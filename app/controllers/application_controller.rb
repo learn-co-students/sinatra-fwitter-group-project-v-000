@@ -53,7 +53,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :index
+    redirect "/tweets"
   end
 
   get "/tweets" do
@@ -61,7 +61,7 @@ class ApplicationController < Sinatra::Base
       @fweets = Tweet.all
       @posts = []
       @fweets.each do |f|
-        @posts << {User.find(f.user_id).username => f.content}
+        @posts << {User.find(f.user_id).username => f.content, user_id: f.user_id, id: f.id}
       end
       @user = User.find(session[:id])
       erb :'tweets/index'
@@ -91,15 +91,6 @@ class ApplicationController < Sinatra::Base
       erb :'/users/slug'
   end
 
-  get "/tweets/:id" do
-    if logged_in?
-      @fweet = Tweet.find(params[:id])
-      @user = User.find(@fweet.user_id)
-      erb :"/tweets/tweet"
-    else redirect "/login"
-    end
-  end
-
   post "/tweet/:id/delete" do
     if logged_in?
       if params[:delete]
@@ -111,15 +102,15 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/tweets/:id/edit" do
-    if logged_in?
-      @fweet = Tweet.find(params[:id])
+    @fweet = Tweet.find(params[:id])
+    if logged_in? && @fweet.user_id == session[:id]
       erb :"/tweets/edit"
-    else redirect "/login"
+    else redirect "/tweets"
     end
   end
 
   post "/tweets/:id/edit" do
-    if params[:content] != ''
+    if params[:content] != '' 
       @fweet = Tweet.find(params[:id])
       @fweet.content = params[:content]
       @fweet.save

@@ -3,5 +3,9 @@
 <br>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 <% @posts.reverse.each do |p| %>
-  <br><%= p.keys[0] %>: <%= p.values[0] %>
+  <% if p[:user_id] == session[:id] %>
+    <br><a href="users/<%= p.keys[0] %>"><%= p.keys[0] %></a>: <a href="tweets/<%= p[:id] %>/edit"><%= p.values[0] %></a>
+  <% else %>
+    <br><a href="users/<%= p.keys[0] %>"><%= p.keys[0] %></a>: <%= p.values[0] %>
+  <% end %>
 <% end %>
