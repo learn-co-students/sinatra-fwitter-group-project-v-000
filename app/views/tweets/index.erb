@@ -1,0 +1,11 @@
+<h1>Welcome, <%=@user.username%>! Here is your feed!</h1>
+<br><a href="/tweets/new">Make a new Fweet!</a>-----<a href="/logout">Log Me Out'a Here!</a>
+<br>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<% @posts.reverse.each do |p| %>
+  <% if p[:user_id] == session[:id] %>
+    <br><a href="users/<%= p.keys[0] %>"><%= p.keys[0] %></a>: <a href="tweets/<%= p[:id] %>/edit"><%= p.values[0] %></a>
+  <% else %>
+    <br><a href="users/<%= p.keys[0] %>"><%= p.keys[0] %></a>: <%= p.values[0] %>
+  <% end %>
+<% end %>
