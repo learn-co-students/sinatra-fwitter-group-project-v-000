@@ -1,0 +1,21 @@
+body {
+  background-color: #14739F;
+  color: white;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  color:navy;
+}
+
+#homepage {
+  padding: 30px;
+  font-size: 1.8em;
+}
+
+.invalid {
+  color: #FA2F2F;
+}
