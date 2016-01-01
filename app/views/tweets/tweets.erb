@@ -1,0 +1,11 @@
+<h2>Welcome, <%=User.find(session[:user_id]).username.capitalize%></h2><br>
+<h4><a href="/users/<%=User.find(session[:user_id]).slug%>">Your tweets</a></h4><br><br>
+<% if @tweets.nil? %>
+    <p class="lead">You have no tweets</p>
+  <% else %>
+    <ul>
+      <% @tweets.each do |tweet| %>
+      <li class="lead"><%= tweet.content %></li>
+      <% end %>
+    </ul>
+<% end %>

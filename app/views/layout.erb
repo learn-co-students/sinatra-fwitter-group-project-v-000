@@ -9,13 +9,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="../stylesheets/style.css">
     <title>Fwitter</title>
   </head>
   <body>
 
     <div class="container">
-      <a href="/"><h1 id="homepage">Homepage</h1></a>
+      <h2>
+        <a href="/" id="homepage">Homepage</a>
+        <a href="/tweets">Tweets</a>
+        <a href="/tweets/new">New Tweet</a>
+        <a href="/logout">Logout</a>
+      </h2><br><br>
       <%= yield %>
     </div>
 

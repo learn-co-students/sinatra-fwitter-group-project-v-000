@@ -1,0 +1,26 @@
+<h2><em>Create a New Tweet</em></h2><br><br>
+
+<form action="/tweets" method="post">
+
+  <p class="lead invalid">
+    <%= missing_field if locals.include?(:missing_field) %>
+  </p>
+
+  <!-- Tweet Textarea -->
+  <div class="row">
+    <div class="col-sm-1">
+      <label for="Content" class="col-sm-1 form-control-label">Tweet:</label>
+    </div>
+    <div class="col-sm-4">
+      <textarea class="form-control" id="content" rows="3" cols="10" name="data[content]" placeholder="Tweet"></textarea>
+    </div>
+  </div><br><br>
+
+  <!-- Submit Button -->
+  <div class="form-group row">
+    <div class="col-sm-offset-2 col-sm-1">
+      <button type="submit" value="Create Tweet" class="btn btn-success">Create Tweet</button>
+    </div>
+  </div>
+
+</form>

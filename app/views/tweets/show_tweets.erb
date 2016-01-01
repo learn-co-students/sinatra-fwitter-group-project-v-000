@@ -1,0 +1,11 @@
+<h2><%= @user.username.capitalize %>'s Tweets</h2><br><br>
+
+<% if @user.tweets.nil? %>
+    <p class="lead">You have no tweets</p>
+  <% else %>
+    <ul>
+      <% @user.tweets.each do |tweet| %>
+      <li class="lead"><%= tweet.content %></li>
+      <% end %>
+    </ul>
+<% end %>

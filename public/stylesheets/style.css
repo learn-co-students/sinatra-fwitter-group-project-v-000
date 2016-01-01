@@ -12,10 +12,14 @@ a:hover {
 }
 
 #homepage {
-  padding: 30px;
-  font-size: 1.8em;
+  padding: 20px;
+  /*font-size: 1.5em;*/
 }
 
 .invalid {
   color: #FA2F2F;
+}
+
+h2>a {
+  margin-right: 30px;
 }
