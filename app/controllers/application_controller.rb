@@ -100,8 +100,6 @@ class ApplicationController < Sinatra::Base
   get '/tweets/:id' do
     @tweet = Tweet.find_by_id(params[:id])
 
-    erb :"tweets/show_tweet"
-
     if session[:id] != nil
       erb :"tweets/show_tweet"
     else
@@ -144,7 +142,7 @@ class ApplicationController < Sinatra::Base
   post '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id]) #finds correct tweet
     if session[:id] == @tweet.user_id 
-      @tweet.delete(params[:id])
+      Tweet.find_by_id(params[:id]).delete
 
       redirect '/tweets'
     else
