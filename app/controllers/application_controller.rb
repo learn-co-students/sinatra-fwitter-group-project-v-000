@@ -49,6 +49,10 @@ class ApplicationController < Sinatra::Base
     if @user == nil
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
       @user.save
+<<<<<<< HEAD
+=======
+      session[:id] = @user.id
+>>>>>>> 440600a5acd950868409d65b745bf359608dfce0
       redirect '/tweets'
     else
       redirect '/login'
@@ -94,7 +98,15 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/:id' do
     @tweet = Tweet.find_by_id(params[:id])
+<<<<<<< HEAD
     erb :"tweets/show_tweet"
+=======
+    if session[:id] != nil
+      erb :"tweets/show_tweet"
+    else
+      redirect '/login'
+    end
+>>>>>>> 440600a5acd950868409d65b745bf359608dfce0
   end
 
   get '/tweets/:id/edit' do
@@ -106,6 +118,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+<<<<<<< HEAD
   post '/tweets/:id' do 
     @tweet = Tweet.find_by_id(params[:id])
     @tweet.content = params[:content]
@@ -113,10 +126,21 @@ class ApplicationController < Sinatra::Base
     redirect "/tweets/#{params[:id]}"
   end
 
+=======
+>>>>>>> 440600a5acd950868409d65b745bf359608dfce0
   get '/tweets/:id/delete' do
 
   end
 
+<<<<<<< HEAD
+=======
+  get '/users/:slug' do
+    @user = User.find_by_username(params[:slug])
+    @tweets = Tweet.all
+    erb :"users/show_user"
+  end
+
+>>>>>>> 440600a5acd950868409d65b745bf359608dfce0
 end
 
 
