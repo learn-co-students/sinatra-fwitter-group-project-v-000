@@ -142,13 +142,12 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets/:id/delete' do
-    @tweet = Tweet.find_by_id(params[:id]) #finds correct tweet
-    if session[:id] == @tweet.user_id 
+    @tweet = Tweet.find_by_id(params[:id]) #find
+    if session[:id] == @tweet.user_id #logged in
       @tweet.delete(params[:id])
-
       redirect '/tweets'
     else
-    redirect "/login"
+      redirect "/login"
     end
   end
 
@@ -160,6 +159,5 @@ class ApplicationController < Sinatra::Base
 
 
 end
-
 
 
