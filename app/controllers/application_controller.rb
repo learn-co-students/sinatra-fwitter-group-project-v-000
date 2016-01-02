@@ -44,7 +44,6 @@ class ApplicationController < Sinatra::Base
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect '/signup'
     end
-
     @user = User.find_by(username: params[:username])
     if @user == nil
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
@@ -52,6 +51,9 @@ class ApplicationController < Sinatra::Base
 
       session[:id] = @user.id
 
+      redirect '/tweets'
+    elsif @user.password == params[:password]
+      session[:id] = @user.id
       redirect '/tweets'
     else
       redirect '/login'
@@ -116,12 +118,13 @@ class ApplicationController < Sinatra::Base
       @tweet = Tweet.find_by_id(params[:id])
       erb :"tweets/edit_tweet"
     else
-      redirect '/tweets'
+      redirect '/login'
     end
   end
 
 
   post '/tweets/:id/edit' do 
+<<<<<<< HEAD
 
     if params[:content] != ""
       @tweet = Tweet.find_by_id(params[:id])
@@ -129,6 +132,11 @@ class ApplicationController < Sinatra::Base
       @tweet.save
       redirect "/tweets"
     end 
+=======
+    @tweet = Tweet.find_by_id(params[:id])
+    @tweet.content = params[:content]
+    @tweet.save
+>>>>>>> d99a3f271b93be0f1eba5380908fcaff6cf63759
     redirect "/tweets/#{params[:id]}"
   end
 
