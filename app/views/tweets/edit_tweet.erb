@@ -2,9 +2,7 @@
 
 <form action="/tweets/<%=@tweet.id%>" method="post">
 
-  <p class="lead invalid">
-    <%= content_unchanged if locals.include?(:content_unchanged) %>
-  </p>
+  <p class="lead invalid"><%= content_unchanged if locals.include?(:content_unchanged) %></p>
 
   <!-- Tweet Content -->
   <div class="row">

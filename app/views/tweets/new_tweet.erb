@@ -2,9 +2,7 @@
 
 <form action="/tweets" method="post">
 
-  <p class="lead invalid">
-    <%= missing_field if locals.include?(:missing_field) %>
-  </p>
+  <p class="lead invalid"><%= missing_field if locals.include?(:missing_field) %></p>
 
   <!-- Tweet Content -->
   <div class="row">

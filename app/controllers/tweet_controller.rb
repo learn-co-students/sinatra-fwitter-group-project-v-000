@@ -21,7 +21,7 @@ class TweetController < ApplicationController
     if missing_field?
       erb :'tweets/new_tweet', locals: {missing_field: "Please enter a tweet."}
     else
-      @user = User.find(session[:user_id])
+      @user = current_user
       @user.tweets.create(params[:data])
       redirect "/tweets/#{@user.tweets.last.id}"
     end

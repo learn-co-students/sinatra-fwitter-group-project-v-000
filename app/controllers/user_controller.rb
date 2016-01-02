@@ -43,10 +43,8 @@ class UserController < ApplicationController
   end
 
   get '/users/:slug' do
-    if logged_in?
-      @user = User.find_by_slug(params[:slug])
-      erb :'tweets/users_tweets'
-    end
+    @user = User.find_by_slug(params[:slug])
+    erb :'tweets/users_tweets'
   end
 
   get '/logout' do
