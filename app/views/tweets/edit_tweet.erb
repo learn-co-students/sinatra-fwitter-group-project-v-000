@@ -1,0 +1,25 @@
+<h2 class="new_and_edit_title">Edit Tweet</h2><br><br>
+
+<form action="/tweets/<%=@tweet.id%>" method="post">
+
+  <p class="lead invalid"><%= content_unchanged if locals.include?(:content_unchanged) %></p>
+
+  <!-- Tweet Content -->
+  <div class="col-sm-offset-2 row">
+    <div class="col-sm-2">
+      <label for="Content" class="col-sm-2 form-control-label">Tweet:</label>
+    </div>
+    <div class="col-sm-5">
+      <textarea class="form-control" id="content" rows="3" cols="10" name="data[content]"
+      value="<%=@tweet.content%>"><%=@tweet.content%></textarea>
+    </div>
+  </div><br><br>
+
+  <!-- Submit Button -->
+  <div class="form-group row">
+    <div class="col-sm-offset-5 col-sm-1">
+      <button type="submit" value="submit" class="btn btn-success">Edit Tweet</button>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,91 @@
+body {
+  background-color: #33ccff;
+}
+
+/* LAYOUT */
+
+#header {
+  background-color: #00c0ff;
+  color: white;
+  border-bottom: 1px #0099cc solid;
+}
+
+#homepage {
+  text-align: center;
+  margin-top: 35px;
+}
+
+#homepage>a{
+  margin-right: 60px;
+  text-shadow: 2px 2px 2px navy;
+  font-family: "Tahoma, Geneva", sans-serif;
+}
+
+#homepage>#fwitter {
+  color: white;
+  text-shadow: 2px 2px 2px navy;
+  font-family: "Tahoma, Geneva", sans-serif;
+}
+
+#greeting {
+  color: white;
+  text-shadow: 2px 2px 2px navy;
+  font-family: "Tahoma, Geneva", sans-serif;
+}
+
+.login_links {
+  padding: 45px;
+}
+
+a {
+  color: white;
+}
+
+a:hover {
+  color:navy;
+}
+
+
+.invalid {
+  color: #FA2F2F;
+}
+
+h2>a {
+  margin-right: 30px;
+}
+
+/* SIGNUP - LOGIN */
+
+#signup {
+  color: white;
+  text-shadow: 2px 2px 2px navy;
+  font-family: "Tahoma, Geneva", sans-serif;
+  margin-left:100px;
+}
+
+.col-sm-2 {
+  color: white;
+  text-shadow: 2px 2px 2px #0099cc;
+  font-size: 1.1em;
+}
+
+/* TWEETS */
+
+.tweets_title {
+  color: white;
+  text-shadow: 2px 2px 2px navy;
+  font-family: "Tahoma, Geneva", sans-serif;
+  margin-left: 330px;
+}
+
+.new_and_edit_title {
+  color: white;
+  text-shadow: 2px 2px 2px navy;
+  font-family: "Tahoma, Geneva", sans-serif;
+  margin-left: 470px;
+}
+
+.tweets {
+  color:white;
+  text-shadow: 2px 2px 2px #0099cc;
+}

@@ -1,0 +1,15 @@
+<div class="col-sm-offset-1">
+
+  <h2 class="tweets_title">Welcome, <%= User.find(session[:user_id]).username.capitalize %></h2><br><br>
+
+  <% if @tweets.nil? %>
+      <p class="lead">There are no tweets</p>
+  <% else %>
+    <ul>
+      <% @tweets.each do |tweet| %>
+      <li class="lead tweets"><%=tweet.user.username.capitalize%>: <%=tweet.content%> </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+</div>
