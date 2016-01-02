@@ -1,7 +1,7 @@
-<h2>Welcome, <%=User.find(session[:user_id]).username.capitalize%></h2><br>
-<h4><a href="/users/<%=User.find(session[:user_id]).slug%>">Your tweets</a></h4><br><br>
+<h2><em>Welcome, <%= User.find(session[:user_id]).username.capitalize %></em></h2><br>
+
 <% if @tweets.nil? %>
-    <p class="lead">You have no tweets</p>
+    <p class="lead">There are no tweets</p>
   <% else %>
     <ul>
       <% @tweets.each do |tweet| %>

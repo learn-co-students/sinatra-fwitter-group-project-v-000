@@ -5,7 +5,7 @@
   <% else %>
     <ul>
       <% @user.tweets.each do |tweet| %>
-      <li class="lead"><%= tweet.content %></li>
+      <li class="lead"><a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a></li>
       <% end %>
     </ul>
 <% end %>

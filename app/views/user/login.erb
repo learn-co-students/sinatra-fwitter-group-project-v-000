@@ -1,12 +1,7 @@
 <h2><em>Login</em></h2><br>
 <p class="lead invalid">
-  <% if locals.include?(:missing_field) %>
-  <%= missing_field %>
-  <% elsif locals.include?(:taken_username) %>
-  <%= taken_username %>
-  <% elsif locals.include?(:taken_email) %>
-  <%= taken_email %>
-  <% end %>
+  <%= missing_field if locals.include?(:missing_field) %>
+  <%= invalid_login if locals.include?(:invalid_login) %>
 </p>
 
 <form action="/login" method="post">

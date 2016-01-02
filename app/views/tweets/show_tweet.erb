@@ -1,2 +1,17 @@
 <br>
-<p class="lead"><%= @tweet.content %></p>
+
+<p class="lead"><%= @tweet.content %></p><br><br><br>
+
+  <div class="form-group row">
+    <div class="col-sm-1">
+      <a href="/tweets/<%=@tweet.id%>/edit"><button type="submit" value="edit" class="btn btn-success">Edit Tweet</button></a>
+    </div>
+  </div>
+
+<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+  <div class="form-group row">
+    <div class="col-sm-1">
+      <button type="submit" value="delete" class="btn btn-danger">Delete Tweet</button>
+    </div>
+  </div>
+</form>

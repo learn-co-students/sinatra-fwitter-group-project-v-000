@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <title>Fwitter</title>
   </head>
   <body>
@@ -17,7 +17,10 @@
     <div class="container">
       <h2>
         <a href="/" id="homepage">Homepage</a>
-        <a href="/tweets">Tweets</a>
+        <% if logged_in? %>
+        <a href="/users/<%=User.find(session[:user_id]).slug%>">Your Tweets</a>
+        <a href="/tweets">All Tweets</a>
+        <% end %>
         <a href="/tweets/new">New Tweet</a>
         <a href="/logout">Logout</a>
       </h2><br><br>
