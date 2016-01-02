@@ -1,0 +1,8 @@
+<h1>Delete Fweet!</h1>
+<!-- EDIT -->
+<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+  Content: <input id="content" type="text" name="content" value="<%=@tweet.content%>" >
+  <button value="submit" type="submit">Delete Tweet</button>
+</form>
+
+
