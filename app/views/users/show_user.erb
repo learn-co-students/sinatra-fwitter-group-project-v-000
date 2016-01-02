@@ -1,0 +1,9 @@
+<h1>Your Fweets, <%="#{@user.username}"%>!</h1>
+
+<ul>
+  <% @tweets.each do |a| %>
+    <% if a.user_id == @user.id %>
+      <li><%= "#{@tweet.content}" %></li>
+    <% end %>
+  <% end %>
+</ul>
