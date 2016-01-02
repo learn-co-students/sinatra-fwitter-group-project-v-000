@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do 
-    if session[:id] != nil
+    if is_logged_in?
       redirect '/tweets'
     else
       erb :"users/login"
@@ -33,7 +33,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    if session[:id] != nil
+    if is_logged_in?
       redirect '/tweets'
     else
       erb :"users/create_user"
@@ -61,8 +61,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-    if session[:id] != nil
-      @user = User.find_by_id(session[:id])
+    if is_logged_in?
+      @user = current_user
       @tweets = Tweet.all
       erb :"tweets/tweets"
     else
@@ -71,7 +71,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    if session[:id] != nil
+    if is_logged_in?
       session.clear
       redirect '/login'
     else
@@ -80,7 +80,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/new' do
-    if session[:id] != nil
+    if is_logged_in?
       erb :"tweets/create_tweet"
     else
       redirect '/login'
@@ -100,9 +100,7 @@ class ApplicationController < Sinatra::Base
   get '/tweets/:id' do
     @tweet = Tweet.find_by_id(params[:id])
 
-    erb :"tweets/show_tweet"
-
-    if session[:id] != nil
+    if is_logged_in?
       erb :"tweets/show_tweet"
     else
       redirect '/login'
@@ -142,9 +140,11 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets/:id/delete' do
-    @tweet = Tweet.find_by_id(params[:id]) #find
-    if session[:id] == @tweet.user_id #logged in
-      @tweet.delete(params[:id])
+
+    @tweet = Tweet.find_by_id(params[:id]) #finds correct tweet
+    if session[:id] == @tweet.user_id 
+      Tweet.find_by_id(params[:id]).delete
+
       redirect '/tweets'
     else
       redirect "/login"
@@ -156,6 +156,21 @@ class ApplicationController < Sinatra::Base
     @tweets = Tweet.all
     erb :"users/show_user"
   end
+
+  private
+
+
+
+    def is_logged_in?
+      session[:id] != nil
+    end
+
+    def current_user
+      User.find_by_id(session[:id])
+    end
+
+    
+
 
 
 end
