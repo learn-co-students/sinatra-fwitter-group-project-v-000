@@ -23,7 +23,7 @@ class TweetController < ApplicationController
     else
       @user = current_user
       @user.tweets.create(params[:data])
-      redirect "/tweets/#{@user.tweets.last.id}"
+      redirect "/tweets"
     end
   end
 
@@ -53,7 +53,7 @@ class TweetController < ApplicationController
       if logged_in?
         @tweet = Tweet.find(params[:id])
         @tweet.update(params[:data])
-        redirect "/users/#{User.find(session[:user_id]).slug}"
+        redirect "/tweets"
       end
     end
   end

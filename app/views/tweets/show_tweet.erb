@@ -1,4 +1,7 @@
-<p class="lead"><%= @tweet.content %></p><br><br><br>
+<div class="col-sm-offset-1"><br>
+
+  <h2 class="tweets_title">Your Tweet</h2><br><br>
+  <p class="lead tweets"><%= @tweet.content %></p><br><br><br>
 
   <div class="form-group row">
     <div class="col-sm-1">
@@ -6,10 +9,11 @@
     </div>
   </div>
 
-<form action="/tweets/<%=@tweet.id%>/delete" method="post">
-  <div class="form-group row">
-    <div class="col-sm-1">
-      <button type="submit" value="delete" class="btn btn-danger">Delete Tweet</button>
+  <form action="/tweets/<%=@tweet.id%>/delete" method="post">
+    <div class="form-group row">
+      <div class="col-sm-1">
+        <button type="submit" value="delete" class="btn btn-danger">Delete Tweet</button>
+      </div>
     </div>
-  </div>
-</form>
+  </form>
+</div>

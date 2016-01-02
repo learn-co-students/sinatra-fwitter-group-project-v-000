@@ -14,16 +14,18 @@
   </head>
   <body>
 
-    <div class="container">
-      <h2>
-        <a href="/" id="homepage">Homepage</a>
+    <div class="container-fluid" id="header">
+      <h2 id="homepage">
+        <a href="/">Fwitter</a>
         <% if logged_in? %>
+        <a href="/tweets">Fweets</a>
         <a href="/users/<%=User.find(session[:user_id]).slug%>">Your Tweets</a>
-        <a href="/tweets">All Tweets</a>
         <% end %>
         <a href="/tweets/new">New Tweet</a>
         <a href="/logout">Logout</a>
       </h2><br><br>
+    </div>
+    <div class="container" id="body">
       <%= yield %>
     </div>
 
