@@ -68,6 +68,7 @@ describe ApplicationController do
       session = {}
       session[:id] = user.id
       get '/signup'
+
       expect(last_response.location).to include('/tweets')
     end
   end
@@ -418,7 +419,7 @@ describe ApplicationController do
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit "tweets/#{tweet2.id}"
-        click_button "Delete Tweet"
+        click_button "Delete Tweet" 
         expect(page.status_code).to eq(200)
         expect(Tweet.find_by(:content => "look at this tweet")).to be_instance_of(Tweet)
         expect(page.current_path).to include('/tweets')
