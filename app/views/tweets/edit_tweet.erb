@@ -1,1 +1,7 @@
-<h1>Hello</h1>
+<h3><%= @tweet.content %></h3>
+
+<form action='/tweets/<%= @tweet.id %>' method='POST'>
+	<label>Tweet Content:  </label><br><br><input type='text' name='content'>
+	<br><br>
+	<input type="submit" value="submit">
+</form>
