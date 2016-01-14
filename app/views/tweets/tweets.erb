@@ -1,0 +1,10 @@
+<h1>Welcome,</h1>
+<% @tweets.each do |tweet| %>
+	<p><a href='/tweets/<%=tweet.id%>'><%= tweet.content %></a> Author: <%= tweet.user.username %></p>
+<% end %>
+<br>
+<br>
+
+<form action="<%="/tweets/new"%>" method="GET">
+	<input type="submit" value="New Tweet">
+</form>

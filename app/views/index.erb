@@ -1,0 +1,22 @@
+
+<h1>Welcome, </h1>
+
+<form action="/tweets/new" method="GET">
+	<button type="submit">New Tweet</button>
+</form><br>
+<form action="/signup" method="GET">
+	<button type="submit">Signup</button>
+</form><br>
+<form action="/login" method="GET">
+	<button type="submit">Log In</button>
+</form><br>
+<form action="/logout" method="GET">
+	<button type="submit">Log Out</button>
+</form><br>
+
+<% Tweet.all.each do |tweet| %>
+	<blockquote>
+    <q><%= tweet.content %></q>
+  </blockquote>
+  <figcaption>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp-&nbsp<%= tweet.user.username %></figcaption><br>
+<% end %>
