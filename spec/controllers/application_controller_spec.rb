@@ -64,9 +64,11 @@ describe ApplicationController do
         :email => "skittles@aol.com",
         :password => "rainbows"
       }
+      #binding.pry
       post '/signup', params
       session = {}
       session[:id] = user.id
+
       get '/signup'
       expect(last_response.location).to include('/tweets')
     end
@@ -215,6 +217,7 @@ describe ApplicationController do
       
         visit '/tweets/new'
         fill_in(:content, :with => "tweet!!!")
+        puts page.body
         click_button 'submit'
 
         user = User.find_by(:username => "becky567")
@@ -309,6 +312,8 @@ describe ApplicationController do
   end
 
   describe 'edit action' do
+
+
     context "logged in" do 
       it 'lets a user view tweet edit form if they are logged in' do
         user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
@@ -351,10 +356,11 @@ describe ApplicationController do
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit '/tweets/1/edit'
-
+        puts page.body
         fill_in(:content, :with => "i love tweeting")
 
         click_button 'submit'
+        #binding.pry
         expect(Tweet.find_by(:content => "i love tweeting")).to be_instance_of(Tweet)  
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)  
 
@@ -383,6 +389,7 @@ describe ApplicationController do
     context "logged out" do 
       it 'does not load let user view tweet edit form if not logged in' do 
         get '/tweets/1/edit'
+        #binding.pry
         expect(last_response.location).to include("/login")
       end
     end
@@ -399,7 +406,8 @@ describe ApplicationController do
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
-        visit 'tweets/1'
+        visit '/tweets/1'
+        puts page.body
         click_button "Delete Tweet"
         expect(page.status_code).to eq(200)
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)
@@ -430,7 +438,7 @@ describe ApplicationController do
       it 'does not load let user delete a tweet if not logged in' do 
         tweet = Tweet.create(:content => "tweeting!", :user_id => 1)
         visit '/tweets/1'
-        expect(page.current_path).to eq("/login")
+        expect(page.current_path).to include("/login")
       end
     end
     
