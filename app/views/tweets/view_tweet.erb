@@ -1,0 +1,15 @@
+<h1>Some annoying tweet that <%=@current_user.username%> posted</h1>
+<br>
+	<%=@tweet.user.username%>:
+	<br>
+	<%=@tweet.content%>
+<%#if @tweet.user==@current_user%>
+	<br>
+	<form action="/tweets/<%=@tweet.id%>/edit">
+ 	<input id="Edit Tweet" type="submit">Edit Tweet</a>
+	</form>
+	<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
+	<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+ 	<input id="Delete Tweet" type="submit">Delete Tweet</a>
+	</form>
+<%#end%>

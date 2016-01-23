@@ -1,0 +1,6 @@
+<form method="post" action="/tweets">
+	Make a new tweet!
+	<textarea id="content" name="content"></textarea>
+	<input type="hidden" value="<%=@user.id%>" name="user_id">
+	<button type="submit" id="submit" value="submit">Submit</button>
+</form>
