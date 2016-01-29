@@ -149,7 +149,7 @@ The form to login should be loaded via a GET request to `/login` and submitted v
 
 You'll need to create a controller action to process a GET request to `/logout` to log out. The controller action should clear the session hash
 
-### Protecting The Views
+### Protecting The Vibes
 
 You'll need to make sure that no one can create, read, edit or delete any tweets.
 
