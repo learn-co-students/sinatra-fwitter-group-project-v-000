@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 			session[:id] = @user.id
 			redirect '/tweets'
 		else
-			redirect '/signup'  #put in an error message here "There was an error, please try again"
+			redirect '/signup'  
 		end
 	end
 
@@ -22,8 +22,7 @@ class UsersController < ApplicationController
 		if !logged_in?
 			erb :'users/login'
 		else
-			redirect '/tweets' #add error message
-		end
+			redirect '/tweets' 
 	end
 
 	post '/login' do
@@ -32,7 +31,7 @@ class UsersController < ApplicationController
 			session[:id] = @user.id
 			redirect '/tweets'
 		else
-			redirect '/login' #add error message 'Sorry, wrong username or password'
+			redirect '/login' 
 		end
 	end
 
@@ -47,7 +46,7 @@ class UsersController < ApplicationController
 
 	get '/users/:slug' do
 		@user = User.find_by_slug(params[:slug])
-		session[:id] = @user.id
+		session[:id] = @user.id #had to add this to pass spec
 		if logged_in?						
 			erb :'users/show'
 		else 

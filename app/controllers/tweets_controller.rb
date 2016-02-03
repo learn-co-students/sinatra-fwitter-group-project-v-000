@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
 		if logged_in?
 			erb :'tweets/tweets'
 		else
-			redirect '/login' #put in an error message here 'Please log in to view content'
+			redirect '/login'
 		end
 	end
 	
@@ -20,7 +20,7 @@ class TweetsController < ApplicationController
 		if current_user.tweets.create(content: params[:content]).save
 			redirect '/users/show'
 		else
-			redirect '/tweets/new'  #put in an error message here "There was an error, please try again"
+			redirect '/tweets/new'
 		end
 	end
 
