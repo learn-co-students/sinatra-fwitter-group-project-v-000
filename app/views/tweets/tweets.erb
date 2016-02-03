@@ -1,11 +1,12 @@
 <h1>Tweets</h1>
 
-Welcome, <%= @user.username %>!
-
+Welcome, <%= current_user.username %>!<br>
+<p>
 <% @tweets.each do |tweet| %>
-  <%= tweet.user_id %>
   <%= tweet.content %><br>
 <% end %>
+</p>
+
 
 <p><a href="/tweets/new">Create a new Tweet</a></p>
 
