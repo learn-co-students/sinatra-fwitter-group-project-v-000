@@ -1,0 +1,8 @@
+<form method='post' action='/tweets/<%=@tweet.id%>'>
+	<input id='hidden' type='hidden' name='_method' value='patch'>
+	<h1><label for='tweet'>Edit Tweet:</label></h1>
+	<textarea id='tweet' name='content'><%=@tweet.content%></textarea>
+	<p><input type='submit' value='submit'></p>
+</form>
+
+<a href="/logout">Logout</a>
