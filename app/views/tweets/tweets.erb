@@ -1,0 +1,13 @@
+<h1>Welcome, <%= "#{@user.username}!" %></h1>
+
+<h3>Tweets:</h3>
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li><%= "#{tweet.content}" %></li>
+  <% end %>
+</ul>
+
+<div>
+  <a href="/tweets/new"><button type="submit" value="new_tweet">Make a New Fweet!</button></a><br>
+  <a href="/logout"><button type="submit" value="log_out">Log Out</button></a>
+</div>

@@ -1,0 +1,11 @@
+<h1>Your Fweets, <%="#{@user.username}"%>!</h1>
+
+<ul>
+  <% @tweets.each do |a| %>
+    <% if a.user_id == @user.id %>
+      <li><%= "#{@tweet.content}" %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<p><a href="/logout"><button type="submit" value="log_out">Log Out</button></a></p>
