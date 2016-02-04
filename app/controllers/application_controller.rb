@@ -69,6 +69,49 @@ class ApplicationController < Sinatra::Base
       redirect '/'
     end
   end
+  
+  get '/tweets/new' do
+    if logged_in?
+      erb :"/tweets/create_tweet"
+    else
+      redirect '/login'
+    end
+  end
+  
+  post '/tweets' do
+    if !params[:content].empty?
+      user = current_user
+      user.tweets.build(content: params[:content])
+      user.save
+    else
+      redirect '/tweets/new'
+    end
+  end
+  
+  get '/users/:slug' do 
+    @user = User.find_by(username: params[:slug])
+    erb :"/users/show"
+  end
+  
+  get '/tweets/:id' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :"/tweets/show_tweet"
+    else
+      redirect '/login'
+    end
+  end
+  
+  get '/tweets/:id/edit' do 
+    if logged_in?
+      erb :"/tweets/edit_tweet"
+    else
+      redirect '/login'
+    end
+  end
+      
+  
+  
 
 
   helpers do 
