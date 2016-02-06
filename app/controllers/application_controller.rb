@@ -69,13 +69,8 @@ class ApplicationController < Sinatra::Base
     if params[:content] == "" #|| params[:content] == nil  #do we needs to account for nil too???
       redirect '/tweets/new'
     else
-<<<<<<< HEAD
+      @tweet = Tweet.new(content: params[:content]) 
       @user = current_user
-      @tweet = Tweet.new(content: params[:content])  ###is not correct
-=======
-      @tweet = Tweet.new(content: params[:content])  ###is not correct
-      @user = current_user
->>>>>>> e7a10f76b55214ec05b3e1568d326e3aa10d4468
       @tweet.user_id = @user.id 
       @tweet.save
       redirect '/tweets'
@@ -106,8 +101,13 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id])
-    @tweet.delete
-    redirect '/tweets'
+    if session[:id] == @tweet.user.id 
+      @tweet.delete
+      redirect '/tweets'
+    else 
+      redirect '/login'
+    end
+    erb :'/tweets/show_tweet'
   end
 
   get '/logout' do 
