@@ -49,7 +49,7 @@ class ApplicationController < Sinatra::Base
       session[:id] = user.id
       redirect '/tweets'
     else
-      redirect '/login'  #where should we redirect? a failure page, sign up, or login?
+      redirect '/login' 
     end
   end 
 
@@ -63,7 +63,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets/new' do   
-    if params[:content] == "" #|| params[:content] == nil  #do we needs to account for nil too???
+    if params[:content] == "" 
       redirect '/tweets/new'
     else
       @tweet = Tweet.new(content: params[:content])  
@@ -76,7 +76,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do 
     if logged_in?
-      @user = current_user  #check on this later
+      @user = current_user 
       erb :'/tweets/tweets'
     else 
       redirect '/login'
@@ -107,7 +107,6 @@ class ApplicationController < Sinatra::Base
 
   end
 
-
   patch '/tweets/:id/edit' do
      @tweet = Tweet.find_by(id: params[:id])
      if @tweet.update(content: params[:content])
@@ -117,17 +116,22 @@ class ApplicationController < Sinatra::Base
      end
    end
 
-  delete '/tweets/:id' do
-    @tweet = Tweet.find_by(id: params[:id])
-    @tweet.delete
-  end
+  delete '/tweets/:id/delete' do
+    if logged_in?
+       @tweet = Tweet.find_by_id(params[:id])
+       if session[:id] == @tweet.user_id
+        @tweet.delete 
+        redirect '/tweets'
+     else
+       redirect '/login'
+     end
+   end
+ end
 
   get '/logout' do 
     session.clear
     redirect '/login'
   end
-
-  ## need to create two helper methods current_user and is_logged_in
 
   helpers do 
     def current_user
@@ -138,23 +142,4 @@ class ApplicationController < Sinatra::Base
      !!session[:id]
     end
   end
-
-
-
-
 end ## class end 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
