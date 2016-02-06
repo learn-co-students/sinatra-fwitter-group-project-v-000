@@ -11,7 +11,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do 
-    erb :layout
+    erb :index
   end
 
   get '/signup' do 
@@ -26,6 +26,24 @@ class ApplicationController < Sinatra::Base
     @user.save
     erb :'/users'
   end
+
+  get '/login' do 
+    if logged_in?(session)
+      redirect '/tweets'
+    else
+      erb :'/users/login'
+    end
+  end
+
+  post '/login' do 
+    user = User.find_by(:username => params[:username])
+    if user && user.authenticate(params[:password])
+      session[:id] = user.id
+      redirect '/tweets'
+    else
+      redirect '/login'  #where should we redirect? a failure page, sign up, or login?
+    end
+  end 
 
   get '/tweets/new' do 
     erb :'/tweets/create_tweet'
@@ -53,17 +71,22 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do 
-    ## logout the user. This should clear the session hash
+    if logged_in?
+      session.clear
+    else
+      redirect '/'
+    end
   end
 
   ## need to create two helper methods current_user and is_logged_in
-
-  def self.current_user(session)
-   @user = User.find_by_id(session["user_id"])
-  end
- 
-  def self.is_logged_in?(session)
-    !!current_user(session)
+  helpers do
+    def current_user(session)
+     User.find(session[:id])
+    end
+   
+    def logged_in?(session)
+      !!session[:id] 
+    end
   end
 
 
