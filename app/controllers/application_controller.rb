@@ -89,7 +89,6 @@ class ApplicationController < Sinatra::Base
   get '/tweets/:id' do
     @tweet = Tweet.find_by(params[:id])
     if logged_in?
-      @tweet
       erb :'/tweets/show_tweet' 
     else
       redirect '/login'
@@ -97,6 +96,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/:id/edit' do 
+    @tweet = Tweet.find_by_id(params[:id])
     if logged_in?
       erb :'/tweets/edit_tweet'
     else
@@ -105,16 +105,25 @@ class ApplicationController < Sinatra::Base
 
   end
 
-  post '/tweets/:id' do 
-    @tweet = Tweet.update(content: params[:content])  
-    @user = current_user
-    @tweet.user_id = @user.id 
+  post '/tweets/:id/edit' do 
+    @tweet = Tweet.find_by_id(params[:id])
+    @tweet.content = params[:content]
     @tweet.save
+    # @user = current_user
+    # @tweet.user_id = @user.id 
+    
     redirect '/tweets'
   end 
 
   post '/tweets/:id/delete' do
-    ## this deletes the tweet. the delete button should be on the show page
+    @tweet = Tweet.find_by_id(params[:id])
+    if session[:id] == @tweet.user.id 
+      @tweet.delete
+      redirect '/tweets'
+    else 
+      redirect '/login'
+    end
+    erb :'/tweets/show_tweet'
   end
 
   get '/logout' do 
