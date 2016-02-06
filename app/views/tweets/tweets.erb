@@ -11,3 +11,9 @@ Welcome, <%= @user.username %>
 
 <a href="/logout">Log Out</a>
 
+<form method="post" action="/login/delete">
+ <input id="hidden" type="hidden" name="_method" value="DELETE">
+ <button type="submit">Delete Tweet</button>
+<form>
+
+

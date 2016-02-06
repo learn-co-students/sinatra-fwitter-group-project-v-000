@@ -69,9 +69,10 @@ class ApplicationController < Sinatra::Base
     if params[:content] == "" #|| params[:content] == nil  #do we needs this if/else statement???
       redirect '/tweets/new'
     else
-      #@user = current_user
-      @tweet = Tweet.create(content: params[:content])  ###is not correct
-      @tweet.user_id = current_user.id 
+      @user = current_user
+      @tweet = Tweet.new(content: params[:content])  ###is not correct
+      @tweet.user_id = @user.id 
+      @tweet.save
       redirect '/tweets'
     end
    end
@@ -99,7 +100,9 @@ class ApplicationController < Sinatra::Base
   end 
 
   post '/tweets/:id/delete' do
-    ## this deletes the tweet. the delete button should be on the show page
+    @tweet = Tweet.find_by_id(params[:id])
+    @tweet.delete
+    redirect '/tweets'
   end
 
   get '/logout' do 
