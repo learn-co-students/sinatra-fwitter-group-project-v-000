@@ -28,8 +28,7 @@ class ApplicationController < Sinatra::Base
       redirect '/signup'
     else
       session[:id] = @user.id
-      redirect '/tweets'
-      
+      redirect '/tweets' 
     end
   end
 
@@ -52,7 +51,8 @@ class ApplicationController < Sinatra::Base
     end
   end 
 
-  get '/tweets/new' do
+  get '/tweets/new' do 
+
     if logged_in?
       erb :'/tweets/create_tweet'
     else
@@ -60,21 +60,34 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post '/tweets/new' do 
-    @tweet = Tweet.create(params[:content])
-    #if params[:content] == ""
-      # erb :'/tweets/create_tweet'
-    #else
-      erb :tweets
-    #end
-  end
+  post '/tweets/new' do   
+    # @tweet = Tweet.create(content: params[:content])
+    
+    # @tweet.user = @user.id
+    # @tweet.save
+
+    if params[:content] == "" #|| params[:content] == nil  #do we needs this if/else statement???
+      redirect '/tweets/new'
+    else
+      #@user = current_user
+      @tweet = Tweet.create(content: params[:content])  ###is not correct
+      @tweet.user_id = current_user.id 
+      redirect '/tweets'
+    end
+   end
 
   get '/tweets' do 
     if logged_in?
+      @user = current_user  #check on this later
       erb :'/tweets/tweets'
     else 
       redirect '/login'
     end  
+  end
+
+  get '/users/:slug' do 
+    @user = User.find_by(username: params[:slug])
+    erb :'/tweets/tweets'
   end
 
   get '/tweets/:id/edit' do 
@@ -90,12 +103,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do 
-    if logged_in?
-      session.clear
-      redirect '/login'
-    else
-      redirect '/login'
-    end
+    session.clear
+    redirect '/login'
   end
 
   ## need to create two helper methods current_user and is_logged_in
