@@ -1,3 +1,5 @@
+require 'pry'
+
 require './config/environment'
 
 
@@ -87,7 +89,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/:id' do
-    @tweet = Tweet.find_by(params[:id])
+    @tweet = Tweet.find_by(id: params[:id])
     if logged_in?
       erb :'/tweets/show_tweet' 
     else
@@ -96,7 +98,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/:id/edit' do 
-    @tweet = Tweet.find_by_id(params[:id])
+    @tweet = Tweet.find_by(id: params[:id])
     if logged_in?
       erb :'/tweets/edit_tweet'
     else
@@ -105,25 +107,19 @@ class ApplicationController < Sinatra::Base
 
   end
 
-  post '/tweets/:id/edit' do 
-    @tweet = Tweet.find_by_id(params[:id])
-    @tweet.content = params[:content]
-    @tweet.save
-    # @user = current_user
-    # @tweet.user_id = @user.id 
-    
-    redirect '/tweets'
-  end 
 
-  post '/tweets/:id/delete' do
-    @tweet = Tweet.find_by_id(params[:id])
-    if session[:id] == @tweet.user.id 
-      @tweet.delete
-      redirect '/tweets'
-    else 
-      redirect '/login'
-    end
-    erb :'/tweets/show_tweet'
+  patch '/tweets/:id/edit' do
+     @tweet = Tweet.find_by(id: params[:id])
+     if @tweet.update(content: params[:content])
+       redirect to "/tweets/#{@tweet.id}/edit"
+     else
+       redirect to "/tweets/#{@tweet.id}/edit"
+     end
+   end
+
+  delete '/tweets/:id' do
+    @tweet = Tweet.find_by(id: params[:id])
+    @tweet.delete
   end
 
   get '/logout' do 
