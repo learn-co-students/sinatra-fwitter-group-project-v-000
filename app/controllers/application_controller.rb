@@ -66,11 +66,16 @@ class ApplicationController < Sinatra::Base
     # @tweet.user = @user.id
     # @tweet.save
 
-    if params[:content] == "" #|| params[:content] == nil  #do we needs this if/else statement???
+    if params[:content] == "" #|| params[:content] == nil  #do we needs to account for nil too???
       redirect '/tweets/new'
     else
+<<<<<<< HEAD
       @user = current_user
       @tweet = Tweet.new(content: params[:content])  ###is not correct
+=======
+      @tweet = Tweet.new(content: params[:content])  ###is not correct
+      @user = current_user
+>>>>>>> e7a10f76b55214ec05b3e1568d326e3aa10d4468
       @tweet.user_id = @user.id 
       @tweet.save
       redirect '/tweets'
