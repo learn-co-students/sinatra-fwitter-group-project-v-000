@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do 
-    if logged_in?(session)
+    if logged_in?
       redirect '/tweets'
     else
       erb :'/users/create_user'
@@ -23,17 +23,19 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do 
-    if params[:username] == "" || params[:password] == "" || params[:email] == ""
+    @user = User.create(username: params[:username], password: params[:password], email: params[:email])
+    if params[:username] == "" || params[:password] == "" || params[:email] == "" 
       redirect '/signup'
     else
-      @user = User.create(name: params[:username], password: params[:password], email: params[:email])
       session[:id] = @user.id
       redirect '/tweets'
+      
     end
   end
 
+
   get '/login' do 
-    if logged_in?(session)
+    if logged_in?
       redirect '/tweets'
     else
       erb :'/users/login'
@@ -50,21 +52,25 @@ class ApplicationController < Sinatra::Base
     end
   end 
 
-  get '/tweets/new' do 
-    if logged_in?(session)
+  get '/tweets/new' do
+    if logged_in?
       erb :'/tweets/create_tweet'
     else
       redirect '/login'
     end
   end
 
-  post '/tweets' do 
-    @tweet = Tweet.create(params[:tweet])
-    erb :tweets
+  post '/tweets/new' do 
+    @tweet = Tweet.create(params[:content])
+    #if params[:content] == ""
+      # erb :'/tweets/create_tweet'
+    #else
+      erb :tweets
+    #end
   end
 
   get '/tweets' do 
-    if logged_in?(session)
+    if logged_in?
       erb :'/tweets/tweets'
     else 
       redirect '/login'
@@ -84,7 +90,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do 
-    if logged_in?(session)
+    if logged_in?
       session.clear
       redirect '/login'
     else
@@ -95,11 +101,11 @@ class ApplicationController < Sinatra::Base
   ## need to create two helper methods current_user and is_logged_in
 
   helpers do 
-    def current_user(session)
+    def current_user
      User.find(session[:id])
     end
  
-    def logged_in?(session)
+    def logged_in?
      !!session[:id]
     end
   end
