@@ -15,16 +15,21 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do 
-    erb :'users/create_user'
+    if logged_in?(session)
+      redirect '/tweets'
+    else
+      erb :'/users/create_user'
+    end
   end
 
   post '/signup' do 
-    @user = User.new
-    @user.name = params[:username]
-    @user.password = params[:password]
-    @user.email = params[:email]
-    @user.save
-    erb :'/users'
+    if params[:username] == "" || params[:password] == "" || params[:email] == ""
+      redirect '/signup'
+    else
+      @user = User.create(name: params[:username], password: params[:password], email: params[:email])
+      session[:id] = @user.id
+      redirect '/tweets'
+    end
   end
 
   get '/login' do 
@@ -46,7 +51,11 @@ class ApplicationController < Sinatra::Base
   end 
 
   get '/tweets/new' do 
-    erb :'/tweets/create_tweet'
+    if logged_in?(session)
+      erb :'/tweets/create_tweet'
+    else
+      redirect '/login'
+    end
   end
 
   post '/tweets' do 
@@ -55,7 +64,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do 
-    ## this shows the info for a single tweet 
+    if logged_in?(session)
+      erb :'/tweets/tweets'
+    else 
+      redirect '/login'
+    end  
   end
 
   get '/tweets/:id/edit' do 
@@ -71,21 +84,23 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do 
-    if logged_in?
+    if logged_in?(session)
       session.clear
+      redirect '/login'
     else
-      redirect '/'
+      redirect '/login'
     end
   end
 
   ## need to create two helper methods current_user and is_logged_in
-  helpers do
+
+  helpers do 
     def current_user(session)
      User.find(session[:id])
     end
-   
+ 
     def logged_in?(session)
-      !!session[:id] 
+     !!session[:id]
     end
   end
 
