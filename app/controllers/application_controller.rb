@@ -61,15 +61,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets/new' do   
-    # @tweet = Tweet.create(content: params[:content])
-    
-    # @tweet.user = @user.id
-    # @tweet.save
-
     if params[:content] == "" #|| params[:content] == nil  #do we needs to account for nil too???
       redirect '/tweets/new'
     else
-      @tweet = Tweet.new(content: params[:content])  ###is not correct
+      @tweet = Tweet.new(content: params[:content])  
       @user = current_user
       @tweet.user_id = @user.id 
       @tweet.save
@@ -91,12 +86,31 @@ class ApplicationController < Sinatra::Base
     erb :'/tweets/tweets'
   end
 
+  get '/tweets/:id' do
+    @tweet = Tweet.find_by(params[:id])
+    if logged_in?
+      @tweet
+      erb :'/tweets/show_tweet' 
+    else
+      redirect '/login'
+    end
+  end
+
   get '/tweets/:id/edit' do 
-    ## this is part of the edit, and contains the form to edit
+    if logged_in?
+      erb :'/tweets/edit_tweet'
+    else
+      redirect '/login'
+    end
+
   end
 
   post '/tweets/:id' do 
-    ## this is part of the edit, and actually posts the update
+    @tweet = Tweet.update(content: params[:content])  
+    @user = current_user
+    @tweet.user_id = @user.id 
+    @tweet.save
+    redirect '/tweets'
   end 
 
   post '/tweets/:id/delete' do
