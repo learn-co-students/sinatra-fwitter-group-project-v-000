@@ -11,20 +11,25 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do 
-    erb :layout
+    erb :index
   end
 
   get '/signup' do 
-    erb :'users/create_user'
+    if logged_in?(session)
+      redirect '/tweets'
+    else
+      erb :'/users/create_user'
+    end
   end
 
   post '/signup' do 
-    @user = User.new
-    @user.name = params[:username]
-    @user.password = params[:password]
-    @user.email = params[:email]
-    @user.save
-    erb :'/users'
+    if params[:username] == "" || params[:password] == "" || params[:email] == ""
+      redirect '/signup'
+    else
+      @user = User.create(name: params[:username], password: params[:password], email: params[:email])
+      session[:id] = @user.id
+      redirect '/tweets'
+    end
   end
 
   get '/tweets/new' do 
@@ -58,12 +63,14 @@ class ApplicationController < Sinatra::Base
 
   ## need to create two helper methods current_user and is_logged_in
 
-  def self.current_user(session)
-   @user = User.find_by_id(session["user_id"])
-  end
+  helpers do 
+    def current_user(session)
+     User.find(session[:id])
+    end
  
-  def self.is_logged_in?(session)
-    !!current_user(session)
+    def logged_in?(session)
+     !!session[:id]
+    end
   end
 
 
