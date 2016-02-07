@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include Slugify
 
   has_many :tweets
 
