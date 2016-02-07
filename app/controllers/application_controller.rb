@@ -4,7 +4,7 @@ class ApplicationController < Sinatra::Base
 
   configure do
     enable :sessions
-    set :session_secret, "billy"
+    set :session_secret, 'billy'
     set :public_folder, 'public'
     set :views, 'app/views'
   end
@@ -31,25 +31,37 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    erb :login
+    if session[:id] == nil
+      erb :login
+    else
+      redirect '/tweets'
+    end
   end
 
   post '/login' do
     @user = User.find_by(username: params['username'], password: params['password'])
     session[:id] = @user.id
-    redirect "/tweets"
+    redirect '/tweets'
   end
 
   get '/tweets' do
-    @user = User.find(session[:id])
-    @tweets = @user.tweets
-
-    if @user
+    if session[:id] != nil
+      @user = User.find(session[:id])
+      @tweets = @user.tweets
       erb :tweets
     else
-      redirect "/login"
+      redirect '/login'
     end
 
+  end
+
+  get '/logout' do
+    if session[:id] != nil
+      session.clear
+      redirect '/login'
+    else
+      redirect '/'
+    end
   end
 
 
