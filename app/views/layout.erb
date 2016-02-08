@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Fwitter - Flatiron Twitter</title>
+
+    <!-- Stylesheets -->
+    <link href="<%= url('/css/bootstrap.min.css') %>" rel="stylesheet" type="text/css" />
+    <link href="<%= url('/css/style.css') %>" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+
+    <div class="container">
+      <% if Helpers.is_logged_in?(session) %>
+      <div class="btn-group-vertical">
+          <button class="navigation_btn"><a href="/users/<%= Helpers.current_user(session).slug %>">Profile</a></button>
+          <button class="navigation_btn"><a href="/tweets/new">New Tweet</a></button>
+
+          <button class="navigation_btn"><a href="/users">Users</a></button>
+          <button class="navigation_btn"><a href="/tweets">Tweets</a></button>
+          
+          <button class="navigation_btn"><a href="/logout">Logout</a></button>
+        </div>
+      <% end %>
+      <br><br><br><br><br>
+      <%= yield %>
+    </div>
+
+  </body>
+</html>
