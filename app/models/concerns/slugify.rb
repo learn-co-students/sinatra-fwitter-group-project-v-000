@@ -1,20 +1,21 @@
 module Slugify
 
- # module InstanceMethods
+  module InstanceMethods
 
-    def slugify
+    def slug
       self.username.gsub(/\s+/, "-").downcase
     end
 
-
-  #end
-
-
-  #module ClassMethods
+  end
 
 
+  module ClassMethods
 
-  #end
+    def find_by_slug(slug)
+      self.find_by(username: (slug.gsub(/-/, " ")))
+    end
+
+  end
 
 
 end

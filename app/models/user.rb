@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  include Slugify
+  include Slugify::InstanceMethods
+  extend Slugify::ClassMethods
 
   has_many :tweets
 
