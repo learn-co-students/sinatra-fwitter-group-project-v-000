@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2>@<%= @tweet.user.username %></h2>
+    <ul><%= @tweet.content %></ul>
+  </div>
+</div>
+
+<form method="GET" action="/tweets/<%= @tweet.id %>/edit">
+  <input type="submit" value="Edit Tweet">
+</form>
+
+<form method="POST" action="/tweets/<%= @tweet.id %>/delete">
+  <input type="submit" value="Delete Tweet">
+</form>

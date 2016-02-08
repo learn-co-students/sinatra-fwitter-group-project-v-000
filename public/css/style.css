@@ -1,0 +1,70 @@
+/* Text style */
+* {
+  color: rgb(20, 179, 217);
+}
+input[type="text"] {
+  color: black;
+}
+
+/* Main body style */
+body {
+  background-color: rgba(83, 98, 109, 0.95);
+}
+div.container {
+  background-color: rgba(0, 0, 0, .9);
+  padding-top: 2em;
+  text-align: center;
+  height: 100%;
+}
+
+/* Row style */
+div.container div.row{
+  background-color: rgba(255, 255, 255, .75);
+  margin: 1.5em;
+  padding: 1em;
+  border-radius: .5em;
+}
+
+/* Main page login/signup buttons */
+div.container button {
+  width: 300px;
+  border-radius: 1em;
+}
+div.container button a{
+  text-decoration: none;
+}
+/* Logout button */
+div.container div.btn-group-vertical {
+  float: right;
+}
+div.container div button.navigation_btn {
+  width: 150px;
+  margin-right: 1em;
+  display: block;
+}
+
+/* Form styles */
+div.container div.row label {
+  color: rgb(20, 179, 217);
+  font-size: 1.7em;
+  height: 25px;
+}
+.row div input {
+  width: 100%;
+  font-size: 1.5em;
+}
+.submit_btn {
+  width: 200px;
+  padding: 0.5em;
+  border-radius: .5em;
+}
+@media screen and (max-width: 992px) {
+  div.row label, div.row div input {
+    margin: .3em;
+  }
+}
+.delete_confirmation {
+  color: red;
+}
+
+
