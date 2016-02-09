@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up!</title>
+</head>
+<body>
+    <% unless locals.empty? %>
+      <%= message %>
+    <% end %>
+  <h1>Welcome to Fwitter Community!</h1>
+  <br>
+  <form action="/signup" method="post">
+    <h4>Enter following fields</h4>
+    <label for="username">Username: </label>
+    <input type="text" name="username" placeholder="FwitterHandle123"><br>
+
+    <label for="email">Email: </label>
+    <input type="email" name="email" palceholder="example@example.com"><br>
+
+    <label for="password">Password: </label>
+    <input type="password" name="password"><br>
+
+    <input type="submit" value="Sign up!">
+  </form>
+</body>
+</html>
