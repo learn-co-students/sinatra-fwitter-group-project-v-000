@@ -4,6 +4,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
+    set :session_secret, "password_security"
   end
 
   get '/' do
@@ -34,7 +35,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    find_user
+    find_user && authenticate_user
     redirect '/login' unless user_exists?
     session[:user_id] = @user.id
     redirect '/tweets'
@@ -51,7 +52,11 @@ class ApplicationController < Sinatra::Base
     end
 
     def find_user
-      @user = User.find_by(params)
+      @user = User.find_by(username: params[:username])
+    end
+
+    def authenticate_user
+      @user.authenticate(params[:password])
     end
 
     def user_exists?
