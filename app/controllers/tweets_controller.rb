@@ -2,7 +2,7 @@ class TweetsController < ApplicationController
 
   get '/tweets' do
     if logged_in?
-      list_tweets
+      @tweets = Tweet.all
       erb :'tweets/index'
     else
       redirect '/login'
@@ -55,10 +55,6 @@ class TweetsController < ApplicationController
   end
 
   helpers do
-    def list_tweets
-      @tweets = Tweet.all
-    end
-
     def create_tweet
       @tweet = Tweet.create(params)
     end
