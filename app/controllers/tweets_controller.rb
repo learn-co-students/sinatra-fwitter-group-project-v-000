@@ -12,8 +12,6 @@ class TweetsController < ApplicationController
   post '/tweets' do
     redirect '/tweets/new' unless user_credentialed?
     create_tweet
-    @tweet.user_id = session[:user_id]
-    @tweet.save
     redirect '/tweets'
   end
 

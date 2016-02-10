@@ -47,6 +47,10 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
+    def current_user
+      @user = User.find(session[:user_id])
+    end
+
     def create_user
       @user = User.create(params)
     end
