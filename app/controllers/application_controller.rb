@@ -11,7 +11,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    if session[:user_id].nil?
+    if !logged_in?
       erb :signup
     else
       redirect '/tweets'
@@ -19,13 +19,14 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    params.any? {|k,v| v.blank?} ? redirect('/signup') : user = User.create(params)
-    session[:user_id] = user.id
+    redirect '/signup' unless user_credentialed?
+    create_user
+    session[:user_id] = @user.id
     redirect '/tweets'
   end
 
   get '/login' do
-    if session[:user_id].nil?
+    if !logged_in?
       erb :login
     else
       redirect '/tweets'
@@ -33,22 +34,37 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    if User.find_by(params).nil?
-      redirect '/login'
-    else
-      user = User.find_by(params)
-      session[:user_id] = user.id
-      redirect '/tweets'
-    end
+    find_user
+    redirect '/login' unless user_exists?
+    session[:user_id] = @user.id
+    redirect '/tweets'
   end
 
   get '/logout' do
-    session.clear if !session[:user_id].nil?
+    session.clear if logged_in?
     redirect '/login'
   end
 
-  get '/tweets' do
-    erb :'tweets/index'
+  helpers do
+    def create_user
+      @user = User.create(params)
+    end
+
+    def find_user
+      @user = User.find_by(params)
+    end
+
+    def user_exists?
+      !!@user
+    end
+
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def user_credentialed?
+      !params.any? {|k,v| v.blank?}
+    end
   end
 
 end
