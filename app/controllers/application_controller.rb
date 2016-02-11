@@ -15,9 +15,9 @@ class ApplicationController < Sinatra::Base
 
   get '/signup' do
     if session[:username].nil?
-      erb 'user/create_user'
+      erb :'user/create_user'
     else
-      redirect '/tweets'
+      redirect 'tweets/tweets'
     end
   end
 
@@ -26,25 +26,27 @@ class ApplicationController < Sinatra::Base
       redirect '/signup'
     else
       session[:username] = params[:username]
-      redirect "/tweets"
+      redirect "tweets/tweets"
 
     end
   end
 
   get '/login' do
-    if session[:username].nil?
+
       erb :'user/login'
-    else
-      redirect '/tweets'
-    end
+
   end
 
   post '/login' do
+    #
     session[:username] = params[:username]
-    @username = User.find_by(params[:username])
+    @username = User.find_by(username: params[:username])
+    #binding.pry
     @tweets = @username.tweets
-    redirect "/tweets"
+    redirect "tweets/tweets"
   end
+
+
 
 
 end
