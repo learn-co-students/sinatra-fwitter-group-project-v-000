@@ -13,6 +13,10 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  get '/tweets' do
+    erb :'tweets/tweets'
+  end
+
   get '/signup' do
     if is_logged_in?
       redirect 'tweets/tweets'
@@ -43,17 +47,19 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    #binding.pry
-    @user = User.find_by(username: params["username"], password: params["password"])
-    if @user.nil? == false
-      #binding.pry
-      session[:user_id] = @user.id
-      @username = @user.username
-      @tweets = @user.tweets
-    redirect 'tweets/tweets'
-  end
+   user = User.find_by(username: params["username"])
+   if user && user.authenticate(params["password"])
+     session[:id] = user.id
+     redirect '/tweets'
+   else
+     redirect '/login'
+   end
+ end
+
+  get '/logout' do
 
   end
+
 
   helpers do
     def is_logged_in?
