@@ -15,6 +15,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     if is_logged_in?
+      @tweets = Tweet.all
     erb :'tweets/tweets'
   else
     redirect '/login'
@@ -70,8 +71,17 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/users/:slug' do
+    @user = User.find_by(username: params[:slug])
+    @tweets = @user.tweets
+    erb :'tweets/tweets'
+  end
 
+  get '/tweets/new' do
+    erb :'tweets/create_tweet'
+  end
 
+  
   helpers do
     def is_logged_in?
       !!session[:id]
