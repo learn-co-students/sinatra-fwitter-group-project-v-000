@@ -7,7 +7,7 @@
     <h1>Welcome, <%= @username %></h1>
     <h3>Your Fweets</h3>
     <% @tweets.each do |tweet| %>
-    <li><a href="/tweets/#{<%= tweet.id %>}"><%= tweet.content %></a></li>
+    <li><a href="/tweets/><%= tweet.id %>/edit"><%= tweet.content %></a></li>
     <% end %>
   </body>
 </html>
