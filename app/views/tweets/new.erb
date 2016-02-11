@@ -1,0 +1,13 @@
+<h1>New Tweet:</h1>
+
+<form action="/tweets" method="POST">
+  <input type="hidden" name="user_id" id="hidden" value="<%=current_user.id%>" />
+  <div>
+    <label for="content">Content: </label>
+    <input type="text" name="content" id="content">
+  </div>
+
+  <div>
+    <input type="submit" id="submit-btn" value="submit">
+  </div>
+</form>
