@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
 
   get '/signup' do
     if session[:username].nil?
-      erb :signup
+      erb 'user/create_user'
     else
       redirect '/tweets'
     end
@@ -33,7 +33,7 @@ class ApplicationController < Sinatra::Base
 
   get '/login' do
     if session[:username].nil?
-      erb :login
+      erb :'user/login'
     else
       redirect '/tweets'
     end
