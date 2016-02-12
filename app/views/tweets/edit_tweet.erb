@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fwitter</title>
+  </head>
+  <body>
+    <h1>Edit Fweet</h1>
+    <form method = "POST" action="/tweets/<%=@tweet.id %>/edit">
+      <label>Edit your Fweet</label>
+      <input type="text" name="content" value="<%= @tweet.content %>">
+      <input type="submit" name="submit" value="submit">
+    </form>
+    <p><a href="/tweets/<%=@tweet.id %>/edit">Edit Tweet</a></p>
+    <form method="POST" action = "/tweets/<%=@tweet.id %>/delete">
+      <input id="hidden" type="hidden" name="_method" value="delete">
+      <button name="submit" type="submit">Delete Tweet</button>
+    </form>
+  </body>
+</html>

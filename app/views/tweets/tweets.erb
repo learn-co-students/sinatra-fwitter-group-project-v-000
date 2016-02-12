@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fwitter</title>
+  </head>
+  <body>
+    <h1>Welcome, <%= @user.username %></h1>
+
+    <% if @tweets.empty? %>
+    <h6>You have no fweets yet!</h6>
+
+    <% else %>
+    <p><a href="/tweets/new">Create New Fweet</a></p>
+    <h3>Your Fweets</h3>
+    <% @tweets.each do |tweet| %>
+    <li><a href="/tweets/<%= tweet.id %>/edit"><%= tweet.content %></a>
+      <form method="POST" action = "/tweets/<%= tweet.id %>/delete">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+        <button name="submit" type="submit" value="Delete Tweet">Delete Tweet</button>
+      </form>
+    </li>
+    <% end %>
+    <% end %>
+    <p>
+    <span style="margin-left:10px;"><a href="/logout">LogOut</span>
+    </p>
+  </body>
+</html>
