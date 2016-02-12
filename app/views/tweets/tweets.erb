@@ -4,12 +4,14 @@
     <title>Fwitter</title>
   </head>
   <body>
-    <h1>Welcome, <%= @username %></h1>
-    <h3>Your Fweets</h3>
+    <h1>Welcome, <%= @user.username %></h1>
+
     <% if @tweets.empty? %>
     <h6>You have no fweets yet!</h6>
-    <p><a href="/tweets/new">New Fweet</a></p>
+
     <% else %>
+    <p><a href="/tweets/new">Create New Fweet</a></p>
+    <h3>Your Fweets</h3>
     <% @tweets.each do |tweet| %>
     <li><a href="/tweets/<%= tweet.id %>/edit"><%= tweet.content %></a>
       <form method="POST" action = "/tweets/<%= tweet.id %>/delete">

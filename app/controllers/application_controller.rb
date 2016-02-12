@@ -15,6 +15,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     if is_logged_in?
+      @user=User.find_by(session[:id])
       @tweets = Tweet.all
     erb :'tweets/tweets'
   else
@@ -24,7 +25,7 @@ class ApplicationController < Sinatra::Base
 
   get '/signup' do
     if is_logged_in?
-      redirect 'tweets/tweets'
+      redirect '/tweets'
     else
       erb :'/user/create_user'
     end
