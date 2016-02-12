@@ -4,10 +4,12 @@
     <title>Fwitter</title>
   </head>
   <body>
-    <h1>Welcome Fweets!</h1>
-    <%= @tweets.each do |tweet| %>
-    <li><%= tweet%></li>
-    <% end %>
-
+    <h1>Fweet <%= @tweet.id %></h1>
+      <p><%= @tweet.content %></p>
+      <p><a href="/tweets/<%=@tweet.id %>/edit">Edit Tweet</a></p>
+      <form method="POST" action = "/tweets/<%=@tweet.id %>/delete">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+        <button name="submit" type="submit">Delete Tweet</button>
+      </form>
   </body>
 </html>
