@@ -1,0 +1,11 @@
+<% if @tweet.user_id != current_user.id %>
+<%= @tweet.content %><br>
+<% end %>
+
+<% if @tweet.user_id == current_user.id %>
+<form method="post" action="/tweets/<%= @tweet.id %>">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <textarea name="content"><%= @tweet.content %></textarea>
+  <input type="submit" value="submit">
+</form>
+<% end %>
