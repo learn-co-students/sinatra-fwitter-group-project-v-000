@@ -4,10 +4,10 @@
     <title>Fwitter</title>
   </head>
   <body>
-    <h1>Welcome Tweets!</h1>
-    <%= @tweets.each do |tweet| %>
-    <li><%= tweet.content %></li>
+    <h1>Welcome, <%= current_user.username %></h1>
+    <h2>Tweets</h2>
+    <% @tweets.each do |tweet| %>
+    <p><%= tweet.content %></p>
     <% end %>
-
   </body>
 </html>
