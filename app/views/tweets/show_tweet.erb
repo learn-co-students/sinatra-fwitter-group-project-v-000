@@ -1,0 +1,26 @@
+<% if Helpers.is_logged_in?(@session) %>
+  <div class="welcome">
+    <h2>Welcome, <%= @user.username %>!</h2>
+  </div>
+
+  <div class="tweet">
+    <h3>~ Your Tweet ~</h3>
+      <p>
+        <%= @tweet.content %>
+      </p>
+      <form class="edit_tweet" action="/tweets/<%=@tweet.id%>/edit" method="post">
+        <input type="submit" name="Edit Tweet" value="Edit Tweet">
+      </form>
+      <form class="delete_tweet" action="/tweets/<%=@tweet.id%>/delete" method="post">
+        <input type="submit" name="Delete Tweet" value="Delete Tweet">
+      </form>
+  </div>
+
+  <div class="logout">
+    <a href="/logout">Log Out</a>
+  </div>
+
+
+<% else %>
+  <a href="/">Home</a> <a href="/login">Log In</a> <a href="/signup">Sign Up</a>
+<% end %>

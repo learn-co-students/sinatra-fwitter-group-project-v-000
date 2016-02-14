@@ -1,0 +1,28 @@
+
+
+<% if Helpers.is_logged_in?(@session) %>
+  <nav>
+    <a href="/">Home</a> ~
+    <a href="/tweets">My Tweets</a> ~
+    <a href="/tweets/new">Tweet</a> ~
+    <a href="/logout">Log Out</a>
+  </nav>
+
+  <div class="tweets">
+    <h2>Latest Tweets</h2>
+    <% @tweets.reverse.each do |tweet| %>
+      <p class="username"><%=tweet.user.username%></p>
+      <p class="content"><%=tweet.content%></p>
+    <% end %>
+  </div>
+  <div class="logout">
+    <a href="/logout">Log Out</a>
+  </div>
+<% else %>
+  <div class="welcome">
+    <h1>Welcome to Fwitter!</h1>
+  </div>
+  <div class="login_or_signup">
+    <h2><a href="/login">Log In</a> - or - <a href="/signup">Sign Up</a></h2>
+  </div>
+<% end %>

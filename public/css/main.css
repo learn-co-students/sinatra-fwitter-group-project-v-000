@@ -1,0 +1,55 @@
+a:link, a:visited { color: lightgray; }
+a:hover { color: lightblue; }
+a:active { color: blue; }
+
+header a:link, header a:visited {
+  color: black;
+  text-decoration: none;
+}
+body {
+  background-color: skyblue;
+}
+
+nav {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: lightgray;
+  font-size: 1.2em;
+  margin: auto;
+  padding: 1%;
+  text-align: center;
+  width: 90%;
+}
+
+div {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: lightgray;
+  display: block;
+  margin: auto;
+  padding: 1%;
+  text-align: center;
+  width: 90%;
+}
+
+header h1 {
+  font-size: 4em;
+  text-align: center;
+  text-shadow: 2px 2px gray;
+}
+
+footer {
+  background-color: rgba(0, 0, 0, 0.9);;
+  color: white;
+  display: block;
+  margin: auto;
+  padding: 1%;
+  text-align: center;
+  width: 90%;
+}
+
+.tweets h3 {
+  text-decoration: overline;
+}
+.tweets .username {
+  font-weight: bold;
+  margin-bottom: -1em;
+}

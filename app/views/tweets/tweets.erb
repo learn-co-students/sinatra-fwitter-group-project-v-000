@@ -1,0 +1,38 @@
+<% if Helpers.is_logged_in?(@session) %>
+  <nav>
+    <a href="/">Home</a> ~
+    <a href="/tweets">My Tweets</a> ~
+    <a href="/tweets/new">Tweet</a> ~
+    <a href="/logout">Log Out</a>
+  </nav>
+  <div class="welcome">
+    <h2>Welcome, <%= @user.username %>!</h2>
+  </div>
+
+  <div class="tweets">
+    <h2>~ Your Tweets ~</h2>
+    <% @user.tweets.each do |tweet| %>
+      <p>
+        <a href="<%="/tweets/#{tweet.id}"%>"><%= tweet.content %></a>
+      </p>
+    <% end %>
+  </div>
+
+  <div class="tweets">
+    <h2>~ Tweets You're Following~ </h2>
+    <% @user.following.each do |user| %>
+      <% user.tweets.each do |tweet| %>
+        <p class="username"><%=user.username%></p>
+        <p class="content"><%=tweet.content%></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="logout">
+    <a href="/logout">Log Out</a>
+  </div>
+
+
+<% else %>
+  <a href="/">Home</a> <a href="/login">Log In</a> <a href="/signup">Sign Up</a>
+<% end %>
