@@ -13,7 +13,7 @@
     <h2>~ Your Tweets ~</h2>
     <% @user.tweets.each do |tweet| %>
       <p>
-        <a href="/tweets/:id"><%= tweet.content %></a>
+        <a href="<%="/tweets/#{tweet.id}"%>"><%= tweet.content %></a>
       </p>
     <% end %>
   </div>

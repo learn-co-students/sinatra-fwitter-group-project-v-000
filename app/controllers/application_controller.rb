@@ -111,10 +111,24 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  post '/tweets/:id/delete' do
+    redirect to '/login' unless Helpers.is_logged_in?(session)
+    begin
+      tweet = Helpers.current_user(session).tweets.find(params[:id])
+      tweet.destroy
+      redirect '/tweets'
+    rescue ActiveRecord::RecordNotFound
+      redirect '/tweets'
+    end
+  end
+
+
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     erb :'tweets/tweets'
   end
+
+
 
 end
 
