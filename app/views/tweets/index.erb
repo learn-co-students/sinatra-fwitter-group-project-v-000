@@ -1,0 +1,12 @@
+<% if @user %>
+  <h3>Welcome, <%= @user.username %>
+<% end %>
+<h3>Listing Tweets</h3>
+<% if @tweets.any? %>
+  <% @tweets.each do |tweet| %>
+    <p><%= tweet.content %> - <%= User.find(tweet.user_id).username %></p>
+  <% end %> 
+<% else %>
+  <p>There don't seem to be any tweets!</p>
+<% end %>
+
