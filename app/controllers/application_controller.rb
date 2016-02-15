@@ -24,14 +24,18 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/tweets/:id' do
-    @tweet = Tweet.find(params[:id].to_i)
-    erb :'tweets/show'
-  end
-  
-  get '/tweets/new' do
+ get '/tweets/new' do
     if logged_in?
       erb :'tweets/new'
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/tweets/:id' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id].to_i)
+      erb :'tweets/show'
     else
       redirect '/login'
     end
@@ -46,18 +50,22 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/tweets/:id/delete' do
-    Tweet.delete(params[:id].to_i)
+  delete '/tweets/:id' do
+    tweet = Tweet.find(params[:id].to_i)
+    redirect '/tweets' if tweet.user_id != current_user.id
+    tweet.delete
     redirect '/tweets'
   end
 
   get '/tweets/:id/edit' do
+    redirect '/login' if !logged_in?
     @tweet = Tweet.find(params[:id].to_i)
     erb :'tweets/edit'
   end
 
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id].to_i)
+    redirect "/tweets/#{@tweet.id}/edit" if params[:content].empty?
     @tweet.update(content: params[:content])
     redirect "tweets/#{@tweet.id}"
   end
