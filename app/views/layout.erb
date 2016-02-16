@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<head>
+  <title>Flatiron Twitter</title>
+</head>
+<body>
+  <%= yield %>
+</body>
+<footer> 
+  <% if logged_in? %>
+    <a href="/logout">Log out</a>
+  <% else %>
+    <a href="/login">Log in</a>
+  <% end %>
+</html>

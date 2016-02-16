@@ -1,0 +1,3 @@
+<% @tweets.each do |tweet| %>
+  <p><%= User.find(tweet.user_id).username %> - <%= tweet.content %></p>
+<% end %>
