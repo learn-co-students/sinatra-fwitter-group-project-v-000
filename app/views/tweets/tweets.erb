@@ -1,0 +1,8 @@
+<h1>Welcome to the Fwitter Feed</h1>
+
+<% @tweets.each do |tweet| %>
+
+  <h4><%= tweet.content %></h4>
+  <p>Posted by: <%= tweet.user.username %></p>
+
+<% end %>
