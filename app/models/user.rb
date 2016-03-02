@@ -5,12 +5,12 @@ class User < ActiveRecord::Base
   has_many :tweets
 
 
-     def current_user
-      User.find(session[:user_id])
-     end
+   def slug
+     username.downcase.split(" ").join("-")
+   end
  
-     def logged_in?
-       !!session[:user_id]
-     end
+   def self.find_by_slug(slug)
+     all.find{ |user| user.slug == slug }
+   end  
 
 end
