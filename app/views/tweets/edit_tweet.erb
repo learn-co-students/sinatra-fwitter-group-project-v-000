@@ -1,0 +1,7 @@
+<h3>Edit Tweet</h3>
+<form action="/tweets/<%=@tweet.id%>/edit" method="POST">
+  <label for="content">Tweet</label>
+  <input type="text" name="content" id="content" value="<%=@tweet.content%>">
+  <input id="submit" type="submit" value"Save Tweet">
+
+</form>
