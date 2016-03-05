@@ -1,0 +1,10 @@
+<h2>UH OH!</h2>
+
+<h3>There was a problem with your login.</h3>
+
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
+<h3><a href="/login">Wanna try again?</h3>
+<h3><a href="/signup">Need to Create an account?</h3>
