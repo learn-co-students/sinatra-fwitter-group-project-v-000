@@ -1,15 +1,22 @@
 <h3>EDIT <%=@tweet.user.username%>'s TWEET</h3>
 
-<form action="/tweets/:id" method="post">
+<h3>You said:</h3>
+  <h2><%= @tweet.content %></h2>
 
-<label><h2>New content</h2></label>
-<input type="text" name="new_content" id="new_content" placeholder="<%=@tweet.content%>"></input>
+<h3>But you meant:</h3>
+<form action="/tweets/<%=@tweet.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+<label>New content</label>
+<input type="text" name="new_content" id="<%=@tweet.id%>" placeholder="<%=@tweet.content%>"></input>
 
 <br></br>
 <button type="submit" name="edit">Edit this shit!</button>
 
-<button type="submit" name="delete"><a href="tweets/<%=@tweet.id%>/delete">Christ, what was I thinking?!?</a></button>
+<button type="submit" name="cancel"><a href="/tweets">Nah, shit shit's genius</a></button> 
+</form>
 
-<button type="submit" name="cancel"><a href="/tweets">Nah, shit shit's genius</a></button>
-
+<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Christ, what was I thinking?!?">
 </form>
