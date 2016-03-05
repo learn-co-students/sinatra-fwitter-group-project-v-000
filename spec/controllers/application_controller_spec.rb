@@ -66,8 +66,8 @@ describe ApplicationController do
       }
       post '/signup', params
       session = {}
-
       session[:id] = user.id      
+      
       get '/signup'
       expect(last_response.location).to include('/tweets')
     end
@@ -86,6 +86,7 @@ describe ApplicationController do
         :password => "kittens"
       }
       post '/login', params
+
       expect(last_response.status).to eq(302)
       follow_redirect!
       expect(last_response.status).to eq(200)
@@ -107,7 +108,8 @@ describe ApplicationController do
     end
   end
 
-  describe "logout" do 
+  describe "logout" do
+# binding.pry 
     it "lets a user logout if they are already logged in" do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
 
@@ -220,6 +222,7 @@ describe ApplicationController do
 
         user = User.find_by(:username => "becky567")
         tweet = Tweet.find_by(:content => "tweet!!!")
+
         expect(tweet).to be_instance_of(Tweet)  
         expect(tweet.user_id).to eq(user.id)
         expect(page.status_code).to eq(200)

@@ -1,14 +1,12 @@
-<h1>ALL TEH TWEETS</h1>
+<h1>Welcome, <%=@user.username%></h1>
 
 <% if @user.tweets.empty? %>
   <h2><a href="tweets/new">Get to tweeting!</h2>
 <% else %>
-  <h2>Your tweets: </h2>
-  <% @user.tweets.each do |t| %>
+  <h2>All teh tweets: </h2>
+  <% Tweet.all.each do |t| %>
   <ul>
-    <li><a href="tweets/<%=t.id%>"><%= t.content %></a>
+    <li><a href="tweets/<%=t.id%>"><%= t.content %></a></li>
   </ul>
-
-
     <% end %>
 <% end %>

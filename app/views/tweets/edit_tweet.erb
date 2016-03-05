@@ -8,10 +8,10 @@
   <input id="hidden" type="hidden" name="_method" value="patch">
 
 <label>New content</label>
-<input type="text" name="new_content" id="<%=@tweet.id%>" placeholder="<%=@tweet.content%>"></input>
+<input type="text" name="content" id="<%=@tweet.id%>" placeholder="<%=@tweet.content%>"></input>
 
 <br></br>
-<button type="submit" name="edit">Edit this shit!</button>
+<button id="submit" type="submit" name="edit">Edit this shit!</button>
 
 <button type="submit" name="cancel"><a href="/tweets">Nah, shit shit's genius</a></button> 
 </form>
