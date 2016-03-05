@@ -18,7 +18,6 @@ module Slugifiable
 end
 
 =begin
-
   I kept my version and deleted yours for a couple reasons:
     1) Mine uses ActiveSupport to handle instance/class variable assignment, 
     then includes it in ActiveRecord::Base, so it's automatically included
