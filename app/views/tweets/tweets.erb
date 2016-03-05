@@ -1,6 +1,7 @@
-<h1>Welcome, <%=@user.username%></h1>
 
-<% if @user.tweets.empty? %>
+<h1>Welcome, <%= current_user.username%></h1>
+
+<% if current_user.tweets.empty? %>
   <h2>You haven't written any tweets yet.</h2>
   <h2><a href="tweets/new">Get to tweeting!</h2>
 <% else %>
@@ -19,6 +20,6 @@
     <% end %>
   </table>
   <button type="submit" name="new_tweet"><a href="/tweets/new">New Tweet</a></button>
-  <button type="submit" name="my_tweets"><a href="/users/<%=@user.slug%>">My Tweets</a></button>
+  <button type="submit" name="my_tweets"><a href="/users/<%=current_user.slug%>">My Tweets</a></button>
 
 <% end %>
