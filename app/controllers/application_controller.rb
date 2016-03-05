@@ -21,32 +21,43 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-  # binding.pry
-
     @user=User.find_by(email: params["user"]["email"])
     if @user && @user.authenticate(params["user"]["password"])
-      session[:user_id]=@user[:id]
+      session[:id]=@user[:id]
       redirect '/tweets'
+binding.pry
     else
       erb :failure
     end
   end
 
   get '/signup' do
-    erb :'users/create_user'
+# binding.pry
+    if is_logged_in
+# binding.pry
+      redirect '/tweets'
+    else
+      erb :'users/create_user'
+    end
   end
 
   post '/signup' do
-
-    if taken?
-      erb :failure, :locals => {:message => "Someone already signed up with that email address."}
+# binding.pry
+    if is_logged_in
+binding.pry
+      redirect '/tweets'
+    elsif params.any?{|k,v| v==""}
+# binding.pry 
+      redirect '/signup'
+# binding.pry
     else
-      @user=User.new(params["user"])
+# binding.pry
+      @user=User.new(params)
+  # binding.pry
       if @user.save
-        session[:user_id]=@user[:id]
+  # binding.pry
+        session[:id]=@user.id
         redirect '/tweets'
-      else
-        redirect '/failure'
       end
     end
 
@@ -73,9 +84,9 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets' do
     
-    if session[:user_id]=params["user"]["id"]
+    if session[:id]=params["user"]["id"]
       @tweet=Tweet.new(content: params["user"]["tweet"])
-      @tweet.user_id=session[:user_id]
+      @tweet.user_id=session[:id]
       @tweet.save
       erb :'tweets/show_tweet'
     else
@@ -95,10 +106,10 @@ class ApplicationController < Sinatra::Base
 
   patch '/tweets/:id' do
     
-binding.pry
+# binding.pry
     @tweet=Tweet.find(params[:id])
     @tweet.content=params["new_content"]
-binding.pry
+# binding.pry
     @tweet.save
 
     redirect "/tweets/#{@tweet.id}"
@@ -106,10 +117,10 @@ binding.pry
   end
 
   delete '/tweets/:id/delete' do
-binding.pry
+# binding.pry
     @tweet=Tweet.find(params[:id])
     @tweet.delete
-    
+
     redirect "/tweets"
 
   end
@@ -131,11 +142,12 @@ binding.pry
 
   helpers do 
           def current_user
-            User.find(session[:user_id])
+            User.find(session[:id])
           end
 
           def is_logged_in
-            !!session[:user_id]
+# binding.pry
+            !!session[:id]
           end
 
           def taken?
