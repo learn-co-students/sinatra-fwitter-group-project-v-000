@@ -1,0 +1,19 @@
+<h1>Just look at what you've done, <%= @user.username%></h1>
+
+
+<table>
+    <tr>
+      <th><h4>Content</hr></th>
+      <th><h4>Tweeted at</h4></th>
+    </tr>
+  <% @user.tweets.each do |t| %>
+    <tr>
+      <td><a href="/tweets/<%=t.id%>"><%= t.content %></a></td>
+      <td><%= t.created_at %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br></br>
+<button type="text" name="new_tweet"><a href="/tweets/new">New Tweet</a></button>
+

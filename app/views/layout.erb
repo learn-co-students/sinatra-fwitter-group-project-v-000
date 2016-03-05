@@ -8,9 +8,10 @@
 
   <%= yield %>
 
-<!--   <button type="submit"><a href="/login">Write a New Tweet></a></button>
-  <br></br>
-  <button type="submit"><a href="/logout">Log out</a></button> -->
+
+  <% if @user %>
+    <button type="submit" name="logout"><a href="/logout">Log me out</a></button>
+  <% end %>
 
 </body>
 </html>
