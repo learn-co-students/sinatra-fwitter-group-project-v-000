@@ -6,14 +6,14 @@
 <h3>But you meant:</h3>
 <form action="/tweets/<%=@tweet.id%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
+  
+  <label>New content</label>
+  <input type="text" name="content" id="<%=@tweet.id%>" placeholder="<%=@tweet.content%>"></input>
 
-<label>New content</label>
-<input type="text" name="content" id="<%=@tweet.id%>" placeholder="<%=@tweet.content%>"></input>
+  <br></br>
+  <button id="submit" type="submit" name="edit">Edit this shit!</button>
 
-<br></br>
-<button id="submit" type="submit" name="edit">Edit this shit!</button>
-
-<button type="submit" name="cancel"><a href="/tweets">Nah, this shit's genius</a></button> 
+  <button type="submit" name="cancel"><a href="/tweets">Nah, this shit's genius</a></button>
 </form>
 
 <form action="/tweets/<%=@tweet.id%>/delete" method="post">

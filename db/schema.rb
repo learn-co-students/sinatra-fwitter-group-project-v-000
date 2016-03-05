@@ -11,20 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160305160741) do
+ActiveRecord::Schema.define(version: 20160304213801) do
 
   create_table "tweets", force: :cascade do |t|
-    t.text     "content"
-    t.integer  "user_id"
-    t.datetime "created_at"
-=======
-ActiveRecord::Schema.define(version: 20160303034349) do
-
-  create_table "tweets", force: :cascade do |t|
+    t.text    "content"
     t.integer "user_id"
-    t.string  "content"
->>>>>>> a06a86da603a5b03c66d47802c0e133f8792e389
   end
 
   create_table "users", force: :cascade do |t|

@@ -15,11 +15,11 @@ class UsersController < ApplicationController
     else
       user = User.new(params)
       if user.save
-        session[:id] = @user.id
+        session[:id] = user.id
         redirect '/tweets'
       end
     end
-    
+
   end
 
   get '/login' do
