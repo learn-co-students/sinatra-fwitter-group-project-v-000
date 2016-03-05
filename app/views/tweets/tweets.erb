@@ -1,0 +1,8 @@
+<h2> Welcome, Here are All The Tweets Ever Tweeted By All Users </h2>
+
+<% @tweets.each do |tweet| %>
+<p><%= tweet.content %></p>
+<% end %>
+
+<a href="/tweets/new"> Write a tweet </a> <br>
+<a href="/logout"> Log Out </a>
