@@ -1,0 +1,19 @@
+
+<!DOCTYPE <html>
+<head>
+  <title>Fwitter</title>
+</head>
+<body>
+  <button type="submit"><a href="/home">Back to homepage</a></button>
+  <br></br>
+
+  <%= yield %>
+
+
+  <% if @user %>
+    <button type="submit" name="logout"><a href="/logout">Log me out</a></button>
+  <% end %>
+
+</body>
+</html>
+

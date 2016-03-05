@@ -1,0 +1,25 @@
+
+<h1>Welcome, <%= current_user.username%></h1>
+
+<% if current_user.tweets.empty? %>
+  <h2>You haven't written any tweets yet.</h2>
+  <h2><a href="tweets/new">Get to tweeting!</h2>
+<% else %>
+  
+  <h2>All teh tweets: </h2>
+  <table>
+    <tr>
+      <th><h4>Content   </h4></th>
+      <th><h4>       User      </hr></th>
+    </tr>
+    <% Tweet.order(id: :desc).each do |t| %>
+    <tr>
+      <td><h3><a href="tweets/<%=t.id%>"><%= t.content %></a></h3></td>
+      <td><h5><a href="users/<%=t.user.slug%>"><%= t.user.username %></a></h5></td>
+    </tr>
+    <% end %>
+  </table>
+  <button type="submit" name="new_tweet"><a href="/tweets/new">New Tweet</a></button>
+  <button type="submit" name="my_tweets"><a href="/users/<%=current_user.slug%>">My Tweets</a></button>
+
+<% end %>

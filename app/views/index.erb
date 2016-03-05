@@ -1,0 +1,19 @@
+
+<h1> Welcome to Fwitter </h1>
+
+<% if @user %> 
+  <h1>Welcome, <%= @user.username%> </h1>
+  <h2>What would you like to do?</h2>
+  <ul>
+    <li><a href='/tweets'>See all the tweets</a>
+      <li><a href='/users/<%=@user.slug%>'>My tweets</a>
+    <li><a href='/tweets/new'>Write a new tweet</a>
+    <li><a href='/logout'>Log out</a>
+  </ul>
+<% else %>
+  <h1>Whaddaya wanna do?</h1>
+  <ul>
+    <li><a href='/login'>Log in</a>
+    <li><a href='/signup'>Sign up</a>
+<% end %>
+<br></br>

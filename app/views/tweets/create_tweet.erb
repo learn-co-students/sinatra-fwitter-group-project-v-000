@@ -1,0 +1,10 @@
+<h3>Whaddaya wanna say?</h3>
+
+<form action="/tweets" method="post">
+<h3><%= current_user.username%> says:<h3>
+<label>Content:</label>
+<input type="text" name="content" id="new_tweet"></input>
+
+<br></br>
+<button id="submit" type="submit" name="user[id]" value="<%=current_user.id%>">HOLLA!</button>
+</form>
