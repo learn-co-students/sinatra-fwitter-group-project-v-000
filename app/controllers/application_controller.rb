@@ -1,4 +1,3 @@
-require 'pry'
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
@@ -23,7 +22,11 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    user = User.new(params)
+    # if !User.find_by(username: params[:username]) && !User.find_by(email: params[:email])
+      user = User.new(params)
+    # else
+      # user = User.new
+    # end
     if user.save
       session[:id] = user.id
       redirect '/tweets'
@@ -64,7 +67,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/users/:slug' do
-    @user = User.find_by_slug(:slug)
+    @user = User.find_by_slug(params[:slug])
     erb :'users/show'
   end
 

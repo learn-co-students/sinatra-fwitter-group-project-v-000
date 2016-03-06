@@ -1,6 +1,6 @@
-<h1>Edit This Tweet:</h1>
+<h1>Edit Tweet:</h1>
 
-<h3><%=@tweet.content%></h3>
+<h3>"<%=@tweet.content%>"</h3>
 
 <p>It's okay. We all change our minds sometime.</p>
 
@@ -9,3 +9,6 @@
   <input type="text" name="content" id="content">
   <input type="submit" id="submit">
 </form>
+
+<p><a href="/users/<%= @tweet.user.slug %>">Return to your tweets.</a></p>
+<p><a href="/logout">Click here to logout.</a></p>

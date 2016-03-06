@@ -1,3 +1,4 @@
+require 'pry'
 class User < ActiveRecord::Base
 
   has_many :tweets
@@ -15,8 +16,16 @@ class User < ActiveRecord::Base
 
   def self.find_by_slug(slug)
     self.all.detect do |user|
-      user.username.downcase = slug.split("-").join(" ")
+      user.username.downcase == slug.split("-").join(" ")
     end
   end
+
+  # def self.new_valid_user(params)
+  #   if !User.find_by(username: params[:username]) || !User.find_by(email: params[:email])
+  #     user = User.new(params)
+  #   else
+  #     user = User.new
+  #   end
+  # end
 
 end
