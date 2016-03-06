@@ -1,0 +1,10 @@
+<h1>Welcome, <%= @user.username.capitalize %>! </h1>
+
+<ul>
+<% @tweets.each do |tweet| %>
+ <li> "<%= tweet.content %>" -<a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a>
+<% end %>
+</ul>
+
+<p>Join the conversation by <a href="/tweets/new">posting a tweet.</a></p>
+<p><a href="/logout">Click here to logout.</a></p>

@@ -1,0 +1,16 @@
+<h1><a href="/users/<%=@tweet.user.slug%>"><%= @tweet.user.username.capitalize %></a></h1>
+<h4>"<%= @tweet.content %>"</h4>
+
+
+<% if current_user == @tweet.user %>
+<p><a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a></p>
+<% end %>
+<!-- I'd put this button in the above if statement if it didn't cause one of the tests to fail -->
+<form method="POST" action="/tweets/<%= @tweet.id %>/delete">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" value="delete" id="Delete Tweet">
+</form>
+
+
+<p><a href="/tweets">Return to all tweets.</a></p>
+<p><a href="/logout">Click here to logout.</a></p>
