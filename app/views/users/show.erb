@@ -1,8 +1,7 @@
-<h1>Welcome, @<%= current_user.username %></h1>
-<a href="/tweets/new">Create Tweet</a>
+<h1>@<%= @user.username %></h1>
 <br><br>
-<h2>Your Tweets:</h2>
+<h2>Tweets:</h2>
 <% @user.tweets.each do |tweet| %>
-	<a href="/tweets/<%= tweet.id %>"><%=tweet.content%></a>
+	<a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
 	<hr>
 <% end %>
