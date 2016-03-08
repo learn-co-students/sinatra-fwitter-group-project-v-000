@@ -5,6 +5,81 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "secret"
   end
+  
+  get '/' do 
+  	erb :index
+  end
+  
+  get '/signup' do 
+  	if logged_in? 
+  		redirect '/tweets'
+  	else
+			erb :'users/create_user'
+		end
+	end
+	
+	post '/signup' do 
+		user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+		if user.save && valid_user?(user)
+			session[:user_id] = user.id
+			redirect '/tweets'
+		else
+			redirect '/signup'
+		end
+	end
+	
+	get '/login' do 
+		if logged_in? 
+  		redirect '/tweets'
+  	else
+			erb :'/users/login'
+		end
+	end
+	
+	post '/login' do 
+		user = User.find_by(:username => params[:username])
+		if params[:username] == "" || params[:password] == ""
+			redirect '/login'
+		else
+			session[:user_id] = user.id
+			redirect '/tweets'
+		end
+	end
+	
+	get '/logout' do 
+		if logged_in? 
+			session.clear
+  		redirect '/login'
+  	else
+			redirect '/'
+		end
+	end
+			
+	
+	helpers do 
+		def logged_in?
+			!!session[:user_id]
+		end
+		
+		def current_user
+			User.find(session[:user_id])
+		end
+		
+		def auth_redirect(path)
+			logged_in? ? (redirect path ) : (redirect '/login')
+		end
+		
+		def auth_erb(path)
+			logged_in? ? (erb :"#{path}") : (redirect '/login')
+		end
+		
+		def valid_user?(user)
+			user.username.length > 0 && user.email.length > 0 && user.password.length > 0
+		end
+	end
+	
 
 end
