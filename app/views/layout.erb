@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Flatiron Twitter</title>
+</head>
+<body>
+	<div style="text-align: right;">
+  <% if !session[:id] && request.path_info != "/login" && request.path_info != "/signup"%>
+  <p><a href="/signup">Signup</a> <a href="/login">Login</a></p>
+  <% elsif request.path_info != "/login" && request.path_info != "/signup" %>
+	<p><a href="/logout">Logout</a>
+  <% end %>
+	</div>
+	<%= yield %>
+</body>
+</html>

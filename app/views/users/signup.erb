@@ -1,0 +1,11 @@
+<h1>Create an account:</h1>
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+<form action="/signup" method="post">
+  <div><label>Username: <input type="text" name="username"></label></div>
+  <div><label>Email: <input type="email" name="email"></label></div>
+  <div><label>Password: <input type="password" name="password"></label></div>
+  <!-- <div><label>Confirm password: <input type="password" name="confirm_password"></label></div> -->
+  <input type="submit" value="Register">
+</form>
