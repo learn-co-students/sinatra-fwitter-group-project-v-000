@@ -69,7 +69,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post '/tweets/:id' do
+  patch '/tweets/:id' do
     if params[:content] == '' #don't allow them update to a blank tweet
       redirect to "/tweets/#{params[:id]}/edit"
     else
