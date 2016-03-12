@@ -81,7 +81,7 @@ class ApplicationController < Sinatra::Base
   end
 
   # DELETE
-  post '/tweets/:id/delete' do
+  delete '/tweets/:id/delete' do
     if is_logged_in?
       @tweet = Tweet.find_by_id(params[:id])  #find that tweet
       if @tweet.user_id == session[:user_id] #check that the person is the creator
