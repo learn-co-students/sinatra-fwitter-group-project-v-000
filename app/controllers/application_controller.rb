@@ -102,26 +102,37 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       @tweet = Tweet.find(params[:id])
       if @tweet.user_id == current_user.id
-
+        erb :"/tweets/edit_tweet"
       else
         redirect to "/tweets"
       end
+    else
+      redirect to "/login"
     end
 
   end
 
   patch "/tweets/:id" do # edit a tweet
-
+    if params["content"] == ""
+      redirect to "/tweets/#{params[:id]}/edit"
+    else
+      @tweet = Tweet.find(params[:id])
+      @tweet.update(content: params["content"])
+      redirect to "/tweets/#{@tweet.id}"
+    end
   end
 
-  post "/tweets/:id/delete" do # submit delete
-
+  delete "/tweets/:id/delete" do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user_id == current_user.id 
+        @tweet.delete
+      end
+      redirect to "/tweets"
+    else
+      redirect to "/login"
+    end
   end
-
-
-
-
-
 
   helpers do
     def logged_in?
