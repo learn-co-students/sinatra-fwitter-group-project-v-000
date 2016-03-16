@@ -1,1 +1,5 @@
-<h1>All Ftweets</h1>
+<h1>Welcome, <%=@user.username%> - All Tweets</h1>
+
+<% @tweets.each do |tweet| %>
+  <p><%=tweet.content%></p>
+<% end %>

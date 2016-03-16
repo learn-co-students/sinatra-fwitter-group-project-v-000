@@ -25,14 +25,14 @@ class ApplicationController < Sinatra::Base
       redirect to "/signup"
     else
       @user = User.create(params)
-      session[:id] = @user.id # log in the user after they sign up
+      session[:user_id] = @user.id # log in the user after they sign up
       redirect to "/tweets"
     end
   end
 
   get "/login" do #form for logging in
     if logged_in?
-      redirect '/tweets'
+      redirect to "/tweets"
     else
       erb :'/users/login'
     end
@@ -41,8 +41,8 @@ class ApplicationController < Sinatra::Base
   post '/login' do #authenticates user & pass and redirects
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
-      session[:id] = user.id
-      erb :'/tweets/tweets'
+      session[:user_id] = user.id
+      redirect to "/tweets"
     else
       redirect '/login'
     end
@@ -53,13 +53,23 @@ class ApplicationController < Sinatra::Base
     redirect '/login'
   end
 
+  get "/tweets" do 
+    @user = current_user
+    @tweets = Tweet.all
+    if !logged_in?
+      redirect to "/login"
+    else
+      erb :"/tweets/tweets"
+    end
+  end
+
   helpers do
     def logged_in?
-      !!session[:id]
+      !!session[:user_id]
     end
-
+  
     def current_user
-      User.find(session[:id])
+      User.find(session[:user_id])
     end
   end
 
