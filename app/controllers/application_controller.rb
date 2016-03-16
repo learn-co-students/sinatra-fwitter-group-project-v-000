@@ -32,7 +32,7 @@ class ApplicationController < Sinatra::Base
 
   get "/login" do #form for logging in
     if logged_in?
-      erb :'/tweets/tweets'
+      redirect '/tweets'
     else
       erb :'/users/login'
     end
@@ -48,15 +48,22 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/logout' do
+    session.clear
+    redirect '/login'
+  end
+
   helpers do
     def logged_in?
-      !!sessions[:id]
+      !!session[:id]
     end
 
     def current_user
       User.find(session[:id])
     end
   end
+
+
 
 
 end
