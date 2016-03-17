@@ -44,10 +44,6 @@ class SessionsController < ApplicationController
   post '/signup' do
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect '/signup', locals: {message: "You must fill in all fields."}
-    elsif username_exist?
-      erb :'registrations/signup', locals: {message: "Username already taken."}
-    elsif email_exist?
-      erb :'registrations/signup', locals: {message: "Email already taken."}
     else
       user = User.create(username: params[:username], password: params[:password], email: params[:email])
       session[:id] = user.id
