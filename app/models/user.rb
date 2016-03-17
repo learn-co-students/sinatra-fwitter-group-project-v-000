@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, length: {in: 1..20}
   validates :email, presence: true
-  validates :password, length: {in: 8..48}, presence: true
+  validates :password, length: {in: 4..48}, presence: true
 
   def slug
     self.username.downcase.gsub(/[[$&\.\,\'\"\[\]\{\}\(\)\+\\\/\|]]/, "").gsub(/[\s]+/, "-")
