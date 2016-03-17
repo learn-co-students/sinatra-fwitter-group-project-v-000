@@ -1,0 +1,6 @@
+<h3>Edit FWEET!</h3>
+<form method='POST' action='/tweets/<%= @tweet.id %>'>
+  <input type='text' id=':content' name='content' value='<%= @tweet.content %>'>
+  <input type='hidden' id='hidden' name='_method' value='PATCH'>
+  <input type='submit' id='submit' name='submit' value='Submit'>
+</form>

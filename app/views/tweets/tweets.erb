@@ -1,0 +1,14 @@
+<h3>ALL THE TWEETS!</h3>
+<h5>Welcome, <%= @user.username %></h5>
+<% @tweets.each do |tweet|%>
+  <p><a href='/tweets/<%= tweet.id %>'>Tweet:<%= tweet.id %>;</a></p>
+  <% if tweet.user_id == @user.id %>
+    <p><a href='/tweets/<%= tweet.id %>/edit'>Edit Tweet</a></p>
+    <form method='POST' action='/tweets/<%= tweet.id  %>/delete'>
+      <input type='hidden' id='hidden' name='_method' value='DELETE'>
+      <input type='submit' id='Delete Tweet' name='Delete Tweet' value='Delete Tweet'>
+    </form>
+  <% end %>
+
+  <p><%= tweet.content %></p>
+<% end %>
