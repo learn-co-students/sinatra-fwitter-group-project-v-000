@@ -1,0 +1,27 @@
+<% if !logged_in? %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fwitter | Home</title>
+</head>
+<body>
+  <h1>Welcome to Fwitter</h1>
+  <p><a href="/signup">Sign Up</a></p>
+  <p><a href="/login">Log in</a></p>
+
+</body>
+</html>
+
+<% else %>
+
+<h1>Welcome, <%=@user.username%></h1>
+<% User.all.each do |user| %>
+  <% user.tweets.each do |tweet| %>
+    <p><%= tweet.content %></p>
+  <% end %>
+<%end%>
+
+<a href="/logout">Log out</a>
+
+<% end %>
