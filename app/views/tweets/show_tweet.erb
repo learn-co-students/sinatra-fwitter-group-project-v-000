@@ -1,0 +1,20 @@
+<h1><%=@tweet.content%></h1>
+
+<!--
+ <p><a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a></p> 
+ <p><a href="/tweets/<%=@tweet.id%>/delete"></a></p> 
+ -->
+
+<form action="/tweets/<%=@tweet.id%>/edit" method="get">
+   <input type="submit" value="Edit Tweet"></input>
+ </form>
+
+ <form action="/tweets/<%=@tweet.id%>/delete" method="post">
+  <input type="hidden" id="hidden" name="_method" value="DELETE">
+   <input type="submit" value="Delete Tweet"></input>
+ </form>
+
+  <form action="/logout" method="get">
+   <input type="submit" value="Log Out"></input>
+ </form>
+ 
