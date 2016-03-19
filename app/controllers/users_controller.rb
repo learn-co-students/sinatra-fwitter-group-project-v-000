@@ -29,7 +29,7 @@ post "/signup" do
     end
 
   get "/success" do
-    @user = User.find_by(session[:user_id])
+    @user = User.current_user
     if @user.logged_in?
       erb :success
     else

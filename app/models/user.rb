@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
       !!session[:user_id]
     end
 
-    def current_user
-      User.find(session[:user_id])
+    def self.current_user
+      self.find(session[:user_id])
     end
 
     def slug
