@@ -22,6 +22,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
+<<<<<<< HEAD
       if params[:username] != "" && params[:email] != "" && params[:password] != ""
         @user = User.create(username: params[:username], email: params[:email], password: params[:password])
         session[:user_id] = @user.id
@@ -29,6 +30,14 @@ class ApplicationController < Sinatra::Base
       else
         redirect '/signup'
       end
+=======
+    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+    if @user.save
+      redirect '/tweets'
+    else
+      redirect '/signup'
+    end
+>>>>>>> f90888dffa37ff5802dd32d006bcb626821c62e6
   end
 
   get '/login' do
@@ -41,12 +50,21 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     @user = User.find_by(username: params[:username])
+<<<<<<< HEAD
     if @user && @user.authenticate(params[:password])
        session[:user_id] = @user.id
        redirect "/tweets"
      else
        redirect '/login'
      end
+=======
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect "/tweets"
+    else
+      redirect '/login'
+    end
+>>>>>>> f90888dffa37ff5802dd32d006bcb626821c62e6
   end
 
   get "/logout" do
@@ -58,6 +76,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+<<<<<<< HEAD
   helpers do
     def is_logged_in
       !!session[:user_id]
@@ -72,6 +91,8 @@ class ApplicationController < Sinatra::Base
     erb :"tweets/tweets"
   end
 
+=======
+>>>>>>> f90888dffa37ff5802dd32d006bcb626821c62e6
   get '/tweets/new' do
     erb :'/tweets/create_tweet'
   end
@@ -87,6 +108,39 @@ class ApplicationController < Sinatra::Base
     erb :'/tweets/show_tweet'
   end
 
+<<<<<<< HEAD
 
 
 end
+=======
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find(params[:id])
+    erb :'/tweets/edit_tweet'
+  end
+
+ patch '/tweets/:id' do
+    @tweet = Tweet.find(params[:id])
+    @tweet.content = params["content"]
+    @tweet.save
+    redirect "/tweets/#{@tweet.id}"
+  end
+
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find(params[:id])
+    @tweet.delete
+    redirect "/tweets"
+  end
+
+
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
+    end
+  end
+
+end
+>>>>>>> f90888dffa37ff5802dd32d006bcb626821c62e6
