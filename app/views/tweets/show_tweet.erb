@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Current Tweet</title>
+</head>
+<body>
+  <h3><%=@username%> tweeted:</h3>
+  <p><%=@tweet.content%></p>
+
+
+  <form method="post" action="/tweets/<%=@tweet.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+
+    <input type="submit" value="Delete">
+  </form>
+
+
+  
+</body>
+</html>

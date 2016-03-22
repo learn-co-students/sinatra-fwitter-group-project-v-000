@@ -3,14 +3,6 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-    def logged_in?
-      !!session[:user_id]
-    end
-
-    def self.current_user
-      self.find(session[:user_id])
-    end
-
     def slug
       self.username.downcase.gsub(" ", "-")
     end

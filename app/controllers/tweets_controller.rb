@@ -1,6 +1,8 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
+    @username = current_user.username
+    @tweets = Tweet.all
     erb :"tweets/tweets"
   end
 
@@ -9,6 +11,7 @@ class TweetsController < ApplicationController
   end
 
   get "/tweets/:id" do
+    @username = current_user.username
     erb :"tweets/show_tweet"
   end
 
