@@ -119,7 +119,6 @@ describe ApplicationController do
       post '/login', params
       get '/logout'
       expect(last_response.location).to include("/login")
-
     end
     it 'does not let a user logout if not logged in' do
       get '/logout'
