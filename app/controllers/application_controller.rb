@@ -19,6 +19,10 @@ class ApplicationController < Sinatra::Base
     erb :"tweets/users/login"
   end
 
+  get '/tweets' do
+    erb :"tweets/tweets"
+  end
+
   get '/tweets/new' do
     erb :'/tweets/create_tweet'
   end
@@ -26,7 +30,7 @@ class ApplicationController < Sinatra::Base
   post '/tweets' do
     Tweet.create(content: params["content"])
     redirect "/tweets/#{Tweet.last.id}"
-  end
+  end  
 
   get '/tweets/:id' do
     @id = params[:id]
@@ -34,4 +38,38 @@ class ApplicationController < Sinatra::Base
     erb :'/tweets/show_tweet'
   end
 
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find(params[:id])
+    erb :'/tweets/edit_tweet'
+  end
+
+ patch '/tweets/:id' do
+    @tweet = Tweet.find(params[:id])
+    @tweet.content = params["content"]
+    @tweet.save
+    redirect "/tweets/#{@tweet.id}"
+  end
+
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find(params[:id])
+    @tweet.delete
+    redirect "/tweets"
+  end
+
+
+
+
+
+
+
+
+ 
+
 end
+
+
+
+
+
+
+
