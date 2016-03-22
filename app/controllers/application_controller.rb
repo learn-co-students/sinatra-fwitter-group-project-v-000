@@ -7,9 +7,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
-  get '/' do
-    erb :layout
-  end
+
 
   get '/signup' do
     erb :index
@@ -22,4 +20,14 @@ class ApplicationController < Sinatra::Base
   get '/login' do
     erb :"tweets/users/login"
   end
+
+  get '/tweets/new' do
+    erb :'/tweets/create_tweet'
+  end
+
+  post '/tweets' do
+
+
+  end
+
 end
