@@ -9,15 +9,12 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "password_security"
   end
 
-<<<<<<< HEAD
   get '/' do
     erb :homepage
   end
 
-=======
->>>>>>> 05dd8d252715d19212d8e237396722fd3025e517
   get '/signup' do
-    if logged_in?
+    if is_logged_in
       redirect '/tweets'
     else
       erb :index
@@ -25,42 +22,56 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-       if @user.save
-         redirect '/tweets'
-       else
-         redirect '/signup'
-       end
+      if params[:username] != "" && params[:email] != "" && params[:password] != ""
+        @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+        session[:user_id] = @user.id
+        redirect '/tweets'
+      else
+        redirect '/signup'
+      end
   end
 
   get '/login' do
-    erb :"tweets/users/login"
+    if is_logged_in
+      redirect "/tweets"
+    else
+      erb :"tweets/users/login"
+    end
   end
 
-<<<<<<< HEAD
   post '/login' do
     @user = User.find_by(username: params[:username])
-    if user && user.authenticate(params[:password])
-       session[:user_id] = user.id
+    if @user && @user.authenticate(params[:password])
+       session[:user_id] = @user.id
        redirect "/tweets"
      else
        redirect '/login'
      end
   end
 
-  get '/tweets' do
-    erb :"tweets/tweets"
+  get "/logout" do
+    if is_logged_in
+      session.clear
+      redirect "/login"
+    else
+      redirect "/"
+    end
   end
 
   helpers do
-    def logged_in?
+    def is_logged_in
       !!session[:user_id]
     end
 
     def current_user
       User.find(session[:user_id])
     end
-=======
+  end
+
+  get '/tweets' do
+    erb :"tweets/tweets"
+  end
+
   get '/tweets/new' do
     erb :'/tweets/create_tweet'
   end
@@ -74,7 +85,8 @@ class ApplicationController < Sinatra::Base
     @id = params[:id]
     @tweet = Tweet.find(@id)
     erb :'/tweets/show_tweet'
->>>>>>> 05dd8d252715d19212d8e237396722fd3025e517
   end
+
+
 
 end
