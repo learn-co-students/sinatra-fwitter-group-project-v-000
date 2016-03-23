@@ -17,7 +17,7 @@ class ApplicationController < Sinatra::Base
     if is_logged_in
       redirect '/tweets'
     else
-      erb :index
+      erb :"tweets/users/create_user"
     end
   end
 
@@ -55,16 +55,6 @@ class ApplicationController < Sinatra::Base
       redirect "/login"
     else
       redirect "/"
-    end
-  end
-
-  helpers do
-    def is_logged_in
-      !!session[:user_id]
-    end
-
-    def current_user
-      User.find(session[:user_id])
     end
   end
 
@@ -140,5 +130,15 @@ class ApplicationController < Sinatra::Base
      @user = User.find_by_slug(params[:slug])
      erb :'tweets/tweets'
    end
+
+  helpers do
+    def is_logged_in
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
+    end
+  end
 end
 
