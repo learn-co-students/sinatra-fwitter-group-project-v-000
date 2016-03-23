@@ -1,0 +1,13 @@
+<a href="/"><img src="https://farm2.staticflickr.com/1515/25704872810_fa439133c1_n.jpg"></a><br><br>
+
+<h1>Hey <%= @user.username %></h1>
+<h2>Here are all your tweets:</h2>
+
+<% Tweet.all.each do |tweet| %>
+  <% if @user.tweets.ids.include?(tweet.id) %>
+    <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a> · <%= tweet.created_at.to_datetime.strftime("%b %d, %Y @%I:%M%p")%><br><br>
+  <% end %>
+<% end %>
+
+<a href="logout"><input type="submit" value="Log Out"></a>
+<a href="/tweets/new"><input type="submit" value="New Tweet"></a>

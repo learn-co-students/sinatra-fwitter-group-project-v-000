@@ -10,7 +10,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :homepage
+    if is_logged_in
+      redirect '/tweets'
+    else
+      erb :homepage
+    end
   end
 
   get '/signup' do
@@ -45,7 +49,7 @@ class ApplicationController < Sinatra::Base
        session[:user_id] = @user.id
        redirect "/tweets"
      else
-       redirect "/login", locals: {message: "Invalid username or password! Please try again."}
+       erb :"tweets/users/login", locals: {message: "Invalid username or password! Please try again."}
      end
   end
 
@@ -60,6 +64,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     if is_logged_in
+      @user = current_user
       erb :"tweets/tweets"
     else
       redirect '/login'
@@ -85,12 +90,9 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/:id' do
     @id = params[:id]
-    @tweet = Tweet.find_by(id: @id)
-    erb :'/tweets/show_tweet'
-
     @tweet = Tweet.find(@id)
     if !is_logged_in
-      redirect "/login", locals: {message: "Please login to continue."}
+      redirect "/login"
     else
       erb :'/tweets/show_tweet'
     end
@@ -117,18 +119,19 @@ class ApplicationController < Sinatra::Base
   end
 
   delete '/tweets/:id/delete' do
+    @user = current_user
     @tweet = Tweet.find(params[:id])
     if !current_user.tweets.ids.include?(@tweet.id)
-      redirect "/tweets/#{@tweet.id}", locals: {message: "Sorry, but you cannot delete another's tweet."}
+      erb :"/tweets/tweets", locals: {message: "Sorry, but you cannot delete another's tweet."}
     else
       @tweet.delete
-      redirect "/tweets", locals: {message: "Successfully deleted Tweet."}
+      erb :"tweets/tweets", locals: {message: "Successfully deleted Tweet."}
     end
   end
 
   get '/users/:slug' do
      @user = User.find_by_slug(params[:slug])
-     erb :'tweets/tweets'
+     erb :'tweets/users/tweets'
    end
 
   helpers do
@@ -137,8 +140,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      User.find(session[:user_id])
+      User.find_by_id(session[:user_id])
     end
   end
 end
-
