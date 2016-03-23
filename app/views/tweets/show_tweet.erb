@@ -1,3 +1,7 @@
 <% unless locals.empty? %>
   <%= message %>
 <% end %>
+
+<%@user.tweets.each do |tweet|%>
+<%=tweet.content%>
+<%end%>

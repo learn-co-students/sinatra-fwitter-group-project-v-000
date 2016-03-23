@@ -6,10 +6,10 @@ class UserController < ApplicationController
 
   get '/login' do
     if User.is_logged_in?(session)
-      redirect '/tweets/tweets'
+      redirect '/tweets'
     else
-    erb :'/users/login'
-  end
+      erb :'/users/login'
+    end
   end
 
   post '/login' do
@@ -22,9 +22,14 @@ class UserController < ApplicationController
     end
   end
 
+  get '/logout' do
+    session.clear
+    erb :'/users/login'
+  end
+
   get '/signup' do
     if User.is_logged_in?(session)
-      redirect '/tweets/tweets'
+      redirect '/tweets'
     else
       erb :'/users/create_user'
     end
@@ -46,5 +51,10 @@ class UserController < ApplicationController
     else
       redirect to '/'
     end
+  end
+
+  get '/users/:id' do
+    @user = User.find_by(params[:id])
+    erb :'/tweets/show_tweet'
   end
 end
