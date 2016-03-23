@@ -1,4 +1,5 @@
 class TweetController < ApplicationController
+  
   get '/tweets' do
     @tweet = Tweet.all
     erb :'/tweets/tweets'
