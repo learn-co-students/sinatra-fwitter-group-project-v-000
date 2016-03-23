@@ -3,6 +3,7 @@ class TweetController < ApplicationController
   get '/tweets' do
     @tweet = Tweet.all
     @user = User.current_user(session)
+    @user_all = User.all
     if User.is_logged_in?(session)
       erb :'/tweets/tweets'
     else
@@ -20,7 +21,7 @@ class TweetController < ApplicationController
   end
 
   post '/tweets' do
-    if params[:content].empty?
+    if params[:content] == ""
       redirect to "/tweets/new", locals: {message: "Your tweet was empty."}
     else
       @user = User.find_by_id(session[:user_id])
@@ -77,6 +78,6 @@ class TweetController < ApplicationController
     else
       redirect to '/login'
     end
-    
+
   end
 end
