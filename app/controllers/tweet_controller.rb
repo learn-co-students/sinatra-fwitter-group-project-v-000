@@ -67,7 +67,6 @@ class TweetController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
   delete '/tweets/:id/delete' do
     if User.is_logged_in?(session)
       @tweet = Tweet.find_by_id(params[:id])
@@ -78,9 +77,6 @@ class TweetController < ApplicationController
     else
       redirect to '/login'
     end
-=======
-  post '/delete' do
-    erb :tweets
->>>>>>> 6
+
   end
 end
