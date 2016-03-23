@@ -25,7 +25,7 @@ class TweetController < ApplicationController
     else
       @user = User.find_by_id(session[:user_id])
       @tweet = Tweet.create(:content => params[:content], :user_id => @user.id)
-      redirect to "/tweets", locals: {message: "Successfully created tweet."}
+      redirect to "/tweets/#{@tweet.id}", locals: {message: "Successfully created tweet."}
     end
   end
 
@@ -77,6 +77,6 @@ class TweetController < ApplicationController
     else
       redirect to '/login'
     end
-
+    
   end
 end
