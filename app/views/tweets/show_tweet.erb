@@ -2,6 +2,10 @@
   <%= message %>
 <% end %>
 
-<%@user.tweets.each do |tweet|%>
-<%=tweet.content%>
-<%end%>
+
+<%=@tweet.content%><br>
+<form action="/delete" method="post">
+  <input type="submit" value="Delete Tweet">
+</form>
+
+<a href="/tweets/:id/edit">Edit Tweet</a>
