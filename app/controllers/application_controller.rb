@@ -88,7 +88,11 @@ class ApplicationController < Sinatra::Base
   get '/tweets/:id' do
     @id = params[:id]
     @tweet = Tweet.find(@id)
-    erb :'/tweets/show_tweet'
+    if !is_logged_in
+      redirect "/login", locals: {message: "Please login to continue."}
+    else
+      erb :'/tweets/show_tweet'
+    end
   end
 
   get '/tweets/:id/edit' do
@@ -113,9 +117,14 @@ class ApplicationController < Sinatra::Base
 
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
-    @tweet.delete
-    redirect "/tweets"
+    if !current_user.tweets.ids.include?(@tweet.id)
+      redirect "/tweets/#{@tweet.id}", locals: {message: "Sorry, but you cannot delete another's tweet."}
+    else
+      @tweet.delete
+      redirect "/tweets", locals: {message: "Successfully deleted Tweet."}
+    end
   end
+
 
 end
 
