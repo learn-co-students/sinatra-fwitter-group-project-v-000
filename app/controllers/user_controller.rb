@@ -8,8 +8,8 @@ class UserController < ApplicationController
     if User.is_logged_in?(session)
       redirect '/tweets'
     else
-    erb :'/users/login'
-  end
+      erb :'/users/login'
+    end
   end
 
   post '/login' do
