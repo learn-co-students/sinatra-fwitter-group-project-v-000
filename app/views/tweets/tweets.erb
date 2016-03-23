@@ -4,10 +4,11 @@
   <%= message %>
 <% end %>
 
-<h1><%= current_user.username %>'s Tweets:</h1>
+<h1>Welcome, <a href="/users/<%=@user.slug%>"><%= current_user.username %></h1></a>
 
-<p>Welcome, <%= current_user.username %>!</p>
+<h2>Here are the latest tweets:</h2>
 <% Tweet.all.each do |tweet| %>
-  <a href="/tweets/<%=tweet.id%>"><%= tweet.content %><br><br></a>
+  <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a> @<%=tweet.user.username%> · <%= tweet.created_at.to_datetime.strftime("%b %d, %Y @%I:%M%p")%> <br>
 <% end %>
 
+<br><br><a href="/tweets/new"><input type="submit" value="New Tweet"></a>  <a href="logout"><input type="submit" value="Log Out"></a>
