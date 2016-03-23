@@ -22,11 +22,6 @@ class UserController < ApplicationController
     end
   end
 
-  get '/logout' do
-    session.clear
-    erb :'/users/login'
-  end
-
   get '/signup' do
     if User.is_logged_in?(session)
       redirect '/tweets'
