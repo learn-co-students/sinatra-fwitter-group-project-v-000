@@ -56,7 +56,7 @@ class ApplicationController < Sinatra::Base
   get "/logout" do
     if is_logged_in
       session.clear
-      redirect "/login"
+      redirect '/login'
     else
       redirect "/"
     end
@@ -125,7 +125,7 @@ class ApplicationController < Sinatra::Base
       erb :"/tweets/tweets", locals: {message: "Sorry, but you cannot delete another's tweet."}
     else
       @tweet.delete
-      erb :"tweets/tweets", locals: {message: "Successfully deleted Tweet."}
+      erb :"tweets/tweets", locals: {message: "Successfully deleted tweet."}
     end
   end
 
