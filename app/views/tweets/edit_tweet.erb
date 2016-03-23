@@ -7,9 +7,9 @@
 <body>
   <h3>Edit Tweet:</h3>
   <form action="/tweets/<%=@tweet.id%>" method="post">
-    <input type="hidden" id="hidden" name="_method" value="patch">
     <label for="content">Your thoughts:</label>
     <input type="text" id="content" name="content" value="<%=@tweet.content%>"><br><br>
+    <input type="hidden" id ="hidden" name="_method" value="PATCH">
     <input type="submit" value="submit">
   </form>
   

@@ -5,17 +5,17 @@
   <title>Current Tweet</title>
 </head>
 <body>
-  <h3><%=@username%> tweeted:</h3>
+  <h3><%=@user.username%> tweeted:</h3>
   <p><%=@tweet.content%></p>
 
-
+  <% if logged_in? && @user = current_user %> 
   <form method="post" action="/tweets/<%=@tweet.id%>/delete">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
-
-    <input type="submit" value="Delete">
+    <input type="submit" value="Delete Tweet">
   </form>
-
-
+<br>
+<a href="./edit">Edit Tweet</a>
+<% end %>
   
 </body>
 </html>
