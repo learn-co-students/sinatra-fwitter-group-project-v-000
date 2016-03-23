@@ -32,8 +32,41 @@ class TweetController < ApplicationController
     if User.is_logged_in?(session)
       @tweet = Tweet.find_by_id(params[:id])
       erb :'tweets/show_tweet'
-    else 
+    else
       erb :'users/login'
     end
+  end
+
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find_by(params[:id])
+    if User.is_logged_in?(session)
+      erb :'/tweets/edit_tweet'
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/tweets/:id' do
+    @tweet = Tweet.find_by(params[:id])
+    if User.is_logged_in?(session)
+      erb :'/tweets/show'
+    else
+      redirect '/login'
+    end
+  end
+
+  patch '/tweets/:id' do
+    @tweet = Tweet.find_by(params[:id])
+    if params[:content].empty?
+      redirect "/tweets/#{@tweet.id}/edit"
+    else
+      @tweet.content = params[:content]
+      @tweet.save
+      redirect "/tweets", locals: {message: "Tweet was successfully edited."}
+    end
+  end
+
+  post '/delete' do
+
   end
 end
