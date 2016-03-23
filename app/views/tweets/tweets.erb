@@ -8,7 +8,7 @@
 
 <h2>Here are the latest tweets:</h2>
 <% Tweet.all.each do |tweet| %>
-  <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a> @<%=tweet.user.username%> · <%= tweet.created_at.to_datetime.strftime("%b %d, %Y @%I:%M%p")%> <br>
+  <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a> @<%=tweet.user.username%> · <%= tweet.created_at.to_datetime.in_time_zone('Eastern Time (US & Canada)').strftime("%b %d, %Y @%l:%M%p")%> -EST <br>
 <% end %>
 
 <br><br><a href="/tweets/new"><input type="submit" value="New Tweet"></a>  <a href="logout"><input type="submit" value="Log Out"></a>
