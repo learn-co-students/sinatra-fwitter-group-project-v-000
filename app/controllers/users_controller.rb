@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   post '/signup' do
     if params["username"].empty? || params["password"].empty? || params["email"].empty?
+      flash[:notice] = "You did not provide a required field. Please try again."
       redirect to '/signup'
     else
       user = User.new(params)
@@ -17,6 +18,7 @@ class UsersController < ApplicationController
         session[:user_id] = user.id
         redirect to '/tweets'
       else
+        flash[:notice] = "Your account could not be created. Please try again."
         redirect to '/signup'
       end
     end
@@ -40,6 +42,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect to '/tweets'
     else
+      flash[:notice] = "You did not enter a valid username or password. Please try again."
       redirect to '/login'
     end
   end

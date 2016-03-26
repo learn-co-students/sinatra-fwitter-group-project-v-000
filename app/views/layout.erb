@@ -5,6 +5,10 @@
   <title>Document</title>
 </head>
 <body>
+<% if flash[:notice] %>
+  <h2><%= flash[:notice]  %></h2>
+    <% end %>
+
   <%= yield %>
 </body>
 </html>

@@ -6,6 +6,7 @@ class TweetsController < ApplicationController
       @username = current_user.username
       erb :"tweets/tweets"
     else
+      flash[:notice] = "You must be logged in to view this page."
       redirect to "/login"
     end
   end
@@ -14,22 +15,30 @@ class TweetsController < ApplicationController
     if logged_in?
       erb :"tweets/create_tweet"
     else
+      flash[:notice] = "You must be logged in to create a tweet."
       redirect to "/login"
     end
   end
 
   get "/tweets/:id/edit" do
-    redirect to "/login" if !logged_in? 
+    if !logged_in?
+      flash[:notice] = "You must be logged in to edit a tweet."
+      redirect to "/login"  
+    end
     @tweet = Tweet.find(params[:id])
     if @tweet && (@tweet.user_id == current_user.id)
       erb :"tweets/edit_tweet"
     else
+      flash[:notice] = "You do not have permission to edit tweets you did not create."
       redirect to "/login"
     end
   end
 
   post "/tweets" do
-    redirect to "/tweets/new" if params["content"].empty?
+    if params["content"].empty?
+      flash[:notice] = "You did not enter any thoughts to create a tweet."
+      redirect to "/tweets/new" 
+    end
     @tweet = Tweet.new(content: params["content"], user_id:current_user.id)
     @tweet.save
     redirect to "/tweets/#{@tweet.id}"
@@ -41,12 +50,16 @@ class TweetsController < ApplicationController
       @user = @tweet.user
       erb :"tweets/show_tweet"
     else
+      flash[:notice] = "You must be logged in to view this page."
       redirect to "/login"
     end
   end
 
   patch "/tweets/:id" do
-    redirect to "/tweets/#{params[:id]}/edit" if params["content"].empty?
+    if params["content"].empty?
+      flash[:notice] = "You did not enter any thoughts when editing the tweet."
+      redirect to "/tweets/#{params[:id]}/edit" 
+    end
     @tweet = Tweet.find(params[:id])
     if @tweet && (@tweet.user_id == current_user.id)
       @tweet.update(content: params["content"])
@@ -56,7 +69,10 @@ class TweetsController < ApplicationController
   end
 
   delete "/tweets/:id/delete" do
-    redirect to "/login" if !logged_in? 
+    if !logged_in?
+      flash[:notice] = "You must be logged in to delete a tweet."
+      redirect to "/login"  
+    end
     @tweet = Tweet.find(params[:id])
     if @tweet && (@tweet.user_id == current_user.id)
       @tweet.delete
