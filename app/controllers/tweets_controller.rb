@@ -78,6 +78,7 @@ class TweetsController < ApplicationController
       @tweet.delete
       redirect to '/tweets'
     else
+      flash[:notice] = "You do not have permission to delete tweets you did not create."
       redirect to "/login"
     end
   end

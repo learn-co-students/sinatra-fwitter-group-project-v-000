@@ -1,9 +1,6 @@
-<h2>Tweets for <%= @user_tweets.username %></h2>
-<h2>Tweets:</h2>
-<ul>
+<h2>Your Tweets</h2>
   <%@user_tweets.tweets.each do |tweet|%>
-  <li>
+  <li><h4>
     <a href="/tweets/<%= tweet.id %>"><%=tweet.content%></a>
-  </li>
+  </h4></li>
   <%end%>
-</ul>

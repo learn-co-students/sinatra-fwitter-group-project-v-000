@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Current Tweet</title>
-</head>
-<body>
-  <h3><%=@user.username%> tweeted:</h3>
-  <p><%=@tweet.content%></p>
-
-  <% if logged_in? && @user = current_user %> 
+ <h3><%=@user.username%> tweeted:</h3>
+  <li><h4><%=@tweet.content%></p></h4>
+<p><a href="/tweets/<%=@tweet.id%>/edit" class="btn btn-info">Edit Tweet</a></p>
   <form method="post" action="/tweets/<%=@tweet.id%>/delete">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete Tweet">
+    <input class="btn btn-danger" type="submit" id='Delete Tweet' value="Delete Tweet">
   </form>
 <br>
-<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
-<% end %>
   
 </body>
 </html>
