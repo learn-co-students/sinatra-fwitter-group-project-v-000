@@ -122,6 +122,8 @@ class ApplicationController < Sinatra::Base
 
   patch '/tweets/:id/edit' do
   	@tweet = Tweet.find_by(:id => params[:id])
+    @user = User.find_by_id(session[:id])
+    redirect "/tweets" if @user.id != @tweet.user_id
   	if params[:content] != ""
   		#binding.pry
   		@tweet.content = params[:content]
