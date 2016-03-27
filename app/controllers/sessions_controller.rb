@@ -8,9 +8,15 @@ class SessionsController < ApplicationController
   end
 
   post '/login' do
-    @user = User.find_by(username: params[:username])
-    session[:id] = @user.id
-    redirect to "/tweets"
+    if params.has_value?("")
+      redirect to "/login"
+    else
+      @user = User.find_by(username: params[:username])
+        if @user && @user.authenticate(params[:password])
+          session[:id] = @user.id
+          redirect to "/tweets"
+        end
+    end
   end
 
   get '/logout' do 
