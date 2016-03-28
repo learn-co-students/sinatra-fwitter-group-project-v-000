@@ -1,0 +1,16 @@
+<html>
+<head>
+  <title>
+  </title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet"  href="/css/bootstrap-responsive.css">
+</head>
+<body>
+  <% if session[:current_user] %>
+  <a href="/logout" id="logout">logout<a/>
+  <% end %>
+  <%= yield %>
+  
+</body>
+</html>

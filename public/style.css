@@ -1,0 +1,45 @@
+h1{
+  text-align: center;
+ 
+}
+
+body{
+  background-color: yellow;
+}
+
+a{
+  text-align: center;
+  font-size: 20px;
+  display: block;
+}
+
+form{
+  width: 200px;
+  margin: 0 auto;
+}
+
+#submit_button{
+  width: 200px;
+  margin: 0 auto;
+  
+}
+
+#login_button{
+  width: 200px;
+  margin: 0 auto;
+  
+
+}
+
+#tweet_holder{
+  width: 200px;
+  margin: 0 auto;
+  border: 1px solid black; 
+  margin: 0 auto 5px;
+}
+
+#login_form{
+  margin: 0 auto;
+}
+
+
