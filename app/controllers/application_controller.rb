@@ -67,7 +67,7 @@ class ApplicationController < Sinatra::Base
       @tweet = Tweet.find(params[:id])
       erb :'tweets/show_tweet'
     else
-      redirect '/users/login'
+      redirect '/login'
     end
   end
 
@@ -76,7 +76,7 @@ class ApplicationController < Sinatra::Base
       @tweet = Tweet.find(params[:id])
       erb :'tweets/edit_tweet'
     else
-      redirect '/users/login'
+      redirect '/login'
     end
   end
 
@@ -91,8 +91,6 @@ class ApplicationController < Sinatra::Base
       # binding.pry
         redirect "/tweets/#{@tweet.id}/edit"
       end
-    else
-      redirect '/login'
     end
   end
 
