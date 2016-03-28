@@ -1,0 +1,18 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <h1>Welcome, <%= session[:current_user][:username] %>'s tweets</h1>
+    <a href="/tweets/new"><button class="btn btn-info">New tweet</button></a><br>
+    <% @tweets.each do |tweet| %>
+    <a href="/tweets/<%= tweet.id %>">
+    <div id="tweet_holder">
+    <p><%= tweet.content %></p>
+    <% date_formatted = Time.parse(tweet.created_at.to_s) %>
+    <p><%= "#{date_formatted.month}/#{date_formatted.day}/#{date_formatted.year}" %></p>
+  </div>
+  </a>
+  <% end %>
+</body>
+</html>
