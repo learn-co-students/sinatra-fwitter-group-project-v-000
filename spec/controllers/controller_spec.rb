@@ -66,7 +66,7 @@ describe ApplicationController do
       }
       post '/signup', params
       session = {}
-      session[:id] = user.id
+      session[:user_id] = user.id
       get '/signup'
       expect(last_response.location).to include('/tweets')
     end

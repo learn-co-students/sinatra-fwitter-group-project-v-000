@@ -1,17 +1,4 @@
-require './config/environment'
-
-class ApplicationController < Sinatra::Base
-
-  configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
-    enable :sessions
-    set :session_secret, "password_security"
-  end
-
-  get '/' do
-    erb :index
-  end
+class UsersController < ApplicationController
 
   get '/signup' do
     if logged_in?
@@ -30,16 +17,6 @@ class ApplicationController < Sinatra::Base
     else
       @message = "Oops, something didn't work.  Try again."
       redirect "/signup"
-    end
-  end
-
-  get '/tweets' do
-    if logged_in?
-      @tweets = Tweet.all
-
-      erb :'tweets/index'
-    else
-      redirect '/login'
     end
   end
 
@@ -70,18 +47,10 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  helpers do
-    def logged_in?
-      !!session[:user_id]
-    end
+  get '/users/:slug' do 
+    @user = User.find_by_slug(params[:slug])
+    @tweets = Tweets.find_by_user_id(@user.id)
 
-    def current_user
-      User.find(session[:user_id])
-    end
-
-    def logout
-      session.clear
-      redirect '/login'
-    end
+    erb :'users/show'
   end
 end
