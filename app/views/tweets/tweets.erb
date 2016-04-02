@@ -2,7 +2,9 @@
 <h4>All Tweets</h4>
 <ul>
   <% @tweets.each do |tweet|%>
-    <li><%= tweet.content %> ; by <%= tweet.user.username %></li>
+    <li>Content: <%= tweet.content %>; By User: <%= tweet.user.username %>
+    <a href="/tweets/<%= tweet.id %>"><input type="submit" value="View Tweet"></a> 
+    <a href="/tweets/<%= tweet.id %>/edit"><input type="submit" value="Edit Tweet"></a></li>
   <% end %>
 </ul><br>
 <a href="/tweets/new"><input type="submit" value="Create a Tweet"></a><br>
