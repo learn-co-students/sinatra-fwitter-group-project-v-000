@@ -1,0 +1,12 @@
+<%if Helpers.is_logged_in?(session)%>
+      <%user = Helpers.current_user(session)%>
+    <p>Welcome, <%=user.username%>!</p>
+    <p>make a tweet</p>
+   <form action "/tweets/new" method="POST">
+      <input type="text" name="content">
+      <input type="hidden" name="user_id" value=<%=user.id%>>
+      <input type="submit" value="submit">
+   </form>
+   <%else%>
+   <p>Dude, you gotta<a href="/">login or signup</a></p>
+<%end%>
