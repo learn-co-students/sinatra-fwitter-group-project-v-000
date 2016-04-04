@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <%if !logged_in? %>
+      <p><a href="/login">Log In</a> or <a href="/signup">Sign Up</a></p>
+    <%else%>
+      <p><a href="/logout">Log Out</a></p>
+    <%end%>
+    <%= yield  %>
+  </body>
+</html>
