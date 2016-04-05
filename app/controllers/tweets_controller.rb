@@ -44,7 +44,8 @@ class TweetsController < ApplicationController
   get '/tweets/:id/edit' do #load edit form
     if logged_in?
       @tweet = Tweet.find(params[:id])
-      if @tweet.user_id == current_user.id 
+      if @tweet.user_id == current_user.id
+        #only user who created tweet, can edit 
         erb :'/tweets/edit_tweet'
       else
         redirect '/tweets'
