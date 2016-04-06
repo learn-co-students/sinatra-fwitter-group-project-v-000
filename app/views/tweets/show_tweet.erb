@@ -1,0 +1,11 @@
+<h1>Tweet:</h1>
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+<p><%= @tweet.content %></p>
+<a href="/tweets/<%=@tweet.id%>/edit" class="btn btn-default">Edit Tweet</a><form method="POST" action="/tweets/<%=@tweet.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <br><input type="submit" value="Delete Tweet" class="btn btn-default">
+</form>
+<hr>
+<p><a href="/tweets">See all</a></p>

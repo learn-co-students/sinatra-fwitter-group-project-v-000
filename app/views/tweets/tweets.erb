@@ -1,0 +1,19 @@
+<h1>Tweets</h1>
+<h3>
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+</h3>
+<p>Welcome, <%= current_user.username %> (<a href="/logout">Logout</a>)</p>
+<h4><a href="/tweets/new">Tweet!</a></h4>
+<hr>
+
+<h5>A list of all the tweets:</h5>
+<% @tweets.each do |tweet| %> 
+    <p><%= tweet.content %><% if tweet.user_id==current_user.id %> | <a href="/tweets/<%=tweet.id%>">View your tweet</a>
+    <%end%></p>
+    
+<%end%>
+
+
+
