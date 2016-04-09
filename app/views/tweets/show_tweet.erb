@@ -1,1 +1,17 @@
-show_tweet.erb
+<!DOCTYPE html>
+<head>
+  <title>Tweet Show Page</title>
+</head>
+<body>
+  <h3>Tweet <%=@tweet.id%></h3>
+  <%=@tweet.content%><br></br>
+  <a href="/tweets/<%=@tweet.id%>/edit">
+    <input type="button" value="Edit Tweet">
+  </a>
+  <p>
+  <form method="post" action="/tweets/<%=@tweet.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" id="Delete Tweet" value="Delete Tweet"></p>
+  </form>
+</body>
+</html>

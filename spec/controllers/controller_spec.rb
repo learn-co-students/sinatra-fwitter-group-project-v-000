@@ -130,6 +130,8 @@ describe ApplicationController do
     end 
 
     it 'does load /tweets if user is logged in' do
+
+
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
 
 
@@ -139,7 +141,6 @@ describe ApplicationController do
       fill_in(:password, :with => "kittens")
       click_button 'submit'
       expect(page.current_path).to eq('/tweets')
-
 
     end
   end
@@ -153,7 +154,6 @@ describe ApplicationController do
 
       expect(last_response.body).to include("tweeting!")
       expect(last_response.body).to include("tweet tweet tweet")
-
     end
   end
 
