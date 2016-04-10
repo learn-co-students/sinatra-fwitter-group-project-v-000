@@ -1,0 +1,7 @@
+<h2><%=@user.username %>'s Page</h2>
+
+<h3>Tweets</h3>
+
+<% @user.tweets.each do |tweet| %>
+  <p><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></p>
+<% end %>
