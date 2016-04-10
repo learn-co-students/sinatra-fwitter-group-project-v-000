@@ -3,5 +3,5 @@
 <h3>Tweets</h3>
 
 <% @user.tweets.each do |tweet| %>
-  <p><%=tweet.content%></p>
+  <p><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></p>
 <% end %>
