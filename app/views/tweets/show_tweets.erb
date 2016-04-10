@@ -1,0 +1,13 @@
+<head>
+  <title>User's Tweet Index</title>
+</head>
+<body>
+  <h3><%="#{@user.username}'s tweets"%>:</h3>
+  <% @user.tweets.all.each_with_index do |tweet,i| %>
+    <%= "#{i+1}. "%><%=tweet.content%><br>
+    <a href="/tweets/<%=tweet.id%>/edit">edit</a><br></br>
+  <% end %>
+  <a href="/tweets"><input type="button" value="All Tweets"></a>
+  <a href="/logout"><input type="button" value="Log Out"></a>
+</body>
+</html>

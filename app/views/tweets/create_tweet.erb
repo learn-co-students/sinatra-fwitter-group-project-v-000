@@ -1,0 +1,15 @@
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
+<head>
+  <title>New Tweet Form</title>
+</head>
+<body>
+  <h1>Create a New Tweet!</h1>
+  <form action="/tweets" method="POST">
+  <textarea name="content" id="content" placeholder="Write your tweet here." cols="40" rows="5"></textarea><br></br>
+  <input type="submit" id="submit" value="Create Tweet">
+  </form>
+</body>
+</html>
