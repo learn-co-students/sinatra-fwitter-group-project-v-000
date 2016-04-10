@@ -44,7 +44,7 @@
 
   get '/tweets/:id/edit' do
     @tweet = Tweet.find_by_id(params[:id])
-    if logged_in? && !@tweet.nil?
+    if logged_in? && !@tweet.nil? && @tweet.user == current_user
       erb :'tweets/edit_tweet'
     else
       redirect "/login"
