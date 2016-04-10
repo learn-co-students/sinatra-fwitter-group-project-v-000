@@ -1,1 +1,7 @@
 <h2>Welcome, <%=@user.username %></h2>
+
+<h3> These are the current tweets. </h3>
+
+<% Tweet.all.reverse_each do |tweet| %>
+  <p><%=tweet.user.username%>: <%=tweet.content%><p>
+<% end %>
