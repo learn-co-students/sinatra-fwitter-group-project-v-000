@@ -1,0 +1,13 @@
+<h1>Welcome, <%= @user.username%> to the Tweets Index</h1>
+<h4>All Tweets</h4>
+<ul>
+  <% @tweets.each do |tweet|%>
+    <li>Content: <%= tweet.content %>; By User: <%= tweet.user.username %>
+    <a href="/tweets/<%= tweet.id %>"><input type="submit" value="View Tweet"></a> 
+    <a href="/tweets/<%= tweet.id %>/edit"><input type="submit" value="Edit Tweet"></a></li>
+  <% end %>
+</ul><br>
+<a href="/tweets/new"><input type="submit" value="Create a Tweet"></a><br>
+<a href="/tweets"><input type="submit" value="Home"></a><br>
+<a href="/logout"><input type="submit" value="Log Out"></a>
+
