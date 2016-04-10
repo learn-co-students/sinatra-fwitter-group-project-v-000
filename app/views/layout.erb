@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fwitter</title>
+</head>
+
+<body>
+  <% unless locals.empty? %>
+    <h3> <%= message %> </h3>
+  <% end %>
+  <%= yield %>
+</body>
+</html>
