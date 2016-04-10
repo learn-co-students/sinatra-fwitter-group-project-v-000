@@ -30,6 +30,7 @@
 
   get '/tweets/:id' do
     if logged_in?
+      @user = current_user
       @tweet = Tweet.all.find_by_id(params[:id])
       if !@tweet.nil?
         erb :'tweets/show_tweet'
