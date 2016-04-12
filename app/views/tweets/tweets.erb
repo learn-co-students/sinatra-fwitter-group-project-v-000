@@ -1,0 +1,13 @@
+<h1>Welcome, <%=@user.username%></h1>
+
+<%Tweet.all.each do |tweet|%>
+<%if @user != User.find(tweet.user_id)%>
+<%@friend = User.find(tweet.user_id)%>
+<p><%=@friend.username%></p>
+<p><%=tweet.content%></p>
+<%else%>
+<p><%=@user.username%></p>
+<p><%=tweet.content%></p>
+<br/>
+<%end%>
+<%end%>
