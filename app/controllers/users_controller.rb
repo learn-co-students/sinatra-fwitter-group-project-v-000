@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if !session[:id]
-      erb :signup
+      erb :'users/signup'
     else
       redirect to '/tweets'
     end
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   get '/login' do
     if !session[:id]
-      erb :login
+      erb :'users/login'
     else
       redirect to '/tweets'
     end
@@ -43,6 +43,6 @@ class UsersController < ApplicationController
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    erb :user_page
+    erb :'users/show'
   end
 end

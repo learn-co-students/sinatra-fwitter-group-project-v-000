@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
     if session[:id]
       @user = User.find(session[:id])
       @tweets = Tweet.all
-      erb :tweets
+      erb :'tweets/index'
     else
       redirect to '/login'
     end
@@ -13,7 +13,7 @@ class TweetsController < ApplicationController
   get '/tweets/new' do
     if session[:id]
       @user = User.find(session[:id])
-      erb :new
+      erb :'tweets/new'
     else
       redirect to '/login'
     end
@@ -23,7 +23,7 @@ class TweetsController < ApplicationController
     if session[:id]
       @tweet = Tweet.find(params[:id])
       @user = User.find(session[:id])
-      erb :show_tweet
+      erb :'tweets/show'
     else
       redirect to '/login'
     end
@@ -33,7 +33,7 @@ class TweetsController < ApplicationController
     if session[:id]
       @tweet = Tweet.find(params[:id])
       if session[:id] == @tweet.user_id
-        erb :edit
+        erb :'tweets/edit'
       else
         redirect to '/tweets'
       end
