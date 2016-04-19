@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FWITTER</title>
+</head>
+  <body>
+    <h1><label>Fwitter LOGIN</label></h1>  
+
+    <h2>Session[:user_id]: <%= session[:user_id] %></h2>
+
+    <form action="/login" method="POST">
+      <h3>Username:</h3>
+        <input type="text" name="username" placeholder="Username:">
+      
+      <h3>Password:</h3>
+        <input type="text" name="password" placeholder="Password:">
+      
+      <br><br>
+        <input type="submit" value="submit">
+    </form>
+
+  </body>
+</html>

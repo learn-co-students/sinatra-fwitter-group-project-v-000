@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FWITTER</title>
+</head>
+  <body>
+    <h1><label>Welcome, to Fwitter Tweets</label></h1>
+
+    <h2>Session[:user_id]: <%= session[:user_id] %></h2>
+
+    <h3><label><a href="/">HOME</a></label></h3>  
+    <h3><label><a href="/tweets/index">TWEETS INDEX</a></label></h3>  
+    <h3><label><a href="/tweets"><%= "#{@user.username}'s " %>TWEETS</a></label></h3>
+    <h3><label><a href="/logout">LOG OUT</a></label></h3>
+    <form action="/tweets" method="GET">
+     
+
+     <h3><label><a href="/tweets/new">Create New Tweet</a></label></h3>
+
+      <p>--------- your tweets below----------click to edit-----------</p>
+      <%  if @tweets%>
+      <%  @tweets.each do |t| %>
+      <%  if t.user_id == @user.id %>
+      <p><%= "#{t.user_id.to_s}   "%> <a href="/tweets/:user_id/edit"><%=  t.content %></a></p>
+      <%  else puts "You have no tweets, click Create New Tweet above." %>
+      <p>--------------------------------------------------------------------------------------------------------------------------------------------</p>
+      <% end %>
+      <% end %>
+      <% end %>
+    </form>
+
+  </body>
+</html>
