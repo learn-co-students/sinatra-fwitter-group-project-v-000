@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title><%=@user.username%></title>
+</head>
+<body>
+
+<h1>Welcome, <%=@user.username%></h1>
+
+
+
+<%@tweets.each do |x|%>
+<h4><%=x.content%></h4>
+<%end%>
+
+<br> <br><br><br>
+<a href='/logout'>Logout</a>
+</body>
+</html>
