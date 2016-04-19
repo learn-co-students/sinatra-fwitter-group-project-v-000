@@ -28,8 +28,6 @@ class TweetsController < ApplicationController
     end
   end
 
-##################################
-##################################
   get '/tweets/:id' do
     if logged_in?
       @tweet = Tweet.find(params[:id])
@@ -38,8 +36,6 @@ class TweetsController < ApplicationController
       redirect to '/login'
     end
   end
-##################################
-##################################
  
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
@@ -48,9 +44,9 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id/edit' do
-    @tweet = Tweet.find(params[:id])
-    @user = @tweet.user
-    if @user == current_user
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      @user = @tweet.user
       erb :'/tweets/edit'
     else
       redirect to '/login'
