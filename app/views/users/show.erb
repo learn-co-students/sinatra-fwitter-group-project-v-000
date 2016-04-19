@@ -7,8 +7,8 @@
     <h1><label>Welcome, <%="#{@user.username}"%></label></h1>  
     <h2>Session[:user_id]: <%= session[:user_id] %></h2>
     <h3>Here are your current Tweets: </h3>
-    <%  @user.tweets.each do |t| %>
+      <% @user.tweets.each do |t| %>
     <p><%=t.id%>: <a href="/tweets/<%=t.id.to_s%>"><%= t.content%></a></p>
-    <% end %>
+      <% end %>
   </body>
 </html>

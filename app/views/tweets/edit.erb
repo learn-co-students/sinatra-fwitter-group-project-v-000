@@ -5,15 +5,12 @@
 </head>
   <body>
     <h1><label>Edit Tweet</label></h1>
-    <h2>Session[:user_id]: <%= session[:user_id] %></h2>
     <h2><label><a href="/logout">LOG OUT</a></label></h2>
-
     <form action="/tweets/<%="#{@tweet.id}"%>" method="POST">
-    <input id="hidden" type="hidden" name="_method" value="PATCH">
+      <input id="hidden" type="hidden" name="_method" value="PATCH">
       <input type="text" name="content" id="tweet" value="<%=@tweet.content%>">
-      <br><br>
+        <br><br>
       <input type="submit" value="submit">
     </form>
-
   </body>
 </html>
