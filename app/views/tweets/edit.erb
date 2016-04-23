@@ -1,0 +1,8 @@
+<h1><label>Edit Tweet</label></h1>
+ <h2><label><a href="/logout">LOG OUT</a></label></h2>
+ <form action="/tweets/<%="#{@tweet.id}"%>" method="POST">
+   <input id="hidden" type="hidden" name="_method" value="PATCH">
+   <input type="text" name="content" id="tweet" value="<%=@tweet.content%>">
+     <br><br>
+   <input type="submit" value="submit">
+ </form>
