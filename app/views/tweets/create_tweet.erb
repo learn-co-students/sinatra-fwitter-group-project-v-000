@@ -1,0 +1,12 @@
+<h4><%=@tweet.user.username%></h4>
+<br />
+<br />
+<h2>New Tweet</h2>
+<br />
+<br />
+<form action='/tweets' method='POST'>
+  <label>Tweet: <input type='text' name='content' id='content' /></label>
+  <br />
+  <br />
+  <input type='text' value='submit' />
+</form>
