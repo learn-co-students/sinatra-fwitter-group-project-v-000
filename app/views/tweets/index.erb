@@ -3,5 +3,7 @@
 <br />
 <h3>Tweets</h3>
 <%@tweets.each do |tweet|%>
-  <p><%=tweet.content%></p>
+  <a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a>
 <%end%>
+
+<a href="/logout">Logout</a>
