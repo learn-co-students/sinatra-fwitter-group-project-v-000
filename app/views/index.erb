@@ -1,7 +1,11 @@
 <h1>Welcome to Fwitter</h1>
 <br />
 <br />
-<a href='/signup'>Create an Account</a>
+<%if !logged_in?%>
+  <a href='/signup'>Create an Account</a>
+<%else%>
+  <a href='/tweets'>View Tweets</a>
+<%end%>
 <br />
 <br />
 <%if !logged_in?%>
