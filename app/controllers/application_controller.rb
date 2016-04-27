@@ -26,17 +26,17 @@ class ApplicationController < Sinatra::Base
   #users signup section
 
   get '/signup' do
-    erb :'users/create_user'
+    erb :'/users/create_user'
   end
 
   post '/signup' do
 
     if params[:username] == ""
-      redirect 'users/signup'
+      redirect '/users/signup'
     elsif params[:password] == ""
-      redirect 'users/signup'
+      redirect '/users/signup'
     elsif params[:email] == ""
-      redirect 'users/signup'
+      redirect '/users/signup'
     else
       @user = User.create(username: params[:username], password: params[:password], email: params[:email])
       if @user.save
@@ -148,7 +148,7 @@ class ApplicationController < Sinatra::Base
 
   #CREATE SESSIONS
 
-  def self.current_user(session)
+  def current_user(session)
    @user = User.find_by_id(session['user_id'])
   end
  
