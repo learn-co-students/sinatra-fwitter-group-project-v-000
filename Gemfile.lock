@@ -87,6 +87,7 @@ GEM
       sinatra (~> 1.0)
     slop (3.6.0)
     sqlite3 (1.3.11)
+    string_helpers (0.1.0)
     thin (1.6.4)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -120,8 +121,9 @@ DEPENDENCIES
   sinatra
   sinatra-activerecord
   sqlite3
+  string_helpers
   thin
   tux
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
