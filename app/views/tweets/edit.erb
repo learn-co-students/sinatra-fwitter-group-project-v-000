@@ -1,0 +1,10 @@
+<form action="/tweets/<%=@tweet.id%>" method="post">
+  <textarea name="content" cols="30" rows="10" required><%=@tweet.content%></textarea>
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <br>
+  <input type="submit" id="submit" value="submit">
+</form>
+<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" id="Delete Tweet" value="Delete Tweet">
+</form>
