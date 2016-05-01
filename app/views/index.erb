@@ -1,0 +1,8 @@
+<h1>Welcome to Fwitter</h1>
+<a href="/signup">Sign Up</a>
+<p>or</p>
+<%if !logged_in?%>
+	<a href="/login">Log In</a>
+<%else%>
+	<a href="/login">Log Out</a>
+<%end%>
