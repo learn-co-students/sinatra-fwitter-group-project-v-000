@@ -1,0 +1,13 @@
+<!-- create an edit link -->
+Your Tweet
+
+<%= @tweet.content%>
+
+<a href="/tweets/<%= @tweet.id %>/edit">Edit your Tweet here</a>
+
+<form method="POST" action="/tweets/<%= @tweet.id %>/delete">
+<!-- <input id="hidden" type="hidden" name="_method" value="Delete Tweet"> -->
+<button type="submit" name="Delete Tweet" value="Delete Tweet">Delete Tweet</button>
+</form>
+<!-- create form for delete function -->
+<!-- The delete form doesn't need to have any input fields, just a submit button. -->
