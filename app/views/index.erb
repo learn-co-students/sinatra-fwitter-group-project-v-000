@@ -1,1 +1,13 @@
 <h1>Welcome to Fwitter</h1>
+
+<% if !logged_in? %>
+  <a href="/singup">Create an Account</a>
+<% else %>
+  <a href="/tweets">View Tweets</a>
+<% end %>
+<br>
+<% if !logged_in? %>
+  <a href="/login">Login</a>
+<% else %>
+  <a href="/logout">Logout</a>
+<% end %>
