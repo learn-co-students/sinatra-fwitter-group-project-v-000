@@ -1,0 +1,5 @@
+<form method="POST" action="/tweets">
+  <input type="hidden" name="tweet[user_id]" value="<%=current_user.id%>">
+  <input id="content" type="text" name="tweet[content]">
+  <input type="submit" value="submit">
+</form>
