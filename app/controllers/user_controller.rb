@@ -10,13 +10,12 @@ class UserController < ApplicationController
 
   get '/users/:slug' do
     @user = User.find_by(username: params[:slug])
-
     erb :'/tweets/tweets'
   end
 
   get '/signup' do
     if is_logged_in
-      redirect '/tweets'
+      redirect to '/tweets'
     else
       erb :'users/create_user'
     end
@@ -27,9 +26,9 @@ class UserController < ApplicationController
       @user = User.create(params)
      # binding.pry
       session[:user_id] = @user.id
-      redirect '/tweets'
+      redirect to '/tweets'
     else
-      redirect '/signup'
+      redirect to '/signup'
     end
   end
 

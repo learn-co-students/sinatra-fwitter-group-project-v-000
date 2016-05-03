@@ -8,7 +8,10 @@
 <form method="POST" action="/tweets/<%= @tweet.id %>/delete">
 <!-- <input id="hidden" type="hidden" name="_method" value="Delete Tweet"> -->
 <br></br>
-<button type="submit" name="Delete Tweet" value="Delete Tweet">Delete Tweet</button>
+
+<button type="submit" value="Delete Tweet">Delete Tweet</button>
 </form>
+
+<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet </a>
 <!-- create form for delete function -->
 <!-- The delete form doesn't need to have any input fields, just a submit button. -->

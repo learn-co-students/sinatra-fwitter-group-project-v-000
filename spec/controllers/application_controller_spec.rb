@@ -343,6 +343,7 @@ describe ApplicationController do
       end
 
       it 'lets a user edit their own tweet if they are logged in' do
+        
         user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet = Tweet.create(:content => "tweeting!", :user_id => 1)
         visit '/login'
@@ -353,9 +354,11 @@ describe ApplicationController do
         visit '/tweets/1/edit'
 
         fill_in(:content, :with => "i love tweeting")
-
+#save_and_open_page
         click_button 'submit'
+
         expect(Tweet.find_by(:content => "i love tweeting")).to be_instance_of(Tweet)
+        
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)
 
         expect(page.status_code).to eq(200)
