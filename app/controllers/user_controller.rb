@@ -35,7 +35,7 @@ class UserController < ApplicationController
 
   post '/login' do
     @user = User.find_by(username: params[:username])
-
+    #binding.pry
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect '/tweets'
@@ -46,7 +46,8 @@ class UserController < ApplicationController
 
   get '/logout' do
     #clear session
-    if is_logged_in
+    if is_logged_in && current_user
+      #binding.pry
       session.clear
       redirect '/login'
     else
