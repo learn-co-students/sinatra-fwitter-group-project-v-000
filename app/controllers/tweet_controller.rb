@@ -51,6 +51,7 @@ class TweetController < ApplicationController
   end
 
   patch '/tweets/:id' do
+    @tweet= Tweet.find_by_id(params[:id])
     if params[:content] == "" || params[:content] = " "
       redirect "/tweets/#{params[:id]}/edit"
     else
@@ -60,7 +61,6 @@ class TweetController < ApplicationController
   end
 
   post '/tweets/:id/delete' do
-    binding.pry
     @tweet = Tweet.find_by_id(params[:id])
 
     if is_logged_in && current_user.id == @tweet.user_id 
