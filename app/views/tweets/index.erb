@@ -1,16 +1,10 @@
-<h1>see all your tweets</h1>
+<h1>Welcome, <%=@user.username%>!</h1>
 
-<h1>Welcome, <%=@user.username%>.</h1>
-
-<br/>
-
-<h3>Tweets</h3>
+<h2>See all your tweets:</h2>
 <%@tweets.each do |tweet|%>
   <%=tweet.user.username%>: <a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a><br>
 <%end%>
 
-<br/>
+<p><a href='/tweets/new'>New Tweet</a></p>
 
-<a href='/tweets/new'>New Tweet</a>
-<br/>
-<a href="/logout">Logout</a>
+<p><a href="/logout">Logout</a></p>
