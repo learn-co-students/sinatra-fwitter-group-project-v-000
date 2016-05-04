@@ -40,6 +40,7 @@ class TweetController < ApplicationController
   end
   
   get '/tweets/:id/edit' do
+    #binding.pry
     if is_logged_in && current_user.id 
        @tweet = Tweet.find_by_id(params[:id])
       erb :'tweets/edit_tweet'
@@ -48,7 +49,8 @@ class TweetController < ApplicationController
     end
   end
 
-  put '/tweets/:id' do
+  patch '/tweets/:id' do
+    binding.pry
     if is_logged_in
       #binding.pry
       @tweet = Tweet.find_by_id(params[:id])
