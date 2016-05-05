@@ -42,7 +42,6 @@ class UserController < ApplicationController
   end
 
   get '/logout' do
-    #clear session
     if is_logged_in && current_user
       session.clear
       redirect to '/login'
