@@ -1,0 +1,10 @@
+<h1>Welcome, <%= session[:email] %></h1>
+<% @tweets.each do |tweet| %>
+  <div class="tweet">
+    <h4><%=tweet.user.username%></h4>
+    <p>
+      <%=tweet.content%>
+    </p>
+  </div>
+
+<%end%>

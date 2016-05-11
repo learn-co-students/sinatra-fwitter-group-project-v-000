@@ -21,7 +21,8 @@ describe ApplicationController do
       params = {
         :username => "skittles123",
         :email => "skittles@aol.com",
-        :password => "rainbows"
+        :password => "rainbows",
+        :password_confirmation => "rainbows"
       }
       post '/signup', params
       expect(last_response.location).to include("/tweets")
