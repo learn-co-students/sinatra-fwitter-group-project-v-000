@@ -1,4 +1,4 @@
-class TweetController < ApplicationController
+class TweetsController < ApplicationController
   get '/tweets' do
     if is_logged_in?
       @tweets = Tweet.all
