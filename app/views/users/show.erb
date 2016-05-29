@@ -1,0 +1,15 @@
+<h2><%=@user.username%>'s Tweets</h2>
+
+<% @user.tweets.each do |tweet| %>
+  <h3> <%=tweet.content%> </h3>
+  <p>by: <%=tweet.user.username%></p>
+  <a href="/tweets/<%=tweet.id%>"><input type="submit" value="View tweet"></a>
+  <% if tweet.user_id == Helpers.current_user(session).id %>
+    <a href="/tweets/<%=tweet.id%>/edit"><input type="submit" value="Edit tweet"></a>
+    <%end%>
+  <br></br>
+<% end %>
+
+<a href="/tweets/new"><input type="submit" value="Create a new tweet"></a>
+<br></br>
+<a href="/logout"><input type="submit" value="Log Out"></a>
