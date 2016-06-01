@@ -2,9 +2,13 @@
 
 
 <% Tweet.all.each do |tweet| %>
-  <p><%= tweet.content %></p>
+  <p><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></p>
 <% end %>
 
+<form action="tweets/new" method="GET">
+  <p><input type="submit" value="New Tweet"></p>
+</form>
+
 <form action="/logout" method="GET">
-  <input type="submit" value="Log Out">
+  <p><input type="submit" value="Log Out"></p>
 </form>
