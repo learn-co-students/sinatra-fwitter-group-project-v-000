@@ -1,0 +1,74 @@
+body {
+  padding-top: 70px;
+  background-color: #f5f8fa;
+}
+
+#login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+}
+#login-dp .help-block{
+    font-size:12px
+}
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .social-buttons{
+    margin:12px 0
+}
+#login-dp .social-buttons a{
+    width: 49%;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+
+/* HERO IMAGE - HEADER */
+
+/* container 100& width background */
+.hero-image-container {
+  background:url(https://abs.twimg.com/a/1464656525/img/t1/lohp_streams_header_bg_v4.png) repeat-x;
+}
+
+/* overriding bootstrap padding and margins */
+.container-hero {padding:0;}
+.row-hero {margin:0;}
+
+/* general styles for hero-image area, will be used by all similar pages */
+.hero-image {
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  color: transparent;
+  background-size: 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+/* page specific bg properties using different image sizes  */
+#hero-home-lg {background:url(https://abs.twimg.com/a/1464656525/img/t1/lohp_streams_header_bg_v4.png) no-repeat; width:100%; height:713px; position:relative;} /* image 1200px */
+#hero-home-md {background:url(https://abs.twimg.com/a/1464656525/img/t1/lohp_streams_header_bg_v4.png) no-repeat; width:100%; height:713px; position:relative;} /* image 992px */
+#hero-home-sm {background:url(https://abs.twimg.com/a/1464656525/img/t1/lohp_streams_header_bg_v4.png) no-repeat; width:100%; height:713px; position:relative;} /* image 768px */
+#hero-home-xs {background:url(https://abs.twimg.com/a/1464656525/img/t1/lohp_streams_header_bg_v4.png) no-repeat; width:100%; height:713px; position:relative;} /* image 320px */
+
+#hero-home
+
+.Welcome-title {
+  color: #333;
+}
+
+@media(max-width:768px){
+    #login-dp{
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
+}
