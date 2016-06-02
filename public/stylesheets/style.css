@@ -21,10 +21,7 @@ nav,
 section,
 summary {
     display: block;
-}
 
-body {
-  background: rgb(74, 187, 200);
 }
 
 /**
@@ -76,7 +73,8 @@ html {
  */
 
 body {
-    margin: 10;
+    margin: 10em;
+    background: rgb(74, 187, 200);
 }
 
 /* ==========================================================================
@@ -97,7 +95,7 @@ a:focus {
 
 a:active,
 a:hover {
-    outline: 0;
+    outline: 5;
 }
 
 /* ==========================================================================
@@ -112,6 +110,14 @@ a:hover {
 h1 {
     font-size: 2em;
     margin: 0.67em 0;
+}
+
+p {
+    display: block;
+    -webkit-margin-before: 2em;
+    -webkit-margin-after: 2em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
 }
 
 /**
@@ -255,7 +261,7 @@ figure {
  */
 
 fieldset {
-    border: 1px solid #c0c0c0;
+    border: 10px solid #c0c0c0;
     margin: 0 2px;
     padding: 0.35em 0.625em 0.75em;
 }
@@ -282,7 +288,7 @@ select,
 textarea {
     font-family: inherit; /* 1 */
     font-size: 100%; /* 2 */
-    margin: 0; /* 3 */
+    margin: 5; /* 3 */
 }
 
 /**
@@ -294,6 +300,39 @@ button,
 input {
     line-height: normal;
 }
+
+.round-button {
+	width:5%;
+}
+
+.round-button-circle {
+	width: 10%;
+	height:25%;
+	padding-bottom: 5%;
+    border-radius: 10%;
+	border:10px solid #cfdcec;
+    overflow:hidden;
+
+    background: #4679BD;
+    box-shadow: 0 0 3px gray;
+    text-align:center;
+	color:#e2eaf3;
+    font-family:Verdana;
+    font-size:1em;
+    font-weight:bold;
+    text-decoration:none;
+}
+.round-button-circle:hover {
+	background:#30588e;
+}
+.round-button a {
+    display:block;
+	float:left;
+	width:100%;
+	padding-top:50%;
+    padding-bottom:50%;
+	line-height:1em;
+	margin-top:-0.5em;
 
 /**
  * Address inconsistent `text-transform` inheritance for `button` and `select`.

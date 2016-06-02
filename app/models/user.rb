@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_secure_password
+  has_many :tweets
 
   def slug
     self.username.downcase.split(" ").join("-")
@@ -9,6 +11,4 @@ class User < ActiveRecord::Base
       i.slug == slug
     end
   end
-
-  has_many :tweets
 end

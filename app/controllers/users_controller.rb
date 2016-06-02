@@ -10,13 +10,10 @@ class UsersController < ApplicationController
   post '/signup' do
     @user = User.new(params)
     if @user.username == "" || @user.username == nil
-      flash[:message] = "You must enter a username."
       redirect '/signup'
     elsif @user.email == "" || @user.email == nil
-      flash[:message] = "You must enter an email."
       redirect '/signup'
     elsif @user.password == "" || @user.password == nil
-      flash[:message] = "You must enter a password."
       redirect '/signup'
     else
       @user.save
@@ -35,11 +32,11 @@ class UsersController < ApplicationController
 
   post '/login' do
     @user = User.find_by(username: params[:username])
-    if @user != nil && @user.password == params[:password]
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect "/tweets"
     else
-      redirect '/login'
+      redirect '/signup'
     end
   end
 
