@@ -3,6 +3,40 @@ body {
   background-color: #f5f8fa;
 }
 
+/* SIGNUP FORM */
+
+.page-canvas {
+  width: 1190px;
+  padding-top: 130px;
+  padding-bottom: 50px;
+}
+.signup-wrapper {
+  width: 392px;
+  padding: 30px 0;
+  margin: 0 auto;
+}
+
+.signup-box {
+  font-size: 12px;
+  margin-bottom: 0;
+  display: block;
+  margin-top: 0em;
+}
+
+.prompt {
+  margin-bottom: 26px;
+  padding: 0;
+}
+
+.centered-form{
+	margin-top: 60px;
+}
+
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+
+}
+
 #login-dp{
     min-width: 250px;
     padding: 14px 14px 0;
