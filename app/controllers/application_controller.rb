@@ -26,7 +26,7 @@ class ApplicationController < Sinatra::Base
       redirect to '/tweets'
     else
       flash[:message] = "Name, email and password are required"
-      erb :signup 
+      redirect to '/signup'
     end
   end
 
