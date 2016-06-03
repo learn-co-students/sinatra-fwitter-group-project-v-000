@@ -1,10 +1,40 @@
 require './config/environment'
+require 'rack-flash' 
 
 class ApplicationController < Sinatra::Base
 
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "secret"
+    use Rack::Flash
   end
 
+  get '/' do 
+    erb :index
+  end
+
+  get '/signup' do 
+    erb :signup
+  end
+  
+  post '/signup' do 
+    @user = User.new(name: params[:username], email: params[:email], password: params[:password])
+    if @user.save
+      session[:id] = @user.id
+      redirect to '/tweets'
+    else
+      flash[:message] = "Name, email and password are required"
+      erb :signup 
+    end
+  end
+
+  get '/tweets' do 
+    erb :'/tweets/index'
+  end
+
+  get '/login' do 
+    erb :login
+  end
 end
