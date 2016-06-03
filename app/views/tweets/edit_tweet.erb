@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <form action="/tweets/<%= @tweet.id%>" method="POST">
+     <input type="hidden" name="_method" value="PATCH">
+
+    <label>Content</label><br>
+
+    <input type="text" name="content" value="<%= @tweet.content %>"><br>
+
+    <input type="submit" name="Submit" id="submit">
+
+  </form>
+</body>
+</html>

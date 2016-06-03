@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+</head>
+<body>
+    
+    <a href="/tweets/new">New Tweet</a>       <a href="/logout">Log Out</a>
+    
+    
+    <h1>Welcome, <%= @user.username %></h1>
+
+     <h2>Tweet Feed</h2>
+     
+     
+    
+    
+      <% Tweet.all.each do |tweet|%>
+
+
+      <ul>
+
+        <li><a href="/tweets/<%= tweet.id%>"><%=tweet.content%><br></a></li>
+
+       </ul>
+
+      <%end%>
+       
+      
+
+</body>
+</html>
