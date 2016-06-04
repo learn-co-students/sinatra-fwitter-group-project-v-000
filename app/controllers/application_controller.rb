@@ -86,6 +86,34 @@ class ApplicationController < Sinatra::Base
     end 
   end
 
+  get '/tweets/:id' do 
+    redirect to '/login' if !session[:id] 
+    @tweet = Tweet.find(params[:id])  
+    erb :'/tweets/show'
+  end
+
+  get '/tweets/:id/edit' do 
+    redirect to '/login' if !session[:id]
+    @tweet = Tweet.find(params[:id])
+    erb :'/tweets/edit'
+  end
+
+  patch '/tweets/:id' do 
+    @tweet = Tweet.find(params[:id])
+    if params[:content] == ""
+      flash[:message] = "Tweet content must not be blank"
+      redirect to "/tweets/#{params[:id]}/edit"
+    else
+      @tweet.update(:content => params[:content])
+      redirect to '/tweets'
+    end
+  end
+
+  delete '/tweets/:id' do 
+    Tweet.find(params[:id]).delete
+    redirect to '/tweets'
+  end
+
   get '/logout' do 
     if session[:id] 
       session.clear
