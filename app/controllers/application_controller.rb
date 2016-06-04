@@ -37,6 +37,7 @@ class ApplicationController < Sinatra::Base
   get '/tweets' do 
     if session[:id] 
       @user = User.find(session[:id])
+      @tweets = Tweet.all
       erb :'/tweets/index'
     else
       redirect to '/login'
@@ -58,6 +59,11 @@ class ApplicationController < Sinatra::Base
       flash[:message] = "Invalid username or password"
       redirect to '/login'
     end
+  end
+
+  get '/users/:slug' do 
+    @user = User.find_by_slug(params[:slug])
+    erb :'/users/show'
   end
 
   get '/logout' do 
