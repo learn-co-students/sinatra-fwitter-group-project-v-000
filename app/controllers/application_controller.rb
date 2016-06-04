@@ -77,8 +77,13 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets' do 
     @user = User.find(session[:id])
-    @user.tweets << Tweet.create(content: params[:content])
-    redirect to '/tweets'
+    if params[:content] == "" 
+      flash[:message] = "Tweet cannot be blank" 
+      redirect to '/tweets/new'
+    else
+      @user.tweets << Tweet.create(content: params[:content])
+      redirect to '/tweets'
+    end 
   end
 
   get '/logout' do 
