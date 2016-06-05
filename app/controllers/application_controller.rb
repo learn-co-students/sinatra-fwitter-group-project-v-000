@@ -66,6 +66,61 @@ class ApplicationController < Sinatra::Base
     erb :'/users/show'
   end
 
+  get '/tweets/new' do 
+    if session[:id] 
+      @user = User.find(session[:id])
+      erb :'/tweets/new' 
+    else 
+      redirect to '/login'
+    end
+  end
+
+  post '/tweets' do 
+    @user = User.find(session[:id])
+    if params[:content] == "" 
+      flash[:message] = "Tweet cannot be blank" 
+      redirect to '/tweets/new'
+    else
+      @user.tweets << Tweet.create(content: params[:content])
+      redirect to '/tweets'
+    end 
+  end
+
+  get '/tweets/:id' do 
+    redirect to '/login' if !session[:id] 
+    @tweet = Tweet.find(params[:id])  
+    erb :'/tweets/show'
+  end
+
+  get '/tweets/:id/edit' do 
+    redirect to '/login' if !session[:id]
+    @tweet = Tweet.find(params[:id])
+    erb :'/tweets/edit'
+  end
+
+  patch '/tweets/:id' do 
+    @tweet = Tweet.find(params[:id])
+    if params[:content] == ""
+      flash[:message] = "Tweet content must not be blank"
+      redirect to "/tweets/#{params[:id]}/edit"
+    else
+      @tweet.update(:content => params[:content])
+      redirect to '/tweets'
+    end
+  end
+
+  delete '/tweets/:id' do 
+    if !(@user = User.find(session[:id]))
+      redirect to '/tweets'
+    else
+      @tweet = Tweet.find(params[:id])
+      if @user.tweets.include? @tweet
+        @tweet.delete
+      end
+    end
+    redirect to '/tweets'
+  end
+
   get '/logout' do 
     if session[:id] 
       session.clear
