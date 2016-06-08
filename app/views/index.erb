@@ -1,2 +1,9 @@
-<h2> Welcome to Fwitter </h2>
+<h1>Welcome to Fwitter</h1>
 
+<a href='/signup'>Sign Up</a>
+
+<% if !logged_in? %>
+  <a href=/'login'>Log In</a>
+<% else %>
+  <a href='/logout'>Log Out</a>
+<% end %>
