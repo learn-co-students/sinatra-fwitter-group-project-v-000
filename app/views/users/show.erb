@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-md-12">
+    <p> Here are your tweets, <%= @user.username %>
+      <% @user.tweets.each do |tweet| %>
+          <div class="col-md-6">
+            <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a>
+          </div>
+      <% end %>
+    </div>
+</div>
