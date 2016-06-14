@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+use Rack::Flash
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
@@ -8,7 +9,8 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if !logged_in?
-      erb :"/users/create_user", locals: {message: "Welcome to Fwitter, please sign up."}
+    flash[:message] = "Welcome to Fwitter, please sign up."
+    redirect to "/users/create_user"
     else
       redirect '/tweets'
     end
@@ -39,7 +41,8 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect "/tweets"
     else
-      erb :index, locals: {message: "Failure to log in"}
+      flash[:message] = "Failure to log in".
+      redirect to '/'
     end
   end
 
