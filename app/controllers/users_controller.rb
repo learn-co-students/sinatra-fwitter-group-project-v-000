@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-use Rack::Flash
+
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
@@ -9,7 +9,7 @@ use Rack::Flash
 
   get '/signup' do
     if !logged_in?
-    flash[:message] = "Welcome to Fwitter, please sign up."
+    #flash[:message] = "Welcome to Fwitter, please sign up."
     redirect to "/users/create_user"
     else
       redirect '/tweets'
@@ -18,7 +18,7 @@ use Rack::Flash
 
   post '/signup' do 
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
-      redirect to '/signup'
+      redirect to '/users/signup'
     else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
@@ -41,14 +41,14 @@ use Rack::Flash
       session[:user_id] = user.id
       redirect "/tweets"
     else
-      flash[:message] = "Failure to log in".
+      #flash[:message] = "Failure to log in".
       redirect to '/'
     end
   end
 
 
  get '/logout' do
-    if session[:user_id] != nil
+    if logged_in?
       session.clear
       redirect to '/login'
     else
