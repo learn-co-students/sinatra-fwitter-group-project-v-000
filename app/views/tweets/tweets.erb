@@ -2,6 +2,6 @@ Welcome, <%= @user.username %>. &nbsp;<a href="/tweets/new">Add new tweet</a>&nb
 <br>
 <ul>
   <% @tweets.each do |tweet| %>
-    <li><%= tweet.content %></li>
+    <li><%= tweet.content %> &nbsp;<a href="/tweets/<%= tweet.id %>/edit">Edit</a>&nbsp;<a href="/tweets/<%= tweet.id %>">Delete</a></li>
   <% end %>
 </ul>
