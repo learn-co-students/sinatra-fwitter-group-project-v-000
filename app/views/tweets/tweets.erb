@@ -1,7 +1,9 @@
 Welcome, <%= @user.username %>. &nbsp;<a href="/tweets/new">Add new tweet</a>&nbsp;&nbsp;<a href="/logout">Log Out</a>
 <br>
+
+<h3>What's everyone up to?</h3>
 <ul>
   <% @tweets.each do |tweet| %>
-    <li><%= tweet.content %> &nbsp;<a href="/tweets/<%= tweet.id %>/edit">Edit</a>&nbsp;<a href="/tweets/<%= tweet.id %>">Delete</a></li>
+    <li><%= tweet.user.username %> says: <%= tweet.content %> &nbsp;<a href="/tweets/<%= tweet.id %>/edit">Edit</a>&nbsp;<a href="/tweets/<%= tweet.id %>">Delete</a></li>
   <% end %>
 </ul>
