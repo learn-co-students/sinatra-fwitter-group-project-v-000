@@ -1,19 +1,6 @@
-<%if Helpers.is_logged_in?(session)%>
-      <%user = Helpers.current_user(session)%>
-    <p>Welcome, <%=user.username%>!</p>
-    <%Tweet.all.each do |tweet| %>
-    <%if tweet.user_id == nil%>
-      <p>anon</p>
-    <%else%>
-      <%=User.find(tweet.user_id).username%>
-    <%end%>
-      <p> - - - - - - - - - - - - - - - - - </p>
-        <%=tweet.content%>
-      <p>===================================</p>
-    <%end%>
-    <p><a href="/logout">logout</a></p>
-    <p><a href="/tweets/new">make a NEW tweet</a></p>
-<%else%>
-  <h3>-You Must <a href="/">Log In</a></h3>
-
-<%end%>
+<p> Here are your tweets, <%= @user.username %>
+<% @user.tweets.each do |tweet| %>
+  <div>
+    <%= tweet.content %>
+  </div>
+<% end %>
