@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-#use Rack::Flash
+
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
@@ -10,16 +10,15 @@ class UsersController < ApplicationController
   get '/signup' do
     if !logged_in?
     #flash[:message] = "Welcome to Fwitter, please sign up."
-    redirect to "users/create_user"
+    redirect to "/users/create_user"
     else
       redirect '/tweets'
     end
   end
 
   post '/signup' do 
-    #binding.pry
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
-      redirect to '/signup'
+      redirect to '/users/signup'
     else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
@@ -48,7 +47,7 @@ class UsersController < ApplicationController
   end
 
 
- get '/logout' do
+  get '/logout' do
     if logged_in?
       session.clear
       redirect to '/login'
