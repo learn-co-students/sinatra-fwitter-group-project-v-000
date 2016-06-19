@@ -92,8 +92,10 @@ describe ApplicationController do
     it 'loads the tweets index after login' do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
       params = {
-        :username => "becky567",
-        :password => "kittens"
+        user: {
+          :username => "becky567",
+          :password => "kittens"
+        }
       }
       post '/login', params
       expect(last_response.status).to eq(302)
@@ -106,8 +108,10 @@ describe ApplicationController do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
 
       params = {
-        :username => "becky567",
-        :password => "kittens"
+        user: {
+          :username => "becky567",
+          :password => "kittens"
+        }
       }
       post '/login', params
       session = {}
@@ -122,8 +126,10 @@ describe ApplicationController do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
 
       params = {
-        :username => "becky567",
-        :password => "kittens"
+        user: {
+          :username => "becky567",
+          :password => "kittens"
+        }
       }
       post '/login', params
       get '/logout'

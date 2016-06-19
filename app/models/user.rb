@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   include BCrypt
 
-   def slug 
+  def slug 
     self.username.gsub(" ", "-")
   end
 
