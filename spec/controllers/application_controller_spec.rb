@@ -19,19 +19,24 @@ describe ApplicationController do
 
     it 'signup directs user to twitter index' do
       params = {
-        :username => "skittles123",
-        :email => "skittles@aol.com",
-        :password => "rainbows"
+        user: {
+          :username => "skittles123",
+          :email => "skittles@aol.com",
+          :password => "rainbows"
+        }
       }
       post '/signup', params
       expect(last_response.location).to include("/tweets")
+      # expect(last_response.body).to include("Tweets")
     end
 
     it 'does not let a user sign up without a username' do
       params = {
-        :username => "",
-        :email => "skittles@aol.com",
-        :password => "rainbows"
+        user: {
+          :username => "",
+          :email => "skittles@aol.com",
+          :password => "rainbows"
+        }
       }
       post '/signup', params
       expect(last_response.location).to include('/signup')
@@ -39,9 +44,11 @@ describe ApplicationController do
 
     it 'does not let a user sign up without an email' do
       params = {
-        :username => "skittles123",
-        :email => "",
-        :password => "rainbows"
+        user: {
+          :username => "skittles123",
+          :email => "",
+          :password => "rainbows"
+        }
       }
       post '/signup', params
       expect(last_response.location).to include('/signup')
@@ -49,9 +56,11 @@ describe ApplicationController do
 
     it 'does not let a user sign up without a password' do
       params = {
-        :username => "skittles123",
-        :email => "skittles@aol.com",
-        :password => ""
+        user: {
+          :username => "skittles123",
+          :email => "skittles@aol.com",
+          :password => ""
+        }
       }
       post '/signup', params
       expect(last_response.location).to include('/signup')
@@ -60,9 +69,11 @@ describe ApplicationController do
     it 'does not let a logged in user view the signup page' do
       user = User.create(:username => "skittles123", :email => "skittles@aol.com", :password => "rainbows")
       params = {
-        :username => "skittles123",
-        :email => "skittles@aol.com",
-        :password => "rainbows"
+        user: {
+          :username => "skittles123",
+          :email => "skittles@aol.com",
+          :password => "rainbows"
+        }
       }
       post '/signup', params
       session = {}
