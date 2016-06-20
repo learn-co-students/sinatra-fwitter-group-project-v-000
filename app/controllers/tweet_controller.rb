@@ -28,15 +28,6 @@ class TweetController < ApplicationController
   end
 
 
-  # get '/tweets/:id' do 
-  #   # if session[:user_id]
-  #   #   @tweet = Tweet.find(params[:id])
-  #   binding.pry
-  #     erb :'/tweets/show_tweet'
-  #   # else 
-  #   #   redirect to '/login'
-  #   # end
-  # end
 
   get '/tweets/:id/edit' do
     if session[:id] 
@@ -53,7 +44,7 @@ class TweetController < ApplicationController
 
   get '/tweets/:id' do 
     if session[:id]
-      @tweet = Tweet.find_by_id(params[:id])
+      @tweet = Tweet.find(params[:id])
       erb :'tweets/show_tweet'
     else 
       redirect to '/login'

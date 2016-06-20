@@ -306,7 +306,7 @@ describe ApplicationController do
 
         visit "/tweets/#{tweet.id}"
         expect(page.status_code).to eq(200)
-         binding.pry
+         # binding.pry
         expect(page.body).to include("Delete Tweet")
         expect(page.body).to include(tweet.content)
         expect(page.body).to include("Edit Tweet")
