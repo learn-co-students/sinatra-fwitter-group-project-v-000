@@ -1,16 +1,13 @@
 class UsersController < ApplicationController
 
-
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     erb :'users/show'
   end
 
-
   get '/signup' do
     if !logged_in?
-    #flash[:message] = "Welcome to Fwitter, please sign up."
-    redirect to "/users/create_user"
+      erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
     else
       redirect '/tweets'
     end
@@ -18,7 +15,7 @@ class UsersController < ApplicationController
 
   post '/signup' do 
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
-      redirect to '/users/signup'
+      redirect to '/signup'
     else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
@@ -41,11 +38,9 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect "/tweets"
     else
-      #flash[:message] = "Failure to log in".
-      redirect to '/'
+      redirect to '/signup'
     end
   end
-
 
   get '/logout' do
     if logged_in?
