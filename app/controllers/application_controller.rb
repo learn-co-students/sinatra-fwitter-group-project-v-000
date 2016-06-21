@@ -35,7 +35,7 @@ class ApplicationController < Sinatra::Base
     if !logged_in?
       redirect '/login'
     else
-      @user = User.find_by_id(session[:user_id])
+      @user = current_user
       @all_tweets = Tweet.all
       erb :'/tweets/show'
     end
@@ -45,7 +45,7 @@ class ApplicationController < Sinatra::Base
     if !logged_in?
       erb :login
     else
-      @user = User.find_by_id(session[:user_id])
+      @user = current_user
       redirect '/tweets'
     end
   end
@@ -56,7 +56,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = @user.id
       redirect '/tweets'
     else
-      @user = User.find_by_id(session[:user_id])
+      @user = current_user
       redirect '/tweets'
     end
   end
@@ -79,7 +79,7 @@ class ApplicationController < Sinatra::Base
     if !logged_in?
       redirect '/login'
     else
-      @user = User.find_by_id(session[:user_id])
+      @user = current_user
       erb :'/tweets/new'
     end
   end
@@ -88,14 +88,14 @@ class ApplicationController < Sinatra::Base
     if params[:content] == ""
       redirect '/tweets/new'
     else
-    @user = User.find_by_id(session[:user_id])
+    @user = current_user
     @new_tweet = Tweet.create(content: params["content"], user_id: @user.id)
     redirect '/tweets'
     end
   end
 
   get '/tweets/:id' do
-    @user = User.find_by_id(session[:user_id])
+    @user = current_user
     @tweet = Tweet.find_by_id(params[:id])
       if logged_in? && @user.id = @tweet.user_id
         erb :'/tweets/single'
@@ -105,7 +105,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets/:id' do
-    @user = User.find_by_id(session[:user_id])
+    @user = current_user
     @tweet = Tweet.find_by_id(params[:id])
       if @user.id == @tweet.user_id && @user != nil
        @tweet.delete
@@ -116,7 +116,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/:id/edit' do
-    @user = User.find_by_id(session[:user_id])
+    @user = current_user
     @tweet = Tweet.find_by_id(params[:id])
     if !logged_in?
       redirect '/login'
@@ -138,6 +138,10 @@ class ApplicationController < Sinatra::Base
   helpers do 
     def logged_in?
       !!session[:user_id]
+    end
+
+    def current_user
+      User.find_by_id(session[:user_id])
     end
   end
 
