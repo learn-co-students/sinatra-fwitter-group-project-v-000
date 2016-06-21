@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
 
       session[:id] = user.id
-      binding.pry
+      # binding.pry
       redirect "/tweets"
     else
       redirect '/signup'
