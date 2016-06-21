@@ -1,9 +1,10 @@
 <h3>Welcome, <%= current_user.username %></h3>
+<p><a href="/tweets/new">(add a tweet)</a></p>
 
 <% @tweets.each do |tweet| %>
   <% if tweet.user %>
     <p><%= tweet.user.username %></p>
   <% end %>
-  <p><%= tweet.content %></p>
+  <p><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></p>
   <br></br>
 <% end %>
