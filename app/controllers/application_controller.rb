@@ -5,10 +5,7 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    # enable :sessions
-    use Rack::Session::Cookie, :key => 'rack.session',
-                           :path => '/',
-                           :secret => 'your_secret'
+    enable :sessions
   end
 
   get '/' do
@@ -26,10 +23,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      @current_user ||= User.find_by(:email => session[:email]) if session[:email]
+      User.find(session[:id])
     end
   end
-
-
-
 end
