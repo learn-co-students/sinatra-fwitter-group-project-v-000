@@ -1,7 +1,9 @@
+<%binding.pry %>
 <h1>Welcome, <%=@user.username%></h1>
 
 <h2>Tweets</h2>
 
 <% @tweets.each do |tweet| %>
+<%binding.pry %>
   <%=tweet.content%>
-<%end%>  
+<%end%>
