@@ -1,6 +1,6 @@
 <h1>Update a Tweet</h1>
 
-<form action="/tweets" method="POST">
+<form action="/tweets/<%=@tweet.id%>" method="POST">
 <input id="hidden" type="hidden" name="_method" value="patch">
 
 <label>Please type your tweet here:</label>
