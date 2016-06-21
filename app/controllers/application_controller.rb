@@ -90,10 +90,10 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/:id/edit' do 
     @tweet = Tweet.find_by_id(params["id"])
-    if logged_in? && @tweet && @tweet.user_id == current_user.id
+    if authorized_to? && @tweet
       erb :"/tweets/edit_tweet"
     else
-      redirect '/tweets'
+      redirect '/login'
     end
   end
 
@@ -109,7 +109,7 @@ class ApplicationController < Sinatra::Base
 
   delete '/tweets/:id/delete' do 
     @tweet = Tweet.find_by_id(params["id"])
-    if logged_in? && @tweet.user_id == current_user.id
+    if authorized_to?
       @tweet.delete
       redirect '/tweets'
     else
@@ -132,6 +132,10 @@ class ApplicationController < Sinatra::Base
   helpers do
     def logged_in?
       !!session[:user_id]
+    end
+
+    def authorized_to?
+      logged_in? && @tweet.user_id == current_user.id
     end
 
     def current_user
