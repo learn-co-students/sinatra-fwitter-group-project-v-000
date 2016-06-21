@@ -9,13 +9,13 @@ class SessionsController < ApplicationController
   end
 
   post '/login' do
-    @user = User.find_by(:email => params[:email])
+    user = User.find_by(:username => params[:username])
 
-    if @user && @user.authenticate(params[:password])
-      session[:email] = @user.email
-      redirect "/tweets"
+    if user && user.authenticate(params[:password])
+      session[:id] = user.id
+      redirect '/tweets'
     else
-      redirect "/signup"
+      redirect '/signup'
     end
   end
 
