@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fwitter Layout</title>
+</head>
+<body>
+  <header>
+    <h1 align="center">Fwitter, A Flatiron & Twitter Creation</h1>
+    <% if logged_in? %>
+      <h3 align="center"><a href="/logout">logout</a></h3>
+    <% else %>
+      <h3 align="center"><a href="/login">login</a> / <a href="/signup">sign-up</a></h3>
+    <% end %>
+  </header>
+
+  <%= yield %>
+</body>
+</html>
