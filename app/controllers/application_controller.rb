@@ -3,10 +3,9 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
-    enable :sessions
     set :public_folder, 'public'
     set :views, 'app/views'
-    set :session_secret, "authentication_sinatra"
+    enable :sessions
   end
 
   get '/' do
@@ -16,7 +15,7 @@ class ApplicationController < Sinatra::Base
   helpers do
 
     def logged_in?
-      !!current_user
+      !!session[:id]
     end
 
     def logout!
