@@ -10,23 +10,25 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+  	session.clear
   	erb :homepage
   end
 
- #  get '/login' do
- #  	erb :login
- #  end
+  get '/login' do
+  	erb :login
+  end
 
- #  post '/login' do
- #  	@user = User.find_by(username: params[:username])
-	# if @user && @user.authenticate(params[:password])
-		
- #  		redirect to '/tweets'
- #  	else
- #  		session[:error] = "Something went wrong"
- #  		redirect to '/login'
- #  	end
- #  end
+  post '/login' do
+  	puts params
+  	@user = User.find_by(username: params["user"]["username"])
+	if @user && @user.authenticate(params["user"]["password"])
+		session[:user_id] = @user.id
+  		redirect to '/tweets'
+  	else
+  	 	session[:error] = "Something went wrong"
+  	 	redirect to '/login'
+  	end
+  end
 
   get '/tweets' do
     if logged_in?
@@ -38,16 +40,17 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-  	# if logged_in?
-  	# 	redirect '/tweets'
-  	# else
+  	if logged_in?
+  		redirect '/tweets'
+  	else
   	erb :signup
-  	# end
+  	end
   end
 
   post '/signup' do
   	@user = User.new(params["user"])
   	if @user.save
+  		@user.save
   		session[:user_id] = @user.id
   		redirect '/tweets'
  		
@@ -55,6 +58,11 @@ class ApplicationController < Sinatra::Base
  		redirect '/signup'	
   	end
   	
+  end
+
+   get "/logout" do
+    session.clear
+    redirect "/"
   end
 
   get '/failure' do
@@ -89,7 +97,7 @@ class ApplicationController < Sinatra::Base
   	end
 
   	def current_user
-  		user = User.find(session[:user_id])
+  		user = User.find(session[:id])
   	end
   end
 
