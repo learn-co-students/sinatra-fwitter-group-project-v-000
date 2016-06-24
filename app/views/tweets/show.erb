@@ -1,5 +1,10 @@
 <%=@tweet.content%>
 <p>
+<a href="/tweets">
+	<button>Back to main page</button>
+</a>
+</p>
+<p>
 <form action="/tweets/<%= @tweet.id %>/delete" method="post">
 	<input id="hidden" type="hidden" name="_method" value="delete">
 	<button value="delete">Delete Tweet</button>

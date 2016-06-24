@@ -1,7 +1,14 @@
 <h2>Welcome, <%=@user.username%></h2>
 <%Tweet.all.each do |tweet|%>
-<p><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></p>
+<p><%=User.find_by(id: tweet.user_id).username%> tweeted: <a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a>
 <%end%>
+<p>
+<a href="/tweets/new">
+	<button>Tweet</button>
+</a>
+</p>
+<p>
 <a href="/logout">
 	<button>Log out</button>
 </a>
+</p>
