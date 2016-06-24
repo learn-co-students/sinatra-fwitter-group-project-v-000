@@ -401,6 +401,7 @@ describe ApplicationController do
         click_button 'submit'
         visit 'tweets/1'
         click_button "Delete Tweet"
+        puts page
         expect(page.status_code).to eq(200)
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)
       end
