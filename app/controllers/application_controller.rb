@@ -7,4 +7,25 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
+  get '/' do
+    erb :index
+  end
+  
+  get '/signup' do
+    erb :signup
+  end
+  
+  get '/login' do
+    erb :login
+  end
+  
+  get '/tweets' do
+    @tweets = Tweet.all
+    erb '/tweets/index'
+  end
+  
+  post '/users' do
+    @user = User.create(params[:user])
+    redirect '/tweets'
+  end
 end
