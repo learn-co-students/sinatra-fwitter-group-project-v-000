@@ -5,7 +5,8 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
-use CategoryController
+
 use PostsController
+use CategoryController
 use UsersController
 run ApplicationController
