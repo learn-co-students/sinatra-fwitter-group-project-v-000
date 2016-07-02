@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Fwitter</title>
-</head>
-<body>
-<h1>Welcome, <%= current_user.username %>!</h1>
-<h2>Check out the Tweets:</h2>
-  <br></br>
-  <ul>
-    <%@tweets.each do |t|%>
-    <li>"<%=t.content%>" — <a href='/<%=t.user.slug%>'><%=t.user.username%></a></li>
-    <%end%>
-  </ul>
-  <br></br>
-  <p><a href="/tweets/new">Create New Tweet</a></p>
-  <p><a href="/logout">Log Out</a></p>
-</body>
-</html>
+Welcome, <%= @user.username %>. &nbsp;<a href="/tweets/new">Create a Tweet</a>&nbsp;&nbsp;<a href="/logout">Log Out</a>
+<br>
+
+<h3>Here's what's going on:</h3>
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li><a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a>: <%= tweet.content %> &nbsp;
+      <ul><a href="/tweets/<%= tweet.id %>/edit">Edit</a>&nbsp;<a href="/tweets/<%= tweet.id %>">Delete</a></ul>
+    </li>
+  <% end %>
+</ul>
