@@ -1,0 +1,13 @@
+<h1>Show Tweet Page</h1>
+
+<h3><%=@tweet.content%> - <%=@user.username%></h3>
+
+  <p>Click this link to <a href="/tweets/<%=@tweet.id%>/edit">Edit This Tweet<a/>
+
+
+<form method="post" action="/tweets/<%= @tweet.id %>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="delete" id="submit">
+</form>
+
+
