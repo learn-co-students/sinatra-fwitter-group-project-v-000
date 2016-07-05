@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+  <meta charset="UTF-8">
+  <title>User's Tweets</title>
+</head>
+<body>
+  
+  <h1><%= @user.username %>'s Tweet Page</h1>
+  <br>
+  <ul>
+  <% @user.tweets.each do |tweet| %>
+  <li><%= tweet.content %></li>
+  <br>
+  <% end %> 
+  </ul> 
+  <br><br>
+  return to <a href="/tweets"><%= current_user.username%> Home</a>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Tweet</title>
+</head>
+<body>
+<h2>Edit this tweet:</h2>
+<br>
+  <%= @tweet.content %>
+ <br>
+  <form action="/tweets/<%= @tweet.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <input type="text" value="<%= @tweet.content %>" name="content" id="content">
+    <input type="submit" id="submit" value="submit" name="submit">
+</form>
+<br><br>
+Or return to <a href="/tweets"><%= current_user.username%> Home</a>
+</body>
+</html>
