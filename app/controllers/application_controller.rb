@@ -101,6 +101,7 @@ class ApplicationController < Sinatra::Base
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect "/signup"
     else
+      @user.save
       session[:user_id] = @user.id
       redirect "/tweets"
     end
