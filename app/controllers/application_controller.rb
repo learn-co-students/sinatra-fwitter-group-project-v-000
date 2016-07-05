@@ -39,7 +39,7 @@ class ApplicationController < Sinatra::Base
       @tweets = Tweet.all
       erb :'/tweets/index'
     else
-      redirect to '/'
+      redirect to '/login'
     end
   end
 
@@ -52,14 +52,51 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    @user = User.find_by(username: params[:username])
-    if @user && user.authenticate(params[:password])
-      session[:user_id] = @user.id
+    user = User.find_by(username: params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
       redirect to '/tweets'
     else
       flash[:message] = "It looks like you don't have an account yet. Sign up now to get started."
       redirect to '/signup'
     end
+  end
+
+  get '/logout' do
+    if is_logged_in?
+      session.clear
+      redirect to '/login'
+    else
+      session.clear
+      redirect to '/'
+    end
+  end
+
+  get '/users/:slug' do
+    erb :'/tweets/show_tweet'
+  end
+
+  get '/tweets/new' do
+    if is_logged_in?
+      erb :'/tweets/create_tweet'
+    else
+      redirect to '/login'
+    end
+  end
+
+  post '/tweets' do
+    user = User.find_by(session[:user_id])
+    tweet = Tweet.new(content: params[:content])
+    if tweet.save
+      user.tweets << tweet
+      redirect to "/tweets/#{tweet.id}"
+    else
+      flash[:message] = "At least say 'hello!' An empty tweet is pretty boring. :)"
+      redirect to '/tweets/new'
+    end
+  end
+
+  get '/tweets/:id' do
   end
 
 
