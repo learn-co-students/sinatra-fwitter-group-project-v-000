@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     if logged_in?
-      @user = current_user
+      # @tweets = Tweet.all
       erb :'/tweets/tweets'
     else
       redirect "/login"
@@ -97,13 +97,12 @@ class ApplicationController < Sinatra::Base
   # Create the new user with un, email and pw
   # assign the auto generated user id to the session id
   post '/signup' do
-    puts params
-    @user = User.create(params[:user])
-    if @user.save
+    @user = User.new(username: params[:username], email: params[:email], password: params[:password])
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      redirect "/signup"
+    else
       session[:user_id] = @user.id
       redirect "/tweets"
-    else
-      redirect to "/signup"
     end
   end
 
