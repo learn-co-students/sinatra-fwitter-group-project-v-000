@@ -66,13 +66,20 @@ class ApplicationController < Sinatra::Base
   end
 
   patch '/tweets/:id' do
+    @tweet = Tweet.find(id: params[:id])
     if params[:content] == ""
-      redirect to "/tweets/#{params[:id]}/edit"
+      redirect to "/tweets/#{@tweet.id}/edit"
     else
-      @tweet = Tweet.find_by_id(params[:id])
-      @tweet.update(params[:tweet])
+      @tweet.update(content: params[:content])
       @tweet.save
       redirect to "/tweets/#{@tweet.id}"
+    end
+  end
+
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find_by(id: params[:id])
+    if logged_in? && @tweet.user_id == current_user.id
+      @tweet.destroy
     end
   end
 
@@ -80,7 +87,11 @@ class ApplicationController < Sinatra::Base
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    erb :'/users/show'
+    if current_user
+      erb :'/users/show'
+    else
+      redirect to "/login"
+    end
   end
 
   get '/signup' do
@@ -94,19 +105,19 @@ class ApplicationController < Sinatra::Base
   # Create the new user with un, email and pw
   # assign the auto generated user id to the session id
   post '/signup' do
-    @user = User.new(username: params[:username], email: params[:email], password: params[:password])
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
-      redirect "/signup"
+      redirect to "/signup"
     else
+      @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
       session[:user_id] = @user.id
-      redirect "/tweets"
+      redirect to "/tweets"
     end
   end
 
   get '/login' do
     if logged_in?
-      redirect '/tweets'
+      redirect to "/tweets"
     else
       erb :'users/login'
     end
@@ -116,9 +127,10 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect "/tweets"
+      redirect to "/tweets"
     else
-      redirect to "/signup"
+      session[:error] = "Incorrect username and/or password."
+      redirect to "/login"
     end
   end
 
