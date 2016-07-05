@@ -73,7 +73,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/users/:slug' do
-    erb :'/tweets/show_tweet'
+    erb :'/users/user_tweets'
   end
 
   get '/tweets/new' do
@@ -97,6 +97,40 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/:id' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if is_logged_in?
+      erb :'/tweets/show_tweet'
+    else
+      redirect to '/login'
+    end
+  end
+
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if is_logged_in?
+      erb :'tweets/edit_tweet'
+    else
+      redirect to '/login'
+    end
+  end
+
+  post '/tweets/:id' do
+    tweet = Tweet.find_by_id(params[:id])
+    tweet[:content] = params[:content]
+    if tweet.save
+      redirect to "/tweets/#{tweet.id}"
+    else
+      flash[:message] = "At least say 'hello!' An empty tweet is pretty boring. :)"
+      redirect to "/tweets/#{tweet.id}/edit"
+    end
+  end
+
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if is_logged_in? && current_user.tweets.include?(@tweet)
+      @tweet.delete
+      redirect to '/tweets'
+    end
   end
 
 
