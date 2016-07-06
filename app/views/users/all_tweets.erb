@@ -1,4 +1,16 @@
-<h1>Tweets From <%= @user.username %></h1>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    Tweets From <strong><%= @user.username %></strong>:
+  </div>
+</div>
+
 <% @user.tweets.each do |tweet| %>
-  <p><%= tweet.content %></p>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <em><%= tweet.created_at.in_time_zone('Central Time (US & Canada)').strftime("%A, %B %d, %Y at %I:%M%p") %></em>
+    </div>
+    <div class="panel-body">
+      <%= tweet.content %>
+    </div>
+  </div>
 <% end %>

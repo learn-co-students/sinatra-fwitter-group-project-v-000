@@ -6,8 +6,22 @@
   <title>Fwitter</title>
 </head>
 <body>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h1>Welcome to Fwitter!</h1>
+    </div>
+  </div>
 
-<%= yield  %>
+  <% if User.is_logged_in?(session) %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>Welcome, <%= User.current_user(session).username %></h3>
+        <p><a href="/logout">Logout</a></p>
+      </div>
+    </div>
+  <% end %>
+
+  <%= yield  %>
 
 </body>
 </html>

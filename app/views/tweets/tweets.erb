@@ -1,9 +1,15 @@
-<h1>Tweets View</h1>
-<h3>Welcome, <%= @user.username %></a></h3>
-
-<h3><a href="/logout">Logout</a></h3>
-
-<p><strong>Latest Tweets:</strong></p>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    Latest Tweets:
+  </div>
+</div>
 <% Tweet.all.each do |tweet|  %>
-  <p><%= tweet.content %></p>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <em>Tweet from <a href="/users/<%= tweet.user.username %>"><%= tweet.user.username %></a> on <%= tweet.created_at.in_time_zone('Central Time (US & Canada)').strftime("%A, %B %d, %Y at %I:%M%p") %></em>
+    </div>
+    <div class="panel-body">
+      <%= tweet.content %>
+    </div>
+  </div>
 <% end %>

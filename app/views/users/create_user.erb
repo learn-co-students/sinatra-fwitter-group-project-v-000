@@ -1,23 +1,28 @@
-<h1>Create New User</h1>
-
-<form action="/signup" method="POST">
-  <p>
-    <label>Username: </label><input id="username" type="text" name="username" value="<%= params[:username] %>">
-    <% if flash[:err_no_username] %>
-    <div class="alert alert-danger" role="alert"><%= flash[:err_no_username] %></div>
-    <% end %>
-  </p>
-  <p>
-    <label>Email: </label><input id="email" type="email" name="email" value="<%= params[:email] %>">
-    <% if flash[:err_no_email] %>
-    <div class="alert alert-danger" role="alert"><%= flash[:err_no_email] %></div>
-    <% end %>
-  </p>
-  <p>
-    <label>Password: </label><input id="password" type="password" name="password">
-    <% if flash[:err_no_password] %>
-    <div class="alert alert-danger" role="alert"><%= flash[:err_no_password] %></div>
-    <% end %>
-  </p>
-  <input id="" type="submit" value="Create New User">
-</form>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Create New User
+  </div>
+  <div class="panel-body">
+    <form action="/signup" method="POST">
+      <p>
+        <label>Username: </label><input id="username" type="text" name="username" value="<%= params[:username] %>">
+        <% if flash[:err_no_username] %>
+        <div class="alert alert-danger" role="alert"><%= flash[:err_no_username] %></div>
+        <% end %>
+      </p>
+      <p>
+        <label>Email: </label><input id="email" type="email" name="email" value="<%= params[:email] %>">
+        <% if flash[:err_no_email] %>
+        <div class="alert alert-danger" role="alert"><%= flash[:err_no_email] %></div>
+        <% end %>
+      </p>
+      <p>
+        <label>Password: </label><input id="password" type="password" name="password">
+        <% if flash[:err_no_password] %>
+        <div class="alert alert-danger" role="alert"><%= flash[:err_no_password] %></div>
+        <% end %>
+      </p>
+      <input id="submit" class="btn btn-success" type="submit" value="Create New User">
+    </form>
+  </div>
+</div>

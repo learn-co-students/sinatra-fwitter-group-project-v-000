@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <em>Tweet from <%= @tweet.user.username %> on <%= @tweet.created_at.strftime("%A, %B %d, %Y at %I:%M%p") %></em>
+    <em>Tweet from <%= @tweet.user.username %> on <%= @tweet.created_at.in_time_zone('Central Time (US & Canada)').strftime("%A, %B %d, %Y at %I:%M%p") %></em>
   </div>
   <div class="panel-body">
     <%= @tweet.content %>
