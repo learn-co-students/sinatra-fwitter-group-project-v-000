@@ -46,7 +46,7 @@ class ApplicationController < Sinatra::Base
   post '/login' do
     query = params.map{|key, value| "#{key}=#{value}" if key != "password"}.join("&")
 
-    login_user = User.find_by(username: params[:username], password: params[:password])
+    login_user = User.find_by(username: params[:username])
 
     flash[:err_no_username] = "Please enter your username." if params[:username].empty?    
     flash[:err_no_password] = "Please enter your password." if params[:password].empty?
@@ -54,7 +54,7 @@ class ApplicationController < Sinatra::Base
 
     redirect to("/login?#{query}") if flash[:err_no_username] || flash[:err_no_password] || flash[:err_username_not_found]
         
-    if login_user
+    if login_user && login_user.authenticate(params[:password])
       session[:id] = login_user.id
       redirect to("/tweets")
     else
