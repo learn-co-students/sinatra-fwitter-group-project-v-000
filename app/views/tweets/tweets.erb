@@ -1,10 +1,9 @@
 <h1>Tweets Page</h1>
-<h2>Here Are All of Your Tweets:</h2>
-<%@tweets.each do |tweet| %>
-<%if tweet%>
-  <%= "#{tweet.user.username} tweeted: #{tweet.content} " %>
+<h2>Welcome,</h2>
+<h2>Here Are All Tweets:</h2>
+<% @tweets.each do |tweet| %>
+  <%= tweet.content%>  -  <%=tweet.user.username %>
   <br></br>
-  <%end%>
   <%end%>
 
   <p>Click the link to <a href="/tweets/new">Create a Tweet<a/>
