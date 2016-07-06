@@ -1,1 +1,16 @@
 <h1>User Login</h1>
+<form action="/login" method="POST">
+  <p>
+    <label>Username: </label><input id="username" type="text" name="username" value="<%= params[:username] %>">
+    <% if flash[:err_no_username] || flash[:err_username_not_found] %>
+    <div class="alert alert-danger" role="alert"><%= flash[:err_no_username] || flash[:err_username_not_found] %></div>
+    <% end %>
+  </p>  
+  <p>
+    <label>Password: </label><input id="password" type="password" name="password">
+    <% if flash[:err_no_password] && !flash[:err_username_not_found] || flash[:err_incorrect_password]%>
+    <div class="alert alert-danger" role="alert"><%= flash[:err_no_password] || flash[:err_incorrect_password]%></div>
+    <% end %>
+  </p>
+  <input id="submit" type="submit" value="Login">  
+</form>

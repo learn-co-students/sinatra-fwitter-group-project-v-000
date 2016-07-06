@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <strong>Edit Tweet</strong>    
+  </div>
+  <div class="panel-body">
+    <form action="/tweets/<%= @tweet.id %>/edit" method="POST">
+      <input type="hidden" name="_method" value="PATCH">
+      <p><textarea name="content" id="content" cols="50" rows="6"><%= @tweet.content %></textarea></p>
+      <% if flash[:err_blank_tweet] %>
+      <div class="alert alert-danger" role="alert"><%= flash[:err_blank_tweet] %></div>
+      <% end %>
+      <input id="submit" class="btn btn-warning" type="submit" value="Edit Tweet">
+    </form>    
+  </div>  
+</div>
+
