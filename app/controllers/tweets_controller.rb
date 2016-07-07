@@ -42,23 +42,26 @@ class TweetsController < ApplicationController
       redirect "/login" # redirect if not logged in
     else
       if tweet = current_user.tweets.find_by(params[:id])
-        "An edit new post form #{current_user.id} "
+        erb :'/tweets/edit_tweet'
       else
         redirect '/tweets'
       end
     end
   end
 
-  get '/tweets/:id/delete' do
+  post '/tweets/:id/edit' do
     if !logged_in?
       redirect "/login" # redirect if not logged in
+    elsif params[:tweet] == ""
+      erb :'/tweets/edit_tweet'
     else
-      if tweet = current_user.tweets.find_by(params[:id])
-        "An edit new post form #{current_user.id} "
-      else
-        redirect '/tweets'
-      end
+      current_user.tweets.find_by(params[:id]).update(content: params[:tweet])
+      redirect '/tweets'
     end
+  end
+
+  post '/tweets/:id/delete' do
+    binding.pry
   end
 
 end

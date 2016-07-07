@@ -1,0 +1,8 @@
+<h1>Edit Tweet: <%=@current_user.tweets.find_by(params[:id]).content%></h1>
+<form action="/tweets/<%=params[:id]%>/edit" method="POST">
+
+  <label for="content">Tweet:</label>
+  <input id="content" type="text" name="tweet">
+
+  <button type="submit" value="submit">Edit Tweet</button>
+</form>
