@@ -60,10 +60,10 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets/:id/delete' do #delete action
-    if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-      @tweet.delete
+  delete '/tweets/:id/delete' do #delete action
+    tweet = Tweet.find(params[:id])
+    if logged_in? && tweet == current_user.tweets.find_by(params[:id])
+      tweet.delete
     end
   end
 

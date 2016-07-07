@@ -3,8 +3,7 @@
 
 
 
-<form method="post" action="/tweets/<%=@tweet.id%>/delete">
+<form method="POST" action="/tweets/<%=@tweet.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="delete">
-
-  <button type="delete" value="delete">Delete Tweet</button>
+  <button type="submit" value="submit">Delete Tweet</button>
 <form>
