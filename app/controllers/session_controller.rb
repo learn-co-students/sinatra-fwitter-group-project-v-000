@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 
   post '/login' do
     login(params[:username], params[:password])
-    redirect '/tweets'
+    redirect '/tweets' if logged_in?
   end
 
   get '/logout' do
