@@ -1,0 +1,10 @@
+<p>
+  Hello, <%= @user.username %>.  You are logged in
+</p>
+
+<% Tweet.all.each do |tweet| %>
+  <p>
+    <%= tweet.content %>
+    <br>
+  </p>
+<% end %>
