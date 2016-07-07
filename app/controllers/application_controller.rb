@@ -15,6 +15,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
+    redirect "/tweets" if logged_in?
     erb :'/users/login'
   end
 
@@ -33,10 +34,13 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/logout' do
+    session.clear
+    redirect "/login"
+  end
+
   get '/signup' do
-    if logged_in?
-      redirect "/tweets"
-    end
+    redirect "/tweets" if logged_in?
     erb :'/users/create_user'
   end
 
@@ -68,6 +72,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
+    redirect "/login" if !logged_in?
     @user = User.find(session[:user_id])
     erb :'/tweets/tweets'
   end
