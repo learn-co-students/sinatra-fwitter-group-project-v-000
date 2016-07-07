@@ -1,3 +1,5 @@
-<%@user.tweets.each do |tweet|%>
-<h4><%=tweet.content%></h4>
-<%end%>
+<h4><%=@tweet.content if @tweet%></h4>
+<form action="/tweet/<%=@tweet.id%>" method="POST">
+  <button type="delete" value="delete">Delete Tweet</button>
+  <button type="edit" value="edit">Edit Tweet</button>
+</form>
