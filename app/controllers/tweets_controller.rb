@@ -39,4 +39,16 @@ class TweetsController < ApplicationController
     binding.pry
   end
 
+  get '/posts/:id/edit' do
+    if !logged_in?
+      redirect "/login" # redirect if not logged in
+    else
+      if tweet = current_user.tweets.find_by(params[:id])
+        "An edit new post form #{current_user.id} "
+      else
+        redirect '/tweets'
+      end
+    end
+  end
+
 end
