@@ -10,4 +10,9 @@ class SessionsController < ApplicationController
     redirect '/tweets'
   end
 
+  get '/logout' do
+    logout! if logged_in?
+    redirect '/login'
+  end
+
 end
