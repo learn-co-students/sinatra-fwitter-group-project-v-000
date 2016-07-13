@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<head></head>
+
+<body>
+  <% if session[:id].nil? %>
+      <a href="/signup">Sign Up</a>
+      <a href="/login">Log In</a>
+  <% else %>    
+      <a href="/logout">Log Out</a>
+  <% end %>
+  <%= yield %>
+</body>
