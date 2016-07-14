@@ -27,7 +27,8 @@ class ApplicationController < Sinatra::Base
       redirect to('/signup') if param.empty?
     end
 
-    User.new( username: a, email: b, password: c)
+    @user = User.create( username: a, email: b, password: c)
+    session[:user_id] = @user.id
     redirect to('/tweets')
   end
 
