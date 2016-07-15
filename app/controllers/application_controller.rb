@@ -32,6 +32,22 @@ class ApplicationController < Sinatra::Base
     redirect to('/tweets')
   end
 
+  get '/login' do
+    redirect to('/tweets') if is_logged_in?
+    erb :login
+  end
+
+  post '/login' do
+    user = User.find_by(username: params[:username])
+
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect to('/tweets')
+    else
+      redirect to('/login')
+    end
+  end
+
   helpers do
     def is_logged_in?
       !session[:user_id].nil?
@@ -40,7 +56,6 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
-
   end
 
 end
