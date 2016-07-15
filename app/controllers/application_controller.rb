@@ -37,6 +37,11 @@ class ApplicationController < Sinatra::Base
     erb :login
   end
 
+  get '/logout' do
+    session.delete(:user_id)
+    redirect to('/login')
+  end
+
   post '/login' do
     user = User.find_by(username: params[:username])
 
