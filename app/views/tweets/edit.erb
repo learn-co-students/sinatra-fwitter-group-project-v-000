@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Your Tweets</title>
+  </head>
+  <body>
+
+      <form action="/tweets/<%= @tweet.id %>" method="post">
+        <input type="hidden" name="_method" value="patch" id="hidden">
+        <br>
+        Edit Content:<input type="textarea" name="content" value="<%= @tweet.content %>" id="content">
+        <br>
+        <br>
+        <input type="submit" value="submit">
+      <br>
+      </form>
+  </body>
+</html>
