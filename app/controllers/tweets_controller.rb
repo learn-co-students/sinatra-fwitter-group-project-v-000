@@ -22,7 +22,7 @@ class TweetsController < ApplicationController
       redirect to "/tweets/new"
     else
       @user = current_user
-      @tweet = Tweet.create(:content => params[:content], :user_id => @user.id)
+      @tweet = Tweet.create(content:params[:content], user_id:@user.id)
       redirect to "/tweets/#{@tweet.id}"
     end
   end
