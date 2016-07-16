@@ -9,6 +9,9 @@ class TweetsController < ApplicationController
     end
   end
 
+  # lets user view new tweet form if logged in
+  # lets user create a tweet if they are logged in
+  # does not let user view new tweet form if not logged in
   get '/tweets/new' do
     if logged_in?
       erb :'/tweets/create_tweet'
@@ -17,6 +20,8 @@ class TweetsController < ApplicationController
     end
   end
 
+  # does not let a user tweet from another user
+  # does not let a user create a blank tweet
   post '/tweets' do
     if params[:content].empty?
       redirect to "/tweets/new"
@@ -27,6 +32,8 @@ class TweetsController < ApplicationController
     end
   end
 
+  # does not let a user view a tweet
+  # displays a single tweet
   get '/tweets/:id' do
     if logged_in?
       @tweet = Tweet.find(params[:id])
@@ -36,6 +43,10 @@ class TweetsController < ApplicationController
     end
   end
 
+  # lets a user view tweet edit form if they are logged in
+  # does not load let user view tweet edit form if not logged in
+  # does not let a user edit a tweet they did not create
+  # lets a user edit their own tweet if they are logged in
   get '/tweets/:id/edit' do
     if logged_in?
       @tweet = Tweet.find(params[:id])
@@ -49,6 +60,7 @@ class TweetsController < ApplicationController
     end
   end
 
+  # does not let a user edit a text with blank content
   patch '/tweets/:id' do
     if !params[:content].empty?
       @tweet = Tweet.find(params[:id])
@@ -60,6 +72,8 @@ class TweetsController < ApplicationController
     end
   end
 
+  # lets a user delete their own tweet if they are logged in
+  # does not let a user delete a tweet they did not create
   delete '/tweets/:id/delete' do
     if logged_in?
       @tweet = Tweet.find(params[:id])
