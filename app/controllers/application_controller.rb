@@ -9,6 +9,7 @@ class ApplicationController < Sinatra::Base
 		set :session_secret, "password_security"
   end
 
+  # loads the homepage
   get '/' do
     erb :index
   end
