@@ -1,1 +1,12 @@
-tweets.erb
+<h1> Welcome, <%= @user.username %>!</h1>
+<h4>look at this tweet</h4>
+<% @user.tweets.each do |t| %>
+    <%= t.content %><br>
+    <% end %>
+
+<br>
+<a href="/tweets/new">Create a Tweet</a>
+
+<br><br>
+
+<a href="/logout">Logout</a>
