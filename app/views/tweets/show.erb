@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <%if !!params[:id]%>
+      <%tweet = Tweet.find(params[:id])%>
+      <%=tweet.content%></br>
+        <a href='/tweets/<%=tweet.id%>/edit'>Edit Tweet.</a></br>
+        <form class="" action='/tweets/<%=params[:id]%>/delete' method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" name="Delete Tweet" value="Delete Tweet" id="Delete Tweet">
+        </form>
+    <%else%>
+      <%Tweet.all.each do |tweet|%>
+          <%=tweet.content%></br>
+          <a href='/tweets/<%=tweet.id%>/edit'>Edit Tweet.</a></br>
+          <form class="" action='/tweets/<%=params[:id]%>/delete' method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" name="Delete Tweet" value="Delete Tweet" id="Delete Tweet">
+          </form>
+      <%end%>
+    <%end%>
+  </body>
+</html>
