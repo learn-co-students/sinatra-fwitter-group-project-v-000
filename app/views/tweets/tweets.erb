@@ -3,6 +3,12 @@
 <h2>Here Are All Tweets:</h2>
 <% @tweets.each do |tweet| %>
   <%= tweet.content%>  -  <%=tweet.user.username %>
+  <%if tweet.user == @user%>
+  <form action='/tweets/<%=tweet.id%>/edit' method="GET">
+    <input type="submit" value="edit" name="tweet[content]" id="submit">
+  </form>
+  <%end%>
+
   <br></br>
   <%end%>
 

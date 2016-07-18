@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
       end
       User.all.each do |user|
         @username = user.username
-        @new_slug.each do |word| #for multi or single line (single is in array)
+        @new_slug.each do |word| #for multi or single line (single is in one-element array)
           if @username.include?(word) || @username.include?(word.capitalize)
             @count += 1
             if @count == @new_slug.length

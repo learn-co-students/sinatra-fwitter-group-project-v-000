@@ -55,7 +55,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = @user.id
       redirect to "/tweets"
     else
-      redirect to '/'  #homepage
+      redirect to '/' 
     end
   end
 
