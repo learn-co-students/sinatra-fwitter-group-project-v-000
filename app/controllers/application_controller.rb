@@ -79,8 +79,13 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/new' do
     # create a new tweet if logged in
+
   end
 
+  get '/users/:slug' do
+    @user = User.find(params[:slug])
+    erb :'/tweets/show_tweet'
+  end
 
   get '/pry' do
     binding.pry
