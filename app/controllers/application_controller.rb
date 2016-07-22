@@ -98,15 +98,32 @@ class ApplicationController < Sinatra::Base
     erb :'/tweets/show_tweet'
   end
 
+  patch '/tweets' do
+    # update the tweet.
+    @tweet = Tweet.find(params[:tweet_id])
+    @tweet.content = params[:content] unless params[:content] == ""
+    @tweet.save
+    redirect '/tweets'
+  end
+
+
   get '/tweets/:id' do
     # show one tweet based on id
-    # if Tweet.all.include?
-    @tweet = Tweet.find(params[:id])
-    erb :'tweets/show_one_tweet'
+    if Tweet.exists?(params[:id])
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/show_one_tweet'
+    else
+      redirect '/failure'
+    end
   end
 
   get '/tweets/:id/edit' do
-
+    if Tweet.exists?(params[:id])
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/edit_tweet'
+    else
+      redirect '/'
+    end
   end
 
   post '/tweets/:id' do
