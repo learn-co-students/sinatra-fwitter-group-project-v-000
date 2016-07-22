@@ -32,6 +32,7 @@ class ApplicationController < Sinatra::Base
     else
       redirect "/failure"
     end
+    redirect "/login"
   end
 
   get '/logout' do
@@ -79,6 +80,36 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/new' do
     # create a new tweet if logged in
+    erb :'/tweets/create_tweet'
+  end
+
+  post '/tweets' do
+    # create the tweet and persist to db
+    # binding.pry
+    redirect "/login" if !logged_in?
+    @user = User.find(session[:user_id])
+
+    if params[:content] != ""
+      @tweet = Tweet.create(content: params[:content])
+      @tweet.user_id = @user.id
+      @tweet.save
+    end
+
+    erb :'/tweets/show_tweet'
+  end
+
+  get '/tweets/:id' do
+    # show one tweet based on id
+    # if Tweet.all.include?
+    @tweet = Tweet.find(params[:id])
+    erb :'tweets/show_one_tweet'
+  end
+
+  get '/tweets/:id/edit' do
+
+  end
+
+  post '/tweets/:id' do
 
   end
 
