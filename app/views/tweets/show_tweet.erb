@@ -1,0 +1,10 @@
+<p>
+  Welcome, <%= @user.username %>.  Here are your tweets:
+</p>
+
+<% @user.tweets.all.each do |tweet| %>
+  <p>
+    <%= tweet.content %>
+    <br>
+  </p>
+<% end %>

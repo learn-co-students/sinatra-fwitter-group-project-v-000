@@ -1,0 +1,10 @@
+<p>
+  Welcome, <%= @user.username %>.  You are logged in
+</p>
+
+<% Tweet.all.each do |tweet| %>
+  <p>
+    <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
+    <br>
+  </p>
+<% end %>
