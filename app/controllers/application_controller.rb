@@ -126,16 +126,6 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/tweets/:id/delete' do
-    validate_login?
-    if Tweet.exists?(params[:id])
-      Tweet.find(params[:id]).delete
-      redirect '/tweets'
-    else
-      redirect '/'
-    end
-  end
-
   post '/tweets/delete' do
     validate_login?
     @tweet = Tweet.find(params[:tweet_id])
