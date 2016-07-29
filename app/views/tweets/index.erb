@@ -1,0 +1,12 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Index of Tweets</title>
+  </head>
+  <body>
+    <h1>Welcome, </h1>
+    <% @tweets.each do |tweet| %>
+    <p><%= tweet.content %></p>
+    <% end %>
+  </body>
+</html>

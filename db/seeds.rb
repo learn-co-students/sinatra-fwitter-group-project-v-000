@@ -1,0 +1,5 @@
+Tweet.create(:content => "hello this is a tweet")
+Tweet.create(:content => "junky tweet by celebrity")
+Tweet.create(:content => "breaking news from kansas")
+Tweet.create(:content => "check out this dog who jumped in a bucket")
+Tweet.create(:content => "biggest homerun you've ever seen")
