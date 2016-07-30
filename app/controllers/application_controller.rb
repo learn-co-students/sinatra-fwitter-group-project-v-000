@@ -130,7 +130,7 @@ class ApplicationController < Sinatra::Base
     validate_login?
     @tweet = Tweet.find(params[:tweet_id])
     if Tweet.exists?(params[:tweet_id]) && @tweet.user_id == session[:user_id]
-      Tweet.find(params[:tweet_id]).delete
+      @tweet.delete
       redirect '/tweets'
     else
       redirect '/tweets'
