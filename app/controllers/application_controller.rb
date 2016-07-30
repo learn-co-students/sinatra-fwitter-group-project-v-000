@@ -1,12 +1,13 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
+  enable :sessions
+  set :session_secret, "secret"
+  use Rack::Flash
 
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    enable :sessions
-    set :session_secret, "secret"
   end
 
   get '/' do
@@ -33,7 +34,7 @@ class ApplicationController < Sinatra::Base
 
   get '/login' do
     if logged_in?
-      redirect to '/tweets'
+      redirect to '/tweets/new'
     else
       erb :login
     end
@@ -64,6 +65,11 @@ class ApplicationController < Sinatra::Base
   get '/logout' do
     session.clear
     redirect to '/login'
+  end
+
+  get '/users/:slug' do
+    @user = User.find(params[:slug])
+    erb :'/tweets/show'
   end
 
   helpers do
