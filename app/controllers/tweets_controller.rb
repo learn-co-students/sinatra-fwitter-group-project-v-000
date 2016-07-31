@@ -1,3 +1,4 @@
+# Tweet Controller
 class TweetsController < ApplicationController
   get '/tweets' do
     if session[:user_id]
@@ -26,6 +27,7 @@ class TweetsController < ApplicationController
     end
   end
 
+  # Loads the Tweet Edit Form
   get '/tweets/:id/edit' do
     if session[:user_id]
       @tweet = Tweet.find_by_id(params[:id])
@@ -39,6 +41,7 @@ class TweetsController < ApplicationController
     end
   end
 
+  # Loads a single tweet
   get '/tweets/:id' do
     if session[:user_id]
       @tweet = Tweet.find_by_id(params[:id])
@@ -48,6 +51,7 @@ class TweetsController < ApplicationController
     end
   end
 
+  # Edits a Tweet
   patch '/tweets/:id' do
     if params[:content] == ''
       redirect to "/tweets/#{params[:id]}/edit"
@@ -59,6 +63,7 @@ class TweetsController < ApplicationController
     end
   end
 
+  # Delete's a Tweet
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id])
     if session[:user_id]
@@ -69,5 +74,4 @@ class TweetsController < ApplicationController
       redirect to '/login'
     end
   end
-
 end
