@@ -3,15 +3,14 @@
 <form method="post" action="/tweets/<%=@tweet.id%>">
   <input id="hidden" type="hidden" name="_method" value="PATCH">
   <div class="form-group row">
-    <label for="example-text-input" class="col-xs-2 col-form-label">Text</label>
+    <label for="example-text-input" class="col-xs-2 col-form-label">Status: </label>
     <div class="col-xs-10">
       <input class="form-control" name="content" value="<%= @tweet.content %>" id="example-text-input">
     </div>
   </div>
   <div class="form-group row">
-    <label for="example-text-input" class="col-xs-2 col-form-label">Text</label>
-    <div class="col-xs-4">
-      <button type="submit" name="submit" class="btn btn-primary btn-sm btn-block">Submit</button>
+    <div class="col-xs-offset-4 col-xs-4">
+      <button type="submit" name="submit" id="submit" class="btn btn-primary btn-sm btn-block">Submit</button>
     </div>
   </div>
 </form>
