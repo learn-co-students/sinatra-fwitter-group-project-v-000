@@ -1,5 +1,4 @@
 class TweetsController < ApplicationController
-
   get '/tweets' do
     if session[:user_id]
       @tweets = Tweet.all
