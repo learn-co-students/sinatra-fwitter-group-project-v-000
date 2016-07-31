@@ -1,0 +1,15 @@
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
+<form class="form-signin" method="post" action="/signup">
+  <h2 class="form-signin-heading">Create an Account</h2>
+  <div class="input-group">
+    <div class="input-group-addon">@</div>
+    <input type="text" id="username" name="username" class="form-control" placeholder="Username">
+  </div>
+  <input type="email" id="email" name="email" class="form-control" placeholder="Email address">
+  <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+</form>
+<center><a href="/login">Have an account already?</a></center>
