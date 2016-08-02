@@ -1,9 +1,14 @@
 class TweetsController < ApplicationController
 
-  # get "/songs" do
-  #   @songs = Song.all
-  #   erb :'/songs/index'
-  # end
+ get "/tweets" do
+    if logged_in?
+      @tweets = Tweet.all
+      erb :'/tweets/tweets'
+    else
+      redirect to "/login"
+    end
+  end
+
 
 
 
