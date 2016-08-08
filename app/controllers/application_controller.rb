@@ -71,13 +71,16 @@ class ApplicationController < Sinatra::Base
       @tweet = Tweet.create(params)
       @user = User.find(session[:id])
       @user.tweets << @tweet
+      redirect "/tweets"
     end
   end
 
   get "/tweets/:id" do
+
     if logged_in?
       @user = User.find(session[:id])
-      @tweet = @user.tweets.find(params[:id])
+      @tweet = Tweet.find(params[:id])
+
       erb :"/user/user_single_tweet"
     else
       redirect "/login"
@@ -102,8 +105,10 @@ class ApplicationController < Sinatra::Base
   delete "/tweets/:id/delete" do
     @user = User.find(session[:id])
     @tweet = Tweet.find(params[:id])
+
     if @user.tweets.include?(@tweet)
       @tweet.delete
+      redirect "/tweets"
     else
       redirect "/login"
     end
