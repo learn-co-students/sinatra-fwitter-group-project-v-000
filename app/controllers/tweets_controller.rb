@@ -17,17 +17,22 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    if params[:content].empty?
-      redirect '/tweets/new'
+    # should I use 'logged_in?' on POST/PATCH/DELETE/etc. routes?
+    if logged_in?
+      tweet = @current_user.tweets.new(content: params[:content])
+      if tweet.save
+        redirect "/tweets/#{tweet.id}"
+      else
+        redirect '/tweets/new'
+      end
     else
-      @tweet = current_user.tweets.create(content: params[:content])
-      redirect "/tweets/#{@tweet.id}"
+      redirect '/login'
     end
   end
 
   get '/tweets/:id' do
     if logged_in?
-      @tweet = Tweet.find(params[:id])
+      @tweet = Tweet.find_by(id: params[:id])
       erb :'tweets/show_tweet'
     else
       redirect '/login'
@@ -36,8 +41,8 @@ class TweetsController < ApplicationController
 
   get '/tweets/:id/edit' do
     if logged_in?
-      @tweet = Tweet.find(params[:id])
-      if @tweet.user == @current_user
+      @tweet = @current_user.tweets.find_by(id: params[:id])
+      if @tweet
         erb :'tweets/edit_tweet'
       else
         redirect '/tweets'
@@ -47,14 +52,18 @@ class TweetsController < ApplicationController
     end
   end
 
-  patch '/tweets/:id' do 
-    if params[:content].empty?
-      redirect "/tweets/#{params[:id]}/edit"
+  patch '/tweets/:id' do
+    if logged_in?
+      tweet = @current_user.tweets.find_by(id: params[:id])
+      if tweet && !params[:content].empty? # is the second half of this conditional necessary or redundant w/ AR validation?
+        tweet.content = params[:content]
+        tweet.save
+        redirect "/tweets/#{tweet.id}"
+      else
+        redirect "/tweets/#{params[:id]}/edit"
+      end
     else
-      @tweet = Tweet.find(params[:id])
-      @tweet.content = params[:content]
-      @tweet.save
-      redirect "/tweets/#{@tweet.id}"
+      redirect '/login'
     end
   end
 

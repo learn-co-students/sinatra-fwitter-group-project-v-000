@@ -8,12 +8,16 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    user = User.new(username: params[:username], email: params[:email], password: params[:password])
-    if !user.username.empty? && !user.email.empty? && user.save
-      session[:user_id] = user.id
-      redirect '/tweets'
+    if !logged_in?
+      user = User.new(username: params[:username], email: params[:email], password: params[:password])
+      if user.save
+        session[:user_id] = user.id # is :user_id a fixed standard, or could I just as easily change every instance of session[:user_id] to session[:id]?
+        redirect '/tweets'
+      else
+        redirect '/signup'
+      end
     else
-      redirect '/signup'
+      redirect '/tweets'
     end
   end
 
@@ -26,12 +30,16 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    user = User.find_by(username: params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect '/tweets'
+    if !logged_in?
+      user = User.find_by(username: params[:username])
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        redirect '/tweets'
+      else
+        redirect '/login'
+      end
     else
-      redirect '/login'
+      redirect '/tweets'
     end
   end
 
@@ -45,7 +53,11 @@ class UsersController < ApplicationController
   end
 
   get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    erb :'users/show_user'
+    # if logged_in? 
+      @user = User.find_by_slug(params[:slug]) # diff between '.find_by_slug(params[:slug]' and '.find_by(slug: params[:slug])' ?
+      erb :'users/show_user'
+    # else
+    #   redirect '/login'
+    # end
   end
 end
