@@ -29,6 +29,7 @@ class UserController < ApplicationController
     else
       session[:failure] = "There was an error logging in. Please try again."
       redirect
+    end
     #if neither then redirect back to login with flash message?
     erb :login
   end
