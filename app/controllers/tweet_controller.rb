@@ -36,8 +36,8 @@ class TweetController < ApplicationController
 
   ### SHOW ALL TWEETS ###
   get '/:slug/tweets' do
-    if !!session[:id]
-      @user = User.find(session[:id])
+    if !!session[:user_id]
+      @user = User.find(session[:user_id])
       erb :'tweets/tweets'
     else 
       redirect "/login"
