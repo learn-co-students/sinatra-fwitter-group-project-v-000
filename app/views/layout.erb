@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fwitter</title>
+  </head>
+
+  <body>
+    <% if !!session[:user] %>
+      Welcome, <%= "#{current_user}" %>!
+      <a href="/logout">Sign Out</a>
+    <% else %>
+      Welcome!
+      <a href="/signup">Sign up</a>
+      <a href="/login">Log In</a>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
