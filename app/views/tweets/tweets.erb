@@ -1,2 +1,9 @@
+<!-- Show all tweets by all users -->
+
 Welcome, <%= @user.username %>
+
+<% @tweets.each do |tweet| %>
+  <%= tweet.user.username %>
+  <%= tweet.content %>
+<% end %>
 

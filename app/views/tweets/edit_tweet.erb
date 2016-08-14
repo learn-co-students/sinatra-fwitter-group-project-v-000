@@ -1,7 +1,15 @@
+Current Tweet Content:
+<%= @tweet.content %>
+
+Edit this Tweet:
+<form action="/tweets/<%= @tweet.id %>/edit" method="post">
+  <input type="text" name="content" id="content">
+  <input type="submit" name="submit" id="submit">
+</form>
 
 
 
 <!-- logout form -->
-<form action="/users/logout" method="post">
+<!-- <form action="/users/logout" method="post">
   <input type="submit" name="logout">Log Out</input>
-</form>
+</form> -->

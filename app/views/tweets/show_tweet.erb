@@ -1,4 +1,10 @@
-<!-- each tweet should include a link to edit -->
+Tweet Content: <%= @tweet.content %>
+
+<a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+
+<form action="/tweets/<%= @tweet.id %>/delete" method="post">
+  <input type="submit" name="submit" id="Delete Tweet">Delete Tweet</input>
+</form>
 
 
 
@@ -6,6 +12,6 @@
 
 
 <!-- logout form -->
-<form action="/users/logout" method="post">
+<!-- <form action="/users/logout" method="post">
   <input type="submit" name="logout">Log Out</input>
-</form>
+</form> -->

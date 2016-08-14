@@ -1,9 +1,8 @@
 Create a Tweet
 
-<form action="____" method="post">
-  <!-- not sure about the textarea input or inculding a <textarea> tag within the form -->
-  <input type="textarea" name="tweet">
-  <input type="submit" name="submit">Create Tweet</input>
+<form action="/tweets/new" method="post">
+  <input type="text" name="content" id="content">
+  <input type="submit" name="submit" id="submit">Create Tweet</input>
 </form>
 
 
@@ -11,6 +10,6 @@ Create a Tweet
 
 
 <!-- logout form -->
-<form action="/users/logout" method="post">
+<!-- <form action="/users/logout" method="post">
   <input type="submit" name="logout">Log Out</input>
-</form>
+</form> -->
