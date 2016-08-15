@@ -35,4 +35,10 @@ class UsersController < ApplicationController
     logout!
     redirect '/login'
   end
+
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    @tweets = Tweet.collect { |tweet| tweet.user_id == @user.id }
+    erb :'/tweets/tweets'
+  end
 end

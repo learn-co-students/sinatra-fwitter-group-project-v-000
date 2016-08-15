@@ -1,0 +1,5 @@
+<% if logged_in? %>
+  <% Tweet.all.each do |tweet| %>
+    <%= tweet.content %>
+  <% end %>
+<% end %>
