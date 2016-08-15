@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   set :public_folder, 'public'
   set :views, 'app/views'
 
+# Displayse the "Sign Up" form and creates a new user
   get '/signup' do
     redirect '/tweets' if logged_in?
     erb :'users/create'
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
     redirect '/tweets'
   end
 
+# Displayse the "Log In" form and logs in user
   get '/login' do
     redirect '/tweets' if logged_in?
     erb :'users/login'
@@ -31,11 +33,13 @@ class UsersController < ApplicationController
     redirect '/tweets'
   end
 
+# Logs out user
   get '/logout' do
     logout!
     redirect '/login'
   end
 
+# Displays individual user's tweets
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     @tweets = Tweet.collect { |tweet| tweet.user_id == @user.id }

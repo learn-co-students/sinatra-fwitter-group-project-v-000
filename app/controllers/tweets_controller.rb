@@ -4,10 +4,16 @@ class TweetsController < ApplicationController
   set :public_folder, 'public'
   set :views, 'app/views'
 
-
+# Shows Tweets index page
   get '/tweets' do
     redirect '/login' if !logged_in?
     erb :'/tweets/tweets'
+  end
+
+# Shows the "New Tweet" form and makes a new tweet
+  get '/tweets/new' do
+    redirect '/login' if !logged_in?
+    erb :'/tweets/new'
   end
 
   post '/tweets' do
@@ -19,11 +25,7 @@ class TweetsController < ApplicationController
     redirect "/tweets/#{@tweet.id}"
   end
 
-  get '/tweets/new' do
-    redirect '/login' if !logged_in?
-    erb :'/tweets/new'
-  end
-
+# Shows an individual tweet
   get '/tweets/:id' do
     redirect '/login' if !logged_in?
     @tweet = Tweet.find(params[:id])
