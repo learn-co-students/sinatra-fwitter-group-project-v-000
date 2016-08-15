@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     redirect '/signup' if params['username'] == "" || params['email'] == "" || params['password'] == ""
     user = User.create
     user.username = params['username']
+    user.password = params['password']
     user.email = params['email']
     user.save
     session[:user] = user.username
@@ -24,20 +25,14 @@ class UsersController < ApplicationController
     erb :'users/login'
   end
 
-  post '/sessions' do
-    puts params
+  post '/login' do
     redirect '/login' if params['username'] == "" || params['password'] == ""
-    username = params['username']
-    if user = User.find_by(:username => username)
-      session[:user] = user.username
-      redirect '/tweets'
-    else
-      redirect '/login'
-    end
+    login(params['username'], params['password'])
+    redirect '/tweets'
   end
 
   get '/logout' do
     logout!
-    redirect '/'
+    redirect '/login'
   end
 end
