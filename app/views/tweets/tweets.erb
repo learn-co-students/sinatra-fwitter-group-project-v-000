@@ -1,9 +1,6 @@
 <h2>Welcome, <%=@user.username%></h2><br>
 
-<p>tweeting!</p>
-
 <h2>Here are your tweets:</h2><br>
-<%@user.tweets.each do |t|%>
-  <li>look at this tweet<br>
-  <a href="/tweets/<%=t.id%>"><%=t.content%></a></li>
+<%@tweets.each do |t|%>
+  <h3><li><a href="/tweets/<%=t.id%>"><%=t.content%></a></li></h3>
 <% end %><br>
