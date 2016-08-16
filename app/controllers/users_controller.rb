@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     else
       @user = User.create(username: params[:username], password: params[:password], email: params[:email])
       session[:user_id] = @user.id
-      redirect "/#{@user.slug}/tweets"
+      redirect "/tweets"
     end
   end
 

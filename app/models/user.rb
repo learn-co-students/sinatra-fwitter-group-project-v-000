@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
   has_many :tweets
 
   def slug
-    username.downcase.gsub("","-")
+    username.downcase.gsub(" ","-")
+  end
+
+  def self.find_by_slug(slug)
+    self.all.find{|song| song.slug == slug}
   end
 end
