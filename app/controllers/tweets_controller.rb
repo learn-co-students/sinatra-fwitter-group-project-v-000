@@ -33,6 +33,14 @@ class TweetsController < ApplicationController
     erb :'/tweets/show'
   end
 
+  #Deletes a tweet.
+  delete '/tweets/:id/delete' do
+    @user = User.find_by(username: current_user)
+    @tweet = Tweet.find_by_id(params[:id])
+    @tweet.delete if @user.id == @tweet.user_id
+    redirect '/tweets'
+  end
+
 # Edits an individual tweet
   get '/tweets/:id/edit' do
     redirect '/login' if !logged_in?
@@ -49,7 +57,4 @@ class TweetsController < ApplicationController
     @tweet.save
     redirect "/tweets/#{@tweet.id}"
   end
-
-#Deletes a tweet.
-
 end
