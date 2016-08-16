@@ -33,20 +33,23 @@ class TweetsController < ApplicationController
     erb :'/tweets/show'
   end
 
-  # Edits an individual tweet
-    get '/tweets/:id/edit' do
-      redirect '/login' if !logged_in?
-      @tweet = Tweet.find(params[:id])
-      @author =
-      redirect '/tweets' if @tweet.user.username != current_user
-      erb :'/tweets/edit'
-    end
+# Edits an individual tweet
+  get '/tweets/:id/edit' do
+    redirect '/login' if !logged_in?
+    @tweet = Tweet.find(params[:id])
+    @author =
+    redirect '/tweets' if @tweet.user.username != current_user
+    erb :'/tweets/edit'
+  end
 
-    post '/tweets/:id' do
-      @tweet = Tweet.find(params[:id])
-      redirect "/tweets/#{@tweet.id}/edit" if params[:tweet][:content].empty?
-      @tweet.content = params[:tweet][:content]
-      @tweet.save
-      redirect "/tweets/#{@tweet.id}"
-    end
+  post '/tweets/:id' do
+    @tweet = Tweet.find(params[:id])
+    redirect "/tweets/#{@tweet.id}/edit" if params[:tweet][:content].empty?
+    @tweet.content = params[:tweet][:content]
+    @tweet.save
+    redirect "/tweets/#{@tweet.id}"
+  end
+
+#Deletes a tweet.
+
 end
