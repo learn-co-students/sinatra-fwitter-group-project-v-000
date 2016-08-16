@@ -1,6 +1,9 @@
 <% if logged_in? %>
+  <br>
   <%= @tweet.content %>
-  <br></br>
-  <a href="#">Delete Tweet</a> <!-- TODO -->
-  <a href="#">Edit Tweet</a> <!-- TODO -->
+  <% if current_user == @tweet.user.username %>
+    <br></br>
+    <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a> <!-- TODO -->
+    <a href="#">Delete Tweet</a> <!-- TODO -->
+    <% end %>
 <% end %>

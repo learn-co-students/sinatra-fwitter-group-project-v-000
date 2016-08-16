@@ -20,7 +20,6 @@ class TweetsController < ApplicationController
   post '/tweets' do
     redirect '/login' if !logged_in?
     redirect '/tweets/new' if params[:tweet][:content].empty?
-    puts session
     @tweet = Tweet.create(params[:tweet])
     @tweet.user_id = User.find_by(username: current_user).id
     @tweet.save
@@ -38,7 +37,16 @@ class TweetsController < ApplicationController
     get '/tweets/:id/edit' do
       redirect '/login' if !logged_in?
       @tweet = Tweet.find(params[:id])
-      redirect '/error' if !@tweet.user_id = current_user
+      @author =
+      redirect '/tweets' if @tweet.user.username != current_user
       erb :'/tweets/edit'
+    end
+
+    post '/tweets/:id' do
+      @tweet = Tweet.find(params[:id])
+      redirect "/tweets/#{@tweet.id}/edit" if params[:tweet][:content].empty?
+      @tweet.content = params[:tweet][:content]
+      @tweet.save
+      redirect "/tweets/#{@tweet.id}"
     end
 end
