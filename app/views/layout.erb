@@ -7,11 +7,11 @@
   <body>
     <% if !!session[:user] %>
       Welcome, <%= "#{current_user}" %>!
-      <a href="/logout">Sign Out</a>
+      <a href="/logout">Sign Out</a><br>
     <% else %>
       Welcome!
       <a href="/signup">Sign up</a>
-      <a href="/login">Log In</a>
+      <a href="/login">Log In</a><br>
     <% end %>
     <%= yield %>
   </body>

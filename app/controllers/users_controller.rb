@@ -41,8 +41,11 @@ class UsersController < ApplicationController
 
 # Displays individual user's tweets
   get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    @tweets = Tweet.collect { |tweet| tweet.user_id == @user.id }
+    @user = User.find_by_slug(params[:slug].to_s)
+    @tweets = []
+    Tweet.all.each do |tweet|
+      @tweets << tweet if tweet.user_id == @user.id 
+    end
     erb :'/tweets/tweets'
   end
 end
