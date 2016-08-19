@@ -47,8 +47,7 @@ class TweetsController < ApplicationController
   get '/tweets/:id/edit' do
     redirect '/login' if !logged_in?
     @tweet = Tweet.find(params[:id])
-    @author =
-    redirect '/tweets' if @tweet.user != current_user
+    redirect '/tweets' if @tweet.user != current_user #I don't see a lot of students checking the tweet's user id. Good job! -@mendelB
     erb :'/tweets/edit'
   end
 
