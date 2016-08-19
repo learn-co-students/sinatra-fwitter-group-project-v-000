@@ -37,10 +37,12 @@ class TweetsController < ApplicationController
 
   #Deletes a tweet.
   delete '/tweets/:id/delete' do
-    @user = current_user
-    @tweet = Tweet.find_by_id(params[:id])
-    @tweet.delete if @user.id == @tweet.user_id
-    redirect '/tweets'
+    tweet = current_user.tweets.find_by(id: params[:id])
+    if tweet && tweet.destroy
+      redirect '/tweets'
+    else
+      redirect "/tweets/#{ params[:id] }"
+    end
   end
 
 # Edits an individual tweet
