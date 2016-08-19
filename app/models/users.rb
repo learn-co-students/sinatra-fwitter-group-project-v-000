@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  include Slug
+  extend ClassSlug
+
   has_many :tweets
 
   has_secure_password

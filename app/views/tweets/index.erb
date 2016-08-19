@@ -1,5 +1,5 @@
-<h3>Welcome to Fwitter</h3>
+<h3>All Tweets</h3>
 
 <% Tweet.all.each do |tweet| %>
-  <%=tweet.content%>
+  <a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a>
 <% end %>
