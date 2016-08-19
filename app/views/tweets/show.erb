@@ -1,7 +1,7 @@
 <% if logged_in? %>
   <br>
   <%= @tweet.content %>
-  <% if current_user == @tweet.user.username %>
+  <% if current_user == @tweet.user %>
     <br></br>
     <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
   <% end %>

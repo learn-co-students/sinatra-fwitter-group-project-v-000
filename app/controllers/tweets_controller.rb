@@ -19,11 +19,13 @@ class TweetsController < ApplicationController
 
   post '/tweets' do
     redirect '/login' if !logged_in?
-    redirect '/tweets/new' if params[:tweet][:content].empty?
-    @tweet = Tweet.create(params[:tweet])
-    @tweet.user_id = User.find_by(username: current_user).id
-    @tweet.save
-    redirect "/tweets/#{@tweet.id}"
+
+    @tweet = current_user.tweets.create(params[:tweet])
+    if @tweet.save
+      redirect "/tweets/#{@tweet.id}"
+    else
+      redirect '/tweets/new'
+    end
   end
 
 # Shows an individual tweet
@@ -35,7 +37,7 @@ class TweetsController < ApplicationController
 
   #Deletes a tweet.
   delete '/tweets/:id/delete' do
-    @user = User.find_by(username: current_user)
+    @user = current_user
     @tweet = Tweet.find_by_id(params[:id])
     @tweet.delete if @user.id == @tweet.user_id
     redirect '/tweets'
@@ -46,12 +48,13 @@ class TweetsController < ApplicationController
     redirect '/login' if !logged_in?
     @tweet = Tweet.find(params[:id])
     @author =
-    redirect '/tweets' if @tweet.user.username != current_user
+    redirect '/tweets' if @tweet.user != current_user
     erb :'/tweets/edit'
   end
 
   post '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
+    redirect "/" if @tweet.user != current_user
     redirect "/tweets/#{@tweet.id}/edit" if params[:tweet][:content].empty?
     @tweet.content = params[:tweet][:content]
     @tweet.save

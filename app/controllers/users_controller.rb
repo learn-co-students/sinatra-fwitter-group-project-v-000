@@ -1,3 +1,4 @@
+require 'pry'
 class UsersController < ApplicationController
   enable :sessions
   set :session_secret, 'fwitter'
@@ -11,14 +12,15 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    redirect '/signup' if params['username'] == "" || params['email'] == "" || params['password'] == ""
-    user = User.create
-    user.username = params['username']
-    user.password = params['password']
-    user.email = params['email']
-    user.save
-    session[:user] = user.username
-    redirect '/tweets'
+
+    user = User.create(params)
+    session[:id] = user.id
+
+    if user.save
+      redirect '/tweets'
+    else
+      redirect '/signup'
+    end
   end
 
 # Displayse the "Log In" form and logs in user
@@ -28,8 +30,8 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    redirect '/login' if params['username'] == "" || params['password'] == ""
-    login(params['username'], params['password'])
+    redirect '/login' if params[:username] == "" || params[:password] == ""
+    login(params[:username], params[:password])
     redirect '/tweets'
   end
 
@@ -44,7 +46,7 @@ class UsersController < ApplicationController
     @user = User.find_by_slug(params[:slug].to_s)
     @tweets = []
     Tweet.all.each do |tweet|
-      @tweets << tweet if tweet.user_id == @user.id 
+      @tweets << tweet if tweet.user_id == @user.id
     end
     erb :'/tweets/tweets'
   end
