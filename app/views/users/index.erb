@@ -1,0 +1,7 @@
+<h3>Fwitter users:</h3>
+
+<% User.all.each do |user| %>
+  <a href="/users/<%=user.slug%>"><h5><%=user.username%></h5></a> 
+<% end %>
+
+<a href="/tweets">Return to tweets</a>

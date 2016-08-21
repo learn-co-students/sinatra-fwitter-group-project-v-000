@@ -6,21 +6,25 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :sessions_secret, 'fwitter_time'
+    set :session_secret, 'fwitter_time'
   end
 
   get '/' do
-    erb :"/index"
+    if logged_in?
+      redirect to "/tweets"
+    else
+      erb :"/index"
+    end
   end
 
   helpers do
 
     def current_user
-      User.find(session[:id])
+      User.find(session[:user_id])
     end
 
     def logged_in?
-      !!current_user
+      !!session[:user_id]
     end
 
   end

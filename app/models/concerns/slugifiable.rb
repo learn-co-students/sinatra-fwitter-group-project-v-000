@@ -1,6 +1,6 @@
 module Slug
   def slug
-    self.name.gsub(" ", "-").downcase
+    self.username.gsub(" ", "-").downcase
   end
 end
 
