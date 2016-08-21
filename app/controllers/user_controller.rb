@@ -50,11 +50,4 @@ class UserController < ApplicationController
     redirect to "/login"
   end
 
-  delete '/users/:id/delete' do
-    user = User.find(params[:id])
-    session.clear
-    user.destroy
-    redirect "/login"
-  end
-
 end
