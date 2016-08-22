@@ -1,7 +1,6 @@
-'Welcome, <%= @user.username%>'
+Welcome, <%= current_user.username%>
   
    <% @tweets.each do |tweet|%>
-   <%= tweet.user.username %>
-   <%=tweet.content%>
+    <%=tweet.content%>
    <%end%>
 
