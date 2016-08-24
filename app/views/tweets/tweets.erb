@@ -1,6 +1,10 @@
 Welcome, <%= current_user.username%>
-  
-   <% @tweets.each do |tweet|%>
-    <%=tweet.content%>
+  <br>
+  <%Tweet.all.each do |tweet| %>
+    <b><%=tweet.user.username%>:<a href='/tweets/<%=tweet.id%>'><%=tweet.content%></a>;</h3>
    <%end%>
-
+  
+<br>
+<a href="/tweets/new">New Tweet</a><br></br>
+<a href='/users'>View Users</a>
+<p><a href='/logout'>Log Out</a></p>
