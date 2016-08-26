@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fwitter</title>
+    <center>
+      <nav>
+        <% if !!session[:user_id] %>
+
+          <p>Welcome, <a href="/users/<%=User.find_by_id(session[:user_id]).slug%>"><%= User.find(session[:user_id]).username %></a></p><br>
+          <a href="/tweets"> Tweets </a><br>
+          <a href="/tweets/new"> Create Tweet </a><br>
+          <a href="/logout"> Log Out </a><br>
+
+
+        <% else %>
+          <a href="/signup">Sign Up</a><br>
+          <a href="/login"> Sign In </a>
+        <%end %>
+      </nav>
+    </center>
+
+    <br><br>
+
+  </head>
+  <body>
+      <%= yield %>
+  </body>
+</html>

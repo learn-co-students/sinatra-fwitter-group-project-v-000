@@ -1,0 +1,10 @@
+
+<% @tweets.each do |tweet| %>
+  <%=User.find_by_id(tweet.user_id).username%>:<br>
+  <%=tweet.content%>
+  <% if session[:user_id] == User.find_by_id(tweet.user_id).id %>
+    <a href="/tweets/<%=tweet.id%>/edit">Edit</a>
+    <a href="/tweets/<%=tweet.id%>/delete">Delete</a>
+  <% end %>
+  <br><br>
+<% end %>
