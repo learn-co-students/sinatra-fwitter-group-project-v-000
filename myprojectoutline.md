@@ -20,6 +20,9 @@ I. Build out file structure/scaffold
      c)new -x
      d)edit -x
 
+    3.Index
+    4.Layout
+
 *****SAVE YOUR PROGRESS PLEASE THANK YYYYYOUUUU*****
 
 II. Create Tables
@@ -54,6 +57,26 @@ IV. Build out Controller Routes
      4.show
       a)shows data(content) of new tweet
       b)shows edited data(content) of a selected tweet.
+
+ V. Build out Views
+     A.Index
+       1.provide links to login and sign up pages
+     
+     B.Tweet
+       1. edit tweet - puts out form to edit a new user 
+         a) sends to users/:id/edit.erb
+       2. tweets - displays user data
+         a) sends to index erb
+       3. new tweet - displays form to create new user
+       4. show tweets-  displays data from new user form. 
+         a)sends to /user/tweets/:id e (?)
+
+      C.User
+       1.Create a new User
+       2.Edit or Delete a User
+
+
+      
 
       
     
