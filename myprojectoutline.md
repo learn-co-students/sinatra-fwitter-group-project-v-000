@@ -63,17 +63,23 @@ IV. Build out Controller Routes
        1.provide links to login and sign up pages
      
      B.Tweet
-       1. edit tweet - puts out form to edit a new user 
+       1. edit tweet - puts out form to edit a new user -x
          a) sends to users/:id/edit.erb
-       2. tweets - displays user data
-         a) sends to index erb
+       2. tweets - displays user data  -x
+         a) sends to index erb         -x
        3. new tweet - displays form to create new user
-       4. show tweets-  displays data from new user form. 
-         a)sends to /user/tweets/:id e (?)
+         a)displays form for new tweet -x
+         b)posts content -x
+       4. show tweets-  displays data from new user form. -x
+         a)sends to /user/tweets/:id e (?) -x
 
       C.User
-       1.Create a new User
-       2.Edit or Delete a User
+       1.Create User 
+         a)get a form for user to fill -x
+         b)send that data via post to create new user
+       2.Login
+         a)display form to log in -x
+         b)if login correct send via post to users index page ?
 
 
       

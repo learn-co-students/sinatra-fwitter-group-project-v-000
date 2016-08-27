@@ -11,11 +11,23 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
     erb :index
+  end  
+
+  get '/users' do 
+    @users = User.all
+    erb :'artists/index'
   end
-   
-  get '/users/create_user' do
+
+   get '/users/create_user' do
     erb :'users/create_user'
   end
+
+  # get '/users/:slug' do 
+  #   @artist = User.find_by_slug(params[:slug])
+  #   erb :'users/show_tweets' 
+  # end
+   
+ 
 
    get '/users/login' do
     erb :'users/login'
@@ -31,14 +43,12 @@ class ApplicationController < Sinatra::Base
     erb :error
   end
 
-  get '/users/create_user' do
-    erb :'users/create_user'
-  end
-
-  post '/registrations' do
-    @user = User.find_by(username: params("username"), email: params["email"], password:["password"])
-    session[:id] = @user.id
-    redirect '/tweets/tweets'
+  post '/users/create_user' do
+     if params[:username] == "" || params[:password] == ""
+      redirect "error"
+    else
+      redirect '/index'
+    end
   end
 
   get '/logout' do#-- logout takes back to home
