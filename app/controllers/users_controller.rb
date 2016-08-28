@@ -2,21 +2,27 @@ class UsersController < ApplicationController
 
   get '/users' do 
     @users = User.all
-    erb :'artists/index'
+    erb :'/users/index'
   end
 
-   get '/users/signup' do
-    erb :'users/create_user'
+  get '/users/signup' do
+    erb :'/users/signup'
   end
 
-  get '/users/:slug' do 
-    @artist = User.find_by_slug(params[:slug])
-    erb :'users/show_tweets' 
+  post '/users/signup' do
+     if params[:username] == "" || params[:password] == ""
+      redirect "error"
+    else
+      redirect '/users/login'
+    end
   end
+
+  # get '/users/:slug' do 
+  #   @artist = User.find_by_slug(params[:slug])
+  #   erb :'/users/show_tweets' 
+  # end
    
- 
-
-   get '/users/login' do
+  get '/users/login' do
     erb :'users/login'
   end
 
@@ -25,7 +31,7 @@ class UsersController < ApplicationController
     @user = User.find_by(:username => params[:username])
     if @user != nil && @user.password == params[:username] 
       session[:user_id] = @user.id
-      redirect to 'user/tweets'
+      redirect to '/tweets'
     end
     erb :error
   end
@@ -34,11 +40,11 @@ class UsersController < ApplicationController
      if params[:username] == "" || params[:password] == ""
       redirect "error"
     else
-      redirect '/index'
+      redirect '/users/index'
     end
   end
 
-  get '/logout' do#-- logout takes back to home
+  get '/users/logout' do#-- logout takes back to home
     session.clear
     redirect to '/'
   end

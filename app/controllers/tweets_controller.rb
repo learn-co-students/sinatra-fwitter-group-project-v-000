@@ -11,7 +11,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id' do
-    # binding.pry
+ 
     @tweet = Tweet.find_by_id(params[:id])
     erb :'tweets/show_tweets'
   end
