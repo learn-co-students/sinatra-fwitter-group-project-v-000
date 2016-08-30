@@ -64,10 +64,10 @@ IV. Build out Controller Routes
      
      B.Tweet
        1. edit tweet - puts out form to edit a new user -x
-         a) sends to users/:id/edit.erb
+         a) sends to users/:id/edit.erb -x
        2. tweets - displays user data  -x
          a) sends to index erb         -x
-       3. new tweet - displays form to create new user
+       3. new tweet - displays form to create new user -x
          a)displays form for new tweet -x
          b)posts content -x
        4. show tweets-  displays data from new user form. -x

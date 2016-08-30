@@ -1,57 +1,57 @@
+require 'pry'
+
 class UsersController < ApplicationController
 
-  get '/users' do 
-    @users = User.all
-    erb :'/users/index'
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'users/show'
+
   end
 
-  get '/users/signup' do
-    erb :'/users/signup'
-  end
-
-  post '/users/signup' do
-     if params[:username] == "" || params[:password] == ""
-      redirect "error"
+  get '/signup' do
+    if !session[:user_id]
+      erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
     else
-      redirect '/users/login'
+      redirect to '/tweets'
     end
   end
 
-  # get '/users/:slug' do 
-  #   @artist = User.find_by_slug(params[:slug])
-  #   erb :'/users/show_tweets' 
-  # end
-   
-  get '/users/login' do
-    erb :'users/login'
-  end
-
-
-  post '/users/login' do #-- login page
-    @user = User.find_by(:username => params[:username])
-    if @user != nil && @user.password == params[:username] 
+  post '/signup' do 
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      redirect to '/signup'
+    else
+      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+      @user.save
       session[:user_id] = @user.id
       redirect to '/tweets'
     end
-    erb :error
   end
 
-  post '/users/signup' do
-     if params[:username] == "" || params[:password] == ""
-      redirect "error"
+  get '/login' do 
+    if !session[:user_id]
+      erb :'users/login'
     else
-      redirect '/users/index'
+      redirect '/tweets'
     end
   end
 
-  get '/users/logout' do#-- logout takes back to home
-    session.clear
-    redirect to '/'
+ post '/login' do
+    user = User.find_by(:username => params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect "/tweets"
+    else
+      redirect to '/signup'
+    end
   end
 
-  get '/users/home' do
-    @user = User.find(session[:id])
-  erb :'/users/home'
+  get '/logout' do
+    if session[:user_id] != nil
+      session.destroy
+      redirect to '/login'
+    else
+      redirect to '/'
+    end
   end
 
 
