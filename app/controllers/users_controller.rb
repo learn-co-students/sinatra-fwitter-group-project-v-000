@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
-    if !session[:user_id]
+    if logged_in?
       erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
     else
       redirect to '/tweets'
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   get '/login' do 
-    if !session[:user_id]
+    if logged_in?
       erb :'users/login'
     else
       redirect '/tweets'
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    if session[:user_id] != nil
+    if logged_in? != nil
       session.destroy
       redirect to '/login'
     else
