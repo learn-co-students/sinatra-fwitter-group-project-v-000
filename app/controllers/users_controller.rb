@@ -2,17 +2,11 @@ class UsersController < ApplicationController
 
   ######## SIGN UP #########
   get '/signup' do
-    #not sure 1st part works, need to to login page first
     if is_logged_in?
       redirect to '/tweets'
     else
       erb :'/users/create_user'
     end
-    # if session[:id] = user.id
-    #   redirect to '/tweets'
-    # else
-    #   erb :'/users/create_user'
-    # end
   end
 
   post '/signup' do
@@ -21,7 +15,7 @@ class UsersController < ApplicationController
     @user.email = params["email"]
     @user.password = params["password"]
     if @user.save
-      login(params["username"], params["email"], params["password"])
+      login(params["username"], params["password"])
       redirect to "/tweets"
     else
       redirect to "/signup"
@@ -30,11 +24,16 @@ class UsersController < ApplicationController
 
   ######## LOG IN #########
   get '/login' do
-    erb :'/users/login'
+    if is_logged_in?
+      redirect to '/tweets'
+    else
+      erb :'/users/login'
+    end
   end
 
   post '/login' do
-    login(params[:username], params[:email], params[:password])
+    puts params
+    login(params[:username], params[:password])
     redirect to "/tweets"
   end
 
