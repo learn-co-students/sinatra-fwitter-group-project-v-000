@@ -5,8 +5,19 @@ class UsersController < ApplicationController
     erb :'/users/create_user'
   end
 
+  # {"username"=>"coffee", "email"=>"coffee@coffee.com", "password"=>"coffee"}
+
   post '/signup' do
-    redirect to "/tweets"
+    @user = User.new
+    @user.username = params["username"]
+    @user.email = params["email"]
+    @user.password = params["password"]
+    if @user.save
+      login(params["username"], params["email"], params["password"])
+      redirect to "/tweets"
+    else
+      erb :'/users/create_user'
+    end
   end
 
   ######## LOG IN #########
