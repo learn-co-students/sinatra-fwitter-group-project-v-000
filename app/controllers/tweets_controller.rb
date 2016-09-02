@@ -69,7 +69,7 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find(params["id"])
     if session["username"] == nil
       redirect '/login'
-    elsif @tweet.user.username == session["username"]
+    elsif @tweet.user.id == current_user.id
       @tweet.destroy
       redirect '/tweets'
     else
