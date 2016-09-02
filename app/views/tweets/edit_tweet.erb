@@ -3,10 +3,11 @@
 
 <form method="post" action="/tweets/<%= @tweet.id %>">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <h2>Edit Tweet:<input type="text" name="content">(currently <%= @tweet.content %>)</h2>
-  <br>
-  <input type="submit" value="submit">
+  <h3>Current Tweet Says:</h3>
+  <p>"<%= @tweet.content %>"</p>
+  <h2>Edit Tweet: <input type="text" name="content"><input type="submit" value="submit"></h2>
 </form>
+<br></br>
 
 <a class="button" href="/tweets/new">Create a New Tweet</a>
 <br>
