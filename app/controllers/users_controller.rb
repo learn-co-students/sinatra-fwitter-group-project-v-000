@@ -10,12 +10,9 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    @user = User.new
-    @user.username = params["username"]
-    @user.email = params["email"]
-    @user.password = params["password"]
-    if @user.save
-      login(params["username"], params["password"])
+    user = User.create(username: params[:username], email: params[:email], password: params[:password])
+    if user.save
+      login(user.username, user.password)
       redirect to "/tweets"
     else
       redirect to "/signup"
