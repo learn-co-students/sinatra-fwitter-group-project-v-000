@@ -1,0 +1,14 @@
+<h1><%= @user.username.capitalize %>'s Tweets</h1>
+
+<br>
+
+<% @user.tweets.each do |tweet| %>
+<a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
+<br>
+<% end %>
+
+<br>
+
+<a class="button" href="/tweets">Return to All Tweets</a>
+<br>
+<a class="button" href="/logout">Logout</a>

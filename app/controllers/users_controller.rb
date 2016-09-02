@@ -32,9 +32,15 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    puts params
     login(params[:username], params[:password])
     redirect to "/tweets"
+  end
+
+  ######## SHOW USERS #########
+
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'/users/show_tweets'
   end
 
   ######## LOG OUT #########
@@ -44,5 +50,3 @@ class UsersController < ApplicationController
   end
 
 end
-
-  # {"username"=>"coffee", "email"=>"coffee@coffee.com", "password"=>"coffee"}

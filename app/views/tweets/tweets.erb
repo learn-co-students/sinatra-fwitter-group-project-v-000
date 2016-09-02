@@ -1,15 +1,23 @@
 <h1>Welcome, <%= session["username"] %></h1>
 
-<% @tweets.each do |tweet| %>
-<a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
-<br>
+<%= params %>
+
+<% @users.each do |user| %>
+  <h2><%= user.username.capitalize %>'s Tweets</h2><br>
+  <% user.tweets.each do |tweet| %>
+  <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
+  <br>
+<% end %>
+<br></br>
 <% end %>
 
 <br></br>
 
-
-
+<a class="button" href="/tweets/new">Create a New Tweet</a>
+<br>
 <a class="button" href="/logout">Logout</a>
-<h3>(For Testing Purposes:)</h3>
+
+<br>
+<h3>(For Testing Purposes)</h3>
 <a class="button" href="/login">Log In Here</a>
 <a class="button" href="/signup">Sign Up Here</a>

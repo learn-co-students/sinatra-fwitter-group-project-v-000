@@ -2,6 +2,7 @@ class TweetsController < ApplicationController
 
   get '/tweets' do
     @tweets = Tweet.all
+    @users = User.all
     if is_logged_in?
       erb :'/tweets/tweets'
     else
@@ -11,16 +12,34 @@ class TweetsController < ApplicationController
 
   ######## CREATE TWEET #########
   get '/tweets/new' do
-    erb :'/tweets/create_tweet'
+    if !is_logged_in?
+      redirect to '/login'
+    else
+      erb :'/tweets/create_tweet'
+    end
   end
 
   post '/tweets' do
-    erb :'/tweets/tweets'
+    if !(params["content"] == "")
+      @tweet = Tweet.create(content: params["content"])
+      @tweet.user = User.find_by(username: session["username"])
+      @tweet.save
+      redirect '/tweets'
+    else
+      redirect '/tweets/new'
+    end
   end
 
   ######## SHOW TWEET #########
-  get '/tweets/:id' do ##not sure about id
-    erb :'/tweets/show_tweet'
+  get '/tweets/:id' do
+    @tweet = Tweet.find(params["id"])
+    if session["username"] == nil
+      redirect '/login'
+    elsif @tweet.user.username == session["username"]
+      erb :'/tweets/show_tweet'
+    else
+      redirect '/tweets'
+    end
   end
 
   ######## EDIT TWEET #########
