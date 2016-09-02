@@ -44,17 +44,39 @@ class TweetsController < ApplicationController
 
   ######## EDIT TWEET #########
   get '/tweets/:id/edit' do
-    erb :'/tweets/edit_tweet'
+    if !is_logged_in?
+      redirect to '/login'
+    end
+    @tweet = Tweet.find(params["id"])
+    if @tweet.user.username == session["username"]
+      erb :'/tweets/edit_tweet'
+    else
+      redirect '/tweets'
+    end
   end
 
-  post '/tweets/:id' do
-    erb :'/tweets/show_tweet'
+  patch '/tweets/:id' do
+    @tweet = Tweet.find(params["id"])
+    if !(params["content"] == "")
+      @tweet.update(content: params["content"])
+      erb :'/tweets/show_tweet'
+    else
+      redirect "/tweets/#{@tweet.id}/edit"
+    end
   end
 
   ######## DELETE TWEET #########
 
   post '/tweets/:id/delete' do
-    erb :'/tweets/show_tweet'
+    @tweet = Tweet.find(params["id"])
+    if session["username"] == nil
+      redirect '/login'
+    elsif @tweet.user.username == session["username"]
+      @tweet.destroy
+      redirect '/tweets'
+    else
+      redirect '/tweets'
+    end
   end
 
 end

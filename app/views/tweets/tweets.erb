@@ -1,9 +1,7 @@
-<h1>Welcome, <%= session["username"] %></h1>
-
-<%= params %>
+<h1>Welcome, <%= session["username"].capitalize %></h1>
 
 <% @users.each do |user| %>
-  <h2><%= user.username.capitalize %>'s Tweets</h2><br>
+  <h2><a href="/users/<%= user.slug %>"><%= user.username.capitalize %>'s Tweets</a></h2><br>
   <% user.tweets.each do |tweet| %>
   <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
   <br>
