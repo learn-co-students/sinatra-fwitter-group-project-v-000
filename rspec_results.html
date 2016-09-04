@@ -288,74 +288,52 @@ a {
   <dl style="margin-left: 15px;">
   <dt id="example_group_2" class="passed">Homepage</dt>
     <script type="text/javascript">moveProgressBar('2.8');</script>
-    <dd class="example passed"><span class="passed_spec_name">loads the homepage</span><span class='duration'>0.06230s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">loads the homepage</span><span class='duration'>0.06699s</span></dd>
   </dl>
 </div>
 <div id="div_group_3" class="example_group passed">
   <dl style="margin-left: 15px;">
   <dt id="example_group_3" class="passed">Signup Page</dt>
     <script type="text/javascript">moveProgressBar('5.7');</script>
-    <dd class="example passed"><span class="passed_spec_name">loads the signup page</span><span class='duration'>0.02468s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">loads the signup page</span><span class='duration'>0.01020s</span></dd>
     <script type="text/javascript">moveProgressBar('8.5');</script>
-    <dd class="example passed"><span class="passed_spec_name">signup directs user to twitter index</span><span class='duration'>0.04508s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">signup directs user to twitter index</span><span class='duration'>0.02693s</span></dd>
     <script type="text/javascript">moveProgressBar('11.4');</script>
-    <dd class="example passed"><span class="passed_spec_name">does not let a user sign up without a username</span><span class='duration'>0.01235s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">does not let a user sign up without a username</span><span class='duration'>0.01122s</span></dd>
     <script type="text/javascript">moveProgressBar('14.2');</script>
-    <dd class="example passed"><span class="passed_spec_name">does not let a user sign up without an email</span><span class='duration'>0.01146s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">does not let a user sign up without an email</span><span class='duration'>0.01266s</span></dd>
     <script type="text/javascript">moveProgressBar('17.1');</script>
-    <dd class="example passed"><span class="passed_spec_name">does not let a user sign up without a password</span><span class='duration'>0.01202s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">does not let a user sign up without a password</span><span class='duration'>0.01176s</span></dd>
     <script type="text/javascript">moveProgressBar('20.0');</script>
-    <dd class="example passed"><span class="passed_spec_name">does not let a logged in user view the signup page</span><span class='duration'>0.02725s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">does not let a logged in user view the signup page</span><span class='duration'>0.02241s</span></dd>
   </dl>
 </div>
 <div id="div_group_4" class="example_group passed">
   <dl style="margin-left: 15px;">
   <dt id="example_group_4" class="passed">login</dt>
+    <script type="text/javascript">moveProgressBar('22.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">loads the login page</span><span class='duration'>0.01065s</span></dd>
     <script type="text/javascript">makeRed('rspec-header');</script>
     <script type="text/javascript">makeRed('div_group_4');</script>
     <script type="text/javascript">makeRed('example_group_4');</script>
-    <script type="text/javascript">moveProgressBar('22.8');</script>
-    <dd class="example failed">
-      <span class="failed_spec_name">loads the login page</span>
-      <span class="duration">0.12184s</span>
-      <div class="failure" id="failure_1">
-        <div class="message"><pre>
-expected: 200
-     got: 500
-
-(compared using ==)
-</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:78:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">76</span>    it <span class="string"><span class="delimiter">'</span><span class="content">loads the login page</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="linenum">77</span>      get <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span>
-<span class="offending"><span class="linenum">78</span>      expect(last_response.status).to eq(<span class="integer">200</span>)</span>
-<span class="linenum">79</span>    <span class="keyword">end</span></code></pre>
-      </div>
-    </dd>
     <script type="text/javascript">moveProgressBar('25.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">loads the tweets index after login</span>
-      <span class="duration">0.01973s</span>
-      <div class="failure" id="failure_2">
-        <div class="message"><pre>
-expected: 302
-     got: 404
-
-(compared using ==)
-</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:88:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">86</span>      }
-<span class="linenum">87</span>      post <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span>, params
-<span class="offending"><span class="linenum">88</span>      expect(last_response.status).to eq(<span class="integer">302</span>)</span>
-<span class="linenum">89</span>      follow_redirect!
-<span class="linenum">90</span>      expect(last_response.status).to eq(<span class="integer">200</span>)</code></pre>
+      <span class="duration">0.03763s</span>
+      <div class="failure" id="failure_1">
+        <div class="message"><pre>expected &quot;tweets&quot; to include &quot;Welcome,&quot;</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:91:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">89</span>      follow_redirect!
+<span class="linenum">90</span>      expect(last_response.status).to eq(<span class="integer">200</span>)
+<span class="offending"><span class="linenum">91</span>      expect(last_response.body).to include(<span class="string"><span class="delimiter">&quot;</span><span class="content">Welcome,</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">92</span>    <span class="keyword">end</span></code></pre>
       </div>
     </dd>
     <script type="text/javascript">moveProgressBar('28.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let user view login page if already logged in</span>
-      <span class="duration">0.09460s</span>
-      <div class="failure" id="failure_3">
+      <span class="duration">0.05069s</span>
+      <div class="failure" id="failure_2">
         <div class="message"><pre>expected nil to include &quot;/tweets&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:105:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">103</span>      session[<span class="symbol">:id</span>] = user.id
@@ -375,8 +353,8 @@ expected: 302
     <script type="text/javascript">moveProgressBar('31.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user logout if they are already logged in</span>
-      <span class="duration">0.01970s</span>
-      <div class="failure" id="failure_4">
+      <span class="duration">0.01702s</span>
+      <div class="failure" id="failure_3">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:119:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">117</span>      post <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span>, params
@@ -389,8 +367,8 @@ expected: 302
     <script type="text/javascript">moveProgressBar('34.2');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user logout if not logged in</span>
-      <span class="duration">0.01122s</span>
-      <div class="failure" id="failure_5">
+      <span class="duration">0.01449s</span>
+      <div class="failure" id="failure_4">
         <div class="message"><pre>expected nil to include &quot;/&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:124:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">122</span>    it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user logout if not logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
@@ -402,8 +380,8 @@ expected: 302
     <script type="text/javascript">moveProgressBar('37.1');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not load /tweets if user not logged in</span>
-      <span class="duration">0.01088s</span>
-      <div class="failure" id="failure_6">
+      <span class="duration">0.00916s</span>
+      <div class="failure" id="failure_5">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:129:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">127</span>    it <span class="string"><span class="delimiter">'</span><span class="content">does not load /tweets if user not logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
@@ -415,16 +393,16 @@ expected: 302
     <script type="text/javascript">moveProgressBar('40.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does load /tweets if user is logged in</span>
-      <span class="duration">0.16874s</span>
-      <div class="failure" id="failure_7">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.01944s</span>
+      <div class="failure" id="failure_6">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:138:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:140:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -442,8 +420,8 @@ expected: 302
     <script type="text/javascript">moveProgressBar('42.8');</script>
     <dd class="example failed">
       <span class="failed_spec_name">shows all a single users tweets</span>
-      <span class="duration">0.02691s</span>
-      <div class="failure" id="failure_8">
+      <span class="duration">0.03129s</span>
+      <div class="failure" id="failure_7">
         <div class="message"><pre>expected &quot;&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n  &lt;style type=\&quot;text/css\&quot;&gt;\n  body { text-align:center;font-family:helvetica,arial;font-size:22px;\n    color:#888;margin:20px}\n  #c {margin:0 auto;width:500px;text-align:left}\n  &lt;/style&gt;\n&lt;/head&gt;\n&lt;body&gt;\n  &lt;h2&gt;Sinatra doesn&amp;rsquo;t know this ditty.&lt;/h2&gt;\n  &lt;img src=&#39;http://example.org/__sinatra__/404.png&#39;&gt;\n  &lt;div id=\&quot;c\&quot;&gt;\n    Try this:\n    &lt;pre&gt;# in application_controller.rb\nclass ApplicationController\n  get &amp;#x27;&amp;#x2F;users&amp;#x2F;becky567&amp;#x27; do\n    &amp;quot;Hello World&amp;quot;\n  end\nend\n&lt;/pre&gt;\n  &lt;/div&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n&quot; to include &quot;tweeting!&quot;
 Diff:[0m
 [0m[34m@@ -1,2 +1,25 @@
@@ -495,16 +473,16 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('45.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user view the tweets index if logged in</span>
-      <span class="duration">0.23040s</span>
-      <div class="failure" id="failure_9">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.03285s</span>
+      <div class="failure" id="failure_8">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:171:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:173:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -522,8 +500,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('48.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user view the tweets index if not logged in</span>
-      <span class="duration">0.00938s</span>
-      <div class="failure" id="failure_10">
+      <span class="duration">0.00921s</span>
+      <div class="failure" id="failure_9">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:184:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">182</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user view the tweets index if not logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
@@ -548,16 +526,16 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('51.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets user view new tweet form if logged in</span>
-      <span class="duration">0.15076s</span>
-      <div class="failure" id="failure_11">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.01932s</span>
+      <div class="failure" id="failure_10">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:199:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:201:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -568,16 +546,16 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('54.2');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets user create a tweet if they are logged in</span>
-      <span class="duration">0.16904s</span>
-      <div class="failure" id="failure_12">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.02147s</span>
+      <div class="failure" id="failure_11">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:212:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:214:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -588,16 +566,16 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('57.1');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user tweet from another user</span>
-      <span class="duration">0.17237s</span>
-      <div class="failure" id="failure_13">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.02408s</span>
+      <div class="failure" id="failure_12">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:233:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:235:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -608,16 +586,16 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('60.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user create a blank tweet</span>
-      <span class="duration">0.16359s</span>
-      <div class="failure" id="failure_14">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.02315s</span>
+      <div class="failure" id="failure_13">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:255:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:257:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -635,8 +613,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('62.8');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let user view new tweet form if not logged in</span>
-      <span class="duration">0.01003s</span>
-      <div class="failure" id="failure_15">
+      <span class="duration">0.01587s</span>
+      <div class="failure" id="failure_14">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:273:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">271</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let user view new tweet form if not logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
@@ -661,16 +639,16 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('65.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">displays a single tweet</span>
-      <span class="duration">0.16229s</span>
-      <div class="failure" id="failure_16">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.02135s</span>
+      <div class="failure" id="failure_15">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:286:in `block (5 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:288:in `block (5 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -688,8 +666,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('68.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user view a tweet</span>
-      <span class="duration">0.01954s</span>
-      <div class="failure" id="failure_17">
+      <span class="duration">0.02532s</span>
+      <div class="failure" id="failure_16">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:303:in `block (5 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">301</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">i am a boss at tweeting</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user.id)
@@ -714,16 +692,16 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('71.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user view tweet edit form if they are logged in</span>
-      <span class="duration">0.15718s</span>
-      <div class="failure" id="failure_18">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.02880s</span>
+      <div class="failure" id="failure_17">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:318:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:320:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -734,16 +712,16 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('74.2');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user edit a tweet they did not create</span>
-      <span class="duration">0.17750s</span>
-      <div class="failure" id="failure_19">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.03165s</span>
+      <div class="failure" id="failure_18">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:335:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:337:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -754,16 +732,16 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('77.1');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user edit their own tweet if they are logged in</span>
-      <span class="duration">0.22809s</span>
-      <div class="failure" id="failure_20">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.02388s</span>
+      <div class="failure" id="failure_19">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:350:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:352:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -774,16 +752,16 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('80.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user edit a text with blank content</span>
-      <span class="duration">0.17861s</span>
-      <div class="failure" id="failure_21">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.02698s</span>
+      <div class="failure" id="failure_20">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:369:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:371:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -801,8 +779,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('82.8');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not load let user view tweet edit form if not logged in</span>
-      <span class="duration">0.02098s</span>
-      <div class="failure" id="failure_22">
+      <span class="duration">0.01084s</span>
+      <div class="failure" id="failure_21">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:386:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">384</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not load let user view tweet edit form if not logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
@@ -827,16 +805,16 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('85.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user delete their own tweet if they are logged in</span>
-      <span class="duration">0.16076s</span>
-      <div class="failure" id="failure_23">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.02482s</span>
+      <div class="failure" id="failure_22">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:399:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:401:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -847,16 +825,16 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('88.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user delete a tweet they did not create</span>
-      <span class="duration">0.19024s</span>
-      <div class="failure" id="failure_24">
-        <div class="message"><pre>Unable to find field :username</pre></div>
+      <span class="duration">0.02811s</span>
+      <div class="failure" id="failure_23">
+        <div class="message"><pre>Unable to find button &quot;submit&quot;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
-/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:39:in `click_button&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
-./spec/controllers/application_controller_spec.rb:417:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+./spec/controllers/application_controller_spec.rb:419:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
 <span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
 <span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
@@ -874,8 +852,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('91.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not load let user delete a tweet if not logged in</span>
-      <span class="duration">0.01439s</span>
-      <div class="failure" id="failure_25">
+      <span class="duration">0.01527s</span>
+      <div class="failure" id="failure_24">
         <div class="message"><pre>
 expected: &quot;/login&quot;
      got: &quot;/tweets/1&quot;
@@ -896,17 +874,17 @@ expected: &quot;/login&quot;
   <dl style="margin-left: 0px;">
   <dt id="example_group_22" class="passed">User</dt>
     <script type="text/javascript">moveProgressBar('94.2');</script>
-    <dd class="example passed"><span class="passed_spec_name">can slug the username</span><span class='duration'>0.01089s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">can slug the username</span><span class='duration'>0.01409s</span></dd>
     <script type="text/javascript">moveProgressBar('97.1');</script>
-    <dd class="example passed"><span class="passed_spec_name">can find a user based on the slug</span><span class='duration'>0.01964s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">can find a user based on the slug</span><span class='duration'>0.01213s</span></dd>
     <script type="text/javascript">makeRed('div_group_22');</script>
     <script type="text/javascript">makeRed('example_group_22');</script>
     <script type="text/javascript">moveProgressBar('100.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">has a secure password</span>
-      <span class="duration">0.01066s</span>
-      <div class="failure" id="failure_26">
-        <div class="message"><pre>undefined method `authenticate&#39; for #&lt;User:0x007fd0b989c010&gt;</pre></div>
+      <span class="duration">0.01435s</span>
+      <div class="failure" id="failure_25">
+        <div class="message"><pre>undefined method `authenticate&#39; for #&lt;User:0x007fb848df8da8&gt;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/activemodel-4.2.5/lib/active_model/attribute_methods.rb:433:in `method_missing&#39;
 ./spec/models/user_spec.rb:18:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">431</span>      <span class="keyword">else</span>
@@ -918,8 +896,8 @@ expected: &quot;/login&quot;
     </dd>
   </dl>
 </div>
-<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>3.07992 seconds</strong>";</script>
-<script type="text/javascript">document.getElementById('totals').innerHTML = "35 examples, 26 failures";</script>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>0.94484 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "35 examples, 25 failures";</script>
 </div>
 </div>
 </body>
