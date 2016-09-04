@@ -20,6 +20,8 @@ class ApplicationController < Sinatra::Base
     redirect to '/tweets'
   end
 
-
+  get '/tweets' do
+    "tweets"
+  end
 
 end
