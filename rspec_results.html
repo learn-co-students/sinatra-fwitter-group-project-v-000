@@ -293,7 +293,7 @@ a {
     <script type="text/javascript">moveProgressBar('2.8');</script>
     <dd class="example failed">
       <span class="failed_spec_name">loads the homepage</span>
-      <span class="duration">0.03826s</span>
+      <span class="duration">0.12113s</span>
       <div class="failure" id="failure_1">
         <div class="message"><pre>
 expected: 200
@@ -319,7 +319,7 @@ expected: 200
     <script type="text/javascript">moveProgressBar('5.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">loads the signup page</span>
-      <span class="duration">0.00171s</span>
+      <span class="duration">0.00685s</span>
       <div class="failure" id="failure_2">
         <div class="message"><pre>
 expected: 200
@@ -337,7 +337,7 @@ expected: 200
     <script type="text/javascript">moveProgressBar('8.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">signup directs user to twitter index</span>
-      <span class="duration">0.00474s</span>
+      <span class="duration">0.01666s</span>
       <div class="failure" id="failure_3">
         <div class="message"><pre>expected nil to include &quot;/tweets&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:27:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
@@ -350,7 +350,7 @@ expected: 200
     <script type="text/javascript">moveProgressBar('11.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user sign up without a username</span>
-      <span class="duration">0.00186s</span>
+      <span class="duration">0.00754s</span>
       <div class="failure" id="failure_4">
         <div class="message"><pre>expected nil to include &quot;/signup&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:37:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
@@ -363,7 +363,7 @@ expected: 200
     <script type="text/javascript">moveProgressBar('14.2');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user sign up without an email</span>
-      <span class="duration">0.00121s</span>
+      <span class="duration">0.00622s</span>
       <div class="failure" id="failure_5">
         <div class="message"><pre>expected nil to include &quot;/signup&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:47:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
@@ -376,7 +376,7 @@ expected: 200
     <script type="text/javascript">moveProgressBar('17.1');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user sign up without a password</span>
-      <span class="duration">0.00114s</span>
+      <span class="duration">0.00727s</span>
       <div class="failure" id="failure_6">
         <div class="message"><pre>expected nil to include &quot;/signup&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:57:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
@@ -389,15 +389,15 @@ expected: 200
     <script type="text/javascript">moveProgressBar('20.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a logged in user view the signup page</span>
-      <span class="duration">0.00037s</span>
+      <span class="duration">0.02188s</span>
       <div class="failure" id="failure_7">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:61:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">59</span>
-<span class="linenum">60</span>    it <span class="string"><span class="delimiter">'</span><span class="content">does not let a logged in user view the signup page</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">61</span>      user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">skittles123</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">skittles@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">rainbows</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">62</span>      params = {
-<span class="linenum">63</span>        <span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">skittles123</span><span class="delimiter">&quot;</span></span>,</code></pre>
+        <div class="message"><pre>expected nil to include &quot;/tweets&quot;, but it does not respond to `include?`</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:71:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">69</span>      session[<span class="symbol">:id</span>] = user.id
+<span class="linenum">70</span>      get <span class="string"><span class="delimiter">'</span><span class="content">/signup</span><span class="delimiter">'</span></span>
+<span class="offending"><span class="linenum">71</span>      expect(last_response.location).to include(<span class="string"><span class="delimiter">'</span><span class="content">/tweets</span><span class="delimiter">'</span></span>)</span>
+<span class="linenum">72</span>    <span class="keyword">end</span>
+<span class="linenum">73</span>  <span class="keyword">end</span></code></pre>
       </div>
     </dd>
   </dl>
@@ -410,7 +410,7 @@ expected: 200
     <script type="text/javascript">moveProgressBar('22.8');</script>
     <dd class="example failed">
       <span class="failed_spec_name">loads the login page</span>
-      <span class="duration">0.00126s</span>
+      <span class="duration">0.00738s</span>
       <div class="failure" id="failure_8">
         <div class="message"><pre>
 expected: 200
@@ -428,29 +428,34 @@ expected: 200
     <script type="text/javascript">moveProgressBar('25.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">loads the tweets index after login</span>
-      <span class="duration">0.00034s</span>
+      <span class="duration">0.01172s</span>
       <div class="failure" id="failure_9">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:82:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">80</span>
-<span class="linenum">81</span>    it <span class="string"><span class="delimiter">'</span><span class="content">loads the tweets index after login</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">82</span>      user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">83</span>      params = {
-<span class="linenum">84</span>        <span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>,</code></pre>
+        <div class="message"><pre>
+expected: 302
+     got: 404
+
+(compared using ==)
+</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:88:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">86</span>      }
+<span class="linenum">87</span>      post <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span>, params
+<span class="offending"><span class="linenum">88</span>      expect(last_response.status).to eq(<span class="integer">302</span>)</span>
+<span class="linenum">89</span>      follow_redirect!
+<span class="linenum">90</span>      expect(last_response.status).to eq(<span class="integer">200</span>)</code></pre>
       </div>
     </dd>
     <script type="text/javascript">moveProgressBar('28.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let user view login page if already logged in</span>
-      <span class="duration">0.00028s</span>
+      <span class="duration">0.01046s</span>
       <div class="failure" id="failure_10">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:95:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">93</span>
-<span class="linenum">94</span>    it <span class="string"><span class="delimiter">'</span><span class="content">does not let user view login page if already logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">95</span>      user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">96</span>
-<span class="linenum">97</span>      params = {</code></pre>
+        <div class="message"><pre>expected nil to include &quot;/tweets&quot;, but it does not respond to `include?`</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:105:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">103</span>      session[<span class="symbol">:id</span>] = user.id
+<span class="linenum">104</span>      get <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span>
+<span class="offending"><span class="linenum">105</span>      expect(last_response.location).to include(<span class="string"><span class="delimiter">&quot;</span><span class="content">/tweets</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">106</span>    <span class="keyword">end</span>
+<span class="linenum">107</span>  <span class="keyword">end</span></code></pre>
       </div>
     </dd>
   </dl>
@@ -463,21 +468,21 @@ expected: 200
     <script type="text/javascript">moveProgressBar('31.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user logout if they are already logged in</span>
-      <span class="duration">0.00029s</span>
+      <span class="duration">0.01096s</span>
       <div class="failure" id="failure_11">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:111:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">109</span>  describe <span class="string"><span class="delimiter">&quot;</span><span class="content">logout</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
-<span class="linenum">110</span>    it <span class="string"><span class="delimiter">&quot;</span><span class="content">lets a user logout if they are already logged in</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">111</span>      user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">112</span>
-<span class="linenum">113</span>      params = {</code></pre>
+        <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:119:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">117</span>      post <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span>, params
+<span class="linenum">118</span>      get <span class="string"><span class="delimiter">'</span><span class="content">/logout</span><span class="delimiter">'</span></span>
+<span class="offending"><span class="linenum">119</span>      expect(last_response.location).to include(<span class="string"><span class="delimiter">&quot;</span><span class="content">/login</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">120</span>
+<span class="linenum">121</span>    <span class="keyword">end</span></code></pre>
       </div>
     </dd>
     <script type="text/javascript">moveProgressBar('34.2');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user logout if not logged in</span>
-      <span class="duration">0.00137s</span>
+      <span class="duration">0.00503s</span>
       <div class="failure" id="failure_12">
         <div class="message"><pre>expected nil to include &quot;/&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:124:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
@@ -490,7 +495,7 @@ expected: 200
     <script type="text/javascript">moveProgressBar('37.1');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not load /tweets if user not logged in</span>
-      <span class="duration">0.00204s</span>
+      <span class="duration">0.00510s</span>
       <div class="failure" id="failure_13">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:129:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
@@ -503,13 +508,21 @@ expected: 200
     <script type="text/javascript">moveProgressBar('40.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does load /tweets if user is logged in</span>
-      <span class="duration">0.00029s</span>
+      <span class="duration">0.06766s</span>
       <div class="failure" id="failure_14">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:133:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">131</span>
-<span class="linenum">132</span>    it <span class="string"><span class="delimiter">'</span><span class="content">does load /tweets if user is logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">133</span>      user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span></code></pre>
+        <div class="message"><pre>Unable to find field :username</pre></div>
+        <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
+./spec/controllers/application_controller_spec.rb:138:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
+<span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
+<span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">44</span>          <span class="keyword">end</span>
+<span class="linenum">45</span>          result.first</code></pre>
       </div>
     </dd>
   </dl>
@@ -522,15 +535,15 @@ expected: 200
     <script type="text/javascript">moveProgressBar('42.8');</script>
     <dd class="example failed">
       <span class="failed_spec_name">shows all a single users tweets</span>
-      <span class="duration">0.00035s</span>
+      <span class="duration">0.00648s</span>
       <div class="failure" id="failure_15">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:149:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">147</span>  describe <span class="string"><span class="delimiter">'</span><span class="content">user show page</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="linenum">148</span>    it <span class="string"><span class="delimiter">'</span><span class="content">shows all a single users tweets</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">149</span>      user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">150</span>      tweet1 = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user.id)
-<span class="linenum">151</span>      tweet2 = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweet tweet tweet</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user.id)</code></pre>
+        <div class="message"><pre>uninitialized constant Tweet</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:150:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">148</span>    it <span class="string"><span class="delimiter">'</span><span class="content">shows all a single users tweets</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">149</span>      user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)
+<span class="offending"><span class="linenum">150</span>      tweet1 = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user.id)</span>
+<span class="linenum">151</span>      tweet2 = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweet tweet tweet</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user.id)
+<span class="linenum">152</span>      get <span class="string"><span class="delimiter">&quot;</span><span class="content">/users/</span><span class="inline"><span class="inline-delimiter">#{</span>user.slug<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span></code></pre>
       </div>
     </dd>
   </dl>
@@ -548,14 +561,15 @@ expected: 200
     <script type="text/javascript">moveProgressBar('45.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user view the tweets index if logged in</span>
-      <span class="duration">0.00047s</span>
+      <span class="duration">0.00886s</span>
       <div class="failure" id="failure_16">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:163:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">161</span>    context <span class="string"><span class="delimiter">'</span><span class="content">logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="linenum">162</span>      it <span class="string"><span class="delimiter">'</span><span class="content">lets a user view the tweets index if logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">163</span>        user1 = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">164</span>        tweet1 = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user1.id)</code></pre>
+        <div class="message"><pre>uninitialized constant Tweet</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:164:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">162</span>      it <span class="string"><span class="delimiter">'</span><span class="content">lets a user view the tweets index if logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">163</span>        user1 = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)
+<span class="offending"><span class="linenum">164</span>        tweet1 = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user1.id)</span>
+<span class="linenum">165</span>
+<span class="linenum">166</span>        user2 = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">silverstallion</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">silver@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">horses</span><span class="delimiter">&quot;</span></span>)</code></pre>
       </div>
     </dd>
   </dl>
@@ -568,7 +582,7 @@ expected: 200
     <script type="text/javascript">moveProgressBar('48.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user view the tweets index if not logged in</span>
-      <span class="duration">0.00234s</span>
+      <span class="duration">0.00607s</span>
       <div class="failure" id="failure_17">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:184:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
@@ -594,56 +608,81 @@ expected: 200
     <script type="text/javascript">moveProgressBar('51.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets user view new tweet form if logged in</span>
-      <span class="duration">0.00036s</span>
+      <span class="duration">0.01052s</span>
       <div class="failure" id="failure_18">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:195:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">193</span>    context <span class="string"><span class="delimiter">'</span><span class="content">logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="linenum">194</span>      it <span class="string"><span class="delimiter">'</span><span class="content">lets user view new tweet form if logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">195</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">196</span>
-<span class="linenum">197</span>        visit <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span></code></pre>
+        <div class="message"><pre>Unable to find field :username</pre></div>
+        <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
+./spec/controllers/application_controller_spec.rb:199:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
+<span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
+<span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">44</span>          <span class="keyword">end</span>
+<span class="linenum">45</span>          result.first</code></pre>
       </div>
     </dd>
     <script type="text/javascript">moveProgressBar('54.2');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets user create a tweet if they are logged in</span>
-      <span class="duration">0.00038s</span>
+      <span class="duration">0.00941s</span>
       <div class="failure" id="failure_19">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:208:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">206</span>
-<span class="linenum">207</span>      it <span class="string"><span class="delimiter">'</span><span class="content">lets user create a tweet if they are logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">208</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">209</span>
-<span class="linenum">210</span>        visit <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span></code></pre>
+        <div class="message"><pre>Unable to find field :username</pre></div>
+        <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
+./spec/controllers/application_controller_spec.rb:212:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
+<span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
+<span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">44</span>          <span class="keyword">end</span>
+<span class="linenum">45</span>          result.first</code></pre>
       </div>
     </dd>
     <script type="text/javascript">moveProgressBar('57.1');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user tweet from another user</span>
-      <span class="duration">0.00061s</span>
+      <span class="duration">0.01421s</span>
       <div class="failure" id="failure_20">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:228:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">226</span>
-<span class="linenum">227</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user tweet from another user</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">228</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">229</span>        user2 = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">silverstallion</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">silver@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">horses</span><span class="delimiter">&quot;</span></span>)</code></pre>
+        <div class="message"><pre>Unable to find field :username</pre></div>
+        <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
+./spec/controllers/application_controller_spec.rb:233:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
+<span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
+<span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">44</span>          <span class="keyword">end</span>
+<span class="linenum">45</span>          result.first</code></pre>
       </div>
     </dd>
     <script type="text/javascript">moveProgressBar('60.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user create a blank tweet</span>
-      <span class="duration">0.00035s</span>
+      <span class="duration">0.01111s</span>
       <div class="failure" id="failure_21">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:251:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">249</span>
-<span class="linenum">250</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user create a blank tweet</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">251</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">252</span>
-<span class="linenum">253</span>        visit <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span></code></pre>
+        <div class="message"><pre>Unable to find field :username</pre></div>
+        <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:32:in `find&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/actions.rb:58:in `fill_in&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/session.rb:698:in `block (2 levels) in &lt;class:Session&gt;&#39;
+/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/dsl.rb:51:in `block (2 levels) in &lt;module:DSL&gt;&#39;
+./spec/controllers/application_controller_spec.rb:255:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">41</span>          <span class="keyword">end</span>
+<span class="linenum">42</span>          <span class="keyword">if</span> result.size == <span class="integer">0</span>
+<span class="offending"><span class="linenum">43</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">44</span>          <span class="keyword">end</span>
+<span class="linenum">45</span>          result.first</code></pre>
       </div>
     </dd>
   </dl>
@@ -656,7 +695,7 @@ expected: 200
     <script type="text/javascript">moveProgressBar('62.8');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let user view new tweet form if not logged in</span>
-      <span class="duration">0.00215s</span>
+      <span class="duration">0.00568s</span>
       <div class="failure" id="failure_22">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:273:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
@@ -682,14 +721,15 @@ expected: 200
     <script type="text/javascript">moveProgressBar('65.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">displays a single tweet</span>
-      <span class="duration">0.00045s</span>
+      <span class="duration">0.00711s</span>
       <div class="failure" id="failure_23">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:281:in `block (5 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">279</span>      it <span class="string"><span class="delimiter">'</span><span class="content">displays a single tweet</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="linenum">280</span>
-<span class="offending"><span class="linenum">281</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">282</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">i am a boss at tweeting</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user.id)</code></pre>
+        <div class="message"><pre>uninitialized constant Tweet</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:282:in `block (5 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">280</span>
+<span class="linenum">281</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)
+<span class="offending"><span class="linenum">282</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">i am a boss at tweeting</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user.id)</span>
+<span class="linenum">283</span>
+<span class="linenum">284</span>        visit <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span></code></pre>
       </div>
     </dd>
   </dl>
@@ -702,15 +742,15 @@ expected: 200
     <script type="text/javascript">moveProgressBar('68.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user view a tweet</span>
-      <span class="duration">0.00035s</span>
+      <span class="duration">0.00986s</span>
       <div class="failure" id="failure_24">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:300:in `block (5 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">298</span>    context <span class="string"><span class="delimiter">'</span><span class="content">logged out</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="linenum">299</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user view a tweet</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">300</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">301</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">i am a boss at tweeting</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user.id)
-<span class="linenum">302</span>        get <span class="string"><span class="delimiter">&quot;</span><span class="content">/tweets/</span><span class="inline"><span class="inline-delimiter">#{</span>tweet.id<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span></code></pre>
+        <div class="message"><pre>uninitialized constant Tweet</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:301:in `block (5 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">299</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user view a tweet</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">300</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)
+<span class="offending"><span class="linenum">301</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">i am a boss at tweeting</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user.id)</span>
+<span class="linenum">302</span>        get <span class="string"><span class="delimiter">&quot;</span><span class="content">/tweets/</span><span class="inline"><span class="inline-delimiter">#{</span>tweet.id<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>
+<span class="linenum">303</span>        expect(last_response.location).to include(<span class="string"><span class="delimiter">&quot;</span><span class="content">/login</span><span class="delimiter">&quot;</span></span>)</code></pre>
       </div>
     </dd>
   </dl>
@@ -728,55 +768,53 @@ expected: 200
     <script type="text/javascript">moveProgressBar('71.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user view tweet edit form if they are logged in</span>
-      <span class="duration">0.00029s</span>
+      <span class="duration">0.00629s</span>
       <div class="failure" id="failure_25">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:314:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">312</span>    context <span class="string"><span class="delimiter">&quot;</span><span class="content">logged in</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
-<span class="linenum">313</span>      it <span class="string"><span class="delimiter">'</span><span class="content">lets a user view tweet edit form if they are logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">314</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">315</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user.id)
+        <div class="message"><pre>uninitialized constant Tweet</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:315:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">313</span>      it <span class="string"><span class="delimiter">'</span><span class="content">lets a user view tweet edit form if they are logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">314</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)
+<span class="offending"><span class="linenum">315</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user.id)</span>
 <span class="linenum">316</span>        visit <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span></code></pre>
       </div>
     </dd>
     <script type="text/javascript">moveProgressBar('74.2');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user edit a tweet they did not create</span>
-      <span class="duration">0.00036s</span>
+      <span class="duration">0.00899s</span>
       <div class="failure" id="failure_26">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:327:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">325</span>
-<span class="linenum">326</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user edit a tweet they did not create</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">327</span>        user1 = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">328</span>        tweet1 = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user1.id)</code></pre>
+        <div class="message"><pre>uninitialized constant Tweet</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:328:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">326</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user edit a tweet they did not create</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">327</span>        user1 = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)
+<span class="offending"><span class="linenum">328</span>        tweet1 = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user1.id)</span>
+<span class="linenum">329</span>
+<span class="linenum">330</span>        user2 = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">silverstallion</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">silver@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">horses</span><span class="delimiter">&quot;</span></span>)</code></pre>
       </div>
     </dd>
     <script type="text/javascript">moveProgressBar('77.1');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user edit their own tweet if they are logged in</span>
-      <span class="duration">0.00043s</span>
+      <span class="duration">0.01194s</span>
       <div class="failure" id="failure_27">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:346:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">344</span>
-<span class="linenum">345</span>      it <span class="string"><span class="delimiter">'</span><span class="content">lets a user edit their own tweet if they are logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">346</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">347</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; <span class="integer">1</span>)
+        <div class="message"><pre>uninitialized constant Tweet</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:347:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">345</span>      it <span class="string"><span class="delimiter">'</span><span class="content">lets a user edit their own tweet if they are logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">346</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)
+<span class="offending"><span class="linenum">347</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; <span class="integer">1</span>)</span>
 <span class="linenum">348</span>        visit <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span></code></pre>
       </div>
     </dd>
     <script type="text/javascript">moveProgressBar('80.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user edit a text with blank content</span>
-      <span class="duration">0.00034s</span>
+      <span class="duration">0.00774s</span>
       <div class="failure" id="failure_28">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:365:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">363</span>
-<span class="linenum">364</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user edit a text with blank content</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">365</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">366</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; <span class="integer">1</span>)
+        <div class="message"><pre>uninitialized constant Tweet</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:366:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">364</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user edit a text with blank content</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">365</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)
+<span class="offending"><span class="linenum">366</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; <span class="integer">1</span>)</span>
 <span class="linenum">367</span>        visit <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span></code></pre>
       </div>
     </dd>
@@ -790,7 +828,7 @@ expected: 200
     <script type="text/javascript">moveProgressBar('82.8');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not load let user view tweet edit form if not logged in</span>
-      <span class="duration">0.00175s</span>
+      <span class="duration">0.00696s</span>
       <div class="failure" id="failure_29">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:386:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
@@ -816,28 +854,28 @@ expected: 200
     <script type="text/javascript">moveProgressBar('85.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user delete their own tweet if they are logged in</span>
-      <span class="duration">0.00059s</span>
+      <span class="duration">0.01080s</span>
       <div class="failure" id="failure_30">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:395:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">393</span>    context <span class="string"><span class="delimiter">&quot;</span><span class="content">logged in</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
-<span class="linenum">394</span>      it <span class="string"><span class="delimiter">'</span><span class="content">lets a user delete their own tweet if they are logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">395</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">396</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; <span class="integer">1</span>)
+        <div class="message"><pre>uninitialized constant Tweet</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:396:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">394</span>      it <span class="string"><span class="delimiter">'</span><span class="content">lets a user delete their own tweet if they are logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">395</span>        user = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)
+<span class="offending"><span class="linenum">396</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; <span class="integer">1</span>)</span>
 <span class="linenum">397</span>        visit <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span></code></pre>
       </div>
     </dd>
     <script type="text/javascript">moveProgressBar('88.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user delete a tweet they did not create</span>
-      <span class="duration">0.00036s</span>
+      <span class="duration">0.00856s</span>
       <div class="failure" id="failure_31">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:409:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">407</span>
-<span class="linenum">408</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user delete a tweet they did not create</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
-<span class="offending"><span class="linenum">409</span>        user1 = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">410</span>        tweet1 = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user1.id)</code></pre>
+        <div class="message"><pre>uninitialized constant Tweet</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:410:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">408</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user delete a tweet they did not create</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">409</span>        user1 = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">becky567</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">starz@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">kittens</span><span class="delimiter">&quot;</span></span>)
+<span class="offending"><span class="linenum">410</span>        tweet1 = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user1.id)</span>
+<span class="linenum">411</span>
+<span class="linenum">412</span>        user2 = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">silverstallion</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">silver@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">horses</span><span class="delimiter">&quot;</span></span>)</code></pre>
       </div>
     </dd>
   </dl>
@@ -850,7 +888,7 @@ expected: 200
     <script type="text/javascript">moveProgressBar('91.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not load let user delete a tweet if not logged in</span>
-      <span class="duration">0.00028s</span>
+      <span class="duration">0.00766s</span>
       <div class="failure" id="failure_32">
         <div class="message"><pre>uninitialized constant Tweet</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:431:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
@@ -871,48 +909,51 @@ expected: 200
     <script type="text/javascript">moveProgressBar('94.2');</script>
     <dd class="example failed">
       <span class="failed_spec_name">can slug the username</span>
-      <span class="duration">0.00028s</span>
+      <span class="duration">0.00813s</span>
       <div class="failure" id="failure_33">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/models/user_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">3</span>describe <span class="string"><span class="delimiter">'</span><span class="content">User</span><span class="delimiter">'</span></span> <span class="keyword">do</span> 
-<span class="linenum">4</span>  before <span class="keyword">do</span>
-<span class="offending"><span class="linenum">5</span>    <span class="instance-variable">@user</span> = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">test 123</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">test123@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">test</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">6</span>  <span class="keyword">end</span>
-<span class="linenum">7</span>  it <span class="string"><span class="delimiter">'</span><span class="content">can slug the username</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+        <div class="message"><pre>undefined method `slug&#39; for #&lt;User:0x007fe8161b18f8&gt;</pre></div>
+        <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/activemodel-4.2.5/lib/active_model/attribute_methods.rb:433:in `method_missing&#39;
+./spec/models/user_spec.rb:8:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">431</span>      <span class="keyword">else</span>
+<span class="linenum">432</span>        match = match_attribute_method?(method.to_s)
+<span class="offending"><span class="linenum">433</span>        match ? attribute_missing(match, *args, &amp;block) : <span class="keyword">super</span></span>
+<span class="linenum">434</span>      <span class="keyword">end</span>
+<span class="linenum">435</span>    <span class="keyword">end</span></code></pre>
       </div>
     </dd>
     <script type="text/javascript">moveProgressBar('97.1');</script>
     <dd class="example failed">
       <span class="failed_spec_name">can find a user based on the slug</span>
-      <span class="duration">0.00031s</span>
+      <span class="duration">0.00667s</span>
       <div class="failure" id="failure_34">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/models/user_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">3</span>describe <span class="string"><span class="delimiter">'</span><span class="content">User</span><span class="delimiter">'</span></span> <span class="keyword">do</span> 
-<span class="linenum">4</span>  before <span class="keyword">do</span>
-<span class="offending"><span class="linenum">5</span>    <span class="instance-variable">@user</span> = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">test 123</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">test123@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">test</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">6</span>  <span class="keyword">end</span>
-<span class="linenum">7</span>  it <span class="string"><span class="delimiter">'</span><span class="content">can slug the username</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+        <div class="message"><pre>undefined method `slug&#39; for #&lt;User:0x007fe816098a48&gt;</pre></div>
+        <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/activemodel-4.2.5/lib/active_model/attribute_methods.rb:433:in `method_missing&#39;
+./spec/models/user_spec.rb:12:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">431</span>      <span class="keyword">else</span>
+<span class="linenum">432</span>        match = match_attribute_method?(method.to_s)
+<span class="offending"><span class="linenum">433</span>        match ? attribute_missing(match, *args, &amp;block) : <span class="keyword">super</span></span>
+<span class="linenum">434</span>      <span class="keyword">end</span>
+<span class="linenum">435</span>    <span class="keyword">end</span></code></pre>
       </div>
     </dd>
     <script type="text/javascript">moveProgressBar('100.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">has a secure password</span>
-      <span class="duration">0.00032s</span>
+      <span class="duration">0.01006s</span>
       <div class="failure" id="failure_35">
-        <div class="message"><pre>uninitialized constant User</pre></div>
-        <div class="backtrace"><pre>./spec/models/user_spec.rb:5:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">3</span>describe <span class="string"><span class="delimiter">'</span><span class="content">User</span><span class="delimiter">'</span></span> <span class="keyword">do</span> 
-<span class="linenum">4</span>  before <span class="keyword">do</span>
-<span class="offending"><span class="linenum">5</span>    <span class="instance-variable">@user</span> = <span class="constant">User</span>.create(<span class="symbol">:username</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">test 123</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:email</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">test123@aol.com</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:password</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">test</span><span class="delimiter">&quot;</span></span>)</span>
-<span class="linenum">6</span>  <span class="keyword">end</span>
-<span class="linenum">7</span>  it <span class="string"><span class="delimiter">'</span><span class="content">can slug the username</span><span class="delimiter">'</span></span> <span class="keyword">do</span></code></pre>
+        <div class="message"><pre>undefined method `authenticate&#39; for #&lt;User:0x007fe81577fbc8&gt;</pre></div>
+        <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/activemodel-4.2.5/lib/active_model/attribute_methods.rb:433:in `method_missing&#39;
+./spec/models/user_spec.rb:18:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">431</span>      <span class="keyword">else</span>
+<span class="linenum">432</span>        match = match_attribute_method?(method.to_s)
+<span class="offending"><span class="linenum">433</span>        match ? attribute_missing(match, *args, &amp;block) : <span class="keyword">super</span></span>
+<span class="linenum">434</span>      <span class="keyword">end</span>
+<span class="linenum">435</span>    <span class="keyword">end</span></code></pre>
       </div>
     </dd>
   </dl>
 </div>
-<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>0.21929 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>0.70575 seconds</strong>";</script>
 <script type="text/javascript">document.getElementById('totals').innerHTML = "35 examples, 35 failures";</script>
 </div>
 </div>
