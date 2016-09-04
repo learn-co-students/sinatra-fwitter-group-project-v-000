@@ -288,63 +288,30 @@ a {
   <dl style="margin-left: 15px;">
   <dt id="example_group_2" class="passed">Homepage</dt>
     <script type="text/javascript">moveProgressBar('2.8');</script>
-    <dd class="example passed"><span class="passed_spec_name">loads the homepage</span><span class='duration'>0.21078s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">loads the homepage</span><span class='duration'>0.12014s</span></dd>
   </dl>
 </div>
 <div id="div_group_3" class="example_group passed">
   <dl style="margin-left: 15px;">
   <dt id="example_group_3" class="passed">Signup Page</dt>
     <script type="text/javascript">moveProgressBar('5.7');</script>
-    <dd class="example passed"><span class="passed_spec_name">loads the signup page</span><span class='duration'>0.03325s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">loads the signup page</span><span class='duration'>0.01669s</span></dd>
     <script type="text/javascript">moveProgressBar('8.5');</script>
-    <dd class="example passed"><span class="passed_spec_name">signup directs user to twitter index</span><span class='duration'>0.05487s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">signup directs user to twitter index</span><span class='duration'>0.05329s</span></dd>
+    <script type="text/javascript">moveProgressBar('11.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not let a user sign up without a username</span><span class='duration'>0.00932s</span></dd>
+    <script type="text/javascript">moveProgressBar('14.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not let a user sign up without an email</span><span class='duration'>0.01126s</span></dd>
+    <script type="text/javascript">moveProgressBar('17.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not let a user sign up without a password</span><span class='duration'>0.00843s</span></dd>
     <script type="text/javascript">makeRed('rspec-header');</script>
     <script type="text/javascript">makeRed('div_group_3');</script>
     <script type="text/javascript">makeRed('example_group_3');</script>
-    <script type="text/javascript">moveProgressBar('11.4');</script>
-    <dd class="example failed">
-      <span class="failed_spec_name">does not let a user sign up without a username</span>
-      <span class="duration">0.03708s</span>
-      <div class="failure" id="failure_1">
-        <div class="message"><pre>expected &quot;http://example.org/tweets&quot; to include &quot;/signup&quot;</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:37:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">35</span>      }
-<span class="linenum">36</span>      post <span class="string"><span class="delimiter">'</span><span class="content">/signup</span><span class="delimiter">'</span></span>, params
-<span class="offending"><span class="linenum">37</span>      expect(last_response.location).to include(<span class="string"><span class="delimiter">'</span><span class="content">/signup</span><span class="delimiter">'</span></span>)</span>
-<span class="linenum">38</span>    <span class="keyword">end</span></code></pre>
-      </div>
-    </dd>
-    <script type="text/javascript">moveProgressBar('14.2');</script>
-    <dd class="example failed">
-      <span class="failed_spec_name">does not let a user sign up without an email</span>
-      <span class="duration">0.01514s</span>
-      <div class="failure" id="failure_2">
-        <div class="message"><pre>expected &quot;http://example.org/tweets&quot; to include &quot;/signup&quot;</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:47:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">45</span>      }
-<span class="linenum">46</span>      post <span class="string"><span class="delimiter">'</span><span class="content">/signup</span><span class="delimiter">'</span></span>, params
-<span class="offending"><span class="linenum">47</span>      expect(last_response.location).to include(<span class="string"><span class="delimiter">'</span><span class="content">/signup</span><span class="delimiter">'</span></span>)</span>
-<span class="linenum">48</span>    <span class="keyword">end</span></code></pre>
-      </div>
-    </dd>
-    <script type="text/javascript">moveProgressBar('17.1');</script>
-    <dd class="example failed">
-      <span class="failed_spec_name">does not let a user sign up without a password</span>
-      <span class="duration">0.01450s</span>
-      <div class="failure" id="failure_3">
-        <div class="message"><pre>expected &quot;http://example.org/tweets&quot; to include &quot;/signup&quot;</pre></div>
-        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:57:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
-    <pre class="ruby"><code><span class="linenum">55</span>      }
-<span class="linenum">56</span>      post <span class="string"><span class="delimiter">'</span><span class="content">/signup</span><span class="delimiter">'</span></span>, params
-<span class="offending"><span class="linenum">57</span>      expect(last_response.location).to include(<span class="string"><span class="delimiter">'</span><span class="content">/signup</span><span class="delimiter">'</span></span>)</span>
-<span class="linenum">58</span>    <span class="keyword">end</span></code></pre>
-      </div>
-    </dd>
     <script type="text/javascript">moveProgressBar('20.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a logged in user view the signup page</span>
-      <span class="duration">0.02421s</span>
-      <div class="failure" id="failure_4">
+      <span class="duration">0.07446s</span>
+      <div class="failure" id="failure_1">
         <div class="message"><pre>expected nil to include &quot;/tweets&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:71:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">69</span>      session[<span class="symbol">:id</span>] = user.id
@@ -364,8 +331,8 @@ a {
     <script type="text/javascript">moveProgressBar('22.8');</script>
     <dd class="example failed">
       <span class="failed_spec_name">loads the login page</span>
-      <span class="duration">0.01059s</span>
-      <div class="failure" id="failure_5">
+      <span class="duration">0.01186s</span>
+      <div class="failure" id="failure_2">
         <div class="message"><pre>
 expected: 200
      got: 404
@@ -382,8 +349,8 @@ expected: 200
     <script type="text/javascript">moveProgressBar('25.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">loads the tweets index after login</span>
-      <span class="duration">0.01741s</span>
-      <div class="failure" id="failure_6">
+      <span class="duration">0.03580s</span>
+      <div class="failure" id="failure_3">
         <div class="message"><pre>
 expected: 302
      got: 404
@@ -401,8 +368,8 @@ expected: 302
     <script type="text/javascript">moveProgressBar('28.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let user view login page if already logged in</span>
-      <span class="duration">0.01682s</span>
-      <div class="failure" id="failure_7">
+      <span class="duration">0.01370s</span>
+      <div class="failure" id="failure_4">
         <div class="message"><pre>expected nil to include &quot;/tweets&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:105:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">103</span>      session[<span class="symbol">:id</span>] = user.id
@@ -422,8 +389,8 @@ expected: 302
     <script type="text/javascript">moveProgressBar('31.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user logout if they are already logged in</span>
-      <span class="duration">0.01481s</span>
-      <div class="failure" id="failure_8">
+      <span class="duration">0.01442s</span>
+      <div class="failure" id="failure_5">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:119:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">117</span>      post <span class="string"><span class="delimiter">'</span><span class="content">/login</span><span class="delimiter">'</span></span>, params
@@ -436,8 +403,8 @@ expected: 302
     <script type="text/javascript">moveProgressBar('34.2');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user logout if not logged in</span>
-      <span class="duration">0.00841s</span>
-      <div class="failure" id="failure_9">
+      <span class="duration">0.01033s</span>
+      <div class="failure" id="failure_6">
         <div class="message"><pre>expected nil to include &quot;/&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:124:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">122</span>    it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user logout if not logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
@@ -449,8 +416,8 @@ expected: 302
     <script type="text/javascript">moveProgressBar('37.1');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not load /tweets if user not logged in</span>
-      <span class="duration">0.00834s</span>
-      <div class="failure" id="failure_10">
+      <span class="duration">0.00872s</span>
+      <div class="failure" id="failure_7">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:129:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">127</span>    it <span class="string"><span class="delimiter">'</span><span class="content">does not load /tweets if user not logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
@@ -462,8 +429,8 @@ expected: 302
     <script type="text/javascript">moveProgressBar('40.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does load /tweets if user is logged in</span>
-      <span class="duration">0.01527s</span>
-      <div class="failure" id="failure_11">
+      <span class="duration">0.01912s</span>
+      <div class="failure" id="failure_8">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -489,8 +456,8 @@ expected: 302
     <script type="text/javascript">moveProgressBar('42.8');</script>
     <dd class="example failed">
       <span class="failed_spec_name">shows all a single users tweets</span>
-      <span class="duration">0.03110s</span>
-      <div class="failure" id="failure_12">
+      <span class="duration">0.02709s</span>
+      <div class="failure" id="failure_9">
         <div class="message"><pre>expected &quot;&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n  &lt;style type=\&quot;text/css\&quot;&gt;\n  body { text-align:center;font-family:helvetica,arial;font-size:22px;\n    color:#888;margin:20px}\n  #c {margin:0 auto;width:500px;text-align:left}\n  &lt;/style&gt;\n&lt;/head&gt;\n&lt;body&gt;\n  &lt;h2&gt;Sinatra doesn&amp;rsquo;t know this ditty.&lt;/h2&gt;\n  &lt;img src=&#39;http://example.org/__sinatra__/404.png&#39;&gt;\n  &lt;div id=\&quot;c\&quot;&gt;\n    Try this:\n    &lt;pre&gt;# in application_controller.rb\nclass ApplicationController\n  get &amp;#x27;&amp;#x2F;users&amp;#x2F;becky567&amp;#x27; do\n    &amp;quot;Hello World&amp;quot;\n  end\nend\n&lt;/pre&gt;\n  &lt;/div&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n&quot; to include &quot;tweeting!&quot;
 Diff:[0m
 [0m[34m@@ -1,2 +1,25 @@
@@ -542,8 +509,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('45.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user view the tweets index if logged in</span>
-      <span class="duration">0.02845s</span>
-      <div class="failure" id="failure_13">
+      <span class="duration">0.02538s</span>
+      <div class="failure" id="failure_10">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -569,8 +536,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('48.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user view the tweets index if not logged in</span>
-      <span class="duration">0.00830s</span>
-      <div class="failure" id="failure_14">
+      <span class="duration">0.01144s</span>
+      <div class="failure" id="failure_11">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:184:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">182</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let a user view the tweets index if not logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
@@ -595,8 +562,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('51.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets user view new tweet form if logged in</span>
-      <span class="duration">0.01531s</span>
-      <div class="failure" id="failure_15">
+      <span class="duration">0.01651s</span>
+      <div class="failure" id="failure_12">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -615,8 +582,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('54.2');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets user create a tweet if they are logged in</span>
-      <span class="duration">0.01643s</span>
-      <div class="failure" id="failure_16">
+      <span class="duration">0.01340s</span>
+      <div class="failure" id="failure_13">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -635,8 +602,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('57.1');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user tweet from another user</span>
-      <span class="duration">0.01990s</span>
-      <div class="failure" id="failure_17">
+      <span class="duration">0.02060s</span>
+      <div class="failure" id="failure_14">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -655,8 +622,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('60.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user create a blank tweet</span>
-      <span class="duration">0.01657s</span>
-      <div class="failure" id="failure_18">
+      <span class="duration">0.01626s</span>
+      <div class="failure" id="failure_15">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -682,8 +649,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('62.8');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let user view new tweet form if not logged in</span>
-      <span class="duration">0.01179s</span>
-      <div class="failure" id="failure_19">
+      <span class="duration">0.01180s</span>
+      <div class="failure" id="failure_16">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:273:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">271</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let user view new tweet form if not logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
@@ -708,8 +675,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('65.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">displays a single tweet</span>
-      <span class="duration">0.01965s</span>
-      <div class="failure" id="failure_20">
+      <span class="duration">0.02126s</span>
+      <div class="failure" id="failure_17">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -735,8 +702,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('68.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user view a tweet</span>
-      <span class="duration">0.02160s</span>
-      <div class="failure" id="failure_21">
+      <span class="duration">0.01982s</span>
+      <div class="failure" id="failure_18">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:303:in `block (5 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">301</span>        tweet = <span class="constant">Tweet</span>.create(<span class="symbol">:content</span> =&gt; <span class="string"><span class="delimiter">&quot;</span><span class="content">i am a boss at tweeting</span><span class="delimiter">&quot;</span></span>, <span class="symbol">:user_id</span> =&gt; user.id)
@@ -761,8 +728,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('71.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user view tweet edit form if they are logged in</span>
-      <span class="duration">0.02337s</span>
-      <div class="failure" id="failure_22">
+      <span class="duration">0.02162s</span>
+      <div class="failure" id="failure_19">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -781,8 +748,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('74.2');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user edit a tweet they did not create</span>
-      <span class="duration">0.02962s</span>
-      <div class="failure" id="failure_23">
+      <span class="duration">0.02487s</span>
+      <div class="failure" id="failure_20">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -801,8 +768,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('77.1');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user edit their own tweet if they are logged in</span>
-      <span class="duration">0.02092s</span>
-      <div class="failure" id="failure_24">
+      <span class="duration">0.02214s</span>
+      <div class="failure" id="failure_21">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -821,8 +788,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('80.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user edit a text with blank content</span>
-      <span class="duration">0.03030s</span>
-      <div class="failure" id="failure_25">
+      <span class="duration">0.02158s</span>
+      <div class="failure" id="failure_22">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -848,8 +815,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('82.8');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not load let user view tweet edit form if not logged in</span>
-      <span class="duration">0.01081s</span>
-      <div class="failure" id="failure_26">
+      <span class="duration">0.01340s</span>
+      <div class="failure" id="failure_23">
         <div class="message"><pre>expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
         <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:386:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">384</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not load let user view tweet edit form if not logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
@@ -874,8 +841,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('85.7');</script>
     <dd class="example failed">
       <span class="failed_spec_name">lets a user delete their own tweet if they are logged in</span>
-      <span class="duration">0.01916s</span>
-      <div class="failure" id="failure_27">
+      <span class="duration">0.02085s</span>
+      <div class="failure" id="failure_24">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -894,8 +861,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('88.5');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not let a user delete a tweet they did not create</span>
-      <span class="duration">0.02293s</span>
-      <div class="failure" id="failure_28">
+      <span class="duration">0.02578s</span>
+      <div class="failure" id="failure_25">
         <div class="message"><pre>Unable to find field :username</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/finders.rb:43:in `block in find&#39;
 /Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/capybara-2.5.0/lib/capybara/node/base.rb:84:in `synchronize&#39;
@@ -921,8 +888,8 @@ Diff:[0m
     <script type="text/javascript">moveProgressBar('91.4');</script>
     <dd class="example failed">
       <span class="failed_spec_name">does not load let user delete a tweet if not logged in</span>
-      <span class="duration">0.01473s</span>
-      <div class="failure" id="failure_29">
+      <span class="duration">0.01334s</span>
+      <div class="failure" id="failure_26">
         <div class="message"><pre>
 expected: &quot;/login&quot;
      got: &quot;/tweets/1&quot;
@@ -943,17 +910,17 @@ expected: &quot;/login&quot;
   <dl style="margin-left: 0px;">
   <dt id="example_group_22" class="passed">User</dt>
     <script type="text/javascript">moveProgressBar('94.2');</script>
-    <dd class="example passed"><span class="passed_spec_name">can slug the username</span><span class='duration'>0.01197s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">can slug the username</span><span class='duration'>0.01023s</span></dd>
     <script type="text/javascript">moveProgressBar('97.1');</script>
-    <dd class="example passed"><span class="passed_spec_name">can find a user based on the slug</span><span class='duration'>0.01076s</span></dd>
+    <dd class="example passed"><span class="passed_spec_name">can find a user based on the slug</span><span class='duration'>0.01219s</span></dd>
     <script type="text/javascript">makeRed('div_group_22');</script>
     <script type="text/javascript">makeRed('example_group_22');</script>
     <script type="text/javascript">moveProgressBar('100.0');</script>
     <dd class="example failed">
       <span class="failed_spec_name">has a secure password</span>
-      <span class="duration">0.01035s</span>
-      <div class="failure" id="failure_30">
-        <div class="message"><pre>undefined method `authenticate&#39; for #&lt;User:0x007ffb0c9f2c98&gt;</pre></div>
+      <span class="duration">0.01038s</span>
+      <div class="failure" id="failure_27">
+        <div class="message"><pre>undefined method `authenticate&#39; for #&lt;User:0x007f8263213530&gt;</pre></div>
         <div class="backtrace"><pre>/Users/brandenmiller/.rvm/gems/ruby-2.2.3/gems/activemodel-4.2.5/lib/active_model/attribute_methods.rb:433:in `method_missing&#39;
 ./spec/models/user_spec.rb:18:in `block (2 levels) in &lt;top (required)&gt;&#39;</pre></div>
     <pre class="ruby"><code><span class="linenum">431</span>      <span class="keyword">else</span>
@@ -965,8 +932,8 @@ expected: &quot;/login&quot;
     </dd>
   </dl>
 </div>
-<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>1.04513 seconds</strong>";</script>
-<script type="text/javascript">document.getElementById('totals').innerHTML = "35 examples, 30 failures";</script>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>0.96973 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "35 examples, 27 failures";</script>
 </div>
 </div>
 </body>
