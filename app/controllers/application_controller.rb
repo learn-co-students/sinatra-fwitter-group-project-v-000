@@ -5,6 +5,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "the_trillest"
   end
 
   get '/' do
@@ -21,6 +23,7 @@ class ApplicationController < Sinatra::Base
     else
       @user = User.create(params)
       redirect to '/tweets'
+      session[:user_id] = @user.id
     end
   end
 
