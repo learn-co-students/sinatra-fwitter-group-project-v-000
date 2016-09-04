@@ -16,7 +16,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    "#{params}"
+    @user = User.create(params)
+    redirect to '/tweets'
   end
+
+
 
 end
