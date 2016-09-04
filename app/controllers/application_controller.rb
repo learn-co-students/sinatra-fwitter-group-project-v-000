@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
 
   get '/signup' do
     if !session[:user_id]
-      erb :signup
+      erb :'/users/signup'
     else
       redirect to '/tweets'
     end
