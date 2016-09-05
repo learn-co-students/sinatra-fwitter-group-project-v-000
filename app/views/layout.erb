@@ -8,32 +8,32 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
 </head>
 <body>
-  <header>
-    <div class="wrapper">
-          <div id="logo">
-            <h1>Fwitter</h1>
-            <h2>Fwitter</h2>
-          </div>
-        </div><!-- .wrapper -->
-    <div id="navbar" class="light-fade">
+  <div class="white-wood">
+    <header class="medium-fade shadow">
       <div class="wrapper">
-        <nav>
-          <% if !!current_user %>
-            <a href="/tweets">Timeline</a>
-            <a href="/users/<%= current_user.username %>">Profile</a>
-            <a href="/tweets/new">New Tweet</a>
-            <a href="/logout">Logout</a>
-          <% else %>
-            <a href="/login">Login</a>
-            <a href="/signup"> Signup</a>
-          <% end %> 
-        </nav>
+        <div id="logo">
+          <h1>Fwitter</h1>
+          <h2>Fwitter</h2>
+        </div>
+      </div><!-- .wrapper -->
+      <div id="navbar" class="light-fade">
+        <div class="wrapper">
+          <nav>
+            <% if !!current_user %>
+              <a href="/tweets">Timeline</a>
+              <a href="/users/<%= current_user.username %>">Profile</a>
+              <a href="/tweets/new">New Tweet</a>
+              <a href="/logout">Logout</a>
+            <% else %>
+              <a href="/login">Login</a>
+              <a href="/signup"> Signup</a>
+            <% end %> 
+          </nav>
+        </div>
       </div>
-    </div>
-  </header>
-
-<%=yield%>
-
+    </header>
+    <%=yield%>
+  </div>
   <footer>
     &copy; 2016 Fwitter - All Rights Reserved - Designed by Branden Miller
     <% if !!current_user %>
