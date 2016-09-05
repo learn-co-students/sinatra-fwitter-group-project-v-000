@@ -51,7 +51,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     if session[:user_id]
-      @user_tweets = Tweet.all
+      @tweets = Tweet.all
       erb :'tweets/tweets'
     else
       redirect to '/login'
