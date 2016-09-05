@@ -63,6 +63,12 @@ class ApplicationController < Sinatra::Base
     redirect to '/login'
   end
 
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    "#{@user.username}"
+
+  end
+
   helpers do
     def logged_in?
       !!current_user
