@@ -1,4 +1,14 @@
 <h1>Welcome, <a href="/users/<%= current_user.username %>">@<%= current_user.username %></a>!</h1>
-<% @tweets.each do |tweet| %>
-  <section class="col-3 shadow"><a href="/users/<%= tweet.user.username %>">@<%= tweet.user.username %></a> - <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></section>
+
+<section class="col-3 first shadow">
+<form method="POST" action="/tweets">
+  <input type="text" name="content">
+
+  <input type="submit" value="submit">
+</form>
+
+<a href="/tweets">Cancel</a>
+</section>
+<% @tweets.reverse.each do |tweet| %>
+  <section class="first col-3 shadow"><a href="/users/<%= tweet.user.username %>">@<%= tweet.user.username %></a> - <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></section>
 <% end %>
