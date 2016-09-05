@@ -63,4 +63,10 @@ class ApplicationController < Sinatra::Base
     redirect to '/login'
   end
 
+  helpers do
+    def logged_in?
+      !!current_user
+    end
+  end
+
 end
