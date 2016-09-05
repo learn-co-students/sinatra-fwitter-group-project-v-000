@@ -3,5 +3,3 @@
 <% @tweets.each do |tweet| %>
   <p><a href="/users/<%= tweet.user.username %>">@<%= tweet.user.username %></a> - <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></p>
 <% end %>
-
-<a href="/logout">Logout</a>
