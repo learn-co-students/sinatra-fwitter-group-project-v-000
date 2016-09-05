@@ -2,7 +2,7 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    if !!session[:user_id]
+    if logged_in?
       redirect to '/tweets'
     else
       erb :'/users/signup'
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    if session[:user_id] !=nil
+    if logged_in?
       session.destroy
       redirect '/login'
     else
@@ -19,17 +19,16 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    if !!session[:user_id]
-      redirect to '/tweets/new'
+    if logged_in?
+      redirect to '/tweets'
     else
       erb :'/users/login'
     end
   end
 
   get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    @tweets = @user.tweets
-    if !!session[:user_id]
+    if logged_in?
+      @user = User.find_by_slug(params[:slug])
       erb :'/users/show'
     else
       redirect to '/login'
@@ -37,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if !!session[:user_id]
+    if logged_in?
       redirect '/tweets'
     elsif params[:username] == "" || params[:email] == "" || params[:password] == "" || User.user_exists?(params[:username])
       redirect to '/signup'

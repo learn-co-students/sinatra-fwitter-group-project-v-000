@@ -1,21 +1,21 @@
 class TweeetsController < ApplicationController
   get '/tweets/new' do
-    if !session[:user_id]
-      redirect '/login'
-    else
+    if logged_in?
       erb :'/tweets/create'
+    else
+      redirect to '/login'
     end
   end
   get '/tweets' do
-    @tweets = Tweet.all
-    if !session[:user_id]
-      redirect '/login'
-    else
+    if logged_in?
+      @tweets = Tweet.all
       erb :'/tweets/show'
+    else
+      redirect to '/login'
     end
   end
   get '/tweets/:id' do
-    if session[:user_id]
+    if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       erb :'tweets/tweet'
     else
@@ -23,9 +23,9 @@ class TweeetsController < ApplicationController
     end
   end
   get '/tweets/:id/edit' do
-    if session[:user_id]
+    if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
-      if @tweet.user_id == session[:user_id]
+      if @tweet.user_id == current_user.id
        erb :'/tweets/edit'
       else
         redirect to '/tweets'
@@ -39,19 +39,17 @@ class TweeetsController < ApplicationController
     if params[:content] == ""
       redirect to "/tweets/#{params[:id]}/edit"
     else
-      @tweet = Tweet.find_by_id(params[:id])
-      @tweet.content = params[:content]
-      @tweet.save
-      redirect to "/tweets/#{@tweet.id}"
+      tweet = Tweet.find_by_id(params[:id])
+      tweet.update(content: params[:content])
+      redirect to "/tweets/#{tweet.id}"
     end
   end
 
   delete '/tweets/:id/delete' do
-    @tweet = Tweet.find_by_id(params[:id])
-    if session[:user_id]
-      @tweet = Tweet.find_by_id(params[:id])
-      if @tweet.user_id == session[:user_id]
-        @tweet.delete
+    if logged_in?
+      tweet = Tweet.find_by_id(params[:id])
+      if tweet.user_id == current_user.id
+        tweet.delete
         redirect to '/tweets'
       else
         redirect to '/tweets'
@@ -62,13 +60,15 @@ class TweeetsController < ApplicationController
   end
 
   post '/tweets' do
-    if !session[:user_id]
-      redirect '/login'
-    elsif params[:content] == ""
+    if params[:content] == ""
       redirect to '/tweets/new'
-    else
+    elsif logged_in?
       Tweet.create(content: params[:content], user_id: session[:user_id])
       redirect to '/tweets'
+    else
+      redirect to '/login'
     end
   end
+
+
 end
