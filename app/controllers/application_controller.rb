@@ -50,7 +50,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-    if logged_in?
+    if session[:user_id]
       @tweets = Tweet.all
       erb :'tweets/tweets'
     else
@@ -66,6 +66,14 @@ class ApplicationController < Sinatra::Base
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     erb :'users/show'
+  end
+
+  get '/tweets/new' do
+    if logged_in?
+      erb :'tweets/create_tweet'
+    else
+      redirect '/login'
+    end
   end
 
   helpers do
