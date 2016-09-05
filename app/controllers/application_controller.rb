@@ -77,8 +77,12 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets' do
-    @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
-    redirect "tweets/#{@tweet.id}"
+    if params[:content] != ""
+      @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
+      redirect "tweets/#{@tweet.id}"
+    else
+      redirect '/tweets/new'
+    end
   end
 
   get '/tweets/:id' do
