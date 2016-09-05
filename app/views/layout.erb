@@ -2,23 +2,28 @@
 <html>
 <head>
   <title>Fwitter</title>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+
 </head>
 <body>
   <header>
     <div id="navbar">
       <nav>
         <% if !!current_user %>
-          <a href="/tweets">Timeline</a> - 
-          <a href="/users/<%= current_user.username %>">Profile</a> -
-          <a href="/tweets/new">New Tweet</a> -
+          <a href="/tweets">Timeline</a>
+          <a href="/users/<%= current_user.username %>">Profile</a>
+          <a href="/tweets/new">New Tweet</a>
           <a href="/logout">Logout</a>
         <% else %>
-          <a href="/login">Login</a> -
+          <a href="/login">Login</a>
           <a href="/signup"> Signup</a>
         <% end %> 
       </nav>
     </div>
   </header>
+
 <%=yield%>
 
   <footer>
