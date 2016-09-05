@@ -4,23 +4,31 @@
   <title>Fwitter</title>
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css">
   <link rel="stylesheet" href="/css/style.css">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
 </head>
 <body>
   <header>
-    <div id="navbar">
-      <nav>
-        <% if !!current_user %>
-          <a href="/tweets">Timeline</a>
-          <a href="/users/<%= current_user.username %>">Profile</a>
-          <a href="/tweets/new">New Tweet</a>
-          <a href="/logout">Logout</a>
-        <% else %>
-          <a href="/login">Login</a>
-          <a href="/signup"> Signup</a>
-        <% end %> 
-      </nav>
+    <div class="wrapper">
+          <div id="logo">
+            <h1>Fwitter</h1>
+            <h2>Fwitter</h2>
+          </div>
+        </div><!-- .wrapper -->
+    <div id="navbar" class="light-fade">
+      <div class="wrapper">
+        <nav>
+          <% if !!current_user %>
+            <a href="/tweets">Timeline</a>
+            <a href="/users/<%= current_user.username %>">Profile</a>
+            <a href="/tweets/new">New Tweet</a>
+            <a href="/logout">Logout</a>
+          <% else %>
+            <a href="/login">Login</a>
+            <a href="/signup"> Signup</a>
+          <% end %> 
+        </nav>
+      </div>
     </div>
   </header>
 
