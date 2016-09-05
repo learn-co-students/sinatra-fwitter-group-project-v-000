@@ -103,7 +103,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post '/tweets/:id' do
+  patch '/tweets/:id' do
     if params[:content] != ""
       @tweet = Tweet.find_by_id(params[:id])
       @tweet.update(content: params[:content])
