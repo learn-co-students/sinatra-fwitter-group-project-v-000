@@ -4,19 +4,21 @@
   <title>Fwitter</title>
 </head>
 <body>
-  <div id="navbar">
-    <nav>
-      <% if !!current_user %>
-        <a href="/tweets">Timeline</a> - 
-        <a href="/users/<%= current_user.username %>">Profile</a> -
-        <a href="/tweets/new">New Tweet</a> -
-        <a href="/logout">Logout</a>
-      <% else %>
-        <a href="/login">Login</a> -
-        <a href="/signup"> Signup</a>
-      <% end %> 
-    </nav>
-  </div>
+  <header>
+    <div id="navbar">
+      <nav>
+        <% if !!current_user %>
+          <a href="/tweets">Timeline</a> - 
+          <a href="/users/<%= current_user.username %>">Profile</a> -
+          <a href="/tweets/new">New Tweet</a> -
+          <a href="/logout">Logout</a>
+        <% else %>
+          <a href="/login">Login</a> -
+          <a href="/signup"> Signup</a>
+        <% end %> 
+      </nav>
+    </div>
+  </header>
 <%=yield%>
 
   <footer>
