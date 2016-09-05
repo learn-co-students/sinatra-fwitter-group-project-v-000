@@ -65,8 +65,7 @@ class ApplicationController < Sinatra::Base
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    "#{@user.username}"
-
+    erb :'users/show'
   end
 
   helpers do
