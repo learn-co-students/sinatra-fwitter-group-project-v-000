@@ -2,7 +2,7 @@
 <section class="first col-1 shadow">
 <div id="details"><h3>Popular Tweeters</h3>
   <% @users.each do |user| %>
-    <li>@<%= user.username %></li>
+    <a href="/users/<%= user.username %>"><li>@<%= user.username %></li></a>
   <% end %>
 </div>
 
