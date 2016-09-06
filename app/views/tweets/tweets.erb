@@ -1,6 +1,6 @@
 <h1 class="milk-text">Welcome, <a href="/users/<%= current_user.username %>">@<%= current_user.username %></a>!</h1>
 <section class="first col-1 shadow">
-<div id="details"><h3>Popular Tweeters</h3>
+<div><h3>Popular Tweeters</h3>
   <% @users.each do |user| %>
     <a href="/users/<%= user.username %>"><li>@<%= user.username %></li></a>
   <% end %>
