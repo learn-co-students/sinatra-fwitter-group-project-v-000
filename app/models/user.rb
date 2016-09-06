@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :tweets
   has_secure_password
-  validates_uniqueness_of :username
+  validates_uniqueness_of :username, :email
   validates_confirmation_of :password
 
   def slug

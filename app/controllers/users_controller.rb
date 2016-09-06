@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       flash[:message] = "All fields are required."
       redirect to "/signup"
     else
-      user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      user = User.create(username: params[:username], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
       if user.save
         session[:id] = user.id
         redirect to "/tweets"
