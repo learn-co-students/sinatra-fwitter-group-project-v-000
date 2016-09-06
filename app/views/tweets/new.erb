@@ -1,4 +1,4 @@
-<h2>Tweet Something, <%= @current_user.username %>!</h2>
+<h2>Tweet Something, <%= current_user.username %>!</h2>
 <form action="/tweets" method="post">
   <input type="text" id="content" name="content">
   <input  type="submit" id="submit" value="submit">
