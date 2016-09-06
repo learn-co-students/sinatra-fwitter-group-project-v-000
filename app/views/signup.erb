@@ -1,0 +1,14 @@
+<% if logged_in? %>
+  <% redirect "/tweets" %>
+<% end %>
+
+<div class="row container-fluid">
+<h3>Please sign up to start using Fwitter:</h3>
+<form class="form-group" action="/signup" method="post">
+  <label class="control-label" for="username">Username: </label><input type="text" name="username" autofocus="true" required="true">
+  <label class="control-label"for="email">Email: </label><input type="email" name="email" required="true">
+  <label class="control-label"for="password">Password: </label><input type="password" name="password" required="true">
+  <label class="control-label"for="password_confirmation">Confirm Password: </label><input type="password" name="password_confirmation" required="true">
+  <input class="btn btn-default" type="submit" value="Sign Up">
+</form>
+</div>
