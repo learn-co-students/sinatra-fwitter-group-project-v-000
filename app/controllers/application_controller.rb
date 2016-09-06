@@ -10,8 +10,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    binding.pry
-    erb :index
+    if logged_in?
+      @user = current_user
+      redirect '/tweets'
+    else
+      erb :index
+    end
   end
 
   helpers do

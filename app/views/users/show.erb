@@ -1,0 +1,12 @@
+<div class="body-content">
+  <h1>User show page</h1>
+
+  <div class="tweets">
+    <ul>
+      <% @user.tweets.each do |tweet| %>
+        <li><%= @user.username %></li>
+        <li><%= tweet.content %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
