@@ -56,6 +56,18 @@ input[type="submit"]:hover {
   text-shadow: 0 2px 3px #000;
 }
 
+.milk-text a:link {
+  text-decoration: none;
+}
+
+.milk-text a:visited {
+  color: white;
+}
+
+.milk-text a:hover {
+  text-decoration: underline;
+}
+
 .shadow {
   box-shadow: 0 3px 10px #333;
 }
@@ -69,7 +81,7 @@ input[type="submit"]:hover {
 /*////////// BACKGROUNDS //////////*/
 
 .background-img {
-  background: url(http://www.intrawallpaper.com/static/images/cool-background.jpg) no-repeat center top;
+  background: url(../images/cool-background.jpg) no-repeat center top;
   background-size: cover;
 }
 
