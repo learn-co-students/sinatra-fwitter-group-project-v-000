@@ -20,7 +20,7 @@ class TweetController < ApplicationController
 
   post '/tweets' do
     if params[:content] != ""
-      @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
+      @tweet = current_user.tweets.create(content: params[:content])
       redirect "tweets"
     else
       redirect '/tweets/new'
