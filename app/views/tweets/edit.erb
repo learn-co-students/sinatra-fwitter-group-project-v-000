@@ -1,0 +1,14 @@
+<div class="body-content">
+  <h2>Edit Tweet</h2>
+  <br><br>
+  <div class="tweets">
+    <p><%= @tweet.user.username %></p>
+    <p><%= @tweet.content %></p>
+  </div>
+  <br>
+  <form action="/tweets/<%= @tweet.id %>" method="POST">
+    <input type="hidden" id="hidden" name="_method" value="PATCH">
+    <input type="text" name="content" id="content">
+    <input type="submit" class="btn btn-default btn-sm" id="submit" value="Edit Tweet">
+  </form>
+</div>

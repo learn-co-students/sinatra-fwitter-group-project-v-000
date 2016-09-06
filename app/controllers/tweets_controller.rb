@@ -1,14 +1,19 @@
 class TweetsController < ApplicationController
 
+  #### TWEETS INDEX ACTION ####
+
   get '/tweets' do
     if logged_in?
       @tweets = Tweet.all
-      @user = User.find_by(session[:user_id])
+      # binding.pry 
+      @user = User.find(session[:user_id])
       erb :'tweets/tweets'
     else
       redirect '/login'
     end
   end
+
+  #### CREATE ACTIONS ####
 
   get '/tweets/new' do
     if logged_in?
@@ -29,22 +34,52 @@ class TweetsController < ApplicationController
     end
   end
 
+  #### SHOW/READ ACTION ####
+
   get '/tweets/:id' do
     # binding.pry
     if logged_in?
-      @tweet = Tweet.find_by(params[:id])
+      @tweet = Tweet.find(params[:id])
       erb :'/tweets/show'
     else
       redirect '/login'
     end
   end
 
+  #### EDIT ACTIONS ####
+
+  get '/tweets/:id/edit' do
+    @tweet = find_tweet(params)
+    if logged_in? && @tweet.user_id == current_user.id
+      erb :'/tweets/edit'
+    else
+
+      redirect '/login'
+    end
+  end
+
+  patch '/tweets/:id' do
+    # binding.pry
+    if params[:content] == ""
+      # binding.pry
+      redirect "/tweets/#{params[:id]}/edit"
+    else
+      # binding.pry
+      @tweet = find_tweet(params)
+      @tweet.content = params[:content]
+      @tweet.save
+      redirect "/tweets/#{@tweet.id}"
+    end
+  end
+
+  #### DELETE ACTION ####
+
   delete '/tweets/:id/delete' do
-    @tweet = Tweet.find_by(params[:id])
+    @tweet = Tweet.find(params[:id])
     if @tweet.user_id == current_user.id
       @tweet.delete
       redirect '/tweets'
-    else
+    else # if you ain't tweet it, you can't delete it!
       redirect '/login'
     end
   end
