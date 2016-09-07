@@ -1,0 +1,5 @@
+<h3>Welcome <%=@tweet.current_user%> </h3>
+<ul>
+  <%@tweet.each do |t| binding.pry%>
+    <li><%=t.content + 1%><a href="tweets/<%=tweets.id%>"></a></li>
+  <%end%>
