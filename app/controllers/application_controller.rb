@@ -28,7 +28,7 @@ class ApplicationController < Sinatra::Base
     end
     
     def find_tweet(params)
-      Tweet.find(params[:id])
+      Tweet.find_by(id: params[:id])
     end
   end
 
