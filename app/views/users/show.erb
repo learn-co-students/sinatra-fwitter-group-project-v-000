@@ -3,8 +3,8 @@
 
   <div class="tweets">
     <ul>
-      <% @user.tweets.each do |tweet| %>
-        <li><%= @user.username %></li>
+      <% current_user.tweets.each do |tweet| %>
+        <li><%= current_user.username %></li>
         <li><%= tweet.content %></li>
       <% end %>
     </ul>
