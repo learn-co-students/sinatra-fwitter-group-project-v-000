@@ -1,5 +1,7 @@
-<h3>Welcome <%=@tweet.current_user%> </h3>
+<h3>Welcome, <%=current_user.user_name%> </h3>
+<h4>Tweets:</h4>
 <ul>
-  <%@tweet.each do |t| binding.pry%>
-    <li><%=t.content + 1%><a href="tweets/<%=tweets.id%>"></a></li>
+  <%@tweets.each do |t| binding.pry %>
+    <li><%= t.content %></li>
   <%end%>
+</ul>
