@@ -1,9 +1,8 @@
 <!-- # <% if current_user.id == @tweet.user.id %> -->
 <h3>Edit Tweet</h3>
 <form action="/tweets/<%=@tweet.id%>" method="post">
-  <input id="hidden" type="hidden" name="method" value="patch">
 
-  <input type="text" name="content" value="<%= @tweet.content binding.pry%>">
+  <input type="text" name="content" value="<%= @tweet.content %>">
 
   <input type="submit" value="submit">
 </form>

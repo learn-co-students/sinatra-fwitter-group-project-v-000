@@ -21,7 +21,7 @@ class TweetsController < ApplicationController
     if params[:content] == ""
       redirect to "/tweets/new"
     else
-      user = User.find_by_id(session[:user_id])
+      user = User.find_by(session[:user_id])
       @tweet = Tweet.create(content: params[:content], user_id: user.id)
       redirect to "/tweets/#{@tweet.id}"
     end
@@ -40,8 +40,6 @@ class TweetsController < ApplicationController
     if session[:user_id]
       @tweet = Tweet.find_by_id(params[:id])
       if @tweet.user_id == session[:user_id]
-        # @tweet.content = params[:content]
-        # binding.pry
        erb :'tweets/edit_tweet'
       else
         redirect to '/tweets'
@@ -51,7 +49,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  patch '/tweets/:id' do
+  post '/tweets/:id' do
     if params[:content] == ""
       redirect to "/tweets/#{params[:id]}/edit"
     else
