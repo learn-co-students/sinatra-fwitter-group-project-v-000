@@ -5,7 +5,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-		set :session_secret, "password_security" # --encryption key that will be used to create a session_id
+		set :session_secret, "password_security" # --encryption key that will be used to create a 
   end
 
   # --home page

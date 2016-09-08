@@ -25,6 +25,7 @@ class TweetsController < ApplicationController
 
   get 'tweets/:id' do
     @tweet = Tweet.find(session[:user_id])
+    erb :'/show_tweet'
   end
 
 end
