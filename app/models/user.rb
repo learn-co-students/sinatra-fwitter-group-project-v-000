@@ -1,15 +1,9 @@
 class User < ActiveRecord::Base
-  has_secure_password
   has_many :tweets
 
+  has_secure_password
 
-  def slug
-    unless self.username.nil?
-      self.username.gsub(" ", "-").downcase
-    end
-  end
+  extend Slugifiable::ClassMethods
+  include Slugifiable::InstanceMethods
 
-  def self.find_by_slug(slug)
-    self.all.find{ |instance| instance.slug == slug }
-  end
 end
