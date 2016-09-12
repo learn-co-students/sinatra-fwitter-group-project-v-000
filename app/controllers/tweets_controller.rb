@@ -3,10 +3,10 @@ class TweetsController < ApplicationController
   get '/tweets' do
     @tweets = Tweet.all
     @users = User.all
-    if is_logged_in?
-      erb :'/tweets/tweets'
-    else
+    if !is_logged_in?
       redirect to "/login"
+    else
+      erb :'/tweets/tweets'
     end
   end
 
@@ -22,7 +22,7 @@ class TweetsController < ApplicationController
   post '/tweets' do
     if !(params["content"] == "")
       @tweet = Tweet.create(content: params["content"])
-      @tweet.user = User.find_by(username: session["username"])
+      @tweet.user = User.find(session[:id])
       @tweet.save
       redirect '/tweets'
     else
