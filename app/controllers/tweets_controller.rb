@@ -33,7 +33,7 @@ class TweetsController < ApplicationController
   ######## SHOW TWEET #########
   get '/tweets/:id' do
     @tweet = Tweet.find(params["id"])
-    if session["username"] == nil
+    if !is_logged_in?
       redirect '/login'
     else
       erb :'/tweets/show_tweet'
@@ -66,11 +66,11 @@ class TweetsController < ApplicationController
   ######## DELETE TWEET #########
 
   post '/tweets/:id/delete' do
-    tweet = Tweet.find(params["id"])
-    if is_logged_in?
+    @tweet = Tweet.find(params["id"])
+    if !is_logged_in?
       redirect '/login'
-    elsif tweet.user.id == current_user.id
-      tweet.destroy
+    elsif @tweet.user_id == current_user.id
+      @tweet.destroy
       redirect '/tweets'
     else
       redirect '/tweets'
