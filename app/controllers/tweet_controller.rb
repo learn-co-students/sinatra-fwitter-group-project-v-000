@@ -7,19 +7,23 @@ class TweetController < ApplicationController
     erb :index
   end
 
+  get '/signup/tweets' do
+    binding.pry
+  end
+
   get '/tweets' do
     erb :show
   end
-
-  get '/tweets/new' do
-    erb :new
-  end
-
-  get '/:id/tweets' do
-    erb :show
-  end
-
-  post '/tweets' do
-    erb :show
-  end
+#
+#  get '/tweets/new' do
+#    erb :new
+#  end
+#
+#  get '/:id/tweets' do
+#    erb :show
+#  end
+#
+#  post '/tweets' do
+#    erb :show
+#  end
 end

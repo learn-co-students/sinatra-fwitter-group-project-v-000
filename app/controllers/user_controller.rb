@@ -14,4 +14,5 @@ class UserController < ApplicationController
   get '/account' do
     erb :accounts
   end
+
 end

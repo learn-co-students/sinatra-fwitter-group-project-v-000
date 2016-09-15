@@ -1,9 +1,10 @@
 require './config/environment'
+require './app/models/users'
 
 class ApplicationController < Sinatra::Base
-
+register Sinatra::ActiveRecordExtension
   configure do
-    enable :sessions unless test?
+    enable :sessions
     set :public_folder, 'public'
     set :views, 'app/views'
   end
@@ -13,16 +14,17 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
+    if current_user(session).nil?
       erb :signup
+    else
+      redirect '/tweet_controller/tweets'
+    end
   end
 
   post '/signup' do
-    user = User.new(username: params[:username], email: params[:email], password: params[:password])
-    if user.save
-      redirect "/tweet_controller/signup/tweets"
-    else
-      redirect '/failure'
-    end
+    user = User.create(username: params[:username], email: params[:email], password: params[:password])
+    user.id = session[:session_id]
+    redirect "/tweet_controller/signup/tweets"
   end
 
   helpers do
