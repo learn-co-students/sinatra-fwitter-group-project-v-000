@@ -24,7 +24,7 @@ register Sinatra::ActiveRecordExtension
   post '/signup' do
     user = User.create(username: params[:username], email: params[:email], password: params[:password])
     user.id = session[:session_id]
-    redirect "/tweet_controller/signup/tweets"
+    redirect "p/tweets"
   end
 
   helpers do
