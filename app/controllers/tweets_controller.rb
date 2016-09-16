@@ -1,13 +1,5 @@
 class TweetsController < ApplicationController
 
-  get '/tweets' do
-    if session[:user_id]
-      @tweets = Tweet.all
-      erb :'tweet/tweets'
-    else
-      redirect to '/login'
-    end
-  end
   #Create
     get '/tweets/new' do
       if session[:user_id]
@@ -40,7 +32,19 @@ class TweetsController < ApplicationController
       redirect("/tweets/#{@tweet.id}")
     end
     #
-    # post '/tweets/:id/delete'
+     delete '/tweets/:id/delete' do
+       if logged_in
+         @tweet = Tweet.find_by_id(params[:id])
+         if @tweet.user_id == current_user.id
+           @tweet.delete
+           redirect to '/tweets'
+         else
+           redirect to '/tweets'
+         end
+       else
+         redirect to '/login'
+       end
+     end
 
   #Read
 
@@ -49,5 +53,9 @@ class TweetsController < ApplicationController
       erb :'tweets/show_tweet'
     end
 
+    get '/tweets' do
+      @tweets = Tweet.all
+      erb :'tweets/tweets'
+    end
 
 end
