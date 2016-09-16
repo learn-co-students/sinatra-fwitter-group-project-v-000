@@ -3,10 +3,6 @@ class TweetController < ApplicationController
     set :views, '/app/views/tweets'
   end
 
-  get '/' do
-    erb :index
-  end
-
   get '/tweets' do
     erb :index
   end
