@@ -11,4 +11,8 @@ class TweetController < ApplicationController
   get '/tweets/:id' do
     erb :show
   end
+
+  get '/login' do
+    erb :login
+  end
 end
