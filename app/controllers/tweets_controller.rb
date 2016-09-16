@@ -1,5 +1,13 @@
 class TweetsController < ApplicationController
 
+  get '/tweets' do
+    if session[:user_id]
+      @tweets = Tweet.all
+      erb :'tweet/tweets'
+    else
+      redirect to '/login'
+    end
+  end
   #Create
     get '/tweets/new' do
       if session[:user_id]
@@ -41,9 +49,5 @@ class TweetsController < ApplicationController
       erb :'tweets/show_tweet'
     end
 
-    get '/tweets' do
-      @tweets = Tweet.all
-      erb :'tweets/tweets'
-    end
 
 end
