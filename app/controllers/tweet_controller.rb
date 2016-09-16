@@ -7,13 +7,10 @@ class TweetController < ApplicationController
     erb :index
   end
 
-  get '/signup/tweets' do
-    binding.pry
+  get '/tweets' do
+    erb :index
   end
 
-  get '/tweets' do
-    erb :show
-  end
 #
 #  get '/tweets/new' do
 #    erb :new
