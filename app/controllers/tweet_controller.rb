@@ -1,10 +1,10 @@
 class TweetController < ApplicationController
-  
+
   get '/tweets' do
-    erb :index
+    erb :"/tweets/index"
   end
 
-  get '/:id' do
+  get '/tweets/:id' do
     erb :show
   end
 end
