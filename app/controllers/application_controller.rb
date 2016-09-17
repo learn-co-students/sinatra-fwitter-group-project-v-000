@@ -1,9 +1,12 @@
+require './config/environment'
+
 class ApplicationController < Sinatra::Base
   include Validate::InstanceMethods
   configure do
     enable :sessions
     set :public_folder, 'public'
     set :views, 'app/views'
+    set :session_secret, "password_security"
   end
 
   get '/' do
@@ -24,8 +27,11 @@ class ApplicationController < Sinatra::Base
     else
       user = User.create(username: params[:username], email: params[:email], password: params[:password])
       user.id = session[:session_id]
-      user.save
-      redirect "/tweets"
+      if user.save
+        redirect "/tweets"
+      else
+        erb :failure
+      end
     end
   end
 
@@ -39,14 +45,23 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     user = User.find_by(username: params[:username])
-    user.id = session[:session_id]
-    user.save
-    redirect "/tweets"
+    if user && user.authenticate(params[:password])
+      user.id = session[:session_id]
+      user.save
+      redirect "/tweets"
+    else
+      erb :failure
+    end
   end
 
   get '/logout' do
     session.clear
     redirect '/login'
+  end
+
+  get '/users/:slug' do
+    user = User.find_by_slug("#{slug}")
+    redirect "/tweets/<%= user.slug %>"
   end
 
   helpers do
