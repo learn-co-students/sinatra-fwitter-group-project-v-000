@@ -13,39 +13,62 @@ class TweetsController < ApplicationController
     if logged_in?
       erb :'tweets/create_tweet'
     else
-      redirect to '/users/login'
+      redirect to '/login'
     end
   end
 
   post'/tweets' do
-    user = User.find_by_id(session[:user_id])
-    @tweet = Tweet.create(:content=> params[:content], :user_id=> user.id)
+    if params[:content] == ""
+      redirect to '/tweets/new'
+    else
+      user = User.find_by_id(session[:user_id])
+      @tweet = Tweet.create(:content=> params[:content], :user_id=> user.id)
 
-    redirect("/tweets/#{@tweet.id}")
+      redirect("/tweets/#{@tweet.id}")
+    end
+  end
+
+  get '/tweets/:id' do
+    if logged_in?
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :'tweets/show_tweet'
+    else
+      redirect to '/login'
+    end
   end
 
   get '/tweets/:id/edit' do
     if session[:user_id]
       @tweet = Tweet.find_by_id(params[:id])
-      erb :'tweets/edit_tweet'
+      if @tweet.user_id == session[:user_id]
+       erb :'tweets/edit_tweet'
+      else
+        redirect to '/tweets'
+      end
     else
-      redirect to '/tweets'
+      redirect to '/login'
     end
   end
 
-  post '/tweets/:id' do
-    @tweet = Tweet.create(params)
-    @tweet.user = User.find(params[:username])
-
-    redirect("/tweets/#{@tweet.id}")
+  patch '/tweets/:id' do
+    if params[:content] == ""
+      redirect to "/tweets/#{params[:id]}/edit"
+    else
+      @tweet = Tweet.find_by_id(params[:id])
+      @tweet.content = params[:content]
+      @tweet.save
+      redirect to "/tweets/#{@tweet.id}"
+    end
   end
 
    delete '/tweets/:id/delete' do
-     if logged_in
-       @tweet = Tweet.find_by_id(params[:id])
-       if @tweet.user_id == current_user.id
+     @tweet = Tweet.find_by_id(params[:id])
+
+     if logged_in?
+       if @tweet.user_id == session[:user_id]
          @tweet.delete
          redirect to '/tweets'
+
        else
          redirect to '/tweets'
        end
@@ -53,11 +76,5 @@ class TweetsController < ApplicationController
        redirect to '/login'
      end
    end
-
-
-  get '/tweets/:id' do
-    @tweet = Tweet.find_by_slug(params[:id])
-    erb :'tweets/show_tweet'
-  end
 
 end
