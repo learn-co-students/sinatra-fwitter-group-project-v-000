@@ -239,7 +239,7 @@ describe ApplicationController do
         fill_in(:content, :with => "tweet!!!")
         click_button 'submit'
 
-        user = User.find_by(:id=> user.id)
+        user = User.find_by(:id => user.id)
         user2 = User.find_by(:id => user2.id)
         tweet = Tweet.find_by(:content => "tweet!!!")
         expect(tweet).to be_instance_of(Tweet)

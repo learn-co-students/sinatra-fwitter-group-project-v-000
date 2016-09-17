@@ -1,5 +1,7 @@
 <p>Welcome, <%= @user.username %></p>
 <p><a href="/tweets/new">Create New Tweet:</a></p>
-
+Tweets: <% @user.tweets.each do |tweet| %>
+<p><%= tweet.content %></p>
+<% end %>
 <br>
 <a href="/logout">Log Out</a>
