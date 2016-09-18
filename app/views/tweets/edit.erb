@@ -1,6 +1,20 @@
+<head>
+  <style>
+    div.content {
+    background: linear-gradient(to right, #46DAFF, #648880, #293f50);
+    width: 500px;
+    margin: auto;
+    border: solid;
+    text-align: center;
+    padding: 0px;
+    }
+  </style>
+  <div class="content">
 <%= @tweet.content %>
 <form method="post" action="/tweets/<%= @tweet.id %>/edit">
   <input type="hidden" name="_method" value="patch">
   <p>New Content: <input type="text" name="content"></p>
   <input type="submit" value="submit">
 </form>
+</div>
+</head>

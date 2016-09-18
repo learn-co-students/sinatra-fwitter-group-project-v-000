@@ -1,6 +1,22 @@
-<form method="post" action='/signup'>
+<head>
+  <style>
+    div.signup {
+    background: linear-gradient(to right, #46DAFF, #648880, #293f50);
+    width: 500px;
+    margin: auto;
+    border: solid;
+    text-align: center;
+    padding: 10px;
+    }
+  </style>
+  <div class="signup">
+    <form method="post" action='/signup'>
   <label>Username: </label><input type="text" name="username">
   <label>Email: </label><input type="text" name="email">
+  <br></br>
   <label>Password: </label><input type="password" name="password">
+  <br></br>
   <input type="submit" value="Sign Up">
 </form>
+</div>
+</head>

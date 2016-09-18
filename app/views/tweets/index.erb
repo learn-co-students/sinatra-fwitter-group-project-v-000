@@ -1,7 +1,70 @@
-<p>Welcome, <%= @user.username %></p>
-<p><a href="/tweets/new">Create New Tweet:</a></p>
-Tweets: <% Tweet.all.each do |tweet| %>
-<p><%= tweet.content %></p>
-<% end %>
-<br>
-<a href="/logout">Log Out</a>
+
+<head>
+  <style>
+    div.tweets {
+    background: linear-gradient(to right, #46DAFF, #648880, #293f50);
+    width: 500px;
+    margin: auto;
+    border: solid;
+    text-align: center;
+    padding: 0px;
+    }
+
+    div.header {
+    text-align: center;
+    background: linear-gradient(to     right bottom, #E80062, #293f50);
+    padding: 10px;
+    border-bottom: solid;
+      }
+
+    div.banner {
+    text-align: center;
+    background: linear-gradient(to right, #648880, #46DAFF, #293f50);
+    height: 35px;
+    padding: 10px;
+    line-height: 0px;
+    text-decoration: underline;
+        }
+
+    div.tweet_background {
+    background: linear-gradient(to right, #46DAFF, #648880, #293f50);
+    padding: 15px;
+    }
+
+    div.footer {
+    background: linear-gradient(to     right top, #E80062, #293f50);
+    border-top: solid;
+    }
+
+    div.tweet {
+    border: solid;
+    }
+
+    div.body {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    }
+  </style>
+<div class="body">
+  <div class="header">
+    <h1>Welcome, <%= @user.username %></h1>
+  </div>
+  <div class="banner">
+    <h2>Tweets</h2>
+  </div>
+  <div class ="tweet_background">
+    <div class="tweets">
+      <% Tweet.all.each do |tweet| %>
+      <div class="tweet">
+        <p><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></p>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="footer">
+    <br>
+      <h3><center><a href="/tweets/new">Create a New Tweet</a></center></h3>
+    <br>
+    <h4><a href="/logout"><input type="submit" value="Log Out"></a></h4>
+  </div>
+</div>
+</head>
