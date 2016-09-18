@@ -1,7 +1,52 @@
+
 div.tweets {
-  background: #aabbcc;
+  background: linear-gradient(to right, #46DAFF, #648880, #293f50);
   width: 500px;
   margin: auto;
   border: solid;
   text-align: center;
+  padding: 0px;
+}
+
+div.header {
+  text-align: center;
+  background: linear-gradient(to     right bottom, #E80062, #293f50);
+  padding: 10px;
+  border-bottom: solid;
   }
+
+div.banner {
+  text-align: center;
+  background: linear-gradient(to right, #648880, #46DAFF, #293f50);
+  height: 35px;
+  padding: 10px;
+  line-height: 0px;
+  text-decoration: underline;
+    }
+
+div.tweet_background {
+  background: linear-gradient(to right, #46DAFF, #648880, #293f50);
+  padding: 15px;
+}
+
+div.footer {
+  background: linear-gradient(to     right top, #E80062, #293f50);
+  border-top: solid;
+}
+
+div.tweet {
+  border: solid;
+}
+
+div.body {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+div.content {
+  background: linear-gradient(to right, #46DAFF, #648880, #293f50);
+  width: 500px;
+  margin: auto;
+  border: solid;
+  text-align: center;
+  padding: 0px;
+}

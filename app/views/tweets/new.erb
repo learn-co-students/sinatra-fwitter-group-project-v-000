@@ -1,18 +1,15 @@
-<head>
-  <style>
-    div.tweet {
-    background: linear-gradient(to right, #46DAFF, #648880, #293f50);
-    width: 500px;
-    margin: auto;
-    border: solid;
-    text-align: center;
-    padding: 0px;
-    }
-  </style>
-  <div class="tweet">
-<form method="post" action="/tweets/new">
-  <p>New Tweet: <input type="text" name="content"></p>
-  <input type="submit" value="submit">
-</form>
-</div>
-</head>
+<!DOCTYPE html>
+<html>
+    <head>
+      <link rel="stylesheet" type="text/css" href="/style.css">
+    </head>
+
+    <body>
+      <div class="content">
+        <form method="post" action="/tweets/new">
+          <p>New Tweet: <input type="text" name="content"></p>
+          <input type="submit" value="submit">
+        </form>
+      </div>
+    </body>
+  </html>
