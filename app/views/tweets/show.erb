@@ -1,0 +1,20 @@
+<h1>Welcome, <%=@user.username%></h1>
+
+<h3>Your Fwitter digest:</h3>
+
+<%Tweet.all.reverse.each do |tweet|%>
+  <%user = User.find_by_id(tweet.user_id)%>
+  <a href="/users/<%=user.slug%>"><%=user.username%></a>: <%=tweet.content%> <br>
+  <%end%>
+
+<h3>Edit your Tweets:</a></h3>
+<%x=1%>
+<%@user.tweets.each do |tweet|%>
+    Tweet <%=x%>: <a href="/tweets/<%="#{tweet.id}"%>">"<%=tweet.content%>"</a><br>
+    <%x= x+1%>
+    <%end%>
+
+<h3>Create a <a href="/tweets/new">new tweet.</a></h3>
+
+
+<a href="/logout">Log out here.</a>
