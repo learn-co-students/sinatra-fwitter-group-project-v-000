@@ -1,0 +1,20 @@
+
+# This is likely a tweet index for all users tweets
+# this is also going to need logic for a user to go to his individual show page
+
+<h1>Welcome, <%= @user.username %> </h1>
+
+
+<h4><a href="/users/<%=@user.slug%>">Your Page</a></h4>
+
+<h4><a href="/tweets/new">Make a new tweet</a></h4>
+
+
+<br>
+
+<h2>All Tweets</h2>
+  <% Tweet.all.each do |tweet| %>
+  <h3><%=tweet.content%></h3>
+  <%end%>
+
+<h4><a href="/logout">Log Out</a></h4>
