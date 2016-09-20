@@ -12,9 +12,9 @@
 
 <br>
 
-<h2>All Tweets</h2>
+<h2>All Tweets - Click to go to edit page</h2>
   <% Tweet.all.each do |tweet| %>
-  <h3><%=tweet.content%></h3>
+  <h3><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></h3>
   <%end%>
 
 <h4><a href="/logout">Log Out</a></h4>
