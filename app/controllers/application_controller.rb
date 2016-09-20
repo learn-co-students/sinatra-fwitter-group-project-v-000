@@ -19,9 +19,9 @@ class ApplicationController < Sinatra::Base
   # this appears to be the users homepage once they're signed in
   # can grab a users specific tweets - a user has many tweets
   get '/tweets' do 
-    @user = User.find_by_id(session[:id])
 
-      if @user
+      if current_user
+        @user = current_user
         erb :'tweets/tweets'
       else
         redirect to '/login'
@@ -31,9 +31,7 @@ class ApplicationController < Sinatra::Base
   # Signup with a username, login, password
   # If a session is logged in - it should redirect to the users page
   get '/signup' do 
-    @user = User.find_by_id(session[:id])
-    
-    if @user  # if a user session isnt already live, populate the signup
+    if logged_in?  # if a user session isnt already live, populate the signup
       redirect to '/tweets'
     else
       erb :'/signup'
@@ -53,10 +51,9 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do 
-
     @user = User.find_by_id(session[:id])
     
-    if @user  # if a user session isnt already live, populate the signup
+    if logged_in? # if a user session isnt already live, populate the signup
       redirect to '/tweets'
     else
       erb :'/users/login'
@@ -112,7 +109,7 @@ helpers do
     end
 
     def current_user
-      User.find(session[:id])
+      User.find_by_id(session[:id])
     end
   end
 
