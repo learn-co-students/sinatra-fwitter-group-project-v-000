@@ -10,19 +10,14 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "secret"
   end
 
-  helpers do
-    def logged_in?
-      !!session[:user_id]
-    end
-
-    def current_user
-      User.find(session[:user_id])
-    end
-  end
-
   get '/' do
     erb :index
   end
+
+  get '/users/:slug' do
+      @user = User.find_by_slug(params[:slug])
+      erb :'/users/show_user_tweets'
+    end
 
   get '/signup' do
     if session[:user_id]
@@ -87,16 +82,6 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/users/:user_slug' do
-    if session[:user_id]
-      @user = User.find_by_slug(params[:user_slug])
-      #binding.pry
-      erb :'/users/show_user_tweets'
-    else
-      redirect to '/'
-    end
-  end
-
   post '/tweets' do
     if !session[:user_id]
       redirect to '/'
@@ -114,6 +99,7 @@ class ApplicationController < Sinatra::Base
     if session[:user_id]
       @user = User.find(session[:user_id])
       @tweet = Tweet.find(params[:tweet_id])
+      #binding.pry
       erb :'/tweets/show_tweet'
     else
       redirect to '/login'
@@ -136,10 +122,13 @@ class ApplicationController < Sinatra::Base
       redirect to '/'
     elsif session[:user_id] != @tweet.user.id
       redirect to '/tweets'
+    elsif params[:content].empty?
+      redirect to "/tweets/#{@tweet.id}/edit"
     else
       @tweet.update(content: params[:content])
       @tweet.save
-      erb :'/tweets/show_tweet'
+      #binding.pry
+      redirect to "/tweets/#{@tweet.id}"
     end
   end
 
