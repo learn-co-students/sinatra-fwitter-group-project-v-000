@@ -3,6 +3,7 @@ class TweetController < ApplicationController
   get '/tweets' do
     if logged_in?(session)
       @user = User.find_by_id(session[:user_id])
+      @tweets = Tweet.all
       erb :"/tweets/index"
     else
       redirect '/login'
@@ -20,8 +21,7 @@ class TweetController < ApplicationController
 
   post '/tweets/new' do
     if params[:content] != nil && params[:content] != ""
-      user = User.find_by(:id => session[:user_id])
-      tweet = Tweet.create(:content => params[:content], :user_id => user.id)
+      tweet = Tweet.create(:content => params[:content], :user => current_user(session))
       redirect "/tweets"
     else
       erb :"tweets/new"
@@ -39,8 +39,8 @@ class TweetController < ApplicationController
 
   get '/tweets/:id/edit' do
     if logged_in?(session)
-      if params[:id].to_i == session[:user_id]
-        @tweet = Tweet.find_by(:id => params[:id])
+      @tweet = Tweet.find_by(id: params[:id])
+      if @tweet.user == current_user(session)
         erb :"tweets/edit"
       else
         redirect "/tweets"
@@ -51,18 +51,22 @@ class TweetController < ApplicationController
   end
 
   patch '/tweets/:id/edit' do
-    if params[:content] != nil && params[:content] != ""
-      tweet = Tweet.find_by(:id => params[:id])
-      tweet.update(:content => params[:content])
-      redirect "/tweets"
+    if logged_in?(session)
+      if !params[:content].blank?
+        tweet = Tweet.find_by(:id => params[:id])
+        tweet.update(:content => params[:content])
+        redirect "/tweets"
+      end
+    else
+      redirect "/login"
     end
   end
 
   delete '/tweets/:id' do
     if logged_in?(session)
       tweet = Tweet.find_by(:id => params[:id])
-      if params[:id].to_i == session[:user_id]
-        tweet = Tweet.delete(params[:id])
+      if tweet.user == current_user(session)
+        tweet.delete
         redirect "/tweets"
       else
         redirect "/tweets"

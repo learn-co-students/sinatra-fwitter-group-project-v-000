@@ -18,10 +18,9 @@ ActiveRecord::Schema.define(version: 20160917184309) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string  "username"
-    t.string  "email"
-    t.string  "password_digest"
-    t.integer "tweet_ids"
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
   end
 
 end

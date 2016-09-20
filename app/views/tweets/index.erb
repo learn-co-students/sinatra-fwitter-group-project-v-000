@@ -6,14 +6,14 @@
     <body>
     <div class="body">
       <div class="header">
-        <h1>Welcome, <%= @user.username %></h1>
+        <h1>Welcome, <%= current_user(session).username %></h1>
       </div>
       <div class="banner">
         <h2>Tweets</h2>
       </div>
       <div class ="tweet_background">
         <div class="tweets">
-          <% Tweet.all.each do |tweet| %>
+          <% @tweets.all.each do |tweet| %>
           <div class="tweet">
             <p><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></p>
           </div>
