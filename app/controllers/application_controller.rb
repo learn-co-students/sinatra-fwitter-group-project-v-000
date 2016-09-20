@@ -51,7 +51,6 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do 
-    @user = User.find_by_id(session[:id])
     
     if logged_in? # if a user session isnt already live, populate the signup
       redirect to '/tweets'
@@ -80,7 +79,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/new' do 
-    @user = User.find_by_id(session[:id])
+    @user = current_user
 
     if @user
       erb :'/tweets/create_tweet'
@@ -90,7 +89,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets/new' do
-    @user = User.find_by_id(session[:id])
+    @user = current_user
 
     if params[:content].empty?
       redirect '/tweets/new'
