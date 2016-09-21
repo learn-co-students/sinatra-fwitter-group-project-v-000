@@ -65,6 +65,8 @@ class ApplicationController < Sinatra::Base
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
       redirect to '/tweets'
+    else
+      redirect '/login'
     end
   end
 
@@ -75,7 +77,8 @@ class ApplicationController < Sinatra::Base
 
   get '/users/:slug' do 
     @user = User.find_by_slug(params[:slug])
-    erb :'/tweets/show_tweet'
+    
+    erb :'/users/user_homepage'
   end
 
   get '/tweets/new' do 
@@ -115,11 +118,36 @@ class ApplicationController < Sinatra::Base
   get '/tweets/:id/edit' do 
     if logged_in?
       @tweet = Tweet.find(params[:id])
-      erb :'/tweets/edit_tweet'
+      erb :'tweets/edit_tweet'
     else
       redirect to '/login'
+    end
+  end
+
+  patch '/tweets/:id/edit' do
+    @tweet = Tweet.find(params[:id])
+    if logged_in? && !params[:content].empty?
+      @tweet.content = params[:content]
+      @tweet.save
+      redirect to "/tweets/#{@tweet.id}"
+    elsif params[:content].empty?
+      redirect to "/tweets/#{@tweet.id}/edit"
     end 
   end
+
+  # needs logic that allows me to 
+  # make sure the tweet id belongs to the logged 
+  # user 
+  delete '/tweets/:id/delete' do #delete action
+  @tweet = Tweet.find(params[:id])
+  if current_user.id == @tweet.user_id 
+    @tweet.delete
+    redirect to '/tweets'
+  else
+    redirect to '/tweets'
+  end
+end
+
 
 helpers do
     def logged_in?
