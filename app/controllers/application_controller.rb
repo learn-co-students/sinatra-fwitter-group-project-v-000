@@ -116,22 +116,27 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/:id/edit' do 
-    if logged_in?
-      @tweet = Tweet.find(params[:id])
+    redirect to '/login' if !logged_in?
+
+    @tweet = Tweet.find(params[:id])
+    
+    if @tweet.user_id == current_user.id
       erb :'tweets/edit_tweet'
-    else
-      redirect to '/login'
+    elsif current_user.id != @tweet.user_id
+      redirect to '/tweets'
     end
   end
 
   patch '/tweets/:id/edit' do
     @tweet = Tweet.find(params[:id])
-    if logged_in? && !params[:content].empty?
+    if logged_in? && !params[:content].empty? && @tweet.user_id == current_user.id
       @tweet.content = params[:content]
       @tweet.save
       redirect to "/tweets/#{@tweet.id}"
     elsif params[:content].empty?
       redirect to "/tweets/#{@tweet.id}/edit"
+    else
+      redirect to '/tweets'
     end 
   end
 
