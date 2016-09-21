@@ -1,4 +1,10 @@
-<h2>Welcome to Fwitter</h2>
+<div class="jumbotron center">
+  <h1>Welcome to Fwitter</h1>
+  <% if logged_in? %>
+    <h2>Welcome Back, <%=current_user.username %>!!</h2>
+  <% end %>
 
-<a href="/signup">Sign Up</a> |
-<a href="/login">Log In</a>
+  <a class="btn btn-primary" href="/signup">Sign Up</a>
+  <a class="btn btn-default" href="/login">Log In</a>
+
+</div>
