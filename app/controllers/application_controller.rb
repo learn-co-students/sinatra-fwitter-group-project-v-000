@@ -17,27 +17,6 @@ class ApplicationController < Sinatra::Base
   end
 
 
-  get '/login' do 
-    
-    if logged_in? # if a user session isnt already live, populate the signup
-      redirect to '/tweets'
-    else
-      erb :'/users/login'
-    end
-  end
-
-  post '/login' do 
-    @user = User.find_by(username: params[:username])
-  
-    if @user && @user.authenticate(params[:password])
-      session[:id] = @user.id
-      redirect to '/tweets'
-    else
-      flash[:message] = "Your login information is incorrect"
-      redirect '/login'
-    end
-  end
-
 helpers do
     def logged_in?
       !!session[:id]
