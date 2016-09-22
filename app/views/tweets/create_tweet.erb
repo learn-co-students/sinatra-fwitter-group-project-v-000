@@ -1,5 +1,13 @@
-<h2>Create A Tweet</h2>
-<form action="/tweets" method="POST">
-  <p>Status: <input type="text" name="content"></p>
-  <input class="btn btn-primary" type="submit" value="submit">
-</form>
+<h2>Create Tweet</h2>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Create A New Tweet</h3>
+  </div>
+  <div class="panel-body">
+    <form action="/tweets" method="POST">
+      <input type="text" name="content" placeholder="Status:"><br><br>
+      <input class="btn btn-primary" type="submit" value="submit">
+    </form>
+  </div>
+</div>
