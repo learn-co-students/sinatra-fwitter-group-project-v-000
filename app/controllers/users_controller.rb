@@ -2,7 +2,7 @@ require './config/environment'
 require 'rack-flash'
 
 class UsersController < ApplicationController
-
+  
   use Rack::Flash
   configure do
     set :public_folder, 'public'
@@ -63,7 +63,6 @@ class UsersController < ApplicationController
 
   get '/logout' do 
     session.clear
-    flash[:message] = "You're logged out!"
     redirect to '/login'
   end
 

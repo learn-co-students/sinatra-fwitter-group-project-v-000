@@ -31,6 +31,7 @@ class TweetsController < ApplicationController
     if @user
       erb :'/tweets/create_tweet'
     else
+      flash[:message] = "You must login"
       redirect '/login'
     end
   end
