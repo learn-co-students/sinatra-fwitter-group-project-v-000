@@ -142,12 +142,12 @@ class ApplicationController < Sinatra::Base
   # make sure the tweet id belongs to the logged 
   # user 
   delete '/tweets/:id/delete' do #delete action
-  @tweet = Tweet.find(params[:id])
+   @tweet = Tweet.find(params[:id])
   if current_user.id == @tweet.user_id 
     @tweet.delete
     redirect to '/tweets'
   else
-    redirect to '/tweets'
+    redirect to '/tweets'  # need a flash message to say you cant delete something you didnt make
   end
 end
 

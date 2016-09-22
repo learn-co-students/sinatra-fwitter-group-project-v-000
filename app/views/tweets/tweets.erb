@@ -10,7 +10,7 @@
 
 <h2>All Tweets - Click to go to edit page</h2>
   <ul><% Tweet.all.each do |tweet| %>
-    <li><%=tweet.content%> <a href="/tweets/<%=tweet.id%>/edit"> Edit</a></li>
+    <li><%=tweet.content%> <br><a href="/tweets/<%=tweet.id%>/edit"> Edit</a>, <a href="/tweets/<%=tweet.id%>">Tweet Page</a></li><br>
     <%end%>
   </ul>
 
