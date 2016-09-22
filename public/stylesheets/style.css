@@ -9,3 +9,14 @@ body {
 .center {
   text-align: center;
 }
+
+hr {
+    display: block;
+    width: 50%;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: outset;
+    border-width: 5px;
+}
