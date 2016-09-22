@@ -20,3 +20,10 @@ hr {
     border-style: outset;
     border-width: 5px;
 }
+
+#icon {
+  position: absolute;
+  left: 50%;
+  margin-right: 25px !important;
+  display: block;
+}
