@@ -1,3 +1,6 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
 <h1>Signup for Fwitter!</h1>
 
 <form method="POST" action="/signup" >

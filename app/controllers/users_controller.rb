@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     erb :'/users/user_homepage'
   end
 
-    # Signup with a username, login, password
+  # Signup with a username, login, password
   # If a session is logged in - it should redirect to the users page
   get '/signup' do 
     if logged_in?  # if a user session isnt already live, populate the signup
