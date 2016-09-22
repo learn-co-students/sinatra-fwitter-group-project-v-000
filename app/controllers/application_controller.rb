@@ -17,30 +17,6 @@ class ApplicationController < Sinatra::Base
   end
 
 
-
-  # Signup with a username, login, password
-  # If a session is logged in - it should redirect to the users page
-  get '/signup' do 
-    if logged_in?  # if a user session isnt already live, populate the signup
-      redirect to '/tweets'
-    else
-      erb :'/signup'
-    end
-  end
-
-  # catches the signup params - creates a new user - and logs them into the tweets homepage
-  post '/signup' do 
-    if params.values.any? { |el| el.empty? }
-       flash[:message] = "You must enter all fields!"
-      redirect to '/signup'
-    else 
-      @user = User.create(username: params["username"], email: params["email"], password: params["password"])
-      @user.save
-      session[:id] = @user.id
-      redirect to '/tweets'
-    end
-  end
-
   get '/login' do 
     
     if logged_in? # if a user session isnt already live, populate the signup
@@ -60,12 +36,6 @@ class ApplicationController < Sinatra::Base
       flash[:message] = "Your login information is incorrect"
       redirect '/login'
     end
-  end
-
-  get '/logout' do 
-    session.clear
-    flash[:message] = "You're logged out!"
-    redirect to '/login'
   end
 
 helpers do

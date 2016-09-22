@@ -96,9 +96,6 @@ class TweetsController < ApplicationController
     end 
   end
 
-  # needs logic that allows me to 
-  # make sure the tweet id belongs to the logged 
-  # user 
   delete '/tweets/:id/delete' do #delete action
    @tweet = Tweet.find(params[:id])
   if current_user.id == @tweet.user_id 

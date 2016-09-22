@@ -30,6 +30,7 @@ class UsersController < ApplicationController
   # catches the signup params - creates a new user - and logs them into the tweets homepage
   post '/signup' do 
     if params.values.any? { |el| el.empty? }
+      flash[:message] = "You need to enter all fields to signup!"
       redirect to '/signup'
     else 
       @user = User.create(username: params["username"], email: params["email"], password: params["password"])
@@ -55,12 +56,14 @@ class UsersController < ApplicationController
       session[:id] = @user.id
       redirect to '/tweets'
     else
+      flash[:message] = "Login information incorrect"
       redirect '/login'
     end
   end
 
   get '/logout' do 
     session.clear
+    flash[:message] = "You're logged out!"
     redirect to '/login'
   end
 
