@@ -6,9 +6,11 @@ class TweetController < ApplicationController
 
     if !logged_in?
       redirect to '/login'
+    else
+      @all_tweets = Tweet.all.reverse
+      @user_tweets = current_user.tweets
+      erb :'tweets/show'
     end
-    @user = User.find_by_id(session[:user_id])
-    erb :'tweets/show'
   end
 
   get '/tweets/new' do
@@ -23,26 +25,24 @@ class TweetController < ApplicationController
     if (params[:tweet][:content]).empty?
       redirect to '/tweets/new'
     else
-      @user = User.find_by_id(session[:user_id])
-      @tweet = Tweet.create(params[:tweet])
-      @user.tweets << @tweet
+      @tweet = current_user.tweets.create(content: params[:tweet][:content])
       redirect to '/tweets'
     end
   end
 
   get '/tweets/:id' do
     if logged_in?
-      @user = User.find_by_id(session[:user_id])
       @tweet = Tweet.find_by_id(params[:id])
-          erb :'tweets/show_individual_tweet'
+      erb :'tweets/show_individual_tweet'
     else
       redirect to '/login'
     end
   end
 
   get '/tweets/:id/edit' do
-    if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
+    @tweet = Tweet.find_by_id(params[:id])
+
+    if logged_in? && current_user.id == @tweet.user_id
       erb :'tweets/edit'
     else
       redirect to '/login'
@@ -53,11 +53,14 @@ class TweetController < ApplicationController
 
   post '/tweets/:id' do
     @tweet = Tweet.find_by_id(params[:id])
+
     if params[:tweet][:content].empty?
       redirect to "/tweets/#{@tweet.id}/edit"
-    else
+    elsif @tweet.user_id == current_user.id
       @tweet.update(params[:tweet])
       redirect to '/tweets'
+    else
+      redirect to "/tweets"
     end
   end
 
@@ -68,8 +71,8 @@ class TweetController < ApplicationController
   delete '/tweets/:id/delete' do
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
-      @user = User.find_by_id(session[:user_id])
-      if @tweet.user_id == @user.id
+
+      if @tweet.user_id == current_user.id
         @tweet.delete
         redirect to '/tweets'
       else
