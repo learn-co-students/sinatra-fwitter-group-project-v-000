@@ -22,11 +22,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    binding.pry
-    if params["user"]["username"].empty? || params["user"]["password"].empty? || params["user"]["email"].empty?
+    if params["username"].empty? || params["password"].empty? || params["email"].empty?
       redirect to '/signup'
     else
-      user = User.create(params["user"])
+      user = User.create(params)
       session[:user_id] = user.id
       redirect to '/tweets'
     end
@@ -54,6 +53,11 @@ class ApplicationController < Sinatra::Base
   get '/tweets' do
     @user = User.find_by_id(session[:user_id])
     erb :'/tweets/tweets'
+  end
+
+  get '/logout' do
+    session.clear
+    redirect to '/'
   end
 
 
