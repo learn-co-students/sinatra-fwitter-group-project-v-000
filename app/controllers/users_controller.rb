@@ -15,7 +15,10 @@ class UsersController < ApplicationController
       session[:id] = user.id
       redirect '/tweets'
     end
+  end
 
+  get '/login' do
+    erb :'users/login'
   end
 
 end
