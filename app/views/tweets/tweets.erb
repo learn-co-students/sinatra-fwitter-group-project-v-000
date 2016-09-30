@@ -1,8 +1,29 @@
-<h1>Welcome, <%= @user.username.capitalize %></h1>
+<% if Helper.logged_in?(session) %>
+  <h1>Welcome, <%= @user.username.capitalize %></h1>
+
+  <h3>Feed</h3>
+
+  <% User.all.map do |u| %>
+    
+    <% u.tweets.each do |t| %>
+      <b><%= u.username %></b>: <%= t.content %>
+      <br>
+    <% end %>
+
+  <% end %>
+<% end %> <!-- Ends the logged in content -->
+
+
+  <h1><%= @view.username %></h1>
+<% @view.tweets.each do |t| %>
+  <p><%= "#{@view.username}: "+t.content %></p>
+<% end %>
+
+<!-- if I change @users into @view or w.e for the specific user that's being used, it gives me the error for "loads the tweets index after login"-->
 
 
 
 
-
-
-<a href="/logout">Logout</a>
+<% if Helper.logged_in?(session) %>
+  <a href="/logout">Logout</a>
+<% end %>

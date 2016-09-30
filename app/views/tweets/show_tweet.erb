@@ -1,0 +1,7 @@
+<h1><%= @tweet.user.username %>'s Tweet</h1>
+
+<p><%= @tweet.content %></p>
+
+<a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+<!-- This has to be a delete inside of a form. Check older lessons. Or does it redirect you to the page where it has the form? Confirm-->
+<a href="/tweets/<%= @tweet.id %>/delete">Delete Tweet</a>

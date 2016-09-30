@@ -41,7 +41,7 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     user = User.find_by(username: params["username"])
-    if user.password == params["password"]
+    if user && user.password == params["password"]
       session[:user_id] = user.id
       redirect to '/tweets'
     else
@@ -53,6 +53,7 @@ class ApplicationController < Sinatra::Base
   get '/tweets' do
     if session[:user_id]
       @user = User.find_by_id(session[:user_id])
+      @view = @user
       erb :'/tweets/tweets'
     else
       redirect to '/login'
@@ -64,6 +65,56 @@ class ApplicationController < Sinatra::Base
     redirect to '/login'
   end
 
+  get '/users/:slug' do
+    @user = User.find_by_id(session["user_id"])
+    @view = User.find_by_slug(params[:slug])
+    erb :'/tweets/tweets'
+  end
+
+  get '/tweets/new' do
+    if Helper.logged_in?(session)
+      erb :'/tweets/create_tweet'
+    else
+      #raise alert saying you're not logged in
+      redirect to '/login'
+    end
+  end
+
+  post '/tweets' do
+    if params["content"].empty?
+      #raise alert here, look back at last lesson to raise alert.
+      redirect to '/tweets/new'
+    else
+      @user = Helper.current_user(session)
+      @user.tweets << Tweet.create(params)
+      @user.save
+      redirect to '/tweets'
+    end
+  end
+
+  get '/tweets/:id' do
+    if Helper.logged_in?(session)
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :'/tweets/show_tweet'
+    else
+      redirect to '/login'
+    end
+  end
+
+  get '/tweets/:id/edit' do
+    if Helper.logged_in?(session)
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :'/tweets/edit_tweet'
+    else
+      redirect to '/login'
+    end
+  end
+
+  patch '/tweets/:id' do
+    binding.pry
+    @tweet = Tweet.find_by_id(params[:id])
+    redirect to "/tweets/#{@tweet.id}"
+  end
 
 
 
