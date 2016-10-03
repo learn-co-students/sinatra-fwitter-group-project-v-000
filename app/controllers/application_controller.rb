@@ -41,7 +41,7 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     user = User.find_by(username: params["username"])
-    if user && user.password == params["password"]
+    if user && user.authenticate(params["password"])
       session[:user_id] = user.id
       redirect to '/tweets'
     else
@@ -111,9 +111,26 @@ class ApplicationController < Sinatra::Base
   end
 
   patch '/tweets/:id' do
-    binding.pry
     @tweet = Tweet.find_by_id(params[:id])
-    redirect to "/tweets/#{@tweet.id}"
+    
+    if params["content"].empty?
+      redirect to "/tweets/#{@tweet.id}/edit"
+    else
+      @tweet.content = params["content"]
+      @tweet.save
+      redirect to "/tweets/#{@tweet.id}"
+    end
+  end
+
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if @tweet.id == session["user_id"]
+      @tweet = Tweet.find_by_id(params[:id])
+      @tweet.delete
+      redirect to '/tweets'
+    else
+      redirect to '/tweets'
+    end
   end
 
 
