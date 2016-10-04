@@ -1,6 +1,5 @@
 <h2><%= @user.username %>'s tweets</h2>
 
 <% @user.tweets.each do |tweet| %>
-<%binding.pry%>
   <p><%= tweet.content %></p>
 <% end %>
