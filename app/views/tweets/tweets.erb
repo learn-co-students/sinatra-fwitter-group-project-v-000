@@ -1,0 +1,5 @@
+<h1>Tweets Written by Fwitterers!</h1>
+<% Tweet.all.each do |tweet| %>
+	<h2><%=tweet.user.username%> wrote:</h2>
+	<h3><%=tweet.content%></h3>
+<% end %>
