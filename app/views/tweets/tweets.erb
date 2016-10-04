@@ -1,5 +1,6 @@
-<h1>Tweets Written by Fwitterers!</h1>
+<h1>Welcome, <%=current_user.username%></h1>
+<h2>These tweets were written by Fwitterers, just like you!</h2>
 <% Tweet.all.each do |tweet| %>
-	<h2><%=tweet.user.username%> wrote:</h2>
-	<h3><%=tweet.content%></h3>
+	<h3><%=tweet.user.username%> wrote:</h3>
+	<h4><%=tweet.content%></h4>
 <% end %>
