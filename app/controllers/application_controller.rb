@@ -22,7 +22,7 @@ class ApplicationController < Sinatra::Base
 	end
 
 	get '/signup' do 
-		if self.logged_in?
+		if logged_in?
 			redirect '/tweets'
 		else
 			erb :'users/create_user'
@@ -134,7 +134,7 @@ class ApplicationController < Sinatra::Base
 		end
 
 		def current_user
-		  User.find(session[:id])
+		  @current_user ||= User.find(session[:id])
 		end
 	end
 
