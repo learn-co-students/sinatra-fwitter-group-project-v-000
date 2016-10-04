@@ -37,6 +37,15 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
+	get '/logout' do 
+		if logged_in?
+			session.clear
+			redirect '/login'
+		else
+			redirect '/'
+		end
+	end
+
 
 	post '/signup' do 
 		@user = User.new
