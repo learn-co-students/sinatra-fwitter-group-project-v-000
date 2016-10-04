@@ -46,6 +46,11 @@ class ApplicationController < Sinatra::Base
 		end
 	end
 
+	get '/users/:slug' do 
+		@user = User.find_by_slug(params[:slug])
+		erb :'users/user_tweets'
+	end
+
 
 	post '/signup' do 
 		@user = User.new
@@ -68,6 +73,31 @@ class ApplicationController < Sinatra::Base
 		else
 			redirect '/'
 		end
+	end
+
+	get '/tweets/new' do
+		if logged_in?
+			erb :'tweets/create_tweet'
+		else
+			redirect '/login'
+		end
+	end
+
+	post '/tweets' do 
+		if !params[:content].nil? && params[:content] != ""
+			@tweet = Tweet.new 
+			@tweet.content = params[:content]
+			@tweet.user = current_user
+			@tweet.save
+			redirect "/tweets/#{@tweet.id}"
+		else
+			redirect '/tweets/new'
+		end
+	end
+
+	get '/tweets/:id' do
+		@tweet = Tweet.find(params[:id])
+		erb :'tweets/show'
 	end
 
 	helpers do
