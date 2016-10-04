@@ -1,0 +1,8 @@
+<h1>Welcome, <%=current_user.username%>!</h1>
+<h2>You are editing Tweet <%=@tweet.id%>, which you wrote (hopefully).</h2>
+<form method="post" action="/tweets">
+<input type="hidden" name="_method" value="patch">
+<textarea id="content" name="content" value="<%=@tweet.content%>"></textarea>
+<input type="hidden" name="id" value=<%=@tweet.id%>>
+<button type="submit" id="submit">Edit Tweet!</button>
+</form>
