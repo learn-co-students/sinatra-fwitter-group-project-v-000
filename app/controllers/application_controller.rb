@@ -100,6 +100,12 @@ class ApplicationController < Sinatra::Base
 		erb :'tweets/show_tweet'
 	end
 
+	delete '/tweets/:id/delete' do 
+		@tweet = Tweet.find(params[:id])
+		@tweet.delete 
+		redirect '/tweets'
+	end
+
 	helpers do
 		def logged_in?
 		  !!session[:id]
