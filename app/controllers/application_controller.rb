@@ -82,11 +82,10 @@ class ApplicationController < Sinatra::Base
 	end
 
 	post '/tweets' do 
-		if !params[:content].nil? && params[:content] != ""
 			@tweet = Tweet.new 
 			@tweet.content = params[:content]
 			@tweet.user = current_user
-			@tweet.save
+		if	@tweet.save
 			redirect "/tweets/#{@tweet.id}"
 		else
 			redirect '/tweets/new'
@@ -116,10 +115,9 @@ class ApplicationController < Sinatra::Base
 	end
 
 	patch '/tweets' do 
-		if !params[:content].nil? && params[:content] != ""
 			@tweet = Tweet.find(params[:id]) 
 			@tweet.content = params[:content]
-			@tweet.save
+		if	@tweet.save
 			redirect "/tweets/#{@tweet.id}"
 		else
 			redirect "/tweets/#{params[:id]}/edit"
