@@ -48,9 +48,8 @@ class TweetsController < Controller
 	end
 
 	patch '/tweets' do 
-			@tweet = Tweet.find(params[:id]) 
-			@tweet.content = params[:content]
-		if	@tweet.save
+		@tweet = Tweet.find(params[:id]) 
+		if @tweet.update(content: params[:content])
 			redirect "/tweets/#{@tweet.id}"
 		else
 			redirect "/tweets/#{params[:id]}/edit"
