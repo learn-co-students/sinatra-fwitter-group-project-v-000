@@ -48,15 +48,13 @@ class ApplicationController < Sinatra::Base
 
 	get '/users/:slug' do 
 		@user = User.find_by_slug(params[:slug])
+		@user_tweets = @user.tweets
 		erb :'users/user_tweets'
 	end
 
 
 	post '/signup' do 
-		@user = User.new
-		@user.username = params[:username]
-		@user.email = params[:email]
-		@user.password = params[:password]
+		@user = User.new(params)
 		if @user.save
 			session[:id] = @user.id
 			redirect '/tweets'
