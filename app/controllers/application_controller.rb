@@ -6,6 +6,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
+    set :session_secret, "password_security"
   end
 
   get '/' do
@@ -60,7 +61,7 @@ class ApplicationController < Sinatra::Base
     if params[:content].empty?
       redirect '/tweets/new'
     else
-      @tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
+      @tweet = Tweet.create(content: params[:content], user_id: session[:id])
       @tweet.save
     end
     redirect "/tweets"
@@ -68,7 +69,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     if logged_in?
-      @user = User.find(session[:user_id])
+      @user = User.find(session[:id])
       erb :'/tweets/tweets'
     else
       redirect "/login"
