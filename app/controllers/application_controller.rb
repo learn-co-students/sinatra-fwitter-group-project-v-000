@@ -59,6 +59,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+<<<<<<< HEAD
   delete '/tweets/:id/delete' do
     if is_logged_in?
       @tweet = Tweet.find_by_id(params[:id])
@@ -71,6 +72,16 @@ class ApplicationController < Sinatra::Base
     else
       redirect to '/login'
     end
+=======
+
+
+  get '/signup' do
+    erb :'/users/create_user'
+  end
+  post '/signup' do
+    binding.pry
+
+>>>>>>> d78bfaca004e2c1a75ba1e8c94ff4c6d91314e74
   end
 
   helpers do
