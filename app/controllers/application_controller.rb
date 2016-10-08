@@ -22,13 +22,9 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    if params[:username].empty? || params[:password].empty? || params[:email].empty?
-      redirect '/signup'
-    else
-      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-      session[:id] = @user.id
-      redirect '/tweets'
-    end
+    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+    session[:id] = @user.id
+    redirect '/tweets'
   end
 
   get '/login' do
@@ -58,12 +54,8 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets' do
-    if params[:content].empty?
-      redirect '/tweets/new'
-    else
-      @tweet = Tweet.create(content: params[:content], user_id: session[:id])
-      @tweet.save
-    end
+    @tweet = Tweet.create(content: params[:content], user_id: session[:id])
+    @tweet.save
     redirect "/tweets"
   end
 
@@ -77,7 +69,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
+    @user = current_user
     erb :'/tweets/show_tweet'
   end
 
@@ -91,9 +83,9 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/:id/edit' do
-    if logged_in? && Tweet.find(params[:id]) != nil
+    if logged_in?
       @tweet = Tweet.find(params[:id])
-       if current_user == @tweet.user
+      if current_user == @tweet.user
          erb :'tweets/edit_tweet'
        else
          redirect "/tweets"
@@ -105,13 +97,8 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    if params[:content].empty?
-      redirect "/tweets/#{params[:id]}/edit"
-    else
-      @tweet.update(content: params[:content])
-      @tweet.save
-      redirect "/tweets"
-    end
+    @tweet.update(content: params[:content])
+    redirect "/tweets"
   end
 
   delete '/tweets/:id/delete' do
@@ -132,12 +119,11 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def logged_in?
-
-      !!session[:id]
+      !!current_user
     end
 
     def current_user
-      User.find(session[:id])
+      @current_user ||= User.find(session[:id]) if session[:id]
     end
   end
 
