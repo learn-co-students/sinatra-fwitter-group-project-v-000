@@ -57,7 +57,11 @@ class ApplicationController < Sinatra::Base
 
 
   get '/signup' do
-    erb :create_user
+    erb :'/users/create_user'
+  end
+  post '/signup' do
+    binding.pry
+
   end
 
   helpers do
