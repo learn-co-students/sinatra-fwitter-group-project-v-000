@@ -54,6 +54,12 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+
+
+  get '/signup' do
+    erb :create_user
+  end
+
   helpers do
 
     def is_logged_in?
