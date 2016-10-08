@@ -60,8 +60,16 @@ class ApplicationController < Sinatra::Base
     erb :'/users/create_user'
   end
   post '/signup' do
-    binding.pry
-
+    if is_logged_in?
+      redirect '/tweets'
+    else
+      if !params[:username].empty? && !params[:email].empty? && !params[:password_digest].empty?
+        @user = User.create(:username=> params[:username], :email => params[:email], :password_digest => params[:password_digest])
+        redirect '/tweets'
+      else
+        redirect '/signup'
+      end
+    end
   end
 
   helpers do
