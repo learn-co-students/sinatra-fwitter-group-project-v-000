@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   get '/signup' do
-    if (session[:id].nil?)
+    if session[:id].nil?
       erb :'users/signup'
     else
       redirect '/tweets'
@@ -18,8 +18,7 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    user = User.find_by(session[:id])
-    if user
+    if !session[:id].nil?
       redirect '/tweets'
     else
       erb :'users/login'
@@ -29,11 +28,16 @@ class UsersController < ApplicationController
   post '/login' do
     user = User.find_by(params)
     session[:id] = user.id
-    if user
+    if !session[:id].nil?
       redirect '/tweets'
     else
-       redirect '/login'
+      redirect '/login'
     end
+  end
+
+  get '/logout' do
+    session.clear
+    redirect '/login'
   end
 
 end

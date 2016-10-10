@@ -134,7 +134,7 @@ describe ApplicationController do
 
 
       visit '/login'
-
+      
       fill_in(:username, :with => "becky567")
       fill_in(:password, :with => "kittens")
       click_button 'submit'
