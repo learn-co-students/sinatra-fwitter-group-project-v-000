@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
 # <<<<<<< HEAD
-    @user = User.find(session[:id])
+    @user = User.find(session[:user_id])
     erb :'/tweets'
 # =======
     if is_logged_in?
@@ -129,7 +129,7 @@ class ApplicationController < Sinatra::Base
   end
   post '/login' do
     @user = User.find_by(params[:email], params[:password])
-    session[:id] = @user.id
+    session[:user_id] = @user.id
   end
 
   helpers do
