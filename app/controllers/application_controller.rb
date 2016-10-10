@@ -128,8 +128,15 @@ class ApplicationController < Sinatra::Base
     end
   end
   post '/login' do
-    @user = User.find_by(params[:email], params[:password])
-    session[:user_id] = @user.id
+    @user = User.find_by(email: params[:email], password_digest: params[:password])
+
+    binding.pry
+    if !@user.nil?
+      session[:user_id] = @user.id
+      redirect to '/tweets'
+    else
+      redirect to '/login'
+    end
   end
 
   helpers do
