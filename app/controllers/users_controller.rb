@@ -18,7 +18,22 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    erb :'users/login'
+    user = User.find_by(session[:id])
+    if user
+      redirect '/tweets'
+    else
+      erb :'users/login'
+    end
+  end
+
+  post '/login' do
+    user = User.find_by(params)
+    session[:id] = user.id
+    if user
+      redirect '/tweets'
+    else
+       redirect '/login'
+    end
   end
 
 end
