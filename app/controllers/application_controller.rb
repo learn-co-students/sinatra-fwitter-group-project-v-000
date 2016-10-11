@@ -107,9 +107,10 @@ class ApplicationController < Sinatra::Base
       redirect '/tweets'
     else
       if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
-        @user = User.create(:username=> params[:username], :email => params[:email], :password => params[:password])
-        session[:user_id] = @user.id
+        @user = User.new(:username=> params[:username], :email => params[:email], :password => params[:password])
         @user.save
+        session[:user_id] = @user.id
+
         redirect '/tweets'
 # >>>>>>> f9e125e886b061a6dbed2c622dc8cd06e3ae2757
       else
@@ -129,7 +130,8 @@ class ApplicationController < Sinatra::Base
     end
   end
   post '/login' do
-    @user = User.find_by(email: params[:email], password_digest: params[:password])
+    @user = User.find_by(params["email"], params["password"])
+    
 
     if !@user.nil?
 
