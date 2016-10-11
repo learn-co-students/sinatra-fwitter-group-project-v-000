@@ -14,8 +14,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    session.clear
-    redirect to '/'
+    if is_logged_in?
+      session.clear
+      redirect to '/'
+    else
+      redirect to '/login'
+    end
   end
 
   get '/tweets' do
@@ -130,16 +134,15 @@ class ApplicationController < Sinatra::Base
     end
   end
   post '/login' do
-    @user = User.find_by(params["email"], params["password"])
-    
 
-    if !@user.nil?
+  @user = User.find_by(username: params["username"])
 
-      session[:user_id] = @user.id
-      redirect to '/tweets'
-    else
-      redirect to '/login'
-    end
+     if @user != nil && @user.password == params[:password_digest]
+       session[:user_id] = @user.id
+       redirect to '/tweets'
+     else
+       redirect to '/login'
+     end
   end
 
   helpers do
