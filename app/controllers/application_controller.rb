@@ -13,17 +13,6 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  get '/logout' do
-    if is_logged_in?
-      session.clear
-
-      redirect to '/'
-    else
-      redirect to '/login'
-      binding.pry
-    end
-  end
-
   get '/tweets' do
 # <<<<<<< HEAD
   @user = current_user
@@ -144,6 +133,21 @@ class ApplicationController < Sinatra::Base
      else
        redirect to '/login'
      end
+  end
+  get '/show' do
+    @user = current_user
+    @tweets = Tweet.find_by(@user.id)
+    erb :'users/show'
+  end
+  get '/logout' do
+    if is_logged_in?
+      session.clear
+      redirect to '/login'
+
+    else
+        redirect to '/'
+
+    end
   end
 
   helpers do
