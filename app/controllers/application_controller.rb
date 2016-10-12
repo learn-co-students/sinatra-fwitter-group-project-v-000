@@ -6,7 +6,6 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "password_security"
   end
 
   get "/" do
@@ -22,11 +21,13 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/signup" do
-    user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-    if user.save && user.username != "" && user.email != "" && user.password != ""
-        redirect "/tweets"
+    @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+    if @user.valid? && username_exists? == nil
+      @user.save
+      session[:user_id] = @user.id
+      redirect "/tweets"
     else
-        redirect "/signup"
+      redirect "/signup"
     end
   end
 
@@ -44,39 +45,26 @@ class ApplicationController < Sinatra::Base
         session[:user_id] = @user.id
         redirect "/tweets"
     else
-        redirect "/failure"
+        redirect "/login"
     end
   end
-
-  # get "/success" do
-  #   if logged_in?
-  #     erb :success
-  #   else
-  #     redirect "/login"
-  #   end
-  # end
-
-  # get "/failure" do
-  #   erb :failure
-  # end
 
   get "/logout" do
     session.clear
     redirect "/login"
   end
 
-  get '/users/:slug' do
-    @user = User.find(params[:slug])
-    erb :'/tweets/show'
-  end
-
   helpers do
     def logged_in?
-      !!session[:user_id]
+      !!current_user
     end
 
     def current_user
-      User.find(session[:user_id])
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    end
+
+    def username_exists?
+      User.find_by(:username => params[:username])
     end
   end
 
