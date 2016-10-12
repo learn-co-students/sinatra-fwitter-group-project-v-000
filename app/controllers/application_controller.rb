@@ -35,6 +35,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/tweets/:id' do
+    if is_logged_in?
+      @tweet = Tweet.find_by(params[:id])
+    else
+      redirect to '/login'
+    end
+
+  end
+
   get '/tweets/:id/edit' do
     if is_logged_in?
       @tweet = Tweet.find_by_id(params[:id])
@@ -74,17 +83,20 @@ class ApplicationController < Sinatra::Base
 
 #<<<<<<< HEAD
   delete '/tweets/:id/delete' do
+
     if is_logged_in?
+      erb :'/tweets/show_tweet'
       @tweet = Tweet.find_by_id(params[:id])
       if @tweet.user_id == current_user.id
         @tweet.delete
         redirect to '/tweets'
       else
-        redirect to '/tweets'
+        redirect to '/login'
       end
     else
       redirect to '/login'
     end
+  binding.pry
   end
 #=======
 
@@ -99,9 +111,6 @@ class ApplicationController < Sinatra::Base
 
   post '/signup' do
 
-#<<<<<<< HEAD
-# <<<<<<< HEAD
-# =======
     if is_logged_in?
       redirect '/tweets'
     else
@@ -143,11 +152,6 @@ class ApplicationController < Sinatra::Base
        redirect to '/login'
      end
   end
-  get '/users/:slug' do
-    @user = current_user.username.slug
-    @tweets = Tweet.find_by(@user.id)
-    erb :'users/show'
-  end
   get '/logout' do
     if is_logged_in?
       session.clear
@@ -158,6 +162,12 @@ class ApplicationController < Sinatra::Base
 
     end
   end
+  get '/users/:slug' do
+    @user = current_user.username.slug
+    @tweets = Tweet.find_by(@user.id)
+    erb :'users/show'
+  end
+
 
   helpers do
 
