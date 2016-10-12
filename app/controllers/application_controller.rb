@@ -53,7 +53,7 @@ class ApplicationController < Sinatra::Base
       redirect to '/tweets/new'
     else
       @tweet = current_user.tweets.create(content: params[:content])
-      redirect to '/tweets/#{@tweet.id}'
+      redirect("/tweets/#{@tweet.id}")
     end
   end
 
@@ -103,10 +103,13 @@ class ApplicationController < Sinatra::Base
     else
       if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
         @user = User.new(:username=> params[:username], :email => params[:email], :password => params[:password])
-        @user.save
-        session[:user_id] = @user.id
+        if @user.save
+          session[:user_id] = @user.id
 
-        redirect '/tweets'
+          redirect '/tweets'
+        else
+          redirec to '/signup'
+        end
 # >>>>>>> f9e125e886b061a6dbed2c622dc8cd06e3ae2757
       else
         redirect to '/signup'
