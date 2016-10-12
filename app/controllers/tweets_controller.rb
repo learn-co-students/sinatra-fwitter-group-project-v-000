@@ -17,14 +17,19 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets/new' do
-    if params[:content].nil?
+    if params["tweet"]["content"].nil? || params["tweet"]["content"] == ""
       redirect :'tweets/new'
     else
       user = User.find_by(session[:id])
-      tweet = Tweet.new(params)
+      tweet = Tweet.new(params["tweet"])
       user.tweets << tweet
-      redirect '/user/#{user.slug}'
+      redirect to("/tweets/#{tweet.id}")
     end
+  end
+
+  get '/tweets/:id' do
+    @tweet =  Tweet.find_by(params[:id])
+    erb :'tweets/show'
   end
 
 end
