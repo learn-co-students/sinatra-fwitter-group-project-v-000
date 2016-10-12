@@ -40,4 +40,9 @@ class UsersController < ApplicationController
     redirect '/login'
   end
 
+  get '/users/:slug' do
+    @user = User.find_by_slug(:slug)
+    erb :'users/index'
+  end
+
 end
