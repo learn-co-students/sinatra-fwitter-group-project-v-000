@@ -15,10 +15,11 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
 # <<<<<<< HEAD
-  @user = current_user
+
 
 # =======
     if is_logged_in?
+        @user = current_user
       @tweets = Tweet.all
       erb :'tweets/tweets'
     else
@@ -90,7 +91,7 @@ class ApplicationController < Sinatra::Base
 
     if is_logged_in?
       @tweet = Tweet.find_by_id(params[:id])
-       
+
       if @tweet.user_id == current_user.id
         @tweet.delete
         redirect to '/tweets'
