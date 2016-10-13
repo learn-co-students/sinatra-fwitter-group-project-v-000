@@ -37,7 +37,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/:id' do
     if is_logged_in?
-      @tweet = Tweet.find_by(params[:id])
+      @tweet = Tweet.find_by_id(params[:id])
       erb :'/tweets/show_tweet'
     else
       redirect to '/login'
@@ -48,6 +48,7 @@ class ApplicationController < Sinatra::Base
   get '/tweets/:id/edit' do
     if is_logged_in?
       @tweet = Tweet.find_by_id(params[:id])
+
       if @tweet.user_id == current_user.id
         erb :'tweets/edit_tweet'
       else
@@ -71,6 +72,8 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+
+
   patch '/tweets/:id' do
     if params[:content] == "" || params[:content] == nil
       redirect to "/tweets/#{params[:id]}/edit"
@@ -86,18 +89,18 @@ class ApplicationController < Sinatra::Base
   delete '/tweets/:id/delete' do
 
     if is_logged_in?
-      erb :'/tweets/show_tweet'
       @tweet = Tweet.find_by_id(params[:id])
+       
       if @tweet.user_id == current_user.id
         @tweet.delete
         redirect to '/tweets'
       else
-        redirect to '/login'
+        redirect to '/tweets'
       end
     else
       redirect to '/login'
     end
-  binding.pry
+
   end
 #=======
 
@@ -148,7 +151,7 @@ class ApplicationController < Sinatra::Base
       if @user && @user.authenticate(params[:password])
        session[:user_id] = @user.id
        redirect to '/tweets'
-       binding.pry
+
      else
        redirect to '/login'
      end
@@ -160,7 +163,6 @@ class ApplicationController < Sinatra::Base
 
     else
         redirect to '/'
-
     end
   end
   get '/users/:slug' do
