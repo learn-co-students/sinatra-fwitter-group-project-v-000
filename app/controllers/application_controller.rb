@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
 
 # =======
     if is_logged_in?
-        @user = current_user
+      @user = current_user
       @tweets = Tweet.all
       erb :'tweets/tweets'
     else
