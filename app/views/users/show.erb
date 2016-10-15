@@ -1,0 +1,17 @@
+<a href="/tweets">Fwitter Feed</a> <a href="/logout">Logout</a>
+<h2><%=@user.username.capitalize%>'s Tweets</h2>
+<form action="/tweets/new" method="get">
+  <input type="submit" value="New Tweet">
+</form>
+<% @user.tweets.each {|tweet| %>
+  <p><%=tweet.content%><p>
+  <p>Tweeted by: <%= tweet.user.username %></p>
+  <form action="/tweets/<%=tweet.id%>/edit" method="get">
+    <input type="submit" value="Edit Tweet">
+  </form>
+  <form action="/tweets/<%=tweet.id%>/delete" method="post">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Tweet">
+  </form>
+  <br></br>
+<% } %>

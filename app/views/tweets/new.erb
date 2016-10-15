@@ -1,0 +1,8 @@
+<a href="/tweets">Fwitter Feed</a> <a href="/users/<%=@user.slug%>">Your Tweets</a> <a href="/logout">Logout</a>
+<h2>New Tweet</h2>
+<form method="post" action="/tweets">
+  <label for="content">Content:</label>
+  <input type="text" name="tweet[content]" id="content">
+  <br></br>
+  <input type="submit" value="submit">
+</form>
