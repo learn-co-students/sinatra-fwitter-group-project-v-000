@@ -28,8 +28,13 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id' do
+    user = User.find_by(session[:id])
     @tweet =  Tweet.find_by(params[:id])
-    erb :'tweets/show'
+    if !session[:id].nil? && @tweet.user_id == user.id
+      erb :'tweets/show'
+    else
+      redirect '/login'
+    end
   end
 
   get '/tweets/:id/edit' do
@@ -37,20 +42,44 @@ class TweetsController < ApplicationController
     if !session[:id].nil?
       @user = User.find_by(session[:id])
     end
-    if @tweet.user.id == @user.id
-      erb :'/tweets/edit'
+    if !@tweet.nil? && !@user.nil?
+      if @tweet.user_id == @user.id
+        erb :'/tweets/edit'
+      else
+        redirect '/login'
+      end
     else
       redirect '/login'
     end
   end
 
   post '/tweets/:id/edit' do
-    if params[:content] == "" || params[:content].nil?
-      tweet = Tweet.find_by(params[:id])
-      tweet.content = params[:content]
-      redirect to "/tweets/#{tweet.id}"
+    if !session[:id].nil?
+      @user = User.find_by(session[:id])
+    end
+    tweet = Tweet.find_by(params[:id])
+    if @user.id == tweet.user_id
+      if !params[:tweet][:content] == "" || !params[:tweet][:content].nil?
+        tweet.content = params[:tweet][:content]
+        tweet.save
+        redirect to("/tweets/#{tweet.id}/edit")
+      else
+        redirect to("/tweets/#{params[:id]}/edit")
+      end
     else
-      redirect to("/tweets/#{params[:id]}")
+      redirect '/login'
+    end
+  end
+
+  post '/tweets/:id' do
+    if !session[:id].nil? && params["Delete Tweet"]
+      user = User.find_by(session[:id])
+      tweet = Tweet.find_by(params[:id])
+    end
+    if user.id == tweet.user_id && !user.id.nil?
+      tweet.destroy
+    else
+      redirect to("/tweets/#{params[:id]/edit}")
     end
   end
 
