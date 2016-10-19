@@ -1,7 +1,7 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
-
+  include Helpers
   configure do
     enable :sessions unless test?
     set :session_secret, "secret"
