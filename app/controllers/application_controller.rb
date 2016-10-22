@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets' do
-    if !params[:content].empty?
+    if !params[:content].empty? && params[:content].length <= 140
       @tweet = Tweet.create(content: params[:content])
     else
       redirect to "/tweets/new"
@@ -53,6 +53,16 @@ class ApplicationController < Sinatra::Base
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
     redirect to "/tweets"
+  end
+  
+  get '/signup' do
+    erb :'/users/new'
+  end
+  
+  post '/signup' do
+    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+    session[:user_id] = @user.id
+    redirect to '/tweets'
   end
 
 end
