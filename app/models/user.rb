@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :tweets
   validates_presence_of :email
   validates_presence_of :username
+  validates_uniqueness_of :username
   validates_presence_of :password
 
   def slug
@@ -15,3 +16,5 @@ class User < ActiveRecord::Base
   end
 
 end
+
+

@@ -4,7 +4,6 @@ use Rack::Flash
 
 get "/tweets" do 
   if logged_in?
-    @user = current_user
     erb :'/tweets/tweets'
   else
     redirect "/login"
@@ -14,7 +13,6 @@ end
 
 get '/tweets/new' do
   if logged_in?
-    @user = current_user
     erb :'/tweets/create_tweet'
   else
     redirect "/login"
@@ -23,7 +21,7 @@ end
 
 post '/tweets' do
   if !params[:content].empty?
-  current_user.tweets.create(content: params[:content], user_id: session[:user_id])
+  current_user.tweets.create(params)
   redirect "/users/#{current_user.slug}"
   else
   flash[:message] = "Please enter text to create a new tweet."
@@ -53,8 +51,7 @@ end
 patch '/tweets/:id' do
   if !params[:content].empty?
     @tweet = Tweet.find(params[:id])
-    @tweet.content = params[:content]
-    @tweet.save
+    @tweet.update(content: params[:content]) 
     redirect "/tweets/#{@tweet.id}"
   end
     redirect "/tweets/#{params[:id]}/edit"
