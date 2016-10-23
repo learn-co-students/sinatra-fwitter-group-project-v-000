@@ -28,8 +28,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-    @tweets = Tweet.all
-    erb :'/tweets/index'
+    if session[:user_id]
+      @tweets = Tweet.all
+      erb :'/tweets/index'
+    else
+      redirect('/')
+    end
   end
 
   get '/tweets/:id' do
@@ -56,13 +60,42 @@ class ApplicationController < Sinatra::Base
   end
   
   get '/signup' do
-    erb :'/users/new'
+    if !session[:user_id]
+      erb :'/users/new'
+    else
+      redirect('/tweets')
+    end
   end
   
   post '/signup' do
-    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-    session[:user_id] = @user.id
-    redirect to '/tweets'
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      redirect('/signup')
+    else
+      @user = User.find_by(username: params[:username], email: params[:email], password: params[:password])
+      if !@user
+        @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      end
+      session[:user_id] = @user.id
+      redirect to '/tweets'
+    end
   end
-
+  
+  get '/login' do
+    erb :'/users/login'
+  end
+  
+  post '/login' do
+    @user = User.find_by(username: params[:username], password: params[:password])
+    if @user
+      session[:user_id] = @user.id
+      redirect to '/tweets'
+    else
+      erb :'/users/error'
+    end
+  end
+  
+  get '/logout' do
+    session.clear
+    erb :'/users/logout'
+  end
 end
