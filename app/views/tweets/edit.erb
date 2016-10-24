@@ -1,5 +1,5 @@
 <% @title = "Edit Tweet" %>
 <form action="/tweets/<%= @tweet.id %>" method="post">
   <input type="text" name="content" size = "140" maxlength = "140" value="<%= @tweet.content %>" autofocus>
-  <input type="submit" name="submit" value="Edit">
+  <input id="submit" type="submit" name="submit" value="Edit">
 </form>
