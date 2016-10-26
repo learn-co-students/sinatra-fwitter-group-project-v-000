@@ -1,9 +1,15 @@
-<h2><%= @tweet.content %></h2>
+<% @title = "#{@user.username}'s Tweet" %>
 
+<h4 class="vertical-space"><%= @tweet.content %></h4>
 
-<p><a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a></p>
+<p>
+    <% if @user.tweets.include?(@tweet) %>
+        <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a> | 
+    <% end %>
+    <a href="/tweets">Back to Timeline</a></p>
 
-<form action="/tweets/<%= @tweet.id %>/delete" method="post">
-  <input type="submit" name="delete" value="Delete Tweet">
-</form>
+    <form action="/tweets/<%= @tweet.id %>/delete" method="post">
+      <input type="submit" name="delete" value="Delete Tweet">
+    </form>
+
 

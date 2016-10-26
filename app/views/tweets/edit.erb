@@ -1,5 +1,12 @@
 <% @title = "Edit Tweet" %>
-<form action="/tweets/<%= @tweet.id %>" method="post">
-  <input type="text" name="content" size = "140" maxlength = "140" value="<%= @tweet.content %>" autofocus>
+<form class = "vertical-space" action="/tweets/<%= @tweet.id %>" method="post">
+  <input type="text" name="content" size = "30" maxlength = "140" value="<%= @tweet.content %>" autofocus>
+  <br />
   <input id="submit" type="submit" name="submit" value="Edit">
 </form>
+
+<form action="/tweets/<%= @tweet.id %>/delete" method="post">
+  <input type="submit" name="delete" value="Delete">
+</form>
+
+<p><a href="/tweets">Back to Timeline</a></p>

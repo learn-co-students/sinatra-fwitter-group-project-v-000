@@ -11,6 +11,6 @@ body {
     text-align: center;
 }
 
-hr {
-    background-color: #436060;
+input {
+    margin-bottom: 8px;
 }

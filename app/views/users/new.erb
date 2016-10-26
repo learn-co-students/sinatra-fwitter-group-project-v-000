@@ -1,13 +1,9 @@
-<% @title = "Sign Up" %>
+<% @title = "Fwitter Sign Up" %>
 
-<div class="col-md-4 col-md-offset-4">
-<form class = "vertical-space" action = "/signup" method = "post">
-    <label>Username</label><br />
-    <input type = "text" name = "username" placeholder = "SPEWOfficial" required><br /><br />
-    <label>Email</label><br />
-    <input type = "text" name = "email" placeholder = "hgranger@hogwarts.edu" required><br /><br />
-    <label>Password</label><br />
-    <input type = "password" name = "password" placeholder = "balderdash" required><br /><br />
+<form class = "vertical-space center" action = "/signup" method = "post">
+    <input type = "text" name = "username" placeholder = "Username" required><br />
+    <input type = "text" name = "email" placeholder = "Email" required><br />
+    <input type = "password" name = "password" placeholder = "Password" required><br />
     <input type = "submit" name = "submit" value = "Sign Up">
 </form>
-</div>
+<p class="center"><a href="/login">Log In</a></p>

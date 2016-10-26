@@ -1,5 +1,8 @@
-<form action = "/login" method = "post">
-    <input placeholder = "username" name = "username" type = "text" required>
-    <input placeholder = "password" name = "password" type = "password" required>
+<% @title = "Fwitter Log In" %>
+
+<form class="vertical-space center" action = "/login" method = "post">
+    <input placeholder = "username" name = "username" type = "text" required><br />
+    <input placeholder = "password" name = "password" type = "password" required><br />
     <input id="submit" type = "submit" name = "submit" value = "Log In">
 </form>
+<p class="center"><a href="/signup">Sign Up</a></p>
