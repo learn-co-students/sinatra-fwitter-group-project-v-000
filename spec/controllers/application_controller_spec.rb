@@ -145,10 +145,22 @@ describe ApplicationController do
   end
 
   describe 'user show page' do
-    it 'shows all a single users tweets' do
+    it 'shows all a single users tweets if logged in' do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
       tweet1 = Tweet.create(:content => "tweeting!", :user_id => user.id)
       tweet2 = Tweet.create(:content => "tweet tweet tweet", :user_id => user.id)
+      
+      # Since the tweet index is not available to users who are not logged in,
+      # it stands to reason that the user show page should not be either.
+      # I modified this test to reflect that.
+      
+      params = {
+        :username => "becky567",
+        :password => "kittens"
+      }
+      post '/login', params
+      session = {}
+      session[:id] = user.id
       get "/users/#{user.slug}"
 
       expect(last_response.body).to include("tweeting!")

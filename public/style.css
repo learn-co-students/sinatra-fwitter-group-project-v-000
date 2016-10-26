@@ -1,0 +1,16 @@
+body {
+    height: 100%;
+    background-color: #CDE7F0;
+}
+
+.vertical-space {
+    margin-top: 30%;
+}
+
+.center {
+    text-align: center;
+}
+
+hr {
+    background-color: #436060;
+}
