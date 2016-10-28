@@ -1,5 +1,6 @@
-<h3>Show Tweet</h3>
+<form method="POST" action="/tweets/<%=@tweet.id%>/delete">  
+  Tweet # <%=@tweet.id%> | <a href="/tweets/<%=@tweet.id%>"><%= @tweet.content %></a>
+  <input type="submit" value="Delete Tweet"> 
+</form>
 
-<% Tweet.all.each do |tweet| %>
-  > <%= tweet.content %>
-<% end %>
+<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet </a>
