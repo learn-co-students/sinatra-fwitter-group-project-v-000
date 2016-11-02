@@ -70,8 +70,8 @@ class TweetController < ApplicationController
 
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
-      if Helpers.logged_in?(session) && Helpers.current_user(session).tweets.include?(@tweet)
-      @tweet.delete
+    if Helpers.logged_in?(session) && Helpers.current_user(session).tweets.include?(@tweet)
+    @tweet.delete
       redirect '/tweets'
     else
       redirect '/tweets'

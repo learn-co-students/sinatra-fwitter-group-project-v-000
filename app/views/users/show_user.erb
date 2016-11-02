@@ -1,7 +1,7 @@
 <h1> Your Tweets </h1>
 
-<%=@user.tweets.each do |tweet| %>
-<h3><li><%= tweet.content%></li></h3>
+<%= @user.tweets.each do |tweet| %>
+<h3><li><%= tweet.content %></li></h3>
     <% end %>
 
     <a href="/logout">Log Out</a>
