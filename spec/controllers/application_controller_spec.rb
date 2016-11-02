@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe ApplicationController do
 
@@ -66,7 +67,7 @@ describe ApplicationController do
       }
       post '/signup', params
       session = {}
-      session[:id] = user.id
+      session[:user_id] = user.id
       get '/signup'
       expect(last_response.location).to include('/tweets')
     end
@@ -100,7 +101,7 @@ describe ApplicationController do
       }
       post '/login', params
       session = {}
-      session[:id] = user.id
+      session[:user_id] = user.id
       get '/login'
       expect(last_response.location).to include("/tweets")
     end
@@ -149,18 +150,18 @@ describe ApplicationController do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
       tweet1 = Tweet.create(:content => "tweeting!", :user_id => user.id)
       tweet2 = Tweet.create(:content => "tweet tweet tweet", :user_id => user.id)
-      
+
       # Since the tweet index is not available to users who are not logged in,
       # it stands to reason that the user show page should not be either.
       # I modified this test to reflect that.
-      
+
       params = {
         :username => "becky567",
         :password => "kittens"
       }
       post '/login', params
       session = {}
-      session[:id] = user.id
+      session[:user_id] = user.id
       get "/users/#{user.slug}"
 
       expect(last_response.body).to include("tweeting!")

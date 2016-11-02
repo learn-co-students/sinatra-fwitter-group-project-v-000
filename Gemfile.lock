@@ -1,8 +1,8 @@
 GIT
-  remote: https://github.com/bmabey/database_cleaner.git
-  revision: b87f00320f8aa0f7e499d183128f05ce29cedc33
+  remote: https://github.com/DatabaseCleaner/database_cleaner.git
+  revision: de085dd5c64c59d60b0ca7bc63bbb2d1e0072dbb
   specs:
-    database_cleaner (1.5.1)
+    database_cleaner (1.5.3)
 
 GEM
   remote: http://rubygems.org/
@@ -124,4 +124,4 @@ DEPENDENCIES
   tux
 
 BUNDLED WITH
-   1.10.6
+   1.13.6
