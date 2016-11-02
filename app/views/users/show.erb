@@ -5,7 +5,7 @@
     <% if @user.id == @current_user.id %>
         <a href="/tweets/new">New Tweet</a> |
     <% end %>
-    <a href="/tweets">Back to Timeline</a> 
+    <a href="/tweets">Back to Timeline</a>
     <% if @user.id == @current_user.id %>
         | <a href="/logout">Log Out</a>
     <% end %>
@@ -13,8 +13,8 @@
 <hr style="height:4px;border-width:0;color:#727474;background-color:#727474" />
 
 <% @user.tweets.each do |tweet|%>
-    <p><%= tweet.content %> 
-        (<a href="/tweets/<%= tweet.id %>">view</a>) 
+    <p><%= tweet.content %>
+        (<a href="/tweets/<%= tweet.id %>">view</a>)
         <% if @user == @current_user %>
           (<a href="/tweets/<%= tweet.id %>/edit">edit</a>)
         <% end %>

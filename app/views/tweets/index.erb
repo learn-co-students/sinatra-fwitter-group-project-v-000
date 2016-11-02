@@ -1,16 +1,15 @@
 <% @title = "Fwitter" %>
 
-<h2>Welcome, <%= @user.username %>!</h2>
-<p><a href="/tweets/new">New Tweet</a> | <a href="/users/<%= @user.slug %>">View Profile</a> | <a href="/logout">Log Out</a></p>
+<h2>Welcome, <%= @current_user.username %>!</h2>
+<p><a href="/tweets/new">New Tweet</a> | <a href="/users/<%= @current_user.slug %>">View Profile</a> | <a href="/logout">Log Out</a></p>
 <hr style="height:4px;border-width:0;color:#727474;background-color:#727474" />
 
 <% @tweets.each do |tweet| %>
   <p> <b>@<a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a></b>: <%= tweet.content %>
-    (<a href="/tweets/<%= tweet.id %>">view</a>) 
-    <% if tweet.user_id == @user.id %>
+    (<a href="/tweets/<%= tweet.id %>">view</a>)
+    <% if tweet.user_id == @current_user.id %>
       (<a href="/tweets/<%= tweet.id %>/edit">edit</a>)
     <% end %>
   </p>
   <hr style="height:2px;width:300px;border-width:0;color:#C7CFCF;background-color:#C7CFCF;" />
 <% end %>
-
