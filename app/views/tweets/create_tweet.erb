@@ -1,0 +1,19 @@
+<%if Helpers.logged_in?(session) %>
+
+<h2> Create a New Tweet </h2>
+
+<form action="/tweets" method="POST">
+
+   <label> Tweet </label>
+   <input id="content" type="text" name="tweet"><br>
+
+  <br></br>
+
+  <input type="submit" value="submit">
+</form>
+
+<%else%>
+
+<h2><a href="/login"> You must login to Tweet </a></h2>
+
+<%end%>
