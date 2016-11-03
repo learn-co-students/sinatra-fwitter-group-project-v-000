@@ -9,14 +9,16 @@ class TweetController < ApplicationController
   end
 
   post '/tweets' do
-    if  logged_in?  && params["tweet"] != ""
+    if  logged_in?
       @tweet = Tweet.new(:content => params["tweet"])
       @user = User.find(session[:user_id])
-      @user.tweets << Tweet.create(:content => params["tweet"])
-      @user.save
-      redirect '/tweets'
-    elsif params["tweet"] == ""
-      redirect '/tweets/new'
+      if params["tweet"] != ""
+        @user.tweets << Tweet.create(:content => params["tweet"])
+        @user.save
+        redirect '/tweets'
+      else
+        redirect '/tweets/new'
+      end
     else
       redirect '/login'
     end
