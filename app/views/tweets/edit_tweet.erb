@@ -1,4 +1,4 @@
-<%if Helpers.logged_in?(session) && Helpers.current_user(session).tweets.include?(@tweet)%>
+<% if logged_in? %>
 
   <h2>  Tweet Edit </h2>
 
@@ -12,11 +12,11 @@
 
     <br></br>
 
-    <input type="submit" value="submit">
+    <input type="submit" name= "content" value="submit">
   </form>
 
-<% else %>
+  <% else %>
 
-  <a href="/login"> Login </a>
+    <a href="/login"> Login </a>
 
-<% end %>
+  <% end %>

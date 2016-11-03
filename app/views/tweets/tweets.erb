@@ -1,5 +1,5 @@
-<% if Helpers.logged_in?(session) %>
-       <h1>Welcome, <%= Helpers.current_user(session).username %></h1>
+<% if logged_in?  %>
+       <h1>Welcome, <%= current_user.username %></h1>
 
 <%Tweet.all.each do |tweet| %>
 <h3><li><a href="/tweets/<%=tweet.id %>"><%= tweet.content%></a></li></h3>
@@ -7,7 +7,7 @@
 
     <a href="/tweets/new">New Tweet</a><br>
 
-    <a href="/users/<%= Helpers.current_user(session).slug%>">My Tweets </a><br>
+    <a href="/users/<%= current_user.slug %>"> My Tweets </a><br>
 
     <a href="/logout">Log Out</a>
 

@@ -1,4 +1,4 @@
-<%if !Helpers.logged_in?(session) %>
+<%if !logged_in?  %>
 
 <h3>Login</h3>
 <form action="/login" method="POST">
@@ -8,6 +8,6 @@
 </form>
 
 <%else%>
-    <p>You are already logged in</p>
+    <p> You are already logged in </p>
     <a href="/logout">Log Out</a>
 <%end%>

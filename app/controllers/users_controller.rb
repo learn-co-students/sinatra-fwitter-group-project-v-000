@@ -6,10 +6,10 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
-    if Helpers.logged_in?(session)
+    if logged_in?
       redirect '/tweets'
     else
-    erb :'users/create_user'
+      erb :'users/create_user'
     end
   end
 
@@ -17,14 +17,14 @@ class UsersController < ApplicationController
     user = User.new(username: params[:username], email: params[:email], password: params[:password])
 		if user.save
       session[:user_id] = user.id
-        redirect '/tweets'
-    elsif !Helpers.logged_in?(session)
+        redirect "/tweets"
+    elsif !logged_in?
         redirect '/signup'
     end
   end
 
   get '/login' do
-    if !Helpers.logged_in?(session)
+    if !logged_in?
       erb :'users/login'
     else
       redirect "/tweets"
