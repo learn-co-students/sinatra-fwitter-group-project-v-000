@@ -23,6 +23,7 @@ class TweetsController < ApplicationController
             redirect '/tweets/new'
         else
             @tweet = Tweet.create(:content => params[:content], :user_id => session[:id])
+            redirect '/tweets'
         end
     end
     
