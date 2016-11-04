@@ -10,14 +10,15 @@ class UsersController < ApplicationController
     
     post '/signup' do
         @user = User.create(params)
-        if @user.username.empty? || @user.password.empty? || @user.email.empty?
+        if @user.username.empty? || @user.password_digest == nil || @user.email.empty?
             redirect '/signup'
         else
           session[:id] = @user.id
           redirect '/tweets'
         end
     end
-    
+    ##################    BCrypt::Password.new(self.password_digest) == password
+
     get '/login' do
       if session[:id] == nil
         erb :'/users/signup'
@@ -27,9 +28,15 @@ class UsersController < ApplicationController
     end
     
     post '/login' do
-        @user = User.find_by(:username => params[:username], :password => params[:password])
-        session[:id] = @user.id
-        redirect '/tweets'
+        @user = User.find_by(:username => params[:username])
+        if BCrypt::Password.new(@user.password_digest) == params[:password]
+          # Nice!
+          session[:id] = @user.id
+          redirect '/tweets'
+        else
+          #boo
+          redirect '/signup'
+        end
     end
     
     get '/logout' do 
