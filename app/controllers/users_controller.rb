@@ -14,12 +14,16 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-    user = User.new(username: params[:username], email: params[:email], password: params[:password])
-		if user.save
-      session[:user_id] = user.id
-        redirect "/tweets"
-    elsif !logged_in?
+    if logged_in?
+      redirect '/tweets'
+    else
+      user = User.new(params)
+  		if user.save
+        session[:user_id] = user.id
+          redirect "/tweets"
+      else
         redirect '/signup'
+      end
     end
   end
 
@@ -32,12 +36,16 @@ class UsersController < ApplicationController
   end
 
   post "/login" do
-    user = User.find_by(username: params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+    if logged_in?
       redirect "/tweets"
     else
-      redirect "/login"
+    user = User.find_by(username: params[:username])
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        redirect "/tweets"
+      else
+        redirect "/login"
+      end
     end
   end
 
