@@ -5,6 +5,28 @@ class UsersController < ApplicationController
     erb :'users/show_user'
   end
 
+  get '/signup' do
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :'users/create_user'
+    end
+  end
+
+  post "/signup" do
+    if !logged_in?
+      user = User.new(params)
+      if user.save
+        session[:user_id] = user.id
+        redirect "/tweets"
+      else
+        redirect '/signup'
+      end
+    else
+      redirect '/tweets'
+    end
+  end
+
   get '/login' do
     if !logged_in?
       erb :'users/login'
@@ -27,27 +49,6 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/signup' do
-    if logged_in?
-      redirect '/tweets'
-    else
-      erb :'users/create_user'
-    end
-  end
-
-  post "/signup" do
-    if !logged_in?
-      user = User.new(params)
-  		if user.save
-        session[:user_id] = user.id
-        redirect "/tweets"
-      else
-        redirect '/signup'
-      end
-    else
-      redirect '/tweets'
-    end
-  end
 
   get '/logout' do
     session.clear

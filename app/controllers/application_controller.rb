@@ -11,12 +11,6 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "super_secret"
   end
 
-  before do
-     pass if ["login", "signup", nil].include? request.path_info.split('/')[1]
-     if !logged_in?
-       redirect '/'
-     end
-  end
 
 #-------- Landing page --------
 
@@ -30,7 +24,7 @@ class ApplicationController < Sinatra::Base
   		end
 
   		def current_user
-  			@current_user ||= User.find(session[:id]) if session[:id]
+  			@current_user ||= User.find(session[:user_id]) if session[:user_id]
   		end
   	end
 
