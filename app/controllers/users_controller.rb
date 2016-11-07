@@ -36,9 +36,7 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-    if logged_in?
-      redirect '/tweets'
-    else
+    if !logged_in?
       user = User.new(params)
   		if user.save
         session[:user_id] = user.id
@@ -46,6 +44,8 @@ class UsersController < ApplicationController
       else
         redirect '/signup'
       end
+    else
+      redirect '/tweets'
     end
   end
 
