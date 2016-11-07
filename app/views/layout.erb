@@ -5,15 +5,16 @@
     <title>Fwitter</title>
   </head>
   <body>
-     <% if logged_in? %>
-       <a href="/tweets/new"> Create Tweet </a>
-       <a href="/logout"> Log Out </a>
-       <p>Welcome, <%=current_user.username %></p>
-     <% else %>
-       <a href="/signup">Sign Up</a>
-       <a href="/login"> Sign In </a>
-     <%end %>
-     <h1>Fwitter</h1>
-     <%= yield %> 
+      <% if logged_in? %>
+        <a class="button" href="/tweets/new"> Create Tweet </a>
+        <a class="button" href="/logout"> Log Out </a>
+        <p>Welcome, <%= current_user.username %></p>
+      <% else %>
+        <a class="button" href="/signup">Sign Up</a>
+        <a class="button" href="/login"> Sign In </a>
+      <% end %>
+      <h1>Fwitter</h1>
+      <%= yield %>
+    </div>
   </body>
 </html>

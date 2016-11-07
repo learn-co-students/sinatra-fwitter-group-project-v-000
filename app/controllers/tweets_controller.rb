@@ -1,3 +1,4 @@
+require 'pry'
 class TweetsController < ApplicationController
 
   get '/tweets' do
@@ -10,18 +11,20 @@ class TweetsController < ApplicationController
  end
 
  get '/tweets/new' do
-    if logged_in?
-      erb :'tweets/create_tweet'
-    else
-      redirect to '/login'
-    end
+   if !logged_in?
+     redirect to '/login'
+   else
+     erb :'/tweets/create_tweet'
+   end
   end
+
 
   post '/tweets' do
     if params[:content] == ""
       redirect to "/tweets/new"
     else
-      current_user.tweets.create(content: params[:content])
+      @tweet = Tweet.create(content: params[:content])
+      current_user.tweets << @tweet
       redirect to "/tweets/#{@tweet.id}"
     end
   end
