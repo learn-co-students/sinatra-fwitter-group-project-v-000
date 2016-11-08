@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
       session[:user_id] = @user.id
-      redirect to '/tweets'  
+      redirect to '/tweets'
     end
   end
 
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect "/tweets"
+      redirect to "/tweets"
     else
       redirect to '/signup'
     end
