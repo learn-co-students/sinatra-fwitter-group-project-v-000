@@ -76,5 +76,4 @@ class TweetController < ApplicationController
     end
   end
 
-
 end
