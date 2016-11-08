@@ -1,5 +1,3 @@
-<% if logged_in? %>
-
   <h2>  Tweet Edit </h2>
 
   <form action="/tweets/<%=@tweet.id%>" method="POST">
@@ -8,15 +6,9 @@
 
      <label> Tweet </label>
 
-     <input id= "content" type="text" name="tweet" value="<%= @tweet.content %>"><br>
+     <input id= "content" type="text" name="content" value="<%= @tweet.content %>"><br>
 
     <br></br>
 
-    <input type="submit" name= "content" value="submit">
+    <input type="submit" value="submit">
   </form>
-
-  <% else %>
-
-    <a href="/login"> Login </a>
-
-  <% end %>

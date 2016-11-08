@@ -9,11 +9,9 @@ class TweetController < ApplicationController
   end
 
   post '/tweets' do
-    if  logged_in?
-      @tweet = current_user.tweets.create(:content => params["tweet"])
-      @user = User.find(session[:user_id])
-      if params["tweet"] != ""
-        @user.tweets << Tweet.create(:content => params["tweet"])
+    if logged_in?
+      if params[:content] != ""
+      @tweet = current_user.tweets.create(content: params[:content])
         redirect '/tweets'
       else
         redirect '/tweets/new'
@@ -43,25 +41,24 @@ class TweetController < ApplicationController
 
   get '/tweets/:id/edit' do
     if logged_in?
-      @tweet= Tweet.find(params[:id])
-      if current_user.tweets.include?(@tweet)
-        erb :'/tweets/edit_tweet'
-      else
-        redirect "/tweets"
-      end
+      @tweet= current_user.tweets.find(params[:id])
+      erb :'/tweets/edit_tweet'
     else
-      redirect "/login"
+      redirect "/tweets"
     end
   end
 
   patch '/tweets/:id' do
-    if params["tweet"] == ""
-      @tweet = Tweet.find(params[:id])
-      redirect "/tweets/#{@tweet.id}/edit"
+    if logged_in?
+      if params[:content] == ""
+        redirect "/tweets/#{@tweet.id}/edit"
+      else
+        @tweet = Tweet.find(params[:id])
+        @tweet.update(:content)
+        redirect "/tweets/#{@tweet.id}"
+      end
     else
-      @tweet = Tweet.find(params[:id])
-      @tweet.update(:content => params["tweet"])
-      redirect "/tweets/#{@tweet.id}"
+      redirect '/login'
     end
   end
 
