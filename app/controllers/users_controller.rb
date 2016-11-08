@@ -1,4 +1,3 @@
-require 'pry'
 class UsersController < ApplicationController
 
   get '/users/:slug' do
@@ -15,17 +14,13 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    username = params["username"].size
-    email = params["email"].size
-    password = params["password"].size
-
-    if username < 1 || email < 1 || password < 1
-      redirect to "/signup"
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      redirect to '/signup'
     else
-      @user = User.create(username: params["username"], email: params["email"], password: params["password"])
+      @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
       session[:user_id] = @user.id
-      redirect to '/tweets'
+      redirect to '/tweets'  
     end
   end
 
