@@ -68,10 +68,13 @@ class TweetController < ApplicationController
       if current_user.tweets.include?(@tweet)
         @tweet.delete
         redirect '/tweets'
+      else
+        redirect '/tweets'
       end
     else
       redirect '/login'
     end
   end
+
 
 end
