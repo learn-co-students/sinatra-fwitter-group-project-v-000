@@ -3,7 +3,6 @@
   <form action="/tweets/<%=@tweet.id%>" method="POST">
     <input  id="hidden" type="hidden" name="_method" value="patch">
 
-
      <label> Tweet </label>
 
      <input id= "content" type="text" name="content" value="<%= @tweet.content %>"><br>

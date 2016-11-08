@@ -1,7 +1,7 @@
 <h1> Your Tweets </h1>
 
-<% @user.tweets.each do |tweet| %>
-<h3><%= tweet.content %></h3>
+<% current_user.tweets.each do |tweet| %>
+<h3><a href="/tweets/<%=tweet.id %>"><%= tweet.content%></a></h3>
     <% end %>
 
      <br>
