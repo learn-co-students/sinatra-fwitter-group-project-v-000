@@ -1,0 +1,11 @@
+<h1>Tweet!</h1>
+
+<%if flash.has?(:tweet_error)%>
+  <h3><%=flash[:tweet_error]%></h3>
+<%end%>
+
+<form action="/tweets/new" method="post">
+  <input type="text" name="content" id="content" size="100">
+  <br></br>
+  <input type="submit" value="submit">
+</form>

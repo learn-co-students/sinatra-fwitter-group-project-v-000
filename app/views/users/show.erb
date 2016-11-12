@@ -1,0 +1,11 @@
+<h1><%=@user.username%>'s Tweets</h1>
+
+<% if current_user == @user%>
+  <form action="/tweets/new" method="get">
+    <input type="submit" value="Make Tweet">
+  </form>
+<% end%>
+
+<%@user.tweets.each do |tweet|%>
+ <h3><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></h3>
+<%end%>
