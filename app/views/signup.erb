@@ -1,0 +1,29 @@
+<h1>Sign Up</h1>
+
+<%if flash.has?(:signup_error_1)%>
+  <h3><%=flash[:signup_error_1]%></h3>
+<%end%>
+
+<%if flash.has?(:signup_error_2)%>
+  <h3><%=flash[:signup_error_2]%></h3>
+<%end%>
+
+<%if flash.has?(:signup_error_3)%>
+  <h3><%=flash[:signup_error_3]%></h3>
+<%end%>
+
+  <form action="/signup" method="post">
+    <label for="username">User Name: </label><br>
+    <input type="text" name="username" id="username">
+    <br></br>
+
+    <label for="email">Email: </label><br>
+    <input type="text" name="email" id="email">
+    <br></br>
+
+    <label for="password">Password: </label><br>
+    <input type="password" name="password" id="password">
+    <br></br>
+
+    <input type="submit" value="submit">
+  </form>

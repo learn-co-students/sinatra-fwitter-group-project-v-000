@@ -1,0 +1,11 @@
+<h1>Welcome to Fwitter</h1>
+
+<%unless logged_in?%>
+  <h2><a href="/signup">Sign Up</a></h2>
+<%else%>
+  <h3><a href="/tweets">Home</a></h3>
+  <h3><a href="/users/<%=current_user.slug%>">Your Page</a></h3>
+  <form action="/tweets/new" method="get">
+    <input type="submit" value="Make Tweet">
+  </form>
+<%end%>

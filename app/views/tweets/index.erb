@@ -1,0 +1,19 @@
+<h1>HOME</h1>
+
+<% if flash.has?(:welcome) %>
+  <h3><%= flash[:welcome] %></h3>
+<% end %>
+
+<form action="/tweets/new" method="get">
+  <input type="submit" value="Make Tweet">
+</form>
+
+<h2>Everyone's Tweets</h2>
+
+<%@tweets.each do |tweet|%>
+ <h3><%=tweet.content%></h3>
+ <p>
+  -- <a href="/users/<%=tweet.user.slug%>"><%=tweet.user.username%></a>
+ </p>
+ <br>
+<%end%>
