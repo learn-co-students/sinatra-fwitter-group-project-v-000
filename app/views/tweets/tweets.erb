@@ -1,5 +1,12 @@
 <h1>Welcome, <%=current_user.username%> </h1>
 
+<a href="/tweets/new">Create a new Tweet</a>
+<br><br>
+
 <%@tweets.each do |tweet| %>
-  <h3><%=tweet.content%></h3>
+<a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a> <br><br>
+
 <%end%>
+
+<br><br>
+<a href="/tweets/logout">Logout</a>
