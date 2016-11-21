@@ -10,12 +10,12 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
-    def current_user(session_hash)
-      @user = User.find_by_id(session_hash[:user_id])
+    def current_user
+      @user = User.find_by_id(session[:user_id])
     end
 
-    def is_logged_in?(session_hash)
-      !!session_hash[:user_id]
+    def is_logged_in?
+      !!session[:user_id]
     end
   end
 
@@ -25,7 +25,7 @@ class ApplicationController < Sinatra::Base
 
   get '/signup' do
     #binding.pry
-    if is_logged_in?(session)
+    if is_logged_in?
       redirect '/tweets'
     else
       erb :'/users/create_user'
@@ -38,7 +38,8 @@ class ApplicationController < Sinatra::Base
     if !u.username.empty? && !u.email.empty? && u.password_digest
       #binding.pry
       u.save
-      session[:id] = u.id
+      #binding.pry
+      session[:session_id] = u.id
       redirect '/tweets'
     else
       redirect '/signup'
@@ -46,7 +47,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    if is_logged_in?(session)
+    if is_logged_in?
       redirect '/tweets'
     else
       erb :'/users/login'
@@ -62,8 +63,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-    #binding.pry expected 1 argument got 0 params is empty! 
-    @user = User.find_by(username: params(:username))
+    #binding.pry expected 1 argument got 0 params is empty!
+    @user = current_user
     erb :'/tweets/tweets'
   end
 
@@ -73,7 +74,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    if is_logged_in?(session)
+    if is_logged_in?
       session.clear
     else
       redirect '/'
