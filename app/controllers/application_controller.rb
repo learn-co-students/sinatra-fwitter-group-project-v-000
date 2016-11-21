@@ -54,12 +54,16 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    binding.pry
-    redirect '/tweets'
+    user = User.find_by(:username => params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect '/tweets'
+    end
   end
 
   get '/tweets' do
-
+    #binding.pry expected 1 argument got 0 params is empty! 
+    @user = User.find_by(username: params(:username))
     erb :'/tweets/tweets'
   end
 
@@ -70,9 +74,9 @@ class ApplicationController < Sinatra::Base
 
   get '/logout' do
     if is_logged_in?(session)
-      #redirect '/tweets'
+      session.clear
     else
-      #erb :'/users/login'
+      redirect '/'
     end
   end
 
