@@ -2,7 +2,6 @@ require './config/environment'
 class UsersController < ApplicationController
 
   get '/signup' do
-    #binding.pry
     if is_logged_in?
       redirect '/tweets'
     else
@@ -44,5 +43,10 @@ class UsersController < ApplicationController
     else
       redirect '/'
     end
+  end
+
+  get '/users/:user' do
+    @tweets = Tweet.all
+    erb :show_tweet.erb
   end
 end
