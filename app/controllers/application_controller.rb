@@ -36,7 +36,7 @@ class ApplicationController < Sinatra::Base
     u ||= User.new(params)
     if !u.username.empty? && !u.email.empty? && u.password_digest
       u.save
-      session[:session_id] = u.id
+      session[:user_id] = u.id
       redirect '/tweets'
     else
       redirect '/signup'
