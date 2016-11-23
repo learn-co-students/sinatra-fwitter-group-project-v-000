@@ -55,10 +55,14 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
+    @tweet = Tweet.find_by_id(params[:id])
     if is_logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-      @tweet.delete
-      redirect "/tweets/:id"
+      if current_user.tweets.include?(@tweet)
+        @tweet.delete
+        redirect "/tweets"
+      else
+        redirect '/tweets'
+      end
     else
       redirect '/login'
     end
