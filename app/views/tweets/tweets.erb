@@ -1,0 +1,11 @@
+<h1>Tweets</h1>
+<h2><%= "Welcome, #{current_user.username}" if is_logged_in? %></h2>
+
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li>
+      <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
+    </li>
+  <% end %>
+</ul>
+

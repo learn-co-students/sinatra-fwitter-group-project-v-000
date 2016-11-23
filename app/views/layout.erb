@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+  <title>Fwitter</title>
+</head>
+<body>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <% if is_logged_in? %>
+      <li><a href="/logout">Logout</a></li>
+      <li><a href="/tweets/new">New Tweet</a></li>
+    <% else %>
+      <li><a href="/signup">Signup</a></li>
+      <li><a href="/login">Login</a></li>
+    <% end %>
+  </ul>
+
+  <% if flash[:notice].inspect %>
+    <%= flash[:notice] %>
+  <% end %>
+
+  <%= yield %>
+
+</body>
+</html>
+
