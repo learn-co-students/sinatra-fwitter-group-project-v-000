@@ -1,4 +1,4 @@
-TweetsController < ApplicationController
+class TweetsController < ApplicationController
   get "/tweets/logout" do
     session.clear
     redirect "/"
