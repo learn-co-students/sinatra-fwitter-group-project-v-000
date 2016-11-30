@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 get "/" do
     erb :index
   end
-  
+
   get "/signup" do
     if logged_in?
       redirect "/tweets"
@@ -11,8 +11,8 @@ get "/" do
       erb :"users/create_user"
     end
   end
-  
-  
+
+
   post "/signup" do
     if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
       @user = User.create(params)
@@ -23,7 +23,7 @@ get "/" do
       redirect "/signup"
     end
   end
-  
+
   get "/login" do
     if logged_in?
       redirect "/tweets"
@@ -31,7 +31,7 @@ get "/" do
       erb :"users/login"
     end
   end
-  
+
   post "/login" do
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
@@ -41,3 +41,4 @@ get "/" do
       redirect "/login"
     end
   end
+end
