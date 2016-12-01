@@ -1,5 +1,6 @@
 <h1>Edit your tweet to the world</h1>
-<form class="" action="/tweets/<%=@tweet.id%>/edit" method="post">
+<form class="" action="/tweets/<%=@tweet.id%>" method="post">
+  <input type="hidden" name="_method" value="patch">
   Your Tweet to the World: <br><br>
   <input type="text" name="content" value="<%=@tweet.content%>">
   <br><br>

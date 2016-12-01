@@ -60,7 +60,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  post "/tweets/:id/edit" do
+  patch "/tweets/:id" do
     @tweet = Tweet.find(params[:id])
     if !params[:content].empty?
       @tweet.update(content: params[:content] )
@@ -71,11 +71,14 @@ class TweetsController < ApplicationController
   end
 
   delete "/tweets/:id/delete" do
-    @tweet = Tweet.find(params[:id])
-    if @tweet.user_id == current_user.id
-      @tweet.destroy
+
+    tweet = current_user.tweets.find_by(id: params[:id])
+    if tweet && tweet.destroy
+      redirect "/tweets"
+    else
+      redirect "/tweets/#{tweet.id}"
     end
-    redirect "/tweets"
+
   end
 
   get "/tweets/logout" do
