@@ -14,10 +14,9 @@ get "/" do
 
 
   post "/signup" do
-    if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
-      @user = User.create(params)
+    @user = User.create(params)
+    if @user.valid?
       session[:id] = @user.id
-
       redirect "/tweets"
     else
       redirect "/signup"
