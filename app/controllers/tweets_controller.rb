@@ -30,11 +30,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  get "/logout" do
-    session.clear
-    redirect "/login"
-  end
-
   get "/users/:slug" do
     @user = User.find_by_slug(params[:slug])
     @tweets = @user.tweets
@@ -71,18 +66,14 @@ class TweetsController < ApplicationController
   end
 
   delete "/tweets/:id/delete" do
-
     tweet = current_user.tweets.find_by(id: params[:id])
     if tweet && tweet.destroy
       redirect "/tweets"
     else
+      tweet = Tweet.find_by(id: params[:id])
       redirect "/tweets/#{tweet.id}"
     end
 
   end
 
-  get "/tweets/logout" do
-    session.clear
-    redirect "/"
-  end
 end
