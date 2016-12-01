@@ -1,0 +1,6 @@
+<h2><%= current_user.username %>'s tweets</h2>
+
+<% current_user.tweets.each do |tweet| %>
+  <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a> <br>
+  <!-- <%= tweet.content %><br> -->
+<% end %>

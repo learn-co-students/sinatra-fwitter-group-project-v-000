@@ -1,0 +1,9 @@
+<% if !logged_in? %>
+
+  <h2>Welcome to Fwitter</h2>
+
+<% else %>
+
+  <h2> Welcome, <%= current_user.username %> </h2>
+
+<% end %>
