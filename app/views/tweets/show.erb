@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FWITTER</title>
+</head>
+  <body>
+    <h1><label>Show or Delete Single Tweet</label></h1>
+    <h2>Session[:user_id]: <%= session[:user_id] %></h2>
+    <h3><label><a href="/logout">LOG OUT</a></label></h3>
+    <h2><a href="/users/<%=@tweet.user.slug%>"><%= @tweet.user.username %></a>: <%= @tweet.content %> </h2>
+      <% if current_user == @tweet.user %>
+        <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
+      <% end %>  
+    <form method="post" action="/tweets/<%=@tweet.id%>/delete">
+      <input id="hidden" type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Delete Tweet">
+    </form> 
+  </body>
+</html>

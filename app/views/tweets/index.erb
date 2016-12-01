@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FWITTER</title>
+</head>
+  <body>
+    <h1><label>Welcome, <%=@user.username%></label></h1>
+    <h3><a href="/logout">LOG OUT</a></h3>
+    <h3>All Tweets</h3>
+      <% Tweet.all.reverse_each do |t| %>
+      <p><a href="/users/<%=t.user.slug%>"><%=t.user.username%></a>: <a href="/tweets/<%=t.id%>"><%=t.id%>: <%=t.content%></a></p>
+      <% end %> 
+  </body>
+</html>
