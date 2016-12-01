@@ -18,11 +18,11 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    if params[:content].empty?
-      redirect to "/tweets/new"
-    else
-      tweet = current_user.tweets.create(content: params[:content])
+    tweet = current_user.tweets.new(content: params[:content])
+    if tweet.save
       redirect to "/tweets/#{tweet.id}"
+    else
+      redirect to "/tweets/new"
     end
   end
 
