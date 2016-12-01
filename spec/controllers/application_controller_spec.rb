@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'pry'
 describe ApplicationController do
 
   describe "Homepage" do
@@ -59,6 +59,7 @@ describe ApplicationController do
 
     it 'does not let a logged in user view the signup page' do
       user = User.create(:username => "skittles123", :email => "skittles@aol.com", :password => "rainbows")
+
       params = {
         :username => "skittles123",
         :email => "skittles@aol.com",
@@ -108,6 +109,7 @@ describe ApplicationController do
 
   describe "logout" do
     it "lets a user logout if they are already logged in" do
+      binding
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
 
       params = {
@@ -117,7 +119,6 @@ describe ApplicationController do
       post '/login', params
       get '/logout'
       expect(last_response.location).to include("/login")
-
     end
     it 'does not let a user logout if not logged in' do
       get '/logout'
