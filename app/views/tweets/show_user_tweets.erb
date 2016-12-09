@@ -1,5 +1,5 @@
 <h2>User <%=@user.username%>'s tweets</h2>
     <%Tweet.all.each do |tweet| if tweet.user_id == @user.id%>
-    <%=tweet.content%>
+    <%=tweet.content%><br>
     <%end%>
 <%end%>

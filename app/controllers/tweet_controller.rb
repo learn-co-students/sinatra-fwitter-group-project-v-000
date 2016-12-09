@@ -43,7 +43,9 @@ class TweetController < ApplicationController
  
   post '/tweets' do
     if !params[:content].empty?
-      @user = User.find_by params[:user_id]
+      #binding.pry
+      #@user = User.find_by params[:user_id]
+      @user = current_user
       Tweet.create(params)
       erb :'/tweets/show_user_tweets'
     else
