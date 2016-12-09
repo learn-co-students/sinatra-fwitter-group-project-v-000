@@ -23,13 +23,12 @@ class ApplicationController < Sinatra::Base
     end
     
     def current_tweet
-        Tweet.find_by params[:tweet_id]
+        Tweet.find_by id: params[:tweet_id]
     end
     
     def slug_name
         User.find_by_slug(params[:slug])
     end
-
   end
   
 end

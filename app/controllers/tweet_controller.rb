@@ -2,7 +2,7 @@ require './config/environment'
 
 class TweetController < ApplicationController
   
-    get '/tweets' do
+  get '/tweets' do
     @user = current_user
     if !current_user.nil?
       erb :'/tweets/tweets'
@@ -20,8 +20,12 @@ class TweetController < ApplicationController
     end
   end
   
+  get '/tweets/show_user_tweets' do
+    @user = current_user
+    erb :'/tweets/show_user_tweets'
+  end
+  
   get '/tweets/:tweet_id' do
-    #binding.pry
     if logged_in?
       @tweet = current_tweet
       erb :'/tweets/show_tweet'
@@ -32,8 +36,6 @@ class TweetController < ApplicationController
   
   get '/tweets/:tweet_id/edit' do
     @user = current_user
-    #binding.pry
-    #if !@user.nil?
     if !current_user.nil? && current_tweet.user_id == current_user.id
      @tweet = current_tweet
      erb :'/tweets/edit_tweet'
@@ -45,17 +47,14 @@ class TweetController < ApplicationController
   post '/tweets' do
     if !params[:content].empty?
       @user = current_user
-      Tweet.create(params)
-      #binding.pry
+      @tweet = Tweet.create(params)
       erb :'/tweets/show_user_tweets'
     else
       redirect to '/tweets/new'
     end
   end
   
-  #post '/tweets/change' do
   patch '/tweets/:tweet_id' do
-   #binding.pry
    if !params[:content].empty?
      @tweet = current_tweet
      @tweet.content = params[:content]
@@ -67,7 +66,9 @@ class TweetController < ApplicationController
   end
   
   post '/tweets/:id/delete' do
-    Tweet.delete(params[:id])
+    if current_user.id == current_tweet.user_id
+      Tweet.delete(params[:id])
+    end
     redirect to '/tweets'
   end
  
