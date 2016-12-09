@@ -27,7 +27,7 @@ class TweetsController < ApplicationController
 		erb :'tweets/edit'
 	end
 
-	patch '/tweets/:id' do
+	post '/tweets/:id' do
 		binding.pry
 	@tweet = Tweet.find_by_id(params[:id])
 	@tweet.update(content: params[:content]) unless params[:content].blank?
@@ -36,7 +36,7 @@ class TweetsController < ApplicationController
 	redirect "/tweets/#{@tweet.id}"
 	end
 
-	delete '/tweets/:id/delete' do 
+	post '/tweets/:id/delete' do 
 		@tweet = Tweet.find(params[:id])
 		@tweet.delete
 
