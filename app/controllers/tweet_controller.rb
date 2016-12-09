@@ -21,6 +21,7 @@ class TweetController < ApplicationController
   end
   
   get '/tweets/:tweet_id' do
+    #binding.pry
     if logged_in?
       @tweet = current_tweet
       erb :'/tweets/show_tweet'
@@ -35,7 +36,7 @@ class TweetController < ApplicationController
     #if !@user.nil?
     if !current_user.nil? && current_tweet.user_id == current_user.id
      @tweet = current_tweet
-      erb :'/tweets/edit_tweet'
+     erb :'/tweets/edit_tweet'
     else
       redirect to '/login'
     end
@@ -43,10 +44,9 @@ class TweetController < ApplicationController
  
   post '/tweets' do
     if !params[:content].empty?
-      #binding.pry
-      #@user = User.find_by params[:user_id]
       @user = current_user
       Tweet.create(params)
+      #binding.pry
       erb :'/tweets/show_user_tweets'
     else
       redirect to '/tweets/new'
