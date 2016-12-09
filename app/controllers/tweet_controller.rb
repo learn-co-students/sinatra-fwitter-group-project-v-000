@@ -51,7 +51,9 @@ class TweetController < ApplicationController
     end
   end
   
-  post '/tweets/change' do
+  #post '/tweets/change' do
+  patch '/tweets/:tweet_id' do
+   #binding.pry
    if !params[:content].empty?
      @tweet = current_tweet
      @tweet.content = params[:content]
