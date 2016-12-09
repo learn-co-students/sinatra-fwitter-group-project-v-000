@@ -5,7 +5,8 @@ class TweetController < ApplicationController
     get '/tweets' do
     #binding.pry
     @user = User.find_by id: session[:id]
-    if !@user.nil?
+    #if !@user.nil?
+    if !current_user.nil?
       #binding.pry
       erb :'/tweets/tweets'
     else

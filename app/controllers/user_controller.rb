@@ -4,7 +4,7 @@ class UserController < ApplicationController
   
   get '/signup/?' do
     #binding.pry
-    if session[:id].nil?
+    if logged_in?.nil?
       erb :'/users/create_user'
     else
       redirect to '/tweets'
@@ -12,9 +12,11 @@ class UserController < ApplicationController
   end
   
   get '/login/?' do
+    #@user = User.find_by id: logged_in?
+    #@user = current_user
     #binding.pry
-    @user = User.find_by id: session[:id]
-    if @user.nil?
+    #if @user.nil?
+    if current_user.nil?
       #binding.pry
       erb :'/users/login'
     else
@@ -23,9 +25,10 @@ class UserController < ApplicationController
   end
   
   get '/logout' do
-    @user = User.find_by id: session[:id]
+    #@user = User.find_by id: logged_in?
     #binding.pry
-    if !@user.nil?
+    #if !@user.nil?
+    if !current_user.nil?
       session.clear
       redirect to '/login'
     else
