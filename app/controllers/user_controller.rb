@@ -3,21 +3,15 @@ require './config/environment'
 class UserController < ApplicationController
   
   get '/signup/?' do
-    #binding.pry
-    if logged_in?.nil?
-      erb :'/users/create_user'
-    else
+    if logged_in?
       redirect to '/tweets'
+    else
+      erb :'/users/create_user'
     end
   end
   
   get '/login/?' do
-    #@user = User.find_by id: logged_in?
-    #@user = current_user
-    #binding.pry
-    #if @user.nil?
     if current_user.nil?
-      #binding.pry
       erb :'/users/login'
     else
       redirect to '/tweets'
@@ -25,39 +19,31 @@ class UserController < ApplicationController
   end
   
   get '/logout' do
-    #@user = User.find_by id: logged_in?
-    #binding.pry
-    #if !@user.nil?
-    if !current_user.nil?
-      session.clear
-      redirect to '/login'
-    else
-      #binding.pry
+    if current_user.nil?
       session.clear
       redirect to '/'
+    else
+      session.clear
+      redirect to '/login'
     end
-    #binding.pry
   end
   
   get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
+    @user = slug_name
     erb :'/tweets/show_user_tweets'
   end
   
   post '/signup' do
-    #binding.pry
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
         redirect to '/signup'
     end
     @user = User.create(params)
     session[:id] = @user.id
-    #binding.pry
     redirect to '/tweets'
   end
   
   patch'/login' do
     @user = User.find_by username: params[:user][:username]
-    #binding.pry
     if !@user.nil? && @user.authenticate(params[:user][:password]) != false
       session[:id] = @user.id
       redirect to "/tweets"
@@ -68,16 +54,12 @@ class UserController < ApplicationController
 
   post '/login' do
     @user = User.find_by username: params[:username]
-    #binding.pry
     if !@user.nil? && @user.authenticate(params[:password]) != false
       session[:id] = @user.id
-      #binding.pry
       redirect to "/tweets"
     else
       redirect to "/login"
     end
   end
-  
-
 
 end

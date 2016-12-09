@@ -15,11 +15,19 @@ class ApplicationController < Sinatra::Base
   
   helpers do
     def logged_in?
-      session[:id]
+      !session[:id].nil?
     end
 
     def current_user
-      User.find_by id: logged_in?
+      User.find_by id: session[:id]
+    end
+    
+    def current_tweet
+        Tweet.find_by params[:tweet_id]
+    end
+    
+    def slug_name
+        User.find_by_slug(params[:slug])
     end
 
   end
