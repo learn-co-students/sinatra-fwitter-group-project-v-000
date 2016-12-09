@@ -31,7 +31,9 @@ class TweetController < ApplicationController
   
   get '/tweets/:tweet_id/edit' do
     @user = current_user
-    if !@user.nil?
+    #binding.pry
+    #if !@user.nil?
+    if !current_user.nil? && current_tweet.user_id == current_user.id
      @tweet = current_tweet
       erb :'/tweets/edit_tweet'
     else
@@ -39,7 +41,7 @@ class TweetController < ApplicationController
     end
   end
  
-  post '/tweets/new' do
+  post '/tweets' do
     if !params[:content].empty?
       @user = User.find_by params[:user_id]
       Tweet.create(params)
