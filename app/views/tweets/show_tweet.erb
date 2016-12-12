@@ -1,0 +1,9 @@
+<h1><%= current_user.username %> tweeted on </h1>
+<div class="tweet">
+  <%= @tweet.content %>
+</div>
+<br>
+<div class="button">
+  <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+  <a href="/tweets/<%= @tweet.id %>/delete">Delete Tweet</a>
+</div>
