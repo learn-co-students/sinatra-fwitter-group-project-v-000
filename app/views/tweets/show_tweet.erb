@@ -5,9 +5,11 @@
 <br>
 
 
-<button type="button" name="button" id="Edit Tweet"><a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a></button>
+<div class="button" id="Edit Tweet"><a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a></div>
 
+<div class="button">
 <form action="/tweets/<%= @tweet.id %>/delete" method="post">
   <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete Tweet" id="Delete Tweet">
+  <input class="submit" type="submit" value="Delete Tweet" id="Delete Tweet">
 </form>
+</div>
