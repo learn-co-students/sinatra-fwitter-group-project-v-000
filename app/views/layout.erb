@@ -5,11 +5,16 @@
     <title>Fwitter</title>
 
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:700" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/styles.css">
   </head>
   <body>
     <div class="navbar">
-      <a href="/"><img src="images/fwitter_nimbus-01.png" id="logo"/></a>
+
+      <% if is_logged_in?(session) %><a href="/tweets"><% else %><a href="/"><% end %><img src="/images/fwitter_nimbus-01.png" id="logo"/></a>
+      <% if is_logged_in?(session) %><div class="button" id="logout">
+        <a href="/logout">Logout</a>
+      </div><% end %>
     </div>
     <div class="wrapper">
       <div class="content">

@@ -1,15 +1,20 @@
-<h1><%= current_user.username %> tweeted on </h1>
+<h1><%= current_user.username %> tweeted:</h1>
 <div class="tweet">
-  <%= @tweet.content %>
+  <div class="username">
+    <a href="/users/<%= @tweet.user.slug %>">@<%= @tweet.user.username %></a>
+  </div>
+  <div class="tweet-text">
+      <%= @tweet.content %>
+  </div>
 </div>
 <br>
 
 
 <div class="button" id="Edit Tweet"><a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a></div>
 
-<div class="button">
-<form action="/tweets/<%= @tweet.id %>/delete" method="post">
-  <input type="hidden" name="_method" value="delete">
-  <input class="submit" type="submit" value="Delete Tweet" id="Delete Tweet">
-</form>
+<div class="button-2">
+  <form action="/tweets/<%= @tweet.id %>/delete" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input class="submit" type="submit" value="Delete Tweet" id="Delete Tweet">
+  </form>
 </div>

@@ -1,7 +1,14 @@
 <h1>Welcome, <%= current_user.username %> </h1>
-
+<p>
+  Here's the latest:
+</p>
 <% @tweets.each do |tweet| %>
 <div class="tweet">
-  <%= tweet.content %>
+  <div class="username">
+    <a href="/users/<%= tweet.user.slug %>">@<%= tweet.user.username %></a>
+  </div>
+  <div class="tweet-text">
+      <%= tweet.content %>
+  </div>
 </div>
 <% end %>

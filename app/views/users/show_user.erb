@@ -1,7 +1,12 @@
-<h1><%= @user.username %> tweets!</h1>
+<h1><%if @user == current_user %>Your<% else %><%= @user.username %>'s<% end %> tweets</h1>
 
 <% @user.tweets.each do |tweet| %>
-<div class="tweet">
-  <%= tweet.content %>
-</div>
+  <div class="tweet">
+    <div class="username">
+      <a href="/users/<%= tweet.user.slug %>">@<%= tweet.user.username %></a>
+    </div>
+    <div class="tweet-text">
+        <%= tweet.content %>
+    </div>
+  </div>
 <% end %>

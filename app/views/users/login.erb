@@ -1,6 +1,26 @@
-<h1>Log in to Fwitter!</h1>
+<h1>Log in to your account</h1>
 <form action="/login" method="post">
-  <p><label>Username: </label><input type="text" name="username" id=":username"></p>
-  <p><label>Password: </label><input type="password" name="password" id=":password"></p>
-  <p><input type="submit" value="Submit" id="submit"></p>
+  <table>
+    <tr>
+      <td class="col-1">
+        <label>Username:</label>
+      </td>
+      <td>
+        <input type="text" name="username" id=":username">
+      </td>
+    </tr>
+    <tr>
+      <td class="col-1">
+        <label>Password: </label>
+      </td>
+      <td>
+        <input type="password" name="password" id=":password">
+      </td>
+    </tr>
+  </table>
+  <p><input class="submit" type="submit" value="Log In" id="submit"></p>
 </form>
+
+<p>
+  <a href="/signup">Don't have an account? Create one here.</a>
+</p>
