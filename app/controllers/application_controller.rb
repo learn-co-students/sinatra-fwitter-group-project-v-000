@@ -22,7 +22,7 @@ class ApplicationController < Sinatra::Base
     if user.save
         redirect "/tweets"
     else
-        redirect "/failure"
+      redirect "/signup_failure"
     end
   end
 
@@ -37,6 +37,7 @@ class ApplicationController < Sinatra::Base
       redirect "/tweets"
     else
       redirect "/failure"
+      redirect "/login_failure"
     end
   end
 
@@ -68,6 +69,11 @@ class ApplicationController < Sinatra::Base
     @tweet = Tweet.find_by(params[:id])
     @tweet.save
     redirect to "tweets/#{@tweet.id}"
+  end
+
+  get "/logout" do
+    session.clear
+    redirect "/"
   end
 
 end
