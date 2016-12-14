@@ -70,4 +70,9 @@ class ApplicationController < Sinatra::Base
     redirect to "tweets/#{@tweet.id}"
   end
 
+  get "/logout" do
+    session.clear
+    redirect "/"
+  end
+
 end
