@@ -7,9 +7,9 @@ class User <ActiveRecord::Base
   end
 
   def find_by_slug(slug)
-    all.each do |x|
+    User.all.each do |x|
       return x if x.slug == slug
     end
   end
-  
+
 end
