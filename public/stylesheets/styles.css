@@ -50,6 +50,7 @@ td {
 
 td.col-1 {
   text-align: right;
+  font-size: 1.1em;
 }
 
 div.wrapper {
@@ -65,7 +66,9 @@ div.content {
   display: inline-block;
   margin: 0 auto;
   width: 100%;
-  padding: 0 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 60px;
   overflow: auto;
 }
 
@@ -92,6 +95,11 @@ div.button, input.submit {
   border-radius: 5px;
   margin: 10px;
   font-size: 1.1em;
+}
+
+div.tweet-text a {
+  text-decoration: none;
+  color: #444;
 }
 
 div#logout {
@@ -133,16 +141,31 @@ div.button-2 {
   padding: none;
 }
 
+div.no-click div.button,
+div.no-click input.submit {
+  background-color: #666;
+}
+
 /*/////// FORM STYLING /////////*/
 
+td.textbox input[type="text"],
+td.textbox input[type="password"] {
+  padding: 5px;
+}
+
+td.textbox input[type="text"],
+td.textbox input[type="password"],
 div.write-tweet input[type="text"] {
-  padding: 10px;
-  margin-bottom: 20px;
   border: 1px solid #666;
   transition: box-shadow 0.3s, border 0.3s;
-  width: 90%;
   font-size: 1.2em;
   font-family: 'Lato', 'Helvetica', sans-serif;
+}
+
+div.write-tweet input[type="text"] {
+  padding: 10class="textbox"px;
+  margin-bottom: 20px;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
 }

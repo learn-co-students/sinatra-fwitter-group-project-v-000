@@ -6,7 +6,7 @@
       <a href="/users/<%= tweet.user.slug %>">@<%= tweet.user.username %></a>
     </div>
     <div class="tweet-text">
-        <%= tweet.content %>
+      <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
     </div>
   </div>
 <% end %>
