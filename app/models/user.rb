@@ -1,13 +1,14 @@
-class User <ActiveRecord::Base
+class User < ActiveRecord::Base
   has_many :tweets
   has_secure_password
+  validates_presence_of :username, :email, :password
 
   def slug
-    self.name.gsub(" ","-").downcase
+    self.username.gsub(" ","-").downcase
   end
 
-  def find_by_slug(slug)
-    User.all.each do |x|
+  def self.find_by_slug(slug)
+    all.each do |x|
       return x if x.slug == slug
     end
   end
