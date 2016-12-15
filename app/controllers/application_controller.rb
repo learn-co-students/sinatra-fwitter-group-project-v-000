@@ -94,7 +94,7 @@ class ApplicationController < Sinatra::Base
   end
 
   patch '/tweets/:id' do
-    @tweet = Tweet.find_by_id(params[:id])
+    @tweet = Tweet.find_by(params[:id])
     if params[:content] != ""
       @tweet.content = params[:content]
       @tweet.save
@@ -105,7 +105,7 @@ class ApplicationController < Sinatra::Base
   end
 
   delete '/tweets/:id/delete' do
-    @tweet = Tweet.find_by_id(params[:id])
+    @tweet = Tweet.find_by(params[:id])
     @tweet.delete
     redirect to '/tweets'
   end
