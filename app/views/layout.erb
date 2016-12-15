@@ -12,10 +12,12 @@
     <div class="navbar">
 
       <% if is_logged_in?(session) %><a href="/tweets"><% else %><a href="/"><% end %><img src="/images/fwitter_nimbus-01.png" id="logo"/></a>
-      <% if is_logged_in?(session) %><div class="button" id="logout">
-        <a href="/logout">Logout</a>
-      </div><% end %>
-      <% if is_logged_in?(session) %><a href="/tweets/new"><div class="button" id="new-tweet"><img src="/images/pencil-24.png" alt="New tweet" /></div></a><% end %>
+
+      <% if is_logged_in?(session) %>
+      <a href="/logout"><div class="button" id="logout">Log out</div></a>
+      <a href="/users/<%= current_user.slug %>"><div class="button" id="profile"><img src="/images/profile-pic.png" alt="New tweet" /></div></a>
+      <a href="/tweets/new"><div class="button" id="new-tweet"><img src="/images/pencil-24.png" alt="New tweet" /></div></a>
+      <% end %>
     </div>
     <div class="wrapper">
       <div class="content">

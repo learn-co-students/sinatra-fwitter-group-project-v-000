@@ -2,10 +2,6 @@
 
 /* color ref: Twitter - #1DA1F2 */
 
-html, body {
-  height: 100%;
-  width: 100%;
-}
 
 body {
   font-family: 'Lato', 'Helvetica', sans-serif;
@@ -104,7 +100,6 @@ div.button, input.submit {
   display: inline-block;
   background-color: #1DA1F2;
   padding: 10px 20px;
-  border-radius: 5px;
   margin: 10px;
   font-size: 1.1em;
 }
@@ -116,18 +111,22 @@ div.tweet-text a {
 
 div#logout {
   float: right;
+  color: #fff;
+  font-weight: 700;
   height: 2.5em;
   margin-top: 40px;
   margin-right: 30px;
 }
 
-div#new-tweet {
+div#new-tweet, div#profile  {
   float: right;
   height: 2.5em;
   margin-top: 40px;
+  margin-right: 5px;
 }
 
-div#new-tweet img {
+div#profile img {
+  height: 1.5em;
 }
 
 input.submit {
