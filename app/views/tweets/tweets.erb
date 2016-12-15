@@ -1,4 +1,15 @@
 <h1>Welcome, <%= current_user.username %> </h1>
+
+<% if flash.has?(:success) %>
+  <div class="success-message">
+    <%= flash[:success] %>
+  </div>
+<% elsif flash.has?(:error) %>
+  <div class="error-message">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
 <p>
   Here's the latest:
 </p>

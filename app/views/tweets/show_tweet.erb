@@ -1,4 +1,15 @@
-<h1><%= @tweet.user.username %> tweeted:</h1>
+<h1><%if @tweet.user == current_user %>You<% else %><%= @tweet.user.username %><% end %> tweeted:</h1>
+
+<% if flash.has?(:success) %>
+  <div class="success-message">
+    <%= flash[:success] %>
+  </div>
+<% elsif flash.has?(:error) %>
+  <div class="error-message">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
 <div class="tweet">
   <div class="username">
     <a href="/users/<%= @tweet.user.slug %>">@<%= @tweet.user.username %></a>

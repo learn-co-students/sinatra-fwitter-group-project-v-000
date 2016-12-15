@@ -1,6 +1,6 @@
 <h1><%if @user == current_user %>Your<% else %><%= @user.username %>'s<% end %> tweets</h1>
-
-<% @user.tweets.each do |tweet| %>
+<% tweets = @user.tweets.sort_by {|tweet| tweet.id}.reverse %>
+<% tweets.each do |tweet| %>
   <div class="tweet">
     <div class="username">
       <a href="/users/<%= tweet.user.slug %>">@<%= tweet.user.username %></a>

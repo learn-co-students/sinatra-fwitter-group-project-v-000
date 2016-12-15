@@ -88,6 +88,18 @@ div.navbar img#logo {
   padding: 8px;
 }
 
+div.success-message {
+  padding: 10px;
+  font-size: 1.2em;
+  color: #08A173;
+}
+
+div.error-message {
+  padding: 10px;
+  font-size: 1.2em;
+  color: #EC1C2A;
+}
+
 div.button, input.submit {
   display: inline-block;
   background-color: #1DA1F2;

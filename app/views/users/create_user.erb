@@ -1,4 +1,15 @@
 <h1>Sign Up</h1>
+
+<% if flash.has?(:success) %>
+  <div class="success-message">
+    <%= flash[:success] %>
+  </div>
+<% elsif flash.has?(:error) %>
+  <div class="error-message">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
 <p>
   Create a username and password and join the world's largest conversation.
 </p>
