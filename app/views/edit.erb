@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Edit the tweet.</h1>
+  <form action="/tweets/<%= @tweet.id %>" method="POST">
+    <input type="hidden" id="hidden" name="_method" value="patch">
+    <label>Tweet:</label>
+    <input type="text" name="content" id="content" value="<%= @tweet.content %>">
+    <br>
+    <input type="submit" name="submit" id="submit">
+  </form>
+</body>
+</html>
