@@ -38,11 +38,7 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets' do
     @tweet = Tweet.new(content: params[:content], user_id: session[:id])
-    if @tweet.save
-      redirect '/tweets'
-    else
-      redirect '/tweets/new'
-    end
+    @tweet.save ? (redirect '/tweets') : (redirect '/tweets/new')
   end
 
   get '/tweets/new' do
@@ -58,11 +54,6 @@ class ApplicationController < Sinatra::Base
     if Helpers.is_logged_in?(session)
       @tweet = Tweet.find(params[:id])
       erb :'single'
-      # if session[:id] == @tweet.user_id
-      #   erb :'single'
-      # else
-      #   redirect '/tweets'
-      # end
     else
       redirect '/login'
     end
@@ -70,9 +61,7 @@ class ApplicationController < Sinatra::Base
 
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    if params[:content] == ""
-      redirect "/tweets/#{@tweet.id}/edit"
-    end
+    redirect "/tweets/#{@tweet.id}/edit" if params[:content] == ""
 
     if Helpers.is_logged_in?(session)
       @tweet.update(content: params[:content])
@@ -94,11 +83,7 @@ class ApplicationController < Sinatra::Base
   post '/tweets/:id/delete' do
     if Helpers.is_logged_in?(session)
       @tweet = Tweet.find(params[:id])
-      if @tweet.user_id == session[:id]
-        @tweet.destroy
-      else
-        redirect '/tweets'
-      end
+      @tweet.user_id == session[:id] ? @tweet.destroy : (redirect '/tweets')
     else
       redirect '/login'
     end
@@ -127,7 +112,5 @@ class ApplicationController < Sinatra::Base
     session.clear
     redirect '/login'
   end
-
-
 
 end
