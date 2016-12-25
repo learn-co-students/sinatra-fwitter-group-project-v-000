@@ -1,0 +1,7 @@
+<h2><%=@user.username%> Page</h2>
+<%@user.tweets.each do |tweet|%>
+  <div class="content">
+    <p class="user">@<%=@user.username%></p>
+    <p><%=tweet.content%></p>
+  </div>
+<%end%>
