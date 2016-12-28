@@ -1,7 +1,7 @@
 <h2>Fix Your Tweet</h2>
-<form action="/tweets/1" method="post">
+<form action="/tweets/<%=@tweet.id%>" method="post">
   <input type="hidden" id="hidden" name="_method" value="patch">
-  <textarea name="content"cols="70" rows="10">Fix your terrible tweet</textarea>
+  <textarea name="content"cols="70" rows="10"><%=@tweet.content%></textarea>
   <br><br>
-  <input type="submit" value="Submit">
+  <input type="submit" value="submit">
 </form>

@@ -1,6 +1,10 @@
 <h2>Your Tweet</h2>
-<a href="/tweets/1/edit">Edit</a>
-<form action="/tweets/1/delete" method="post">
+<div class="content">
+  <p class="user">@<a class="user" href="/users/<%=@user.slug%>"><%=@user.username%></a></p>
+  <p><%=@tweet.content%></p>
+</div>
+<a class="button" href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
+<form class="button" action="/tweets/<%=@tweet.id%>/delete" method="post">
   <input type="hidden" id="hidden" name="_method" value="delete">
-  <input type="submit" class="button" value="Delete">
+  <input type="submit" class="button" value="Delete Tweet">
 </form>

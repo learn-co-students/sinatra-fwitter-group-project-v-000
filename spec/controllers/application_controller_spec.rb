@@ -167,7 +167,6 @@ describe ApplicationController do
         tweet2 = Tweet.create(:content => "look at this tweet", :user_id => user2.id)
 
         visit '/login'
-
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
