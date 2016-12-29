@@ -1,17 +1,18 @@
-<h2>Tweet from <%= @tweet.user.username %></h2>
-
 <% if flash.has?(:message) %>
   <p><em><%= flash[:message] %></em></p>
 <% end %>
 
-<p><%= @tweet.content %></p>
+<article>
+  <h3><em><%= @tweet.user.username %> tweeted:</em></h3>
+  <p><%= @tweet.content %></p>
+</article>
 
 <!-- Apparently the spec says the Delete button should be there
 even if it's not your tweet to delete. Hey, I don't make the rules. -->
 <p>
-  <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
   <form action="/tweets/<%= @tweet.id %>/delete" method="post">
     <input type="hidden" id="hidden" name="_method" value="delete">
+    <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a> |
     <input type="submit" value="Delete Tweet">
   </form>
 </p>

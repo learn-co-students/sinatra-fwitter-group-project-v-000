@@ -3,6 +3,7 @@ class UsersController < Sinatra::Base
   include Helper
 
   configure do
+    set :public_folder, 'public'
     set :views, "app/views/users"
     enable :sessions
     set :session_secret, "what a wonderful secret this is"
