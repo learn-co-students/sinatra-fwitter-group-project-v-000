@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>fwitter</title>
+</head>
+<body>
+  <header class="top_bar">
+    <h1><a href="/">fwitter</a></h1>
+    <nav id="main_nav">
+      <ul>
+        <li><a href="/tweets">tweets</a></li>
+        <li><a href="/logout">log out</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <%= yield %>
+  </main>
+</body>
+</html>
