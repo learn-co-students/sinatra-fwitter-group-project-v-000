@@ -13,7 +13,7 @@ class UsersController < Sinatra::Base
 
   get "/signup" do
     redirect to("/tweets") if logged_in?
-    erb :signup
+    erb :create_user
   end
 
   post "/signup" do

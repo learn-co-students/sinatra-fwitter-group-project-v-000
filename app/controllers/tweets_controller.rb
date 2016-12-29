@@ -45,7 +45,7 @@ class TweetsController < Sinatra::Base
     end
   end
 
-  post "/tweets/:id" do
+  patch "/tweets/:id" do
     tweet = Tweet.find(params[:id])
     if params[:tweet][:content].empty?
       flash[:message] = "Tweet contents cannot be empty!"
@@ -58,7 +58,7 @@ class TweetsController < Sinatra::Base
     redirect to("/tweets/#{tweet.id}")
   end
 
-  post "/tweets/:id/delete" do
+  delete "/tweets/:id/delete" do
     tweet = Tweet.find(params[:id])
     if tweet.user == current_user
       tweet.destroy
