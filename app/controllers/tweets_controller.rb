@@ -18,12 +18,8 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    if params[:content].empty?
-      redirect to 'tweets/new'
-    else
       current_user.tweets.create(content: params[:content])
       redirect to '/tweets'
-    end
   end
 
   get '/tweets/:id' do
@@ -47,21 +43,16 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    if params[:content].empty?
-      redirect to "/tweets/#{params[:id]}/edit"
-    else
-      @tweet = Tweet.find_by_id(params[:id])
+      @tweet = current_user.tweets.find_by_id(params[:id])
       @tweet.content = params[:content]
       @tweet.save
       redirect to "/tweets/#{@tweet.id}"
-    end
   end
 
   delete '/tweets/:id/delete' do
     if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-      if current_user.id == @tweet.user_id
-        @tweet.delete
+      @tweet = current_user.tweets.find_by_id(params[:id])
+      if @tweet && @tweet.destroy
         redirect to '/tweets'
       end
     else
