@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :tweets
+  validates :username, :email, :password, presence: true
+  validates :username, :email, uniqueness: true
 
   def slug
     self.username.downcase.split(" ").join("-")
