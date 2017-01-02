@@ -1,0 +1,13 @@
+Welcome,<%=@user.username%>
+
+
+
+<%User.all.each do |user|%>
+
+    <%=user.username%>
+    <br>
+      <%user.tweets.each do |tweet|%>
+        <%=tweet.content%>
+        <br>
+      <%end%>
+<%end%>
