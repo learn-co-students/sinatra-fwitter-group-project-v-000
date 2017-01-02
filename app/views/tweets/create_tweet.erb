@@ -1,0 +1,10 @@
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
+<form action="/tweets" method="POST">
+<label>What's on your mind?</label>
+  <input type="text" name="content">
+  <label> Submit</label>
+  <input type="submit" value="submit" class="btn btn-primary">
+</form>
