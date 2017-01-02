@@ -1,0 +1,12 @@
+
+  <%user = Helpers.current_user(session)%>
+    <p>Welcome, <%=user.username%>!</p>
+    
+    <%user.tweets.each do |tweet| %>
+      <p>===========================</p>
+      <p><%=tweet.content%></p>
+    <%end%>
+
+    <p><a href="/tweets">see all tweets</a></p>
+    <p><a href="/tweets/new">make a new tweet</a></p>
+    <p><a href="/logout">logout</a></p>
