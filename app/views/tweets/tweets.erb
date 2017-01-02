@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tweets</title>
+</head>
+<body>
+<h2>Welcome, <%=@username%>!</h2>
+<h2>Your Tweets Timeline</h2>
+  <%@tweets.each do |tweet|%>
+  <li><h4>
+    <a href="/tweets/<%= tweet.id %>"><%=tweet.content%></a> by <%= tweet.user.username %>
+  </h4></li>
+  <%end%>
+  
+</body>
+</html>
