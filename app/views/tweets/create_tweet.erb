@@ -1,0 +1,10 @@
+<!-- CRUD NEW -->
+
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
+<form action="/tweets" method="post">
+  <label>Create Tweet: </label><input type="text" name="content"><br>
+  <label>Submit: </label><input type="submit" value="submit">
+</form>

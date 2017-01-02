@@ -1,0 +1,22 @@
+<h1>Welcome, <%=@user.username%>!</h1>
+
+<%@tweet.each do |tweet|%>
+<h2><%= tweet.content %></h2>
+
+<h4>By 
+<%@user_all.each do |user|%>
+<%if tweet.user_id == user.id%>
+<%=user.username%></h4>
+
+<% if tweet.user_id == @user.id %>
+<a href="/tweets/<%=tweet.id%>">Show/Delete Tweet</a>
+<a href="/tweets/<%=tweet.id%>/edit">Edit Tweet</a>
+<%end%>
+<hr>
+<%end%>
+<%end%>
+<%end%>
+
+<br><br>
+<a href="/tweets/new">New Tweet</a><br><br>
+<a href="/logout">Log Out</a>
