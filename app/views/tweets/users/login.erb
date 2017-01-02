@@ -1,0 +1,13 @@
+<a href="/"><img src="https://farm2.staticflickr.com/1515/25704872810_fa439133c1_n.jpg"></a><br><br>
+
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
+<h1>Login Form</h1>
+
+<form method="post" action='/login'>
+  Username: <input type="text" id="username" name="username"><br><br>
+  Password: <input type="text" id="password" name="password"><br><br>
+  <input type="submit" id="submit">
+</form>

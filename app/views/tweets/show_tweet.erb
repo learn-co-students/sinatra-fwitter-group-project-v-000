@@ -1,0 +1,14 @@
+<a href="/"><img src="https://farm2.staticflickr.com/1515/25704872810_fa439133c1_n.jpg"></a><br><br>
+
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
+<h1><%=@tweet.content%></h1>
+
+<a href="/tweets/<%=@tweet.id%>/edit"><input type="submit" value="Edit Tweet"></a>
+<form method="post" action="/tweets/<%=@tweet.id%>/delete">
+<input id="hidden" type="hidden" name="_method" value="DELETE">
+<input type="submit" id="Delete Tweet" value="Delete Tweet">
+</form>
+
