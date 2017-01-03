@@ -29,18 +29,21 @@ class UsersController < Sinatra::Base
     #   flash[:message] = "No loopholes! Please fill out all the items!"
     #   redirect to("/signup")
     # end
-    if params[:username].empty? || params[:email].empty? || params[:password].empty?
-      flash[:message] = "No loopholes! Please fill out all the items!"
-      redirect to("/signup")
-    end
+
     user = User.create(
       username: params[:username],
       email: params[:email],
       password: params[:password]
     )
-    session[:id] = user.id
-    flash[:message] = "Login successful!"
-    redirect to("/tweets")
+    if user.valid?
+      session[:id] = user.id
+      flash[:message] = "Login successful!"
+      redirect to("/tweets")
+    else
+      flash[:message] = "No loopholes! Please fill out all the items!"
+      redirect to("/signup")
+    end
+
   end
 
   get "/login" do
