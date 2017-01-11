@@ -1,9 +1,13 @@
-<%= @tweet.content %>
+<h3><%= @tweet.content %></h3>
+
 
 <form class="" action="/tweets/<%=@tweet.id.to_s%>/delete" method="post">
   <input type="submit" id="Delete Tweet" value="Delete Tweet">
 </form>
-
-<form class="" action="/tweet/<%=@tweet.id.to_s%>/edit" method="post">
+<% if @tweet.user.id==@session[:id] then %>
+<form class="" action="/tweets/<%=@tweet.id.to_s%>/edit" method="get">
   <input type="submit" id="Edit Tweet" value="Edit Tweet">
 </form>
+<% end %>
+
+<p><a href="/tweets">Show all tweets</a></p>
