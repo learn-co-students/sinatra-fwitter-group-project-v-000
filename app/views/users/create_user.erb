@@ -1,0 +1,16 @@
+views/users/create_user.erb
+
+<h1>Create New User</h1>
+
+<form action='/signup' method = "POST">
+  <label>Username: </label>
+  <input type="text" name="username">
+
+  <label>Email: </label>
+  <input type="text" name="email">
+
+  <label>Password: </label>
+  <input type="password" name="password">
+
+  <input type="submit" value="Create User">
+</form>
