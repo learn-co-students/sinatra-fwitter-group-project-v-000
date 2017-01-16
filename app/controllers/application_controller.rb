@@ -54,13 +54,6 @@ class ApplicationController < Sinatra::Base
 	end 
   end
 
-  get '/tweets' do 
-    	if logged_in?
-  			erb :'tweets/tweets'
-  		else 
-  			redirect '/login'
-  		end 
-  end 
 
   get '/logout' do 
 	    session.clear
