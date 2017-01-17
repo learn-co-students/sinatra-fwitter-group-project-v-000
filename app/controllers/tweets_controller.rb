@@ -1,11 +1,7 @@
 class TweetsController < ApplicationController
 
-  get '/' do
-    redirect :index
+  get '/tweets' do
+    'This is the get /tweets page'
   end
 
-  get '/index' do
-    @tweets = Tweet.all
-    erb :index
-  end
 end
