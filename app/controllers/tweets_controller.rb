@@ -42,14 +42,14 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets/:id/edit' do
+  patch '/tweets/:id/edit' do
     @tweet = Tweet.find_by_id(params[:id])
     @tweet.content = params[:content] unless params[:content].empty?
     @tweet.save
     erb :'/tweets/show_tweet'
   end
 
-  post '/tweets/:id/delete' do
+  delete '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id])
     @tweet.delete if @tweet.user_id == current_user.id
     erb :'/tweets/tweets'

@@ -8,6 +8,7 @@ views/tweets/show_tweet
 </form>
 
 <form method="post" action='/tweets/<%=@tweet.id%>/delete'>
+  <input id="hidden" type="hidden" name="_method" value="delete">
   <label>Delete Tweet: </label>
   <input type="submit" name="delete" id="delete" value="Delete Tweet">
 </form>
