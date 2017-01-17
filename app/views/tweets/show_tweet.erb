@@ -1,1 +1,13 @@
 views/tweets/show_tweet
+
+<h3><%=@tweet.content%></h3>
+
+<form method="get" action='/tweets/<%=@tweet.id%>/edit'>
+  <label>Edit Tweet: </label>
+  <input type="submit" name="edit" id="edit" value="Edit Tweet">
+</form>
+
+<form method="post" action='/tweets/<%=@tweet.id%>/delete'>
+  <label>Delete Tweet: </label>
+  <input type="submit" name="delete" id="delete" value="Delete Tweet">
+</form>

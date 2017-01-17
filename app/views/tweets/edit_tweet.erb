@@ -1,1 +1,7 @@
 views/tweets/edit_tweet
+
+<form method="post" action='/tweets/<%=@tweet.id%>/edit'>
+  <label>Edit Tweet: </label>
+  <input type="text" name="content" value="<%=@tweet.content%>">
+  <input type="submit" name="edit" id="submit" value="Edit Tweet">
+</form>
