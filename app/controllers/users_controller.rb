@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do #user creation
-    binding.pry
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect to '/signup'
     else
