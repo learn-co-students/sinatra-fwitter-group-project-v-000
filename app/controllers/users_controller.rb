@@ -15,9 +15,7 @@ class UsersController < ApplicationController
 end
 
 # {"username"=>"skittles123", "email"=>"skittles@aol.com", "password"=>"rainbows"}
-# {"user"=>
-#   {"user_name"=>"picasso", "email"=>"picasso@artist.es", "password"=>"pablo"},
-#  "Sign Up"=>"Submit"}
+
 
 # SIGN UP
 # You'll need to create two controller actions, one to display the user signup and one to process the form submission.
