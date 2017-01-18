@@ -4,10 +4,15 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do #user creation
+    binding.pry
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect to '/signup'
     else
-      user = User.create(params[:user_name => "username", :email => "email", :password => "password"])
+      @user = User.new(params[:username => "username", :email => "email", :password => "password"])
+      binding.pry
+      @user.save
+      binding.pry
+      session[:user_id] = @user.id
       redirect to '/tweets'
 
     end
@@ -15,11 +20,4 @@ class UsersController < ApplicationController
 end
 
 # {"username"=>"skittles123", "email"=>"skittles@aol.com", "password"=>"rainbows"}
-
-
-# SIGN UP
-# You'll need to create two controller actions, one to display the user signup and one to process the form submission.
-#  The controller action that processes the form submission should create the user and save it to the database.
-# The form to sign up should be loaded via a GET request to /signup and submitted via a POST request to /signup.
 # The signup action should also log the user in and add the user_id to the sessions hash.
-# Make sure you add the Signup link to the home page.
