@@ -4,8 +4,14 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do #user creation
-    user = User.create(params[:user])
-    redirect to '/tweets'
+    binding.pry
+    # if !params[:user].empty
+    #   binding.pry
+      user = User.create(params[:user])
+      redirect to '/tweets'
+    # else
+    #   redirect to '/signup'
+    # end
   end
 end
 
