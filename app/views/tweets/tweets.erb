@@ -1,1 +1,12 @@
-<h1>Welcome to Tweets!!</h1>
+<h1>Welcome, Here Are Your Tweets! People Really Care!!</h1>
+
+  <% @tweets.each do |tweet| %>
+    <%= tweet.content %>
+    <%= tweet.user %>
+  <% end %>  
+
+
+<a href="/logout">Log Out</a>
+
+<a href="/tweets/new">Send a Tweet</a>
+

@@ -1,0 +1,12 @@
+
+
+<h1>Here is/are a/some tweet/tweets</h1>
+
+Name: <%= @tweet.user %>
+Tweet <%= @tweet.content %>
+
+<form method="post" action="/tweets/:slug/delete">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+
+  <input type="submit" value="delete">
+</form>

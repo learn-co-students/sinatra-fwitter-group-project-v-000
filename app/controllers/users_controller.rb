@@ -1,9 +1,14 @@
 require 'pry'
 class UsersController < ApplicationController
 
+  get '/users/:slug' do 
+    @user = User.find_by_slug(params[:slug])
+    erb :'users/show'
+  end  
+
   get '/signup' do
     if logged_in? 
-      redirect to :'/tweets/tweets'
+      redirect to '/tweets'
     else    
       erb :'users/create_user'
     end  
@@ -31,17 +36,21 @@ class UsersController < ApplicationController
   post '/login' do 
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
-      session_id = @user.id
-      redirect to '/tweets'
+      session[:user_id] = @user.id
+      redirect to '/tweets' 
     else
-      redirect to '/login'  
+      redirect to '/signup'
     end  
   end  
 
-  get '/tweets' do 
-
-    erb :'tweets/tweets'
-  end   
+  get '/logout' do 
+    if logged_in?
+      session.destroy
+      redirect to '/login'
+    else
+      redirect to '/'
+    end   
+  end 
 
   helpers do 
 
