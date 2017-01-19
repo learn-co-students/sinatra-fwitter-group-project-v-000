@@ -38,6 +38,12 @@ class UsersController < ApplicationController
     redirect to '/login'
   end
 
+  get '/users/:slug' do #user show page
+    @user = User.find_by_slug(params[:slug])
+    @tweets = @user.tweets
+    erb :'/users/show'
+  end
+
 end
 
 # LOG OUT
