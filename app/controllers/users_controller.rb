@@ -26,15 +26,11 @@ class UsersController < ApplicationController
   end
 
   post '/login' do #user login
-    if Helpers.is_logged_in?(session)
-      redirect to '/logout'
-    else
       @user = User.find_by(:username => params[:username])
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
         redirect to '/tweets'
       end
-    end
   end
 
   get '/logout' do #logout
