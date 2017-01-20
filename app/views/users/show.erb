@@ -1,13 +1,11 @@
-<h1>Here is/are a/some tweet/tweets</h1>
+<h1>Hello, <%= @user.username %>. Here are your tweets</h1>
 
-Name: <%= @user.username %>
+<ul>
 <% @user.tweets.each do |tweet| %>
-  <%= tweet.content %>
+  <li><%= tweet.content %></li>
 <% end %>  
+</ul>
 
 
-<form method="post" action="/tweets/:slug/delete">
-    <input id="hidden" type="hidden" name="_method" value="delete">
-
-  <input type="submit" value="delete">
+  <a href="/tweets/new"> Compose Tweet</a>
 </form>

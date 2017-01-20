@@ -1,12 +1,9 @@
-<h1>Welcome, Here Are Your Tweets! People Really Care!!</h1>
-
+<h1>Welcome, <%=@user.username %></h1>
+<h1>HERE ARE TWEETS FROM PEOPLE!</h1>
   <% @tweets.each do |tweet| %>
-    <%= tweet.content %>
-    <%= tweet.user %>
-  <% end %>  
-
-
-<a href="/logout">Log Out</a>
-
+    <p><li><%= tweet.content %><br></p></li>
+    </ul></p>
+  <% end %>  <br><br>
+<a href="/logout">Log Out</a>  &nbsp;  &nbsp;
 <a href="/tweets/new">Send a Tweet</a>
 
