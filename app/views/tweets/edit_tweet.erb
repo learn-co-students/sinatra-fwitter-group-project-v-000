@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Edit Your Tweet, Because So Many Want to Read It!</h1>
-  <form method="POST" action="/tweets/<%=@tweet.id%>">
+  <form method="POST" action="/tweets/<%=@tweet.user_id%>">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
     <input type="text" id="content" name="content" value="<%= @tweet.content %>"><br><br>
     <input type="submit" value="submit">

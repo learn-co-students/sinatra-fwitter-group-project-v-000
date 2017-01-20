@@ -1,4 +1,3 @@
-require 'pry'
 class TweetsController < ApplicationController 
 
   get '/tweets' do 
@@ -21,7 +20,7 @@ class TweetsController < ApplicationController
   end 
 
   post '/tweets' do
-    if params[:content] == nil || params[:content] == "" || params[:user_id] == ""
+    if params[:content] == nil || params[:content] == "" 
       redirect to "/tweets/new"
     else       
       @tweet = Tweet.create(:content => params[:content], :user_id => params[:user_id])
@@ -56,27 +55,29 @@ class TweetsController < ApplicationController
 
   patch '/tweets/:id' do 
     if logged_in?
-      if @tweet.user_id == self.current_user.id
-      @tweet = Tweet.find_by_id(params[:id])
-      @tweet.content = params[:content]
+      if params[:content] == nil || params[:content] == ""
+        redirect to "/tweets/#{params[:id]}/edit"
+      else   
+        @tweet = Tweet.find_by_id(params[:id])
+        @tweet.content = params[:content]
+        @tweet.save
         redirect to "/tweets/#{@tweet.id}"
-      else
-        redirect to '/tweets'
-      end  
+      end
+        # redirect to '/tweets'
+     
     else 
       redirect to '/login'    
     end
   end  
-  
-  # patch '/tweets/:id' do
-  #     erb :'/tweets/show_tweet'
-  #   else 
-  #     redirect to '/login'
-  #   end    
-  # end  
 
-    #redirect "/tweets/#{@tweet.id}" 
-   # redirect "/tweets/:id"
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if self.current_user.id == @tweet.user_id
+      @tweet.delete
+    else
+      redirect to "tweets"  
+    end  
+  end
 
 helpers do 
 
