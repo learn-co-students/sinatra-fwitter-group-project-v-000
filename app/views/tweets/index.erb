@@ -1,3 +1,9 @@
 /app/views/tweets/index.erb
 
-<h1>Welcome,  </h1>
+<h1>Welcome, <%= @user.username %> </h1>
+
+<% @tweets.each do |tweet| %>
+  <ul>
+    <li><%= tweet.content %> --<%= User.find_by_id(tweet.user_id).username %></li>
+  </ul>
+<% end %>
