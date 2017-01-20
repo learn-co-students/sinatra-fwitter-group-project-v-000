@@ -1,6 +1,0 @@
-<h2>Tweets of <%=@user.username %></h2>
-  <%= if u.tweets==[] then "This user has no tweet yet." end %>
-<% @user.tweets.each do |t| %>
-    <h3> <%= t.content %> </h3>
-  <% end %>
-<p><a href="/tweets">Show all user's tweets</a></p>
