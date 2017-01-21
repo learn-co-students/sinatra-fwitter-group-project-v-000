@@ -1,0 +1,6 @@
+views/tweets/show.erb <br></br>
+
+<h1><%= @tweet.content %> -- <%= User.find_by_id(@tweet.user_id).username %></h1>
+
+<h3>Edit Tweet</h3>
+<h3>Delete Tweet</h3>
