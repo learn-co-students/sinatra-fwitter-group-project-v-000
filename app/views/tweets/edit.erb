@@ -1,0 +1,10 @@
+app/views/tweets/edit.erb
+
+<h1>Edit yo' tweet</h1>
+
+<form method="POST" action="/tweets/<%= @tweet.id %>">
+  <input type="hidden" name="_method" value="patch">
+  <label>Tweet:</label>
+  <input type="text" name="content" value="<%= @tweet.content %>"><br></br>
+  <input type="submit" name="submit" value="submit">
+</form>
