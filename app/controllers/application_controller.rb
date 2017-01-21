@@ -1,5 +1,6 @@
 require 'bcrypt'
 require './config/environment'
+require 'twilio-ruby'
 class ApplicationController < Sinatra::Base
 
 
