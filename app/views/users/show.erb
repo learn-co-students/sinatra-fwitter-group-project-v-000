@@ -1,7 +1,10 @@
-views/users/show.erb <br></br>
+<h1>Hello, <%= @user.username %>. Here are your tweets</h1>
 
-<h1><%= @user.username%>'s Tweets</h1>
+<ul>
+<% @user.tweets.each do |tweet| %>
+  <li><%= tweet.content %></li>
+<% end %>
+</ul>
 
-<% @tweets.each do |tweet| %>
-  <%= tweet.content %><br></br>
-  <% end %>
+
+<a href="/tweets/new">Send a Tweet</a>

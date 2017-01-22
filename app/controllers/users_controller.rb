@@ -30,12 +30,18 @@ class UsersController < ApplicationController
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
         redirect to '/tweets'
+      else
+        redirect to '/'
       end
   end
 
   get '/logout' do #logout
-    session.clear
-    redirect to '/login'
+    if Helpers.is_logged_in?(session)
+      session.clear
+      redirect to '/login'
+    else
+      redirect to '/'
+    end
   end
 
   get '/users/:slug' do #user show page
@@ -45,6 +51,3 @@ class UsersController < ApplicationController
   end
 
 end
-
-# LOG OUT
-# You'll need to create a controller action to process a GET request to /logout to log out. The controller action should clear the session hash

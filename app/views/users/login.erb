@@ -1,9 +1,14 @@
-<h1>Log in to your Fwitter account...</h1>
+<h1>Login to Fwitter</h1>
 
 <form method="POST" action="/login">
-  <label>user name:</label>
+  <label>Your username: </label>
   <input type="text" name="username">
-  <label>password:</label>
+  <label>Your password: </label>
   <input type="text" name="password">
   <input type="submit" value="submit">
+
+  <p class="change_link">
+    Not a member yet ?
+  <a href="/signup" class="to_register">Sign Up</a>
+  </p>
 </form>
