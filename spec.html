@@ -1,0 +1,604 @@
+D, [2017-01-18T11:07:39.682467 #88446] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Run options: include {:focus=>true}
+
+All examples were filtered out; ignoring {:focus=>true}
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>RSpec results</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Expires" content="-1" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <style type="text/css">
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 80%;
+  }
+  </style>
+  <script type="text/javascript">
+    // <![CDATA[
+
+function addClass(element_id, classname) {
+  document.getElementById(element_id).className += (" " + classname);
+}
+
+function removeClass(element_id, classname) {
+  var elem = document.getElementById(element_id);
+  var classlist = elem.className.replace(classname,'');
+  elem.className = classlist;
+}
+
+function moveProgressBar(percentDone) {
+  document.getElementById("rspec-header").style.width = percentDone +"%";
+}
+
+function makeRed(element_id) {
+  removeClass(element_id, 'passed');
+  removeClass(element_id, 'not_implemented');
+  addClass(element_id,'failed');
+}
+
+function makeYellow(element_id) {
+  var elem = document.getElementById(element_id);
+  if (elem.className.indexOf("failed") == -1) {  // class doesn't includes failed
+    if (elem.className.indexOf("not_implemented") == -1) { // class doesn't include not_implemented
+      removeClass(element_id, 'passed');
+      addClass(element_id,'not_implemented');
+    }
+  }
+}
+
+function apply_filters() {
+  var passed_filter = document.getElementById('passed_checkbox').checked;
+  var failed_filter = document.getElementById('failed_checkbox').checked;
+  var pending_filter = document.getElementById('pending_checkbox').checked;
+
+  assign_display_style("example passed", passed_filter);
+  assign_display_style("example failed", failed_filter);
+  assign_display_style("example not_implemented", pending_filter);
+
+  assign_display_style_for_group("example_group passed", passed_filter);
+  assign_display_style_for_group("example_group not_implemented", pending_filter, pending_filter || passed_filter);
+  assign_display_style_for_group("example_group failed", failed_filter, failed_filter || pending_filter || passed_filter);
+}
+
+function get_display_style(display_flag) {
+  var style_mode = 'none';
+  if (display_flag == true) {
+    style_mode = 'block';
+  }
+  return style_mode;
+}
+
+function assign_display_style(classname, display_flag) {
+  var style_mode = get_display_style(display_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    elems[i].style.display = style_mode;
+  }
+}
+
+function assign_display_style_for_group(classname, display_flag, subgroup_flag) {
+  var display_style_mode = get_display_style(display_flag);
+  var subgroup_style_mode = get_display_style(subgroup_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    var style_mode = display_style_mode;
+    if ((display_flag != subgroup_flag) && (elems[i].getElementsByTagName('dt')[0].innerHTML.indexOf(", ") != -1)) {
+      elems[i].style.display = subgroup_style_mode;
+    } else {
+      elems[i].style.display = display_style_mode;
+    }
+  }
+}
+
+    // ]]>
+  </script>
+  <style type="text/css">
+#rspec-header {
+  background: #65C400; color: #fff; height: 4em;
+}
+
+.rspec-report h1 {
+  margin: 0px 10px 0px 10px;
+  padding: 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  font-size: 1.8em;
+  position: absolute;
+}
+
+#label {
+  float:left;
+}
+
+#display-filters {
+  float:left;
+  padding: 28px 0 0 40%;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+}
+
+#summary {
+  float:right;
+  padding: 5px 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  text-align: right;
+}
+
+#summary p {
+  margin: 0 0 0 2px;
+}
+
+#summary #totals {
+  font-size: 1.2em;
+}
+
+.example_group {
+  margin: 0 10px 5px;
+  background: #fff;
+}
+
+dl {
+  margin: 0; padding: 0 0 5px;
+  font: normal 11px "Lucida Grande", Helvetica, sans-serif;
+}
+
+dt {
+  padding: 3px;
+  background: #65C400;
+  color: #fff;
+  font-weight: bold;
+}
+
+dd {
+  margin: 5px 0 5px 5px;
+  padding: 3px 3px 3px 18px;
+}
+
+dd .duration {
+  padding-left: 5px;
+  text-align: right;
+  right: 0px;
+  float:right;
+}
+
+dd.example.passed {
+  border-left: 5px solid #65C400;
+  border-bottom: 1px solid #65C400;
+  background: #DBFFB4; color: #3D7700;
+}
+
+dd.example.not_implemented {
+  border-left: 5px solid #FAF834;
+  border-bottom: 1px solid #FAF834;
+  background: #FCFB98; color: #131313;
+}
+
+dd.example.pending_fixed {
+  border-left: 5px solid #0000C2;
+  border-bottom: 1px solid #0000C2;
+  color: #0000C2; background: #D3FBFF;
+}
+
+dd.example.failed {
+  border-left: 5px solid #C20000;
+  border-bottom: 1px solid #C20000;
+  color: #C20000; background: #FFFBD3;
+}
+
+
+dt.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+dt.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+dt.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+#rspec-header.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+#rspec-header.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+#rspec-header.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+.backtrace {
+  color: #000;
+  font-size: 12px;
+}
+
+a {
+  color: #BE5C00;
+}
+
+/* Ruby code, style similar to vibrant ink */
+.ruby {
+  font-size: 12px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+  padding: 0.1em 0 0.2em 0;
+}
+
+.ruby .keyword { color: #FF6600; }
+.ruby .constant { color: #339999; }
+.ruby .attribute { color: white; }
+.ruby .global { color: white; }
+.ruby .module { color: white; }
+.ruby .class { color: white; }
+.ruby .string { color: #66FF00; }
+.ruby .ident { color: white; }
+.ruby .method { color: #FFCC00; }
+.ruby .number { color: white; }
+.ruby .char { color: white; }
+.ruby .comment { color: #9933CC; }
+.ruby .symbol { color: white; }
+.ruby .regex { color: #44B4CC; }
+.ruby .punct { color: white; }
+.ruby .escape { color: white; }
+.ruby .interp { color: white; }
+.ruby .expr { color: white; }
+
+.ruby .offending { background-color: gray; }
+.ruby .linenum {
+  width: 75px;
+  padding: 0.1em 1em 0.2em 0;
+  color: #000000;
+  background-color: #FFFBD3;
+}
+
+  </style>
+</head>
+<body>
+<div class="rspec-report">
+
+<div id="rspec-header">
+  <div id="label">
+    <h1>RSpec Code Examples</h1>
+  </div>
+
+  <div id="display-filters">
+    <input id="passed_checkbox"  name="passed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="1" /> <label for="passed_checkbox">Passed</label>
+    <input id="failed_checkbox"  name="failed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="2" /> <label for="failed_checkbox">Failed</label>
+    <input id="pending_checkbox" name="pending_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="3" /> <label for="pending_checkbox">Pending</label>
+  </div>
+
+  <div id="summary">
+    <p id="totals">&#160;</p>
+    <p id="duration">&#160;</p>
+  </div>
+</div>
+
+
+<div class="results">
+<div id="div_group_1" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_1" class="passed">ApplicationController</dt>
+  </dl>
+</div>
+<div id="div_group_2" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_2" class="passed">Homepage</dt>
+    <script type="text/javascript">moveProgressBar('2.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">loads the homepage</span><span class='duration'>0.02528s</span></dd>
+  </dl>
+</div>
+<div id="div_group_3" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_3" class="passed">Signup Page</dt>
+    <script type="text/javascript">moveProgressBar('5.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">loads the signup page</span><span class='duration'>0.01036s</span></dd>
+    <script type="text/javascript">moveProgressBar('8.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">signup directs user to twitter index</span><span class='duration'>0.08407s</span></dd>
+    <script type="text/javascript">moveProgressBar('11.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not let a user sign up without a username</span><span class='duration'>0.01050s</span></dd>
+    <script type="text/javascript">moveProgressBar('14.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not let a user sign up without an email</span><span class='duration'>0.00996s</span></dd>
+    <script type="text/javascript">moveProgressBar('17.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not let a user sign up without a password</span><span class='duration'>0.01042s</span></dd>
+    <script type="text/javascript">moveProgressBar('20.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not let a logged in user view the signup page</span><span class='duration'>0.14804s</span></dd>
+  </dl>
+</div>
+<div id="div_group_4" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_4" class="passed">login</dt>
+    <script type="text/javascript">moveProgressBar('22.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">loads the login page</span><span class='duration'>0.00996s</span></dd>
+    <script type="text/javascript">moveProgressBar('25.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">loads the tweets index after login</span><span class='duration'>0.14655s</span></dd>
+    <script type="text/javascript">moveProgressBar('28.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not let user view login page if already logged in</span><span class='duration'>0.14502s</span></dd>
+  </dl>
+</div>
+<div id="div_group_5" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_5" class="passed">logout</dt>
+    <script type="text/javascript">moveProgressBar('31.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">lets a user logout if they are already logged in</span><span class='duration'>0.14422s</span></dd>
+    <script type="text/javascript">moveProgressBar('34.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not let a user logout if not logged in</span><span class='duration'>0.00905s</span></dd>
+    <script type="text/javascript">moveProgressBar('37.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not load /tweets if user not logged in</span><span class='duration'>0.00920s</span></dd>
+    <script type="text/javascript">moveProgressBar('40.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">does load /tweets if user is logged in</span><span class='duration'>0.14649s</span></dd>
+  </dl>
+</div>
+<div id="div_group_6" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_6" class="passed">user show page</dt>
+    <script type="text/javascript">makeRed('rspec-header');</script>
+    <script type="text/javascript">makeRed('div_group_6');</script>
+    <script type="text/javascript">makeRed('example_group_6');</script>
+    <script type="text/javascript">moveProgressBar('42.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">shows all a single users tweets</span>
+      <span class="duration">0.09740s</span>
+      <div class="failure" id="failure_1">
+        <div class="message"><pre>Failure/Error: expect(last_response.body).to include(&quot;tweeting!&quot;)
+
+  expected &quot;&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n&lt;head&gt;\n  &lt;style type=\&quot;text/css\&quot;&gt;\n  body { text-align:center;font-family...2F;becky567&amp;#x27; do\n    &amp;quot;Hello World&amp;quot;\n  end\nend\n&lt;/pre&gt;\n  &lt;/div&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n&quot; to include &quot;tweeting!&quot;
+  Diff:
+  @@ -1,2 +1,25 @@
+  -tweeting!
+  +&lt;!DOCTYPE html&gt;
+  +&lt;html&gt;
+  +&lt;head&gt;
+  +  &lt;style type=&quot;text/css&quot;&gt;
+  +  body { text-align:center;font-family:helvetica,arial;font-size:22px;
+  +    color:#888;margin:20px}
+  +  #c {margin:0 auto;width:500px;text-align:left}
+  +  &lt;/style&gt;
+  +&lt;/head&gt;
+  +&lt;body&gt;
+  +  &lt;h2&gt;Sinatra doesn&amp;rsquo;t know this ditty.&lt;/h2&gt;
+  +  &lt;img src=&#39;http://example.org/__sinatra__/404.png&#39;&gt;
+  +  &lt;div id=&quot;c&quot;&gt;
+  +    Try this:
+  +    &lt;pre&gt;# in application_controller.rb
+  +class ApplicationController
+  +  get &amp;#x27;&amp;#x2F;users&amp;#x2F;becky567&amp;#x27; do
+  +    &amp;quot;Hello World&amp;quot;
+  +  end
+  +end
+  +&lt;/pre&gt;
+  +  &lt;/div&gt;
+  +&lt;/body&gt;
+  +&lt;/html&gt;</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:154:in `block (3 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">152</span>      get <span class="string"><span class="delimiter">&quot;</span><span class="content">/users/</span><span class="inline"><span class="inline-delimiter">#{</span>user.slug<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>
+<span class="linenum">153</span>
+<span class="offending"><span class="linenum">154</span>      expect(last_response.body).to include(<span class="string"><span class="delimiter">&quot;</span><span class="content">tweeting!</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">155</span>      expect(last_response.body).to include(<span class="string"><span class="delimiter">&quot;</span><span class="content">tweet tweet tweet</span><span class="delimiter">&quot;</span></span>)</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_7" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_7" class="passed">index action</dt>
+  </dl>
+</div>
+<div id="div_group_8" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_8" class="passed">logged in</dt>
+    <script type="text/javascript">makeRed('div_group_8');</script>
+    <script type="text/javascript">makeRed('example_group_8');</script>
+    <script type="text/javascript">moveProgressBar('45.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">lets a user view the tweets index if logged in</span>
+      <span class="duration">0.21698s</span>
+      <div class="failure" id="failure_2">
+        <div class="message"><pre>Failure/Error: expect(page.body).to include(tweet1.content)
+
+  expected &quot;&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n  &lt;head&gt;\n    &lt;title&gt;&lt;/title&gt;\n  &lt;/head&gt;\n\n  &lt;body&gt;\n    &lt;h1&gt;Welcome, Stup...ople&#39;s Opinions Abound!! Enjoy!&lt;/h1&gt;\n\n\n\n\n&lt;a href=\&quot;/logout\&quot;&gt;Log Out&lt;/a&gt;\n\n  &lt;/body&gt;\n&lt;/html&gt;&quot; to include &quot;tweeting!&quot;
+  Diff:
+  @@ -1,2 +1,17 @@
+  -tweeting!
+  +&lt;!DOCTYPE html&gt;
+  +&lt;html&gt;
+  +  &lt;head&gt;
+  +    &lt;title&gt;&lt;/title&gt;
+  +  &lt;/head&gt;
+  +
+  +  &lt;body&gt;
+  +    &lt;h1&gt;Welcome, Stupid People&#39;s Opinions Abound!! Enjoy!&lt;/h1&gt;
+  +
+  +
+  +
+  +
+  +&lt;a href=&quot;/logout&quot;&gt;Log Out&lt;/a&gt;
+  +
+  +  &lt;/body&gt;
+  +&lt;/html&gt;</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:175:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">173</span>        click_button <span class="string"><span class="delimiter">'</span><span class="content">submit</span><span class="delimiter">'</span></span>
+<span class="linenum">174</span>        visit <span class="string"><span class="delimiter">&quot;</span><span class="content">/tweets</span><span class="delimiter">&quot;</span></span>
+<span class="offending"><span class="linenum">175</span>        expect(page.body).to include(tweet1.content)</span>
+<span class="linenum">176</span>        expect(page.body).to include(tweet2.content)
+<span class="linenum">177</span>      <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_9" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_9" class="passed">logged out</dt>
+    <script type="text/javascript">moveProgressBar('48.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">does not let a user view the tweets index if not logged in</span><span class='duration'>0.01200s</span></dd>
+  </dl>
+</div>
+<div id="div_group_10" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_10" class="passed">new action</dt>
+  </dl>
+</div>
+<div id="div_group_11" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_11" class="passed">logged in</dt>
+    <script type="text/javascript">moveProgressBar('51.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">lets user view new tweet form if logged in</span><span class='duration'>0.15227s</span></dd>
+    <script type="text/javascript">makeRed('div_group_11');</script>
+    <script type="text/javascript">makeRed('example_group_11');</script>
+    <script type="text/javascript">moveProgressBar('54.2');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">lets user create a tweet if they are logged in</span>
+      <span class="duration">0.15454s</span>
+      <div class="failure" id="failure_3">
+        <div class="message"><pre>Failure/Error: fill_in(:content, :with =&gt; &quot;tweet!!!&quot;)
+
+Capybara::ElementNotFound:
+  Unable to find field :content</pre></div>
+        <div class="backtrace"><pre>/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/node/finders.rb:44:in `block in find&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/node/base.rb:85:in `synchronize&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/node/finders.rb:33:in `find&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/node/actions.rb:90:in `fill_in&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/session.rb:721:in `block (2 levels) in &lt;class:Session&gt;&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/dsl.rb:52:in `block (2 levels) in &lt;module:DSL&gt;&#39;
+./spec/controllers/application_controller_spec.rb:217:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">42</span>          <span class="keyword">end</span>
+<span class="linenum">43</span>          <span class="keyword">if</span> result.empty?
+<span class="offending"><span class="linenum">44</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">45</span>          <span class="keyword">end</span>
+<span class="linenum">46</span>          result.first</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('57.1');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">does not let a user tweet from another user</span>
+      <span class="duration">0.22074s</span>
+      <div class="failure" id="failure_4">
+        <div class="message"><pre>Failure/Error: fill_in(:content, :with =&gt; &quot;tweet!!!&quot;)
+
+Capybara::ElementNotFound:
+  Unable to find field :content</pre></div>
+        <div class="backtrace"><pre>/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/node/finders.rb:44:in `block in find&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/node/base.rb:85:in `synchronize&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/node/finders.rb:33:in `find&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/node/actions.rb:90:in `fill_in&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/session.rb:721:in `block (2 levels) in &lt;class:Session&gt;&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/dsl.rb:52:in `block (2 levels) in &lt;module:DSL&gt;&#39;
+./spec/controllers/application_controller_spec.rb:239:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">42</span>          <span class="keyword">end</span>
+<span class="linenum">43</span>          <span class="keyword">if</span> result.empty?
+<span class="offending"><span class="linenum">44</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">45</span>          <span class="keyword">end</span>
+<span class="linenum">46</span>          result.first</code></pre>
+      </div>
+    </dd>
+    <script type="text/javascript">moveProgressBar('60.0');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">does not let a user create a blank tweet</span>
+      <span class="duration">0.14777s</span>
+      <div class="failure" id="failure_5">
+        <div class="message"><pre>Failure/Error: fill_in(:content, :with =&gt; &quot;&quot;)
+
+Capybara::ElementNotFound:
+  Unable to find field :content</pre></div>
+        <div class="backtrace"><pre>/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/node/finders.rb:44:in `block in find&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/node/base.rb:85:in `synchronize&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/node/finders.rb:33:in `find&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/node/actions.rb:90:in `fill_in&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/session.rb:721:in `block (2 levels) in &lt;class:Session&gt;&#39;
+/Users/scottbewick/.rvm/gems/ruby-2.3.1/gems/capybara-2.11.0/lib/capybara/dsl.rb:52:in `block (2 levels) in &lt;module:DSL&gt;&#39;
+./spec/controllers/application_controller_spec.rb:261:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">42</span>          <span class="keyword">end</span>
+<span class="linenum">43</span>          <span class="keyword">if</span> result.empty?
+<span class="offending"><span class="linenum">44</span>            raise <span class="constant">Capybara</span>::<span class="constant">ElementNotFound</span>.new(<span class="string"><span class="delimiter">&quot;</span><span class="content">Unable to find </span><span class="inline"><span class="inline-delimiter">#{</span>query.description<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">45</span>          <span class="keyword">end</span>
+<span class="linenum">46</span>          result.first</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_12" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_12" class="passed">logged out</dt>
+    <script type="text/javascript">makeRed('div_group_12');</script>
+    <script type="text/javascript">makeRed('example_group_12');</script>
+    <script type="text/javascript">moveProgressBar('62.8');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">does not let user view new tweet form if not logged in</span>
+      <span class="duration">0.01058s</span>
+      <div class="failure" id="failure_6">
+        <div class="message"><pre>Failure/Error: expect(last_response.location).to include(&quot;/login&quot;)
+  expected nil to include &quot;/login&quot;, but it does not respond to `include?`</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:273:in `block (4 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">271</span>      it <span class="string"><span class="delimiter">'</span><span class="content">does not let user view new tweet form if not logged in</span><span class="delimiter">'</span></span> <span class="keyword">do</span>
+<span class="linenum">272</span>        get <span class="string"><span class="delimiter">'</span><span class="content">/tweets/new</span><span class="delimiter">'</span></span>
+<span class="offending"><span class="linenum">273</span>        expect(last_response.location).to include(<span class="string"><span class="delimiter">&quot;</span><span class="content">/login</span><span class="delimiter">&quot;</span></span>)</span>
+<span class="linenum">274</span>      <span class="keyword">end</span>
+<span class="linenum">275</span>    <span class="keyword">end</span></code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_13" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_13" class="passed">show action</dt>
+  </dl>
+</div>
+<div id="div_group_14" class="example_group passed">
+  <dl style="margin-left: 45px;">
+  <dt id="example_group_14" class="passed">logged in</dt>
+
+[1mFrom:[0m /Users/scottbewick/Development/code/sinatra-fwitter-group-project-v-000/app/controllers/tweets_controller.rb @ line 19 self.GET /tweets/:id:
+
+    [1;34m14[0m:     [32mend[0m
+    [1;34m15[0m:   [32mend[0m 
+    [1;34m16[0m: 
+    [1;34m17[0m:   get [31m[1;31m'[0m[31m/tweets/:id[1;31m'[0m[31m[0m [32mdo[0m 
+    [1;34m18[0m:     @tweet = [1;34;4mTweet[0m.find_by_id(params[[33m:id[0m])
+ => [1;34m19[0m:     binding.pry
+    [1;34m20[0m:     erb [33m:[1;33m'[0m[33m/tweets/show_tweet[1;33m'[0m[33m[0m
+    [1;34m21[0m:   [32mend[0m
+    [1;34m22[0m: 
+    [1;34m23[0m:   get [31m[1;31m'[0m[31m/tweet/:id/edit[1;31m'[0m[31m[0m [32mdo[0m 
+    [1;34m24[0m: 
+
+[0G[1] pry(#<TweetsController>)> opel
+NameError: undefined local variable or method `opel' for #<TweetsController:0x007fc4ae943de0>
+Did you mean?  open
+from (pry):1:in `block in <class:TweetsController>'
+[2] pry(#<TweetsController>)> exit
+    <script type="text/javascript">makeRed('div_group_14');</script>
+    <script type="text/javascript">makeRed('example_group_14');</script>
+    <script type="text/javascript">moveProgressBar('65.7');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">displays a single tweet</span>
+      <span class="duration">92.96900s</span>
+      <div class="failure" id="failure_7">
+        <div class="message"><pre>Failure/Error: expect(page.status_code).to eq(200)
+
+  expected: 200
+       got: 500
+
+  (compared using ==)</pre></div>
+        <div class="backtrace"><pre>./spec/controllers/application_controller_spec.rb:291:in `block (5 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">289</span>
+<span class="linenum">290</span>        visit <span class="string"><span class="delimiter">&quot;</span><span class="content">/tweets/</span><span class="inline"><span class="inline-delimiter">#{</span>tweet.id<span class="inline-delimiter">}</span></span><span class="delimiter">&quot;</span></span>
+<span class="offending"><span class="linenum">291</span>        expect(page.status_code).to eq(<span class="integer">200</span>)</span>
+<span class="linenum">292</span>        expect(page.body).to include(<span class="string"><span class="delimiter">&quot;</span><span class="content">Delete Tweet</span><span class="delimiter">&quot;</span></span>)
+<span class="linenum">293</span>        expect(page.body).to include(tweet.content)</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>95.00179 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "23 examples, 7 failures";</script>
+</div>
+</div>
+</body>
+</html>

@@ -1,3 +1,6 @@
+require 'twilio-ruby'
+require 'dotenv'
+
 class TweetsController < ApplicationController
   get '/tweets' do
     if !Helpers.is_logged_in?(session)
@@ -22,6 +25,15 @@ class TweetsController < ApplicationController
       redirect to '/tweets/new'
     else
       @tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
+      if params[:phone_number] != ""
+        @client = Twilio::REST::Client.new(ACCOUNT_SID, AUTH_TOKEN)
+        number = "#{params[:phone_number]}"
+        @client.messages.create(
+          from: 'Number goes here',
+          to: number,
+          body: params[:content] + "\n - sent by #{@tweet.user.username} from Fwitter"
+          )
+      end
     end
   end
 
@@ -65,5 +77,4 @@ class TweetsController < ApplicationController
       redirect to '/tweets'
     end
   end
-
 end

@@ -11,6 +11,8 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem "tux"
+gem "twilio-ruby"
+gem "dotenv"
 
 group :test do
   gem 'rspec'

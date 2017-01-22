@@ -1,8 +1,8 @@
-views/tweets/show.erb <br></br>
+<h1>Your latest tweet...</h1>
 
-<h1><%= @tweet.content %> -- <%= User.find_by_id(@tweet.user_id).username %></h1>
+<h2><%= @tweet.content %> -- <%= User.find_by_id(@tweet.user_id).username %></h2>
 
-<h3>Edit Tweet</h3>
+<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
 
 <form method="POST" action="/tweets/<%= @tweet.id %>/delete">
   <input type="hidden" name="_method" value="delete">
