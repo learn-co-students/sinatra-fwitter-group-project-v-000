@@ -1,12 +1,12 @@
-<h1>Your latest tweet...</h1>
+<h1 class="bg-info">Your latest tweet...</h1>
 
-<h2><%= @tweet.content %> -- <%= User.find_by_id(@tweet.user_id).username %></h2>
+<h2><%= @tweet.content %> <small>-- <%= User.find_by_id(@tweet.user_id).username %><small></h2>
 
-<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a> &nbsp;  &nbsp;
+<a href="/tweets/<%=@tweet.id%>/edit" class="btn btn-info" role="button">Edit Tweet</a><br></br>
 
 <form method="POST" action="/tweets/<%= @tweet.id %>/delete">
   <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete Tweet">
-</form>
+  <input type="submit" class="btn btn-info" role="button" value="Delete Tweet">
+</form><br>
 
-<a href="/tweets">Return to home</a> 
+<a href="/tweets" class="btn btn-info" role="button">Return to home</a>
