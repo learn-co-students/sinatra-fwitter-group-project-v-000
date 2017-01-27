@@ -27,11 +27,10 @@ class TweetsController < ApplicationController
             @tweet = Tweet.new(params[:tweet]) #create new tweet
             @tweet.user_id  = current_user.id #set session to the users id
             
-            if @tweet.save #saves new tweet or returns false if unsuccessful
-            
+            if @tweet.save #saves new tweet 
                 redirect '/tweets' #redirect back to tweets index page
             else
-                erb :'tweets/new' # show new tweets view again(potentially displaying errors)
+                erb :'tweets/new' 
             end
         else 
             redirect '/tweets/new'
@@ -47,7 +46,7 @@ class TweetsController < ApplicationController
       if !logged_in?
         redirect '/login'
       else 
-       @tweet = Tweet.find(params[:id]) #define instance variable for view
+       @tweet = Tweet.find(params[:id]) 
        erb :'tweets/show_tweet' #show single tweet view
       end
     end 
@@ -87,7 +86,7 @@ class TweetsController < ApplicationController
         end
            redirect '/tweets'
         else    
-          redirect '/login' #redirect back to tweets index page
+          redirect '/login' 
         end
     end
 end
