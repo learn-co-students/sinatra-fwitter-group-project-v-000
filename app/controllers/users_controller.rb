@@ -14,7 +14,6 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    #binding.pry
     if(params[:username] == "" || params[:email] == "" || params[:password] == "")
       redirect to '/signup'
     else
