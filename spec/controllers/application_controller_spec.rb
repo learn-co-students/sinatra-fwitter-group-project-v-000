@@ -54,6 +54,7 @@ describe ApplicationController do
         :password => ""
       }
       post '/signup', params
+#      binding.pry
       expect(last_response.location).to include('/signup')
     end
 
@@ -68,6 +69,7 @@ describe ApplicationController do
       session = {}
       session[:id] = user.id
       get '/signup'
+#      binding.pry
       expect(last_response.location).to include('/tweets')
     end
   end
@@ -208,7 +210,6 @@ describe ApplicationController do
         user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
 
         visit '/login'
-
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
@@ -220,6 +221,7 @@ describe ApplicationController do
         user = User.find_by(:username => "becky567")
         tweet = Tweet.find_by(:content => "tweet!!!")
         expect(tweet).to be_instance_of(Tweet)
+
         expect(tweet.user_id).to eq(user.id)
         expect(page.status_code).to eq(200)
       end
