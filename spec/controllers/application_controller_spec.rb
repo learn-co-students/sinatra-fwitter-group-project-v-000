@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'pry'
 describe ApplicationController do
 
   describe "Homepage" do
@@ -68,6 +68,7 @@ describe ApplicationController do
       session = {}
       session[:id] = user.id
       get '/signup'
+
       expect(last_response.location).to include('/tweets')
     end
   end
@@ -355,6 +356,7 @@ describe ApplicationController do
         fill_in(:content, :with => "i love tweeting")
 
         click_button 'submit'
+        # binding.pry
         expect(Tweet.find_by(:content => "i love tweeting")).to be_instance_of(Tweet)
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)
 
