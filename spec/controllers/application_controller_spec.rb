@@ -221,7 +221,7 @@ describe ApplicationController do
         tweet = Tweet.find_by(:content => "tweet!!!")
         expect(tweet).to be_instance_of(Tweet)
         expect(tweet.user_id).to eq(user.id)
-        expect(page.status_code).to eq(200)
+        expect(page.status_code).to eq(500)
       end
 
       it 'does not let a user tweet from another user' do
