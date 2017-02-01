@@ -1,6 +1,5 @@
 class TweetsController < ApplicationController
 
-
   get '/' do
     erb :index
   end
@@ -34,8 +33,8 @@ class TweetsController < ApplicationController
 
   post '/tweets' do
     if !logged_in? then redirect "/login" end
-    if params[:content] == "" then redirect "/tweets/new" end
     @tweet = current_user.tweets.create(content: params[:content])
+    if !@tweet.errors.messages.empty? then redirect "/tweets/new" end
     redirect "/tweets"
   end
 
