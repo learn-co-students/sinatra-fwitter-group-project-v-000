@@ -24,11 +24,11 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/tweets/new' do
+  get '/tweet/new' do
     erb :"tweets/create_tweet"
   end
 
-  post '/tweets/new' do
+  post '/tweet/new' do
     @tweet = Tweet.create(params)
     redirect to '/tweets'
   end
@@ -36,19 +36,36 @@ class ApplicationController < Sinatra::Base
   get '/users/:username_slug' do
     @user = User.find_by_slug(params[:username_slug])
     @tweets = @user.tweets.all
-    erb :'/tweets/show_tweets'
+    erb :'/users/show_tweets'
+  end
+
+  get '/tweet/:id' do
+    @tweet = Tweet.find(params[:id])
+    erb :'/tweets/show_tweet'
   end
 
   get '/tweet/:id/edit' do
-
+    @tweet = Tweet.find(params[:id])
+    erb :'/tweets/edit_tweet'
   end
 
   patch '/tweet/:id' do
-
+    @tweet = Tweet.update(params[:id], content: params[:content])
+    redirect to '/tweets'
   end
 
   post '/tweet/:id/delete' do
-
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user.id == session[:id]
+        @tweet.delete
+        redirect to '/tweets'
+      else
+        redirect to '/tweets'
+      end
+    else
+      redirect to '/login'
+    end
   end
 
   get '/signup' do

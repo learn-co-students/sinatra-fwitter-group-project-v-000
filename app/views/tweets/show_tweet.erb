@@ -1,0 +1,9 @@
+<img src="images/bird-png.png" alt="" />
+<%= @tweet.content %>
+
+<a href="/tweet/<%= @tweet.id %>/edit">Edit this tweet.</a>
+
+<form action="/tweet/<%= @tweet.id %>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="delete">
+</form>

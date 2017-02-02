@@ -2,5 +2,5 @@
 <h3>Those tweets, tho...</h3>
 <% @tweets.each do |tweet| %>
   <%= tweet.content %>
-  <a href="/tweets/<%= tweet.id %>"><img src="images/bird-png.png" alt="Tweet!" /></a>
+  <a href="/tweet/<%= tweet.id %>"><img src="images/bird-png.png" alt="Tweet!" /></a>
 <% end %>
