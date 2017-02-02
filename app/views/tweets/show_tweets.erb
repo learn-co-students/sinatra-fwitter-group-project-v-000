@@ -1,6 +1,5 @@
-<h1>Welcome, <%= @user.username %>!</h1>
-<h3>Those tweets, tho...</h3>
-<% @tweets.each do |tweet| %>
+<h3><%= @user.username %>'s Tweets</h3>
+<% @user.tweets.each do |tweet| %>
   <%= tweet.content %>
   <a href="/tweets/<%= tweet.id %>"><img src="images/bird-png.png" alt="Tweet!" /></a>
 <% end %>

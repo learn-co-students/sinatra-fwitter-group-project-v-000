@@ -14,17 +14,29 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  get '/tweets/new' do
-
-  end
-
   get '/tweets' do
-    @user = current_user
-    erb :'tweets/tweets'
+    if logged_in?
+      @user = current_user
+      @tweets = Tweet.all
+      erb :'tweets/tweets'
+    else
+      redirect to '/login'
+    end
   end
 
-  get '/tweet/:id' do
+  get '/tweets/new' do
+    erb :"tweets/create_tweet"
+  end
 
+  post '/tweets/new' do
+    @tweet = Tweet.create(params)
+    redirect to '/tweets'
+  end
+
+  get '/users/:username_slug' do
+    @user = User.find_by_slug(params[:username_slug])
+    @tweets = @user.tweets.all
+    erb :'/tweets/show_tweets'
   end
 
   get '/tweet/:id/edit' do
@@ -76,7 +88,12 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/logout' do
-
+    if logged_in?
+      session.clear
+      redirect to '/login'
+    else
+      redirect to '/'
+    end
   end
 
   helpers do
