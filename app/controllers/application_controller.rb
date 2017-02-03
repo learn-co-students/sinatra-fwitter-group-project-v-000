@@ -76,7 +76,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post '/tweet/:id/delete' do
+  delete '/tweets/:id' do
     if logged_in?
       @tweet = Tweet.find(params[:id])
       if @tweet.user.id == session[:id]
@@ -128,15 +128,11 @@ class ApplicationController < Sinatra::Base
 
   get '/logout' do
     if logged_in?
-      erb :'users/logout'
+      session.clear
+      redirect to '/login'
     else
       redirect to '/'
     end
-  end
-
-  post '/logout' do
-    session.clear
-    redirect to '/login'
   end
 
   helpers do
