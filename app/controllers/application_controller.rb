@@ -25,7 +25,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/new' do
-    erb :"tweets/create_tweet"
+    if logged_in?
+      erb :"tweets/create_tweet"
+    else
+      redirect to '/login'
+    end
   end
 
   post '/tweets/new' do
@@ -41,9 +45,13 @@ class ApplicationController < Sinatra::Base
     erb :'/users/show_tweets'
   end
 
-  get '/tweet/:id' do
-    @tweet = Tweet.find(params[:id])
-    erb :'/tweets/show_tweet'
+  get '/tweets/:id' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/show_tweet'
+    else
+      redirect to '/login'
+    end
   end
 
   get '/tweet/:id/edit' do
