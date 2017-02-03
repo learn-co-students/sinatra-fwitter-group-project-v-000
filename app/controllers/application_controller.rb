@@ -24,13 +24,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/tweet/new' do
+  get '/tweets/new' do
     erb :"tweets/create_tweet"
   end
 
-  post '/tweet/new' do
-    @tweet = Tweet.create(params)
-    redirect to '/tweets'
+  post '/tweets/new' do
+    if !params[:content].empty?
+      @tweet = Tweet.create(content: params[:content], user_id: session[:id])
+      redirect to '/tweets'
+    end
   end
 
   get '/users/:username_slug' do
@@ -104,13 +106,17 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post '/logout' do
+  get '/logout' do
     if logged_in?
-      session.clear
-      redirect to '/login'
+      erb :'users/logout'
     else
       redirect to '/'
     end
+  end
+
+  post '/logout' do
+    session.clear
+    redirect to '/login'
   end
 
   helpers do
