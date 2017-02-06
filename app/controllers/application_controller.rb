@@ -22,7 +22,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    if params["username"] != "" && params["email"] && params["password"] != ""
+    if params["username"] != "" && params["email"] != "" && params["password"] != ""
       @user = User.create(username: params["username"], email: params["email"], password: params["password"])
       redirect to "/tweets"
     else
@@ -45,17 +45,20 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-    erb :"tweets/tweets"
+    if logged_in?
+      erb :"tweets/tweets"
+    else
+      redirect to "/login"
+    end
   end
 
   helpers do
-
     def current_user
-      User.find(session[:user_id])
+      User.find(session[:id])
     end
 
     def logged_in?
-      !!(session[:user_id])
+      !!(session[:id])
     end
   end
 
