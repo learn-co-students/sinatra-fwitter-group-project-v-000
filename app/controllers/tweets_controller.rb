@@ -19,11 +19,11 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    if params[:content] == ""
-      redirect to '/tweets/new'
+    tweet = current_user.tweets.create(content: params[:content])
+    if tweet.valid?
+      redirect to "/tweets/#{tweet.id}"
     else
-      @tweet = current_user.tweets.create(:content => params[:content])
-      redirect to "/tweets/#{@tweet.id}"
+      redirect to "/tweets/new"
     end
   end
 
@@ -46,15 +46,13 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    @tweet = Tweet.find_by_id(params[:id])
-    if params[:content] == ""
-      redirect to "/tweets/#{params[:id]}/edit"
-    elsif current_user == @tweet.user
-      @tweet.content = params[:content]
-      @tweet.save
+    @tweet = current_user.tweets.find_by_id(params[:id])
+    @tweet.content = params[:content]
+    if @tweet.save
       redirect to "/tweets/#{@tweet.id}"
     else
-      redirect to "/tweet"
+      redirect to "/tweets/#{params[:id]}/edit"
+      #redirect to "/tweet"
     end
   end
 
