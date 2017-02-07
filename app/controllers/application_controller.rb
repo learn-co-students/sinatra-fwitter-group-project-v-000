@@ -10,7 +10,32 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    "Welcome to fwitter!"
+    erb :index
+  end
+
+  helpers do
+    def login
+      user = User.find_by(username: params[:username])
+      if user
+        if user.authenticate(params[:password])
+          session[:user_id] = user.id
+          redirect to '/tweets'
+        else
+          flash[:message] = "Wrong Password!"
+        end
+      else
+        flash[:message] = "This User does not exist!"
+      end
+      redirect to '/login'
+    end
+
+    def logged_in?
+      !!current_user
+    end
+
+    def current_user
+      @current_user ||= User.find_by(id: session[:user_id])
+    end
   end
 
 end
