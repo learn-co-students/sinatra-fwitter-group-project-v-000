@@ -381,7 +381,7 @@ describe ApplicationController do
 
       end
     end
-
+  
     context "logged out" do
       it 'does not load let user view tweet edit form if not logged in' do
         get '/tweets/1/edit'
