@@ -1,4 +1,5 @@
-<h1>Welcome, dude. Here are your tweets.</h1>
+<h1>Welcome, dude. Here are the tweets.</h1>
 <% @tweets.each do |tweet|%>
-<%= puts tweet.content %>
+<li><%= tweet.content %></li>
+<br>
 <%end%> 
