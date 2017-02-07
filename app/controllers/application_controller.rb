@@ -1,6 +1,7 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
+  use Rack::Flash
 
   configure do
     set :public_folder, 'public'
@@ -19,12 +20,12 @@ class ApplicationController < Sinatra::Base
       if user
         if user.authenticate(params[:password])
           session[:user_id] = user.id
-          redirect to '/tweets'
+          redirect to '/'
         else
-          flash[:message] = "Wrong Password!"
+          flash[:login_errors] = "Wrong Password!"
         end
       else
-        flash[:message] = "This User does not exist!"
+        flash[:login_errors] = "This User does not exist!"
       end
       redirect to '/login'
     end

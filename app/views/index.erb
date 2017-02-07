@@ -1,7 +1,8 @@
 <h1>Welcome to Fwitter!</h1>
 <% if logged_in? %>
   <p>You are logged in as <%= current_user.username %></p>
-  <p>Watch you <a href="/tweets">tweets</a></p>
+  <p>Email: <%= current_user.email %></p>
+  <p>Watch you <a href="/tweets">Tweets</a></p>
   <a href="/logout">Log Out</a>
 <% else %>
   <a href="/login">Log In</a>
