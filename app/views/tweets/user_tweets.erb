@@ -1,0 +1,28 @@
+<% if logged_in? && current_user.id == @user.id %>
+  <h1>Here are your tweets, <%= current_user.username %></h1>
+<% else %>
+  <h1>All tweets of <%= @user.username %></h1>
+<% end %>
+
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li>
+      <h3><a href="/tweets/<%= tweet.id %>"><%= tweet.title %></a></h3>
+      <p>Updated at: <%= tweet.updated_at %></p>
+      <pre<p>Content: <%= tweet.content %></h3><br></p>
+    </li>
+  <% end %>
+</ul>
+
+<% if logged_in? %>
+  <% if current_user.id == @user.id %>
+    <a href="tweets/new">Create New Tweet</a><br>
+  <% else %>
+    <a href="/users/<%= current_user.slug %>">Your Tweets</a><br>
+  <% end %>
+<% end %>
+<% if logged_in? %>
+  <a href="/tweets">All Tweets</a>
+<% else %>
+  <a href="/login">Log In</a>
+<% end %>

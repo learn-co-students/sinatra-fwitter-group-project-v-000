@@ -2,7 +2,7 @@
 <% if flash.has?(:signup_errors) %>
 <p class="flash"><%= flash[:signup_errors] %></p>
 <% end %>
-<form action="/users" method="post">
+<form action="/signup" method="post">
   <input type="text" name="user[username]" placeholder="Username"><br>
   <input type="email" name="user[email]" placeholder="Email"><br>
   <input type="password" name="user[password]" placeholder="Password"><br>

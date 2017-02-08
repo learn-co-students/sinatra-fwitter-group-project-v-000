@@ -1,15 +1,19 @@
 class SessionsController < ApplicationController
 
   get '/login' do
-    erb :'sessions/login'
+    if logged_in?
+      redirect to '/tweets'
+    else
+      erb :'sessions/login'
+    end
   end
 
-  post '/sessions' do
+  post '/login' do
     login
   end
 
   get '/logout' do
     session.clear
-    redirect to '/'
+    redirect to '/login'
   end
 end

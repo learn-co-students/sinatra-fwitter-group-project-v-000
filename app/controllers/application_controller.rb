@@ -19,8 +19,8 @@ class ApplicationController < Sinatra::Base
       user = User.find_by(username: params[:username])
       if user
         if user.authenticate(params[:password])
-          session[:user_id] = user.id
-          redirect to '/'
+          session[:id] = user.id
+          redirect to '/tweets'
         else
           flash[:login_errors] = "Wrong Password!"
         end
@@ -35,7 +35,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      @current_user ||= User.find_by(id: session[:user_id])
+      @current_user ||= User.find_by(id: session[:id])
     end
   end
 

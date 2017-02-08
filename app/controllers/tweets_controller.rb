@@ -1,7 +1,11 @@
 class TweetsController < ApplicationController
 
   get '/tweets/new' do
-    erb :'tweets/new'
+    if logged_in?
+      erb :'tweets/new'
+    else
+      redirect to '/login'
+    end
   end
 
   post '/tweets' do
@@ -17,18 +21,37 @@ class TweetsController < ApplicationController
 
   get '/tweets' do
     if logged_in?
-      @tweets = current_user.tweets
+      @tweets = Tweet.all
       erb :'tweets/index'
     else
       redirect to '/login'
     end
   end
 
-  get '/tweets/:slug' do
+#was /tweets
+  get '/users/:slug' do
+    #if logged_in?
+      @user = User.all.find { |user| user.slug == params[:slug]}
+      if @user
+        @tweets = @user.tweets
+        erb :'tweets/user_tweets'
+      else
+        erb :'tweets/failure'
+      end
+    #else
+      #redirect to '/login'
+    #end
+  end
+
+  get '/tweets/:id' do
     if logged_in?
-      @tweet = current_user.tweets.find { |tw| tw.slug == params[:slug] }
+      @tweet = Tweet.find_by(id: params[:id])
       if @tweet
+        #if @tweet.user_id == current_user.id
         erb :'tweets/show'
+        #else
+          #erb :'tweets/permission_denied'
+        #end
       else
         erb :'tweets/failure'
       end
@@ -37,12 +60,12 @@ class TweetsController < ApplicationController
     end
   end
 
-  delete '/tweets/:slug/delete' do
+  delete '/tweets/:id/delete' do
     if logged_in?
-      tweet = current_user.tweets.find { |tweet| tweet.slug == params[:slug]}
+      tweet = current_user.tweets.find_by(id: params[:id])
       if tweet
         tweet.delete
-        redirect to '/tweets'
+        redirect to "/users/#{current_user.slug}"
       else
         erb :'tweets/failure'
       end
@@ -51,23 +74,27 @@ class TweetsController < ApplicationController
     end
   end
 
-  get '/tweets/:slug/edit' do
-    @tweet = current_user.tweets.find { |tweet| tweet.slug == params[:slug]}
-    if @tweet
-      erb :'/tweets/edit'
+  get '/tweets/:id/edit' do
+    if logged_in?
+      @tweet = current_user.tweets.find_by(id: params[:id])
+      if @tweet
+        erb :'/tweets/edit'
+      else
+        erb :'tweets/failure'
+      end
     else
-      erb :'tweets/failure'
+      redirect to '/login'
     end
   end
 
-  patch '/tweets/:slug' do
+  patch '/tweets/:id' do
     if logged_in?
-      tweet = current_user.tweets.find { |tweet| tweet.slug == params[:slug]}
+      tweet = current_user.tweets.find_by(id: params[:id])
       if tweet.update(params[:tweet])
-        redirect to '/tweets'
+        redirect to "/users/#{current_user.slug}"
       else
         flash[:tweet_errors] = tweet.errors.full_messages.join(", ")
-        redirect to "tweets/#{params[:slug]}/edit"
+        redirect to "tweets/#{params[:id]}/edit"
       end
     else
       redirect to '/login'

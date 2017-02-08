@@ -5,3 +5,7 @@
 .flash {
   color: red;
 }
+
+li {
+  list-style: none;
+}

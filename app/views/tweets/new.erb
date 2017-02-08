@@ -3,7 +3,7 @@
   <p class="flash"><%= flash[:tweet_errors] %></p>
 <% end %>
 <form action="/tweets" method="post">
-  <input type="text" name="tweet[title]" placeholder="Title"><br>
-  <textarea name="tweet[content]" rows="10" cols="40" placeholder="Content"></textarea><br>
-  <input type="submit" name="create" value="Create" ><br>
+  <input type="text" name="tweet[title]" placeholder="Title" id="title"><br>
+  <textarea name="tweet[content]" rows="10" cols="40" placeholder="Content" id="content"></textarea><br>
+  <input type="submit" name="create" value="Create" id="submit"><br>
 </form>

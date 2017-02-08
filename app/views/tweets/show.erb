@@ -1,12 +1,16 @@
+<h1>Author: <%= @tweet.user.username %></h1>
 <h1><%= @tweet.title %></h1>
-<p><%= @tweet.content %></p>
+<pre><p><%= @tweet.content %></p></pre>
 
-<form action="/tweets/<%= @tweet.slug %>/edit" method="get">
-  <input type="submit" name="edit" value="Edit">
-</form>
+<% if @tweet.user.id == current_user.id %>
 
-<form action="/tweets/<%= @tweet.slug %>/delete" method="post">
-  <input type="hidden" name="_method" value="delete">
-  <input type="submit" name="delete" value="Delete Tweet">
-</form>
-<br><a href="/tweets">All Tweets</a>
+  <form action="/tweets/<%= @tweet.id %>/edit" method="get">
+    <input type="submit" name="edit" value="Edit Tweet">
+  </form>
+
+  <form action="/tweets/<%= @tweet.id %>/delete" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" name="delete" value="Delete Tweet" id="Delete Tweet">
+  </form>
+  <br><a href="/tweets">All Tweets</a>
+<% end %>

@@ -2,8 +2,8 @@
 <% if flash.has?(:login_errors) %>
 <p class="flash"><%= flash[:login_errors] %></p>
 <% end %>
-<form action="/sessions" method="post">
+<form action="/login" method="post">
   <input type="text" name="username" placeholder="Username"><br>
   <input type="password" name="password" placeholder="Password"><br>
-  <input type=submit name="login" value="Log In" ><br>
+  <input type=submit name="login" value="Log In" id="submit"><br>
 </form>
