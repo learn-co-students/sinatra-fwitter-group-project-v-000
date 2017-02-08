@@ -1,6 +1,6 @@
 <h1>Enter your personal data:</h1>
-<% if flash.has?(:signup_error) %>
-<p class="flash"><%= flash[:signup_error] %></p>
+<% if flash.has?(:signup_errors) %>
+<p class="flash"><%= flash[:signup_errors] %></p>
 <% end %>
 <form action="/users" method="post">
   <input type="text" name="user[username]" placeholder="Username"><br>

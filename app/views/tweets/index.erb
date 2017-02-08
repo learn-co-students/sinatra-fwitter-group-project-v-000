@@ -2,7 +2,9 @@
 <h3>Your Tweets:<h3>
 <ul>
   <% @tweets.each do |tweet| %>
-    <li><a href="/tweets/<%= tweet.slug %>"><%= tweet.title %>, updated at: <%= tweet.updated_at %></a></li>
+    <li>
+      <a href="/tweets/<%= tweet.slug %>"><%= tweet.title %>, updated at: <%= tweet.updated_at %></a>
+    </li>
   <% end %>
   <br><a href="tweets/new">Create New Tweet</a><br><br>
   <br><a href="/">Main Page</a>

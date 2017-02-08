@@ -1,3 +1,12 @@
 <h1><%= @tweet.title %></h1>
 <p><%= @tweet.content %></p>
-<a href="/tweets">All Tweets</a>
+
+<form action="/tweets/<%= @tweet.slug %>/edit" method="get">
+  <input type="submit" name="edit" value="Edit">
+</form>
+
+<form action="/tweets/<%= @tweet.slug %>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" name="delete" value="Delete Tweet">
+</form>
+<br><a href="/tweets">All Tweets</a>

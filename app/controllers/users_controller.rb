@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  
+
   get '/signup' do
     if logged_in?
       redirect to '/'
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect to '/'
     else
-      flash[:signup_error] = user.errors.full_messages.join(", ")
+      flash[:signup_errors] = user.errors.full_messages.join(", ")
       redirect to '/signup'
     end
   end
