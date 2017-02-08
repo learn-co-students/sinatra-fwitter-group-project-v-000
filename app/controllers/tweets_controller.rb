@@ -10,11 +10,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  get '/users/:slug' do 
-    @user = User.find_by_slug(params[:slug])
-    erb :'tweets/tweets'
-  end
-
   get '/tweets/new' do
     if !logged_in?
       redirect '/login'

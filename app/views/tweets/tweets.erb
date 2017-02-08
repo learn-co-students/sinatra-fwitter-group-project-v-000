@@ -1,7 +1,10 @@
 <h1>Welcome, <%= @user.username %>!</h1>
-<ul>
-  <% @tweets.each do |tweet| %>
-    <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></li>
-  <% end %>
-</ul>
+<h2>Here are all of the public tweets:</h2>
+  
+<% @tweets.each do |tweet| %>
+  <div><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></div>
+  <div>posted by <%= tweet.user.username %></div>
+  <br>
+<% end %>
+
 
