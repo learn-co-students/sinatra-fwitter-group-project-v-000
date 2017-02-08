@@ -16,7 +16,7 @@
 
 <% if logged_in? %>
   <% if current_user.id == @user.id %>
-    <a href="tweets/new">Create New Tweet</a><br>
+    <a href="/tweets/new">Create New Tweet</a><br>
   <% else %>
     <a href="/users/<%= current_user.slug %>">Your Tweets</a><br>
   <% end %>
