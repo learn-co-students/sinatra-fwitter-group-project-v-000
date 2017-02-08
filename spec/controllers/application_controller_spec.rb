@@ -260,7 +260,6 @@ describe ApplicationController do
 
         fill_in(:content, :with => "")
         click_button 'submit'
-
         expect(Tweet.find_by(:content => "")).to eq(nil)
         expect(page.current_path).to eq("/tweets/new")
 
