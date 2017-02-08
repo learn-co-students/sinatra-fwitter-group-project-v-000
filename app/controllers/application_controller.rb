@@ -80,12 +80,12 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets' do
-    if !logged_in?
-      redirect to "/login"
-    else !(params["content"].empty?)
+    if !(params["content"].empty?) && logged_in?
       tweet = Tweet.create(content: params["content"])
       @user = current_user
       @user.tweets << tweet
+    else
+      redirect to "/tweets/new"
     end
   end
 
@@ -114,12 +114,11 @@ class ApplicationController < Sinatra::Base
   end
 
   delete '/tweets/:id/delete' do
-    
     if logged_in?
       @tweet = Tweet.find(params[:id])
       @tweet.delete
     end
-    redirect to '/tweets'
+      redirect to '/tweets'
   end
 
   #users
