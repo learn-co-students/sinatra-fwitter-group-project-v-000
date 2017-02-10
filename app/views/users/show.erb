@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= @user.username %>'s Fwitter Page!</title>
+  </head>
+  <body>
+    <h2>Welcome to <%= @user.username %>'s Fwitter Page!</h2>
+    <h2>Tweets</h2>
+    <ul>
+      <% @user.tweets.each do |tweet| %>
+        <li><%= tweet.content %></li>
+      <% end %>
+    </ul>
+    <p>Go <a href="/tweets">back</a> to all the Tweets!</p>
+  </body>
+</html>

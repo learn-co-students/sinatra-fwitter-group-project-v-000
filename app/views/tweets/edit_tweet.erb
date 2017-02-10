@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello, <%= current_user.username %></title>
+  </head>
+  <body>
+    <h2>Edit Your Tweet</h2>
+
+    <form action="/tweets/<%= @tweet.id %>" method="post">
+      <input id="hidden" type="hidden" name="_method" value="patch">
+      <p><input type="text" name="content" value="<%= @tweet.content %>">
+      <input type="submit" id="submit" value="Edit Tweet">
+    </form>
+
+  </body>
+</html>
