@@ -5,11 +5,13 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params.has_value?("")
-      redirect to '/signup'
+    user = User.create(params)
+    if user.save
+      session[:id] = user.id
+      redirect to '/tweets'
     else
-      User.create(params)
+      redirect to '/signup'
     end
-    redirect to '/tweets'
   end
+
 end
