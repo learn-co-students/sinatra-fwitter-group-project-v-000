@@ -1,0 +1,15 @@
+<div class="tweet"><h3><%= @tweet.content %> - <span class="loggedin"><%= @tweet.user.username %></span></h3>
+
+	<form class="side" <%= (@tweet.user_id != current_user.id) ? "style='display : none'" : "" %> action="/tweets/<%= @tweet.id %>/edit" method="get">
+	<input type="submit" value="Edit Tweet">
+	</form>
+
+	<form class="side" <%= @tweet.user_id != current_user.id ? "style='display : none'" : "" %> action="/tweets/<%= @tweet.id %>/delete" method="post">
+	<input type="submit" value="Delete Tweet">
+	</form>
+</div>
+
+<p><a href="/users/<%= @tweet.user.slug %>">View all tweets by <%= @tweet.user.username %></a></p>
+<p><a href="/tweets">View all tweets by all users</a></p>
+<p><a href="/users/<%= current_user.slug%>">View all my tweets</a></p>
+

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+	body {
+		background: powderblue;
+	}
+
+	.loggedin {
+		color: green;
+	}
+	.none {
+		display:none;
+	}
+	.tweet {
+		border: dotted 1px black;
+		padding: 10px;
+	}
+
+	.side {
+		display: inline;
+	}
+
+	.notweets {
+		color: red;
+		padding-left: 3px;
+	}
+	#login{
+		position: absolute;
+		top: 110px;
+		width: 50%;	
+		padding: 18px 6% 60px 6%;
+		margin: 0 0 35px 0;
+		background: rgb(247, 247, 247);
+		border: 1px solid rgba(147, 184, 189,0.8);
+		box-shadow:	
+			0pt 2px 5px rgba(105, 108, 109,  0.7),	
+			0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+		border-radius: 5px;
+	}
+	#login{
+		z-index: 22;
+	}
+
+	.makeroom {
+		margin-top: 90px;
+		margin-left: 5px;
+	}
+
+	.failure {
+		color: red;
+		margin-left: 5px;
+		position: absolute;
+		top: 230px;
+		left: 62px;
+		z-index: 25;
+	}
+
+	.moveover {
+		margin-left: 5px;
+	}
+</style>
+</head>
+
+<body>
+<%= yield %>
+<% if logged_in? %>
+<h5>Logged in as <span class="loggedin"><%= current_user.username %></span> <span class="logout"><a href="/logout">(logout)</a></span></h5>
+<% end %>
+</body>
+
+
+
+</html>
