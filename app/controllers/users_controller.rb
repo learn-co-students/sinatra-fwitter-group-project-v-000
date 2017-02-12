@@ -36,7 +36,8 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect to '/tweets'
     else
-      flash[:notice] = "Please fill out all fields."
+      # added for validation error messages
+      flash[:notice] = user.errors.full_messages.join
       redirect to '/signup'
     end
   end
