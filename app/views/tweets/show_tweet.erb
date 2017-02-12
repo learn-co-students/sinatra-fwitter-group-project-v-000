@@ -1,15 +1,28 @@
-<div class="tweet"><h3><%= @tweet.content %> - <span class="loggedin"><%= @tweet.user.username %></span></h3>
+<h1>Welcome, <span class="loggedin"><%= current_user.username %></span>!</h1>
+<% if logged_in?%>
+	<a href="/tweets/new">Create New Tweet</a><br>
+	<% if @message %>
+		<a href="/users/<%= @user.slug %>">View all my tweets</a><br>
+	<% else %>
+		<a href="/tweets">View all tweets</a><br>
+	<% end %>
+<% end %>
+<hr>
 
+
+<div class="tweet"><h3><%= @tweet.content %> - <span class="username"><%= @tweet.user.username %></span></h3>
 	<form class="side" <%= (@tweet.user_id != current_user.id) ? "style='display : none'" : "" %> action="/tweets/<%= @tweet.id %>/edit" method="get">
-	<input type="submit" value="Edit Tweet">
+		<input type="submit" value="Edit Tweet">
 	</form>
 
 	<form class="side" <%= @tweet.user_id != current_user.id ? "style='display : none'" : "" %> action="/tweets/<%= @tweet.id %>/delete" method="post">
-	<input type="submit" value="Delete Tweet">
+		<input type="submit" value="Delete Tweet">
 	</form>
 </div>
 
-<p><a href="/users/<%= @tweet.user.slug %>">View all tweets by <%= @tweet.user.username %></a></p>
-<p><a href="/tweets">View all tweets by all users</a></p>
-<p><a href="/users/<%= current_user.slug%>">View all my tweets</a></p>
+<% if @tweet.user != current_user %>
+<br>
+<a href="/users/<%= @tweet.user.slug %>">View all tweets by <%= @tweet.user.username %></a><br>
+<a href="/users/<%= current_user.slug%>">View all my tweets</a>
+<% end %>
 

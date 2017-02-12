@@ -7,12 +7,31 @@
 		background: powderblue;
 	}
 
+	hr {
+		color: navy;
+		background: navy;
+	}
+
+	.indent {
+		margin-left: 20px;
+	}
+
+	.username {
+		color: navy;
+		font-style: italic;
+	}
+
+	.makeblue {
+		color: navy;
+	}
+
 	.loggedin {
 		color: green;
 	}
 	.none {
 		display:none;
 	}
+	
 	.tweet {
 		border: dotted 1px black;
 		padding: 10px;
@@ -26,10 +45,10 @@
 		color: red;
 		padding-left: 3px;
 	}
-	#login{
+	.login{
 		position: absolute;
 		top: 110px;
-		width: 50%;	
+		width: 540px;	
 		padding: 18px 6% 60px 6%;
 		margin: 0 0 35px 0;
 		background: rgb(247, 247, 247);
@@ -39,7 +58,7 @@
 			0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
 		border-radius: 5px;
 	}
-	#login{
+	.login{
 		z-index: 22;
 	}
 
@@ -60,14 +79,29 @@
 	.moveover {
 		margin-left: 5px;
 	}
+
+	.pform {
+		float: left;
+	}
+
+	.forminput {
+		float: right;
+		margin-right: 335px;
+	}
+
+	.movedown {
+		margin-top: 240px;
+	}
 </style>
 </head>
 
+
+
 <body>
-<%= yield %>
-<% if logged_in? %>
-<h5>Logged in as <span class="loggedin"><%= current_user.username %></span> <span class="logout"><a href="/logout">(logout)</a></span></h5>
-<% end %>
+	<%= yield %>
+	<% if logged_in? %>
+		<h5>Logged in as <span class="loggedin"><%= current_user.username %></span> <span class="logout"><a href="/logout">(logout)</a></span></h5>
+	<% end %>
 </body>
 
 
