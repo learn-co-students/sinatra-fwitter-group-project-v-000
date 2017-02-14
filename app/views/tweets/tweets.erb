@@ -1,0 +1,19 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h1>All Tweets:</h1>
+
+<p><a href="/tweets/new">Post a New Tweet:</a></p>
+
+<br></br>
+<% @tweets.each do |tweet| %>
+  <p><%= tweet.user.username %>:</p>
+  <br></br>
+  <p><%= tweet.content %></p>
+  <br></br>
+  <p><a href="/tweets/<%= tweet.id %>">Link:</a></p>
+<% end %>
+<br></br>
+
+<p><a href="/logout">Log Out:</a></p>
