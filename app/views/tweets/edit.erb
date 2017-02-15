@@ -1,0 +1,20 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<%if Helpers.current_user(session).id == @tweet.user_id%>
+
+<h1>Edit your tweet</h1>
+<form method="post" action="/tweets/<%=@tweet.id%>">
+  <label for="content">Edit Tweet: </label>
+  <input id="content" type="text" name="content" value="<%=@tweet.content%>">
+<br><br>
+<input type="submit" value="submit">
+</form>
+<br>
+<a href="/tweets">Back to Homepage</a>
+<%else%>
+  <h3>Sorry, you can only edit your own tweets.</h3>
+  <br><br>
+  <a href="/tweets">Back to Homepage</a>
+<%end%>
