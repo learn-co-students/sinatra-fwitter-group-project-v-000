@@ -1,0 +1,11 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h1>New Tweet</h1>
+
+<form method="POST" action="/tweets">
+  <p>Tweet Content:</p>
+  <input type="textbox" name="content">
+  <input type="submit" value="Submit" id="submit">
+</form>
