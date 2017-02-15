@@ -2,7 +2,8 @@
   <%= flash[:message] %>
 <% end %>
 
-<h1>All Tweets</h1>
+<h1>Welcome, <%= @user.username %></h1>
+<h2>All Tweets</h2>
   <% @tweets.each do |tweet| %>
     <p><%= tweet.user.username %></p>
     <p><%= tweet.content %></p>

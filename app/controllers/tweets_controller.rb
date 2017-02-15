@@ -7,14 +7,27 @@ class TweetsController < ApplicationController
       @tweets = Tweet.all
       erb :'/tweets/tweets'
     else
-      flash[:message] = "You must log in to access tweets."
       redirect to '/login'
     end
   end
 
   # CREATE TWEET
   get '/tweets/new' do
-    erb :'/tweets/create_tweet'
+    if logged_in?
+      erb :'/tweets/create_tweet'
+    else
+      redirect '/login'
+    end
+  end
+
+  post '/tweets' do
+    if params[:content].empty?
+      redirect to '/tweets/new'
+    else
+      @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
+      @tweet.save
+      redirect to "/tweets/#{@tweet.id}"
+    end
   end
 
   get '/tweets/:id' do
@@ -26,15 +39,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets' do
-    if params[:content].empty?
-      redirect to '/tweets/new'
-    else
-      @tweet = current_user.tweets.create(content: params[:content])
-      @tweet.save
-      redirect to "/tweets/#{@tweet.id}"
-    end
-  end
 
   # EDIT
   get '/tweets/:id/edit' do
@@ -62,15 +66,16 @@ class TweetsController < ApplicationController
   end
 
   # DELETE
+
   delete '/tweets/:id/delete' do
-    @tweet = Tweet.find_by_id(params[:id])
     if logged_in?
-      if @tweet.user_id == session[:user_id]
-        @tweet.delete
-        redirect to '/tweets'
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user == current_user
+        @tweet.destroy
       end
-    else
       redirect to '/tweets'
+    else
+      redirect '/login'
     end
   end
 end

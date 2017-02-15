@@ -41,12 +41,12 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    @user = User.find(:username => params[:username])
+    @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect to '/tweets'
     else
-      redirect to '/'
+      redirect to '/login'
     end
   end
 
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
       session.clear
       redirect to '/login'
     else
-      redirect to '/'
+      redirect to '/login'
     end
   end
 
