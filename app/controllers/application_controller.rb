@@ -26,7 +26,7 @@ end
   end
 
   post '/signup' do #see implementing BCRYPT and LOGIN notes
-    if !User.all.find {|user| user.username == params[:username]}
+    # if !User.all.find {|user| user.username == params[:username]}
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       if @user.save
         session[:user_id] = @user.id
@@ -35,10 +35,10 @@ end
         flash[:message] = "Oops! We couldn't sign you up. Please enter all fields and try again."
         redirect '/signup'
       end
-    else
-      flash[:message] = "Oops! That username already exists. Please try again."
-      redirect '/signup'
-    end
+    # else
+    #   flash[:message] = "Oops! That username already exists. Please try again."
+    #   redirect '/signup'
+    # end
   end
 
   get '/login' do
@@ -50,14 +50,14 @@ end
     end
   end
 
-  post '/login' do #see implementing BCRYPT notes
+  post '/login' do
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect '/tweets'
     else
       flash[:message] = "Oh no! Your log in failed. Please try again."
-      redirect '/'
+      redirect '/login'
     end
   end
 
@@ -85,13 +85,13 @@ end
   end
 
   get '/users/:slug' do
-    if session[:user_id]
+    # if session[:user_id]
       @user = User.find_by_slug(params[:slug])
       erb :'/users/show'
-    else
-      flash[:message] = "You have to login first."
-      redirect to '/login'
-    end
+    # else
+    #   flash[:message] = "You have to login first."
+    #   redirect to '/login'
+    # end
   end
 
   get '/tweets/new' do
