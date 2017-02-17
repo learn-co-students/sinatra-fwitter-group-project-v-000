@@ -19,7 +19,7 @@ describe ApplicationController do
 
     it 'signup directs user to twitter index' do
       params = {
-        :username => "skittles123",
+        :username => "skittles123",  
         :email => "skittles@aol.com",
         :password => "rainbows"
       }
@@ -168,7 +168,7 @@ describe ApplicationController do
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:username, :with => "becky567") 
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit "/tweets"
