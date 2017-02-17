@@ -14,13 +14,13 @@ class ApplicationController < Sinatra::Base
   end
 
  helpers do
-    def logged_in?
-      !!session[:user_id]
-    end
+   def logged_in?
+ !!current_user
+end
 
-    def current_user
-      User.find(session[:user_id])
-    end
+def current_user
+@current_user ||= User.find(session[:id]) if session[:id]
+end
 
   end
 end
