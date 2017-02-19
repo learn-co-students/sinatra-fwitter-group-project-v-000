@@ -3,6 +3,8 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
+    enable :sessions unless test?
+    set :session_secret, "fwitter_secret_sessions"
     set :public_folder, 'public'
     set :views, 'app/views'
   end
@@ -11,4 +13,7 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  get '/signup' do
+    erb :signup
+  end
 end
