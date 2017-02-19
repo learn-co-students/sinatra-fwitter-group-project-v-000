@@ -1,13 +1,16 @@
-.account-form {
+.fwitter-form {
   margin-top: 6em;
+  border: .5px solid #8888FF;
+  border-radius: 8px;
+  background-color: #EEEEEE;
 }
 
-.account-form-message {
+.fwitter-form-message {
   text-align: center;
   margin-bottom: 2em;
 }
 
-.account-button {
+.fwitter-form-button {
   margin-top: 2em;
 }
 
