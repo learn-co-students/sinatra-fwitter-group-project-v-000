@@ -29,7 +29,7 @@
   color: #AAAAAA;
 }
 
-#user-profile-card {
+.user-profile-card {
   border: 0.5px solid #8888FF;
   border-radius: 8px;
   margin-left: 2em;
@@ -37,6 +37,6 @@
   background-color: #EEEEEE;
 }
 
-#user-tweets {
+.tweet-feed {
   /*margin-left: 2em;*/
 }
