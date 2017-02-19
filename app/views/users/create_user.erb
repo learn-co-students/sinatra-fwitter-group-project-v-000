@@ -1,1 +1,37 @@
-<h1>Signup</h1>
+<div class="col-sm-6 col-sm-offset-3 account-form">
+  <div class="col-sm-12 account-form-message">
+    <h1>Sign up for an account</h1>
+  </div>
+  <% if flash[:message] %>
+    <div class="form-group has-error">
+      <div class="col-sm-8 col-sm-offset-2">
+        <p class="control-label"><%= flash[:message] %></p>
+      </div>
+    </div>
+  <% end %>
+  <form class="form-horizontal" action="/signup" method="post">
+    <div class="form-group">
+      <!-- <label for="inputUsername3" class="col-sm-2 control-label">Username</label> -->
+      <div class="col-sm-8 col-sm-offset-2">
+        <input type="username" name="user[username]"class="form-control" id="inputUsername3" placeholder="Username">
+      </div>
+    </div>
+    <div class="form-group">
+      <!-- <label for="inputEmail3" class="col-sm-2 control-label">Email</label> -->
+      <div class="col-sm-8 col-sm-offset-2">
+        <input type="email" name="user[email]"class="form-control" id="inputEmail3" placeholder="Email">
+      </div>
+    </div>
+    <div class="form-group">
+      <!-- <label for="inputPassword3" class="col-sm-2 control-label">Password</label> -->
+      <div class="col-sm-8 col-sm-offset-2">
+        <input type="password" name="user[password]"class="form-control" id="inputPassword3" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-group account-button">
+      <div class="col-sm-8 col-sm-offset-2">
+        <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+      </div>
+    </div>
+  </form>
+</div>
