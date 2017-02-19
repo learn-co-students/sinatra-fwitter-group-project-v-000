@@ -13,17 +13,25 @@ class ApplicationController < Sinatra::Base
   use Rack::Flash
 
   get '/' do
-    erb :index
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :index
+    end
   end
 
   get '/signup' do
-    erb :'users/create_user'
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :'users/create_user'
+    end
   end
 
   post '/signup' do
-    @user = User.new params[:user]
+    @user = User.new params
     if @user.save
-      session[:user_id] = @user.id
+      session[:id] = @user.id
       redirect '/tweets'
     else
       flash[:message] = "Username or email not unique, please try again"
@@ -36,9 +44,9 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    @user = User.find_by email: params[:user][:email]
-    if @user && @user.authenticate(params[:user][:password])
-      session[:user_id] = @user.id
+    @user = User.find_by email: params[:email]
+    if @user && @user.authenticate(params[:password])
+      session[:id] = @user.id
       redirect '/tweets'
     else
       flash[:message] = "Incorrect email/password match, please try again."
@@ -57,11 +65,11 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def logged_in?
-      !!session[:user_id]
+      !!session[:id]
     end
 
     def current_user
-      User.find session[:user_id]
+      User.find session[:id]
     end
   end
 end
