@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
   get '/users/:slug' do
+    @user = User.find_by_slug params[:slug]
     erb :'users/show'
   end
-  
+
   get '/signup' do
     if logged_in?
-      redirect '/tweets'
+      redirect "/users/#{current_user.slug}"
     else
       erb :'users/create_user'
     end
@@ -14,10 +15,10 @@ class UsersController < ApplicationController
   post '/signup' do
     @user = User.new params
     if @user.save
-      session[:id] = @user.id
-      redirect '/tweets'
+      session[:user_id] = @user.id
+      redirect "/users/#{@user.slug}"
     else
-      flash[:message] = "Username or email not unique, please try again"
+      flash[:message] = @user.errors.full_messages.uniq
       redirect '/signup'
     end
   end
@@ -29,10 +30,10 @@ class UsersController < ApplicationController
   post '/login' do
     @user = User.find_by email: params[:email]
     if @user && @user.authenticate(params[:password])
-      session[:id] = @user.id
-      redirect '/tweets'
+      session[:user_id] = @user.id
+      redirect "/users/#{@user.slug}"
     else
-      flash[:message] = "Incorrect email/password match, please try again."
+      flash[:message] = ["Incorrect email/password match, please try again."]
       redirect '/login'
     end
   end

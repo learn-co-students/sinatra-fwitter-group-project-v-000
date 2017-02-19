@@ -1,0 +1,20 @@
+<div id="user-profile-card" class="col-sm-4">
+  <% if logged_in? && @user == current_user %>
+    <h1>Welcome, <%= @user.username %></h1>
+    <a class="btn btn-primary" href="/tweets/new" role="button">New Tweet</a>
+  <% else %>
+    <h1><%= @user.username %></h1>
+  <% end %>
+    <h4><%= @user.tweets.count %> tweets</h4>
+    <h4>Joined <%= @user.created_at.strftime "%B, %Y" %></h4>
+</div>
+
+<div id="user-tweets" class="col-sm-6">
+  <h1>Tweets</h1>
+  <% @user.tweets.order("created_at DESC").each do |tweet| %>
+    <div class="tweet-card col-sm-12">
+      <p class="tweet-info"><%= tweet.created_at.localtime.strftime "%l:%M:%S%P %B %d, %Y" %></p>
+      <p class="tweet-text"><%= tweet.content %></p>
+    </div>
+  <% end %>
+</div>

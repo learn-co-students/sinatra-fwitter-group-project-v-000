@@ -3,11 +3,13 @@
     <h1>Log in to your account</h1>
   </div>
   <% if flash[:message] %>
-    <div class="form-group has-error">
-      <div class="col-sm-8 col-sm-offset-2">
-        <p class="control-label"><%= flash[:message] %></p>
+    <% flash[:message].each do |message| %>
+      <div class="form-group has-error">
+        <div class="col-sm-8 col-sm-offset-2">
+          <p class="control-label"><%= message %></p>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
   <form class="form-horizontal" action="/login" method="post">
     <div class="form-group">
