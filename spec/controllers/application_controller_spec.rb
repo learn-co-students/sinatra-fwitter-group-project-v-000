@@ -58,15 +58,12 @@ describe ApplicationController do
     end
 
     it 'does not let a logged in user view the signup page' do
-      user = User.create(:username => "skittles123", :email => "skittles@aol.com", :password => "rainbows")
       params = {
         :username => "skittles123",
         :email => "skittles@aol.com",
         :password => "rainbows"
       }
       post '/signup', params
-      session = {}
-      session[:id] = user.id
       get '/signup'
       expect(last_response.location).to include('/tweets')
     end
@@ -82,6 +79,7 @@ describe ApplicationController do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
       params = {
         :username => "becky567",
+        :email => "starz@aol.com",
         :password => "kittens"
       }
       post '/login', params
@@ -96,11 +94,12 @@ describe ApplicationController do
 
       params = {
         :username => "becky567",
+        :email => "starz@aol.com",
         :password => "kittens"
       }
       post '/login', params
       session = {}
-      session[:id] = user.id
+      session[:user_id] = user.id
       get '/login'
       expect(last_response.location).to include("/tweets")
     end
@@ -112,6 +111,7 @@ describe ApplicationController do
 
       params = {
         :username => "becky567",
+        :email => "starz@aol.com",
         :password => "kittens"
       }
       post '/login', params
@@ -135,9 +135,9 @@ describe ApplicationController do
 
       visit '/login'
 
-      fill_in(:username, :with => "becky567")
+      fill_in(:email, :with => "starz@aol.com")
       fill_in(:password, :with => "kittens")
-      click_button 'submit'
+      click_button 'Log In'
       expect(page.current_path).to eq('/tweets')
 
 
@@ -168,9 +168,9 @@ describe ApplicationController do
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:email, :with => "starz@aol.com")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit "/tweets"
         expect(page.body).to include(tweet1.content)
         expect(page.body).to include(tweet2.content)
@@ -196,9 +196,9 @@ describe ApplicationController do
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:email, :with => "starz@aol.com")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit '/tweets/new'
         expect(page.status_code).to eq(200)
 
@@ -209,9 +209,9 @@ describe ApplicationController do
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:email, :with => "starz@aol.com")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
 
         visit '/tweets/new'
         fill_in(:content, :with => "tweet!!!")
@@ -230,9 +230,9 @@ describe ApplicationController do
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:email, :with => "starz@aol.com")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
 
         visit '/tweets/new'
 
@@ -252,9 +252,9 @@ describe ApplicationController do
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:email, :with => "starz@aol.com")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
 
         visit '/tweets/new'
 
@@ -283,9 +283,9 @@ describe ApplicationController do
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:email, :with => "starz@aol.com")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
 
         visit "/tweets/#{tweet.id}"
         expect(page.status_code).to eq(200)
@@ -315,9 +315,9 @@ describe ApplicationController do
         tweet = Tweet.create(:content => "tweeting!", :user_id => user.id)
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:email, :with => "starz@aol.com")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit '/tweets/1/edit'
         expect(page.status_code).to eq(200)
         expect(page.body).to include(tweet.content)
@@ -332,9 +332,9 @@ describe ApplicationController do
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:email, :with => "starz@aol.com")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         session = {}
         session[:user_id] = user1.id
         visit "/tweets/#{tweet2.id}/edit"
@@ -347,9 +347,9 @@ describe ApplicationController do
         tweet = Tweet.create(:content => "tweeting!", :user_id => 1)
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:email, :with => "starz@aol.com")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit '/tweets/1/edit'
 
         fill_in(:content, :with => "i love tweeting")
@@ -366,9 +366,9 @@ describe ApplicationController do
         tweet = Tweet.create(:content => "tweeting!", :user_id => 1)
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:email, :with => "starz@aol.com")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit '/tweets/1/edit'
 
         fill_in(:content, :with => "")
@@ -396,9 +396,9 @@ describe ApplicationController do
         tweet = Tweet.create(:content => "tweeting!", :user_id => 1)
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:email, :with => "starz@aol.com")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit 'tweets/1'
         click_button "Delete Tweet"
         expect(page.status_code).to eq(200)
@@ -414,9 +414,9 @@ describe ApplicationController do
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:email, :with => "starz@aol.com")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit "tweets/#{tweet2.id}"
         click_button "Delete Tweet"
         expect(page.status_code).to eq(200)

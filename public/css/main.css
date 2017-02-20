@@ -1,0 +1,55 @@
+.fwitter-form {
+  margin-top: 6em;
+  border: .5px solid #8888FF;
+  border-radius: 8px;
+  background-color: #EEEEEE;
+}
+
+.fwitter-form-message {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.fwitter-form-button {
+  margin-top: 2em;
+}
+
+.tweet-card {
+  border: 0.5px solid #8888FF;
+  padding: 0.5em;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  border-radius: 5px;
+}
+
+.tweet-text {
+  font-size: 120%;
+}
+
+.tweet-info {
+  color: #AAAAAA;
+}
+
+.user-profile-card {
+  border: 0.5px solid #8888FF;
+  border-radius: 8px;
+  margin-left: 2em;
+  margin-right: 2em;
+  background-color: #EEEEEE;
+}
+
+.tweet-feed {
+  /*margin-left: 2em;*/
+}
+
+.back-button {
+  margin-top: 1em;
+}
+
+.user-link:hover {
+  text-decoration: none;
+}
+
+#tweet-delete-cancel {
+  margin-right: .5em;
+}
