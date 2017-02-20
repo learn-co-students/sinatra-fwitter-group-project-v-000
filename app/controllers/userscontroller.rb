@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if logged_in?
-      redirect "/users/#{current_user.slug}"
+      redirect '/tweets'
     else
       erb :'users/create_user'
     end
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.new params
     if @user.save
       session[:user_id] = @user.id
-      redirect "/users/#{@user.slug}"
+      redirect '/tweets'
     else
       flash[:message] = @user.errors.full_messages.uniq
       redirect '/signup'
@@ -24,14 +24,18 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    erb :'users/login'
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :'users/login'
+    end
   end
 
   post '/login' do
     @user = User.find_by email: params[:email]
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect "/users/#{@user.slug}"
+      redirect '/tweets'
     else
       flash[:message] = ["Incorrect email/password match, please try again."]
       redirect '/login'
@@ -39,7 +43,11 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    session.clear
-    redirect '/'
+    if logged_in?
+      session.clear
+      redirect '/login'
+    else
+      redirect '/'
+    end
   end
 end

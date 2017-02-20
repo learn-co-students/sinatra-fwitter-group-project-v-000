@@ -1,0 +1,32 @@
+<div class="modal fade" id="delete-tweet-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
+      </div>
+      <div class="modal-body">
+        Deleted tweets are not recoverable.
+      </div>
+      <div class="modal-footer">
+        <form class="tweet-delete-form pull-right" action="/tweets/<%= @tweet.id %>/delete" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <button id="tweet-delete-button" type="submit" class="btn btn-danger">Delete Tweet</button>
+        </form>
+        <button id="tweet-delete-cancel" type="button" class="btn btn-default pull-right" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-sm-8 col-sm-offset-2">
+  <div class="tweet-card col-sm-12">
+    <p class="tweet-info"><%= @tweet.created_at.localtime.strftime "%l:%M:%S%P %B %d, %Y" %>  by
+    <% if @tweet.user == current_user %>
+      you <a class="btn btn-default btn-xs" href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a> <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete-tweet-modal">Delete</button>
+    <% else %>
+      @<%= @tweet.user.slug %>
+    <% end %></p>
+    <p class="tweet-text"><%= @tweet.content %></p>
+  </div>
+</div>
