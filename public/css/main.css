@@ -42,6 +42,10 @@
   /*margin-left: 2em;*/
 }
 
+.back-button {
+  margin-top: 1em;
+}
+
 #tweet-delete-cancel {
   margin-right: .5em;
 }

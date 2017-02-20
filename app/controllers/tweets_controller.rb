@@ -54,7 +54,7 @@ class TweetsController < ApplicationController
     @user = current_user
     if params[:content]
       @tweet = Tweet.new params
-    elsif params[tweet][:content]
+    elsif params[:tweet][:content]
       @tweet = Tweet.new params[:tweet]
     end
 
