@@ -12,11 +12,14 @@
   <h1>Your Feed</h1>
   <% Tweet.all.order("created_at DESC").each do |tweet| %>
     <div class="tweet-card col-sm-12">
-      <p class="tweet-info"><%= tweet.created_at.localtime.strftime "%l:%M:%S%P %B %d, %Y" %>  by <% if tweet.user == current_user %>
-        you
-      <% else %>
-        @<%= tweet.user.slug %>
-      <% end %> <a class="btn btn-default btn-xs" href="/tweets/<%= tweet.id %>">show</a></p>
+      <p class="tweet-info"><%= tweet.created_at.localtime.strftime "%l:%M:%S%P %B %d, %Y" %>  by <a class="user-link" href="/users/<%= tweet.user.slug %>">
+        <% if tweet.user == current_user %>
+          you
+        <% else %>
+          @<%= tweet.user.slug %>
+        <% end %>
+      </a>
+      <a class="btn btn-default btn-xs" href="/tweets/<%= tweet.id %>">show</a></p>
       <p class="tweet-text"><%= tweet.content %></p>
     </div>
   <% end %>

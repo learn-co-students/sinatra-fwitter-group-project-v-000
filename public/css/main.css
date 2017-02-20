@@ -46,6 +46,10 @@
   margin-top: 1em;
 }
 
+.user-link:hover {
+  text-decoration: none;
+}
+
 #tweet-delete-cancel {
   margin-right: .5em;
 }
