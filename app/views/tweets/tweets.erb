@@ -1,5 +1,12 @@
-<h1>Welcome, Here's your tweets!</h1>
+<h1>Welcome, <%=@user.username%>!<h1>
+________________________________________
 
-<h1>Wow so many!</h1>
+<%if logged_in?%>
+<%@tweets.each do |tweet|%>
+<p><%= tweet.content %></p>
+________________________________________
+<%end%>
 
-<h1>You tweet way too much!</h1>
+<%else%>
+You aren't logged in, loser!
+<%end%>
