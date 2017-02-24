@@ -1,0 +1,12 @@
+<h1> <%="#{@tweet.user.username} @Fwitter"%> </h1>
+________________________________________________
+<h3><p><%= "\"#{@tweet.content}\"" %></p></h3>
+
+<form method="POST" action="/tweets/<%=@tweet.id%>/delete">
+<input id="hidden" type="hidden" name="_method" value="delete">
+<input type="submit" name="Delete Tweet" value="Delete Tweet">
+</form><br>
+<a href="/tweets/<%=@tweet.id%>/edit"><input type="submit" value="Edit Tweet"></a><br>
+
+________________________________________________<br></br>
+

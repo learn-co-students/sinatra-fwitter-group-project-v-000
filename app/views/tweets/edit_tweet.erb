@@ -1,0 +1,11 @@
+<%if logged_in? && @tweet.user.id == current_user[:id]%>
+<h2>Welcome, <%=current_user.username%>. Edit Tweet Below!</h2>
+_________________________________________________<br></br>
+<p><strong>Currently:</strong> <%=@tweet.content%><br></br>
+_________________________________________________<br></br>
+<form method="POST" action="/tweets/<%=@tweet.id%>" id="edit_tweet">
+<input id="hidden" type="hidden" name="_method" value="patch">
+<textarea name="content" form="edit_tweet" placeholder="Edit your tweet here..." rows="6" cols="60"></textarea><br><br>
+<input type="submit" name="submit" value="submit">
+</form>
+<%end%>
