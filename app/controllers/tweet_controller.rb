@@ -24,7 +24,7 @@ class TweetController < ApplicationController
       redirect "/login"
     else
       @user = current_user
-      @tweets = Tweet.all
+      @tweets = Tweet.order("id desc")
       erb :"/tweets/index"
     end
   end
