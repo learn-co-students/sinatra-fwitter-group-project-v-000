@@ -1,10 +1,22 @@
-<a href="/tweets">Fwitter Feed</a> <a href="/users/<%=@user.slug%>">Your Tweets</a> <a href="/logout">Logout</a>
-<h3>Your new tweet!</h3>
-<p><%=@tweet.content%><p>
-<form action="/tweets/<%=@tweet.id%>/edit" method="get">
-  <input type="submit" value="Edit Tweet">
-</form>
-<form action="/tweets/<%=@tweet.id%>/delete" method="post">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete Tweet">
-</form>
+<div class="jumbotron">
+	<div class="wrapper">
+	  <div class="content">
+      <br></br>
+      <h3><strong>Your new tweet!</strong></h3><br></br>
+      <p><%=@tweet.content%></p>
+      <div class="row">
+        <div class="col-sm-6">
+          <form action="/tweets/<%=@tweet.id%>/edit" method="get">
+            <input type="submit" class="btn btn-default btn-sm" value="Edit">
+          </form>
+        </div>
+        <div class="col-sm-6">
+          <form action="/tweets/<%=@tweet.id%>/delete" method="post">
+            <input id="hidden" type="hidden" name="_method" value="DELETE">
+            <input type="submit" class="btn btn-default btn-sm" value="Delete">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
