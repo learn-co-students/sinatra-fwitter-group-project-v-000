@@ -24,14 +24,15 @@ end
 
   get "/login" do
     if !logged_in?
-        erb :"users/login"    
+      erb :"users/login"
     else
-    redirect to "/tweets"
+      redirect to "/tweets"
     end
   end
 
 
-post '/login' do
+  post '/login' do
+    binding.pry
    user = User.find_by(:username => params[:username])
    if user && user.authenticate(params[:password])
      session[:user_id] = user.id
