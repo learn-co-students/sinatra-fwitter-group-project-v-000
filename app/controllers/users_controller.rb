@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+get "/users/:slug" do
+  @user = User.find_by_slug(params[:slug])
+  erb :'users/show'
+end
+
 
 get "/signup" do
   # binding.pry
@@ -15,10 +20,10 @@ end
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect to "/signup"
     else
-        @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-      session[:session_id] = @user.id
+      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      session[:user_id] = @user.id
       @user.save
-    redirect to "/tweets"
+      redirect to "/tweets"
     end
   end
 
@@ -32,7 +37,7 @@ end
 
 
   post '/login' do
-    binding.pry
+    # binding.pry
    user = User.find_by(:username => params[:username])
    if user && user.authenticate(params[:password])
      session[:user_id] = user.id
