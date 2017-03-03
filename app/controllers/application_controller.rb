@@ -108,6 +108,18 @@ class ApplicationController < Sinatra::Base
     end
 	end
 
+  post '/tweets/:id/delete' do
+    if logged_in?
+      tweet = Tweet.find(params[:id])
+      if tweet.user_id == session[:user_id]
+        tweet.delete
+      end
+      redirect '/tweets'
+    else
+	    redirect '/login'
+    end
+	end
+
   post '/tweets/:id' do
     tweet = Tweet.find(params[:id])
     if tweet.update(content: params[:content])
