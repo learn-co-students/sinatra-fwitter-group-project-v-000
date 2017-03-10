@@ -1,0 +1,11 @@
+* {
+  text-align: center;
+}
+
+.flash {
+  color: red;
+}
+
+li {
+  list-style: none;
+}

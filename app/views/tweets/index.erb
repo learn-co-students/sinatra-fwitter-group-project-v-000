@@ -1,0 +1,15 @@
+<% if logged_in? %>
+  <h1>Welcome, <a href="/users/<%= current_user.slug %>"><%= current_user.username %></a>
+<% end %>
+<h1>All Tweets:</h1><br>
+  <ul>
+    <% @tweets.reverse.each do |tweet| %>
+      <li>
+        <h3><a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a></h3>
+        <h3><a href="/tweets/<%= tweet.id %>"><%= tweet.title %></a></h3>
+        <p>Created at: <%= tweet.created_at %></p>
+        <pre><p>Content: <%= tweet.content %></p><br></pre>
+      </li>
+    <% end %>
+  </ul>
+<br><a href="/">Main Page</a>
