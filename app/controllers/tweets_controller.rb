@@ -9,8 +9,7 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    tweet = Tweet.new(params[:tweet])
-    tweet.user = current_user
+    tweet = Tweet.new(content: params[:content], user: current_user)
     if tweet.save
       redirect to '/tweets'
     else
