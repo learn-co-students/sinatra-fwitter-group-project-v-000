@@ -1,9 +1,9 @@
 <h1>Welcome, <%= current_user.username %></h1>
 
-<h2>Your tweets:</h2>
+<h2>Tweets:</h2>
 
 <% @tweets.each do |tweet| %>
-  <p><%= tweet.content %></p>
+  <p><%= tweet.user.username %>: <%= tweet.id %>: <%= tweet.content %></p>
 <% end %>
 
 <p><a href="/logout">Log Out</a></p>

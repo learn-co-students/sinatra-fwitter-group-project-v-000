@@ -3,47 +3,36 @@ require './config/environment'
 class TweetController < ApplicationController
 
   get '/tweets' do
-    if logged_in?
-      @tweets = Tweet.all
-      erb :'/tweets/index'
-    else
-	    redirect '/login'
-    end
+    redirect '/login' if !logged_in?
+    @tweets = Tweet.all.order(:id)
+    erb :'/tweets/index'
 	end
 
   get '/tweets/new' do
-    if logged_in?
-      erb :'/tweets/new'
-    else
-	    redirect '/login'
-    end
+    redirect '/login' if !logged_in?
+    erb :'/tweets/new'
 	end
 
   get '/tweets/:id' do
-    if logged_in?
-      @tweet = Tweet.find(params[:id])
-      erb :'/tweets/show'
-    else
-	    redirect '/login'
-    end
+    redirect '/login' if !logged_in?
+    @tweet = Tweet.find(params[:id])
+    erb :'/tweets/show'
 	end
 
   get '/tweets/:id/edit' do
-    if logged_in?
-      @tweet = Tweet.find(params[:id])
-      erb :'/tweets/edit'
-    else
-	    redirect '/login'
-    end
+    redirect '/login' if !logged_in?
+    @tweet = Tweet.where(["id = ? and user_id = ?", "#{params[:id]}", "#{current_user.id}"]).first
+    erb :'/tweets/edit'
 	end
 
   post '/tweets' do
-    tweet = Tweet.create(user_id: current_user.id, content: params[:content])
+#    tweet = Tweet.create(user_id: current_user.id, content: params[:content])
+    tweet = current_user.tweets.create(content: params[:content])
     redirect '/tweets/new'
   end
 
   post '/tweets/:id' do
-    tweet = Tweet.find(params[:id])
+    tweet = Tweet.where(["id = ? and user_id = ?", "#{params[:id]}", "#{current_user.id}"]).first
     if tweet.update(content: params[:content])
       redirect "/tweets/#{tweet.id}"
     else
@@ -52,15 +41,10 @@ class TweetController < ApplicationController
   end
 
   post '/tweets/:id/delete' do
-    if logged_in?
-      tweet = Tweet.find(params[:id])
-      if tweet.user_id == current_user._id
-        tweet.delete
-      end
-      redirect '/tweets'
-    else
-	    redirect '/login'
-    end
+    redirect '/login' if !logged_in?
+    tweet = Tweet.where(["id = ? and user_id = ?", "#{params[:id]}", "#{current_user.id}"]).first
+    tweet.delete if !tweet.nil?
+    redirect '/tweets'
 	end
 
 end
