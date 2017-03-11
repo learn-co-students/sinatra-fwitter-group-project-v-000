@@ -10,17 +10,26 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-  	"Welcome to Fwitter"
+  	erb :"home.html"
   end
 
   get "/signup" do
   	erb :"users/new.html"
   end
 
+  get "/login" do
+    erb :"sessions/new.html"
+  end
+
   post "/register" do
-    @user = User.create(params)
-    session[:id] = @user.id
-    redirect "/tweets"
+    user = User.new(params)
+    params.inspect
+    if user.save
+      session[:id] = user.id
+      redirect "/tweets"
+    else
+      erb :"users/new.html"
+    end
   end
 
 
