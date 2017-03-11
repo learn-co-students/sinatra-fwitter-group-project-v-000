@@ -17,5 +17,11 @@ class ApplicationController < Sinatra::Base
   	erb :"users/new.html"
   end
 
+  post "/register" do
+    @user = User.create(params)
+    session[:id] = @user.id
+    redirect "/tweets"
+  end
+
 
 end
