@@ -32,5 +32,13 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get "/tweets" do
+    @tweets = Tweet.all
+    erb :"tweets/index.html"
+  end
+
+  get "/tweets/new" do |variable|
+    
+  end
 
 end
