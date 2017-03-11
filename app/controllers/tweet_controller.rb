@@ -38,7 +38,7 @@ class TweetController < ApplicationController
 	end
 
   post '/tweets' do
-    tweet = Tweet.create(user_id: session[:user_id], content: params[:content])
+    tweet = Tweet.create(user_id: current_user.id, content: params[:content])
     redirect '/tweets/new'
   end
 
@@ -54,7 +54,7 @@ class TweetController < ApplicationController
   post '/tweets/:id/delete' do
     if logged_in?
       tweet = Tweet.find(params[:id])
-      if tweet.user_id == session[:user_id]
+      if tweet.user_id == current_user._id
         tweet.delete
       end
       redirect '/tweets'
