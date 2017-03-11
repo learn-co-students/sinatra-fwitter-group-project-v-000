@@ -3,3 +3,9 @@
 <% @tweets.each do |tweet| %>
 	<div><p><%= tweet %></p></div>
 <% end %>
+
+<a href="/logout">Log Out</a>
+
+<form action="/logout" method="POST">
+	<input type="submit" value="Log Out">
+</form>
