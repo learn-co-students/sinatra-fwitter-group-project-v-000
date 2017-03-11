@@ -31,7 +31,7 @@ class TweetController < ApplicationController
     redirect '/tweets/new'
   end
 
-  post '/tweets/:id' do
+  patch '/tweets/:id' do
     tweet = Tweet.where(["id = ? and user_id = ?", "#{params[:id]}", "#{current_user.id}"]).first
     if tweet.update(content: params[:content])
       redirect "/tweets/#{tweet.id}"
@@ -40,7 +40,7 @@ class TweetController < ApplicationController
     end
   end
 
-  post '/tweets/:id/delete' do
+  delete '/tweets/:id' do
     redirect '/login' if !logged_in?
     tweet = Tweet.where(["id = ? and user_id = ?", "#{params[:id]}", "#{current_user.id}"]).first
     tweet.delete if !tweet.nil?
