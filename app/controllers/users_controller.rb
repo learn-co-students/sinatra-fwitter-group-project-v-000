@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 
+  enable :sessions
+  set :session_secret, "pollywog"
+
   get '/login' do
     if logged_in?
       redirect '/tweets'
@@ -28,12 +31,13 @@ class UsersController < ApplicationController
 
 
   post '/signup' do
-    if params[:username] == '' || params[:email] == '' || params[:password] == ''
-      redirect "/signup"
-    else
-      @user = User.create(params)
+    @user = User.create(params)
+    if @user.valid?
       session[:user_id] = @user.id
+      current_user
       redirect "/tweets"
+    else
+     redirect "/signup"
     end
   end
 

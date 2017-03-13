@@ -5,5 +5,6 @@ class Tweet < ActiveRecord::Base
   #include Slugifiable::InstanceMethods
 
   belongs_to :user
+  validates :content, presence: true 
 
 end
