@@ -1,0 +1,11 @@
+<h1>Sign Up</h1>
+<p>Already have an account? <a href="/login">Login</a> instead</p>
+<form id="account_signup" action="/signup" method="POST">
+	<input type="text" name="username" placeholder="Username">
+	<span class="error username_error">Username Required</span>
+	<input type="email" name="email" placeholder="you@email.com">
+	<span class="error email_error">Email Required</span>
+	<input type="password" name="password" placeholder="Password">
+	<span class="error password_error">Password Required</span>
+	<input type="submit" value="Sign Up!">
+</form>
