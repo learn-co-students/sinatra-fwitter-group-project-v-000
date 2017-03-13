@@ -1,7 +1,9 @@
 <h2>Your Tweets: </h2>
+<a href = "/logout">Log Out</a>
 
 <ul>
  <%current_user.tweets.each do |t| %>
    <li><a href = "/tweets/<%=t.id%>"><%=t.content%></a></li>
  <%end%>
 </ul>
+<a href = "/tweets">View all tweets</a>

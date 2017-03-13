@@ -1,4 +1,6 @@
 <h2>Welcome, <%=current_user.username%></h2>
+<a href = "/users/<%=current_user.slug%>">View your tweets</a><br>
+<a href = "/logout">Log Out</a>
 
 <ul>
  <%Tweet.all.each do |t| %>
