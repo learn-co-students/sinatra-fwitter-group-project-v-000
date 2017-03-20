@@ -1,5 +1,5 @@
 require './config/environment'
-
+require 'pry'
 class ApplicationController < Sinatra::Base
     configure do
         set :public_folder, 'public'
@@ -10,11 +10,12 @@ class ApplicationController < Sinatra::Base
 
     helpers do
         def logged_in?
-            !session[:username].nil?
+#            binding.pry
+            !session[:id].nil?
         end
 
         def current_user
-            session[:username] 
+            session[:id] 
         end
     end
 
@@ -24,22 +25,29 @@ class ApplicationController < Sinatra::Base
     end
 
     get '/signup' do
-        erb :'/users/create_login'
+#        binding.pry
+        if !logged_in?
+            erb :'/users/create_login'
+        else
+            redirect '/tweets'
+        end
     end
 
     post '/signup' do
+        #                binding.pry
         if !logged_in?
             if params[:username] != '' && params[:password] != '' && params[:email] != ''
-                if !User.find_by(params[:username]) #usernam isn't used yet
-                    @user = User.create(username: params[:username], password_digest: params[:password])
-                    redirect '/success'
+                if !User.find_by(username: params[:username]) #usernam isn't used yet
+                    @user = User.create(params)
+                    session[:user_id] = @user.id
+                    redirect '/tweets'
                 else
                     # message = username already taken
-                    redirect "/failure"
+                    redirect "/signup"
                 end
             else
                 #message = all fields must be filled out
-                redirect "/failure"
+                redirect "/signup"
             end
         else
             # logged in means you can't view sign up page
@@ -64,37 +72,42 @@ class ApplicationController < Sinatra::Base
             redirect '/failure'
         end
     end
-    
+
     get "/success" do
+        binding.pry
         if logged_in?
-            redirect '/account'
+            redirect '/tweets'
         else
             redirect "/login"
         end
     end
 
     get "/failure" do
-        erb :failure
+        erb :"index"
     end
 
     get "/logout" do
         session.clear
         redirect "/"
     end
-    
+
     get "/tweets/:id/edit" do
+        erb :"tweets/edit_tweet"
     end
-    
+
     get "/tweets/new" do
+        erb :"tweets/create_tweet"
     end
-    
+
     get "/tweets/:id" do
+        erb :"tweets/show_tweet"
     end
-    
+
     get "/tweets" do 
+        erb :"tweets/tweets"
     end
-    
-    
-    
-    
+
+
+
+
 end
