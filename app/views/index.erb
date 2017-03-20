@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>title</title>
-    <link rel="stylesheet" href="stylesheets/bootstrap.css" type="text/css">
-  </head>
-    <body id="page-top">
-      <% @tweets.each do |tweet| %>
-        <a href="/tweets/<%= tweet.slug %>"><%= tweet.user.name %><%= tweet.content %></a>
-      <% end %>
-    </body>
-  </html>
+<% @tweets.each do |tweet| %>
+  <a href="/tweets/<%= tweet.slug %>"><%= tweet.user.name %><%= tweet.content %></a>
+<% end %>
