@@ -6,5 +6,6 @@ end
 
 use Rack::MethodOverride
 use TweetsController
+use UsersController
 use SignupController
 run ApplicationController
