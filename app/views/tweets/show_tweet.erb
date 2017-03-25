@@ -4,6 +4,7 @@
     <title>Fwitter | @<%= @user.username %></title>
   </head>
   <body>
+    <h1>Fwitter</h1>
     <h1>The Deep Thoughts of @<%= <%= @user.username %></h1>
     <ul style="list-style: none;"><% @tweets.each do |tweet| %>
       <li><%= tweet.content %></li>
