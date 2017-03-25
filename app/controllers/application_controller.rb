@@ -12,7 +12,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb :'users/create_user'
+    if !!session[:id]
+      redirect to '/tweets'
+    else
+      erb :'users/create_user'
+    end
   end
 
   get '/tweets' do
@@ -20,6 +24,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
+    binding.pry
     if !params.values.any? {|value| value.empty?}
       redirect to '/tweets'
     else
