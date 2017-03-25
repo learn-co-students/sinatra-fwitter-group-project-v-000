@@ -6,7 +6,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "secret"
+    set :session_secret, "password_security"
   end
 
   get '/' do
@@ -49,9 +49,11 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     @user = User.find_by(params)
-    if !!@user
+    if !!@user && @user.authenticate(params[:password])
       session[:id] = @user.id
       redirect to '/tweets'
+    else
+      redirect to '/login'
     end
   end
 
