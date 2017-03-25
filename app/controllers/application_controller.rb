@@ -22,7 +22,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-    erb :index
+    if !!session[:id]
+      erb :index
+    else
+      redirect to '/login'
+    end
   end
 
   post '/signup' do
