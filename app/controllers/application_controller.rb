@@ -8,7 +8,14 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    "Welcome to Fwitter"
   end
 
+  get '/signup' do
+    erb :'users/create_user'
+  end
+
+  post '/signup'
+    erb :index
+  end
 end
