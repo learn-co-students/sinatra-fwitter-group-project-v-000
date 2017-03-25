@@ -13,13 +13,18 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  get '/signup' do
-    !logged_in? ? (erb :'users/create_user') : (redirect to '/tweets')
-  end
-
   get '/tweets' do
     @user = current_user if logged_in?
     logged_in? ? (erb :'tweets/tweets') : (redirect to '/login')
+  end
+
+  get '/users/:slug' do
+    @tweets = Tweet.where(user_id: User.find_by_slug(params[:slug]).id)
+    erb :'tweets/show_tweet'
+  end
+
+  get '/signup' do
+    !logged_in? ? (erb :'users/create_user') : (redirect to '/tweets')
   end
 
   post '/signup' do
