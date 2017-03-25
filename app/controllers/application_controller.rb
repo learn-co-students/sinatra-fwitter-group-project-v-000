@@ -8,14 +8,23 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    "Welcome to Fwitter"
+    "<h1>Welcome to Fwitter</h1><p><a href='/signup'>Sign Up</a></p><p><a href = '/login'>Log In</a></p>"
   end
 
   get '/signup' do
     erb :'users/create_user'
   end
 
-  post '/signup'
+  get '/tweets' do
     erb :index
   end
+
+  post '/signup' do
+    if !params.values.any? {|value| value.empty?}
+      redirect to '/tweets'
+    else
+      redirect to '/signup'
+    end
+  end
+
 end
