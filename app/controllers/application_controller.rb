@@ -10,23 +10,25 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    "<h1>Welcome to Fwitter</h1><p><a href='/signup'>Sign Up</a></p><p><a href = '/login'>Log In</a></p>"
+    erb :index
   end
 
   get '/signup' do
-    if session[:id].nil?
-      erb :'users/create_user'
-    else
-      redirect to '/tweets'
-    end
+    !logged_in? ? (erb :'users/create_user') : (redirect to '/tweets')
+    #if session[:id].nil?
+    #  erb :'users/create_user'
+    #else
+    #  redirect to '/tweets'
+    #end
   end
 
   get '/tweets' do
-    if !!session[:id]
-      erb :index
-    else
-      redirect to '/login'
-    end
+    !!logged_in? ? (erb :'tweets/tweets') : (redirect to '/login')
+    #binding.pry
+    #if logged_in?
+    #  erb :'tweets/tweets'
+    #else
+    ##end
   end
 
   post '/signup' do
@@ -40,15 +42,16 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    if session[:id].nil?
-      erb :'users/login'
-    else
-      redirect to '/tweets'
-    end
+    !logged_in? ? (erb :'users/login') : (redirect to '/tweets')
+    #if session[:id].nil?
+    #  erb :'users/login'
+    #else
+    #  redirect to '/tweets'
+  #  end
   end
 
   post '/login' do
-    @user = User.find_by(params)
+    @user = User.find_by(username: params["username"])
     if !!@user && @user.authenticate(params[:password])
       session[:id] = @user.id
       redirect to '/tweets'
@@ -58,11 +61,21 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    if !!session[:id]
+    if !!logged_in?
       session.clear
       redirect to '/login'
     else
       redirect to '/'
+    end
+  end
+
+  helpers do
+    def logged_in?
+      !!session[:id]
+    end
+
+    def current_user
+      User.find(session[:id])
     end
   end
 

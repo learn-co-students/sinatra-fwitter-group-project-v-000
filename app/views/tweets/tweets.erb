@@ -1,1 +1,13 @@
-"hello tweets"
+<h1>Welcome, <%= User.find_by(id: session[:id]).username %></h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fwitter</title>
+  </head>
+
+  <body>
+    <h1>Welcome, <%= User.find_by(id: session[:id]).username %></h1>
+
+
+  </body>
+</html>
