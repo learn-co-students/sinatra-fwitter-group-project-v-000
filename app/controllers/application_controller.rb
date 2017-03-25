@@ -18,6 +18,10 @@ class ApplicationController < Sinatra::Base
     logged_in? ? (erb :'tweets/tweets') : (redirect to '/login')
   end
 
+  get '/tweets/new' do
+    erb :'tweets/create_tweet'
+  end
+
   get '/users/:slug' do
     @tweets = Tweet.where(user_id: User.find_by_slug(params[:slug]).id)
     erb :'tweets/show_tweet'

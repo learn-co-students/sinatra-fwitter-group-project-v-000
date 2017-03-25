@@ -9,6 +9,7 @@
     <ul style="list-style: none;"><% Tweet.all.each do |tweet| %>
       <li><h2>@<%= User.find(tweet.user_id).username %></h2></li>
       <li><p><%= tweet.content %></p></li>
+      <br></br>
       <% end %></ul>
   </body>
 </html>
