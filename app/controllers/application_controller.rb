@@ -5,6 +5,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "secret"
   end
 
   get '/' do
@@ -12,10 +14,10 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    if !!session[:id]
-      redirect to '/tweets'
-    else
+    if session[:id].nil?
       erb :'users/create_user'
+    else
+      redirect to '/tweets'
     end
   end
 
@@ -24,8 +26,9 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    binding.pry
     if !params.values.any? {|value| value.empty?}
+      user = User.create(params)
+      session[:id] = user.id
       redirect to '/tweets'
     else
       redirect to '/signup'
