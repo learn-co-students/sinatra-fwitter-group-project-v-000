@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Fwitter | @<%= @user.username %></title>
+    <title>Fwitter | @<%= User.find(@tweet.user_id).username %></title>
   </head>
   <body>
     <h1>Fwitter</h1>
-    <h1>The Deep Thoughts of @<%= <%= @user.username %></h1>
-    <ul style="list-style: none;"><% @tweets.each do |tweet| %>
-      <li><%= tweet.content %></li>
-      <%end%></ul>
+    <p><b>@<%= User.find(@tweet.user_id).username %></b></p>
+    <p><%= @tweet.content %></p>
+    <br>
+    <input type="submit" value='Edit Tweet'> <input type="submit" value='Delete Tweet'>
   </body>
 </html>
