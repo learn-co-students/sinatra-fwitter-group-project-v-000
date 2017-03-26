@@ -9,13 +9,9 @@
     <h2><%= @tweet.content %></h2>
     <p><i>Last updated on <%= @tweet.updated_at.strftime("%c %Z") %></i></p>
     <br>
-    <form action="/tweets">
-      <input type="submit" value="Go Back to Tweets">
-    </form>
+    <button type="button"><a href='/tweets'>Go back</a></button>
+    <button type="button"><a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a></button>
     <br>
-    <form action="/tweets/<%= @tweet.id %>/edit">
-      <input type="submit" value="Edit Tweet">
-    </form>
     <br>
     <form action="/tweets/<%= @tweet.id %>/delete" method="post">
       <input id="hidden" type="hidden" name="_method" value="delete">
