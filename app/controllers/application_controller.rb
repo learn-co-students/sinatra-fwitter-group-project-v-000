@@ -61,7 +61,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  delete '/posts/:id/delete' do
+  delete '/tweets/:id/delete' do
     if logged_in?
       @tweet = Tweet.find(params[:id])
       @tweet.delete
