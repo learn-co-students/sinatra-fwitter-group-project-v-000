@@ -23,12 +23,14 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets' do
-    if logged_in?\
-      && current_user.id == session[:id]\
-      && !!params[:content]
+    if logged_in? && (current_user.id == session[:id])
+      if params[:content].strip.empty?
+        redirect to '/tweets/new'
+      else
         params[:user_id] = current_user.id
         @tweet = Tweet.create(params)
         redirect to '/tweets'
+      end
     else
       redirect to '/'
     end
