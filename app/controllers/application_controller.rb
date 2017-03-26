@@ -50,6 +50,13 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  patch '/tweets/:id' do
+    @tweet = Tweet.find(params[:id])
+    @tweet.content = params[:content]
+    @tweet.save
+    redirect to '/tweets/#{@tweet.id}'
+  end
+
   get '/users/:slug' do
     @tweets = Tweet.where(user_id: User.find_by_slug(params[:slug]).id)
     erb :'tweets/show_tweet'
