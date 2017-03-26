@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/new' do
-    erb :'tweets/create_tweet'
+    logged_in? ? (erb :'tweets/create_tweet') : (redirect to '/login')
   end
 
   post '/tweets' do
