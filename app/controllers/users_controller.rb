@@ -10,7 +10,7 @@ require 'pry'
   end
 
   post '/signup' do
-  
+    
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect to "/signup"
     else

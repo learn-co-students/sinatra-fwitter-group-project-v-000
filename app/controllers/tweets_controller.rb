@@ -59,7 +59,7 @@ require 'pry'
     end
   end
 
-   delete '/tweets/:id/delete' do
+  delete '/tweets/:id/delete' do
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       if @tweet.id == current_user.id
@@ -70,5 +70,5 @@ require 'pry'
       end
     end
   end
-  
+
 end
