@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 require 'pry'
+
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :"/users/show"
+  end
   
   get '/signup' do 
     if !logged_in?
@@ -10,7 +15,7 @@ require 'pry'
   end
 
   post '/signup' do
-    
+
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect to "/signup"
     else
@@ -36,14 +41,9 @@ require 'pry'
     end
   end
 
-  get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    erb :'/users/show'
-  end
-
   get '/logout' do
     if logged_in? 
-      session.clear
+      session.destroy
       redirect to '/login'
     else
       redirect to '/'
