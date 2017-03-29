@@ -1,9 +1,9 @@
-<% if Helpers.is_logged_in?(session) %>
-  <h3>Welcome <%= Helpers.current_user(session).username %></h3>
+<% if logged_in? %>
+  <h3>Welcome back <%= @username %>!</h3>
   <p>
-    <a href="/tweet">New Tweet</a><br>
+    <a href="/tweet/new">New Tweet</a><br>
     <a href="/tweets">View Tweets</a><br>
-    
+
     <a href="/logout">Log Out</a>
   </p>
 <% else %>
