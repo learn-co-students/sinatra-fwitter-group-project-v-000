@@ -1,0 +1,8 @@
+<h3><%= @username %></h3>
+<a href="/tweet/new">New Tweet</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/logout">Log Out</a><br>
+
+<form action="/tweets/<%= @tweet.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="text" name="content" placeholder="<%= @tweet.content %>">
+  <input name="submit" value="submit" type="submit">
+</form>
