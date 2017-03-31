@@ -1,9 +1,9 @@
 <% if @tweets == [] %>
   <h3>Welcome, <%= @username %>, there are no tweets yet...</h3>
-  <a href="/tweet/new">New Tweet</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/logout">Log Out</a>
+  <a href="/tweets/new">New Tweet</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/logout">Log Out</a>
 <% else %>
   <h3>Welcome, <%= @username %>, here are the latest tweets!</h3>
-  <a href="/tweet">New Tweet</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/logout">Log Out</a><br>
+  <a href="/tweets/new">New Tweet</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/logout">Log Out</a><br>
   <br>
   <% @tweets.each do |t| %>
     <a href="/tweets/<%= t.id %>"><%= t.content %></a><br>
