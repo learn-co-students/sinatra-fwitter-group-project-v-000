@@ -1,5 +1,5 @@
 <h3><%= @username %></h3>
-<a href="/tweet/new">New Tweet</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/tweets/:id/edit">Edit Tweet</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/logout">Log Out</a><br>
+<a href="/tweet/new">New Tweet</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/logout">Log Out</a><br>
 
 <h4><%= @tweet.content %></h4><br>
 
