@@ -81,7 +81,14 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets' do
-
+    @user = User.find(session[:user_id])
+    @tweet = @user.tweets.build(params)
+    if @tweet.valid?
+      @tweet.save
+      redirect "/tweets/#{@tweet.id}"
+    else
+      redirect '/tweets/new'
+    end
   end
 
   get '/tweets/:id' do
@@ -104,13 +111,18 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-
-    redirect "/tweets/#{@tweet.id}"
+    if params[:content] != ""
+      @tweet.update(content: params[:content])
+      redirect "/tweets/#{@tweet.id}"
+    else
+      redirect "/tweets/#{@tweet.id}/edit"
+    end
   end
 
   delete '/tweets/:id' do
-    if is_logged_in?
-      @tweet = Tweet.find(params[:id])
+    @tweet = Tweet.find(params[:id])
+    if is_logged_in? && current_user == @tweet.user
+
       @tweet.destroy
     end
     redirect '/tweets'
