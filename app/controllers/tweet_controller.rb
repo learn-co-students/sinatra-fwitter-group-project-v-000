@@ -21,6 +21,7 @@ class TweetController < ApplicationController
 			redirect "/tweets/new"
 		else
 			user.tweets << Tweet.create(params)
+			redirect "/tweets"
 		end
   	end
 
