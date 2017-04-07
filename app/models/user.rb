@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  belongs_to :user
+  has_many :tweets
   has_secure_password
 
   def slug
