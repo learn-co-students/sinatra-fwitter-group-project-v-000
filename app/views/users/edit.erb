@@ -1,0 +1,20 @@
+<%= @flash_message if @flash_message %>
+<h1>Edit Account</h1>
+<form action="/users/<%= @current_user.slug %>" method="post">
+  <input type="hidden" id="hidden" name="_method" value="patch">
+  <p>
+    <label for="username">Enter Username: </label>
+    <input type="text" id="username" name="user[username]" value="<%= @current_user.username %>">
+  </p>
+  <p>
+    <label for="email">Enter E-mail: </label>
+    <input type="text" id="email" name="user[email]" value="<%= @current_user.email %>">
+  </p>
+  <p>
+    <label for="password">Enter Password: </label>
+    <input type="password" id="password" name="user[password]" value="<%= @current_user.password %>">
+  </p>
+  <p>
+    <input type="submit" value="Update">
+  </p>
+</form>

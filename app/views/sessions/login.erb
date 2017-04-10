@@ -1,0 +1,15 @@
+<%= @flash_message if @flash_message %>
+<h1>Login</h1>
+<form action="/login" method="post">
+  <p>
+    <label for="username">Enter Username: </label>
+    <input type="text" id="username" name="username">
+  </p>
+  <p>
+    <label for="password">Enter Password: </label>
+    <input type="password" id="password" name="password">
+  </p>
+  <p>
+    <input type="submit" value="submit">
+  </p>
+</form>

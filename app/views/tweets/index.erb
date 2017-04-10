@@ -1,0 +1,13 @@
+<% if @current_user %>
+  <h1>Welcome, <%= @current_user.username.capitalize %></h1>
+<% end %>
+<h2>All Tweets</h2>
+<ol>
+<% @tweets.each do |tweet| %>
+  <li>
+    <a href="/tweets/<%= tweet.id %>">
+      <%= tweet.content[0..23] %><%= "..." if tweet.content.length > 24 %>
+    </a>
+  </li>
+<% end %>
+</ol>
