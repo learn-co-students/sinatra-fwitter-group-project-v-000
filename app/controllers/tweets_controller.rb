@@ -50,15 +50,16 @@ class TweetsController < ApplicationController
   get "/tweets/:id/edit" do # (must validate session ID)
     @flash_message = session[:flash] if session[:flash]
     session[:flash] = nil
-    @tweet = Tweet.find(params[:id])
     @current_user = UserHelper.current_user(session)
-    if @tweet.user == @current_user
-      erb :'/tweets/edit'
-    elsif @current_user
-      redirect "/tweets"
-    else
-      binding.pry
+    if !@current_user
       redirect "/login"
+    else
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user == @current_user
+        erb :'/tweets/edit'
+      else
+        redirect "/tweets"
+      end
     end
 
   end
