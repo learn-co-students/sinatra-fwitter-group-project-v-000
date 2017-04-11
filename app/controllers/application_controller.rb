@@ -102,28 +102,25 @@ end
 
   post "/tweets/:id" do
     @tweet = Tweet.find(params[:id])
-    @tweet.update(params)
-    redirect '/show_tweet'
-  end
-
-  delete '/tweets/:id/delete' do
-    if logged_in?# && @user.id = @tweet.user_id #logged_in? is probably redundant here
-      @tweet = Tweet.find(params[:id])
-      @tweet.delete
-      redirect :'/show_tweet'
+    if params[:content].empty?
+      redirect "/tweets/#{@tweet.id}/edit"
     else
-      redirect :'/login'
+      @tweet.content = params[:content]
+      @tweet.save
+      redirect '/tweets'
     end
   end
 
-    # context 'logged in' do
-    #   it 'displays a single tweet' do
-    #     visit "/tweets/#{tweet.id}"
-    #     expect(page.status_code).to eq(200)
-    #     expect(page.body).to include("Delete Tweet")
-    #     expect(page.body).to include(tweet.content)
-    #     expect(page.body).to include("Edit Tweet")
-    #   end
+  delete '/tweets/:id/delete' do
+    @user = current_user
+    @tweet = Tweet.find(params[:id])
+    if @user.id == @tweet.user_id
+      @tweet.delete
+      redirect '/tweets'
+    else
+      redirect '/login'
+    end
+  end
 
   helpers do
     def current_user
