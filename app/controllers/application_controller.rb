@@ -67,13 +67,12 @@ end
   end
 
   post '/tweets/new' do
-    #binding.pry
     unless params[:content].empty?
       @user = current_user
       @tweet = Tweet.create(params) #later change to .new
       @tweet.user_id = @user.id
       @tweet.save
-      #redirect '/tweets'
+      redirect '/tweets'
     end
   end
 
@@ -92,14 +91,29 @@ end
     end
   end
 
+  get "/tweets/:id/edit" do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/edit_tweet'
+    else
+      redirect '/login'
+    end
+  end
+
   post "/tweets/:id" do
-    
+    @tweet = Tweet.find(params[:id])
+    @tweet.update(params)
+    redirect '/show_tweet'
   end
 
   delete '/tweets/:id/delete' do
-    @tweet = Tweet.find(params[:id])
-    @tweet.delete
-    redirect :'/show_tweet'
+    if logged_in?# && @user.id = @tweet.user_id #logged_in? is probably redundant here
+      @tweet = Tweet.find(params[:id])
+      @tweet.delete
+      redirect :'/show_tweet'
+    else
+      redirect :'/login'
+    end
   end
 
     # context 'logged in' do
