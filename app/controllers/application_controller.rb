@@ -25,21 +25,19 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    not logged_in? ? (erb :'/users/login') : (redirect '/tweets')
+    logged_in? ? (redirect '/tweets') : (erb :'/users/login')
   end
 
   post '/login' do
-    if params[:username].empty? || params[:password].empty?
+    redirect '/login' if params[:username].empty? || params[:password].empty?
+    @user = User.find_by(username: params[:username]) #find and set user (if possible)
+    if @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect '/tweets'
+    else
       redirect '/login'
-    elsif @user = User.find_by(username: params[:username]) #find and set user (if possible)
-      if @user && @user.authenticate(params[:password]) #TRY TO REFACTOR THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-        session[:user_id] = @user.id
-        redirect '/tweets'
-      else
-        redirect '/login'
-      end
-    end
   end
+end
 
   get '/logout' do
     if logged_in?
@@ -84,25 +82,36 @@ class ApplicationController < Sinatra::Base
     erb :"/tweets/show_tweet"
   end
 
-  # 3) ApplicationController lets user create a tweet if they are logged in
-  #  Failure/Error: expect(tweet).to be_instance_of(Tweet)
-  #    expected nil to be an instance of Tweet
+  get "/tweets/:id" do
+    #binding.pry
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/edit_tweet'
+    else
+      redirect '/login'
+    end
+  end
 
-  # describe 'user show page' do
-  #   it 'shows all a single users tweets' do
-  #     user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-  #     tweet1 = Tweet.create(:content => "tweeting!", :user_id => user.id)
-  #     tweet2 = Tweet.create(:content => "tweet tweet tweet", :user_id => user.id)
-  #     get "/users/#{user.slug}"
-  #
-  #     expect(last_response.body).to include("tweeting!")
-  #     expect(last_response.body).to include("tweet tweet tweet")
-  #
-  #   end
-  # end
+  post "/tweets/:id" do
+    
+  end
+
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find(params[:id])
+    @tweet.delete
+    redirect :'/show_tweet'
+  end
+
+    # context 'logged in' do
+    #   it 'displays a single tweet' do
+    #     visit "/tweets/#{tweet.id}"
+    #     expect(page.status_code).to eq(200)
+    #     expect(page.body).to include("Delete Tweet")
+    #     expect(page.body).to include(tweet.content)
+    #     expect(page.body).to include("Edit Tweet")
+    #   end
 
   helpers do
-
     def current_user
       User.find(session[:user_id])
     end
@@ -110,7 +119,5 @@ class ApplicationController < Sinatra::Base
     def logged_in? #dunno if this should be a class method
       !!session[:user_id]
     end
-
   end
-
 end
