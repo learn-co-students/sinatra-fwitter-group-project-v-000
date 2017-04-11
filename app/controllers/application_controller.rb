@@ -25,7 +25,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    logged_in? ? (redirect '/tweets') : (erb :'/users/login')
+    not logged_in? ? (erb :'/users/login') : (redirect '/tweets')
   end
 
   post '/login' do
