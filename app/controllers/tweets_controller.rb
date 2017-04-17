@@ -21,20 +21,12 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    if params[:content].empty?
-      redirect to '/tweets/new'
-    else
-      @tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
-      # if params[:phone_number] != ""
-      #   @client = Twilio::REST::Client.new(ACCOUNT_SID, AUTH_TOKEN)
-      #   number = "#{params[:phone_number]}"
-      #   @client.messages.create(
-      #     from: 'Number goes here',
-      #     to: number,
-      #     body: params[:content] + "\n - sent by #{@tweet.user.username} from Fwitter"
-      #     )
-      # end
+    @tweet = Tweet.new(content: params[:content], user_id: session[:user_id])
+
+    if @tweet.save
       redirect to "/tweets/#{@tweet.id}"
+    else
+      redirect to '/tweets/new'
     end
   end
 
