@@ -77,7 +77,7 @@ make others if we want to separate them out
 ### Homepage
   * views/index.html
     * Needs to include "Welcome to Fwitter" text
-    * Needs links to Login and Signup password_digest
+    * Needs links to Login and Signup
 
 ### Users
   * views/users/create_user
