@@ -19,26 +19,26 @@ database for :password_digest, also a string.
 
 * Need these routes:
 
-** get '/' - loads Homepage
+-* get '/' - loads Homepage
 
-** get '/signup' - load signup page
+-* get '/signup' - load signup page
 
-** post '/signup' - process signup form submission, log in, redirect to '/tweets'
-*** must have a username to sign up
-*** must have an email to sign up
-*** must have a password to sign up
-*** does not let logged in user view the signup page, instead redirect to '/tweets'
+-* post '/signup' - process signup form submission, log in, redirect to '/tweets'
+--* must have a username to sign up
+--* must have an email to sign up
+--* must have a password to sign up
+--* does not let logged in user view the signup page, instead redirect to '/tweets'
 
-** get '/login'
-*** log in user
-*** redirects to '/tweets'
-*** immediately redirects to '/tweets' if already logged in
+-* get '/login'
+--* log in user
+--* redirects to '/tweets'
+--* immediately redirects to '/tweets' if already logged in
 
-** get '/logout'
-*** logs out the user, then redirects to '/login'
-*** will not allow logout if not already logged in -> redirect to '/' instead
+-* get '/logout'
+--* logs out the user, then redirects to '/login'
+--* will not allow logout if not already logged in -> redirect to '/' instead
 
-** get '/tweets'
-*** redirects to '/login' if not logged in
-*** shows list of current user's tweets
+-* get '/tweets'
+--* redirects to '/login' if not logged in
+--* shows list of current user's tweets
 
