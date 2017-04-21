@@ -1,4 +1,4 @@
-#Reading the instructions and specs:
+# From instructions and specs
 
 ## Classes
 ### Class User 
@@ -32,7 +32,7 @@ make others if we want to separate them out
     * does not let logged in user view the signup page, instead redirect to '/tweets'
 
   * get '/login'
-    * log in user
+    * log in user, add message to session "Welcome, <user>" to be shown on '/tweets'
     * redirects to '/tweets'
     * immediately redirects to '/tweets' if already logged in
 
@@ -74,4 +74,34 @@ make others if we want to separate them out
 
 ## Views
     
+### Homepage
+  * views/index.html
+    * Needs to include "Welcome to Fwitter" text
+    * Needs links to Login and Signup password_digest
 
+### Users
+  * views/users/create_user
+    * New User form (Sign up form)
+  * views/users/login
+    * Login Form
+
+### Tweets
+  * views/tweets/create_tweet
+    * New Tweet
+  * views/tweets/edit_tweet
+    * Edit Tweet
+  * views/tweets/show_tweet
+    * Show Tweet
+    * includes "Edit Tweet" and "Delete Tweet" buttons
+  * views/tweets/tweets
+    * Tweets index
+
+## Helper methods
+  ## Use #current_user and #logged_in? helper methods
+    * sinatra-secure-password-lab
+    * in the application_controller.rb file
+
+## Additional Comments
+* pay special attention to securing the views against 'hacking'.  Make sure
+that only the owner of a tweet can edit or delete it, and that nobody
+can create a tweet using someone else's identity.
