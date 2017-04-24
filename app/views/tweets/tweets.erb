@@ -1,0 +1,6 @@
+<h2>Here is the lastest news:</h2>
+
+<% @tweets.each do |tweet| %>
+  <p><%= tweet.content %></p>
+  <h4>By: <a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a></h4>
+<% end %>
