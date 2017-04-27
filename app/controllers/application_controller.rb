@@ -15,9 +15,13 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
+  	erb :create_users
   end
 
   post '/signup' do
+
+  	
+  	redirect '/tweets'
   end
 
   get '/login' do
@@ -32,22 +36,4 @@ class ApplicationController < Sinatra::Base
 
   get '' do
   end
-
-  get '/tweets' do
-
-  end
-
-
-  get '/tweets/:id/edit' do
-  end
-
-  post '/tweets/:id' do
-  	#update to tweets/id
-  end
-
-  post '/tweets/:id/delete' do
-  	#deletion of tweet 
-  end
-
-
 end
