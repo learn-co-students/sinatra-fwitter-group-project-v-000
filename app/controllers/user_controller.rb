@@ -1,16 +1,23 @@
 class UserController < ApplicationController
-	 get '/tweets' do
-
+  get '/signup' do
+    erb :create_users
   end
 
-  get '/tweets/:id/edit' do
+  post '/signup' do
+
+    redirect '/tweets'
   end
 
-  post '/tweets/:id' do
-  	#update to tweets/id
+  get '/login' do
   end
 
-  post '/tweets/:id/delete' do
-  	#deletion of tweet 
+  post '/login' do
+  end
+
+  get '/logout' do
+    session.clear
+  end
+
+  get '/' do
   end
 end
