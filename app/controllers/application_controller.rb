@@ -11,7 +11,6 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
   	erb :index
-  	#have links to login/sign up?
   end
 
   helpers do
