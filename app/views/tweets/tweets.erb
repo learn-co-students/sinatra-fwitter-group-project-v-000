@@ -1,10 +1,13 @@
 <h1>Welcome, <%=@user.username%></h1>
 
 <ul>
-	<li>
+	
 	<% Tweet.all.each { |tweet| %>
+	<li>
 		<h2> <%= tweet.user %> </h2>
 	  <h3> <%= tweet.content %> </h3>
+  </li>
 	<% } %>
-	</li>
+	
+	
 </ul>

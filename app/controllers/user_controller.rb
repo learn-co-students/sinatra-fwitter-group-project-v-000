@@ -9,7 +9,6 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
-    # binding.pry
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect '/signup'
     else
@@ -46,12 +45,10 @@ class UserController < ApplicationController
   end
 
   get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    if @user
-      erb :"/tweets"
+    if @user = User.find_by_slug(params[:slug])
+      erb :"/tweets/tweets"
     else
-      "USER NOT FOUND"
+      redirect '/'
     end
-
   end
 end

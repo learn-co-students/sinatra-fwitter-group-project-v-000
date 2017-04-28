@@ -13,6 +13,10 @@ class ApplicationController < Sinatra::Base
   	erb :index
   end
 
+  get '/debug' do
+    binding.pry
+  end
+
   helpers do
     def logged_in?
       !!session[:id]
