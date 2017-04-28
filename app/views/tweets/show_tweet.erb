@@ -1,8 +1,8 @@
 
-<h1>User: <%= @tweet.user %></h1>
+<h1>User: <%= @tweet.user.username %></h1>
 <div>
 	Content:<br>
-	<%= @tweet.content %>
+	<p><%= @tweet.content %></p>
 </div>
 
 
@@ -11,5 +11,6 @@
 	<input type="submit" value="Delete Tweet" name="Delete Tweet">
 </form>
 
-
-<a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+<form>
+	<button type="submit" formaction="/tweets/<%= @tweet.id %>/edit" formmethod="get">Edit Tweet</button>
+</form>

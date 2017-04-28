@@ -1,6 +1,8 @@
 <form action="/tweets/<%= @tweet.id %>" method="post">
 	<input id="hidden" type="hidden" name="_method" value="PATCH">
 	<label for="content">Content:</label><br>
-	<textarea name="content" id="content" value="<%= @tweet.content %>" cols="30" rows="10"></textarea>
+	<textarea name="content" id="content" cols="30" rows="10"><%= @tweet.content %></textarea><br>
+	Tweet owned by: <%= @tweet.user.username %><br>
+	Tweet editing by: <%= current_user.username %><br>
 	<input type="submit" name="Submit" id="submit">
 </form>

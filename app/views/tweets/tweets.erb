@@ -4,8 +4,8 @@
 	
 	<% Tweet.all.each { |tweet| %>
 	<li>
-		<h2> <%= tweet.user %> </h2>
-	  <h3> <%= tweet.content %> </h3>
+		<h2> <a href=""><%= tweet.user.username %></a> </h2>
+	  <h3> <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a> </h3>
   </li>
 	<% } %>
 	
