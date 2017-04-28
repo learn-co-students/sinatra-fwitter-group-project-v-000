@@ -9,7 +9,10 @@ class TweetController < ApplicationController
     end
   end
 
-  get '/tweets/:slug'
+  get '/tweets/:slug' do
+    @tweet = Tweet.find_by_slug(params[:slug])
+    erb :'/tweets/show_tweet'
+  end
 
   get '/tweets/:id/edit' do
   end

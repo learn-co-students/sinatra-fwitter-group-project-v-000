@@ -44,6 +44,13 @@ class UserController < ApplicationController
     redirect '/login'
   end
 
-  # get '/' do
-  # end
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    if @user
+      erb :"/tweets"
+    else
+      "USER NOT FOUND"
+    end
+
+  end
 end
