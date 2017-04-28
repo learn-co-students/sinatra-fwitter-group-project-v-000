@@ -57,7 +57,12 @@ class TweetController < ApplicationController
     end
   end
 
-  post '/tweets/:id/delete' do
-  	#deletion of tweet 
+  delete '/tweets/:id/delete' do
+    tweet = Tweet.find(params[:id])
+  	if logged_in? && tweet.user == current_user
+      tweet.destroy
+    else
+
+    end
   end
 end
