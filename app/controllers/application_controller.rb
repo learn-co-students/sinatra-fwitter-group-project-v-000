@@ -14,4 +14,16 @@ class ApplicationController < Sinatra::Base
   	#have links to login/sign up?
   end
 
+  helpers do
+    def logged_in?
+      !!session[:id]
+    end
+
+    def current_user
+      User.find(session[:id])
+    end
+  end
+
 end
+
+
