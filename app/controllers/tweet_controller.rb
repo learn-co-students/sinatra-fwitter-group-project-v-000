@@ -66,8 +66,9 @@ class TweetController < ApplicationController
   	if logged_in? && tweet.user == current_user
       flash[:message] = "Tweet successfully destroyed"
       tweet.destroy
+    else
+      flash[:message] = "Unauthorized delete action"
     end
-    flash[:message] = "Unauthorized delete action"
     redirect '/tweets'
   end
 end
