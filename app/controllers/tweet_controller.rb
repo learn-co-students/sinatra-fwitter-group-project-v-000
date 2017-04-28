@@ -9,6 +9,8 @@ class TweetController < ApplicationController
     end
   end
 
+  get '/tweets/:slug'
+
   get '/tweets/:id/edit' do
   end
 
