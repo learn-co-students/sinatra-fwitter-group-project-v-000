@@ -1,0 +1,14 @@
+
+<h1>User: <%= @tweet.user %></h1>
+<div>
+	Content:<br>
+	<%= @tweet.content %>
+</div>
+
+
+<form action="delete" method="post">
+	<input type="submit" value="Delete Tweet" name="Delete Tweet">
+</form>
+
+
+<a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
