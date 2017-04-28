@@ -62,6 +62,6 @@ class TweetController < ApplicationController
   	if logged_in? && tweet.user == current_user
       tweet.destroy
     end
-    redirect '/tweet'
+    redirect '/tweets'
   end
 end
