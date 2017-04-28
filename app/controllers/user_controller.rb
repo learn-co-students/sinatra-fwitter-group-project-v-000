@@ -10,12 +10,13 @@ class UserController < ApplicationController
 
   post '/signup' do
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
+      flash[:message] = "Fields cannot be empty, please try again."
       redirect '/signup'
     else
       user = User.create(username: params[:username], email: params[:email], password: params[:password])
       session[:id] = user.id
+      flash[:message] = "Tweet successfully created."
       redirect '/tweets'
-      #flash msg?
     end
   end
 
@@ -33,7 +34,7 @@ class UserController < ApplicationController
       session[:id] = user.id
       redirect '/tweets'
     else
-      #flash msg
+      flash[:message] = "User or password not found."
       redirect '/login'
     end
 

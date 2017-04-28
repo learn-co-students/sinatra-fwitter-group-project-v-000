@@ -4,6 +4,7 @@ class TweetController < ApplicationController
       @user = current_user
       erb :'/tweets/tweets'
     else 
+      flash[:message] = "Please log in first."
       redirect '/login'
     end
   end
@@ -12,7 +13,7 @@ class TweetController < ApplicationController
     if logged_in?
       erb :'/tweets/create_tweet'
     else
-      #flash message
+      flash[:message] = "To create a new tweet please log in first."
       redirect '/login'
     end
   end
@@ -20,10 +21,10 @@ class TweetController < ApplicationController
   post '/tweets' do
     if params[:content] != ""
       @tweet = Tweet.create(content: params[:content], user_id: session[:id])
-      #flash msg tweet successfully created
+      flash[:message] = "Tweet successfully created."
       redirect "/tweets/#{@tweet.id}"
     else
-      #flast msg tweet cannot be empty
+      flash[:message] = "Tweets cannot be empty. Please retry."
       redirect '/tweets/new'
     end
   end
@@ -33,6 +34,7 @@ class TweetController < ApplicationController
       @tweet = Tweet.find(params[:id])
       erb :'/tweets/show_tweet'
     else
+      flash[:message] = "Please log in first."
       redirect '/login'
     end
   end
@@ -42,6 +44,7 @@ class TweetController < ApplicationController
       @tweet = Tweet.find(params[:id])
       erb :'/tweets/edit_tweet'
     else
+      flash[:message] = "Unauthorized edit action"
       redirect '/login'
     end
   end
@@ -49,9 +52,11 @@ class TweetController < ApplicationController
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
     if params[:content] != ""
+      flash[:message] = "Tweets successfully updated."
     	@tweet.update(content: params[:content])
       redirect "/tweets/#{@tweet.id}"
     else
+      flash[:message] = "Tweets cannot be empty. Please retry."
       redirect "/tweets/#{@tweet.id}/edit"
     end
   end
@@ -59,8 +64,10 @@ class TweetController < ApplicationController
   delete '/tweets/:id/delete' do
     tweet = Tweet.find(params[:id])
   	if logged_in? && tweet.user == current_user
+      flash[:message] = "Tweet successfully destroyed"
       tweet.destroy
     end
+    flash[:message] = "Unauthorized delete action"
     redirect '/tweets'
   end
 end
