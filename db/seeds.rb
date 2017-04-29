@@ -1,3 +1,2 @@
-User.find('5').destroy
-User.find('3').destroy
-User.find('4').destroy
+tweet1 = Tweet.create(:content => "tweeting!", :user_id => '8')
+tweet2 = Tweet.create(:content => "tweet tweet tweet", :user_id => '9')
