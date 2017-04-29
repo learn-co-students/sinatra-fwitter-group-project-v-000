@@ -14,12 +14,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/signup" do
-    erb :signup
+    erb :"/users/create_user"
   end
 
   post "/signup" do
       @user = User.create(username: params[:username], email: params[:email], password_digest: params[:password])
-      redirect "/login"
+      redirect "/users/login"
   end
 
   get '/account' do
@@ -28,7 +28,7 @@ class ApplicationController < Sinatra::Base
   end
 
 
-  get "/login" do
+  get "users/login" do
     erb :login
   end
 
@@ -47,5 +47,5 @@ class ApplicationController < Sinatra::Base
   get "/logout" do
     session.clear
     redirect "/"
-
+  end
 end
