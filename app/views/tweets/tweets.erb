@@ -1,0 +1,8 @@
+<% if !@tweets.blank? %>
+  <% for item in @tweets %>
+    <h5><%=item.user.username%></h5>
+    <h4><%=item.content%></h4>
+  <% end %>
+<% else %>
+  No Tweets Yet
+<% end %>
