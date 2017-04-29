@@ -105,7 +105,9 @@ You'll need to set up the relationship between users and tweets. Think about how
 
 ### Home Page
 
-You'll need a controller action to load the home page. You'll want to create a view that will eventually link to both a login page and signup page. The homepage should respond to a GET request to `/`.
+You'll need a controller action to load the home page. 
+You'll want to create a view that will eventually link to both a login page and signup page. 
+The homepage should respond to a GET request to `/`.
 
 ### Create Tweet
 
