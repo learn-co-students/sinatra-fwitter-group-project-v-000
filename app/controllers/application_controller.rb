@@ -61,10 +61,12 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets/:id/edit' do
     @tweet = Tweet.find_by_id(params[:id])
-    if @tweet.user == current_user
+    if @tweet.user == current_user && params[:content] != ""
       @tweet.content = params[:content]
       @tweet.save
       redirect "/tweets/#{@tweet.id}"
+    else
+      redirect "/tweets/#{@tweet.id}/edit"
     end
   end
 
