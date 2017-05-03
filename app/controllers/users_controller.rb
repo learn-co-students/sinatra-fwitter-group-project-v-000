@@ -38,7 +38,7 @@ class UserController < ApplicationController
       session[:user_id] = user.id
       redirect to '/tweets'
     else
-      redirect to 'signup'
+      redirect to '/signup'
     end
   end
 
@@ -54,10 +54,15 @@ class UserController < ApplicationController
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    erb :'users/show'
+    erb :'/users/show'
   end
 
   get '/tweets' do
-    "Welcome, You are now logged in and can see all of your tweets"
+    if logged_in?
+      @user = User.find_by_id(session[:user_id])
+      erb :'users/index'
+    else
+      redirect to "/login"
+    end
   end
 end
