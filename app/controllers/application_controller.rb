@@ -75,6 +75,8 @@ class ApplicationController < Sinatra::Base
     if @tweet.user == current_user
       @tweet.destroy
       redirect "/tweets"
+    else
+      redirect "/tweets/#{@tweet.id}/edit"
     end
   end
 
