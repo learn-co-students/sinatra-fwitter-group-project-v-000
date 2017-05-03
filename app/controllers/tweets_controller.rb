@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+    use Rack::Flash
     get '/tweets' do
         if logged_in?
             @user = User.find_by_id(session[:user_id])
@@ -10,7 +11,7 @@ class TweetsController < ApplicationController
 
     get '/tweets/new' do
         if logged_in?
-            erb :'tweets/create_tweet'
+            erb :'/tweets/create_tweet'
         else
             redirect "/login"
         end
@@ -21,6 +22,8 @@ class TweetsController < ApplicationController
             @tweet = Tweet.create(:content => params[:content])
             @tweet.user = current_user
             @tweet.save
+            @user = @tweet.user
+            erb :"/tweets/tweets"
         else
             redirect "/tweets/new"
         end
@@ -29,7 +32,7 @@ class TweetsController < ApplicationController
     get '/tweets/:id' do
         if logged_in?
             @tweet = Tweet.find_by_id(params[:id])
-            erb :'tweets/show_tweet'
+            erb :'/tweets/show_tweet'
         else
             redirect "/login"
         end
@@ -38,7 +41,12 @@ class TweetsController < ApplicationController
     get '/tweets/:id/edit' do
         if logged_in?
             @tweet = Tweet.find_by_id(params[:id])
-            erb :'tweets/edit_tweet'
+            if @tweet.user.username == current_user.username
+                erb :'/tweets/edit_tweet'
+            else
+                flash[:message] = "You are not #{@tweet.user.username}!"
+                erb :'/tweets/tweets'
+            end
         else
             redirect "/login"
         end
@@ -48,6 +56,8 @@ class TweetsController < ApplicationController
         @tweet = Tweet.find_by_id(params[:id])
         if !params[:content].empty?
             @tweet.update(:content => params[:content])
+            @user = current_user
+            erb :"/tweets/tweets"
         else
             redirect "/tweets/#{@tweet.id}/edit"
         end

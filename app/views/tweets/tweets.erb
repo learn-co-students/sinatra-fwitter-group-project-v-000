@@ -1,7 +1,16 @@
-<p>Welcome, You are now logged in and can see all of the tweets.</p>
-      
-<p> Here are all the tweets, <%= @user.username %>
-<% Tweet.all.each do |tweet| %>
-    <p> <%= tweet.content %> </p>
-    <p> <%= tweet.user.username %></p>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
 <% end %>
+
+<p>Welcome, <%= current_user.username %>. You are now logged in and can see all of the tweets on the Fwitter Land.</p>
+
+<% Tweet.all.each do |tweet| %>
+    <a href="/tweets/<%=tweet.id%>"><p> <%= tweet.content %> </p></a>
+    <p> -by <%= tweet.user.username %></p>
+<% end %>
+
+<form action="/tweets/new" method="GET">
+    <input type="submit" value="Add new tweet!">
+</form>
+
+<p><a href="/logout">Log Out</a></p>
