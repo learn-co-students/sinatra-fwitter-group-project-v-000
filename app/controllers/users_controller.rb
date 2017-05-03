@@ -1,6 +1,6 @@
 require 'rack-flash'
 
-class UserController < ApplicationController
+class UsersController < ApplicationController
   use Rack::Flash
 
   get '/signup' do
@@ -57,12 +57,4 @@ class UserController < ApplicationController
     erb :'/users/show'
   end
 
-  get '/tweets' do
-    if logged_in?
-      @user = User.find_by_id(session[:user_id])
-      erb :'users/index'
-    else
-      redirect to "/login"
-    end
-  end
 end
