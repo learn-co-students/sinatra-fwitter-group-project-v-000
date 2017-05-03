@@ -12,6 +12,9 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "password_security"
   end
 
+  include Slugifiable::InstanceMethods
+  extend Slugifiable::ClassMethods
+
   get "/" do
     erb :index
   end
