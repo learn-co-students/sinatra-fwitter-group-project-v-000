@@ -14,32 +14,39 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-    @tweets = Tweet.all
-    erb :'tweets/tweets'
+    # binding.pry
+    if logged_in?
+      @tweets = Tweet.all
+      erb :'tweets/tweets'
+    else
+      redirect "/login"
+    end
   end
 
   get '/signup' do
+    # binding.pry
     if logged_in?
-      redirect "tweets"
+
+      redirect "/tweets"
     else
       erb :'users/create_user'
     end
   end
 
   post '/signup' do
-    @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-    session[:user_id] = @user.id
-    if @user.save && @user.username != "" && @user.email != "" && @user.password != ""
+    user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+    if user.save && user.username != "" && user.email != "" && user.password != ""
+      session[:id] = user.id
       redirect "/tweets"
     else
       redirect "/signup"
-    # binding.pry
+
     end
   end
 
   get '/login' do
     if logged_in?
-      redirect "tweets"
+      redirect "/tweets"
     else
       erb :'users/login'
     end
@@ -48,7 +55,7 @@ class ApplicationController < Sinatra::Base
   post '/login' do
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+      session[:id] = user.id
       redirect '/tweets'
     else
       redirect '/login'
@@ -56,17 +63,27 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/logout" do
-    session.clear
-    redirect "/"
+    if logged_in?
+      session.clear
+      redirect "/login"
+    else
+      redirect "/login"
+    end
+  end
+
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'users/user_tweets'
+    # binding.pry
   end
 
   helpers do
     def logged_in?
-      !!session[:user_id]
+      !!session[:id]
     end
 
     def current_user
-      User.find(session[:user_id])
+      User.find(session[:id])
     end
   end
 
