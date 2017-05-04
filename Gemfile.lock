@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/bmabey/database_cleaner.git
-  revision: f30d5be108aa5edadfc16c480be3ed23cfbe0e05
+  revision: bf9e1fe75cb863c0671ac5eb6de9d7d8e14e0cda
   specs:
     database_cleaner (1.6.0)
 
@@ -50,6 +50,8 @@ GEM
       slop (~> 3.4)
     public_suffix (2.0.5)
     rack (1.6.5)
+    rack-flash3 (1.0.5)
+      rack
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -113,6 +115,7 @@ DEPENDENCIES
   capybara
   database_cleaner!
   pry
+  rack-flash3
   rack-test
   rake
   require_all
