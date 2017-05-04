@@ -6,8 +6,8 @@
   </head>
   <body>
     <%= yield %>
-    <!-- <%if !logged_in?%>
-      <a href="/signup">Sign Up</a> or <a href="/login">Log In</a>
-    <%end%> -->
+    <% if logged_in? %>
+      <p><a href="/tweets/new">Tweet</a> - <a href="/tweets">Home</a> - <a href="/logout">Log Out</a></p>
+    <% end %>
   </body>
 </html>
