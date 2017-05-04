@@ -1,0 +1,16 @@
+<% if flash[:error] %>
+<div class="<%= flash[:error] %>" id="flash">
+  <%= flash[:error] %>
+</div>
+<% end %>
+<h1>Let's get the preliminaries out of the way...</h1>
+<p>Sign up with an email, username, and password.</p>
+<form action="/signup" method="post">
+  <input type="text" name="email" placeholder="Email">
+  <br></br>
+  <input type="text" name="username" placeholder="Username">
+  <br></br>
+  <input type="password" name="password" placeholder="Password">
+  <br></br>
+  <input type="submit" value="Submit">
+</form>
