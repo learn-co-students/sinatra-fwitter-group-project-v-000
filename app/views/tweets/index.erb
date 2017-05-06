@@ -1,0 +1,7 @@
+Welcome,
+<a href="/tweets/new">New Tweet</a>
+<ol>
+  <% @tweets.each do |tweet|%>
+    <li><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></li>
+  <% end %>
+</ol>
