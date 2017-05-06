@@ -10,7 +10,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :index
+    if logged_in?
+      redirect "/tweets"
+    else
+      erb :index
+    end
   end
 
   get "/signup" do
@@ -55,32 +59,26 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/tweets" do
-    if logged_in?
+    as_logged_in do
       @tweets = Tweet.all
       erb :'tweets/index'
-    else
-      redirect "/login"
     end
   end
 
   post "/tweets" do
-    if logged_in?
-      tweet = Tweet.new(content: params[:content], user: current_user)
+    as_logged_in do |user|
+      tweet = Tweet.new(content: params[:content], user: user)
       if tweet.save
         redirect "/tweets"
       else
         redirect "/tweets/new"
       end
-    else
-      redirect "/login"
     end
   end
 
   get "/tweets/new" do
-    if logged_in?
+    as_logged_in do
       erb :'tweets/new'
-    else
-      redirect "/login"
     end
   end
 

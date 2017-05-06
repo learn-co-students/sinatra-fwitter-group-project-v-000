@@ -1,5 +1,5 @@
 Welcome,
-<a href="/tweets/new">New Tweet</a>
+<a href="/tweets/new">New Tweet</a> <a href="/logout">Logout</a>
 <ol>
   <% @tweets.each do |tweet|%>
     <li><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></li>
