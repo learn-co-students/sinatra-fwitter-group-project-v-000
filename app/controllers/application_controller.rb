@@ -8,28 +8,48 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      @user = User.find(session[:user_id])
+    end
+  end
+
   get '/' do
     erb :home
   end
 
-  get '/singup' do
-    erb :singup
+  get '/signup' do
+    if !session[:user_id]
+      erb :signup
+    else
+      redirect to '/tweets'
+    end
   end
 
   get '/login' do
-    erb :login
+    if !session[:user_id]
+      erb :login
+    else
+      redirect to '/tweets'
+    end
   end
 
   get '/failure' do
     erb :failure
   end
 
-  post '/singup' do
-    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-    if @user.save
-      redirect to "/tweets"
+  post '/signup' do
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      redirect to '/signup'
     else
-      redirect to "/failure"
+      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      @user.save
+      session[:user_id] = @user.id
+      redirect to "/tweets"
     end
   end
 
@@ -44,8 +64,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    session.clear
-    redirect to "/"
+    if session[:user_id]
+      session.clear
+      redirect to "/login"
+    else
+      redirect to '/login'
+    end
   end
 
 end
