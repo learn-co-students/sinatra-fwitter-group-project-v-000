@@ -28,8 +28,8 @@ get '/tweets' do
 end 
 
 get '/tweets/:id' do 
-	if logged_in?
-		@tweet = Tweet.find_by_id(params[:id])
+	@tweet = Tweet.find_by(params[:id])
+	if logged_in? && @tweet.user_id == current_user.id
 		erb :'tweets/show_tweet'
 	else 
 		redirect '/login'
@@ -37,8 +37,8 @@ get '/tweets/:id' do
 end 
 
 get '/tweets/:id/edit' do 
-	if logged_in?
-		@tweet = Tweet.find_by_id(params[:id])
+	@tweet = Tweet.find_by_id(params[:id])
+	if logged_in? && @tweet.user_id == current_user.id
 		erb :'tweets/edit_tweet'
 	else 
 		redirect '/login'
@@ -46,7 +46,7 @@ get '/tweets/:id/edit' do
 end 
 
 patch '/tweets/:id' do 
-	@tweet = Tweet.find_by_id(params[:id])
+	@tweet = current_user.tweets.find_by_id(params[:id])
 	if params[:content] == ""
 		redirect "/tweets/#{@tweet.id}/edit"
 	else 

@@ -4,7 +4,7 @@
 <ul>
 
 
-<%Tweet.all.each do |tweet| %>
+<% current_user.tweets.all.each do |tweet| %>
 <li><%= tweet.content %></li>
 <% end %>
 </ul>
