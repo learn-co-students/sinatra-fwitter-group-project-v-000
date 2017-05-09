@@ -1,0 +1,12 @@
+<% if flash[:error] %>
+ <% flash[:error].each do |e| %>
+   <p class="error message"><%= e + "." %></p>
+  <% end %>
+<% end %>
+
+<h1>Post a new tweet</h1>
+
+<form action="/tweets" method="post">
+  <input type="textarea" name="content" placeholder="Start writing here...">
+  <input type="submit" value="submit">
+</form>

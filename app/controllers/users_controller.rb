@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    if session[:id]
+    if logged_in?
       redirect '/tweets'
     else
       erb :'/users/new'
@@ -9,32 +9,34 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    @user = User.create(params)
+    @user = User.new(params)
 
     if @user.save
-      flash[:notice] = "Successfully created new user."
+      @user.save
       session[:id] = @user.id
 
-      redirect '/tweets'
-    else
-      flash[:error] = @user.errors.full_messages
+      flash[:notice] = "Successfully created new user."
 
-      redirect '/signup'
+      redirect '/tweets'
     end
+
+    flash[:error] = @user.errors.full_messages
+
+    erb :'/users/new'
   end
 
   get '/login' do
-    if session[:id]
+    if logged_in?
       redirect '/tweets'
-    else
-      erb :'/users/login'
     end
+
+    erb :'/users/login'
   end
 
   post '/login' do
-    @user = User.find_by(params)
+    @user = User.find_by(username: params[:username])
 
-    if @user
+    if @user && @user.authenticate(params[:password])
       flash[:notice] = "Logged in as #{@user.username}."
       session[:id] = @user.id
 
@@ -47,8 +49,10 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    if session[:id]
+    if logged_in?
       session.clear
+
+      flash[:notice] = "You have logged out."
       redirect '/login'
     else
       redirect '/'
