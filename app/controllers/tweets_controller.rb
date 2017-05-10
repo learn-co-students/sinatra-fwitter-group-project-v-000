@@ -18,15 +18,8 @@ class TweetsController < ApplicationController
     end
 
     post '/tweets' do
-        if !params[:content].empty?
-            @tweet = Tweet.create(:content => params[:content])
-            @tweet.user = current_user
-            @tweet.save
-            @user = @tweet.user
-            erb :"/tweets/tweets"
-        else
-            redirect "/tweets/new"
-        end
+        @tweet = current_user.tweets.create(:content => params[:content])
+        erb :"/tweets/tweets"
     end
 
     get '/tweets/:id' do
@@ -53,25 +46,22 @@ class TweetsController < ApplicationController
     end
 
     patch '/tweets/:id' do
-        @tweet = Tweet.find_by_id(params[:id])
-        if !params[:content].empty?
+        @tweet = current_user.tweets.find_by(id: params[:id])
+        if @tweet
             @tweet.update(:content => params[:content])
-            @user = current_user
             erb :"/tweets/tweets"
         else
             redirect "/tweets/#{@tweet.id}/edit"
         end
     end
 
-    get '/tweets/:id/delete' do
-        @tweet = Tweet.find_by_id(params[:id])
-        if logged_in?
-            if current_user == @tweet.user
-                @tweet.delete
-                redirect '/tweets'
-            end
+    delete '/tweets/:id' do
+        tweet = current_user.tweets.find_by(id: params[:id])
+        if tweet && tweet.destroy
+            redirect '/tweets'
         else
-            redirect "/login"
+            flash[:message] = "You can't delete someone else's tweet!"
+            erb :"/tweets/tweets"
         end
     end
 end
