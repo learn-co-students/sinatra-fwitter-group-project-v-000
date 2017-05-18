@@ -6,7 +6,7 @@ class TweetController < ApplicationController
       @users = User.all
       @tweets = Tweet.all
       @user = current_user
-      erb :index
+      erb :"/tweets/index"
     else
       redirect '/login'
     end
@@ -31,6 +31,9 @@ class TweetController < ApplicationController
   end
 
   get '/tweets/:id/edit' do
+    if !logged_in?  #had to add this in to get test to pass
+      redirect '/login' # not sure why lines 42-43 did not cover it
+    end
     @tweet = Tweet.find(params[:id])
     if logged_in? && @tweet.user == current_user
       erb :"/tweets/edit"

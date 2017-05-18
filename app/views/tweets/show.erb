@@ -1,6 +1,6 @@
-<p><%= @tweet.content %></p>
-<p><%= @tweet.user.username %></p>
+<h2><%= @tweet.user.username %>: <%= @tweet.content %></h2>
 
+<a href="/tweets">Home</a>
 <form class="" action="/tweets/<%= @tweet.id %>/edit" method="get">
   <input type="submit" value="Edit Tweet">
 </form>
