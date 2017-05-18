@@ -1,14 +1,7 @@
-<h1>Welcome to Fwitter</h1>
+<h1>Welcome, <%= @user.username %></h1>
 
-<a href="/login">Login</a>
-<a href="/signup">Sign Up</a>
-
-<% @users.each do |user| %>
-  <p><%= user.username %></p>
-<% end %>
-
-<h2>tweets</h2>
+<h2>Latest tweets:</h2>
 
 <% @tweets.each do |tweet| %>
-  <p><%= tweet.content %></p>
+  <p><b><%= tweet.user.username %></b>: <%= tweet.content %></p>
 <% end %>

@@ -12,40 +12,12 @@ class ApplicationController < Sinatra::Base
   get '/' do
     @users = User.all
     @tweets = Tweet.all
-    erb :index
+    erb :welcome
   end
 
-  get '/tweets' do
-    @users = User.all
-    @tweets = Tweet.all
-    erb :index
-  end
-
-  get '/tweets/new' do
-    if logged_in?
-      @user = current_user
-      erb :new
-    else
-      "not logged in #{session}"
-    end
-  end
-
-  get '/tweets/:id' do
-    if logged_in?
-      @tweet = Tweet.find(params[:id])
-      erb :show
-    else
-      redirect 'failure'
-    end
-  end
-
-  get '/tweets/:id/edit' do
-    @tweet = Tweet.find(params[:id])
-    if @tweet.user == current_user
-      erb :edit
-    else
-      redirect 'failure'
-    end
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :"/users/show"
   end
 
   get '/signup' do
@@ -56,20 +28,20 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/failure' do
-    "You do not have proper access."
-  end
-
   get '/login' do
-    erb :login
+    if !logged_in?
+      erb :login
+    else
+      redirect '/tweets'
+    end
   end
 
   get '/logout' do
     if logged_in?
       session.clear
-      redirect '/'
+      redirect '/login'
     else
-      redirect '/failure'
+      redirect '/login'
     end
   end
 
@@ -90,33 +62,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = user.id
       redirect "/tweets"
     else
-      redirect '/failure'
-    end
-  end
-
-  post '/tweets' do
-    params[:tweet][:user] = current_user
-    tweet = Tweet.new(params[:tweet])
-    tweet.save
-
-    redirect "/tweets/#{tweet.id}"
-  end
-
-  post '/tweets/:id' do
-    tweet = Tweet.find(params[:id])
-    tweet.update(params[:tweet])
-
-    redirect "/tweets/#{tweet.id}"
-  end
-
-  post '/tweets/:id/delete' do
-    tweet = Tweet.find(params[:id])
-
-    if tweet.user == current_user
-      tweet.delete
-      redirect '/'
-    else
-      redirect '/failure'
+      redirect '/login'
     end
   end
 
