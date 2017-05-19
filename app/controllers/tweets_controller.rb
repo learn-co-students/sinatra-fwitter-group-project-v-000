@@ -1,12 +1,12 @@
 class TweetsController < ApplicationController
 
-  configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
-    enable :sessions
-    # set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
-    # set :session_secret, SecureRandom.hex(64)
-  end
+#   configure do
+#    set :public_folder, 'public'
+#    set :views, 'app/views'
+#    enable :sessions
+#   #   # set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
+#   #   # set :session_secret, SecureRandom.hex(64)
+# end
 
   get '/tweets' do
     if logged_in?
@@ -22,6 +22,16 @@ class TweetsController < ApplicationController
       erb :'/tweets/create_tweet'
     else
       redirect to '/login'
+    end
+  end
+
+  post '/tweets' do
+    if params.value?('')
+      redirect to '/tweets/new'
+    else
+      user = User.find(session[:user_id])
+      Tweet.create(user_id: user.id, content: params[:content])
+      redirect to '/tweets'
     end
   end
 
@@ -62,15 +72,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets' do
-    if params.value?('')
-      redirect to '/tweets/new'
-    else
-      user = User.find(session[:user_id])
-      Tweet.create(user_id: user.id, content: params[:content])
-      redirect to '/tweets'
-    end
-  end
 
   delete '/tweets/:id/delete' do
     if logged_in?

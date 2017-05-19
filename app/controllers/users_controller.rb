@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
 
-  configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
-    enable :sessions
-    # set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
-    # set :session_secret, SecureRandom.hex(64)
-  end
+  # configure do
+  #   set :public_folder, 'public'
+  #   set :views, 'app/views'
+  #   enable :sessions
+  #   # set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
+  #   # set :session_secret, SecureRandom.hex(64)
+  # end
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
@@ -14,10 +14,10 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
-    if logged_in?
-      redirect to '/tweets'
-    else
+    if !logged_in?
       erb :'/users/create_user'
+    else
+      redirect to '/tweets'
     end
   end
 
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :'/users/login'
     else
-      redirect to '/tweets'
+      redirect '/tweets'
     end
   end
 
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to '/tweets'
+      redirect '/tweets'
     else
       redirect to '/signup'
     end
