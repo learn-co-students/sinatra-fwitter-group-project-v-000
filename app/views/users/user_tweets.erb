@@ -1,0 +1,7 @@
+<h1>Welcome, <%= @user.username %></h1>
+<h4>You can find all of your tweets here:</h4>
+<% @user.tweets each do |tweet| %>
+<ol>
+  <li><a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a></li>
+</ol>
+<% end %>

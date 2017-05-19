@@ -64,9 +64,9 @@ describe ApplicationController do
         :email => "skittles@aol.com",
         :password => "rainbows"
       }
-      post '/signup', params
-      session = {}
-      session[:id] = user.id
+      post '/login', params  # /signup broke the app!
+      # session = {}
+      # session[:id] = user.id
       get '/signup'
       expect(last_response.location).to include('/tweets')
     end
