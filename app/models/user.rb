@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   # validations for username, email, pswd, w/ min pswd length
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
-  validates :password, length: { minimum: 8}
+  validates_presence_of :password, length: { minimum: 8}
 
   def slug
     username.strip.downcase.tr(' ', '-')
