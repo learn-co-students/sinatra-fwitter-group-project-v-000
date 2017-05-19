@@ -1,5 +1,13 @@
 class TweetsController < ApplicationController
 
+  configure do
+    set :public_folder, 'public'
+    set :views, 'app/views'
+    enable :sessions
+    # set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
+    # set :session_secret, SecureRandom.hex(64)
+  end
+
   get '/tweets' do
     if logged_in?
       @tweets = Tweet.all

@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
 
+  configure do
+    set :public_folder, 'public'
+    set :views, 'app/views'
+    enable :sessions
+    # set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
+    # set :session_secret, SecureRandom.hex(64)
+  end
+
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     erb :'/users/user_tweets'
