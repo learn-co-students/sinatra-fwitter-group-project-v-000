@@ -1,0 +1,6 @@
+<h3>Your Tweets</h3>
+<% @user.tweets.each do |tweet| %>
+  <div>
+    <%= tweet.content %>
+  </div>
+<% end %>
