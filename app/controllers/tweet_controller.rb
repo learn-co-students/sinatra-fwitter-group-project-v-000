@@ -51,13 +51,18 @@ class TweetController < ApplicationController
 
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    if params[:content] != ""
-      flash[:message] = "Tweets successfully updated."
-    	@tweet.update(content: params[:content])
+
+    if current_user == @tweet.user
+      if params[:content] != ""
+          flash[:message] = "Tweets successfully updated."
+        	@tweet.update(content: params[:content])
+          redirect "/tweets/#{@tweet.id}"
+      else
+        flash[:message] = "Tweets cannot be empty. Please retry."
+        redirect "/tweets/#{@tweet.id}/edit"
+      end
+    else #to dbl check user association with tweet
       redirect "/tweets/#{@tweet.id}"
-    else
-      flash[:message] = "Tweets cannot be empty. Please retry."
-      redirect "/tweets/#{@tweet.id}/edit"
     end
   end
 
