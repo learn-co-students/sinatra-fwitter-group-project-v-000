@@ -1,69 +1,84 @@
-require './config/environment'
-
 class ApplicationController < Sinatra::Base
 
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-  end
-
-  get '/' do
-    erb :'/index'
+    enable :sessions
+    set :session_secret, "never_trust_the_ide"
   end
 
   get '/signup' do
-    erb :'/users/create_user'
+    if !session[:user_id]
+      erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
+    else
+      redirect to '/tweets'
+    end
   end
 
   post '/signup' do
-    @user = User.create(params["user"])
-    redirect to '/tweets'
+    if params.any? {|k, v| v.length <=0 }
+      redirect to '/signup'
+    else
+      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+      @user.save
+      session[:user_id] = @user.id
+      redirect to '/tweets'
+    end
   end
 
-  get '/figures' do
-    @figures = Figure.all
-    erb :'/figures/index'
+  get '/login' do
+    if !session[:user_id]
+      erb :'users/login'
+    else
+      redirect '/tweets'
+    end
   end
 
-  get '/figures/new' do
-    erb :'/figures/new'
+  post '/login' do
+    user = User.find_by(:username => params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect "/tweets"
+    else
+      redirect to '/signup'
+    end
   end
 
-  get '/figures/:id' do
-    @figure = Figure.find(params[:id])
-    erb :'/figures/show'
+  get '/logout' do
+    if !!session[:user_id]
+      session.destroy
+      redirect to '/login'
+    else
+      redirect to '/'
+    end
   end
 
-  get '/figures/:id/edit' do
-    @figure = Figure.find(params[:id])
-    erb :'/figures/edit'
-  end
+  get '/tweets' do
+      if session[:user_id]
+        @tweets = Tweet.all
+        erb :'tweets/tweets'
+      else
+        redirect to '/login'
+      end
+    end
 
-  post '/figures' do
-   @figure = Figure.create(params["figure"])
-   if !params[:landmark][:name].empty?
-     @figure.landmarks << Landmark.create(params[:landmark])
-   end
+    get '/tweets/new' do
+      if session[:user_id]
+        erb :'tweets/create_tweet'
+      else
+        redirect to '/login'
+      end
+    end
 
-   if !params[:title][:name].empty?
-     @figure.titles << Title.create(params[:title])
-   end
+    post '/tweets' do
+      if params[:content] == ""
+        redirect to "/tweets/new"
+      else
+        user = User.find_by_id(session[:user_id])
+        @tweet = Tweet.create(:content => params[:content], :user_id => user.id)
+        redirect to "/tweets/#{@tweet.id}"
+      end
+    end
 
-   @figure.save
-   redirect to "/figures/#{@figure.id}"
-  end
-
-   post '/figures/:id' do
-     @figure = Figure.find(params[:id])
-     @figure.update(params[:figure])
-     if !params[:title][:name].empty?
-       @figure.titles.build(name: params[:title][:name])
-     end
-     if !params[:landmark][:name].empty?
-       @figure.landmarks.build(name: params[:landmark][:name])
-     end
-     @figure.save
-     redirect to "/figures/#{@figure.id}"
-   end
 
 end
