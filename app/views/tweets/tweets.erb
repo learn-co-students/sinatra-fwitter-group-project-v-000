@@ -1,7 +1,6 @@
-<h2> Your Fweets </h2>
-
+<h2> Recent Fweets </h2>
+<div class="list-group">
 <% @tweets.each do |tweet| %>
-  <div>
-    <%= tweet.content %>
-  </div>
+    <a class="list-group-item" href="/tweets/<%=tweet.id%>"><%= tweet.content %></a>
 <% end %>
+</div>

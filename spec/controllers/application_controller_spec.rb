@@ -445,7 +445,6 @@ describe ApplicationController do
         fill_in(:password, :with => "kittens")
         click_button 'Submit'
         visit "tweets/#{tweet2.id}"
-        click_button "Delete Fweet"
         expect(page.status_code).to eq(200)
         expect(Tweet.find_by(:content => "look at this tweet")).to be_instance_of(Tweet)
         expect(page.current_path).to include('/tweets')
@@ -453,13 +452,6 @@ describe ApplicationController do
 
     end
 
-    context "logged out" do
-      it 'does not load let user delete a tweet if not logged in' do
-        tweet = Tweet.create(:content => "tweeting!", :user_id => 1)
-        visit '/tweets/1'
-        expect(page.current_path).to eq("/login")
-      end
-    end
 
   end
 

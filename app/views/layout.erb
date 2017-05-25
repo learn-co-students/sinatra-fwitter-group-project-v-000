@@ -12,7 +12,7 @@
       <% if logged_in? %>
         <a class="btn btn-primary navbar-btn" href="/tweets/new" role="button"> New Fweet </a>
         <a class="btn btn-danger navbar-btn" href="/logout" role="button"> Log Out </a>
-        <p class="navbar-text navbar-right">Welcome, <a href="/users/:slug"><%=current_user.username%></a> </p>
+        <p class="navbar-text navbar-right">Welcome, <a class="navbar-link" href="/users/<%=current_user.slug%>"><%=current_user.username%></a> </p>
       <% else %>
         <a class="btn btn-success navbar-btn" href="/signup" role="button"> Sign Up </a>
         <a class="btn btn-default navbar-btn" href="/login" role="button"> Log In </a>
