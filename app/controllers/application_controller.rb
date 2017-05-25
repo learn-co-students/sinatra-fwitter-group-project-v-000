@@ -7,6 +7,10 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "never_trust_the_ide"
   end
 
+  get '/' do
+    erb :'/index'
+  end
+
   get '/signup' do
     if !session[:user_id]
       erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
@@ -16,7 +20,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    if params.any? {|k, v| v.length <=0 }
+    if params.any? { |k, v| v.length <=0 }
       redirect to '/signup'
     else
       @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
@@ -74,11 +78,44 @@ class ApplicationController < Sinatra::Base
       if params[:content] == ""
         redirect to "/tweets/new"
       else
-        user = User.find_by_id(session[:user_id])
-        @tweet = Tweet.create(:content => params[:content], :user_id => user.id)
+        @tweet = Tweet.create(:content => params[:content], :user_id => current_user.id)
         redirect to "/tweets/#{@tweet.id}"
       end
     end
 
+    get '/tweets/:id' do
+      if session[:user_id]
+        @tweet = Tweet.find(params[:id])
+        erb :'tweets/edit_tweet'
+      else
+        redirect to '/login'
+      end
+    end
+
+    post '/tweets/:id' do
+      if params[:content] == ""
+        redirect to "/tweets/new"
+      else
+        @tweet = Tweet.create(:content => params[:content], :user_id => current_user.id)
+        redirect to "/tweets/#{@tweet.id}"
+      end
+    end
+
+    get '/users/:slug' do
+      @user = User.find_by_slug(params[:slug])
+      erb :'users/show'
+    end
+
+
+    helpers do
+       def logged_in?
+         !!session[:user_id]
+       end
+
+       def current_user
+         User.find(session[:user_id])
+       end
+
+     end
 
 end
