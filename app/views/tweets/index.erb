@@ -1,0 +1,14 @@
+<h1>Welcome, <%= @user.username %> </h1>
+
+
+<% @tweets.each do |tweet| %>
+  <ul>
+    <li> <%= tweet.content %> - <b><%= User.find(tweet.user_id).username %></b> </li>
+  </ul>
+<% end %>
+
+<br><br>
+<a href="/tweets/new">Tweet</a>
+
+<br><br><br>
+<a href="/logout">Log Out</a>
