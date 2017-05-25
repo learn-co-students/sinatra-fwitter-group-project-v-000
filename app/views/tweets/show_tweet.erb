@@ -1,0 +1,14 @@
+
+<h2>Fweet number: <%= @tweet.id%></h2>
+<h3><%= @tweet.content %> </h3>
+
+<% if @tweet.user_id == current_user.id %>
+  <form method="post" action="/tweets/<%=@tweet.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input class="btn btn-danger" type="submit" value="Delete Fweet">
+  </form>
+
+  <a class="btn btn-default" href="/tweets/<%=@tweet.id%>/edit">Edit Fweet </a>
+<% else %>
+  <span class="label label-warning">This Fweet does not belong to you.</span>
+<% end %>

@@ -137,7 +137,7 @@ describe ApplicationController do
 
       fill_in(:username, :with => "becky567")
       fill_in(:password, :with => "kittens")
-      click_button 'submit'
+      click_button 'Submit'
       expect(page.current_path).to eq('/tweets')
 
 
@@ -170,7 +170,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Submit'
         visit "/tweets"
         expect(page.body).to include(tweet1.content)
         expect(page.body).to include(tweet2.content)
@@ -188,7 +188,6 @@ describe ApplicationController do
   end
 
 
-
   describe 'new action' do
     context 'logged in' do
       it 'lets user view new tweet form if logged in' do
@@ -198,11 +197,12 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Submit'
         visit '/tweets/new'
         expect(page.status_code).to eq(200)
 
       end
+
 
       it 'lets user create a tweet if they are logged in' do
         user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
@@ -211,17 +211,18 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Submit'
 
         visit '/tweets/new'
         fill_in(:content, :with => "tweet!!!")
-        click_button 'submit'
+        click_button 'Submit'
 
         user = User.find_by(:username => "becky567")
         tweet = Tweet.find_by(:content => "tweet!!!")
         expect(tweet).to be_instance_of(Tweet)
         expect(tweet.user_id).to eq(user.id)
         expect(page.status_code).to eq(200)
+        expect(page.current_path).to eq("/tweets/1")
       end
 
       it 'does not let a user tweet from another user' do
@@ -232,12 +233,12 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Submit'
 
         visit '/tweets/new'
 
         fill_in(:content, :with => "tweet!!!")
-        click_button 'submit'
+        click_button 'Submit'
 
         user = User.find_by(:id=> user.id)
         user2 = User.find_by(:id => user2.id)
@@ -254,12 +255,12 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Submit'
 
         visit '/tweets/new'
 
         fill_in(:content, :with => "")
-        click_button 'submit'
+        click_button 'Submit'
 
         expect(Tweet.find_by(:content => "")).to eq(nil)
         expect(page.current_path).to eq("/tweets/new")
@@ -285,13 +286,13 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Submit'
 
         visit "/tweets/#{tweet.id}"
         expect(page.status_code).to eq(200)
-        expect(page.body).to include("Delete Tweet")
+        expect(page.body).to include("Delete Fweet")
         expect(page.body).to include(tweet.content)
-        expect(page.body).to include("Edit Tweet")
+        expect(page.body).to include("Edit Fweet")
       end
     end
 
@@ -317,10 +318,23 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Submit'
         visit '/tweets/1/edit'
+
         expect(page.status_code).to eq(200)
         expect(page.body).to include(tweet.content)
+      end
+
+      it 'submits the edit form via a PATCH request' do
+        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        tweet = Tweet.create(:content => "tweeting!", :user_id => user.id)
+        visit '/login'
+
+        fill_in(:username, :with => "becky567")
+        fill_in(:password, :with => "kittens")
+        click_button 'Submit'
+        visit '/tweets/1/edit'
+        expect(find("#hidden", :visible => false).value).to eq("PATCH")
       end
 
       it 'does not let a user edit a tweet they did not create' do
@@ -334,7 +348,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Submit'
         session = {}
         session[:user_id] = user1.id
         visit "/tweets/#{tweet2.id}/edit"
@@ -349,12 +363,12 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Submit'
         visit '/tweets/1/edit'
 
         fill_in(:content, :with => "i love tweeting")
 
-        click_button 'submit'
+        click_button 'Submit'
         expect(Tweet.find_by(:content => "i love tweeting")).to be_instance_of(Tweet)
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)
 
@@ -368,12 +382,12 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Submit'
         visit '/tweets/1/edit'
 
         fill_in(:content, :with => "")
 
-        click_button 'submit'
+        click_button 'Submit'
         expect(Tweet.find_by(:content => "i love tweeting")).to be(nil)
         expect(page.current_path).to eq("/tweets/1/edit")
 
@@ -398,11 +412,24 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Submit'
         visit 'tweets/1'
-        click_button "Delete Tweet"
+        click_button "Delete Fweet"
         expect(page.status_code).to eq(200)
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)
+      end
+
+      it 'deletes a tweet via a DELETE request' do
+        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        tweet = Tweet.create(:content => "tweeting!", :user_id => 1)
+        visit '/login'
+
+        fill_in(:username, :with => "becky567")
+        fill_in(:password, :with => "kittens")
+        click_button 'Submit'
+        visit 'tweets/1'
+        expect(find("#hidden", :visible => false).value).to eq("DELETE")
+
       end
 
       it 'does not let a user delete a tweet they did not create' do
@@ -416,9 +443,8 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Submit'
         visit "tweets/#{tweet2.id}"
-        click_button "Delete Tweet"
         expect(page.status_code).to eq(200)
         expect(Tweet.find_by(:content => "look at this tweet")).to be_instance_of(Tweet)
         expect(page.current_path).to include('/tweets')
@@ -426,13 +452,6 @@ describe ApplicationController do
 
     end
 
-    context "logged out" do
-      it 'does not load let user delete a tweet if not logged in' do
-        tweet = Tweet.create(:content => "tweeting!", :user_id => 1)
-        visit '/tweets/1'
-        expect(page.current_path).to eq("/login")
-      end
-    end
 
   end
 

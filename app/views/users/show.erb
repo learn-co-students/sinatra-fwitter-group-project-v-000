@@ -1,0 +1,7 @@
+<h2><%= @user.username %>'s Fweets</h2>
+
+<div class="list-group">
+<% @user.tweets.each do |tweet| %>
+    <a class="list-group-item" href="/tweets/<%=tweet.id%>"><%= tweet.content %></a>
+<% end %>
+</div>
