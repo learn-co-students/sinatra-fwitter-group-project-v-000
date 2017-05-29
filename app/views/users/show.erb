@@ -1,0 +1,7 @@
+<h1>Welcome, <%= current_user.username %> </h1>
+<p>Here are <%= @user.username %> latest tweets : </p>
+<% @tweets.each do |tweet| %>
+  <p>
+    <%= tweet.content %>
+  </p>
+<% end %>
