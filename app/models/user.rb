@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :tweets
   has_secure_password
+  validates :username, :email, :password_digest, presence: true
 
   def slug
     self.username.gsub(/\ |[$.+'()&]/, '-').downcase
