@@ -11,7 +11,6 @@ describe ApplicationController do
   end
 
   describe "Signup Page" do
-
     it 'loads the signup page' do
       get '/signup'
       expect(last_response.status).to eq(200)
@@ -66,7 +65,7 @@ describe ApplicationController do
       }
       post '/signup', params
       session = {}
-      session[:id] = user.id
+      session[:user_id] = user.id
       get '/signup'
       expect(last_response.location).to include('/tweets')
     end
@@ -100,7 +99,7 @@ describe ApplicationController do
       }
       post '/login', params
       session = {}
-      session[:id] = user.id
+      session[:user_id] = user.id
       get '/login'
       expect(last_response.location).to include("/tweets")
     end
