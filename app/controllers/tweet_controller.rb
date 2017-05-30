@@ -1,5 +1,6 @@
 class TweetController < ApplicationController
   include Authable::InstanceMethods
+  include Ownable::InstanceMethods
 
   get '/tweets' do
     if logged_in?
@@ -38,7 +39,6 @@ class TweetController < ApplicationController
     end
   end
 
-
   get '/tweets/:id/edit' do
     if logged_in?
       @tweet = Tweet.find(params[:id])
@@ -48,11 +48,13 @@ class TweetController < ApplicationController
     end
   end
 
-  patch '/tweets' do
+  patch '/tweets/:id' do
     tweet = Tweet.find(params[:id])
-    if logged_in? && current_user.id == tweet.user_id && tweet.valid?
-      tweet.update(params)
+    if logged_in? && current_user_owns(tweet) && !params[:content].empty?
+      tweet.update(content: params[:content])
       redirect '/tweets'
+    elsif logged_in? && current_user_owns(tweet) && params[:content].empty?
+      redirect "/tweets/#{tweet.id}/edit"
     elsif logged_in?
       redirect '/tweets'
     else
@@ -62,7 +64,7 @@ class TweetController < ApplicationController
 
   delete '/tweets/:id/delete' do
     tweet = Tweet.find(params[:id])
-    if logged_in? && current_user.id == tweet.user_id
+    if logged_in? && current_user_owns(tweet)
       Tweet.destroy(tweet.id)
       redirect '/tweets'
     elsif logged_in?
