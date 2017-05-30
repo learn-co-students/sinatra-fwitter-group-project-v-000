@@ -49,7 +49,15 @@ class TweetController < ApplicationController
   end
 
   patch '/tweets' do
-
+    tweet = Tweet.find(params[:id])
+    if logged_in? && current_user.id == tweet.user_id && tweet.valid?
+      tweet.update(params)
+      redirect '/tweets'
+    elsif logged_in?
+      redirect '/tweets'
+    else
+      redirect '/login'
+    end
   end
 
   delete '/tweets/:id/delete' do
