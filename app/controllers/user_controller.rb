@@ -1,10 +1,20 @@
 class UserController < ApplicationController
   get '/signup' do
-    if session[:id]
+    if session[:user_id]
       redirect '/tweets'
     end
 
-    erb :'/user/signup'
+    erb :'/users/signup'
+  end
+
+  get '/login' do
+    erb :'/users/login'
+  end
+
+  get '/users/:username' do
+    @user = User.find_by_slug(params[:username])
+
+    erb :'users/show'
   end
 
   post '/users' do
