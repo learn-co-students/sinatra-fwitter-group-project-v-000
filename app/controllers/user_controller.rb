@@ -42,7 +42,7 @@ class UserController < ApplicationController
     erb :'users/show'
   end
 
-  post '/users' do
+  post '/signup' do
     user = User.new(
       username: params[:username],
       email: params[:email],
