@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if logged_in?
       redirect '/tweets'
     else
-      erb :'/users/new'
+      erb :'/users/signup'
     end
   end
 
@@ -16,10 +16,10 @@ class UsersController < ApplicationController
       session[:id] = @user.id
       flash[:notice] = "Successfully created new user."
       redirect '/tweets'
+    else
+      flash[:error] = "You need to complete all required fields"
+      redirect '/signup'
     end
-
-    flash[:error] = @user.errors.full_messages
-    erb :'/users/new'
   end
 
   get '/login' do
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:username])
 
     if @user && @user.authenticate(params[:password])
-      flash[:notice] = "Logged in as #{@user.username}."
+      flash[:notice] = "Welcome, #{@user.username}."
       session[:id] = @user.id
       redirect '/tweets'
     else
@@ -53,4 +53,9 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    @tweets = @user.tweets
+    erb :'/users/show'
+  end
 end
