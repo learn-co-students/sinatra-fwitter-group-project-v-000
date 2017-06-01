@@ -1,0 +1,14 @@
+<h3>Post by: <%=@user.username %></h3>
+
+<ul>
+	<% @user.tweets.each do |tweet| %>
+	<br>
+	<li><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></li>
+	<%end%>
+
+</ul>
+
+<form method="get" action='/logout'>
+	
+	<input type="submit" name="submit" value="Log Out">
+</form>

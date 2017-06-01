@@ -1,14 +1,21 @@
 class UserController < ApplicationController
 
+	get "/users/:slug" do 
+			@user = User.find_by_slug(params[:slug])
+			erb :'/users/show'
+	end
+
 	get '/signup' do 
 
 		if logged_in?
 			redirect to "/tweets"
 		else
-
-			if !session[:valid?] 
+			if session[:valid?] == false
 				@valid = false
 				session[:valid?] = true
+			# elsif session[:exist?]
+			# 	@exist = true
+			# 	session[:exist?]	
 			end
 
 			erb :'/users/create_user'
@@ -17,7 +24,13 @@ class UserController < ApplicationController
 	end
 
 	post '/signup' do 
-		user = User.new(username: params[:username], email: params[:email], password: params[:password])
+		# if !!User.find_by(name: params[:username])
+			user = User.new(username: params[:username], email: params[:email], password: params[:password])
+		# else 
+		# 	session[:exist?] = true
+		# 	redirect to "/signup"
+		# end
+
 		if user.save
 			user.save
 			session[:user_id] = user.id
@@ -32,9 +45,10 @@ class UserController < ApplicationController
 	get '/login' do 
 		if logged_in?
 			redirect '/tweets'
-		else
+		else	
+
 			
-			if !session[:valid?] 
+			if session[:valid?] == false
 				@valid = false
 				session[:valid?] = true
 			end
@@ -60,6 +74,7 @@ class UserController < ApplicationController
 
 		if logged_in?
 			session.clear
+
 			redirect '/login'
 		else
 			redirect "/"

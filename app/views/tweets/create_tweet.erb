@@ -1,0 +1,13 @@
+
+<% if @content == false %>
+
+<h3>Can't tweet a blank post</h3>
+
+<%end%>
+
+<form method="post" action='/tweets'>
+	<input type="text" name="content" id="content">
+
+	<input type="submit" name="submit" value="submit">
+
+</form>

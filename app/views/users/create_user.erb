@@ -3,7 +3,13 @@
 <% if @valid == false %>
 
 <h3>Invalid information, please enter a username/email and password</h3>
+
+<% elsif @exist %>
+<h3>username already exists, please choose another name</h3>
 <%end%>
+
+
+
 
 <form action="/signup" method="post">
 	<label>Username:</label>

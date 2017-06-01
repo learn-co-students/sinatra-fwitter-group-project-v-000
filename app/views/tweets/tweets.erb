@@ -1,7 +1,7 @@
 <ul>
 <h3>Welcome, check out the tweets</h3>
 <% @tweets.each do |tweet| %>
-	<li><%=tweet.content%> <br> By: <%=tweet.user.username%></li>
+	<li><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a> <br> By: <a href="/users/<%=tweet.user.slug%>"><%=tweet.user.username%></a></li>
 	
 <%end%>
 </ul>
