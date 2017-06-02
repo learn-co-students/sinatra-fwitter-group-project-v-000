@@ -1,10 +1,11 @@
+require 'pry'
+
 class TweetsController < ApplicationController
 
   get '/tweets/new' do
     if logged_in?
+    #  @tweet.user_id = current_user.id
       erb :'/tweets/new'
-      # current_user.id
-    #  binding.pry
     else
       redirect '/login'
     end
@@ -33,8 +34,12 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    @tweet = Tweet.find(params[:id])
-    @tweet.update(content: params[:content])
+    if params[:content] == ""
+      redirect "/tweets/#{params[:id]}/edit"
+    else
+      @tweet = Tweet.find(params[:id])
+      @tweet.update(content: params[:content])
+    end
     redirect "/tweets/#{@tweet.id}"
   end
 
@@ -52,17 +57,14 @@ class TweetsController < ApplicationController
 
   post '/tweets' do
     if logged_in?
-      @tweet = Tweet.create(params)
+      @tweet = Tweet.new(content: params[:content], user_id: session[:id])
       if @tweet.save
-        @tweet = current_user.tweets.create(content: params[:content])
-        flash[:notice] = "Successfully posted a new tweet."
         redirect '/tweets'
       else
-        flash[:error] = @tweet.errors.full_messages
         redirect '/tweets/new'
       end
     else
-      redirect '/login'
+      redirect 'login'
     end
   end
 
