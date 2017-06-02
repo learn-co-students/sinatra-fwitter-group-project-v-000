@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'sinatra'
 gem 'activerecord', :require => 'active_record'
 gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
-gem "sinatra-contrib"
+gem "sinatra-contrib", require: false
 gem 'rake'
 gem 'require_all'
 gem 'sqlite3'
