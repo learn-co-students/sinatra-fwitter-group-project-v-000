@@ -74,6 +74,8 @@ class ApplicationController < Sinatra::Base
     erb :"users/show"
   end
 
+  # Tweet related
+
   get '/tweets' do
     if !logged_in?
       redirect "/login"
@@ -82,4 +84,45 @@ class ApplicationController < Sinatra::Base
       erb :"tweets/tweets"
     end
   end
+
+  get '/tweets/new' do
+    redirect "/login" if !logged_in?
+
+    erb :"tweets/new"
+  end
+
+  get '/tweets/:id' do
+    @tweet = Tweet.find_by(id: params[:id])
+
+    erb :"tweets/show"
+  end
+
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find_by(id: params[:id])
+  
+    erb :"tweets/edit"
+  end
+
+  post '/tweets' do
+    redirect "/tweets/new" if params[:content] == ""
+
+    @tweet = Tweet.create(params)
+    @tweet.user = current_user
+    @tweet.save
+
+    redirect "/tweets/#{@tweet.id}"
+  end
+
+  patch '/tweets/:id' do
+    @tweet = Tweet.find_by(id: params[:id])
+
+    redirect "/tweets/#{@tweet.id}"
+  end
+
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find_by(id: params[:id])
+
+    redirect "/tweets"
+  end
+
 end
