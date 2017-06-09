@@ -1,0 +1,12 @@
+<h2>This is a Single Tweet</h2>
+
+<p><%=@tweet.content%><p>
+<form method = "post" action = "/delete" >
+<input id="hidden" type="hidden" name="_method" value="delete">
+<input type = "submit" id = "submit" value = "Delete Tweet">
+</form>
+<form method = "post" action = "/edit">
+<input type = "text" name = "content" value = "<%=@tweet.content%>"></input>
+<input id="hidden" type="hidden" name="_method" value="patch">
+<input type = "submit" id = "submit"  value ="Edit Tweet">
+</form>

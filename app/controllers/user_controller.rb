@@ -1,20 +1,25 @@
+require 'pry'
 class UserController < ApplicationController
 
   get '/signup' do
-    if session[:id] == nil
+    if !loggedin?
       erb :'/users/create_user'
     else
-      redirect to '/tweets'
+      redirect '/tweets'
     end
   end
 
-  get '/users/login' do
-    erb :'users/login'
+  get '/login' do
+       if !loggedin?
+         erb :'/users/login'
+       else
+         redirect '/tweets'
+       end
   end
 
-  get '/users/home' do
-    @user = User.find(session[:id])
-    erb :'/users/home'
+  get '/users/:slug' do
+    @user = User.find_by(username: params[:slug])
+    erb :"users/show"
   end
 
   get '/fail' do
@@ -22,8 +27,11 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
+
     if session[:id] != nil
+
       redirect '/tweets'
+
     elsif params["username"] == "" || params["email"] == "" || params["password"] == ""
 
       redirect '/signup'
@@ -35,15 +43,26 @@ class UserController < ApplicationController
     end
   end
 
-  post '/login' do
-    @user = User.find_by(username: params["username"], password: params["password"])
-    session[:id] = @user.id
-    redirect '/users/home'
-  end
+    post "/login" do
+        user = User.find_by(:username => params[:username])
+        if user
+           if user.authenticate(params[:password]) && user.id != session[:id]
+            session[:id] = user.id
+            redirect "/tweets"
+          end
+        else
+            redirect "/fail"
+        end
+    end
+
 
   get '/logout' do
-    session.clear
-    redirect '/'
+    if loggedin?
+      session.clear
+      redirect '/login'
+    else
+      redirect '/'
+    end
   end
 
 

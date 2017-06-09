@@ -1,4 +1,5 @@
 class Tweet < ActiveRecord::Base
    belongs_to :user
-   include Helpers::InstanceMethods
+   extend Slugifiable::ClassMethods
+   include Slugifiable::InstanceMethods
 end

@@ -9,8 +9,14 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "secret"
   end
 
+  def loggedin?
+    session[:id] != nil
+  end
+
   get '/' do
+     @session = session
      erb :index
+
   end
 
 

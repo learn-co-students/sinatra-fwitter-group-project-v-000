@@ -5,10 +5,11 @@
     <title>Twitter</title>
   </head>
   <body>
+
     <h2>Twitter Feed:</h2>
+       <h3>Welcome,</h3>
         <%Tweet.all.each do |tweet|%>
             <p><%=tweet.content%></p>
-              <p><%=User.find(tweet.user_id).name%></p>
         <%end%>
 
   </body>
