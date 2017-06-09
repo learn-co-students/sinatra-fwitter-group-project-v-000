@@ -1,4 +1,3 @@
-require 'pry'
 class UserController < ApplicationController
 
   get '/signup' do
@@ -17,12 +16,18 @@ class UserController < ApplicationController
     @user = User.find(session[:id])
     erb :'/users/home'
   end
+
   get '/fail' do
     erb :fail
   end
+
   post '/signup' do
-    if params["username"] == "" || params["email"] == "" || params["password"] == ""
+    if session[:id] != nil
+      redirect '/tweets'
+    elsif params["username"] == "" || params["email"] == "" || params["password"] == ""
+
       redirect '/signup'
+
     else
         @user = User.create(username: params["user_name"], email: params["email"], password: params["password"])
         session[:id] = @user.id
