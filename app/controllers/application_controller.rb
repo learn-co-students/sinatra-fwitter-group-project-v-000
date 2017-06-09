@@ -118,13 +118,19 @@ class ApplicationController < Sinatra::Base
   end
 
   patch '/tweets/:id' do
+    redirect "/tweets/#{params[:id]}/edit" if params[:content] == ""
+
     @tweet = Tweet.find_by(id: params[:id])
+    @tweet.update(content: params[:content])
 
     redirect "/tweets/#{@tweet.id}"
   end
 
   delete '/tweets/:id/delete' do
+    redirect "/login" if !logged_in?
+
     @tweet = Tweet.find_by(id: params[:id])
+    @tweet.delete if @tweet.user.id == current_user.id
 
     redirect "/tweets"
   end
