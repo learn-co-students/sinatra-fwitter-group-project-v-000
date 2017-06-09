@@ -64,9 +64,17 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/tweets' do
-    @user = User.find_by(id: session[:user_id])
+  get '/logout' do
+    session.clear if logged_in?
+    redirect "/login"
+  end
 
-    erb :"tweets/tweets"
+  get '/tweets' do
+    if !logged_in?
+      redirect "/login"
+    else
+      @tweets = Tweet.all
+      erb :"tweets/tweets"
+    end
   end
 end
