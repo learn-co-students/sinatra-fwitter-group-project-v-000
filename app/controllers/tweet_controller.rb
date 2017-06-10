@@ -16,8 +16,9 @@ class TweetController < ApplicationController
   end
 
   post "/tweets" do
+    redirect to "/tweets/new" if params[:content].empty?
     @tweet = Tweet.create(content: params[:content])
-    if logged_in? && @tweet.valid?
+    if logged_in?
       current_user.tweets << @tweet
       @tweet.save ? (redirect to "/tweets") : (redirect to "/tweets/new")
     else
