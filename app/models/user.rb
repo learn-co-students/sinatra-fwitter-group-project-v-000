@@ -1,4 +1,4 @@
-class User < Sinatra::Base
+class User < ActiveRecord::Base
   extend Parser::ClassMethods
   include Parser::InstanceMethods
   
