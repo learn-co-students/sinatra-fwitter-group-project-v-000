@@ -6,6 +6,6 @@
 
 <ul>
 <% @tweets.each do |tweet| %>
-  <li><%= tweet.content %></li>
+  <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></li>
 <% end %>
 </ul>
