@@ -29,6 +29,7 @@ class TweetController < ApplicationController
 
   get "/tweets/:id/edit" do
     @tweet = Tweet.find(params[:id])
+    redirect to "/tweets" unless current_user == @tweet.user 
     erb :"/tweets/edit"
   end
 
