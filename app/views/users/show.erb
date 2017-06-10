@@ -1,7 +1,9 @@
-<h1>Tweets</h1><br>
+<h1><a href="/users/<%= @user.username %>"><%= @user.username %></a>'s Tweets</h1><br>
 
 <ul>
-<% @user.tweets.each do |tweet| %>
-  <li><%= tweet.content %></li>
-<% end %>
+  <% @user.tweets.each do |tweet| %>
+    <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></li>
+  <% end %>
 </ul>
+
+<h4><a href="/tweets">Return to Index</a></h4>
