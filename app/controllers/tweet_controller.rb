@@ -27,11 +27,14 @@ get '/tweets/:id' do
 end
 
 get '/tweets/:id/edit' do 
+  #binding.pry
   if is_logged_in?
     @tweet = Tweet.find_by_id(params[:id])
     erb :'/tweets/edit_tweet'
+  else 
+    redirect '/login'
   end
-  redirect "/login"
+
   end
 
   get '/logout' do
