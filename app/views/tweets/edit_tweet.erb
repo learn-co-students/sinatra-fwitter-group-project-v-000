@@ -1,0 +1,8 @@
+<h1> You can edit your tweet here</h1>
+<p>You Can Edit this Tweet by simply adding text in the text box
+<form method=post action="/tweets/<%=@tweet.id%>/edit">
+  <input type=hidden name=_method value="patch">
+  <input type=text name="content" id="content" value=<%=@tweet.content%>>
+</p>
+  <br><center><input type=submit value='submit'></center>
+</form>

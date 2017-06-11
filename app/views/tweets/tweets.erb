@@ -1,0 +1,12 @@
+
+  Welcome,
+  <%=current_user.username%><br>
+
+  Tweets:
+<ul>
+  <%Tweet.all.each do |t| %>
+  <li><%=t.content%><br>
+  <%=t.user_id%></li>
+  <% end %>
+
+  <a href="/logout">Log Out</a>

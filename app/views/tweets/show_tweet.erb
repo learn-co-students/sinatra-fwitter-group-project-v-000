@@ -1,0 +1,16 @@
+
+<h2>Welcome, <%=User.find_by_id(@tweet.user_id).username%></h2>
+<p>
+<form method=post action='/tweets/<%=@tweet.id%>/delete'>
+  <input type=hidden name=_method value="delete">
+  Tweet Number :<%=@tweet.id%><br>
+  content :<%=@tweet.content%>
+  <center><input type=submit value="Delete Tweet"></center>
+</form>
+<p>You Can Edit this Tweet by simply adding text in the text box
+<form method=post action="/tweets/<%=@tweet.id%>/edit">
+  <input type=hidden name=_method value="patch">
+  <input type=text name="content" id="content" value=<%=@tweet.content%>>
+</p>
+  <br><center><input type=submit value='Edit Tweet'></center>
+</form>
