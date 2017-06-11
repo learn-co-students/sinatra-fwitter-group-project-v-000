@@ -1,8 +1,8 @@
 
 <h2>Welcome, <%=User.find_by_id(@tweet.user_id).username%></h2>
 <p>
-<form method=post action='/tweets/<%=@tweet.id%>/delete'>
-  <input type=hidden name=_method value="delete">
+<form method="post" action="/tweets/<%=@tweet.id%>/delete">
+  <input type="hidden" name="_method" value="delete">
   Tweet Number :<%=@tweet.id%><br>
   content :<%=@tweet.content%>
   <center><input type=submit value="Delete Tweet"></center>
