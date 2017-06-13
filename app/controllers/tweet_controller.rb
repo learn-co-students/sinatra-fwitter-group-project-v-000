@@ -10,7 +10,7 @@ get '/tweets' do
 end
 
 get '/tweets/new' do
-  if is_logged_in? 
+  if is_logged_in?
   erb :'/tweets/create_tweet'
 else
   redirect '/login'
@@ -26,12 +26,12 @@ get '/tweets/:id' do
   end
 end
 
-get '/tweets/:id/edit' do 
+get '/tweets/:id/edit' do
   #binding.pry
   if is_logged_in?
     @tweet = Tweet.find_by_id(params[:id])
     erb :'/tweets/edit_tweet'
-  else 
+  else
     redirect '/login'
   end
 
@@ -55,7 +55,7 @@ end
 delete '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id])
   if current_user == @tweet.user
-    @tweet.destroy 
+    @tweet.destroy
   end
   redirect "/tweets"
 end
@@ -63,18 +63,18 @@ end
   patch '/tweets/:id/edit' do
     if params[:content] == ""
       redirect "/tweets/#{params[:id]}/edit"
-    else 
+    else
     @tweet = Tweet.find_by_id(params[:id])
     if @tweet.user_id == current_user.id
     @tweet.content = params[:content]
     @tweet.save
     redirect "/tweets/#{@tweet.id}"
     end
-    
+
   end
   end
 
-  
+
 
 
 end

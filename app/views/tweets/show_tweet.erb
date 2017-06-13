@@ -5,7 +5,7 @@
   <input type="hidden" name="_method" value="delete">
   Tweet Number :<%=@tweet.id%><br>
   content :<%=@tweet.content%>
-  <center><input type=submit value="Delete Tweet"></center>
+  <center><input type="submit" value="Delete Tweet"></center>
 </form>
 <p>You Can Edit this Tweet by simply adding text in the text box
 <form method=post action="/tweets/<%=@tweet.id%>/edit">
