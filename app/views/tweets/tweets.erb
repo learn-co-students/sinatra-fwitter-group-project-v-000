@@ -1,0 +1,7 @@
+<h1>Welcome, <%= current_user.username %> explore your Fwitter Feed</h1>
+<h1>You are now logged in</h1>
+ <% Tweet.all.each do |tweet| %>
+   <h3><a href="tweets/<%= tweet.id%>"><%= tweet.content %></a> - <a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a></h3>
+<% end %>
+<br><br>
+<a href="/tweets/new">Create Tweet</a>
