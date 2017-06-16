@@ -1,0 +1,9 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+
+<h1>Hey! This isn't your tweet!</h1>
+
+<p><a href="/tweets/new">Create a New Tweet</a></p>
+<p><a href="/tweets">Home</a></p>

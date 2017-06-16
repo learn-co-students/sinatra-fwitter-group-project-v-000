@@ -1,0 +1,17 @@
+
+    <% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+
+
+<h1>Welcome, <%= @user.username %>, here are all tweets in the Fwitter Feed:</h1>
+
+<h3>
+  <p><% Tweet.all.each do |tweet| %>
+     <p><a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %> tweeting! <a href="/tweets/<%= tweet.id %>">"<%= tweet.content %>"</p>
+    <% end %>
+  </p> </h3>
+
+      <br>
+      <p><a href="/tweets/new">Create a New Tweet</a></p>
+        <p><a href="/tweets">Home</a></p>

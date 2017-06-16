@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+  </head>
+  <body style="background-color:#CAF9F9;">
+    <% if session[:user_id] %>
+      <%= @user.username %>'s account
+        <a href ="/logout">Logout</a>
+        <%end%>
+    <%= yield %>
+  </body>
+
+</html>
