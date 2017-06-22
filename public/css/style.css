@@ -1,0 +1,37 @@
+.center {
+  text-align: center;
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.font {
+  font-family: Courier;
+}
+.small-font {
+  font-size: 8px;
+}
+
+table {
+  width: 600px;
+}
+
+/*--Buttons--*/
+.menu {
+  background-color: white;
+  border-width: 0;
+}
+
+.menu:hover {
+  background-color: white;
+  border-width: 0;
+  box-shadow: 1px 1px 1px 1px silver;
+}
+
+.menu:active {
+  background-color: white;
+  border-width: 0;
+  box-shadow: 2px 2px 2px 2px silver;
+}
