@@ -21,7 +21,7 @@ class ApplicationController < Sinatra::Base
     user = User.new(params[:user])
     if user.save
       user_log_in(user)
-    
+
     else
       redirect '/signup'
     end
@@ -34,18 +34,16 @@ class ApplicationController < Sinatra::Base
   post '/login' do
     user = User.find_by(username: params[:user][:username])
 
-    # binding.pry
     user_log_in(user)
-
   end
 
+# test routes for user account testing - may not be necessary for final project build
   get '/success' do
     @user = current_user
-    # binding.pry
     erb :'users/success'
   end
 
-
+  # test routes for user account testing - may not be necessary for final project build
   get '/failure' do
     erb :'users/failure'
   end
