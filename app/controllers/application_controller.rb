@@ -17,6 +17,20 @@ class ApplicationController < Sinatra::Base
     erb :'users/create_users'
   end
 
+  post '/signup' do
+    user = User.new(params[:user])
+    if user.save
+      redirect '/login'  #change this to redirect directly to index page with user logged in
+    else
+      redirect '/signup'
+      #todo: implement a rack flash message saying date not valid or somesuch
+    end
+  end
+
+  get '/login' do
+    erb: 'users/login'
+  end
+
 
 
 end
