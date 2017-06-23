@@ -1,7 +1,16 @@
-/*--Body--*/
+/*contents*/
+/*
+body
+colors
+fonts
+buttons
+links
+*/
+
+
+                    /*--Body--*/
 body {
   background-color: #282C34;
-  /*font-variant: small-caps;*/
 }
 
 textarea {
@@ -10,12 +19,13 @@ textarea {
   color: #56B6C2;
   font-size: 18px;
 }
-.outline {
-    text-decoration: bold;
-    color: #282C34;
-    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+
+table {
+  width: 800px;
 }
 
+
+                    /*--Colors--*/
 .blue {
   color: #61AFEF;
 }
@@ -42,7 +52,7 @@ textarea {
 .center {
   text-align: center;
 }
-
+                    /*--Fonts--*/
 .font {
   font-family: Courier;
 }
@@ -54,12 +64,12 @@ textarea {
   font-size: 18px;
 }
 
-table {
-  width: 800px;
+.outline {
+    text-decoration: bold;
+    color: #282C34;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
-
-/*--Buttons--*/
-
+                      /*--Buttons--*/
 .menu {
   background-color: black;
   border-width: 0;
@@ -106,13 +116,11 @@ input.submit:hover {
   border-width: 0;
 }
 
-/*--Links--*/
+                    /*--Links--*/
 
 a {
   color: #61AFEF;
 }
-
-
 
 a:hover {
   color: #D19A66;

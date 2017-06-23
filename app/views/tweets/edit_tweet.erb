@@ -17,6 +17,7 @@
   </span>
     <br>
     <br>
+    <span class='red'><%= flash[:content] %></span>
   <h1 class='outline'>Edit Tweet</h1>
     <form method='POST' action='/tweets/<%= @tweet.id %>'>
       <textarea name='content' rows='3' cols='50'><%= @tweet.content %></textarea>

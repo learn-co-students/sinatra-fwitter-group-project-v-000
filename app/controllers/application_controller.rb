@@ -22,7 +22,7 @@ class ApplicationController < Sinatra::Base
       @tweets = Tweet.all
       erb :'/tweets/tweets'
     else
-      flash[:message] = "You don't seem to be logged in."
+      flash[:login] = "You don't seem to be logged in."
       redirect "/login"
     end
   end
@@ -43,7 +43,7 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       erb :'/tweets/create_tweet'
     else
-      flash[:message] = "You don't seem to be logged in."
+      flash[:login] = "You don't seem to be logged in."
       redirect "/login"
     end
   end
@@ -71,7 +71,7 @@ class ApplicationController < Sinatra::Base
         redirect "/tweets/#{@tweet.id}"
       end
     else
-      flash[:message] = "You don't seem to be logged in."
+      flash[:login] = "You don't seem to be logged in."
       redirect "/login"
     end
   end
@@ -93,7 +93,7 @@ class ApplicationController < Sinatra::Base
       @tweet = Tweet.find(params[:id])
       erb :'/tweets/show_tweet'
     else
-      flash[:message] = "You don't seem to be logged in."
+      flash[:login] = "You don't seem to be logged in."
       redirect "/login"
     end
   end
@@ -127,7 +127,7 @@ class ApplicationController < Sinatra::Base
       session[:id] = user.id
       redirect "/tweets"
     else
-      flash[:fields] = "You seem to be missing something..."
+      flash[:fields] = "I thinkn you're missing something..."
       redirect "/signup"
     end
   end

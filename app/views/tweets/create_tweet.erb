@@ -9,6 +9,7 @@
     <br>
     <br>
   <h1 class='outline'>Create Tweet</h1>
+  <span class='red'><%= flash[:content] %></span>
     <form method='POST' action='/tweets'>
       <textarea name='content' placeholder='Tweet goes here...' rows='3' cols='50'></textarea>
       <br>

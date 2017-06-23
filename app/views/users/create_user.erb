@@ -1,5 +1,6 @@
 <div class='center'>
   <h1 class='outline'>Signup</h1>
+  <span class='red'><%= flash[:fields] %></span>
   <form method='post' action='/signup'>
     <input class='text' type='text' name='username' placeholder='Username'><br>
     <input class='text' type='text' name='email' placeholder='Email'><br>
