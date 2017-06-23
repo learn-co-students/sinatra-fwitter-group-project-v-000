@@ -1,4 +1,5 @@
 <h1> All the Tweets </h1>
+<!--TODO: <h2> Welcome, <%= current_user.name %> --> 
 
 <% @tweets.each do |tweet| %>
   <li><!--TODO: add <%= tweet.user %> --> <a href="/tweets/<%= tweet.id %>"> <%= tweet.content %> </a></li>

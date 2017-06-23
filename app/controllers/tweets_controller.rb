@@ -24,7 +24,7 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    @tweet = Tweet.new(params[:tweet]) #TODO: replace Tweet with current_user.tweets
+    @tweet = Tweet.new(params[:tweet]) #TODO: replace 'Tweet' with 'current_user.tweets'
     if @tweet.valid?
       @tweet.save
       redirect "tweets/#{@tweet.id}"
@@ -40,7 +40,9 @@ class TweetsController < ApplicationController
   end
 
   delete 'tweets/:id/delete' do
+    #TODO: check if logged in
     @tweet = Tweet.find(params[:id])
+    #TODO: check if tweet belongs to current_user
     @tweet.delete
     redirect '/tweets'
   end
