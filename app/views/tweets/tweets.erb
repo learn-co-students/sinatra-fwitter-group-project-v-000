@@ -1,23 +1,33 @@
 <div class='center'>
   <span>
-    <a href='/tweets'><button class='menu'>Home</button></a>
+    <a href='/tweets'>
+      <button class='menu active'>Home</button></a>
      |
-    <a href='/tweets/new'><button class='menu'>Create Tweet</button></a>
+    <a href='/tweets/new'>
+      <button class='menu'>Create Tweet</button></a>
      |
-    <a href='/logout'><button class='menu'>Logout</button></a>
+    <a href='/logout'>
+      <button class='menu'>Logout</button></a>
   </span>
-  <br>
-  <br>
-  
-  <table align='center'>
-    <tr>
-      <th class='center' rowspan=2>--Tweet Feed--</th>
-    </tr>
-    <tr>
-      <% @tweets.each do |tweet| %>
-      <td class='small-font' width='30%'><a href='/users/<%= tweet.user.username %>'><%= tweet.user.username %></a><br><%= tweet.created_at %></td>
-      <td width='70%'><%= tweet.content %></td>
-      <% end %>
-    </tr>
-  </table>
+    <br>
+  <h1 class='outline'>Welcome<%=", " + @user.username if !!@user  %></h1>
+    <table align='center'>
+      <tr>
+        <th class='center' colspan=2>
+          <u class='purple'>--Tweet Feed--</u>
+        </th>
+      </tr>
+        <% @tweets.each do |tweet| %>
+          <tr>
+            <td class='small-font' width='30%'>
+              <a href='/users/<%= tweet.user.username %>'><%= tweet.user.username %></a>
+              <br>
+              <span class='red'><%= tweet.created_at.strftime("%c") %></span>
+            </td>
+            <td align='left' width='70%'>
+              <a href='/tweets/<%= tweet.id %>'>#</a> <span class='green reg-font'><%= tweet.content %></span>
+            </td>
+          </tr>
+        <% end %>
+    </table>
 </div>

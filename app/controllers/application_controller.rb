@@ -18,6 +18,7 @@ class ApplicationController < Sinatra::Base
     #--- Current User's Homepage---
   get '/tweets' do
     if logged_in?
+      @user = current_user
       @tweets = Tweet.all
       erb :'/tweets/tweets'
     else
@@ -27,20 +28,107 @@ class ApplicationController < Sinatra::Base
   end
 
     #---User Homepage---
+  get '/users/:slug' do
+    if @user_view = User.find_by_slug(params[:slug])
+      @tweets = @user_view.tweets
+      @user = current_user if logged_in?
+      erb :'/tweets/tweets'
+    else
+      redirect "/tweets"
+    end
+  end
 
-  
+    #---Create Tweet---
+  get '/tweets/new' do
+    if logged_in?
+      erb :'/tweets/create_tweet'
+    else
+      flash[:message] = "You don't seem to be logged in."
+      redirect "/login"
+    end
+  end
+
+  post '/tweets' do
+    user = current_user
+    tweet = user.tweets.build(content: params[:content])
+    if tweet.valid?
+      user.save
+      redirect "/tweets"
+    else
+      flash[:content] = "A tweet requires content."
+      redirect '/tweets/new'
+    end
+  end
+
+    #---Edit Tweet---
+  get '/tweets/:id/edit' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      if owned?
+        erb :'/tweets/edit_tweet'
+      else
+        flash[:owned] = "That doesn't belong to you..!"
+        redirect "/tweets/#{@tweet.id}"
+      end
+    else
+      flash[:message] = "You don't seem to be logged in."
+      redirect "/login"
+    end
+  end
+
+  post '/tweets/:id' do
+    tweet = Tweet.find(params[:id])
+    tweet.content = params[:content]
+    if tweet.save
+      redirect "/tweets"
+    else
+      flash[:content] = "A tweet requires content."
+      redirect "/tweets/#{tweet.id}/edit"
+    end
+  end
+
+    #---Show Tweet---
+  get '/tweets/:id' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/show_tweet'
+    else
+      flash[:message] = "You don't seem to be logged in."
+      redirect "/login"
+    end
+  end
+
+    #---Delete Tweet---
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find(params[:id])
+    if logged_in? && owned?
+      @tweet.destroy
+      redirect "/tweets"
+    else
+      flash[:owned] = "That doesn't belong to you..!"
+      redirect "/tweets/#{@tweet.id}"
+    end
+  end
+
+
+
     #---Signup---
   get '/signup' do
-    erb :'/users/create_user'
+    if logged_in?
+      redirect "/tweets"
+    else
+      erb :'/users/create_user'
+    end
   end
 
   post '/signup' do
     user = User.new(params)
     if user.save
       session[:id] = user.id
-      redirect '/tweets'
+      redirect "/tweets"
     else
       flash[:fields] = "You seem to be missing something..."
+      redirect "/signup"
     end
   end
 
@@ -55,7 +143,7 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     user = User.find_by(username: params[:username])
-    if user.authenticate(params[:passowrd])
+    if user.authenticate(params[:password])
       session[:id] = user.id
       redirect "/tweets"
     else
@@ -69,6 +157,7 @@ class ApplicationController < Sinatra::Base
     redirect '/login'
   end
 
+    #---Helper Methods---
   helpers do
     def current_user
       @current_user ||= User.find(session[:id])
@@ -78,12 +167,8 @@ class ApplicationController < Sinatra::Base
       !!session[:id]
     end
 
-    def disabled?
-      if @tweet.user.id == session[:id]
-        "/tweets/<%= @tweet.id %>/delete"
-      else
-        ""
-      end
+    def owned?
+      @tweet.user.id == session[:id]
     end
   end
 

@@ -1,0 +1,38 @@
+<div class='center'>
+    <a href='/tweets'>
+      <button class='menu'>Home</button></a>
+      |
+    <a href='/tweets/new'>
+      <button class='menu'>Create Tweet</button></a>
+      |
+    <a href='/tweets/<%= @tweet.id %>/edit'>
+      <button class='menu'>Edit Tweet</button></a>
+      |
+    <a href='/tweets/<%= @tweet.id %>/delete'>
+      <button form='delete' class='menu'>Delete Tweet</button></a>
+      |
+    <a href='/logout'>
+      <button class='menu'>Logout</button></a>
+  </span>
+    <br>
+    <br>
+  <table align='center'>
+    <tr>
+      <td class='small-font'>
+        <span class='blue'>created:</span> <span class='purple'><%= @tweet.created_at.strftime("%c") %></span>
+        <br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class='green reg-font'><%= @tweet.content %></span>
+      </td>
+    </tr>
+  </table>
+
+  <form id='delete' method='post' action='/tweets/<%= @tweet.id %>/delete'>
+    <input type='hidden' name='_method' value='delete'>
+  </form>
+  <span>
+
+</div>
