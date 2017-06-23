@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
 
-  get 'tweets/tweets' do
+  get '/tweets' do
     # TODO: Check for login
     @tweets = Tweet.all
     erb :'tweets/tweets'
