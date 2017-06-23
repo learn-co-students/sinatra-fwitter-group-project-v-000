@@ -19,8 +19,10 @@ class TweetsController < ApplicationController
     erb :'tweets/edit_tweet'
   end
 
-  post 'tweets/:id'
+  post 'tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    @tweet.name 
+    @tweet.name
     redirect '/tweets/#{@tweet.id}'
+  end
+  
 end
