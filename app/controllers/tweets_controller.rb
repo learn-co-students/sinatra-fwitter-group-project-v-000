@@ -1,30 +1,46 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    # TODO: Check for login
-    @tweets = Tweet.all
-    erb :'tweets/tweets'
+    if !logged_in?
+      redirect '/login'
+    else
+      @tweets = Tweet.all
+      erb :'tweets/tweets'
+    end
   end
 
   get '/tweets/new' do
-    # TODO: Check for login
-    erb :'tweets/create_tweet'
+    if !logged_in?
+      redirect '/login'
+    else
+      erb :'tweets/create_tweet'
+    end
   end
 
   get '/tweets/:id' do
-    # TODO: Check for login
-    @tweet = Tweet.find(params[:id])
-    erb :'tweets/show_tweet'
+    if !logged_in?
+      redirect '/login'
+    else
+      @tweet = Tweet.find(params[:id])
+      erb :'tweets/show_tweet'
+    end
   end
 
   get '/tweets/:id/edit' do
-    # TODO: Check for login, match user
-    @tweet = Tweet.find(params[:id])
-    erb :'tweets/edit_tweet'
+    if !logged_in?
+      redirect '/login'
+    else
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user_id == current_user.id
+        erb :'tweets/edit_tweet'
+      else
+        redirect '/tweets'
+      end
+    end
   end
 
   post '/tweets' do
-    @tweet = Tweet.new(params[:tweet]) #TODO: replace 'Tweet' with 'current_user.tweets'
+    @tweet = current_user.tweets.new(params[:tweet])
     if @tweet.valid?
       @tweet.save
       redirect "tweets/#{@tweet.id}"
@@ -45,11 +61,17 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
-    #TODO: check if logged in
-    @tweet = Tweet.find(params[:id])
-    #TODO: check if tweet belongs to current_user
-    @tweet.delete
-    redirect '/tweets'
+    if !logged_in?
+      redirect '/login'
+    else
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user_id == current_user.id
+        @tweet.delete
+        redirect '/tweets'
+      else
+        redirect '/tweets'
+      end
+    end
   end
 
 end
