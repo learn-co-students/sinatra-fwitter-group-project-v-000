@@ -21,7 +21,7 @@ class ApplicationController < Sinatra::Base
     user = User.new(params[:user])
     if user.save
       user_log_in(user)
-      redirect '/success'  #change this to redirect directly to index page with user logged in
+    
     else
       redirect '/signup'
     end
@@ -36,7 +36,7 @@ class ApplicationController < Sinatra::Base
 
     # binding.pry
     user_log_in(user)
-    redirect '/success'
+
   end
 
   get '/success' do
@@ -69,7 +69,7 @@ class ApplicationController < Sinatra::Base
       # binding.pry
       if user && user.authenticate(params[:user][:password])
         session[:user_id] = user.id
-        # redirect '/account' #redirect to a user's list of tweets
+        redirect '/success'
       else
         redirect '/failure'
       end
