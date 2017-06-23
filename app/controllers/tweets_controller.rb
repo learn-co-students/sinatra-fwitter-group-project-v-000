@@ -1,26 +1,30 @@
 class TweetsController < ApplicationController
 
   get 'tweets/tweets' do
+    # TODO: Check for login
     @tweets = Tweet.all
     erb :'tweets/tweets'
   end
 
   get '/tweets/new' do
+    # TODO: Check for login
     erb :'tweets/create_tweet'
   end
 
   get '/tweets/:id' do
+    # TODO: Check for login
     @tweet = Tweet.find(params[:id])
     erb :'tweets/show_tweet'
   end
 
   get '/tweets/:id/edit' do
+    # TODO: Check for login, match user
     @tweet = Tweet.find(params[:id])
     erb :'tweets/edit_tweet'
   end
 
   post '/tweets' do
-    @tweet = Tweet.new(params[:tweet]) #replace Tweet with current_user.tweets
+    @tweet = Tweet.new(params[:tweet]) #TODO: replace Tweet with current_user.tweets
     if @tweet.valid?
       @tweet.save
       redirect "tweets/#{@tweet.id}"
