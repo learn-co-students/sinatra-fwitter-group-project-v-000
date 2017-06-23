@@ -1,5 +1,5 @@
 <h1> All the Tweets...Need to add Welcome, current_user.name and add each Tweet's username </h1>
-
+<h2> Welcome, <%= current_user.username %>! </h2>
 <% @tweets.each do |tweet| %>
-  <li> <a href="/tweets/<%= tweet.id %>"> <%= tweet.content %> </a></li>
+  <li> <% tweet.user.username %> tweeted <a href="/tweets/<%= tweet.id %>"> <%= tweet.content %> </a></li>
 <% end %>
