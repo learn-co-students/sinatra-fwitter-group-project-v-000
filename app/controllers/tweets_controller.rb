@@ -33,13 +33,18 @@ class TweetsController < ApplicationController
     end
   end
 
-  patch 'tweets/:id' do
+  patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    @tweet.name
-    redirect "/tweets/#{@tweet.id}"
+    @tweet.assign_attributes(params[:tweet])
+    if @tweet.valid?
+      @tweet.save
+      redirect "/tweets/#{@tweet.id}"
+    else
+      redirect '/tweets/:id/edit'
+    end
   end
 
-  delete 'tweets/:id/delete' do
+  delete '/tweets/:id/delete' do
     #TODO: check if logged in
     @tweet = Tweet.find(params[:id])
     #TODO: check if tweet belongs to current_user
