@@ -1,0 +1,10 @@
+<div class='center'>
+  <h1 class='outline'>Login</h1>
+  <span class='red'><%= flash[:login] %><%= flash[:wrong] %></span>
+  <form method='post' action='/login'>
+    <input class='text' type='text' name='username' placeholder='Username' required><br>
+    <input class='text' type='password' name='password' placeholder='Password' required><br>
+    <br>
+    <input class='submit' type='submit' value='submit' class='button'>
+  </form>
+</div>
