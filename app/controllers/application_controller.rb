@@ -14,27 +14,43 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb :'users/create_users'
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :'users/create_users'
+    end
   end
 
   post '/signup' do
+
+    # binding.pry
     user = User.new(params[:user])
     if user.save
       user_log_in(user)
-
     else
       redirect '/signup'
     end
   end
 
   get '/login' do
-    erb :'users/login'
+    if !logged_in?
+      erb :'users/login'
+    else
+      redirect '/tweets'
+    end
   end
 
   post '/login' do
+    # binding.pry
     user = User.find_by(username: params[:user][:username])
 
     user_log_in(user)
+  end
+
+  get '/users/:slug' do
+    # binding.pry
+    @user = User.find_by_slug(params[:slug])
+    erb :'users/show'
   end
 
 # test routes for user account testing - may not be necessary for final project build
@@ -50,7 +66,7 @@ class ApplicationController < Sinatra::Base
 
   get '/logout' do
     session.clear
-    erb :index
+    redirect '/login'
   end
 
   helpers do
@@ -67,7 +83,8 @@ class ApplicationController < Sinatra::Base
       # binding.pry
       if user && user.authenticate(params[:user][:password])
         session[:user_id] = user.id
-        redirect '/success'
+        redirect '/tweets'
+
       else
         redirect '/failure'
       end
