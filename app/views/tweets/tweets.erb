@@ -1,0 +1,9 @@
+<h1> All the Tweets </h1>
+<h2> Welcome, <%= current_user.username %>! </h2>
+<% if !@tweets.empty? %>
+  <% @tweets.each do |tweet| %>
+    <li> <%= tweet.user.username %> tweeted <a href="/tweets/<%= tweet.id %>"> <%= tweet.content %> </a></li>
+  <% end %>
+<% else %>
+  <h4> No tweets yet! </h4>
+<% end %>

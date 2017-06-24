@@ -19,9 +19,11 @@ describe ApplicationController do
 
     it 'signup directs user to twitter index' do
       params = {
-        :username => "skittles123",
-        :email => "skittles@aol.com",
-        :password => "rainbows"
+        :user => {
+          :username => "skittles123",
+          :email => "skittles@aol.com",
+          :password => "rainbows"
+        }
       }
       post '/signup', params
       expect(last_response.location).to include("/tweets")
@@ -29,9 +31,11 @@ describe ApplicationController do
 
     it 'does not let a user sign up without a username' do
       params = {
+        :user =>{
         :username => "",
         :email => "skittles@aol.com",
         :password => "rainbows"
+        }
       }
       post '/signup', params
       expect(last_response.location).to include('/signup')
@@ -39,9 +43,11 @@ describe ApplicationController do
 
     it 'does not let a user sign up without an email' do
       params = {
-        :username => "skittles123",
-        :email => "",
-        :password => "rainbows"
+        :user => {
+          :username => "skittles123",
+          :email => "",
+          :password => "rainbows"
+        }
       }
       post '/signup', params
       expect(last_response.location).to include('/signup')
@@ -49,9 +55,11 @@ describe ApplicationController do
 
     it 'does not let a user sign up without a password' do
       params = {
-        :username => "skittles123",
-        :email => "skittles@aol.com",
-        :password => ""
+        :user => {
+          :username => "skittles123",
+          :email => "skittles@aol.com",
+          :password => ""
+        }
       }
       post '/signup', params
       expect(last_response.location).to include('/signup')
@@ -60,9 +68,11 @@ describe ApplicationController do
     it 'does not let a logged in user view the signup page' do
       user = User.create(:username => "skittles123", :email => "skittles@aol.com", :password => "rainbows")
       params = {
-        :username => "skittles123",
-        :email => "skittles@aol.com",
-        :password => "rainbows"
+        :user => {
+          :username => "skittles123",
+          :email => "skittles@aol.com",
+          :password => "rainbows"
+        }
       }
       post '/signup', params
       session = {}
@@ -81,8 +91,10 @@ describe ApplicationController do
     it 'loads the tweets index after login' do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
       params = {
-        :username => "becky567",
-        :password => "kittens"
+        :user => {
+          :username => "becky567",
+          :password => "kittens"
+        }
       }
       post '/login', params
       expect(last_response.status).to eq(302)
@@ -95,8 +107,10 @@ describe ApplicationController do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
 
       params = {
-        :username => "becky567",
-        :password => "kittens"
+        :user => {
+          :username => "becky567",
+          :password => "kittens"
+        }
       }
       post '/login', params
       session = {}
@@ -111,8 +125,10 @@ describe ApplicationController do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
 
       params = {
-        :username => "becky567",
-        :password => "kittens"
+        :user => {
+          :username => "becky567",
+          :password => "kittens"
+        }
       }
       post '/login', params
       get '/logout'
