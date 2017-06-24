@@ -1,7 +1,7 @@
-<!-- TODO: Add Username -->
+<h1><%= @tweet.user.username %></h1>
 <h2><%= @tweet.content %>
 
 <form method="post" action="/tweets/<%=@tweet.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="delete">
+  <input type="submit" value="Delete Tweet">
 </form>

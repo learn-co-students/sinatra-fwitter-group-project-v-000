@@ -22,6 +22,7 @@ class TweetsController < ApplicationController
       redirect '/login'
     else
       @tweet = Tweet.find(params[:id])
+      # binding.pry
       erb :'tweets/show_tweet'
     end
   end
