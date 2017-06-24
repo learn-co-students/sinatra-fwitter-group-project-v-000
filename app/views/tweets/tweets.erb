@@ -11,6 +11,7 @@
   </span>
     <br>
   <h1 class='outline'>Welcome<%=", " + @user.username if !!@user  %></h1>
+    <span class='red'><%= flash[:nonexist] %></span>
     <table align='center'>
       <tr>
         <th class='center' colspan=2>

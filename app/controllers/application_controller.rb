@@ -10,12 +10,12 @@ class ApplicationController < Sinatra::Base
     register Sinatra::Flash
   end
 
-    #---Welcome Page---
+                    #---Welcome Page---
   get '/' do
     erb :index
   end
 
-    #--- Current User's Homepage---
+                    #--- Current User's Homepage---
   get '/tweets' do
     if logged_in?
       @user = current_user
@@ -27,18 +27,19 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-    #---User Homepage---
+                    #---User Homepage---
   get '/users/:slug' do
     if @user_view = User.find_by_slug(params[:slug])
       @tweets = @user_view.tweets
       @user = current_user if logged_in?
       erb :'/tweets/tweets'
     else
+      flash[:nonexist] = "I can't seem to find that user."
       redirect "/tweets"
     end
   end
 
-    #---Create Tweet---
+                    #---Create Tweet---
   get '/tweets/new' do
     if logged_in?
       erb :'/tweets/create_tweet'
@@ -60,7 +61,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-    #---Edit Tweet---
+                    #---Edit Tweet---
   get '/tweets/:id/edit' do
     if logged_in?
       @tweet = Tweet.find(params[:id])
@@ -87,7 +88,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-    #---Show Tweet---
+                    #---Show Tweet---
   get '/tweets/:id' do
     if logged_in?
       @tweet = Tweet.find(params[:id])
@@ -98,7 +99,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-    #---Delete Tweet---
+                    #---Delete Tweet---
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
     if logged_in? && owned?
@@ -110,9 +111,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-
-
-    #---Signup---
+                    #---Signup---
   get '/signup' do
     if logged_in?
       redirect "/tweets"
@@ -127,12 +126,12 @@ class ApplicationController < Sinatra::Base
       session[:id] = user.id
       redirect "/tweets"
     else
-      flash[:fields] = "I thinkn you're missing something..."
+      flash[:fields] = "I think you're missing something..."
       redirect "/signup"
     end
   end
 
-  #---Login---
+                  #---Login---
   get '/login' do
     if logged_in?
       redirect "/tweets"
@@ -147,17 +146,18 @@ class ApplicationController < Sinatra::Base
       session[:id] = user.id
       redirect "/tweets"
     else
+      flash[:wrong] = "Something has gone wrong, try again, please."
       redirect "/login"
     end
   end
 
-    #---Logout---
+                    #---Logout---
   get '/logout' do
     session.clear
     redirect '/login'
   end
 
-    #---Helper Methods---
+                    #---Helper Methods---
   helpers do
     def current_user
       @current_user ||= User.find(session[:id])
