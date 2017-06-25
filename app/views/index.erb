@@ -1,0 +1,8 @@
+<h1>Welcome to Fwitter</h1>
+
+ <% if !session[:user_id] %>
+  <p><a href="/login">Log In</a> to Fwitter</p>
+  <p>or <a href="/signup">Sign up</a></p>
+<% else %>
+  <p><a href="/logout">Log Out</a> of Fwitter?</p>
+<% end %>
