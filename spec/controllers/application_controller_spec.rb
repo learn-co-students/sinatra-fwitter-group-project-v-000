@@ -11,7 +11,6 @@ describe ApplicationController do
   end
 
   describe "Signup Page" do
-
     it 'loads the signup page' do
       get '/signup'
       expect(last_response.status).to eq(200)
