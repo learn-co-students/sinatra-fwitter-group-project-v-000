@@ -1,0 +1,17 @@
+<h2>Welcome, <%= current_user.username %> to Fwitter</h2>
+
+<h4>Here are all the tweets!</h4>
+
+<h5><a href="/tweets/new">Add New Tweet</a><h5><br>
+
+<div>
+	<% @tweets.each do |tweet| %>
+		<p><%= tweet.content %><p>
+		<% user = User.find(tweet.user_id) %>
+		<p>by: <a href="/users/<%= user.username %>"><%= user.username %></a> | <a href="/tweets/<%= tweet.id %>">view</a></p><br>
+
+	<% end %>
+</div>
+
+
+<p><a href="/logout">Log Out</a></p>
