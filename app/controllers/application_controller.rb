@@ -1,5 +1,4 @@
 require './config/environment'
-
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -8,5 +7,9 @@ class ApplicationController < Sinatra::Base
     enable :sessions
 	set :session_secret, "Ruby For Dayz"
   end
+
+  get '/' do
+  	erb :index
+  end 
 
 end
