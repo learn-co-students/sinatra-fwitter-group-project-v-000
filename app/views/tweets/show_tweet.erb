@@ -1,0 +1,13 @@
+<h1><%=@user.username%>'s Timeline</h1>
+<% @user.tweets.each do |tweet| %>
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <p>Content ID: <%=tweet.id%></p>
+  <p>Content: <%=tweet.content%></p>
+
+  <form action="/tweets/<%= tweet.id %>/delete" method="post">
+      <input id="hidden" type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete Tweet">
+  </form>
+
+  <input type="button" value="Edit Tweet" onclick="location.href='/tweets/<%=tweet.id%>/edit'"value="">
+<% end %>
