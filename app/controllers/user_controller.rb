@@ -46,4 +46,10 @@ class UserController < ApplicationController
     redirect '/login'
   end 
 
+  get '/users/:username' do
+  	@user = User.find_by(username: params[:username])
+  	@user_tweets = Tweet.all.select{|t| t.user_id ==@user.id}
+  	erb :'users/show_user'
+  end
+
 end 
