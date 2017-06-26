@@ -9,29 +9,51 @@ end
 
 
 get "/signup" do
+	if Helpers.logged_in?(session) 
+	redirect '/tweets'
+	else
 	erb :'users/signup'
+	end
 end
 
 
 post "/signup" do
-	user = User.new(:username => params[:username], :password => params[:password], :email => params[:email])
-    if user.save
-        redirect "/login"
-    else
-        redirect "/failure"
-    end
+	# if Helpers.logged_in?(session) 
+	# redirect '/tweets'
+	# else
+
+			if params[:username] != "" && params[:password] != "" && params[:email] != ""
+			user = User.new(:username => params[:username], :password => params[:password], :email => params[:email])
+    						if user.save
+    					    session[:user_id] = user.id
+							redirect "/tweets"
+							end
+    		else
+    		    redirect "/signup"
+    		end
+
+	# end
+end
+
+get '/tweets' do
+	erb :'tweets/tweets'
 end
 
 
+
 get "/login" do
+	if Helpers.logged_in?(session) 
+	redirect '/tweets'
+	else
 	erb :'users/login'
+	end
 end
 
 post "/login" do
       user = User.find_by(:username => params[:username])
       if user && user.authenticate(params[:password])
           session[:user_id] = user.id
-          			redirect "/success"
+          			redirect "/tweets"
       else
           redirect "/signup"
       end
