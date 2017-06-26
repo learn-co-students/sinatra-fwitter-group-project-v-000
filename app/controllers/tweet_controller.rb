@@ -29,4 +29,10 @@ class TweetController < ApplicationController
   	end 
   end 
 
+  get '/tweets/:id' do
+  	@user = current_user
+  	@tweet = Tweet.find_by_id(params[:id])
+  	erb :'tweets/show_tweet'
+  end 
+
 end 
