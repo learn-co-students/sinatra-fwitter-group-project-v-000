@@ -9,6 +9,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    @user = current_user
   	erb :index
   end 
 
@@ -50,7 +51,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     if logged_in?
-      @user = User.find_by_id(session[:user_id])
+      @user = current_user
       erb :index
     else 
       redirect '/login'
