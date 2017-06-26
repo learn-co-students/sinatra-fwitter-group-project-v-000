@@ -35,11 +35,6 @@ post "/signup" do
 	# end
 end
 
-get '/tweets' do
-	erb :'tweets/tweets'
-end
-
-
 
 get "/login" do
 	if Helpers.logged_in?(session) 
@@ -59,7 +54,6 @@ post "/login" do
       end
 end
 
-
 get '/users/:username/home' do
 	if Helpers.logged_in?(session)
     @user = Helpers.current_user(session)
@@ -74,12 +68,16 @@ end
 
 get '/users/:slug' do
 	if Helpers.logged_in?(session)
-    @user = Helpers.current_user(session)
+    @user = User.find_by_slug(params[:slug])
     erb :'/users/home'
     else
      redirect '/login'
     end
 end
+
+
+
+
 
 get "/success" do
 	@user = Helpers.current_user(session)
@@ -100,7 +98,7 @@ end
 
 get "/logout" do
 	session.clear
-	redirect "/"
+	redirect "/login"
 end
 
 
