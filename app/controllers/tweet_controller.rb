@@ -56,6 +56,7 @@ class TweetController < ApplicationController
   		if @tweet.user_id == @user.id
   			@tweet.content = params[:content]
   			@tweet.save
+  			redirect "/tweets/#{params[:id]}"
   		end 
   	else
   		redirect "/tweets/#{params[:id]}/edit"
@@ -65,9 +66,10 @@ class TweetController < ApplicationController
   delete '/tweets/:id/delete' do
   	if logged_in?
   		@user = current_user	
-  		@tweet = tweet.find_by_id(params[:id])
+  		@tweet = Tweet.find_by_id(params[:id])
   		if @tweet.user_id == @user.id
   			@tweet.delete
+  			redirect "/tweets"
   		end 
   	else 
   		redirect "/tweets/#{params[:id]}"
