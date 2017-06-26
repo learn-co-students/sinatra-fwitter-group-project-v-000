@@ -25,7 +25,7 @@ class TweetController < ApplicationController
   		@user = current_user
   		params[:user_id] = @user.id
   		@tweet = Tweet.create(params)
-  		redirect "/users/#{@user.username}"
+  		redirect "/users/#{@user.slug}"
   	end 
   end 
 
