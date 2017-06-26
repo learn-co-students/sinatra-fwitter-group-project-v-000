@@ -7,7 +7,13 @@
   </head>
   <body>
     <nav>
+<%if logged_in? == false%>
     Welcome
+    <a href="/login">Sign In</a>
+    <a href="/signup">Sign Up</a>
+<%else%>
+    Welcome, <%=@user.username%>
+<%end%>
     </nav>
     <div class="container">
       <h1>Fwitter</h1>
