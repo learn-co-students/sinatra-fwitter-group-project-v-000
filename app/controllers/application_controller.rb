@@ -22,9 +22,8 @@ class ApplicationController < Sinatra::Base
   post '/signup' do
       @user = User.create(username: params["username"], email: params["email"], password: params["password"])
       @user.save
-        session[:user_id] = @user.id
-        erb :'tweets/tweets'
-      
+      session[:user_id] = @user.id
+    redirect "user/show"
   end
 
   get '/login' do
@@ -38,16 +37,11 @@ class ApplicationController < Sinatra::Base
   post '/login' do
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+      session[:user_id] = user.# IDEA:
       redirect "tweets/tweets"
     else
       redirect "users/login"
     end
-  end
-
-  get 'users/show' do
-    @user = User.find_by()
-    erb :'users/show'
   end
 
   get '/logout' do
