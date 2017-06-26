@@ -19,43 +19,52 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post '/signup' do
-      @user = User.create(username: params["username"], email: params["email"], password: params["password"])
-      @user.save
-        session[:user_id] = @user.id
-        erb :'tweets/tweets'
-      
-  end
-
   get '/login' do
     if logged_in?
-      erb :'tweets/tweets'
+      redirect '/tweets'
     else
       erb :'users/login'
     end
   end
 
+  post '/signup' do
+    if session[:user_id] != nil
+      redirect 'tweets/tweets'
+    elsif params["username"] == "" || params["email"] == "" || params["password"] == ""
+      redirect '/signup'
+    else
+      @user = User.create(username: params["username"], email: params["email"], password: params["password"])
+      @user.save
+      session[:user_id] = @user.id
+      redirect '/tweets'
+    end
+  end
+
+
   post '/login' do
-    user = User.find_by(username: params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect "tweets/tweets"
+    @user = User.find_by(username: params[:username])
+    if @user
+      if @user.authenticate(params[:password]) && @user.id != session[:user_id]
+        session[:user_id] = @user.id
+        redirect "/tweets"
+      end
     else
       redirect "users/login"
     end
   end
 
-  get 'users/show' do
-    @user = User.find_by()
-    erb :'users/show'
-  end
-
   get '/logout' do
-    session.clear
-    erb :logout
+    if logged_in?
+      session.clear
+      redirect '/login'
+    else
+      redirect '/'
+    end
   end
 
-
+  get '/tweets' do
+    erb :'tweets/tweets'
+  end
 
   helpers do
     def logged_in?
