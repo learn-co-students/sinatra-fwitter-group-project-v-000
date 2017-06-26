@@ -1,0 +1,15 @@
+<h1>Welcome to your official Fwitter page!, <%= @user.username%>!!. Go ahead and get tweeting!</h1>
+
+<form method="get" action="/tweets/new">
+<input type="submit" name="New Tweet" id="New Tweet" value="New Tweet">
+</form>
+
+<h3> Your past tweets </h3>
+<table>
+<%@user.tweets.each{|tweet|%>
+            <tr><td><%=tweet.content%></td><td><a href="/tweets/<%=tweet.id%>">View</td><td><a href="/tweets/<%=tweet.id%>/delete">Delete</td></tr>
+
+<%}%>
+</table>
+
+<p><a href="/logout">Log Out</a></p>
