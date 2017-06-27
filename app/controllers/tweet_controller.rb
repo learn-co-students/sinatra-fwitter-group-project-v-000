@@ -15,6 +15,7 @@ class TweetController < ApplicationController
   		@user = current_user
   		erb :'tweets/create_tweet'
   	else
+  		flash[:message] = "You need to be logged in to do that!"
   		redirect '/login'
   	end 
   end 
@@ -26,7 +27,8 @@ class TweetController < ApplicationController
   		@user = current_user
   		params[:user_id] = @user.id
   		@tweet = Tweet.create(params)
-  		redirect "/users/#{@user.slug}"
+  		flash[:message] = "Success your tweet has been posted!"
+  		redirect "/tweets/#{@tweet.id}"
   	end 
   end 
 
@@ -36,6 +38,7 @@ class TweetController < ApplicationController
   		@tweet = Tweet.find_by_id(params[:id])
   		erb :'tweets/show_tweet'
   	else
+  		flash[:message] = "You need to be logged in to do that!"
   		redirect '/login'
   	end 
   end 
@@ -46,6 +49,7 @@ class TweetController < ApplicationController
   		@tweet = Tweet.find_by_id(params[:id])
 		erb :'tweets/edit_tweet'
 	else
+		flash[:message] = "You need to be logged in to do that!"
 		redirect '/login'
 	end 
   end
