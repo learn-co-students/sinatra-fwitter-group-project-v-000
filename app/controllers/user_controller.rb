@@ -1,5 +1,6 @@
+require 'rack-flash'
 class UserController < ApplicationController
-  
+use Rack::Flash
   get '/' do
     @user = current_user
   	erb :index
@@ -17,9 +18,15 @@ class UserController < ApplicationController
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect '/signup'
     else
-      @user = User.create(params)
-      session[:user_id] = @user.id
-      redirect '/tweets'
+    	@user = User.find_by(username: params[:username])
+    	if @user == nil
+    		@user = User.create(params)
+    		session[:user_id] = @user.id
+    		redirect '/tweets'
+    	else 
+    		flash[:message] = "That user already exists"
+    		redirect '/signup'
+    	end 
     end 
   end 
 

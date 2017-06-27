@@ -1,5 +1,6 @@
+require 'rack-flash'
 class TweetController < ApplicationController
-  
+  use Rack::Flash
   get '/tweets' do
     if logged_in?
       @user = current_user
