@@ -71,8 +71,12 @@ class TweetController < ApplicationController
   		if @tweet.user_id == @user.id
   			@tweet.delete
   			redirect "/tweets"
-  		end 
+  		else
+  			flash[:message] = "You can only delete tweets the belong to you"
+  			redirect "/tweets/#{params[:id]}"
+  		end
   	else 
+  		flash[:message] = "You must be logged in to delete one of your tweets"
   		redirect "/tweets/#{params[:id]}"
   	end 
   end  

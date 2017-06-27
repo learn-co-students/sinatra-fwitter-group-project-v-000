@@ -1,3 +1,8 @@
+<% if flash.has?(:message) %>
+	<%= flash[:message] %>
+	<%flash[:message].clear%>
+	<br>
+<% end %>
 <%=@tweet.content%>
 
 <br>
