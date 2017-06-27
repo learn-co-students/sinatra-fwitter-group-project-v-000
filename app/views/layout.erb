@@ -12,7 +12,8 @@
     <a href="/login">Sign In</a>
     <a href="/signup">Sign Up</a>
 <%else%>
-    Welcome, <%=@user.username%> 
+    Welcome, <a href="/users/<%=@user.slug%>"><%=@user.username%></a>
+    <a href="/tweets/new">New Tweet</a>
     <a href="/logout">Log Out</a>
 <%end%>
     </nav>
