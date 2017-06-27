@@ -4,6 +4,12 @@
 <a href="/signup">Sign Up</a>
 <% else %>
 <%Tweet.all.each do |tweet|%>
-	<a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a>
+	<%=tweet.content%>
+	<br>
+	by: <%=tweet.user.username%>
+	<br>
+	<a href="/tweets/<%=tweet.id%>">View Tweet</a>
+	<br>
+	<br>
 	<%end%>
 <%end%>
