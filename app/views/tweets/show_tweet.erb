@@ -4,7 +4,7 @@
 	<br>
 <% end %>
 <%=@tweet.content%>
-
+<%if @tweet.user_id == @user.id%>
 <br>
 
 <a href="/tweets/<%=@tweet.id%>/edit"><button>Edit Tweet</button></a>
@@ -13,3 +13,4 @@
 	<input id="hidden" type="hidden" name="_method" value="delete">
 	<input type="submit" value="Delete Tweet">
 </form>
+<%end%>
