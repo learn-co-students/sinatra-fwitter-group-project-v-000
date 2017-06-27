@@ -303,6 +303,7 @@ describe ApplicationController do
       it 'lets a user view tweet edit form if they are logged in' do
         user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet = Tweet.create(:content => "tweeting!", :user_id => user.id)
+
         visit '/login'
 
         fill_in(:username, :with => "becky567")
@@ -324,6 +325,8 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
+
+
         click_button 'submit'
         session = {}
         session[:user_id] = user1.id

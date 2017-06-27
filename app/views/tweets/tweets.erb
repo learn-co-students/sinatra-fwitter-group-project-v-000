@@ -1,0 +1,7 @@
+<h1>Welcome,</h1>
+<h3>Tweets:</h3>
+<ul>
+<%@tweets.each do |tweet|%>
+  <li><%=tweet.id%> - <%=tweet.content%></li>
+  <%end%>
+</ul>
