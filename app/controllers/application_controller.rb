@@ -159,7 +159,14 @@ class ApplicationController < Sinatra::Base
     redirect "tweets/#{tweet.id}"
   end
 
-  post '/tweets/delete' do
+  post '/tweets/:id/delete' do
+    tweet = Tweet.find_by_id(params[:id])
+    if logged_in? && tweet.user == current_user
+      tweet.delete
+      erb :'tweets/tweets'
+    else
+      redirect "/tweets/:id"
+    end
   end
 
 
