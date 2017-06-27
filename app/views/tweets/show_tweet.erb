@@ -9,10 +9,8 @@
 <br>
 <a href='/tweets/<%=@tweet.id%>/edit'>Edit Tweet</a>
 
-
-<!--Log Out  -->
 <br>
-<form method="post" action="/logout">
+<form id='delete' method="post" action="/tweets/<%=@tweet.id%>/delete">
   <input id="hidden" type="hidden" name "_method" value="delete">
   <input type="submit" value="Delete Tweet">
 </form>
