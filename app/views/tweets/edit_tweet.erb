@@ -1,0 +1,29 @@
+<div>
+  <span>
+    <a href='/tweets'>
+      <button class='menu'>Home</button></a>
+     <a href='/tweets/new'>
+      <button class='menu'>Create Tweet</button></a>
+    <a href='/tweets/<%= @tweet.id %>/edit'>
+      <button class='menu active'>Edit Tweet</button></a>
+     <a href='/tweets/<%= @tweet.id %>/delete'>
+      <button form='delete' class='menu'>Delete Tweet</button></a>
+     <a href='/logout'>
+      <button class='menu'>Logout</button></a>
+  </span>
+    <br>
+    <br>
+    <span><%= flash[:content] %></span>
+  <h1>Edit Fweet</h1>
+    <form method='POST' action='/tweets/<%= @tweet.id %>'>
+      <textarea name='content' rows='3' cols='50' required><%= @tweet.content %></textarea>
+      <br>
+      <br>
+      <input class='submit' type='submit' value='submit'>
+    </form>
+
+    <form id='delete' method='post' action='/tweets/<%= @tweet.id %>/delete'>
+      <input type='hidden' name='_method' value='delete'>
+    </form>
+    <span>
+</div>
