@@ -22,6 +22,7 @@ class TweetController < ApplicationController
 
   post '/tweets/new' do 
   	if params[:content].empty?
+      flash[:message] = "Your tweet can't be blank"
   		redirect '/tweets/new'
   	else
   		@user = current_user
@@ -64,6 +65,7 @@ class TweetController < ApplicationController
   			redirect "/tweets/#{params[:id]}"
   		end 
   	else
+      flash[:message] = "Your tweet can't be blank"
   		redirect "/tweets/#{params[:id]}/edit"
   	end 
   end 
