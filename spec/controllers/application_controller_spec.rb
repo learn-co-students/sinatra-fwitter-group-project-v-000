@@ -23,7 +23,7 @@ describe ApplicationController do
         :email => "skittles@aol.com",
         :password => "rainbows"
       }
-      post '/signup', params
+      post 'signup', params
       expect(last_response.location).to include("/tweets")
     end
 

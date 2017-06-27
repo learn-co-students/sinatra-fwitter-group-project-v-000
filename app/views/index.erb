@@ -1,0 +1,15 @@
+<%if logged_in? == false%>
+<h2>Welcome to Fwitter</h2>
+<a href="/login">Sign In</a>
+<a href="/signup">Sign Up</a>
+<% else %>
+<%Tweet.all.each do |tweet|%>
+	<%=tweet.content%>
+	<br>
+	by: <%=tweet.user.username%>
+	<br>
+	<a href="/tweets/<%=tweet.id%>">View Tweet</a>
+	<br>
+	<br>
+	<%end%>
+<%end%>

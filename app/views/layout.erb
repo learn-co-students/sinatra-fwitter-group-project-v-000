@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Fwitter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <nav>
+<%if logged_in? == false%>
+    ||Welcome||
+    <a href="/login">Sign In</a>||
+    <a href="/signup">Sign Up</a>||
+<%else%>
+    ||Welcome, <a href="/users/<%=@user.slug%>"><%=@user.username%></a>||
+    <a href="/tweets/new">New Tweet</a>||
+    <a href="/logout">Log Out</a>||
+<%end%>
+    </nav>
+    <div class="container">
+      <h1>Fwitter</h1>
+      <%= yield %> 
+      
+      
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
