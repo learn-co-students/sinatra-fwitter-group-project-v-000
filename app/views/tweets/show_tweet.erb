@@ -1,0 +1,11 @@
+<h1>Tweet</h1>
+
+<%=@tweet.content%>
+
+
+
+<!--Log Out  -->
+<form method="post" action="/logout">
+  <input id="hidden" type="hidden" name "_method" value="patch">
+  <input type="submit" value="Log out">
+</form>

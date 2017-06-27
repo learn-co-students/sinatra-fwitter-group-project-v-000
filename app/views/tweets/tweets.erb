@@ -1,6 +1,14 @@
-<h1>Welcome, User</h1>
+<h1>Welcome, <%=@user.username%></h1>
 <ul>
 <%Tweet.all.each do |twit|%>
-  <li><%=twit.content%></li>
+  <li><%=@user.username%>: <%=twit.content%></li>
 <%end%>
 </ul>
+
+
+
+<!--Log Out  -->
+<form method="post" action="/logout">
+  <input id="hidden" type="hidden" name "_method" value="patch">
+  <input type="submit" value="Log out">
+</form>

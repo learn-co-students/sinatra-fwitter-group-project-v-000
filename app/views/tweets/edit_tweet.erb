@@ -7,3 +7,11 @@
   <input type="text" name="tweet[content]" value="<%=@tweet.content%>"><br>
   <input type="submit" value="submit">
 </form>
+
+
+
+<!--Log Out  -->
+<form method="post" action="/logout">
+  <input id="hidden" type="hidden" name "_method" value="patch">
+  <input type="submit" value="Log out">
+</form>
