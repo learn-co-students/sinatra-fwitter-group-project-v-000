@@ -15,7 +15,8 @@ use Rack::Flash
   end 
 
   post '/signup' do
-    if params[:username].empty? || params[:email].empty? || params[:password].empty?
+    if params[:username].empty? || params[:email].empty? || params[:password].empty? || !is_an_email?
+      flash[:message] = "You must enter a valid username, email and password"
       redirect '/signup'
     else
     	@user = User.find_by(username: params[:username])
