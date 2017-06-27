@@ -1,4 +1,4 @@
-<h1>Welcome, <%=@user.username%></h1>
+<h1>Welcome, This is Fwitter!</h1>
 <ul>
 <%Tweet.all.each do |twit|%>
   <li><%=@user.username%>: <%=twit.content%></li>
@@ -6,8 +6,15 @@
 </ul>
 
 
+<!-- To New Tweet Page -->
+<br>
+<form method="post" action="/tweets/new">
+  <input id="hidden" type="hidden" name "_method" value="patch">
+  <input type="submit" value="New Tweet">
+</form>
 
 <!--Log Out  -->
+<br>
 <form method="post" action="/logout">
   <input id="hidden" type="hidden" name "_method" value="patch">
   <input type="submit" value="Log out">

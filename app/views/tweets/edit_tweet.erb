@@ -1,17 +1,17 @@
 <h1>Edit Tweet</h1>
 <p><%=@tweet.content%></p>
 
-<form method="post" action="/tweets/<%=@tweet%>">
+<form method="post" action="/tweets/<%=@tweet.id%>">
   <input id="hidden" type="hidden" name "_method" value="patch">
   <label for="content">New content: </label><br>
-  <input type="text" name="tweet[content]" value="<%=@tweet.content%>"><br>
+  <input type="text" name="content" value="<%=@tweet.content%>" required><br>
   <input type="submit" value="submit">
 </form>
 
 
-
 <!--Log Out  -->
+<!--<br>
 <form method="post" action="/logout">
   <input id="hidden" type="hidden" name "_method" value="patch">
   <input type="submit" value="Log out">
-</form>
+</form> -->
