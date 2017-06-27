@@ -122,10 +122,14 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets/new' do
     if logged_in?
-      tweet = Tweet.create(params)
-      tweet.user = current_user
-      tweet.save
-      redirect "/tweets/:id"
+      if params[:content] != ""
+        tweet = Tweet.create(params)
+        tweet.user = current_user
+        tweet.save
+        redirect "/tweets/:id"
+      else
+        redirect "/tweets/new"
+      end
     else
       redirect "/login"
     end
