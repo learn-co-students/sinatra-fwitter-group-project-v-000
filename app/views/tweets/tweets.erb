@@ -2,5 +2,13 @@
 
 <h2>Tweets:</h2>
 <% @tweets.each do |tweet| %>
-  <div><%= tweet.content %></div>
+  <div>
+    <%= tweet.user.username %> says:
+    <%= tweet.content %>
+  </div>
 <% end %>
+
+<br><br>
+<a href="/tweets/new">Create a New Tweet</a>
+<br><br>
+<a href="/users/<%= current_user.slug %>">Visit Your Tweets</a>
