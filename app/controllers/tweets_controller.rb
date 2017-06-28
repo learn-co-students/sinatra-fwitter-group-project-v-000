@@ -1,7 +1,11 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    erb :"/tweets/tweets"
+    if session[:id]
+      erb :"/tweets/tweets"
+    else
+      erb :index
+    end
   end
 
   get '/tweets/new' do
@@ -25,6 +29,6 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id' do
-    
+
   end
 end

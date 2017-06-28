@@ -1,10 +1,20 @@
 class UsersController < ApplicationController
   get '/signup' do
-    erb :"/users/create_user"
+    if !session[:id]
+      erb :"/users/create_user"
+    else
+      redirect("/tweets")
+    end
   end
 
   post '/signup' do
-    redirect("/tweets")
+    if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
+      user = User.create(params)
+      session[:id] = user.id
+      redirect("/tweets")
+    else
+      redirect("/signup")
+    end
   end
 
   get '/login' do
@@ -12,6 +22,8 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
+    user = User.find_by(params)
+    session[:id] = user.id
     redirect("/tweets")
   end
 
