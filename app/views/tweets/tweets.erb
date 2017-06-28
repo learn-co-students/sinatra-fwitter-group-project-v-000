@@ -1,0 +1,17 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+  <br></br>
+<% end %>
+
+<% @tweets.each do |tweet| %>
+  <%= tweet.content %>
+  <br></br>
+<% end %>
+
+<form action="/logout" method="get">
+<input type="submit" value="Logout">
+</form>
+<br></br>
+<a href='/tweets/new'>Write a Tweet</a>
+<br></br>
+<a href='/users/<%= current_user.username %>'>All your tweets</a>
