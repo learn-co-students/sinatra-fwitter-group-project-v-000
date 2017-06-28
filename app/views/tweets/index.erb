@@ -1,0 +1,25 @@
+<% if flash[:error] %>
+ <% flash[:error].each do |e| %>
+   <p class="error message"><%= e + "." %></p>
+  <% end %>
+<% end %>
+
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<p><a href="/logout">Log Out</a></p>
+<p><a href="/tweets/new">New Tweet</a></p>
+
+<h1>Welcome,</h1>
+
+<h3>Here are the Latest Tweets</h2>
+
+<% Tweet.all.each do |t| %>
+  <a href="/tweets/<%= t.id %>">
+    <h4><%= t.content %></h3>
+  </a>
+  <a href="/users/<%= t.user.slug %>">
+    <p><%= t.user.username %></p>
+  </a>
+<% end %>
