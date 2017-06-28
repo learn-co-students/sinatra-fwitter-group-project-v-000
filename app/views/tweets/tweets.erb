@@ -1,0 +1,13 @@
+<h2>Welcome, <%=@user.username%></h2>
+<a href="/logout">Logout</a>
+<p><a href="/users/<%=@user.slug%>">See your own tweets</a></p>
+<p><a href="/tweets/new" name="submit">Create a new tweet</a></p>
+<br>
+
+<%if @tweets.empty?%>
+  <p>There is currently no tweet.</p>
+<%else%>
+  <%@tweets.each do |tweet|%>
+    <li><%=tweet.content%> <a href="/tweets/<%=tweet.id%>">tweet details</a></li>
+  <% end %>
+<% end %>

@@ -1,0 +1,13 @@
+<h2><%=@user.username%></h2>
+<a href="/logout">Logout</a>
+<p><a href="/tweets">See all the tweets</a></p>
+<p><a href="/users/<%=@user.slug%>">See your own tweets</a></p>
+<p><a href="/tweets/new" name="submit">Create a new tweet</a></p>
+<br>
+
+<h3>Update tweet</h3>
+<form action="/tweets/<%=@tweet.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <p><label>Content: </label><input type="text" name="content" value="<%=@tweet.content%>"></p>
+  <p><input type="submit" value="submit"></p>
+</form>

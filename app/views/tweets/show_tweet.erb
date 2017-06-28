@@ -1,0 +1,20 @@
+<h2><%=@user.username%></h2>
+<a href="/logout">Logout</a>
+<p><a href="/tweets">See all the tweets</a></p>
+<p><a href="/users/<%=@user.slug%>">See your own tweets</a></p>
+<p><a href="/tweets/new" name="submit">Create a new tweet</a></p>
+<br>
+
+<table><tr>
+  <td><b><%=@tweet.content%></b> by <%=@tweet.user.username%></td>
+  <%if @tweet.user == @user %>
+    <td><form action="/tweets/<%=@tweet.id%>/edit" method="GET">
+      <input type="submit" value="Edit Tweet">
+    </form></td>
+  <%end%>
+    <td><form method="post" action='/tweets/<%=@tweet.id%>/delete'>
+      <input id="hidden" type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete Tweet">
+    </form></td>
+
+</table>
