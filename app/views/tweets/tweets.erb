@@ -1,0 +1,11 @@
+<h1>Welcome,</h1>
+<% if !@tweets.blank? %>
+  <% for item in @tweets %>
+    <div class="">
+      <h3><%=item.user.username%></h3>
+      <h2><%=item.content%></h2>
+    </div>
+  <% end %>
+<% else %>
+  No Tweets Yet
+<% end %>

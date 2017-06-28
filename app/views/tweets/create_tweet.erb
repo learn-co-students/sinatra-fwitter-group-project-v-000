@@ -1,0 +1,7 @@
+<form action="/new/tweet" method="post">
+  <input type="text" name="tweet[content]" id="content" value="">
+  <input type="hidden" name="tweet[user_id]" value="<%=@user.id%>">
+  <input type="submit" value="submit">
+</form>
+
+<a href="/logout">Log out</a>
