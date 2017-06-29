@@ -45,7 +45,8 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets/:id' do #edit tweet
+  #post '/tweets/:id' do #edit tweet
+  patch '/tweets/:id' do
     tweet = Tweet.find_by_id(params[:id])
     if !params["content"].empty?
       tweet.content = params["content"]
