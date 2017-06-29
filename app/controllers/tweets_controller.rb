@@ -18,7 +18,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id' do
-    erb :"/tweets/show"
+    erb :"/tweets/show_tweet"
   end
 
   get '/tweets/:id/edit' do
