@@ -37,7 +37,12 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id/edit' do
-
+    @tweet = Tweet.find_by_id(params[:id])
+    if current_user.id == @tweet.id
+      erb :"/tweets/edit_tweet"
+    else
+      redirect("/tweets")
+    end
   end
 
   patch '/tweets/:id' do
@@ -45,6 +50,10 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id' do
-
+    tweet = Tweet.find_by_id(params[:id])
+    if tweet.id == current_user.id
+      tweet.delete
+    end
+    redirect("/tweets")
   end
 end
