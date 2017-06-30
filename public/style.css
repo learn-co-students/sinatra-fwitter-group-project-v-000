@@ -1,0 +1,66 @@
+body {
+  background-color: #7fa8e8;
+  font-family: sans-serif;
+}
+
+header {
+  padding: 10px 20px 20px;
+  margin-bottom: 20px;
+  color: #ccc;
+
+}
+
+header a {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+}
+
+#logo {
+  font-size: 300%;
+  font-weight: bold;
+  display: inline;
+  color: #fff;
+}
+
+.white-text {
+  color: #fff;
+}
+
+.tweet {
+  display: block;
+  width: 60%;
+  background-color: #fff;
+  margin: auto;
+  padding: 5px 20px 15px;
+  border-radius: 20px;
+  /* box-shadow: 3px 3px 5px #888; */
+}
+
+.center {
+  text-align: center;
+}
+
+.tweet-content {
+  font-size: 200%;
+}
+
+.align-right {
+  text-align: right;
+}
+
+form {
+  display: inline;
+}
+
+input {
+  font-size: 150%;
+  text-transform: uppercase;
+}
+
+input[type="submit"] {
+  background-color: #fff;
+  padding: 5px;
+  border-style: none none none solid;
+  border-color: #2176ff;
+}
