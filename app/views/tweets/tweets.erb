@@ -1,5 +1,3 @@
-Welcome, <%= @user.username %>!
-
 <% Tweet.all.each do |t| %>
 <div class="tweet">
   <h2>@<%= t.user.username %></h2>
