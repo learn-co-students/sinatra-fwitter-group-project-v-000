@@ -2,7 +2,8 @@ Welcome, <%= @user.username %>!
 
 <% Tweet.all.each do |t| %>
 <div class="tweet">
-  <%= t.user.username %><br>
-  <%= t.content %>
+  <h2>@<%= t.user.username %></h2>
+  <div class="tweet-content"><%= t.content %></div>
+  <div class="align-right"><form action="tweets/<%=t.id%>" method="get"><input type="submit" value="Permalink"></form></div>
 </div>
 <% end %>
