@@ -10,10 +10,16 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    if !logged_in?
+      @title = "Fwitter - Welcome!"
+      erb :index
+    else
+      redirect to '/tweets'
+    end
   end
 
   get '/login' do
+    @title = "Fwitter - Log In"
     if !logged_in?
       erb :'/users/login'
     else
@@ -39,6 +45,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
+    @title = "Fwitter - Sign Up"
     if !logged_in?
       erb :'/users/create_user'
     else
@@ -62,6 +69,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     if logged_in?
+      @title = "Fwitter - Home"
       @user = User.find_by(id: session[:user_id])
       @tweets = Tweet.all
       erb :'/tweets/tweets'
@@ -72,6 +80,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/new' do
     if logged_in?
+      @title = "Fwitter - Create a Tweet"
       erb :'/tweets/create_tweet'
     else
       redirect to '/login'
@@ -91,6 +100,7 @@ class ApplicationController < Sinatra::Base
   get '/tweets/:id' do
     if logged_in?
       @tweet = Tweet.find_by(id: params[:id])
+      @title = "Fwitter - Tweet #{@tweet.id}"
       erb :'/tweets/show_tweet'
     else
       redirect to '/login'
@@ -98,8 +108,9 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/:id/edit'do
-    if logged_in?
-      @tweet = Tweet.find_by(id: params[:id])
+    @title = "Fwitter - Edit Tweet"
+    @tweet = Tweet.find_by(id: params[:id])
+    if logged_in? && @tweet.user.id == current_user.id
       erb :'/tweets/edit_tweet'
     else
       redirect to '/login'
@@ -130,12 +141,17 @@ class ApplicationController < Sinatra::Base
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     @tweets = @user.tweets.all
+    @title = "Fwitter - #{@user.username}"
     erb :'/users/show'
   end
 
   helpers do
     def logged_in?
       !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
     end
   end
 

@@ -1,16 +1,20 @@
 <h1>Welcome, <%= @user.username %></h1>
 
+<h2>View Your <a href="/users/<%= @user.username %>">Profile</a></h2>
+
 <% if @tweets.count == 0 %>
   You haven't tweeted yet!
 <% else %>
-  <h2>Tweets:</h2>
-  <% @tweets.each do |tweet| %>
-    <blockquote><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></blockquote>
+  <h2>Fwitter Feed:</h2>
+  <ul>
+  <% @tweets.reverse.each do |tweet| %>
+    <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a> by <a href="/users/<%= tweet.user.username %>"><%= tweet.user.username %></a></li>
   <% end %>
+  </ul>
 <% end %>
 </p>
 
 <hr>
-<a href="/tweets/new">Create a New Tweet</a></p>
 <a href="/tweets">Home</a></p>
-<a href="/logout">Logout</a>
+<a href="/tweets/new">Tweet</a></p>
+Logged in as <a href="/users/<%= current_user.username %>"><%= current_user.username %></a>. <a href="/logout">Logout</a>
