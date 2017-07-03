@@ -1,0 +1,23 @@
+<h1><%= @user.username %>'s Profile</h1>
+
+<h2>Tweets: </h2>
+
+<% if @tweets.length == 0 %>
+  You have no tweets!
+<% else %>
+  <ul>
+  <% @tweets.reverse.each do |tweet| %>
+    <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<hr>
+<% if logged_in? %>
+  <a href="/tweets">Home</a></p>
+  <a href="/tweets/new">Tweet</a></p>
+  Logged in as <a href="/users/<%= current_user.username %>"><%= current_user.username %></a>. <a href="/logout">Logout</a>
+<% else %>
+  <a href="/login">Log In</a></p>
+  <a href="/signup">Sign Up</a>
+<% end %>
