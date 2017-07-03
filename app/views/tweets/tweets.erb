@@ -1,0 +1,16 @@
+<h1>Welcome, <%= @user.username %></h1>
+
+<% if @tweets.count == 0 %>
+  You haven't tweeted yet!
+<% else %>
+  <h2>Tweets:</h2>
+  <% @tweets.each do |tweet| %>
+    <blockquote><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></blockquote>
+  <% end %>
+<% end %>
+</p>
+
+<hr>
+<a href="/tweets/new">Create a New Tweet</a></p>
+<a href="/tweets">Home</a></p>
+<a href="/logout">Logout</a>

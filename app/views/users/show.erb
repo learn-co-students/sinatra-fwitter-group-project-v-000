@@ -1,0 +1,9 @@
+<h1>Profile for <%= @user.username %></h1>
+
+<h2><%= @user.username %>'s Tweets</h2>
+
+<ul>
+<% @tweets.each do |tweet| %>
+  <li><%= tweet.content %></li>
+<% end %>
+</ul>
