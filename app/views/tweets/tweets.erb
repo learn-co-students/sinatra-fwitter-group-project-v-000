@@ -1,0 +1,10 @@
+<h1>Tweets</h1>
+
+<%@tweets.each do |tweet|%>
+	<hr>
+	<div class="tweet">
+		<h3><%= tweet.user.username %> tweeted:</h3>
+		<p><%= tweet.content %></p>
+	</div>
+	<hr>
+<%end%>
