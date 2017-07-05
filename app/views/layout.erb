@@ -1,0 +1,16 @@
+<h1> Flatiron Twitter </h1>
+<% if flash.has?(:message) %>
+  <h5><%= flash[:message] %></h5>
+<% end %>
+
+  <%= yield %>
+
+<% if logged_in? %>
+  <label> <a href="/tweets">All Tweets</a> | </label>
+  <label> <a href="/users/<%= current_user.slug %>">My Tweets</a> | </label>
+  <label> <a href="/tweets/new"> Create Tweet | </label>
+  <label> <a href="/logout">Logout</a> </label>
+<% else %>
+  <label> <a href="/login">Login</a> | </label>
+  <label> <a href="/signup">Signup</a> </label>
+<% end %>
