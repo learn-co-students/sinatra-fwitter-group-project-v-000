@@ -1,0 +1,19 @@
+<h1>Welcome, <%= @user.username %></h1>
+
+<%@tweets.each do |tweet|%>
+	<hr>
+
+	<form action="/tweets/<%=tweet.id%>" method="POST">
+		<input type="hidden" name="_method" value="delete">
+		<button type="submit" id="submit" value="Delete Tweet">Delete Tweet</button>
+	</form>
+
+	<a href="/tweets/<%=tweet.id%>/edit">Edit Tweet</a>
+
+	<div class="tweet">
+		<h3><%= tweet.user.username %> tweeted:</h3>
+		<p><%= tweet.content %></p>
+	</div>
+
+	<hr>
+<%end%>
