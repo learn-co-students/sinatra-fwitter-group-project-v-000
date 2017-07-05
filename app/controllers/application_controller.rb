@@ -46,9 +46,12 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/:id/edit' do 
     protect_data
-    @tweet = Tweet.find(params[:id])
-
-    erb :'tweets/edit_tweet'
+    if current_user.tweets.detect{|tweet| tweet.id == params[:id].to_i}
+      @tweet = Tweet.find(params[:id])
+      erb :'tweets/edit_tweet'
+    else
+      redirect :'/tweets'
+    end
   end
 
   patch '/tweets/:id' do 

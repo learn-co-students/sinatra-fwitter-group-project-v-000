@@ -8,6 +8,8 @@
 		<button type="submit" id="submit" value="Delete Tweet">Delete Tweet</button>
 	</form>
 
+	<a href="/tweets/<%=tweet.id%>/edit">Edit Tweet</a>
+
 	<div class="tweet">
 		<h3><%= tweet.user.username %> tweeted:</h3>
 		<p><%= tweet.content %></p>
