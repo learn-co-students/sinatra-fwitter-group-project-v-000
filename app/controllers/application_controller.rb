@@ -5,7 +5,7 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    enable :sessions unless test?
+    enable :sessions 
     set :session_secret, "password_security"
   end
 
@@ -28,9 +28,12 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets' do 
   	protect_data
-  	tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
-
-  	redirect :"/tweets/#{tweet.id}"
+    if params[:content] != ""
+  	  tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
+      redirect :"/tweets/#{tweet.id}"
+    else
+      redirect :"/tweets/new"
+    end
   end
 
   get '/tweets/:id' do 
@@ -41,6 +44,36 @@ class ApplicationController < Sinatra::Base
   	erb :'tweets/show_tweet'
   end
 
+  get '/tweets/:id/edit' do 
+    protect_data
+    @tweet = Tweet.find(params[:id])
+
+    erb :'tweets/edit_tweet'
+  end
+
+  patch '/tweets/:id' do 
+    protect_data
+    tweet = Tweet.find(params[:id])
+
+    redirect :"/tweets/#{tweet.id}/edit" if params[:content] == ""
+    tweet.update(content: params[:content]) 
+
+    redirect :"/tweets/#{tweet.id}"
+  end
+
+  delete '/tweets/:id' do 
+    protect_data
+    Tweet.destroy(params[:id]) if current_user.tweets.detect{|tweet| tweet.id == params[:id].to_i}
+
+    redirect :'/tweets'
+  end
+
+  get '/users/:slug' do 
+    @user = User.find_by_slug(params[:slug])
+    @current_user = current_user.id
+    erb :'users/show'
+  end 
+
   get '/signup' do 
   	redirect :'/tweets' if logged_in? 
   	erb :'users/create_user'
@@ -48,7 +81,8 @@ class ApplicationController < Sinatra::Base
 
   post '/signup' do 
   	if (params[:username] != "") && (params[:email] != "") && (params[:password] != "") 
-  		User.create(username: params[:username], password: params[:password])
+  		user = User.create(username: params[:username], password: params[:password])
+      login(user)
   		redirect :'/tweets'
   	else 
   		redirect :'/signup'
@@ -63,7 +97,7 @@ class ApplicationController < Sinatra::Base
   post '/login' do 
   	user = User.find_by(username: params[:username])
   	if user && user.authenticate(params[:password])
-  		session[:user_id] = user.id
+  		login(user)
   		redirect :"/tweets"
     else 
     	redirect :"/login"
@@ -75,11 +109,6 @@ class ApplicationController < Sinatra::Base
   	redirect :'/login'
   end
 
-  get '/users' do 
-  	protect_data
-  	@user = current_user
-  	erb :'users/show'
-  end 
 
   helpers do
 
@@ -89,6 +118,10 @@ class ApplicationController < Sinatra::Base
 
     def current_user
       User.find(session[:user_id])
+    end
+
+    def login(user)
+      session[:user_id] = user.id
     end
 
     def protect_data
