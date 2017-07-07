@@ -1,0 +1,10 @@
+<h3>Tweet:</h3>
+<ul>
+  <%@user.tweet.each do |tweet| %>
+  <li><%= tweet.content %></li>
+  <%end%>
+</ul>
+<br>
+<form action="/tweets/<%=@tweet.id%>/edit" method="GET">
+  <input type="submit" value="Edit Tweet">
+</form>
