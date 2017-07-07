@@ -65,6 +65,8 @@ describe ApplicationController do
         :password => "rainbows"
       }
       post '/signup', params
+      session = {}
+      session[:user_id] = user.id
       get '/signup'
       expect(last_response.location).to include('/tweets')
     end
@@ -98,7 +100,7 @@ describe ApplicationController do
       }
       post '/login', params
       session = {}
-      session[:id] = user.id
+      session[:user_id] = user.id
       get '/login'
       expect(last_response.location).to include("/tweets")
     end
@@ -115,8 +117,8 @@ describe ApplicationController do
       post '/login', params
       get '/logout'
       expect(last_response.location).to include("/login")
-
     end
+
     it 'does not let a user logout if not logged in' do
       get '/logout'
       expect(last_response.location).to include("/")
@@ -137,8 +139,6 @@ describe ApplicationController do
       fill_in(:password, :with => "kittens")
       click_button 'submit'
       expect(page.current_path).to eq('/tweets')
-
-
     end
   end
 
@@ -175,17 +175,13 @@ describe ApplicationController do
       end
     end
 
-
     context 'logged out' do
       it 'does not let a user view the tweets index if not logged in' do
         get '/tweets'
         expect(last_response.location).to include("/login")
       end
     end
-
   end
-
-
 
   describe 'new action' do
     context 'logged in' do
@@ -199,7 +195,6 @@ describe ApplicationController do
         click_button 'submit'
         visit '/tweets/new'
         expect(page.status_code).to eq(200)
-
       end
 
       it 'lets user create a tweet if they are logged in' do
@@ -261,7 +256,6 @@ describe ApplicationController do
 
         expect(Tweet.find_by(:content => "")).to eq(nil)
         expect(page.current_path).to eq("/tweets/new")
-
       end
     end
 
@@ -271,6 +265,7 @@ describe ApplicationController do
         expect(last_response.location).to include("/login")
       end
     end
+  end
 
   describe 'show action' do
     context 'logged in' do
@@ -301,9 +296,6 @@ describe ApplicationController do
         expect(last_response.location).to include("/login")
       end
     end
-  end
-
-
   end
 
   describe 'edit action' do
@@ -337,7 +329,6 @@ describe ApplicationController do
         # session[:user_id] = user1.id
         visit "/tweets/#{tweet2.id}/edit"
         expect(page.current_path).to include('/tweets')
-
       end
 
       it 'lets a user edit their own tweet if they are logged in' do
@@ -355,7 +346,6 @@ describe ApplicationController do
         click_button 'submit'
         expect(Tweet.find_by(:content => "i love tweeting")).to be_instance_of(Tweet)
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)
-
         expect(page.status_code).to eq(200)
       end
 
@@ -374,7 +364,6 @@ describe ApplicationController do
         click_button 'submit'
         expect(Tweet.find_by(:content => "i love tweeting")).to be(nil)
         expect(page.current_path).to eq("/tweets/1/edit")
-
       end
     end
 
@@ -384,7 +373,6 @@ describe ApplicationController do
         expect(last_response.location).to include("/login")
       end
     end
-
   end
 
   describe 'delete action' do
@@ -421,7 +409,6 @@ describe ApplicationController do
         expect(Tweet.find_by(:content => "look at this tweet")).to be_instance_of(Tweet)
         expect(page.current_path).to include('/tweets')
       end
-
     end
 
     context "logged out" do
@@ -431,8 +418,5 @@ describe ApplicationController do
         expect(page.current_path).to eq("/login")
       end
     end
-
   end
-
-
 end
