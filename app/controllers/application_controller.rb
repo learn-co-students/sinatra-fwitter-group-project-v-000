@@ -2,18 +2,18 @@ require './config/environment'
 
 
 class ApplicationController < Sinatra::Base
-enable :sessions
 
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    enable :sessions
+    enable :sessions unless test?
     set :session_secret, "password_security"
   end
 
   get '/' do
     erb :index
   end
+
 
   #helpers do
     # def logged_in?

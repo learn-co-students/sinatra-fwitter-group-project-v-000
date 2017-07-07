@@ -4,11 +4,10 @@ class TweetsController < ApplicationController
     if Helper.logged_in?(session)
       @tweets= Tweet.all
       @user = Helper.current_user(session)
-      erb :'tweets/tweets'
+      erb :'tweets'
     else
       redirect to "/login"
    end
-    #erb :'tweets/tweets'
   end
 
   #create
@@ -21,7 +20,6 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    binding.pry
     user = Helper.current_user(session)
     @tweet= Tweet.create(content: params[:content])
     @tweet.user = user
