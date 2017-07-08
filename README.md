@@ -2,6 +2,9 @@
 
 ## Objectives
 
+## NOTE TO INSTRUCTOR: Please note that my commits are shown in this repo:
+https://github.com/gnappo1/sinatra-fwitter-group-project-v-000/commits/master
+
 1. Build a full scale Sinatra application that uses:
 
 + A sqlite database
