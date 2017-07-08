@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
     get '/signup' do
-
       if Helper.logged_in?(session)
         redirect to "/tweets"
       else
@@ -22,23 +21,25 @@ class UsersController < ApplicationController
 
     get '/login' do
       if Helper.logged_in?(session)
-        redirect "/tweets"
+        redirect to "/tweets"
       else
         erb :'users/login'
       end
     end
 
     post '/login' do
+      #binding.pry
       @user = User.find_by(username: params[:username])
       if @user && @user.authenticate(params[:password])
-        session[:user_id]= @user.id
-        redirect "tweets/tweets"
+        session[:user_id]= @user
+        redirect to "/tweets"
       else
-        redirect "/login"
+        redirect to "/login"
       end
     end
 
     get '/users/:slug' do
+    #  binding.pry
       @user = User.find_by_slug(:slug)
       erb :'users/show'
     end

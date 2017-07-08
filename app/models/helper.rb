@@ -6,7 +6,7 @@ class Helper
   end #will return True or False
 
   def self.current_user(session)
-    self.logged_in?(session) ? User.find(session[:user_id]) : nil
+    self.logged_in?(session) ? User.find_by_id(session[:user_id]) : nil
   end
 
 end
