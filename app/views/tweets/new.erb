@@ -1,0 +1,9 @@
+<h1>Create new tweet:</h1>
+<form action="/tweets" method="post">
+  <label for="content">Tweet content:</label><br>
+  <% if flash[:message] %>
+    <p><%= flash[:message] %></p>
+  <% end %>
+  <textarea name="content" rows="4" cols="80" id="content"></textarea><br>
+  <input type="submit" name="" value="submit">
+</form>
