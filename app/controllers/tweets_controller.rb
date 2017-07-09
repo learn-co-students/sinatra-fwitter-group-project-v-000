@@ -39,4 +39,14 @@ class TweetsController < ApplicationController
     end
   end
 
+  get '/tweets/:id/edit' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/edit'
+    else
+      flash[:message] = "Please log in to view tweet."
+      redirect '/login'
+    end
+  end
+
 end
