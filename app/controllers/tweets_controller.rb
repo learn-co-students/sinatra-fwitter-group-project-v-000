@@ -49,4 +49,21 @@ class TweetsController < ApplicationController
     end
   end
 
+  patch '/tweets/:id' do
+    tweet = Tweet.find(params[:id])
+    if tweet.user == current_user
+      # binding.pry
+      if !params[:content].empty?
+        tweet.update(:content=>params[:content])
+        redirect "/tweets/#{tweet.id}"
+      else
+        flash[:message] = "Content cannot be empty."
+        redirect "/tweets/#{tweet.id}/edit"
+      end
+    else
+      flash[:message] = "Insufficient privileges to edit!"
+      redirect '/tweets'
+    end
+  end
+
 end

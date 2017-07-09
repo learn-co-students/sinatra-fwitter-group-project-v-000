@@ -1,6 +1,9 @@
 <h3><%= @tweet.user.username.capitalize %>'s Tweet:</h3>
+<% if flash[:message] %>
+  <p><%= flash[:message] %></p>
+<% end %>
 <form action="/tweets/<%= @tweet.id %>" method="post">
-  <input type="hidden" name="_method" value="patch">
+  <input id="hidden" type="hidden" name="_method" value="patch">
   <input type="text" name="content" id="content" value="<%= @tweet.content %>">
   <input type="submit" name="" value="submit">
 </form>
