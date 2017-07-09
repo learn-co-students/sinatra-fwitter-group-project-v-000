@@ -1,4 +1,5 @@
 <h1>Welcome, <%= current_user.username.capitalize %> </h1>
+<h2>Tweet List:</h2>
 <ul>
   <% Tweet.all.each do |tweet| %>
     <li><%= tweet.content %></li>
