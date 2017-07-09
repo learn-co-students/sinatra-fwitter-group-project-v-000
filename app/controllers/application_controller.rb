@@ -12,4 +12,10 @@ class ApplicationController < Sinatra::Base
     # set :views, Proc.new { File.join(root, "../views/") }
   end
 
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+  end
+
 end
