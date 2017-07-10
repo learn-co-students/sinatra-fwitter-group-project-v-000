@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-
+  #index
   get '/tweets' do
     if Helper.logged_in?(session)
       @tweets= Tweet.all
@@ -10,7 +10,7 @@ class TweetsController < ApplicationController
      end
   end
 
-  #create
+  #new
   get '/tweets/new' do
     if Helper.logged_in?(session)
       erb :'tweets/new'
@@ -19,8 +19,8 @@ class TweetsController < ApplicationController
     end
   end
 
+  #create
   post '/tweets' do
-    #binding.pry
     user = Helper.current_user(session)
     if !params[:content].empty?
       @tweet= Tweet.create(content: params[:content])
@@ -59,6 +59,7 @@ class TweetsController < ApplicationController
     redirect "/tweets/#{@tweet.id}/edit"
   end
 
+  #delete
   post '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id])
     if @tweet.user == Helper.current_user(session)
