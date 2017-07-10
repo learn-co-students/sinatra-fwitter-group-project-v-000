@@ -1,0 +1,7 @@
+<%if logged_in?%>
+
+<h2>These are your tweets: </h2>
+
+  <% @user.tweets.each do |tweet|%>
+    <p><%=tweet.content%></p>
+  <% end %>
