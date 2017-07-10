@@ -1,5 +1,6 @@
-<h3>Tweet:</h3>
-  <%= @tweet.content %>
+<h3>Tweets:</h3>
+
+  <p> <%= @tweet.content %> </p>
 <form action="/tweets/<%=@tweet.id%>/delete" method="Post">
   <input type="submit" value="Delete Tweet">
 </form>
