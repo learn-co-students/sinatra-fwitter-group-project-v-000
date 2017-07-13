@@ -20,9 +20,9 @@ class TweetsController < ApplicationController
   post '/tweets' do
     tweet = Tweet.new(content: params[:content], user_id: session[:user_id])
     if tweet.save
-      redirect :'/tweets'
+      redirect '/tweets'
     else
-      redirect :'/tweets/new'
+      redirect '/tweets/new'
     end
   end
 
@@ -55,12 +55,16 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
-    @tweet = Tweet.find_by_id(params[:id])
-    if session[:id] == @tweet.user_id
-      @tweet.delete
-      redirect '/tweets/tweets'
+    if logged_in? && current_user
+      @tweet = Tweet.find_by_id(params[:id])
+      if @tweet.user_id == current_user.id
+        @tweet.delete
+        redirect '/tweets'
+      else
+        redirect '/tweets'
+      end
     else
-      redirect '/tweets/tweets'
+      redirect '/login'
     end
   end
 
