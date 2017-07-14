@@ -8,7 +8,6 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "secret"
-
   end
 
   get '/' do
@@ -45,7 +44,7 @@ class ApplicationController < Sinatra::Base
     else
       @user = User.find(session[:user_id])
       @tweets = Tweet.all
-      erb :'/tweets'
+      erb :'tweets/tweets'
     end
   end
 
@@ -95,6 +94,8 @@ class ApplicationController < Sinatra::Base
       @tweet = Tweet.create(content: params[:content])
       @user.tweets << @tweet
       redirect "/tweets/#{@tweet.id}"
+    else
+      redirect "/tweets/new"
     end
   end
 
@@ -102,34 +103,38 @@ class ApplicationController < Sinatra::Base
     if session[:user_id]
       @user = User.find(session[:user_id])
       @tweet = Tweet.find(params[:tweet_id])
-      erb :'/tweets/show_tweets'
+      erb :'/tweets/show_tweet'
     else
       redirect "/login"
     end
   end
 
   get '/tweets/:tweet_id/edit' do
+
     if session[:user_id]
+
       @user = User.find(session[:user_id])
       @tweet = Tweet.find(params[:tweet_id])
-      erb :'/tweets/edit_tweets'
+      erb :'/tweets/edit_tweet'
+      #binding.pry
     else
       redirect "/login"
     end
   end
 
   patch '/tweets/:tweet_id' do
-  @tweet = Tweet.find(params[:tweet_id])
+
+    @tweet = Tweet.find(params[:tweet_id])
     if !session[:user_id]
       redirect "/"
-    elsif session[:user_id] =! @tweet.user.id
-      redirect "/tweets"
     elsif params[:content].empty?
       redirect "/tweets/#{@tweet.id}/edit"
+    elsif session[:user_id] =! @tweet.user.id
+      redirect "/tweets"
     else
       @tweet.update(content: params[:content])
       @tweet.save
-      redirect "/tweets/#{@tweet.id}}"
+      redirect "/tweets/#{@tweet.id}"
     end
   end
 
@@ -140,7 +145,8 @@ class ApplicationController < Sinatra::Base
     elsif session[:user_id] != @tweet.user.id
       redirect "/tweets"
     else
-      @tweet.destroy(@tweet.id)
+      @tweet.destroy
+      redirect "/tweets"
     end
   end
 
