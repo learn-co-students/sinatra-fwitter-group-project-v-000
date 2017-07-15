@@ -1,6 +1,12 @@
-class TweetsController < Sinatra::Base
+class TweetsController < ApplicationController
 
-  get '/tweets' do
+  get '/tweets/:id' do
+    binding.pry
+    # @tweets = Tweet.all
+    erb :'tweets/index'
+  end
+
+  post '/tweets/:id' do
     binding.pry
   end
 

@@ -4,7 +4,8 @@ class ApplicationController < Sinatra::Base
 
   configure do
     set :public_folder, 'public'
-    set :views, 'app/views'
+    set :views, Proc.new { File.join(root, "../views/") }
+    register Sinatra::Twitter::Bootstrap::Assets
     enable :sessions
 	  set :session_secret, "password_security"
   end
@@ -14,21 +15,39 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    binding.pry
+    if Helpers.is_logged_in?(session)
+      redirect "/tweets/#{session[:id]}"
+    else
+      erb :login
+    end
+  end
 
-    erb :login
+  post '/login' do
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:id] = @user.id
+      redirect "/tweets/#{@user.id}"
+    else
+      redirect '/login'
+    end
   end
 
   get '/signup' do
-    erb :signup
+    if Helpers.is_logged_in?(session)
+      redirect "/tweets/#{session[:id]}"
+    else
+      erb :signup
+    end
   end
 
   post '/signup' do
-    binding.pry
-    @user = User.new(username: params["username"], email: params["email"], password: params["password"])
-    @user.save
-    session[:id] = @user.id
-    redirect '/tweets'
+    if (params["username"].size == 0 || params["email"].size == 0 || params["password"].size == 0)
+        redirect '/signup'
+    else
+      @user = User.create(username: params["username"], email: params["email"], password: params["password"])
+      session[:id] = @user.id
+      redirect '/tweets'
+    end
   end
 
 end
