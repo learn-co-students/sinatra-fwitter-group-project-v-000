@@ -14,11 +14,21 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
+    binding.pry
+
     erb :login
   end
 
   get '/signup' do
     erb :signup
+  end
+
+  post '/signup' do
+    binding.pry
+    @user = User.new(username: params["username"], email: params["email"], password: params["password"])
+    @user.save
+    session[:id] = @user.id
+    redirect '/tweets'
   end
 
 end
