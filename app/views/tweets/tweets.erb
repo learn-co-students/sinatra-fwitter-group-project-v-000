@@ -1,0 +1,8 @@
+<h1>Welcome, to your Tweets</h1>
+
+<% @tweets.each do |tweet| %>
+    <p><a href="tweets/<%=tweet.id%>"> <%= tweet.content%></a></p>
+<%end%>
+
+
+<p><a href="/tweets/new">Create a new Tweet</a></p>
