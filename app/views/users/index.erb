@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Show All User's Tweets</title>
+ </head>
+ <body>
+  <h1> Welcome, To Show All User's Tweets </h1>
+    <h3>Tweets:</h3>
+    <ul>
+      <% @user.tweets.each do |tweet| %>
+        <li> <%= tweet.content %> </a></li>
+      <% end %>
+    </ul>
+ </body>
+</html>
