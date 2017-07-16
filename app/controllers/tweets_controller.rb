@@ -1,9 +1,12 @@
 class TweetsController < ApplicationController
 
-  get '/tweets/:id' do
+  get '/tweets' do
     binding.pry
-    # @tweets = Tweet.all
-    erb :'tweets/index'
+    if Helpers.is_logged_in?(session)
+      erb :'tweets/index'
+    else
+      redirect '/login'
+    end
   end
 
   post '/tweets/:id' do
