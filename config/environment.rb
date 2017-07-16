@@ -8,4 +8,6 @@ ActiveRecord::Base.establish_connection(
   :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
 )
 
+Dir[File.join(File.dirname(__FILE__), "../app/models/concerns", "*.rb")].each {|f| require f}
+
 require_all 'app'
