@@ -1,0 +1,19 @@
+<h2>Users</h2>
+
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
+<h3>Create New Fwitter User</h3>
+<form action="/signup" method="POST">
+  <lable>Username:</label>
+  <input type="text" id="username" name="username">
+  <br></br>
+  <lable>Email:   </label>
+  <input type="text" id="email" name="email">
+  <br></br>
+  <lable>Password:</label>
+  <input type="text" id="password" name="password">
+  <br></br>
+  <input type="submit" value="Create New User">
+</form>
