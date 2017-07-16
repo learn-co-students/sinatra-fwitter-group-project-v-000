@@ -1,0 +1,17 @@
+views/tweets/tweets.erb
+
+<%if current_user%>
+  <h1>Welcome, <%=current_user.username%></h1>
+<%end%>
+
+<h3>Your tweets:</h3>
+
+<%current_user.tweets.each do |tweet|%>
+  <p><%=tweet.content%></p>
+<%end%>
+
+<h3>All Tweets: </h3>
+
+<%Tweet.all.each do |tweet|%>
+  <p><%=tweet.content%></p>
+<%end%>
