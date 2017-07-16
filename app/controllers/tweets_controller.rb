@@ -3,7 +3,7 @@ class TweetsController < ApplicationController
   get '/tweets' do
     if Helpers.is_logged_in?(session)
       @tweets = Tweet.all
-      erb :'tweets/index'
+      erb :'tweets/tweets_index'
     else
       redirect '/login'
     end
@@ -12,7 +12,7 @@ class TweetsController < ApplicationController
   get '/tweets/:id' do
     if Helpers.is_logged_in?(session)
       @user = User.find_by_id(session[:id])
-      erb :'tweets/show'
+      erb :'tweets/show_tweet'
     else
       redirect '/login'
     end
@@ -20,7 +20,7 @@ class TweetsController < ApplicationController
 
   get '/tweets/new' do
     if Helpers.is_logged_in?(session)
-      erb :'tweets/new'
+      erb :'tweets/create_tweet'
     else
       redirect '/login'
     end
@@ -28,6 +28,7 @@ class TweetsController < ApplicationController
 
   post '/tweets' do
     binding.pry
+    redirect 'tweets/show_tweet'
   end
 
 end

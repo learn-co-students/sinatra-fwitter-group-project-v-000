@@ -2,15 +2,20 @@
 <html>
  <head>
   <meta charset="UTF-8">
-  <title>Show All User's Tweets</title>
+  <title>Show User Tweets</title>
  </head>
  <body>
-  <h1> Welcome, To Show All User's Tweets </h1>
+  <h1> Welcome, To Show User Tweets </h1>
+	<h2>User Name: <%=@user.name%></h1>
+  <% if @user.tweets.size > 0%>
     <h3>Tweets:</h3>
     <ul>
       <% @user.tweets.each do |tweet| %>
         <li> <%= tweet.content %> </a></li>
       <% end %>
     </ul>
+  <%else%>
+    <h2>There are no tweets to display!</h2>
+  <%end%>
  </body>
 </html>
