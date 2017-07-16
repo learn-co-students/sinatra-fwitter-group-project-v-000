@@ -134,7 +134,7 @@ describe ApplicationController do
 
 
       visit '/login'
-
+      
       fill_in(:username, :with => "becky567")
       fill_in(:password, :with => "kittens")
       click_button 'submit'
@@ -147,6 +147,7 @@ describe ApplicationController do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
       tweet1 = Tweet.create(:content => "tweeting!", :user_id => user.id)
       tweet2 = Tweet.create(:content => "tweet tweet tweet", :user_id => user.id)
+
       get "/users/#{user.slug}"
 
       expect(last_response.body).to include("tweeting!")
