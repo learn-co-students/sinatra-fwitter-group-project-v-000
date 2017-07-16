@@ -1,0 +1,11 @@
+<h1 class="bg-info">Welcome, <%= @user.username %> </h1>
+
+<% @tweets.each do |tweet| %>
+  <ul>
+    <li><%= tweet.content %> <small>--<%= User.find_by_id(tweet.user_id).username %></small></li>
+  </ul>
+<% end %><br></br>
+
+
+<a href="/logout" class="btn btn-info" role="button">Log Out</a>  &nbsp;  &nbsp;
+<a href="/tweets/new" class="btn btn-info" role="button">Send a Tweet</a>

@@ -1,0 +1,11 @@
+<h1 class="bg-info">Edit your tweet</h1>
+
+
+<form method="POST" action="/tweets/<%= @tweet.id %>">
+  <input type="hidden" name="_method" value="patch">
+  <div class="form-group">
+  <label for="inputdefault">Tweet:</label>
+  <input type="text" name="content" class="form-control" id="inputdefault" value="<%= @tweet.content %>"><br></br>
+  <input type="submit" name="submit" class="btn btn-info" role="button" value="submit">
+</div>
+</form>
