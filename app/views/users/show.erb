@@ -1,0 +1,11 @@
+<h1>Hello, <%= @user.username %>. Here are your tweets</h1>
+
+<ul>
+<% @user.tweets.each do |tweet| %>
+  <li><%= tweet.content %></li>
+<% end %>  
+</ul>
+
+
+  <a href="/tweets/new"> Compose Tweet</a>
+</form>
