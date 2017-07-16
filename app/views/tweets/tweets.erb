@@ -1,0 +1,25 @@
+<h1>Welcome, <span class="loggedin"><%= current_user.username %></span>!</h1>
+<% if logged_in?%>
+	<a href="/tweets/new">Create New Tweet</a><br>
+	<% if @message %>
+		<a href="/users/<%= @user.slug %>">View all my tweets</a><br>
+	<% else %>
+		<a href="/tweets">View all tweets</a><br>
+	<% end %>
+<% end %>
+<hr>
+
+<h2>Tweets
+	<% if !@message %> 
+		<span class="makeblue">(<%= @user.username %>)</span>
+	<% else %>
+		<span class="makeblue">(all users)</span>
+	<% end %>:</h2>
+<% if !@tweets.empty? %>
+	<% @tweets.each do |tweet| %>
+		<p class="indent"><a href="/tweets/<%= tweet.id %>"><%= tweet.content %> </a>(<span class="username"><%= tweet.user.username %></span>)</p>
+	<% end %>
+<% else %>
+	<h4><span class="notweets">No tweets.</span></h4>
+<% end %>
+

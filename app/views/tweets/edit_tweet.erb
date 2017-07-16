@@ -1,0 +1,19 @@
+<h1>Welcome, <span class="loggedin"><%= current_user.username %></span>!</h1>
+<% if logged_in?%>
+	<a href="/tweets/new">Create New Tweet</a><br>
+	<% if @message %>
+		<a href="/users/<%= @user.slug %>">View all my tweets</a><br>
+	<% else %>
+		<a href="/tweets">View all tweets</a><br>
+	<% end %>
+<% end %>
+<hr>
+
+
+
+
+<form action="/tweets/<%= @tweet.id %>" method=POST>
+	<p><span class="username"><%= @tweet.user.username %></span>, edit your tweet: <input type="text" name="content" id="content" value="<%= @tweet.content %>"></p>
+	<input type="submit" id="submit">
+</form>
+

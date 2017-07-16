@@ -1,0 +1,17 @@
+<h1 class="moveover">Welcome to Fwitter!</h1>
+<h3 class="moveover">Please Log In.</h>
+<h4>New user? <a href="/signup">signup</a></h4>
+<br>
+<br>
+<br>
+<form action="/login" method=POST class="login">
+	<p>Username: <input class="forminput" type="text" name="username" id="username"></p>
+	<p>Password: <input class="forminput" type="password" name="password" id="password"></p>
+	<input type="submit" value="submit">
+
+</form>
+<h4 class="makeroom">New user? <a href="/signup">signup</a></h4>
+
+<% if @failure %>
+	<p class="failure"><%= @failure %></p>
+<% end %>
