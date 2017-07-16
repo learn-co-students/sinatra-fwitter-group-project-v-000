@@ -1,0 +1,14 @@
+<%if Helpers.logged_in?(session)%>
+
+<h2><%=@user.username%> tweets:</h1>
+
+<ul>
+  <%@user.tweets.reverse.each do |tweet|%>
+    <li><h4>"<%=tweet.content%>"<br>
+      <a href="/tweets/<%=tweet.id%>">(View Tweet)</a></h4></li>
+  <%end%>
+</ul>
+<br><br>
+<a href="/tweets">Back to Homepage</a>
+
+<%end%>

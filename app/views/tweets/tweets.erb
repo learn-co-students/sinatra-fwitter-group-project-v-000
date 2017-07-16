@@ -1,0 +1,20 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<%if Helpers.logged_in?(session)%>
+  <h1>Welcome,  <%=Helpers.current_user(session).username%></h1>
+
+  <h4><a href="/logout">Click Here to Log Out</a></h4>
+
+  <h3><a href="/tweets/new">Click Here to Create a New Tweet</a></h3>
+
+  <h3>Tweets:</h3>
+  <ul>
+     <%Tweet.all.reverse.each do |tweet|%>
+      <li><a href='users/<%=tweet.user.slug%>'><%=tweet.user.username%></a> said:<br>
+        "<%=tweet.content%>"<br>
+      <a href="/tweets/<%=tweet.id%>">View Tweet</a></li><br><br>
+      <%end%>
+</ul>
+  <%end%>
