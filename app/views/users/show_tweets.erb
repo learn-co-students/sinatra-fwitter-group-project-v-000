@@ -1,0 +1,5 @@
+<h3><%= @user.username %>'s Tweets</h3>
+<% @user.tweets.each do |tweet| %>
+  <%= tweet.content %>
+  <a href="/tweets/<%= tweet.id %>"><img src="../images/bird-png.png" alt="Tweet!" /></a>
+<% end %>
