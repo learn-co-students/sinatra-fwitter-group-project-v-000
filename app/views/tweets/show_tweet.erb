@@ -8,7 +8,14 @@
 	  <h1>User: <%=@user.username%></h1>
     <h3>Tweet:</h3>
   	 <h4><%=@tweet.content%></h4>
-   <h3><a href="/tweets/<%=@tweet.id%>/edit"><Edit Tweet></a></h3>
-   <h3><a href="/tweets/<%=@tweet.id%>/delete"><Delete Tweet></a></h3>
+     <form action="/tweets/<%=@tweet.id%>/delete" method="POST">
+       <br></br>
+       <input id="hidden" type="hidden" name="_method" value="delete">
+	  	 <input type="submit" value="Delete Tweet">
+     </form>
+     <form action="/tweets/<%=@tweet.id%>/edit" method="POST">
+       <br></br>
+	  	 <input type="submit" value="Edit Tweet">
+     </form>
  </body>
 </html>

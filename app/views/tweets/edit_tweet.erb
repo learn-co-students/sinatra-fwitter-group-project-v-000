@@ -1,1 +1,17 @@
-<h1>Edit A Tweet</h1>
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Edit A Tweet</title>
+ </head>
+ <body>
+   <h1>Edit A Tweet</h1>
+   <h2>User: <%=@user.username%></h1>
+   <h3>Tweet:</h3>
+    <form action="/tweets/<%=@tweet.id%>" method="POST">
+      Content: <input  type="text" id="content" name="content" value="<%= @tweet.content %>">
+      <br></br>
+      <input type="submit" value="submit">
+    </form>
+  </body>
+</html>
