@@ -6,14 +6,14 @@
  </head>
  <body>
    <h1>Edit A Tweet</h1>
-   <h2>User: <%=@user.username%></h1>
+   <h2>User: <%=session[:user].username%></h1>
    <h3>Tweet:</h3>
     <form action="/tweets/<%=@tweet.id%>" method="POST">
       Content: <input  type="text" id="content" name="content" value="<%= @tweet.content %>">
       <br></br>
       <input type="submit" value="submit">
     </form>
-    <h4><a href="/users/<%=@user.slug%>">Show My Tweets</a></h4>
+    <h4><a href="/users/<%=session[:user].slug%>">Show My Tweets</a></h4>
     <h4><a href="/logout">Log Out</a></h4>
   </body>
 </html>

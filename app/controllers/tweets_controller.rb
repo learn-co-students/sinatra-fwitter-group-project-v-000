@@ -2,7 +2,6 @@ class TweetsController < ApplicationController
 
   get '/tweets' do
     if Helpers.is_logged_in?(session)
-      @user = User.find_by_id(session[:id])
       @tweets = Tweet.all
       erb :'tweets/tweets_index'
     else
@@ -12,7 +11,6 @@ class TweetsController < ApplicationController
 
   get '/tweets/new' do
     if Helpers.is_logged_in?(session)
-      @user = User.find_by_id(session[:id])
       erb :'tweets/create_tweet'
     else
       redirect '/login'
@@ -21,7 +19,6 @@ class TweetsController < ApplicationController
 
   get '/tweets/:id' do
     if Helpers.is_logged_in?(session)
-      @user = User.find_by_id(session[:id])
       @tweet = Tweet.find_by_id(params[:id])
       erb :'tweets/show_tweet'
     else
@@ -31,7 +28,6 @@ class TweetsController < ApplicationController
 
   get '/tweets/:id/edit' do
     if Helpers.is_logged_in?(session)
-      @user = User.find_by_id(session[:id])
       @tweet = Tweet.find_by_id(params[:id])
       erb :'tweets/edit_tweet'
     else
@@ -41,9 +37,8 @@ class TweetsController < ApplicationController
 
   post '/tweets' do
     if params[:content].size > 0
-      @user = User.find_by_id(session[:id])
       @tweet = Tweet.create(content: params[:content])
-      @user.tweets << @tweet
+      session[:user].tweets << @tweet
       erb :'tweets/show_tweet'
     else
       redirect '/tweets/new'
@@ -52,7 +47,6 @@ class TweetsController < ApplicationController
 
   post '/tweets/:id' do
     if params[:content].size > 0
-      @user = User.find_by_id(session[:id])
       @tweet = Tweet.find_by_id(params[:id])
       @tweet.content = params[:content]
       @tweet.save
@@ -67,7 +61,6 @@ class TweetsController < ApplicationController
        @tweet = Tweet.find_by_id(params[:id])
        if @tweet.user_id == Helpers.current_user(session).id
         @tweet.delete
-        @user = User.find_by_id(session[:id])
         erb :'tweets/delete_tweet'
       else
         redirect '/tweets'

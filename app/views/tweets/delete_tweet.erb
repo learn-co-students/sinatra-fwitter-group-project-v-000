@@ -1,4 +1,4 @@
 <h3>The following tweet was deleted:</h3>
 <h4>"<%= @tweet.content %>"</h4>
-<h4><a href="/users/<%=@user.slug%>">Show My Tweets</a></h4>
+<h4><a href="/users/<%=session[:user].slug%>">Show My Tweets</a></h4>
 <h4><a href="/logout">Log Out</a></h4>

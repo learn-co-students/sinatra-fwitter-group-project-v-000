@@ -1,4 +1,3 @@
-require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
@@ -25,6 +24,7 @@ class ApplicationController < Sinatra::Base
   post '/login' do
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
+      session[:user] = @user
       session[:id] = @user.id
       redirect "/tweets"
     else
@@ -54,6 +54,7 @@ class ApplicationController < Sinatra::Base
         redirect '/signup'
     else
       @user = User.create(username: params["username"], email: params["email"], password: params["password"])
+      session[:user] = @user
       session[:id] = @user.id
       redirect "/tweets"
     end

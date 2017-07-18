@@ -6,11 +6,11 @@
  </head>
  <body>
   <h1> Welcome, To Show User Tweets </h1>
-	<h2>User Name: <%=@user.username%></h1>
-  <% if @user.tweets.size > 0%>
+  <h2>User Name: <%=session[:user].username%></h1>
+  <% if session[:user].tweets.size > 0%>
     <h3>Tweets:</h3>
     <ul>
-      <% @user.tweets.each do |tweet| %>
+      <% session[:user].tweets.each do |tweet| %>
         <li><h4><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a><h4></li>
       <% end %>
     </ul>
