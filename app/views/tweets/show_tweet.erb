@@ -5,7 +5,7 @@
   <title>Show A Tweet</title>
  </head>
  <body>
-	  <h1>User: <%=@user.username%></h1>
+	  <h2>User: <%=@user.username%></h2>
     <h3>Tweet:</h3>
   	 <h4><%=@tweet.content%></h4>
      <h4><a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a></h4>
@@ -13,5 +13,7 @@
        <input id="hidden" type="hidden" name="_method" value="delete">
 	  	 <input type="submit" value="Delete Tweet">
      </form>
+     <h4><a href="/users/<%=@user.slug%>">Show My Tweets</a></h4>
+     <h4><a href="/logout">Log Out</a></h4>
  </body>
 </html>

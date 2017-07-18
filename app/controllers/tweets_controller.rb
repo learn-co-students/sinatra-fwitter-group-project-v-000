@@ -12,6 +12,7 @@ class TweetsController < ApplicationController
 
   get '/tweets/new' do
     if Helpers.is_logged_in?(session)
+      @user = User.find_by_id(session[:id])
       erb :'tweets/create_tweet'
     else
       redirect '/login'
@@ -64,6 +65,7 @@ class TweetsController < ApplicationController
   delete '/tweets/:id/delete' do
     if Helpers.is_logged_in?(session) && Tweet.find_by(id: params[:id], user_id: session[:id])
       @tweet = Tweet.destroy(params[:id])
+      @user = User.find_by_id(session[:id])
       erb :'tweets/delete_tweet'
     else
       redirect '/login'
