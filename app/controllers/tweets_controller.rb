@@ -2,6 +2,7 @@ class TweetsController < ApplicationController
 
   get '/tweets' do
     if Helpers.is_logged_in?(session)
+      @user = User.find_by_id(session[:id])
       @tweets = Tweet.all
       erb :'tweets/tweets_index'
     else

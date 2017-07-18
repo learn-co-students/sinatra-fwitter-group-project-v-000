@@ -13,7 +13,9 @@
           <li> <%= tweet.content %> </a></li>
         <% end %>
       </ul>
+      <h4><a href="/users/<%=@user.slug%>">Show My Tweets</a></h4>
     <%else%>
       <h2>There are no tweets to display!</h2>
     <%end%>
- </body
+ </body>
+</html>
