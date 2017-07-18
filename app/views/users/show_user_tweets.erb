@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Show User Tweets</title>
+ </head>
+ <body>
+  <h1> Welcome, To Show User Tweets </h1>
+  <h2>User Name: <%=session[:user].username%></h1>
+  <% if session[:user].tweets.size > 0%>
+    <h3>Tweets:</h3>
+    <ul>
+      <% session[:user].tweets.each do |tweet| %>
+        <li><h4><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a><h4></li>
+      <% end %>
+    </ul>
+  <%else%>
+    <h2>There are no tweets to display!</h2>
+  <%end%>
+  <h4><a href="/tweets/new">Create A New Tweet</a></h4>
+  <h4><a href="/logout">Log Out</a></h4>
+ </body>
+</html>

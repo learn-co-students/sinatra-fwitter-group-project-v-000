@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Show A Tweet</title>
+ </head>
+ <body>
+    <h2>User: <%=session[:user].username%></h2>
+    <h3>Tweet:</h3>
+     <h4><%=@tweet.content%></h4>
+     <h4><a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a></h4>
+     <form action="/tweets/<%=@tweet.id%>/delete" method="POST">
+       <input id="hidden" type="hidden" name="_method" value="delete">
+       <input type="submit" value="Delete Tweet">
+     </form>
+     <h4><a href="/users/<%=session[:user].slug%>">Show My Tweets</a></h4>
+     <h4><a href="/logout">Log Out</a></h4>
+ </body>
+</html>
