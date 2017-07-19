@@ -1,0 +1,28 @@
+<h2>Fill out the form below to register:</h2>	
+
+<% if @valid == false %>
+
+<h3>Invalid information, please enter a username/email and password</h3>
+
+<% elsif @exist %>
+<h3>username already exists, please choose another name</h3>
+<%end%>
+
+
+
+
+<form action="/signup" method="post">
+	<label>Username:</label>
+	<input type="text" name="username" id="username">
+	<br>
+	<br>
+	<label>Email:</label>
+	<input type="text" name="email" id="email">
+	<br><br>
+	<label>Password:</label>
+	<input type="password" name="password" id="pass">
+
+	<br>
+	<input type="submit" name="creat_user" value="Create New User">
+
+</form>
