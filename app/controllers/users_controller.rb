@@ -16,9 +16,9 @@ class UsersController < ApplicationController
       user.password = params[:password]
 
       if user.save
-        session[:user_id] = user.id
-        redirect '/tweets'
+        login(params)
       else
+        flash[:message] = "Please fill out every field."
         redirect '/signup'
       end
 

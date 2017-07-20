@@ -395,7 +395,7 @@ describe ApplicationController do
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)
       end
 
-      it 'does not let a user delete a tweet they did not create' do
+      it 'does not show a delete button for a tweet the user did not create' do
         user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet1 = Tweet.create(:content => "tweeting!", :user_id => user1.id)
 
@@ -407,12 +407,31 @@ describe ApplicationController do
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
+
         visit "tweets/#{tweet2.id}"
-        click_button "Delete Tweet"
         expect(page.status_code).to eq(200)
-        expect(Tweet.find_by(:content => "look at this tweet")).to be_instance_of(Tweet)
-        expect(page.current_path).to include('/tweets')
+        expect(page.current_path).to include("tweets/#{tweet2.id}")
+        expect(page.body).not_to match(/delete/i)
       end
+
+      it 'does not allow a fraudulent delete request' do
+        user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        tweet1 = Tweet.create(:content => "tweeting!", :user_id => user1.id)
+
+        user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
+        tweet2 = Tweet.create(:content => "look at this tweet", :user_id => user2.id)
+
+        visit '/login'
+
+        fill_in(:username, :with => "becky567")
+        fill_in(:password, :with => "kittens")
+        click_button 'submit'
+
+        delete "tweets/#{tweet2.id}"
+
+        expect(Tweet.find_by(:content => "look at this tweet")).to be_instance_of(Tweet)
+      end
+
     end
 
     context "logged out" do

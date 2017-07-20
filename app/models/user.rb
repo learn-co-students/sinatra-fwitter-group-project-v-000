@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
     username.downcase.split.join('-')
   end
 
+  def owns?(item)
+    item.user_id == self.id
+  end
+
 end

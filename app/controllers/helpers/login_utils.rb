@@ -1,5 +1,9 @@
 module LoginUtils
 
+  def current_user
+    User.find(session[:user_id])
+  end
+
   def login(params)
 
     user = User.find_by(username: params[:username])
