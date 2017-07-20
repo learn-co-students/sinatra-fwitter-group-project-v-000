@@ -5,6 +5,26 @@
     <title>Fwitter</title>
   </head>
   <body>
+    <% # if defined?(flash) && flash.respond_to?(:has?) && flash.has?(:message) %>
+    <% if flash.has?(:message) %>
+      <p><%= flash[:message] %></p>
+      <br>
+      <br>
+    <% end %>
+
+    <% if session[:user_id] %>
+      <a href="/logout">Log Out</a>
+      <br>
+      <br>
+    <% else %>
+      <a href="/login">Log In</a>
+      <br>
+      <br>
+      <a href="/signup">Sign Up</a>
+      <br>
+      <br>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

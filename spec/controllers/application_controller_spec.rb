@@ -2,6 +2,10 @@ require 'spec_helper'
 
 describe ApplicationController do
 
+  # after do
+  #   save_and_open_page
+  # end
+
   describe "Homepage" do
     it 'loads the homepage' do
       get '/'
