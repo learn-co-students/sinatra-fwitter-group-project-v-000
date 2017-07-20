@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    if session[:user_id]
+    if logged_in?
       redirect '/tweets'
     else
       erb :'/users/signup'

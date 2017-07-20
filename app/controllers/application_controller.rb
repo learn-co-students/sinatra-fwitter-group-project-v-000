@@ -13,6 +13,8 @@ class ApplicationController < Sinatra::Base
     use Rack::Flash
   end
 
+  helpers LoginUtils
+
 
   get '/' do
     erb :index
@@ -20,7 +22,7 @@ class ApplicationController < Sinatra::Base
 
 
   get '/login' do
-    if session[:user_id]
+    if logged_in?
       redirect '/tweets'
     else
       erb :'/users/login'
@@ -28,25 +30,16 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    user = User.find_by(username: params[:username])
-
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      flash[:message] = "Welcome, #{user.username}!"
-      redirect '/tweets'
-    else
-      redirect '/login'
-    end
+    login(params)
   end
 
   get '/logout' do
-    if session[:user_id]
-      session.clear
+    if logged_in?
+      logout
       redirect '/login'
     else
       redirect '/'
     end
   end
-
 
 end
