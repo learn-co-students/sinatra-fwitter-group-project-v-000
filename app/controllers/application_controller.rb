@@ -70,7 +70,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/users/:slug/tweets' do
+  get '/users/:slug' do
     @user = User.find_by_slug(params["slug"])
     erb :'/users/show'
   end
