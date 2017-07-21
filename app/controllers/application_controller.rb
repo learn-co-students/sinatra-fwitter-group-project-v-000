@@ -1,4 +1,5 @@
 require './config/environment'
+require 'pry'
 
 class ApplicationController < Sinatra::Base
    register Sinatra::ActiveRecordExtension
@@ -42,6 +43,32 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/tweets/new' do
+    if logged_in?
+      @user = current_user
+      erb :'/tweets/create_tweet'
+    else
+      redirect("/login")
+    end
+  end
+
+  post '/tweets' do
+    if logged_in? && !params["content"].empty?
+      @tweet = Tweet.create(content: params["content"])
+      @tweet.user_id = current_user.id
+      @tweet.save
+      redirect("/tweets")
+    else
+      redirect("/tweets/new")
+    end
+  end
+
+  get '/tweets/:id' do
+    @tweet = Tweet.find_by_id(params["id"])
+
+    erb :'/tweets/show_tweet'
+  end
+
   get '/login' do
     if logged_in?
       @user = current_user
@@ -74,6 +101,8 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by_slug(params["slug"])
     erb :'/users/show'
   end
+
+
 
   helpers do
     def logged_in?
