@@ -78,16 +78,17 @@ class ApplicationController < Sinatra::Base
       erb :'/tweets/edit_tweet'
     else
       redirect("/login")
+    end
   end
 
   patch '/tweets/:id' do
     @tweet = Tweet.find_by_id(params["id"])
     if logged_in? && !params["content"].empty?
-      @tweet = Tweet.update(content: params["content"])
+      @tweet.content = params["content"]
       @tweet.save
       redirect("/tweets")
     else
-      redirect("/tweets/new")
+      redirect("/tweets/#{@tweet.id}/edit")
     end
   end
 
