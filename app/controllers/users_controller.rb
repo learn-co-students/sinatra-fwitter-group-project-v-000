@@ -35,12 +35,13 @@ class UsersController < ApplicationController
 
     post '/login' do
         @users = User.find_by(:username => params[:username])
-        
+        if @users && @users.authenticate(params[:password])
         #add authentication for password
                 session[:user_id] = @users.id
         redirect to "/tweets"
-        
-        
+        else 
+        redirect to '/login'
+        end
     end
 
     get '/tweets' do

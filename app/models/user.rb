@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          self.username.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
     end
     def self.find_by_slug(slug)
-        Tweet.all.find{|tweet| tweet.slug == tweet}
+        User.all.find{|user| user.slug == user}
     
     end
 
