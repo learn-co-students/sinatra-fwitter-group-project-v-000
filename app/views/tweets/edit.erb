@@ -1,8 +1,3 @@
-Welcome, <%=current_user.username%>
-
-<br />
-<br />
-
 <%=@tweets.all%>
 
 Tweets:
@@ -10,3 +5,8 @@ Tweets:
 <%=tweet.content%>
 
 <%end%>
+
+<form action="/tweets/<%=@tweets.slug%>" method="post">
+
+
+</form>
