@@ -147,6 +147,7 @@ describe ApplicationController do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
       tweet1 = Tweet.create(:content => "tweeting!", :user_id => user.id)
       tweet2 = Tweet.create(:content => "tweet tweet tweet", :user_id => user.id)
+
       get "/users/#{user.slug}"
 
       expect(last_response.body).to include("tweeting!")
@@ -344,6 +345,7 @@ describe ApplicationController do
         fill_in(:content, :with => "i love tweeting")
 
         click_button 'submit'
+
         expect(Tweet.find_by(:content => "i love tweeting")).to be_instance_of(Tweet)
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)
         expect(page.status_code).to eq(200)
