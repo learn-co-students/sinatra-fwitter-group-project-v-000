@@ -1,0 +1,14 @@
+<h2>Edit Tweet</h2>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Edit Tweet</h3>
+  </div>
+  <div class="panel-body">
+    <form method="post" action="/tweets/<%= @tweet.id %>">
+      <input id="hidden" type="hidden" name="_method" value="PATCH">
+      <input type="text" name="content" value="<%= @tweet.content %>">
+      <input type="submit" class="btn btn-primary" value="submit">
+    </form>
+  </div>
+</div>

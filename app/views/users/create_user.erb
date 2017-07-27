@@ -1,0 +1,18 @@
+<h1>Users Sign Up</h1>
+
+  <% unless locals.empty? %>
+    <%= message %>
+  <% end %>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Sign Up</h3>
+    </div>
+    <div class="panel-body">
+      <input type="text" name="username" placeholder="Username:"><br><br>
+      <input type="text" name="email" placeholder="Email:"><br><br>
+      <input type="text" name="password" placeholder="Password:"><br><br>
+
+      <input type="submit" class="btn btn-primary" value="submit">
+    </div>
+  </div>
