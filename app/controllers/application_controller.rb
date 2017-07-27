@@ -13,13 +13,13 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  helpers do
-    def current_user
-      @current_user = User.find_by_id(session[:user_id])
+  helpers do #see sinatra-secure-password-lab-v-000
+    def logged_in?
+      !!session[:user_id]
     end
 
-    def logged_in?
-      !!@current_user
+    def current_user
+      @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
     end
   end
 
