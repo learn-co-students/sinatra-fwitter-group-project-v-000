@@ -22,7 +22,7 @@ class TweetsController < ApplicationController
 
     @tweet = Tweet.find(params[:id])
 
-    unless @tweet.user.id == current_user.id
+    if @tweet.user.id != current_user.id
       flash[:notice] = "You cannot edit another user's tweet!"
       redirect to "/tweets/#{@tweet.id}"
     end
