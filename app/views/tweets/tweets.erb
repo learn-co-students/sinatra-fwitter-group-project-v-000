@@ -1,0 +1,15 @@
+<h1> Welcome, <%= current_user.username %> </h1>
+<br>
+
+<div>
+  <% @tweets.each do |tweet| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= tweet.content %>
+      </div>
+      <div class="panel-footer">
+        By: <strong> <%= tweet.user.username %> </strong>
+      </div>
+    </div>
+  <% end %>
+</div>

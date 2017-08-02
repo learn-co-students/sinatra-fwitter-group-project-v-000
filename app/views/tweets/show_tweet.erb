@@ -1,0 +1,24 @@
+<% if flash.has?(:notice) %>
+  <div class="alert alert-danger" role="alert"> <%= flash[:notice] %> </div>
+<% end %>
+<br>
+
+<h1> Tweet </h1>
+<br>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= @tweet.content %>
+    <br><br>
+    <a href="/tweets/<%= @tweet.id %>/edit"> Edit Tweet </a>
+  </div>
+  <div class="panel-footer">
+    By: <strong> <%= @tweet.user.username %> </strong>
+  </div>
+</div>
+
+
+<form action="/tweets/<%= @tweet.id %>/delete" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="DELETE">
+  <input type="submit" class="btn btn-danger" value="Delete Tweet">
+</form>
