@@ -21,6 +21,12 @@ class TweetsController < ApplicationController
     redirect to '/login' unless logged_in?
 
     @tweet = Tweet.find(params[:id])
+
+    unless @tweet.user.id == current_user.id
+      flash[:notice] = "You cannot edit another user's tweet!"
+      redirect to "/tweets/#{@tweet.id}"
+    end
+
     erb :'/tweets/edit_tweet'
   end
 
@@ -45,8 +51,7 @@ class TweetsController < ApplicationController
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
 
-    redirect to '/tweets' unless @tweet.user.id == current_user.id
-
+    # ActiveRecord validation not triggering for some reason so checking manually instead. Pending.
     if params[:content].empty?
       flash[:notice] = "Invalid content. Please try again."
       redirect to "/tweets/#{@tweet.id}/edit"
