@@ -1,6 +1,7 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
+  include Helpers  
 
   configure do
     set :public_folder, 'public'
@@ -17,11 +18,10 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    if session[:id] == nil
-      erb :'users/create_user'
-    else
-      @user = User.find(session[:id])
+    if logged_in?(session)
       redirect to "/tweets"
+    else
+      erb :'users/create_user'
     end
   end 
 
@@ -38,22 +38,14 @@ class ApplicationController < Sinatra::Base
     end
   end 
 
-  get '/tweets' do
-    if session[:id] == nil
-      redirect to "/login"
-    else
-      @user = User.find(session[:id])
-      #erb :'tweets/tweets'
-    end
-      erb :'tweets/tweets'
-  end
+  
 
   get '/login' do
-    if session[:id] == nil
-      erb :'users/login'
-    else
-      @user = User.find(session[:id])
+    if logged_in?(session)
+      current_user(session)
       redirect to "/tweets"
+    else
+      erb :'users/login'
     end
   end
 
@@ -69,12 +61,10 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    session.clear
+    if logged_in?(session)
+      session.clear
+    end
     redirect to "/login"
-  end
-
-  get '/users/#{user.slug}' do
-    erb :'users/show'
   end
 
 end

@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
     end
 
     def self.find_by_slug(slug)
-        @@user = slug.gsub("-", " ")
-        User.find_by(:username => @@user)
+        User.all.find do |user|
+            if user.slug == slug
+                user
+            end
+        end
     end
 end
