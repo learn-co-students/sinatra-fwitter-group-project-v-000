@@ -1,7 +1,9 @@
+require 'sinatra/base'
 class TweetController < ApplicationController
 
+    enable :sessions
     enable :method_override
-    
+ 
     get '/tweets' do
         if logged_in?(session)
             @user = current_user(session)
@@ -61,17 +63,20 @@ class TweetController < ApplicationController
         else
             @tweet.content = params["content"]
             @tweet.save
-            redirect to "/tweets/#{@tweet.id}"
+            redirect to "/tweets/#{@tweet.id}/edit"
         end
     end
 
-    delete '/tweets/:id/delete' do
+    delete '/tweets/:id' do
         if logged_in?(session)
+            @user = current_user(session)
             @tweet = current_tweet(params[:id])
-            @tweet.delete
-            redirect to '/tweets'
-        else
-            redirect to "/login"
+            if @tweet.user_id == @user.id
+                @tweet.delete
+                redirect to '/tweets'
+            else
+                redirect to "/login"
+            end
         end
     end
 end
