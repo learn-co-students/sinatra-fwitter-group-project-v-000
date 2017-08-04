@@ -2,7 +2,7 @@
 
 <% @users.each do |user| %>
     <% user.tweets.each do |tweet| %>
-        <p>Tweet by <%= user.username%></p>
+        <p>Tweet by @<%= user.username%></p>
         <p><%= tweet.id %>. <%=tweet.content%></p>
     <% end %>
 <% end %>
