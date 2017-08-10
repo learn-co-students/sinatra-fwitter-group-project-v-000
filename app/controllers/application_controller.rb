@@ -28,7 +28,40 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-
+    erb :'tweets/tweets'
   end
+
+  get '/login' do
+    erb :'/users/login'
+  end
+
+  post '/login' do
+    @user = User.find_by(username: params[:username])
+    if @user
+      session[:id] = @user.id
+      session[:username] = @user.username
+      session[:email] = @user.email
+      session[:password] = @user.password
+      redirect to '/tweets'
+    end
+  end
+
+  get "/logout" do
+    session.clear
+   redirect to '/login'
+  end
+
+  get "/users/:slug" do
+    @user = User.find_by_slug(params[:slug])
+    erb :'/users/tweets'
+  end
+
+  get '/tweets/new' do
+
+    @tweet = Tweet.create(content: params[:content])
+    erb :'/tweets/create_tweet'
+  end
+
+
 
 end
