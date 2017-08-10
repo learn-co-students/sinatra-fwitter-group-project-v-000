@@ -1,6 +1,5 @@
-<% binding.pry %>
-<% if Helpers.is_logged_in?(session)%>
 
+<% if !Helpers.is_logged_in?(session) %>
 <form action="/signup" method="post">
   <label>Username:</label>
   <input type="text" name="username">
@@ -16,4 +15,6 @@
 
   <input type="submit" value="Sign Up">
 </form>
+<% else %>
+  <% redirect to '/tweets' %>
 <% end %>

@@ -21,7 +21,6 @@ class ApplicationController < Sinatra::Base
     if !params.any?{|k, v| v == "" || v == " " || v == nil}
       @user = User.create(params)
       session[:id] = @user.id
-
     else
        redirect to '/signup'
     end
