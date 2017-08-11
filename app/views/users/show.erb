@@ -1,0 +1,5 @@
+<h1><%= current_user(session).username %>'s Tweets</h1>
+
+<% @user.tweets.each do |tweet| %>
+	<%= tweet.content %>
+<% end %>
