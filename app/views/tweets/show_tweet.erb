@@ -1,8 +1,8 @@
 <h1>Your Tweet</h1>
 
 <label>Tweet: </label>
-<%= @tweet.content %>
-<br><br>
+  <%= @tweet.content %>
+  <br><br>
 
 <form action="/tweets/<%= @tweet.id %>/edit" method="GET">
   <input type="submit" value="Edit Tweet">

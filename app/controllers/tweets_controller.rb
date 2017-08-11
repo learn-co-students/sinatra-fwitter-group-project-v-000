@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+  
   get '/tweets' do
     if logged_in? && current_user
       @user = current_user
