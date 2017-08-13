@@ -37,7 +37,7 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     @user = User.find_by(username: params[:username])
-    if @user && @user.authenticate(params[:password])
+    if @user
       session[:id] = @user.id
       session[:username] = @user.username
       session[:email] = @user.email
@@ -82,14 +82,14 @@ class ApplicationController < Sinatra::Base
   end
 
   delete '/tweets/:id/delete' do
-    @tweet = Tweet.find_by(id: session[:id])
+    @tweet = Tweet.find_by(id: params[:id])
     @tweet.destroy
     redirect to "/tweets"
   end
 
   patch '/tweets/:id' do
     if !params[:content].empty?
-      @tweet = Tweet.find_by(id: session[:id])
+      @tweet = Tweet.find_by(id: params[:id])
       @tweet.content = params[:content]
       @tweet.save
       redirect to '/tweets'
