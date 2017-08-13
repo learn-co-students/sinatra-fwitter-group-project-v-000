@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
       username.slug == slug
     end
   end
+
+  def authenticate
+
+  end
 end

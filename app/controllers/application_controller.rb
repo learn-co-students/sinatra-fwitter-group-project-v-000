@@ -48,7 +48,12 @@ class ApplicationController < Sinatra::Base
 
   get "/logout" do
     session.clear
-   redirect to '/login'
+    redirect to '/login'
+  end
+
+  get '/tweets/new' do
+    @tweet = Tweet.create(content: params[:content])
+    erb :'/tweets/create_tweet'
   end
 
   get "/users/:slug" do
@@ -56,12 +61,42 @@ class ApplicationController < Sinatra::Base
     erb :'/users/tweets'
   end
 
-  get '/tweets/new' do
-
-    @tweet = Tweet.create(content: params[:content])
-    erb :'/tweets/create_tweet'
+  post '/tweets' do
+    if !params[:content].empty?
+      @user = User.find_by(id: session[:id])
+      @tweet = @user.tweets.create(params)
+      redirect to '/tweets'
+    else
+      redirect to '/tweets/new'
+    end
   end
 
+  get '/tweets/:id' do
+    @tweet = Tweet.find_by(id: params[:id])
+    erb :'/tweets/show_tweet'
+  end
+
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find_by(id: session[:id])
+    erb :'/tweets/show_tweet'
+  end
+
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find_by(id: session[:id])
+    @tweet.destroy
+    redirect to "/tweets"
+  end
+
+  patch '/tweets/:id' do
+    if !params[:content].empty?
+      @tweet = Tweet.find_by(id: session[:id])
+      @tweet.content = params[:content]
+      @tweet.save
+      redirect to '/tweets'
+    else
+      redirect to "/tweets/#{params[:id]}/edit"
+    end
+  end
 
 
 end
