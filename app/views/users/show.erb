@@ -1,0 +1,8 @@
+<h2>Showing all tweets for <%=@user.username%></h2>
+
+<% @user.tweets.each do |tweet| %>
+<li><%=tweet.content%></li>
+<% end %>
+<br>
+
+<h4>Back to <a href="/tweets">tweetfeed</a> or <a href="/logout">log out</a>
