@@ -52,7 +52,6 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/new' do
-    @tweet = Tweet.create(content: params[:content])
     erb :'/tweets/create_tweet'
   end
 
@@ -64,7 +63,8 @@ class ApplicationController < Sinatra::Base
   post '/tweets' do
     if !params[:content].empty?
       @user = User.find_by(id: session[:id])
-      @tweet = @user.tweets.create(params)
+      @user.tweets.build(params)
+      @user.save
       redirect to '/tweets'
     else
       redirect to '/tweets/new'
