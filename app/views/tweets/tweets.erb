@@ -1,6 +1,13 @@
-<h2>Welcome, <%= current_user(session).username %></h2>
+<div class="container-fluid">
+    <h2>Welcome, <%= current_user(session).username %></h2>
+    <button type="button" class="btn btn-primary"><a href="/tweets/new">Create New Tweet</a></button>
+    <br></br>
+    <button type="button" class="btn btn-primary"><a href="/logout">Logout</a></button>
 
-<h3>Tweets</h3>
-<% @tweets.each do |tweet| %>
-<li> <%= tweet.content %></li>
-<% end %>
+    <div class="tweets">
+        <h3>Tweets</h3>
+        <% @tweets.each do |tweet| %>
+        <li> <%= tweet.content %></li>
+        <% end %>
+    </div>
+</div>

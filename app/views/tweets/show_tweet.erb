@@ -1,11 +1,27 @@
-<h1> New Tweet by <%= current_user(session).username %>!</h1>
+<div class="container" id="form1">
 
-	<%= @tweet.content %>
+    <h1>Tweet by <%= current_user(session).username %>!</h1>
 
-	<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet </a>
+        <%= @tweet.content %>
 
-<form method="post" action="/tweets/<%= @tweet.id %>">
-  <input id="hidden" type="hidden" name="_method" value="delete">
+    <br></br>
+    
+    <div class="edit-button">
+    <form action="/tweets/<%=@tweet.id%>/edit">
+        <input class="btn btn-secondary" type="submit" value="Edit Tweet">
+    </form>
+    </div>
 
-  <input type="submit" value="Delete Tweet">
-</form>
+       <div class="delete-button">
+        <form method="post" action="/tweets/<%= @tweet.id %>"  >
+          <input id="hidden" type="hidden" name="_method" value="delete">
+
+          <input class="btn btn-secondary" type="submit" value="Delete Tweet">
+            
+        <div class="tweet_button">
+	       <button type="button" class="btn btn-secondary"><a href="/tweets">Back to Tweets</a></button>
+        </div>
+            
+        </form>
+        </div>
+</div>

@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Abel|Cairo');
+
+body {
+  font-family: 'Abel', sans-serif;
+}
+
+#form1 {
+    width: 400px;
+    margin: 100px auto;
+    background-color: #0095ff;
+    text-align: center;
+    padding: 10px;
+}
+
+#form_align {
+    margin-top: 50px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+input {
+    border: none;
+    margin-bottom: 30px;
+    padding-right: 50px;
+}
+
+.delete-button {
+  width: 100%;
+  text-align: center;
+  padding: 5px 5px;
+}
+
+.edit-button {
+  width: 100%;
+  text-align: center;
+    margin-right: 20px;
+}
+
+#submit_button {
+    margin-left: 125px;
+    padding: 5px 10px 5px 10px;
+}
+
+#edit_button {
+    text-align: center;
+    margin-top: 25px;
+    margin-left: 15px
+}
+
+#email {
+    margin-left: 27px;
+}
+
+#sitebar {
+    background-color: #0095ff
+}
+
+a {
+    color: black;
+    text-decoration: none!important;
+} 
+
+.tweets {
+   width:auto;
+   height:auto;
+   position: relative;
+   top:0;
+   margin:0;
+   padding:0;
+   left:0;
+   z-index: 1;
+   text-align: center;
+   color:black;
+   box-sizing: border-box;
+    
+}
+
+.tweet_button {
+  width: 100%;
+  text-align: center;
+  padding: 5px 5px;
+}
