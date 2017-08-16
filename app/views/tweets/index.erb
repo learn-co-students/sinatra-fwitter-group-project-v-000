@@ -1,0 +1,13 @@
+<h1>Welcome, <%=@user.username%></h1>
+
+<h2>Here are a list of all tweets</h2>
+
+<ol>
+  <% Tweet.all.each do |tweet| %>
+  <li><a href = "/tweets/<%=tweet.id%>"><%=tweet.content%></li>
+  <% end %>
+</ol>
+
+<form action = "/tweets/new" method = "GET">
+  <input type = "submit" value = "Create a New Tweet">
+</form>
