@@ -1,0 +1,13 @@
+require_all 'app'
+  User.create(username: "WhoamI", email: "thisisa@gmail.com", password: "show", tweet_id: 1)
+  User.create(username: "WhoamI2", email: "thisisa2@gmail.com", password: "show2", tweet_id: 2)
+  User.create(username: "WhoamI3", email: "thisisa3@gmail.com", password: "show3", tweet_id: 3)
+  User.create(username: "WhoamI4", email: "thisisa4@gmail.com", password: "show4", tweet_id: 4)
+  User.create(username: "WhoamI5", email: "thisisa5@gmail.com", password: "show5", tweet_id: 5)
+  User.create(username: "WhoamI6", email: "thisisa6@gmail.com", password: "show6", tweet_id: 6)
+  Tweet.create(content: "whatever")
+  Tweet.create(content: "whatever2")
+  Tweet.create(content: "whatever3")
+  Tweet.create(content: "whatever4")
+  Tweet.create(content: "whatever5")
+  Tweet.create(content: "whatever6")

@@ -11,6 +11,8 @@
 + Login/Logout
 
 ## Overview2222
+http://www.sinatrarb.com/faq.html#slash
+https://github.com/maxjustus/sinatra-authentication/blob/master/readme.markdown
 
 The goal of this project is to build Fwitter (aka Flatiron Twitter).
 
