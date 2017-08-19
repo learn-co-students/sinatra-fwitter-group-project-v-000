@@ -17,7 +17,7 @@ class ApplicationController < Sinatra::Base
 
   get '/signup' do
     if !session[:user_id]
-      binding.pry
+      #binding.pry
      erb :'/users/create_user'
    else
      redirect to '/tweets'
@@ -57,6 +57,11 @@ class ApplicationController < Sinatra::Base
         flash[:message] = "Invalid username or password. Please try again."
         redirect to '/login'
       end
+    end
+    
+    get '/logout' do
+      session.clear
+      redirect to '/login'
     end
 
   get '/tweets' do
