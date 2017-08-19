@@ -2,7 +2,6 @@
 
   <h3><%=@tweet.content%></h3>
 
-  <% if @tweet.user_id == session[:user_id] %>
     <form action = "/tweets/<%=@tweet.id%>/edit" method = "GET">
       <input type = "submit" value = "Edit Tweet">
     </form>
@@ -10,5 +9,4 @@
     <form action = "/tweets/<%=@tweet.id%>/delete" method = "POST">
       <input id = "hidden" type = "hidden" name = "_method" value = "DELETE">
       <input type = "submit" value = "Delete Tweet">
-      <% end %>
     </form>
