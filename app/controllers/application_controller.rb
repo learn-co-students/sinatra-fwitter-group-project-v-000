@@ -62,6 +62,17 @@ class ApplicationController < Sinatra::Base
      end
   end
 
+  get '/logout' do
+    @user = User.find_by(session[:user_id])
+    if @user
+      session.clear
+      redirect '/login'
+    else
+      redirect '/login'
+    end
+  end
+
+
   helpers do
 
       def logged_in?
