@@ -3,6 +3,6 @@
 <% if flash.has?(:message) %>
   <%= flash[:message] %>
 <% end %>
-<% Tweet.all.each do |tweet| %>
+<% @tweets.each do |tweet| %>
   <li><%= tweet.content %></li>
 <% end %>
