@@ -17,6 +17,10 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  #helper methods:
+  # logged-in?
+  # current user
+
   get '/twitter' do
     erb :'/tweets/tweets'
   end
@@ -26,12 +30,15 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
+# Need to put a condition in here that checks to see if info belongs to user
+# if so redirect to tweets?
+    
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect '/signup'
     else
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
     end
-    session[:id] = @user.id
+    session[:user_id] = @user.id
 # this, session[:id] = @user.id, logs the user in
     redirect '/twitter/tweets'
   end
@@ -41,13 +48,27 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    # okay this isn't working, @user.id is throwing error of nil class
-     @user = User.find_by(username: params[:username], password: params[:password])
-# I don't think it's working in shotgun because I'm not entering input that is in db
-     session[:id] = @user.id
-    erb :'/tweets/tweets'
+     @user = User.find_by(username: params[:username])
+     if @user != nil && @user.password == params[:password]
+       session[:user_id] = @user.id
+       #binding.pry
+       erb :'/tweets/index'
+     else
+       redirect '/login'
+     end
   end
 
+  helpers do
+
+      def logged_in?
+        !!session[:user_id]
+      end
+
+      def current_user
+        User.find(session[:user_id])
+      end
+
+  end
 
 
 
