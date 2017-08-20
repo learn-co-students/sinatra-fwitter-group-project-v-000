@@ -33,7 +33,7 @@ class ApplicationController < Sinatra::Base
     end
     session[:id] = @user.id
 # this, session[:id] = @user.id, logs the user in
-    redirect '/login'
+    redirect '/twitter/tweets'
   end
 
   get '/login' do
