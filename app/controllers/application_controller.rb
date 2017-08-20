@@ -17,15 +17,17 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  get '/twitter' do
+  get '/tweets' do
     erb :'/tweets/tweets'
   end
 
   get '/signup' do
-    # conditional that checks session[:user_id]
-    # This isn't necessarily a straight line, a user, already logged in, could 
-    # type in /signup.  We need to check if that user has a session's hash.  
+    @user = User.find_by(session[:user_id])
+    if @user
+      redirect '/tweets'
+    else
       erb :create_user
+    end
   end
 
   post '/signup' do
@@ -48,7 +50,7 @@ class ApplicationController < Sinatra::Base
      @user = User.find_by(username: params[:username])
      if @user != nil && @user.password == params[:password]
        session[:user_id] = @user.id
-       redirect '/twitter'
+       redirect '/tweets'
      else
        redirect '/login'
      end
