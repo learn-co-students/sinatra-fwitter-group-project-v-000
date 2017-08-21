@@ -87,13 +87,14 @@ class ApplicationController < Sinatra::Base
     @tweet = Tweet.find_by(params[:id])
     @tweet.content = params[:content]
     @tweet.save
+    redirect '/tweets'
   end
 
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find_by(params[:id])
-    if logged_in? && @tweet.user_id == @tweet.id
+    if logged_in? && @tweet.user_id == session[:user_id]
       @tweet.delete
-      erb :'/tweets/tweets'
+      redirect '/tweets'
     else
       redirect '/login'
     end

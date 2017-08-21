@@ -1,11 +1,10 @@
 <h1>Show Tweet</h1>
 <%=@tweet.content%>
+<br>
 
 <form  action="/tweets/<%=@tweet.id%>/delete" method="post">
   <input type="hidden" name="_method" value="delete">
   <label>Delete Tweet</label>
-  <textarea name="content" id="content" rows="4" cols="40">Edit tweet here...
-  </textarea>
   <input type="submit" value="Delete Tweet">
 </form>
 
