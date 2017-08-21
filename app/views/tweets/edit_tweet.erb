@@ -1,16 +1,17 @@
 <h1>Edit Tweet</h1>
 <%=@tweet.content%>
 
-<form  action="/tweets/<%=@tweet.id%/delete>" method="post">
+<form action="/tweets/<%=@tweet.id%>/delete" method="POST">
   <input type="hidden" name="_method" value="delete">
-  <label>Delete Tweet</label>
-  <input type="submit" value="Delete Tweet">
+  <label>Delete Tweet</label><br>
+  <input type="submit" name="submit" value="submit">
+
 </form>
 
 <form  action="/tweets/<%=@tweet.id%>/edit" method="POST">
   <input type="hidden" name="_method" value="patch">
   <label>Edit Tweet</label>
-  <textarea name="content" rows="4" cols="40">Edit tweet here...
+  <textarea name="content" id="content" value="content" rows="4" cols="40">Edit tweet here...
   </textarea>
-  <input type="submit" value="submit">
+  <input type="submit">
 </form>
