@@ -17,20 +17,28 @@ class ApplicationController < Sinatra::Base
       erb :index
   end
 
+  get '/login' do
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :'/users/login'
+    end
+  end
+
+
   get '/logout' do
+# So, 'pry' shows that session is 'nil', and redirects to '/'
     if logged_in?
       session.clear
-      redirect '/login'
-    else
       redirect '/'
+    else
+      redirect '/login'
     end
   end
 
   get '/tweets' do
     if logged_in?
-      #binding.pry ~ It's showing a user logged in.  This shouldn't be.
-      @user = User.find_by(session[:user_id])
-      # However, it does make it to the erb :tweets page!
+      @user = User.find_by_id(session[:user_id])
       erb :'/tweets/tweets'
     else
       redirect '/login'
@@ -50,24 +58,16 @@ class ApplicationController < Sinatra::Base
       redirect '/signup'
     else
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-    end
-    session[:user_id] = @user.id
-    redirect '/tweets'
-  end
-
-  get '/login' do
-    if logged_in?
-      redirect '/tweets'
-    else
-      erb :'/users/login'
+      session[:user_id] = @user.id
+      redirect :'/tweets'
     end
   end
 
   post '/login' do
      @user = User.find_by(username: params[:username])
-     if @user != nil && @user.password == params[:password]
+     if @user && @user.authenticate(params[:password])
        session[:user_id] = @user.id
-       redirect '/tweets'
+       redirect :'/tweets'
      else
        redirect '/login'
      end
