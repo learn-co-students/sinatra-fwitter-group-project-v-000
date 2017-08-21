@@ -14,25 +14,34 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+      erb :index
+  end
+
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect '/login'
+    else
+      redirect '/'
+    end
   end
 
   get '/tweets' do
-    @user = User.find_by(session[:user_id])
-    if @user
+    if logged_in?
+      #binding.pry ~ It's showing a user logged in.  This shouldn't be.
+      @user = User.find_by(session[:user_id])
+      # However, it does make it to the erb :tweets page!
       erb :'/tweets/tweets'
     else
       redirect '/login'
-    end 
-
+    end
   end
 
   get '/signup' do
-    @user = User.find_by(session[:user_id])
-    if @user
+    if logged_in?
       redirect '/tweets'
     else
-      erb :create_user
+      erb :'/users/create_user'
     end
   end
 
@@ -42,15 +51,12 @@ class ApplicationController < Sinatra::Base
     else
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
     end
-
     session[:user_id] = @user.id
-
     redirect '/tweets'
   end
 
   get '/login' do
-    @user = User.find_by(session[:user_id])
-    if @user
+    if logged_in?
       redirect '/tweets'
     else
       erb :'/users/login'
@@ -67,30 +73,25 @@ class ApplicationController < Sinatra::Base
      end
   end
 
-  get '/logout' do
-    @user = User.find_by(session[:user_id])
-    if @user
-      session.clear
-      redirect '/login'
-    else
-      redirect '/'
-    end
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    @tweets = Tweet.all
+    erb :'/users/show'
+  end
+
+  get '/tweets/:slug' do
   end
 
 
   helpers do
 
-      def logged_in?
-        !!session[:user_id]
-      end
+    def logged_in?
+      !!session[:user_id]
+    end
 
-      def current_user
-        User.find(session[:user_id])
-      end
-
+    def current_user
+      User.find(session[:user_id])
+    end
   end
-
-
-
 
 end
