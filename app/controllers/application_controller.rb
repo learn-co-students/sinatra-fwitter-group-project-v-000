@@ -105,7 +105,9 @@ class ApplicationController < Sinatra::Base
     get '/tweets/:id'do
       if session[:user_id]
         #binding.pry #find a single tweet from :id
-        @tweet = Tweet.find_by(params[:id])
+        @tweet = Tweet.find_by_id(params[:id])
+        # binding.pry
+        flash[:message] = "You are logged in to view a tweet."
         erb :'/tweets/show_tweet'
       else
         flash[:message] = "You must be logged in to view a tweet."
@@ -113,22 +115,36 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    get '/tweets/:id/edit' do  #load edit form
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :'/tweets/edit_tweet'
+    get '/tweets/:id/edit' do #load edit form
+      @tweet = Tweet.find_by_id(params[:id])
+      if session[:user_id]
+         erb :'/tweets/edit_tweet'
+       else
+        redirect to '/login'
+       end
     end
 
-    patch '/tweets/:id' do #edit action
-    @tweet = Tweet.find_by_id(params[:id])
-    @tweet.content = params[:content]
-    @tweet.save
-    redirect to "/tweets/#{@tweet.id}"
+    patch '/tweets/:id/edit' do #edit action
+    #binding.pry
+        @tweet = Tweet.find_by_id(params[:id])
+        #binding.pry
+        if params["content"].empty?
+          redirect to "/tweets/#{@tweet.id}/edit"
+        else
+          @tweet.content = params[:content]
+          @tweet.save
+          redirect to "/tweets/#{@tweet.id}"
+        end
     end
 
     delete '/tweets/:id/delete' do #delete action
-    @tweet = Tweet.find_by_id(params[:id])
-    @tweet.delete
-    redirect to '/tweets'
+        @tweet = Tweet.find_by_id(params[:id])
+      if session[:user_id] == @tweet.user_id
+        @tweet.delete
+        redirect to '/tweets'
+      else
+        redirect to '/login'
+      end
     end
 
   helpers do
