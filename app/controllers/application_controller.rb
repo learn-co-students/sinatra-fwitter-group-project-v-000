@@ -27,10 +27,9 @@ class ApplicationController < Sinatra::Base
 
 
   get '/logout' do
-# So, 'pry' shows that session is 'nil', and redirects to '/'
     if logged_in?
       session.clear
-      redirect '/'
+      redirect '/login'
     else
       redirect '/login'
     end
