@@ -1,15 +1,15 @@
 <h1>Show Tweet</h1>
 <%=@tweet.content%>
 
-<form  action="/tweets/<%=@tweet.id%>" method="post">
+<form  action="/tweets/<%=@tweet.id%>/delete" method="post">
   <input type="hidden" name="_method" value="delete">
   <label>Delete Tweet</label>
   <textarea name="content" id="content" rows="4" cols="40">Edit tweet here...
   </textarea>
-  <input type="submit" value="Edit">
+  <input type="submit" value="Delete Tweet">
 </form>
 
-<form  action="/tweets/<%=@tweet.id%>" method="post">
+<form  action="/tweets/<%=@tweet.id%>/edit" method="post">
   <input type="hidden" name="_method" value="patch">
   <label>Edit Tweet</label>
   <textarea name="content" id="content" rows="4" cols="40">Edit tweet here...
