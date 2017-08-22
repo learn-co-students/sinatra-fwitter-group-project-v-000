@@ -84,10 +84,11 @@ class ApplicationController < Sinatra::Base
   end
 
   patch '/tweets/:id/edit' do
+    binding.pry
     @tweet = Tweet.find_by(params[:id])
     @tweet.content = params[:content]
     @tweet.save
-    redirect '/tweets'
+    redirect "/tweets/#{@tweet.id}"
   end
 
   delete '/tweets/:id/delete' do
