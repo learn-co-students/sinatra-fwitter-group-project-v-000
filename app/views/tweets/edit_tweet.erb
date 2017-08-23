@@ -1,0 +1,16 @@
+<h1> View and edit your Tweet #<%= @tweet.id %> </h1>
+
+<p>Your tweet as it is currently: <%= @tweet.content %></p>
+
+
+<form action="/tweets/<%=@tweet.id%>" method="POST" id="twittertype"> <!--textarea instead of input type="text". value submits, last just displays it in field-->
+    <h3>Edit Tweet <textarea id="tweet_id" name="content" value="<%=@tweet.content%>"><%=@tweet.content%> </textarea></h3>
+    <input type="submit" value="submit">
+</form>
+
+<br>
+
+<form method="POST" action="/tweets/<%=@tweet.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" id="delete" value="Delete Tweet">
+</form>
