@@ -1,0 +1,8 @@
+<h3><%= @username %></h3>
+<a href="/">View Tweets</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/logout">Log Out</a><br>
+
+<h3>Create tweet</h3>
+<form action="/tweets" method="POST">
+  <p>Tweet: <input type="text" name="content"></p>
+  <input type="submit" value="submit">
+</form>

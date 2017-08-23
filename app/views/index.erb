@@ -1,0 +1,10 @@
+<% if logged_in? %>
+  <h3>Welcome back <%= @username %>!</h3>
+  <p>
+    <a href="/tweets/new">New Tweet</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/tweets">View Tweets</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/logout">Log Out</a>
+  </p>
+<% else %>
+  <p>
+    <a href="/login">Log In</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/signup">Sign Up</a>
+  </p>
+<% end %>

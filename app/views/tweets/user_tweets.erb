@@ -1,0 +1,12 @@
+<% if @tweets == [] %>
+  <h3>Welcome, <%= @username %>, you have no tweets yet</h3>
+  <a href="/tweet/new">New Tweet</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/logout">Log Out</a>
+<% else %>
+  <h3>Welcome, <%= @username %>, here are your latest tweets!</h3>
+  <a href="/tweet">New Tweet</a>&nbsp&nbsp&nbsp-&nbsp&nbsp&nbsp<a href="/logout">Log Out</a><br>
+  <br>
+  <% @user.tweets.each do |tweet| %>
+    <a href="/tweets/<%= tweet.slug %>"><%= tweet.content %></a><br>
+    <br>
+  <% end %>
+<% end %>
