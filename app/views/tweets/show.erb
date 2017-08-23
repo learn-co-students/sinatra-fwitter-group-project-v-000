@@ -1,0 +1,12 @@
+<h2>Your newest Tweet</h2>
+<%= @tweet.content %>
+<br>
+
+<a href="/tweets">Back to all tweets</a>
+<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
+<form action="/tweets/<%=@tweet.id%>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <button type="submit">Delete Tweet</button>
+</form>
+
+<p><a href="/logout">Log out</a></p>
