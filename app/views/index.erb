@@ -1,0 +1,17 @@
+<h1>Welcome to Fwitter</h1>
+
+<h3>Current Users:</h3>
+  <% @users.each do |user| %>
+      <a href="/users/<%= user.username %>"><%= user.username %></a>
+<% end %>
+<br>
+<br>
+
+<h3>View Tweets</h3>
+<p><a class= "button" href="/tweets">View Tweets</a>
+
+<h3>Login</h3>
+<a class= "button" href="/login">Login</a>
+
+<h3>Create an Account</h3>
+<a class= "button" href="/signup">Sign Up</a>
