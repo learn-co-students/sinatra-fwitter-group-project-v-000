@@ -1,0 +1,18 @@
+<h1>Welcome, <%= @user.username %> to Fwitter</h1>
+<h2>Happy tweeting!</h2>
+  <% if !Tweet.all.empty? %>
+    <h3>All Tweets </h3>
+    <% Tweet.all.each do |tweet| %>
+      <a href="/tweets/<%= tweet.id %>/show">
+        <li> <%= tweet.content %></li>
+      </a>
+    <% end %>
+  <% else %>
+    <h3>There are no Tweets!  Click to Make One!</h3>
+  <% end %>
+
+<h3><a href="/tweets/new">Create a Tweet</a></h3>
+<br><br>
+<a href="/details">Account Details</a>
+
+<p><a href="/logout">Log Out</a></p>
