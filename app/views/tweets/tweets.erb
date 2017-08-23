@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fwitter</title>
+  </head>
+
+  <body>
+    <h1>Fwitter</h1><p>Welcome, @<%= @user.username %>! (<a href='/logout'>logout</a>)</h1>
+    <h2>Tweets | <a href='/tweets/new'>make a tweet</a></h2>
+
+    <ul style="list-style: none;"><% Tweet.all.reverse.each do |tweet| %>
+      <li><p style="font-size:160%;">@<%= User.find_by_id(tweet.user_id).username %>: <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></p></li>
+      <li><p style="font-size:80%;"><i><%= tweet.updated_at.strftime("%c %Z") %></i></p></li>
+      <% end %></ul>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fwitter | @<%= User.find(@tweet.user_id).username %></title>
+  </head>
+  <body>
+    <h1>Fwitter</h1>
+    <p>@<b><%= User.find(@tweet.user_id).username %></b> • <%= @tweet.created_at.strftime("%b %d, %Y") %></p>
+    <h2><%= @tweet.content %></h2>
+    <p><i>Last updated on <%= @tweet.updated_at.strftime("%c %Z") %></i></p>
+    <br>
+    <button type="button"><a href='/tweets'>Go back</a></button>
+    <button type="button"><a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a></button>
+    <br>
+    <br>
+    <form action="/tweets/<%= @tweet.id %>/delete" method="post">
+      <input id="hidden" type="hidden" name="_method" value="delete">
+      <input type="hidden" name="content">
+    <input type="submit" value="Delete Tweet">
+
+    </form>
+  </body>
+</html>
