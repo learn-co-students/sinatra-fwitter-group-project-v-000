@@ -1,0 +1,11 @@
+<h1>Tweets</h1>
+<p>Welcome,</p>
+<!-- all the tweets -->
+<!-- conditionally, show only a single user's tweets? -->
+
+<% @tweets.each do |tweet| %>
+
+<p><%= tweet.content %></p>
+<p>by @<%= tweet.user.username %></p>
+
+<% end %>
