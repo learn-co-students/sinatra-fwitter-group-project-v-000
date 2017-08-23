@@ -1,0 +1,17 @@
+<h1><%= @user.username.capitalize %>'s Profile</h1>
+<ol>
+<% @user.tweets.each do |tweet| %>
+  <li>
+    <a href="/tweets/<%= tweet.id %>">
+      <%= tweet.content[0..23] %><%= "..." if tweet.content.length > 24 %>
+    </a>
+  </li>
+<% end %>
+</ol>
+<p>
+  <% if @user == @current_user %>
+    <form action="/logout" method="post">
+      <input type="submit" value="Log Out">
+    </form>
+  <% end %>
+</p>
