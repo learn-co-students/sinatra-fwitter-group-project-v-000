@@ -1,0 +1,9 @@
+<h1> Welcome, <%=@user.username%></h1>
+<a href = "/logout">Log Out </a><br></br>
+<a href = "/users/<%=@user.slug%>">User Home Page</a>
+<h2> Fwitter Main Page </h2>
+<% Tweet.all.each do |tweet| %>
+<ul>
+  <li>@<%=tweet.user.username%> : <%=tweet.content%></li>
+</ul>
+<% end %>
