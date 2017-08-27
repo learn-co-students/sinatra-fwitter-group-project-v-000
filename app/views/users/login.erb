@@ -1,0 +1,9 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<form action="/login" method="POST">
+  <input type="string" name="username" id="username" placeholder="username"></input>
+  <input type="string" name="password" id="password" placeholder="password"></input>
+  <input type="submit" value="submit">
+</form>
