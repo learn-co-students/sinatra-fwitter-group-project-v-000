@@ -1,0 +1,9 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h1>Welcome, <%= @user.username %>!</h1>
+
+<% Tweet.all.each do |tweet| %>
+<h1><%= tweet.content %></h1>
+<% end %>
