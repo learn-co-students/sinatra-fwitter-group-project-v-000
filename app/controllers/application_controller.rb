@@ -54,7 +54,6 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets/new' do
     @user = User.find_by(session[:user_id])
-
     if params[:content] == ""
       redirect '/tweets/new'
     else
@@ -84,14 +83,19 @@ class ApplicationController < Sinatra::Base
   end
 
   patch '/tweets/:id/edit' do
-    binding.pry
     @tweet = Tweet.find_by(params[:id])
-    @tweet.content = params[:content]
-    @tweet.save
-    redirect "/tweets/#{@tweet.id}"
+    @user = User.find_by(session[:user_id])
+
+    if params[:content] == "" ||  session[:user_id] != @user.id
+      redirect "/tweets/#{@tweet.id}/edit"
+    else
+      @tweet.content = params[:content]
+      @tweet.save
+      redirect "/tweets/#{@tweet.id}"
+    end
   end
 
-  delete '/tweets/:id/delete' do
+  delete '/tweets/:id/delete' do # delete action working
     @tweet = Tweet.find_by(params[:id])
     if logged_in? && @tweet.user_id == session[:user_id]
       @tweet.delete
