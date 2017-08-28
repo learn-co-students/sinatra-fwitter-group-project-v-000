@@ -18,6 +18,12 @@ class ApplicationController < Sinatra::Base
 
   get "/tweets/new" do
     # CREATE TWEET form should be loaded
+    #redirect "/tweets/create_tweet"
+    follow_redirect!
+    #def test_should_signin_first_before_add_post
+    #get "/admin/posts/new"
+    #follow_redirect!
+    #end
   end
 
   post "/tweets" do
@@ -88,6 +94,7 @@ class ApplicationController < Sinatra::Base
       if @user && @user.authenticate(params[:password])
         session[:id] = @user[:id]
         redirect "/tweets"# redirect to "tweets/index" redirect to "/tweets" redirect to '/tweets'  redirect '/tweets' redirect '/tweets/index' redirect "tweets/index" redirect "/index"
+        #follow_redirect!
       else
         erb :'users/login', :locals => {:message => "*** The username and password provided do not match. Please try again. ***"}
       end
