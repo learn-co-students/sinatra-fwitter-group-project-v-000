@@ -19,18 +19,32 @@ class ApplicationController < Sinatra::Base
   get "/tweets/new" do
     # CREATE TWEET form should be loaded
     #redirect "/tweets/create_tweet"
-    follow_redirect!
     #def test_should_signin_first_before_add_post
     #get "/admin/posts/new"
     #follow_redirect!
+    #follow_redirect!()
     #end
+  end
+
+  get "/tweets" do
+    if logged_in?
+      @tweets = Tweet.all
+      @posts = []
+        @tweets.each do |t|
+          @posts << {User.find(t.user_id).username => t.content, user_id: t.user_id, id: t.id}
+        end
+        @user = User.find(session[:id])
+        erb :'tweets/index'
+    else
+      redirect "/login"
+    end
   end
 
   post "/tweets" do
     # CREATE TWEET form submitted
     @user = Helpers.current_user(session) if Helpers.is_logged_in?(session)
     if @user
-      redirect to "/tweets/tweets"
+      redirect "/tweets/tweets"
     else
       redirect "/login"
     end
@@ -89,14 +103,12 @@ class ApplicationController < Sinatra::Base
 
   post "/login" do
     # LOGIN submitted
-    #redirect to '/tweets' #redirect to "/tweets" #redirect '/tweets' #redirect "/tweets" #erb :index #redirect '/index'
     @user = User.find_by(username: params[:username])
       if @user && @user.authenticate(params[:password])
         session[:id] = @user[:id]
-        redirect "/tweets"# redirect to "tweets/index" redirect to "/tweets" redirect to '/tweets'  redirect '/tweets' redirect '/tweets/index' redirect "tweets/index" redirect "/index"
-        #follow_redirect!
+        redirect '/tweets' #redirect "/index"
       else
-        erb :'users/login', :locals => {:message => "*** The username and password provided do not match. Please try again. ***"}
+        erb :'users/login'
       end
   end
 
@@ -104,7 +116,7 @@ class ApplicationController < Sinatra::Base
     # LOGOUT submitted
     #clear the session hash
    session.clear
-   redirect ("/")
+   redirect ("/login")
  end
 
   helpers do
