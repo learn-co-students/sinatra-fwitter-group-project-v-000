@@ -115,9 +115,13 @@ class ApplicationController < Sinatra::Base
   get "/logout" do
     # LOGOUT submitted
     #clear the session hash
-   session.clear
-   redirect ("/login")
- end
+    if logged_in?
+      session.clear
+      redirect "/login"
+    else
+      redirect "/"
+    end
+  end
 
   helpers do
     def logged_in?
