@@ -123,6 +123,10 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get "/users/#{user.slug}" do
+
+  end
+
   helpers do
     def logged_in?
        !!current_user
