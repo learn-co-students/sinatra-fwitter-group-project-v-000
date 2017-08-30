@@ -70,7 +70,7 @@ class ApplicationController < Sinatra::Base
       if tweet && tweet.destroy
         redirect "/tweets"
       else
-        redirect "/tweets/#{tweet.id}"
+        redirect "/tweets/:id"
       end
   end
 
