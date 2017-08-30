@@ -18,7 +18,11 @@ class ApplicationController < Sinatra::Base
 
   get "/tweets/new" do
     # CREATE TWEET form should be loaded
-    redirect "/tweets"
+    if logged_in?
+      erb :"tweets/create_tweet"
+    else
+       redirect "/login"
+    end
   end
 
   get "/tweets" do
@@ -37,7 +41,7 @@ class ApplicationController < Sinatra::Base
 
   post "/tweets" do
     # CREATE TWEET form submitted
-    @user = Helpers.current_user(session) if Helpers.is_logged_in?(session)
+    @user = current_user(session) if is_logged_in?(session)
     if @user
       redirect "/tweets/tweets"
     else
