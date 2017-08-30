@@ -1,4 +1,5 @@
 <p>Welcome, <%= @user.username%>!</p>
+<a href="/tweets/new">Create a Tweet</a>
 <% @posts.each do |p| %>
   <% if p[:user_id] == session[:id] %>
   <br>

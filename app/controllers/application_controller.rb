@@ -18,12 +18,7 @@ class ApplicationController < Sinatra::Base
 
   get "/tweets/new" do
     # CREATE TWEET form should be loaded
-    #redirect "/tweets/create_tweet"
-    #def test_should_signin_first_before_add_post
-    #get "/admin/posts/new"
-    #follow_redirect!
-    #follow_redirect!()
-    #end
+    redirect "/tweets"
   end
 
   get "/tweets" do
