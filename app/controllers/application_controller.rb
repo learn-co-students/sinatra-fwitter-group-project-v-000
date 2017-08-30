@@ -25,6 +25,21 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  post "/tweets" do
+    # so if the user is not logged in we want to redirect to the log in page
+    # if the user is logged in but gives not content, then we want to redirect to the new page
+    # else we want to create our tweet and redirect to /tweets
+    if !logged_in?
+      redirect "/users/login"
+    elsif params[:content].empty?
+      redirect "/tweets/new"
+    else
+      @content = params[:content]
+      Tweet.create(content: @content, user_id: session[:id])
+      redirect "/tweets"
+    end
+  end
+
   get "/tweets" do
     if logged_in?
       @tweets = Tweet.all
@@ -39,15 +54,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post "/tweets" do
-    # CREATE TWEET form submitted
-    @user = current_user(session) if is_logged_in?(session)
-    if @user
-      redirect "/tweets/tweets"
-    else
-      redirect "/login"
-    end
-  end
+
 
   get "/tweets/:id" do
     # SHOW TWEET displays the information for a single tweets
@@ -59,7 +66,12 @@ class ApplicationController < Sinatra::Base
 
   get "/tweets/:id/edit" do
     # EDIT TWEET The form to edit a tweet should be loaded
-
+    tweet = current_user.tweets.find_by(:id => params[:id])
+      if tweet && tweet.destroy
+        redirect "/tweets"
+      else
+        redirect "/tweets/#{tweet.id}"
+      end
   end
 
   post "/tweets/:id" do
