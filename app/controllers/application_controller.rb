@@ -25,6 +25,20 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get "/tweets" do
+    if logged_in?
+      @tweets = Tweet.all
+      @posts = []
+        @tweets.each do |t|
+          @posts << {User.find(t.user_id).username => t.content, user_id: t.user_id, id: t.id}
+        end
+        @user = User.find(session[:id])
+        erb :'tweets/index'
+    else
+      redirect "/login"
+    end
+  end
+
   post "/tweets" do
     # so if the user is not logged in we want to redirect to the log in page
     # if the user is logged in but gives not content, then we want to redirect to the new page
@@ -40,23 +54,16 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get "/tweets" do
-    if logged_in?
-      @tweets = Tweet.all
-      @posts = []
-        @tweets.each do |t|
-          @posts << {User.find(t.user_id).username => t.content, user_id: t.user_id, id: t.id}
-        end
-        @user = User.find(session[:id])
-        erb :'tweets/index'
-    else
-      redirect "/login"
-    end
-  end
-
-
-
   get "/tweets/:id" do
+    #if logged_in?
+      #@tweets = Tweet.all
+      #@posts = []
+        #@tweets.each do |t|
+          #@posts << {User.find(t.user_id).username => t.content, user_id: t.user_id, id: t.id}
+        #end
+        erb :"/tweets/show_tweet"
+        #end
+
     # SHOW TWEET displays the information for a single tweets
     # create an edit link on the tweet show page.
     # DELETE TWEET The form to delete a tweet should be found on the tweet show page.
@@ -98,9 +105,9 @@ class ApplicationController < Sinatra::Base
     @user.save
     session[:user_id] = @user.id
       redirect to "/tweets" #redirect "/tweets
-      else
+    else
       redirect "/signup"
-      end
+    end
   end
 
   get "/login" do
