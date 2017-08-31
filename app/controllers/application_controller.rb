@@ -55,21 +55,24 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/tweets/:id" do
-    #if logged_in?
+    if logged_in?
       #@tweets = Tweet.all
       #@posts = []
         #@tweets.each do |t|
           #@posts << {User.find(t.user_id).username => t.content, user_id: t.user_id, id: t.id}
         #end
+    @tweet = current_user.tweets.find_by(:id => params[:id])
+    #Tweet.find_by.id
         erb :"/tweets/show_tweet"
-        #end
-
+    else
+      redirect "/login"
+    end
+  end
     # SHOW TWEET displays the information for a single tweets
     # create an edit link on the tweet show page.
     # DELETE TWEET The form to delete a tweet should be found on the tweet show page.
     # The delete form doesn't need to have any input fields, just a submit button
     # The form to delete a tweet should be submitted via a POST request to tweets/:id/delete
-  end
 
   get "/tweets/:id/edit" do
     # EDIT TWEET The form to edit a tweet should be loaded

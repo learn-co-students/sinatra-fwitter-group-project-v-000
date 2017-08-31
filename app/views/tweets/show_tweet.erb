@@ -1,2 +1,3 @@
-<form><action="/tweets" method="POST" input type="submit" value="Delete Tweet" id="delete"></input></form>
-<!-- %= @tweet.current_user %> %= Tweet.current_user %> %= Tweet.user_id %> %= Tweet.id %> %= @tweet.id %> % @tweet.id %>
+<form><action="/tweets/:id/delete" method="POST" input type="submit" value="Delete Tweet" id="delete"></input></form>
+<%= @tweet.content %>
+<a href="/tweets/edit_tweet">Edit Tweet</a>
