@@ -1,0 +1,22 @@
+<h1>Welcome, <%= @user.username %></h1>
+ <br>
+
+ <% if !@tweets.empty? %>
+   <ul>
+   <% @tweets.each do |tweet| %>
+     <% user = User.find(tweet.user_id) %>
+     <p><a href="/users/<%=user.slug%>"><%= user.username %></a><br>
+     <%= tweet.content %><br></br>
+     <a href="/tweets/<%= tweet.id %>">Open Tweet</a></p>
+   <% end %>
+   </ul>
+ <% end %>
+ <br></br>
+ 
+ <a href="/tweets/new">Create New Tweet</a>
+ <br><br>
+
+ <a href="/users/show">My Tweets</a>
+ <br><br>
+
+ <a href="/logout">Log Out</a>
