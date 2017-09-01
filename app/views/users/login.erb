@@ -5,6 +5,11 @@
 	<title>Fwitter - Log In</title>
 </head>
 <body>
+
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
+
 	<h1>Log In to Fwitter!</h1>
 
 	<form action="/login" method="POST">

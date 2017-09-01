@@ -1,5 +1,8 @@
 class UsersController < ApplicationController 
+
+	
 	get '/signup' do
+
 		erb :'users/signup'
 	end
 
@@ -22,6 +25,7 @@ class UsersController < ApplicationController
 			session[:user_id] = user.id
 			redirect "/users/#{user.username}"
 		else
+			flash[:message] = "Nope."
 			redirect "/login"
 		end
 	end
