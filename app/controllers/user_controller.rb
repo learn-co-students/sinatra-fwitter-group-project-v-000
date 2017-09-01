@@ -11,7 +11,8 @@ class UsersController < ApplicationController
 		if user.save
 			redirect '/login'
 		else
-			redirect '/signup'	
+			flash[:message] = "Invalid input! Please try again!"
+			erb :'users/signup'	
 		end
 	end
 
@@ -25,8 +26,8 @@ class UsersController < ApplicationController
 			session[:user_id] = user.id
 			redirect "/users/#{user.username}"
 		else
-			flash[:message] = "Nope."
-			redirect "/login"
+			flash[:message] = "Invalid username or password! Please try again!"
+			erb :'users/login'
 		end
 	end
 
