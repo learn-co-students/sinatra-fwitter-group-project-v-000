@@ -12,6 +12,7 @@ class TweetsController < ApplicationController
 			erb  :'tweets/feed'
 		else
 			@user = User.find(session[:user_id])
+			flash[:message] = "Nope."
 			erb :'users/show'
 		end
 	end
