@@ -84,14 +84,13 @@ class ApplicationController < Sinatra::Base
   post "/tweets/:id" do
     @tweet = current_user.tweets.find_by(:id => params[:id])
     @content = params[:content]
-    @tweet.update(content: @content)
-    if params[:content].empty?
-      redirect "/tweets/#{@tweet.id}"
-
+    if !logged_in?
+      redirect "/users/login"
+    elsif params[:content].empty?
+      redirect "/tweets/#{@tweet.id}/edit"
     else
-      #@tweet = current_user.tweets.find_by(:id => params[:id])
-      #@content = params[:content]
       @tweet.update(content: @content)
+      redirect "/tweets/#{@tweet.id}"
     # EDIT TWEET The form should be submitted
     end
   end
