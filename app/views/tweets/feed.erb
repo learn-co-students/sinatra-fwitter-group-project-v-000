@@ -1,0 +1,12 @@
+<h1>Fwitter - Tweets</h1>
+
+<% if @tweets.size !=0 %>
+	<ul>
+		<% @tweets.reverse.each do |tweet| %>
+			<a href="tweets/<%= tweet.id %>"><li><%= tweet.content %></li></a> <a href="/users/<%=tweet.user.username%>"><%=tweet.user.username%></a>
+		<% end %>
+	</ul>
+<% else %>
+	<p>No tweets to show.</p>
+<% end %>
+	
