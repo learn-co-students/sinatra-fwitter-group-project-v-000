@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Fwitter - Edit Tweet</title>
-</head>
-<body>
-	<h1>Fwitter - Edit Tweet</h1>
+<h1>Fwitter - Edit Tweet</h1>
 
-	<h3>Change what was on your mind.</h3>
+<h3>Change what was on your mind.</h3>
 
-	<form action="/tweets/<%=@tweet.id%>" method="POST">
-		<input id="hidden" type="hidden" name="_method" value="patch"> 
-		<textarea name="content" id="" cols="30" rows="10"></textarea>
-		<input type="submit" value="Save Edit">
-	</form>
-</body>
-</html>
+<form action="/tweets/<%=@tweet.id%>" method="POST">
+	<input id="hidden" type="hidden" name="_method" value="patch"> 
+	<textarea name="content" id="" cols="30" rows="10" placeholder="<%= @tweet.content %>"></textarea>
+	<br>
+	<input type="submit" value="Save Edit">
+
+	<% if flash.has?(:message) %>
+    	<%= flash[:message] %>
+	<% end %>
+</form>

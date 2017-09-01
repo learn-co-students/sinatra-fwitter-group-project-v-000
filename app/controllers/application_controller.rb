@@ -11,7 +11,13 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-  	erb :home
+    if logged_in?
+      @user = User.find(session[:user_id])
+      @tweets = Tweet.all
+      erb :'tweets/feed'
+    else
+  	   erb :home
+    end
   end
 
   helpers do 

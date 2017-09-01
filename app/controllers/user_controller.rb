@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 	end
 
 	post '/signup' do
-		user = User.create(username: params[:username], password: params[:password], email: params[:email])
-		if user.save
+		@user = User.create(username: params[:username], password: params[:password], email: params[:email])
+		if @user.save
 			redirect '/login'
 		else
 			flash[:message] = "Invalid input! Please try again!"
@@ -21,10 +21,10 @@ class UsersController < ApplicationController
 	end
 
 	post '/login' do
-		user = User.find_by(username: params[:username])
-		if user && user.authenticate(params[:password])
-			session[:user_id] = user.id
-			redirect "/users/#{user.username}"
+		@user = User.find_by(username: params[:username])
+		if @user && @user.authenticate(params[:password])
+			session[:user_id] = @user.id
+			redirect "/users/#{@user.username}"
 		else
 			flash[:message] = "Invalid username or password! Please try again!"
 			erb :'users/login'

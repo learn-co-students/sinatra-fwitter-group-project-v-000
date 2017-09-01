@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Fwitter - Tweet</title>
-</head>
-<body>
-	
-	<h1>Fwitter - Tweet</h1>
+<h1>Fwitter - Tweet</h1>
 
-	<h3><%= @tweet.content %></h3>
-	<p><%= @tweet.user.username %></p>
+<h3><%= @tweet.content %></h3>
+<p><%= @tweet.user.username %></p>
 
-	<% if logged_in? && @tweet.user_id == session[:user_id] %>
-		<a href="/tweets/<%=@tweet.id%>/edit">Edit</a>
-		<form action="/tweets/<%=@tweet.id%>/delete" method="POST">
-			<input id="hidden" type="hidden" name="_method" value="delete"> 
-			<input type="submit" value="Delete">
-		</form>
-	<% end %>
-
-</body>
-</html>
+<% if logged_in? && @tweet.user_id == session[:user_id] %>
+	<a href="/tweets/<%=@tweet.id%>/edit">Edit</a>
+	<form action="/tweets/<%=@tweet.id%>/delete" method="POST">
+		<input id="hidden" type="hidden" name="_method" value="delete"> 
+		<input type="submit" value="Delete">
+	</form>
+<% end %>
