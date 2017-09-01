@@ -10,10 +10,10 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :index
     # HOME PAGE
     # add the Signup link to the home page
     # create a view that will eventually link to both a login page and signup page.
+    erb :index
   end
 
   get "/tweets/new" do
@@ -55,37 +55,45 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/tweets/:id" do
-    if logged_in?
-      #@tweets = Tweet.all
-      #@posts = []
-        #@tweets.each do |t|
-          #@posts << {User.find(t.user_id).username => t.content, user_id: t.user_id, id: t.id}
-        #end
-    @tweet = current_user.tweets.find_by(:id => params[:id])
-    #Tweet.find_by.id
-        erb :"/tweets/show_tweet"
-    else
-      redirect "/login"
-    end
-  end
     # SHOW TWEET displays the information for a single tweets
     # create an edit link on the tweet show page.
     # DELETE TWEET The form to delete a tweet should be found on the tweet show page.
     # The delete form doesn't need to have any input fields, just a submit button
     # The form to delete a tweet should be submitted via a POST request to tweets/:id/delete
+    if logged_in?
+    @tweet = current_user.tweets.find_by(:id => params[:id])
+      erb :"/tweets/show_tweet"
+    else
+      redirect "/login"
+    end
+  end
 
   get "/tweets/:id/edit" do
     # EDIT TWEET The form to edit a tweet should be loaded
-    tweet = current_user.tweets.find_by(:id => params[:id])
-      if tweet && tweet.destroy
-        redirect "/tweets"
+    # expect(page.body).to include(tweet.content)
+    @tweet = current_user.tweets.find_by(:id => params[:id])
+      #tweet.content
+      if @tweet
+        erb :"tweets/edit_tweet"
+
       else
-        redirect "/tweets/:id"
+        redirect "/tweets"
       end
   end
 
   post "/tweets/:id" do
+    @tweet = current_user.tweets.find_by(:id => params[:id])
+    @content = params[:content]
+    @tweet.update(content: @content)
+    if params[:content].empty?
+      redirect "/tweets/#{@tweet.id}"
+
+    else
+      #@tweet = current_user.tweets.find_by(:id => params[:id])
+      #@content = params[:content]
+      @tweet.update(content: @content)
     # EDIT TWEET The form should be submitted
+    end
   end
 
   get "/signup" do
@@ -103,11 +111,10 @@ class ApplicationController < Sinatra::Base
     # SIGN UP submitted to process the form submission.
     #processes the form submission should create the user and save it to the database.
     if params[:username] != "" && params[:email] != "" && params[:password] != ""
-
     @user = User.new(username: params[:username], email: params[:email], password: params[:password])
     @user.save
     session[:user_id] = @user.id
-      redirect to "/tweets" #redirect "/tweets
+      redirect to "/tweets"
     else
       redirect "/signup"
     end
@@ -127,7 +134,7 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by(username: params[:username])
       if @user && @user.authenticate(params[:password])
         session[:id] = @user[:id]
-        redirect '/tweets' #redirect "/index"
+        redirect '/tweets'
       else
         erb :'users/login'
       end
@@ -152,14 +159,10 @@ class ApplicationController < Sinatra::Base
   helpers do
     def logged_in?
        !!current_user
-       #!!session[:user_id] #:id
-      #@current_user ||= User.find(session[:user_id]) if session[:user_id]
     end
 
     def current_user
       @current_user ||= User.find(session[:id]) if session[:id]
-      #User.find(session[:id ]) #:user_id
-      #redirect_to '/login' unless current_user
       end
     end
 end
