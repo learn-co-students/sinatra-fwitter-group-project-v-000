@@ -1,0 +1,6 @@
+<h3>tweet tweet tweet</h3>
+<% User.all.each do |him| %>
+  <h3><%= him.username %> is tweeting!</h3>
+  <h5><%= him.email %></h5>
+  <h5><%= him.password %></h5>
+<%end%>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+  <body>
+      <h1>Welcome, </h1>
+      <h4><%= @user.username %> is logged in </h4>
+
+        <% Tweet.all.each do |tweet| %>
+            <p><%= tweet.content %></p>
+        <%end%>
+      <a href="/tweets/new"> Click here for a new tweet </a>
+      <a href="/logout">Logout</a>
+  </body>
+</html>
