@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+  <body>
+    <h1>Oh wow check out this Fweet!!!!!</h1>
+
+    <h4>  users name </h4>
+
+    <p> <%= @tweet.content %> </p>
+
+    <form method="POST" action="/tweets/<%=@tweet.id%>/delete">
+      <input id="hidden" type="hidden" name="_method" value="delete">
+      <input type="submit" value="submit">
+    </form>
+
+    <a href="/tweets/<%=@tweet.id%>/edit">Click here if you would like to Edit the Fweet</a>
+    <a href="/tweets/new"> Tweet Again </a>
+    <a href="/tweets"> View all tweets </a>
+  </body>
+</html>
