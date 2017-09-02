@@ -1,0 +1,8 @@
+<h2>Welcome, read all tweets below:</h2>
+
+<% @tweets.each do |tweet| %>
+<p><%= tweet.content %></p>
+<% end %>
+
+<a href="/tweets/new"> Click here to Tweet</a> <br>
+<a href="/logout"> Logout </a>
