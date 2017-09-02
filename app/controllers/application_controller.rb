@@ -60,25 +60,28 @@ class ApplicationController < Sinatra::Base
     # DELETE TWEET The form to delete a tweet should be found on the tweet show page.
     # The delete form doesn't need to have any input fields, just a submit button
     # The form to delete a tweet should be submitted via a POST request to tweets/:id/delete
-    if logged_in?
+    if !logged_in?
+      redirect "/login"
+    else
     @tweet = current_user.tweets.find_by(:id => params[:id])
       erb :"/tweets/show_tweet"
-    else
-      redirect "/login"
     end
   end
 
   get "/tweets/:id/edit" do
     # EDIT TWEET The form to edit a tweet should be loaded
-    # expect(page.body).to include(tweet.content)
-    @tweet = current_user.tweets.find_by(:id => params[:id])
-      #tweet.content
-      if @tweet
-        erb :"tweets/edit_tweet"
-      else
-        redirect "/tweets"
-      end
+
+    if !logged_in?
+      redirect "/login"
+
+    else @tweet = current_user.tweets.find_by(:id => params[:id])
+      @tweet
+      erb :"tweets/edit_tweet"
+    #else
+      #redirect "/tweets"
+    end
   end
+
 
   post "/tweets/:id" do
     @tweet = current_user.tweets.find_by(:id => params[:id])
