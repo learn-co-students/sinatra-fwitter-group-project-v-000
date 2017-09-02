@@ -75,7 +75,6 @@ class ApplicationController < Sinatra::Base
       #tweet.content
       if @tweet
         erb :"tweets/edit_tweet"
-
       else
         redirect "/tweets"
       end
