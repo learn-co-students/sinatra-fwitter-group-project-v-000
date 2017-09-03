@@ -84,14 +84,12 @@ class ApplicationController < Sinatra::Base
 
   post "/tweets/:id/delete" do
     @tweet = current_user.tweets.find_by(:id => params[:id])
-
     if logged_in? && @tweet
       @tweet.destroy
     #does not let a user delete a tweet they did not create
-
-
+    else
+      erb :"/login"
     end
-
   end
 
   post "/tweets/:id" do
