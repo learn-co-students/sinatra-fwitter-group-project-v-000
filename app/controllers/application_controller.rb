@@ -87,17 +87,19 @@ class ApplicationController < Sinatra::Base
   end
 
   delete "/tweets/:id/delete" do
-    @tweet = current_user.tweets.find_by(:id => params[:id])
-    if logged_in? && @tweet
+    @tweet = Tweet.find_by(:id => params[:id])
+    if logged_in? && @tweet.user_id == current_user.id
       @tweet.destroy
-      erb :"tweets/show_tweet"
+      redirect "/tweets"
     #does not let a user delete a tweet they did not create
-    else
+  elsif !(@tweet.user_id == current_user.id)
+    redirect "/tweets"
+  else
       erb :"/login"
     end
   end
 
-  post "/tweets/:id" do
+  patch "/tweets/:id" do
     @tweet = current_user.tweets.find_by(:id => params[:id])
     @content = params[:content]
     if !logged_in?
