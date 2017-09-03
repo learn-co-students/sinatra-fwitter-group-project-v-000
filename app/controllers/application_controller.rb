@@ -63,7 +63,7 @@ class ApplicationController < Sinatra::Base
     if !logged_in?
       redirect "/login"
     else
-    @tweet = current_user.tweets.find_by(:id => params[:id])
+      @tweet = Tweet.all.find_by(:id => params[:id])
       erb :"/tweets/show_tweet"
     end
   end
@@ -74,18 +74,23 @@ class ApplicationController < Sinatra::Base
     if !logged_in?
       redirect "/login"
 
-    else @tweet = current_user.tweets.find_by(:id => params[:id])
-      @tweet
-      erb :"tweets/edit_tweet"
+    else #tweet id: 40010 taylor swifts tweet
+      @tweet = current_user.tweets.find_by(:id => params[:id])
+      if @tweet
+        erb :"tweets/edit_tweet"
+      else
+        redirect to '/tweets'
+      end
     #else
       #redirect "/tweets"
     end
   end
 
-  post "/tweets/:id/delete" do
+  delete "/tweets/:id/delete" do
     @tweet = current_user.tweets.find_by(:id => params[:id])
     if logged_in? && @tweet
       @tweet.destroy
+      erb :"tweets/show_tweet"
     #does not let a user delete a tweet they did not create
     else
       erb :"/login"
