@@ -82,6 +82,14 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  post "/tweets/:id/delete" do
+    @tweet = current_user.tweets.find_by(:id => params[:id])
+
+    if logged_in? && @tweet
+      @tweet.destroy
+    end
+
+  end
 
   post "/tweets/:id" do
     @tweet = current_user.tweets.find_by(:id => params[:id])
@@ -96,6 +104,7 @@ class ApplicationController < Sinatra::Base
     # EDIT TWEET The form should be submitted
     end
   end
+
 
   get "/signup" do
     # SIGN UP The form to sign up should be loaded
