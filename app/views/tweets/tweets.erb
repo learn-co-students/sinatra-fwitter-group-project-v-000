@@ -1,1 +1,9 @@
 <h1>Welcome, <%= current_user.username if logged_in? %></h1>
+
+
+	<% @tweets.each do |tweet| %>
+		<div class="tweet--card">
+			<h3><%= tweet.user.username %> <%= "@#{tweet.user.slug}" %></h3>
+			<p><%= tweet.content %></p>
+		</div>
+	<% end %>

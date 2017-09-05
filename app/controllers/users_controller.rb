@@ -38,6 +38,11 @@ class UsersController < ApplicationController
 		end
 	end
 
+	get '/users/:slug' do
+		@user = User.find_by_slug(params[:slug])
+		erb :'users/show'
+	end
+
 	post '/login' do
 		if @user = User.find_by(:username => params[:username]).try(:authenticate, params[:password])   
 			session[:id] = @user.id
