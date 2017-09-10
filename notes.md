@@ -27,11 +27,11 @@ Routes
 [x] get '/' => homepage
 [ ] get '/tweets/new' => create a new tweet; tweet gets created and saved to db (cannot be blank!)
 [x] get '/tweets' => show all tweets on twitter
-[ ] post '/tweets' => process new tweet request
-[ ] get '/tweets/:id' => view a single tweet; has link to edit tweet; option to delete tweet
+[x] post '/tweets' => process new tweet request
+[x] get '/tweets/:id' => view a single tweet; has link to edit tweet; option to delete tweet
 [ ] get '/tweets/:id/edit' => edit a single tweet
-[ ] post '/tweets/:id' => process edit request
-[ ] post '/tweets/:id/delete' => delete a tweet
+[ ] patch '/tweets/:id' => process edit request
+[x] delete '/tweets/:id/delete' => delete a tweet
 [x] get '/signup' => form to create user - username, email and password
 [x] post '/signup' => create user and persist db, after successful sign up the user is logged in
 [x] get 'login' => display the login form
@@ -40,9 +40,9 @@ Routes
 
 Views - remember that a user can only CRUD their own tweets!!!
 [x] index.erb => homepage with links to login and signup pages
-[ ] create_tweet.erb => create a new tweet
+[x] create_tweet.erb => create a new tweet
 [ ] edit_tweet.erb => edit a tweet
-[ ] show_tweet.erb => show a single tweet
+[x] show_tweet.erb => show a single tweet
 [x] tweets.erb => show all tweets by a user (?)
 [x] create_user.erb => user sign up form; only logged out users can see
 [x] login.erb => user login page
@@ -53,3 +53,5 @@ Misc
 [ ] add flash messages
 [ ] add lines between divs on Fwitter main feed page
 [ ] clean up layout styling
+[ ] review the login/logout issues
+[ ] is there a reason you wouldn't use helper methods in the controllers? why !session[:user_id] vs logged_in?
