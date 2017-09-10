@@ -1,0 +1,5 @@
+<h3>Here's what you have to say, <%= @user.username %>!</h3>
+
+<% @user.tweets.each do |t| %>
+  <li><%= tweet.content %></li>
+<% end %>
