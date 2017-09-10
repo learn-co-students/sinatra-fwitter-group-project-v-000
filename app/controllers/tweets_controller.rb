@@ -8,17 +8,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets' do
-    @user = current_user
-    if params[:content].empty?
-      redirect to '/tweets/new'
-    else
-      @tweet = @user.tweets.build(params)
-      @user.save
-      redirect to "/tweets/#{@tweet.id}"
-    end
-  end
-
   get '/tweets/new' do
     if logged_in?
       erb :"tweets/create"
@@ -27,8 +16,8 @@ class TweetsController < ApplicationController
     end
   end
 
-  get '/tweet/:id' do
-    @tweet = Tweet.find_by_id(params[:id])
+  get '/tweets/:id' do
+    @tweet = Tweet.find(params[:id])
     if logged_in?
       erb :"tweets/show"
     else
@@ -45,6 +34,7 @@ class TweetsController < ApplicationController
       end
     else
       redirect to '/login'
+    end
   end
 
   patch '/tweets/:id' do
@@ -53,6 +43,17 @@ class TweetsController < ApplicationController
       redirect to "/tweets/#{@tweet.id}/edit"
     else
       @tweet.update(params[:tweet])
+    end
+  end
+
+  post '/tweets' do
+    @user = current_user
+    if params[:content].empty?
+      redirect to '/tweets/new'
+    else
+      @tweet = @user.tweets.build(params)
+      @user.save
+      redirect to "/tweets/#{@tweet.id}"
     end
   end
 
