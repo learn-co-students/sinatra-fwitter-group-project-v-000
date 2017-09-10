@@ -1,6 +1,12 @@
-<h1>Welcome, <%=current_user.username%></h1>
-<p>this is the tweets index for a user</p>
+<h1>What's Happening on Fwitter Today</h1>
+<p>this is the main Fwitter feed</p>
 
-<form action="/logout" method="get">
-  <input type="button" name="Logout" value="Logout">
-</form>
+<%Tweet.all.each do |t|%>
+  <div>
+
+    <p><strong><%=User.find(t.user_id).username%></strong>
+      <br>
+      <%=t.content%>
+    </p>
+  </div>
+<%end%>

@@ -1,10 +1,10 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    if logged_in?
-      erb :'/tweets/tweets'
+    if !session[:user_id]
+      redirect to '/login'
     else
-      redirect to '/'
+      erb :'/tweets/tweets'
     end
   end
 
