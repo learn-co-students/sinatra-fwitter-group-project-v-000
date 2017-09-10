@@ -1,0 +1,14 @@
+<!--protect this view so that only logged out users can view it-->
+<% if !logged_in? %>
+<h1>Sign up to join Fwitter</h1>
+<h3>Create your account below.</h3>
+<form action="/signup" method="post">
+
+<h3><input type="text" name="username" placeholder="Username"></h3>
+<h3><input type="text" name="email" placeholder="Email"></h3>
+<h3><input type="text" name="password" placeholder="Password"></h3>
+
+<input type="submit" value="Create Your Account">
+
+</form>
+<%end%>

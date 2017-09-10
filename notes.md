@@ -2,17 +2,17 @@ TO DO
 [x] Set up directories and files
 
 Models & Migrations
-[ ] Create User model
-[ ] Create Tweet model
-[ ] Users have username (string), email (string), password (string)
-[ ] A User has_many :tweets
-[ ] A User has_secure_password
-[ ] Tweets have content (string)
-[ ] A Tweet belongs_to :user
-[ ] Create Migrations
+[x] Create User model
+[x] Create Tweet model
+[x] Users have username (string), email (string), password (string)
+[x] A User has_many :tweets
+[x] A User has_secure_password
+[x] Tweets have content (string) and user_id (for association)
+[x] A Tweet belongs_to :user
+[x] Create Migrations
 
 Controllers
-[ ] ApplicationController
+[x] ApplicationController
 
 Helper Methods
 [ ] #current_user => determine who the current user is based on the session id (?)
@@ -24,7 +24,7 @@ Login
 [ ] seed data?
 
 Routes
-[ ] get '/' => homepage
+[x] get '/' => homepage
 [ ] get '/tweets/new' => create a new tweet; tweet gets created and saved to db (cannot be blank!)
 [ ] post '/tweets' => process new tweet request
 [ ] get '/tweets/:id' => view a single tweet; has link to edit tweet; option to delete tweet
