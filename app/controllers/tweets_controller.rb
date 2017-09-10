@@ -20,7 +20,7 @@ class TweetsController < ApplicationController
   post '/tweets' do
     tweet = Tweet.new(params)
     if logged_in? && tweet.save
-      current_user.tweets << tweet
+      @current_user.tweets << tweet
       redirect to "/tweets/#{tweet.id}"
       # why does this think there's no '/tweets/:id' route?
     else

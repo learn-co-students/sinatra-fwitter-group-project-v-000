@@ -25,12 +25,12 @@ Login
 
 Routes
 [x] get '/' => homepage
-[ ] get '/tweets/new' => create a new tweet; tweet gets created and saved to db (cannot be blank!)
+[x] get '/tweets/new' => create a new tweet; tweet gets created and saved to db (cannot be blank!)
 [x] get '/tweets' => show all tweets on twitter
 [x] post '/tweets' => process new tweet request
 [x] get '/tweets/:id' => view a single tweet; has link to edit tweet; option to delete tweet
-[ ] get '/tweets/:id/edit' => edit a single tweet
-[ ] patch '/tweets/:id' => process edit request
+[x] get '/tweets/:id/edit' => edit a single tweet
+[x] patch '/tweets/:id' => process edit request
 [x] delete '/tweets/:id/delete' => delete a tweet
 [x] get '/signup' => form to create user - username, email and password
 [x] post '/signup' => create user and persist db, after successful sign up the user is logged in
@@ -55,3 +55,5 @@ Misc
 [ ] clean up layout styling
 [ ] review the login/logout issues
 [ ] is there a reason you wouldn't use helper methods in the controllers? why !session[:user_id] vs logged_in?
+[ ] create css stylesheet
+[ ] can #current_user be used more in the controllers?
