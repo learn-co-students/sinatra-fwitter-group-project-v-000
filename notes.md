@@ -33,7 +33,7 @@ Routes
 [ ] post '/tweets/:id/delete' => delete a tweet
 [x] get '/signup' => form to create user - username, email and password
 [ ] post '/signup' => create user and persist db, after successful sign up the user is logged in
-[ ] get 'login' => display the login form
+[x] get 'login' => display the login form
 [ ] post '/login' => process the login and add the user_id to the sessions hash
 [ ] get '/logout' => clear session
 
@@ -47,3 +47,6 @@ Views - remember that a user can only CRUD their own tweets!!!
 [ ] login.erb => user login page
 [ ] show.erb => show user information; logged out users can't see this
 [x] layout.erb => html template for site
+
+Misc
+[ ] add flash messages
