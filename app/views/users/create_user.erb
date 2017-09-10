@@ -1,5 +1,6 @@
 <!--protect this view so that only logged out users can view it-->
-<% if !logged_in? %>
+# <% if !logged_in? %>
+ <!--check if the user can see the page?-->
 <h1>Sign up to join Fwitter</h1>
 <h3>Create your account below.</h3>
 <form action="/signup" method="post">
@@ -11,4 +12,4 @@
 <input type="submit" value="Create Your Account">
 
 </form>
-<%end%>
+# <%end%>
