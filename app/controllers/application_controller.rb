@@ -9,4 +9,24 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "unlockable"
   end
 
+  get '/' do
+    if logged_in?
+      get '/tweets'
+    else
+      erb :index
+    end
+  end
+
+  helpers do
+
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
+    end
+
+  end
+
 end
