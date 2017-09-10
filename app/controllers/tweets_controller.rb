@@ -39,19 +39,35 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    # edit and update the tweet
-    redirect to "/tweets/#{@tweet.id}"
+    @tweet = Tweet.find(params[:id])
+    if params[:content].empty?
+      redirect to "/tweets/#{@tweet.id}/edit"
+    else
+      @tweet.update(content: params[:content])
+      redirect to "/tweets/#{@tweet.id}"
+    end
   end
 
   get '/tweets/:id/edit' do
-    # if the current user is the tweet creator, then they can view form to edit
-    # else redirect them elsewhere and show a flash message?
-    erb :'/tweets/edit_tweet'
+    # is this really the best way to handle this?
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      if session[:user_id] == @tweet.id
+        erb :'/tweets/edit_tweet'
+      end
+    else
+      # add a flash message here
+      redirect to '/login'
+    end
   end
 
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
-    @tweet.destroy
+    if logged_in? && session[:user_id] == @tweet.id
+      @tweet.destroy
+    else
+      redirect to '/tweets'
+    end
   end
 
 end
