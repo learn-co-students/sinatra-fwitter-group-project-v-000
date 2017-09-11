@@ -3,20 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title>Fwitter</title>
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
   </head>
   <body>
     <header>
-      <nav>
+      <div id="navbar">
         <% if logged_in? %>
-          <strong>Welcome, <%=current_user.username%>!</strong>
-          <a href="/logout">Log Out</a> |
-          <a href="/users/<%=current_user.slug%>">Your Tweets</a> |
-          <a href="/tweets/new">Create Tweet</a>
+          <em style="font-size: 18px">Welcome, <%=current_user.username%>!</em>
+          <a href="/tweets/new" class="button">New Tweet</a>
+          <a href="/users/<%=current_user.slug%>" class="button">Your Tweets</a>
+          <a href="/logout" class="button">Log Out</a>
         <% else %>
-          <a href="/signup">Sign Up</a>
-          <a href="/login">Log In</a>
+          <a href="/signup" class="button">Sign Up</a>
+          <a href="/login" class="button">Log In</a>
         <% end %>
-      </nav>
+      </div>
     </header>
     <!-- create a nav bar that allows people to login or logout or signup -->
     <%=yield%>

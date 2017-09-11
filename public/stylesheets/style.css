@@ -1,0 +1,44 @@
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  padding: 5px 5px 0px 5px;
+}
+
+#navbar nav {
+  border-left: 1px solid #00BCE1;
+}
+
+#navbar nav a {
+  display: inline-block;
+  width: 16.6666667%;
+  margin: 0;
+  padding: 22px 0;
+  text-transform: uppercase;
+  color: black;
+  text-align: center;
+  border-right: 1px solid #00BCE1;
+  text-decoration: none;
+  font: 1em "Trebuchet MS", Arial, sans-serif;
+}
+
+header {
+  padding: 10px;
+}
+
+.button {
+    background-color: #00BCE1;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    /*cursor: pointer;*/
+}
