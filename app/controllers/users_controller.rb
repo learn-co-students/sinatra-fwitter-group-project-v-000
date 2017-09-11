@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user = User.new(params)
     if @user.save
       session[:user_id] = @user.id
-
+      
       redirect to '/tweets'
     else
       # show a message about invalid sign up - could use render to show?
