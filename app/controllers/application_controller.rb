@@ -10,11 +10,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    if logged_in?
-      get '/tweets'
-    else
+    # if logged_in?
+    #   get '/tweets'
+    # else
       erb :index
-    end
+    #end
   end
 
   helpers do

@@ -47,15 +47,25 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    @user = current_user
-    if params[:content].empty?
-      redirect to '/tweets/new'
+    if params[:content] == ""
+      redirect to "/tweets/new"
     else
-      @tweet = @user.tweets.build(params)
-      @user.save
+      user = User.find_by_id(session[:user_id])
+      @tweet = Tweet.create(:content => params[:content], :user_id => user.id)
       redirect to "/tweets/#{@tweet.id}"
     end
   end
+
+  # post '/tweets' do
+  #   @user = current_user
+  #   if params[:content].empty?
+  #     redirect to '/tweets/new'
+  #   else
+  #     @tweet = @user.tweets.build(params)
+  #     @user.save
+  #     redirect to "/tweets/#{@tweet.id}"
+  #   end
+  # end
 
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id])
