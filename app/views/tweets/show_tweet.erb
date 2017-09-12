@@ -1,3 +1,11 @@
+<p style="color: red">
+  <em>
+    <% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+  </em>
+</p>
+
 <h3>Your Tweet</h3>
 
 <p><%=@tweet.content%></p>
@@ -7,6 +15,4 @@
   <input type="submit" value="Delete Tweet">
 </form>
 
-<form action="/tweets/<%=@tweet.id%>/edit" method="get">
-  <input type="submit" value="Edit Tweet">
-</form>
+<a href="/tweets/<%=@tweet.id%>/edit" class="button">Edit Tweet</a>

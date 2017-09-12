@@ -1,3 +1,11 @@
+<p style="color: red">
+  <em>
+    <% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+  </em>
+</p>
+
 <h1><%=current_user.username%>'s Tweets</h1>
 
 <ul>

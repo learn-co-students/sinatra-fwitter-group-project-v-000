@@ -1,9 +1,13 @@
+require 'rack-flash'
+
 class TweetsController < ApplicationController
+  use Rack::Flash
 
   get '/tweets' do
     if logged_in?
       erb :'/tweets/tweets'
     else
+      flash[:message] = "You must be logged in to see this page."
       redirect to '/login'
     end
   end
@@ -12,7 +16,7 @@ class TweetsController < ApplicationController
     if logged_in?
       erb :'/tweets/create_tweet'
     else
-      # show a flash message about not being able to nav here? or is it not an issue
+      flash[:message] = "You must be logged in to see this page."
       redirect to '/login'
     end
   end
@@ -21,9 +25,10 @@ class TweetsController < ApplicationController
     tweet = Tweet.new(params)
     if logged_in? && tweet.save
       current_user.tweets << tweet
+      flash[:message] = "Successfully created tweet."
       redirect to "/tweets/#{tweet.id}"
-      # why does this think there's no '/tweets/:id' route?
     else
+      flash[:message] = "Tweet failed. Please try again. Remember to fill in all fields."
       redirect to '/tweets/new'
     end
   end
@@ -33,7 +38,7 @@ class TweetsController < ApplicationController
       @tweet = Tweet.find(params[:id])
       erb :'/tweets/show_tweet'
     else
-      # add a flash message here
+      flash[:message] = "You must be logged in to see this page."
       redirect to '/login'
     end
   end
@@ -41,6 +46,7 @@ class TweetsController < ApplicationController
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
     if params[:content].empty?
+      flash[:message] = "Unable to update tweet. Please try again."
       redirect to "/tweets/#{@tweet.id}/edit"
     else
       @tweet.update(content: params[:content])
@@ -49,14 +55,16 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id/edit' do
-    # is this really the best way to handle this?
+    @tweet = Tweet.find(params[:id])
     if logged_in?
-      @tweet = Tweet.find(params[:id])
-      if session[:user_id] == @tweet.id
+      if session[:user_id] == @tweet.user_id
         erb :'/tweets/edit_tweet'
+      else
+        flash[:message] = "You cannot edit someone else's tweet."
+        redirect to '/tweets'
       end
     else
-      # add a flash message here
+      flash[:message] = "You must be logged in to view this page."
       redirect to '/login'
     end
   end
@@ -65,6 +73,8 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find(params[:id])
     if logged_in? && session[:user_id] == @tweet.id
       @tweet.destroy
+      flash[:message] = "Tweet successfully deleted."
+      redirect to "/users/#{current_user.slug}"
     else
       redirect to '/tweets'
     end
