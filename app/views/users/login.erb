@@ -1,0 +1,16 @@
+<!-- <p style="color: red">
+  <em>
+    <% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+  </em>
+</p> -->
+
+<h1>Welcome! Please login:</h1>
+<form action="/login" method="post">
+  <h3><input type="text" name="username" placeholder="Username"></h3>
+
+  <h3><input type="text" name="password" placeholder="Password"></h3>
+
+  <input type="submit" value="submit">
+</form>

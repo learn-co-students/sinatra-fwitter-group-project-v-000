@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fwitter</title>
+    <link rel="stylesheet" href="stylesheets/style.css" type="text/css">
+  </head>
+  <body>
+    <header>
+      <div id="navbar">
+        <% if logged_in? %>
+          <em style="font-size: 18px">Welcome, <%=current_user.username%>!</em>
+          <a href="/tweets/new" class="button">New Tweet</a>
+          <a href="/users/<%=current_user.slug%>" class="button">Your Tweets</a>
+          <a href="/logout" class="button">Log Out</a>
+        <% else %>
+          <a href="/signup" class="button">Sign Up</a>
+          <a href="/login" class="button">Log In</a>
+        <% end %>
+      </div>
+    </header>
+    <p style="color: red">
+      <em>
+        <% if flash.has?(:message) %>
+          <%= flash[:message] %>
+        <% end %>
+      </em>
+    </p>
+    <%=yield%>
+  </body>
+</html>

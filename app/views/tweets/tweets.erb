@@ -1,0 +1,20 @@
+<!-- <p style="color: red">
+  <em>
+    <% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+  </em>
+</p> -->
+
+<h1>What's Happening on Fwitter Today</h1>
+
+<%Tweet.all.each do |t|%>
+  <div>
+
+    <p>
+      <strong><%=User.find(t.user_id).username%></strong>
+      <br/>
+      <%=t.content%>
+    </p>
+  </div>
+<%end%>
