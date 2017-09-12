@@ -1,15 +1,15 @@
-<p style="color: red">
+<!-- <p style="color: red">
   <em>
     <% if flash.has?(:message) %>
       <%= flash[:message] %>
     <% end %>
   </em>
-</p>
+</p> -->
 
 <h1><%=current_user.username%>'s Tweets</h1>
 
 <ul>
   <%current_user.tweets.all.each do |t|%>
-    <li><%=t.content%></li>
+    <li><%=t.content%> <a href="/tweets/<%=t.id%>">edit</a></li>
   <%end%>
 </ul>

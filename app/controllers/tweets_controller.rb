@@ -50,18 +50,16 @@ class TweetsController < ApplicationController
       redirect to "/tweets/#{@tweet.id}/edit"
     else
       @tweet.update(content: params[:content])
+      flash[:message] = "Successfully updated tweet."
       redirect to "/tweets/#{@tweet.id}"
     end
   end
 
   get '/tweets/:id/edit' do
-    @tweet = Tweet.find(params[:id])
     if logged_in?
-      if session[:user_id] == @tweet.user_id
+      @tweet = Tweet.find(params[:id])
+      if current_user.id == @tweet.user_id
         erb :'/tweets/edit_tweet'
-      else
-        flash[:message] = "You cannot edit someone else's tweet."
-        redirect to '/tweets'
       end
     else
       flash[:message] = "You must be logged in to view this page."
@@ -71,11 +69,12 @@ class TweetsController < ApplicationController
 
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
-    if logged_in? && session[:user_id] == @tweet.id
+    if logged_in? && current_user.id == @tweet.user_id
       @tweet.destroy
       flash[:message] = "Tweet successfully deleted."
       redirect to "/users/#{current_user.slug}"
     else
+      flash[:message] = "You cannot delete someone else's tweet."
       redirect to '/tweets'
     end
   end

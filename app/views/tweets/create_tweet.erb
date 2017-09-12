@@ -1,11 +1,3 @@
-<p style="color: red">
-  <em>
-    <% if flash.has?(:message) %>
-      <%= flash[:message] %>
-    <% end %>
-  </em>
-</p>
-
 <h1>Create a new tweet</h1>
 <form action="/tweets" method="post">
   <p>Enter your new tweet below and click submit</p>
