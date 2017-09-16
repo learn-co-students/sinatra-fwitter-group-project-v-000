@@ -1,0 +1,9 @@
+<%if logged_in?%> 
+<h1>Let's tweet, <%=current_user.username%>!</h1>
+_______________________________________________________<br></br><br>
+
+<form method="POST" action="/tweets" id="new_tweet">
+<textarea name="content" form="new_tweet" placeholder="80 characters or less...." rows="6" cols="60"></textarea><br><br>
+<input type="submit" name="submit" value="submit">
+</form>
+<%end%>

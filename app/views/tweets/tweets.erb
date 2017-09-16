@@ -1,0 +1,17 @@
+<%if logged_in?%> <h1>Welcome, <%=@user.username%>!</h1>
+<%else%> <h1><%="#{@user.username} @Fwitter"%> </h1> <%end%>
+________________________________________
+
+<%if logged_in?%>
+<%Tweet.all.each do |tweet|%>
+<h3><p><%= "#{tweet.user.username}: \"#{tweet.content}\"" %></p></h3>
+<input type="submit" name="Like" value="Like"> <input type="submit" name="Comment" value="Comment"> <input type="submit" name="Refweet" value="Refweet"><br>
+________________________________________
+<%end%>
+<%else%>
+<%@user.tweets.each do |tweet|%>
+<h3><p><%= "#{tweet.user.username}: \"#{tweet.content}\"" %></p></h3>
+<input type="submit" name="Like" value="Like"> <input type="submit" name="Comment" value="Comment"> <input type="submit" name="Refweet" value="Refweet"><br>
+________________________________________
+<%end%>
+<%end%>
