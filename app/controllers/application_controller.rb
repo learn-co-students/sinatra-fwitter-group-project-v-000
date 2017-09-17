@@ -14,11 +14,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/signup" do
-    if !Helpers.logged_in?(session)
-      erb :signup
-    else
-      redirect "/tweets"
-    end
+    erb :signup
   end
 
   post "/signup" do
@@ -32,15 +28,8 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get "/tweets" do
-    @user = User.find(session[:user_id])
-    erb :'tweets/index' #twitter index page where user must be logged in
-  end
-
   get "/login" do
-    if !Helpers.logged_in?(session)
-      erb :login
-    end
+    erb :login
   end
 
   post "/login" do
@@ -56,6 +45,11 @@ class ApplicationController < Sinatra::Base
   get "/logout" do
     session.clear
     redirect "/login"
+  end
+
+  get "/tweets" do
+    @user = User.find(session[:user_id])
+    erb :'tweets/index' #twitter index page where user must be logged in
   end
 
 end
