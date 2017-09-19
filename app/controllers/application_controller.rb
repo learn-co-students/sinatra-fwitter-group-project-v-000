@@ -30,6 +30,27 @@ class ApplicationController < Sinatra::Base
     redirect "/signup"
   end
 
+  get '/login' do
+    if logged_in?
+      redirect "/tweets"
+    else
+      erb :"users/login"
+    end
+  end
+
+  post '/login' do
+    redirect "/tweets"
+  end
+
+  get '/tweets' do
+    erb :"tweets/tweets"
+  end
+
+  get '/logout' do
+    session.clear
+    redirect "/"
+  end
+
   helpers do
     def logged_in?
       !!session[:user_id]
