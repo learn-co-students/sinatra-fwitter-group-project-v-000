@@ -38,17 +38,36 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  #to do: add logic for finding user and adding user to session
+  #referencing sinatra-secure-password-lab-v-000
   post '/login' do
-    redirect "/tweets"
+    user = User.find_by(username: params[:username])
+    if params[:username] == "" || params[:password] == ""
+      redirect "/login"
+    elsif !!user
+      user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect "/tweets"
+    else
+      redirect "/login"
+    end
   end
 
   get '/tweets' do
-    erb :"tweets/tweets"
+    if logged_in?
+      erb :"tweets/tweets"
+    else
+      redirect "/login"
+    end
   end
 
   get '/logout' do
     session.clear
-    redirect "/"
+    redirect "/login"
+  end
+
+  get '/users/:id' do
+
   end
 
   helpers do
