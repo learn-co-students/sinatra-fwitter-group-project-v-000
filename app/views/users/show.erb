@@ -1,1 +1,24 @@
-hi dudes
+<div class ="logged_in">
+  Logged In:  <%=User.find(session[:user_id]).slug.upcase%> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/users/<%=User.find(session[:user_id]).slug%>">Your Tweets</b> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/tweets"> View All Tweets</b> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/tweets/new"> Create New Tweet</b> &nbsp;&nbsp; | &nbsp;&nbsp; <u><a href="/logout">Log Out</a></u>
+</div>
+
+<div class="content-user-home">
+  <%if @user.id == session[:user_id] %>
+    <b>YOUR TWEETS</b>
+  <%else %>
+    <b><%=@user.username.upcase%>'S TWEETS</b>
+  <%end%><br></br><br>
+
+  <% @user.tweets.sort { |a,b| b.id <=> a.id }.each do |tweet| %>
+    <div class ="tweet-div">
+      <i><a href="/tweets/<%=tweet.id%>"> <%=tweet.content%> </a> </i> <br> </br>
+        &nbsp;&nbsp;&nbsp; written on:&nbsp; <%=tweet.created_at%><br></br>
+        <%if @user.id == session[:user_id] %>
+      <p><u><a href="/tweets/<%=tweet.id%>/edit">Edit Tweet</a></u></p>
+        <form action="/tweets/<%=tweet.id%>/delete" method="post">
+            <input id="hidden" type="hidden" name="_method" value="delete"><button type="submit">Delete Tweet</button>
+          </form>
+        <%end%>
+    </div>
+  <% end %> <br></br>
+</div>
