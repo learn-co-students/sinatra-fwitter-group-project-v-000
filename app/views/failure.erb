@@ -1,1 +1,8 @@
-<h2>Failed to Sign Up</h2>
+<div class ="logged_in">
+  Logged In:  <%=User.find(session[:user_id]).slug.upcase%> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/users/<%=User.find(session[:user_id]).slug%>">Your Tweets</b> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/tweets"> View All Tweets</b> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/tweets/new"> Create New Tweet</b> &nbsp;&nbsp; | &nbsp;&nbsp; <u><a href="/logout">Log Out</a></u>
+</div><br></br><br></br>
+
+<div class="content">
+
+  <b>ERROR:</b> &nbsp;Sorry this page does not exist.
+</div>

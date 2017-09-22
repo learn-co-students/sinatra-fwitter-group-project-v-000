@@ -20,7 +20,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    if logged_in?
+      redirect '/tweets'
+    else
     erb :'/index'
+    end
   end
 
   get '/signup' do
@@ -45,7 +49,11 @@ class ApplicationController < Sinatra::Base
   get '/users/:slug' do
     @user=User.find_by_slug(params[:slug])
     #if (session[:user_id] = @user.id)
+    if !@user
+      redirect '/failure'
+    else
       erb :'/users/show'
+    end
     #end
   end
 
@@ -53,7 +61,6 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       #@user = User.find(session[:user_id])
       erb :'/tweets/index'
-
     else
       redirect "/login"
     end
@@ -70,11 +77,16 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/:id' do
     if logged_in?
-      @tweet=Tweet.find(params[:id])
-      erb :'/tweets/show'
+      if @tweet = Tweet.find_by_id(params[:id])
+
+        erb :'/tweets/show'
+      else
+        redirect '/failure'
+      end
     else
       redirect "/login"
     end
+
   end
 
   post '/tweets' do
@@ -138,6 +150,10 @@ class ApplicationController < Sinatra::Base
   get '/logout' do
     session.clear
     redirect "/login"
+  end
+
+  get '/failure' do
+    erb :'/failure'
   end
 
 end
