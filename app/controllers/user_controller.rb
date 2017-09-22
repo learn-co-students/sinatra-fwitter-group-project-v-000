@@ -25,8 +25,6 @@ class UserController < ApplicationController
     end
   end
 
-  #to do: add logic for finding user and adding user to session
-  #referencing sinatra-secure-password-lab-v-000
   post '/login' do
     user = User.find_by(username: params[:username])
     if params[:username] == "" || params[:password] == ""
