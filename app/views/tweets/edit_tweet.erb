@@ -1,7 +1,8 @@
 <h1>Edit Fweet</h1>
+<p>Original Fweet: <%= @tweet.content %></p>
 <form  action="/tweets/<%= @tweet.id %>" method="post">
   <input type="hidden" type="hidden" name="_method" value="patch">
-  <p><input type="text" name="content" value="<%= @tweet.content %>"></p>
+  <p>Enter new Fweet: <input type="text" name="content"></p>
   <input type="submit" value="submit">
 </form>
 <p></p>
