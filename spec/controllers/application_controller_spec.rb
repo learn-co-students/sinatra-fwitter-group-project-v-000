@@ -67,7 +67,9 @@ describe ApplicationController do
       post '/signup', params
       session = {}
       session[:user_id] = user.id
+      # binding.pry
       get '/signup'
+      # binding.pry 
       expect(last_response.location).to include('/tweets')
     end
   end

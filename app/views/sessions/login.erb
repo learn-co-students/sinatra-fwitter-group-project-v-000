@@ -1,0 +1,20 @@
+<h1>Log In</h1>
+
+<h2>Please enter the following information to create your account.</h2>
+
+<%= @error %>
+
+<form action="/login" method="post">
+	<label for="username">Username:</label>
+	<%= text_field :user, :username %>
+
+	<label for="email">Email:</label>
+	<!-- <input type="email" name="email"> -->
+	<%= text_field :user, :email %>
+	<%= text_field :user, :email_confirmation %>
+
+	<label for="password">Password:</label>
+	<%= text_field :user, :password %>
+
+	<input type="submit" value="submit" >
+</form>

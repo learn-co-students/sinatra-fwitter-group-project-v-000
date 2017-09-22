@@ -10,6 +10,7 @@ describe 'User' do
 
   it 'can find a user based on the slug' do
     slug = @user.slug
+    # binding.pry
     expect(User.find_by_slug(slug).username).to eq("test 123")
   end
 
