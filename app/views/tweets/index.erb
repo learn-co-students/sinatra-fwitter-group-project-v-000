@@ -1,0 +1,11 @@
+<h1>Fwitter</h1>
+
+<h2>Welcome, <%= @user.username %></h2>
+
+<p>Here's your tweets:</p>
+
+<ul>
+	<% @tweets.each do |tweet| %>
+		<li><%= tweet.content %></li>
+	<% end %>
+</ul>
