@@ -1,0 +1,12 @@
+<% if logged_in? %>
+  <h1>Welcome, <%= current_user.username %></h1>
+  <a href="/tweets/new">Add New Tweet</a>
+<% end %>
+
+<h2>List of Tweets</h2>
+<hr>
+<% Tweet.all.each do |t| %>
+  <p><%= t.content %></p>
+  <p><em>Posted by <a href="/users/<%= t.user.slug %>"><%= t.user.username %></a> | <a href="/tweets/<%= t.id %>">View Tweet Page</a></em></p>
+  <hr>
+<% end %>
