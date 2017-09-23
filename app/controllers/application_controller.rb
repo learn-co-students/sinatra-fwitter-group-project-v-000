@@ -1,7 +1,6 @@
 require './config/environment'
-
 class ApplicationController < Sinatra::Base
-
+  register Sinatra::ActiveRecordExtension
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -14,44 +13,50 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/signup" do
-    erb :signup
+    if logged_in?
+      @user = User.find(session[:user_id])
+      redirect '/tweets'
+    else
+      erb :signup
+    end
   end
 
   post "/signup" do
-    #your code here
-    user = User.create(:name => params[:username], :password=>params[:password])
+    user = User.create(:username => params[:username],:email=>params[:email], :password=>params[:password])
     if user.save
-      redirect '/login'
+      session[:user_id] = user.id
+      redirect '/tweets'
     else
-      redirect '/failure'
+      erb :signup
     end
   end
 
-  get '/account' do
-    @user = User.find(session[:user_id])
-    erb :account
+  get '/tweets' do
+    if logged_in?
+      @user = User.find(session[:user_id])
+      erb :tweets
+    else
+      erb :login
+    end
   end
-
-
+  
   get "/login" do
-    erb :login
+    if logged_in?
+      @user = User.find(session[:user_id])
+      redirect '/tweets'
+    else
+      erb :login
+    end
   end
 
   post "/login" do
-    user = User.find_by(:name => params[:name])
+    # binding.pry
+    user = User.find_by(:username=>params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect '/account'
+      redirect '/tweets'
     else
       redirect '/failure'
-    end
-  end
-
-  get "/success" do
-    if logged_in?
-      erb :success
-    else
-      redirect "/login"
     end
   end
 
@@ -72,5 +77,9 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
+  end
+
+  #annoying chrome
+  get "/favicon.ico" do
   end
 end

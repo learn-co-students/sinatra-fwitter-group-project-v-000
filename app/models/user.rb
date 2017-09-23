@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
     has_secure_password
+    validates :username, :email, :password, presence: true
     has_many :tweets
 
     def slug
-        Slugify.slug(self.username)
+        self.username.split.join("-")
     end
 
     def self.find_by_slug(slugged_username)

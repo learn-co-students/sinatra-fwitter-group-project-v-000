@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ApplicationController do
 
-  describe "Homepage" do
+  xdescribe "Homepage" do
     it 'loads the homepage' do
       get '/'
       expect(last_response.status).to eq(200)
@@ -10,7 +10,7 @@ describe ApplicationController do
     end
   end
 
-  xdescribe "Signup Page" do
+  describe "Signup Page" do
 
     it 'loads the signup page' do
       get '/signup'
