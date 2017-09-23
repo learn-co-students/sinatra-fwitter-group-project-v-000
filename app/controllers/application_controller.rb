@@ -1,6 +1,8 @@
 require './config/environment'
+require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
+  use Rack::Flash
 
   configure do
     set :public_folder, 'public'
@@ -17,6 +19,15 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
+
+    def all_emails
+      User.all.collect {|user| user.email.downcase}
+    end
+
+    def all_usernames
+      User.all.collect {|user| user.username.downcase}
+    end
+
   end
 
   get '/' do
@@ -36,7 +47,26 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    if (!params["username"].empty?) && (!params["email"].empty?) && (!params["password"].empty?)
+    if (all_usernames.include?(params["username"].downcase)) || (all_emails.include?(params["email"].downcase))
+      redirect "/invalid-signup"
+    elsif (!params["username"].empty?) &&  (!params["email"].empty?) &&  (!params["password"].empty?)
+      @user = User.create(:username=>params[:username], :email=>params[:email], :password=>params[:password])
+      @user.save
+      session[:user_id] = @user.id
+      redirect "/tweets"
+    else
+      redirect "/signup"
+    end
+  end
+
+  get '/invalid-signup' do
+    erb :'/invalid-signup'
+  end
+
+  post '/invalid-signup' do
+    if (all_usernames.include?(params["username"].downcase)) || (all_emails.include?(params["email"].downcase))
+      redirect "/invalid-signup"
+    elsif (!params["username"].empty?) &&  (!params["email"].empty?) &&  (!params["password"].empty?)
       @user = User.create(:username=>params[:username], :email=>params[:email], :password=>params[:password])
       @user.save
       session[:user_id] = @user.id
@@ -139,11 +169,25 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     @user=User.find_by(:username=>params[:username])
-    if @user.authenticate(params[:password])
+    if @user && @user.authenticate(params[:password])
       session[:user_id]=@user.id
       redirect "/tweets"
     else
-      redirect "/login"
+      redirect "/invalid-login"
+    end
+  end
+
+  get '/invalid-login' do
+    erb :'/invalid-login'
+  end
+
+  post '/invalid-login' do
+    @user=User.find_by(:username=>params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id]=@user.id
+      redirect "/tweets"
+    else
+      redirect "/invalid-login"
     end
   end
 
