@@ -7,7 +7,7 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "blah"
   end
-  
+
   get "/" do
     erb :index
   end
@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = user.id
       redirect '/tweets'
     else
-      erb :signup
+      redirect '/signup'
     end
   end
 
@@ -39,7 +39,7 @@ class ApplicationController < Sinatra::Base
       erb :login
     end
   end
-  
+
   get "/login" do
     if logged_in?
       @user = User.find(session[:user_id])
