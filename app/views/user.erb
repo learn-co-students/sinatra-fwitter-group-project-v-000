@@ -1,0 +1,12 @@
+<table>
+<tr>
+    <th><%=@user.username%>'s Tweets</th>
+</tr>
+
+<%@user.tweets.all.each do |tweet|%>
+<tr>
+    <td><%=tweet.content%></td>
+</tr>
+<%end%>
+
+</table>

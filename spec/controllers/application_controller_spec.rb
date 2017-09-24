@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ApplicationController do
 
-  xdescribe "Homepage" do
+  describe "Homepage" do
     it 'loads the homepage' do
       get '/'
       expect(last_response.status).to eq(200)
@@ -12,7 +12,7 @@ describe ApplicationController do
 
   #This test doesn't work last_response.location is always nil
   #Correction, does work, but just need to redirect everything
-  xdescribe "Signup Page" do
+  describe "Signup Page" do
 
     it 'loads the signup page' do
       get '/signup'
@@ -74,7 +74,7 @@ describe ApplicationController do
     end
   end
 
-  xdescribe "login" do
+  describe "login" do
     it 'loads the login page' do
       get '/login'
       expect(last_response.status).to eq(200)
@@ -144,7 +144,7 @@ describe ApplicationController do
     end
   end
 
-  xdescribe 'user show page' do
+  describe 'user show page' do
     it 'shows all a single users tweets' do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
       tweet1 = Tweet.create(:content => "tweeting!", :user_id => user.id)
@@ -157,7 +157,7 @@ describe ApplicationController do
     end
   end
 
-  xdescribe 'index action' do
+  describe 'index action' do
     context 'logged in' do
       it 'lets a user view the tweets index if logged in' do
         user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
@@ -185,7 +185,7 @@ describe ApplicationController do
     end
   end
 
-  xdescribe 'new action' do
+  describe 'new action' do
     context 'logged in' do
       it 'lets user view new tweet form if logged in' do
         user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
@@ -269,7 +269,7 @@ describe ApplicationController do
     end
   end
 
-  xdescribe 'show action' do
+  describe 'show action' do
     context 'logged in' do
       it 'displays a single tweet' do
 
@@ -300,7 +300,7 @@ describe ApplicationController do
     end
   end
 
-  xdescribe 'edit action' do
+  describe 'edit action' do
     context "logged in" do
       it 'lets a user view tweet edit form if they are logged in' do
         user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
@@ -377,7 +377,7 @@ describe ApplicationController do
     end
   end
 
-  xdescribe 'delete action' do
+  describe 'delete action' do
     context "logged in" do
       it 'lets a user delete their own tweet if they are logged in' do
         user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")

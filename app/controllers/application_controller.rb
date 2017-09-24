@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
 
   get "/signup" do
     if logged_in?
-      @user = User.find(session[:user_id])
+      @user = current_user
       redirect '/tweets'
     else
       erb :signup
@@ -33,10 +33,71 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     if logged_in?
-      @user = User.find(session[:user_id])
+      @user = current_user
       erb :tweets
     else
-      erb :login
+      redirect '/login'
+    end
+  end
+
+  get '/tweets/new' do
+    if logged_in?
+      @user = current_user
+      erb :new
+    else
+      redirect '/login'
+    end
+  end
+
+  post '/tweets' do
+    if params[:content].empty?
+      redirect '/tweets/new'
+    else
+      Tweet.create(:user_id => session[:user_id], :content => params[:content])
+      redirect '/tweets'
+    end
+  end
+
+  get '/tweets/:id' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      @user = current_user
+      erb :show
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/tweets/:id/edit' do
+    if logged_in?
+      @user = current_user
+      @tweet = Tweet.find(params[:id])
+      if @user == @tweet.user
+        erb :edit
+      else
+        redirect "/tweets/#{params[:id]}"
+      end
+    else
+      redirect '/login'
+    end
+  end
+
+  patch '/tweets/:id/edit' do
+    if params[:content].empty?
+      redirect "/tweets/#{params[:id]}/edit"
+    else
+      Tweet.find(params[:id]).update(:content => params[:content])
+      redirect "/tweets/#{params[:id]}"
+    end
+  end
+
+  delete '/tweets/:id/delete' do
+    tweet = Tweet.find(params[:id])
+    if current_user == tweet.user
+      tweet.destroy
+      redirect '/tweets'
+    else
+      redirect '/tweets'
     end
   end
 
@@ -60,13 +121,19 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  #Anyone has access to view a user's tweet
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :user
+  end
+
   get "/failure" do
     erb :failure
   end
 
   get "/logout" do
     session.clear
-    redirect "/"
+    redirect "/login"
   end
 
   helpers do
