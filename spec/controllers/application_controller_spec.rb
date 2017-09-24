@@ -10,6 +10,8 @@ describe ApplicationController do
     end
   end
 
+  #This test doesn't work last_response.location is always nil
+  #Correction, does work, but just need to redirect everything
   describe "Signup Page" do
 
     it 'loads the signup page' do
