@@ -1,0 +1,35 @@
+body {
+    background-color: #FAFBFC;
+    padding-bottom: 70px;
+}
+
+.container {
+    /* background-color: #E6E6E6; */
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+    line-height: 0;
+}
+
+.block-left {
+    display: block;
+    float: left;
+}
+
+div.block-left h3 {
+    margin-top: 4px;
+    padding-right: 10px;
+}
+
+a.block-left {
+    margin-right: 5px;
+}
+
+div.col-xs-3 {
+    padding-left: 0px;
+}
