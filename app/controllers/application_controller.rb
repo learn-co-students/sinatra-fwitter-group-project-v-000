@@ -26,7 +26,7 @@ class ApplicationController < Sinatra::Base
       @user = current_user
       erb :'/tweets/index'
     else
-      redirect '/signup'
+      redirect '/login'
     end
   end
 
@@ -63,7 +63,7 @@ class ApplicationController < Sinatra::Base
       session.clear
       redirect '/login'
     else
-      redirect '/tweets'
+      redirect '/login'
     end
   end
 
