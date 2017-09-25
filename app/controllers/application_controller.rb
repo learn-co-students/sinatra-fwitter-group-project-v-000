@@ -72,6 +72,22 @@ class ApplicationController < Sinatra::Base
     erb :'users/show'
   end
 
+  get '/tweets/new' do
+    if logged_in?
+      erb :'/tweets/create'
+    else
+      redirect '/login'
+    end
+  end
+
+  post '/tweets' do
+    @user = User.find(session[:user_id])
+    @user.tweets.build(content: params[:content])
+    @user.save
+    tweet = @user.tweets.last
+    redirect "/tweets/#{tweet.id}"
+  end
+
   helpers do
     def current_user
       User.find(session[:user_id])
