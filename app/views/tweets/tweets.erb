@@ -1,8 +1,11 @@
 <h1>Fweets</h1>
 <% if logged_in? %>
   <h2><%= "Welcome, #{current_user.username}" %></h2>
+  <a href="/users/<%= current_user.slug %>"><%= current_user.username %> Fweets</a>
+  <br></br>
   <% @tweets.each do |tweet| %>
     <li><%= tweet.content %></li>
   <% end %>
+  <br></br>
   <a href="/logout">Log Out</a>
 <% end %>
