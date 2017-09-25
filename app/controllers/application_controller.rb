@@ -17,7 +17,7 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       redirect '/tweets'
     else
-      erb :signup
+      erb :'/users/signup'
     end
   end
 
@@ -44,7 +44,7 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       redirect '/tweets'
     else
-      erb :login
+      erb :'/users/login'
     end
   end
 
@@ -65,6 +65,11 @@ class ApplicationController < Sinatra::Base
     else
       redirect '/login'
     end
+  end
+
+  get '/users/:username' do
+    @user = User.find_by(username: params[:username])
+    erb :'users/show'
   end
 
   helpers do
