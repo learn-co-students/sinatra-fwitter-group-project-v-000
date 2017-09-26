@@ -25,9 +25,14 @@ class UsersController < ApplicationController
   	end
 
   #renders the login page for a user
+  #doesn't let user view the login page if already logged in"
     get "/login" do
+      if !logged_in?
       erb :"users/login"
+    else
+      redirect "/tweets"
     end
+  end
 
   #login form is loaded via post /login request
     post "/login" do
