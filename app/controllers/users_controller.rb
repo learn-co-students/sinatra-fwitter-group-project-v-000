@@ -2,14 +2,16 @@ class UsersController < ApplicationController
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    erb :'users/show'
+    erb :'/users/show'
   end
+
+
 
   #displays the user signup
   #only shows the sign-up page if user is not logged in if they are logged in, redirects them to their tweets
     get "/signup" do
-        if !logged_in?
-  		erb :"users/signup"
+    if !logged_in?
+  		erb :"/users/signup"
     else
       redirect to '/tweets'
   	end
@@ -17,20 +19,23 @@ class UsersController < ApplicationController
 
   #Users submission form is loaded via the POST request to /signup
     post "/signup" do
-  		user = User.new(email: params[:email], username: params[:username], password: params[:password])
+      if params[:username].empty? || params[:email].empty? || params[:password].empty?
+       redirect to '/signup'#, locals: {message: "Please complete all valid fields"}
+     else
+  		user = User.new(username: params[:username], email: params[:email], password: params[:password])
   		user.save
-      #sets the session to the new users ID and directs them to their tweets
-      session[:user_id] = @user.id
-      redirect to '/tweets'
+      session[:user_id] = user.id
+      redirect '/tweets'
   	end
+  end
 
   #renders the login page for a user
   #doesn't let user view the login page if already logged in"
     get "/login" do
-      if !logged_in?
-      erb :"users/login"
+      if logged_in?
+      redirect to "/tweets"
     else
-      redirect "/tweets"
+      erb :'/users/login'
     end
   end
 
@@ -39,25 +44,19 @@ class UsersController < ApplicationController
       user = User.find_by(:username => params[:username])
       if user && user.authenticate(params[:password])
           session[:user_id] = user.id
-          redirect "/tweets"
+          redirect to "/tweets"
       else
-          redirect "/signup"
+          redirect to "/login"
       end
     end
 
-    get "/logout" do
-  		session.clear
-  		redirect "/"
-  	end
-
-  	helpers do
-  		def logged_in?
-  			!!session[:user_id]
-  		end
-
-  		def current_user
-  			User.find(session[:user_id])
-  		end
-  	end
+    get '/logout' do
+       if logged_in?
+         session.clear
+         redirect '/login'
+       else
+         redirect '/'
+       end
+     end
 
 end

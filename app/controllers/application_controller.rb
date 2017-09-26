@@ -1,5 +1,6 @@
 require './config/environment'
 require "./app/models/user"
+require "./app/models/tweet"
 
 class ApplicationController < Sinatra::Base
 
@@ -10,18 +11,22 @@ class ApplicationController < Sinatra::Base
   end
 
 #renders the index page
-  get '/' do
-    erb :index
-  end
+get '/' do
+  if logged_in?
+    redirect "/tweets"
+  else
+    erb :'/index'
+end
+end
 
 #help methods to checked if loggin in or not
-  helpers do
+helpers do
     def logged_in?
-      !!current_user
+      !!session[:user_id]
     end
 
     def current_user
-      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+      User.find(session[:user_id])
     end
   end
 end
