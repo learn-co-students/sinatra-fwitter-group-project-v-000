@@ -1,3 +1,4 @@
+require 'pry'
 class UsersController < ApplicationController
   configure do
     set :views, "app/views"
@@ -10,24 +11,44 @@ class UsersController < ApplicationController
   end
 
   get "/signup" do
-    erb :'/users/signup'
+    if logged_in?
+      redirect("/tweets")
+    else
+      erb :'/users/signup'
+    end
   end
 
   post "/signup" do
-    if !logged_in?
-      @user = User.create(params)
-      if @user.username == "" || @user.email == "" || @user.password == ""
-        redirect('/signup')
-      else
-        session[:user_id] = @user.id
-        redirect("/tweets")
-      end
+    @user = User.create(params)
+    if @user.username == "" || @user.email == "" || @user.password == ""
+      redirect('/signup')
     else
+      session[:user_id] = @user.id
       redirect("/tweets")
     end
   end
 
+  get '/login' do
+    if logged_in?
+      redirect('/tweets')
+    else
+      erb :'/users/login'
+    end
+  end
+
+  post '/login' do
+    @user = User.find_by(username: params["username"])
+    if @user && @user.authenticate(params["password"])
+      session[:user_id] = @user.id
+      redirect('/tweets')
+    else
+      redirect ('/login')
+    end
+  end
+
   get "/tweets" do
+    @user = current_user
+    erb :'/users/tweets'
   end
 
 
@@ -35,7 +56,7 @@ class UsersController < ApplicationController
 
     def logged_in?
       if session[:user_id]
-        return user
+        return self
       else
         return false
       end
