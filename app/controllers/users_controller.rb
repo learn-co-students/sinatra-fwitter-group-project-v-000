@@ -1,5 +1,6 @@
 # must inherit from ApplicationController not Sinatra::Base
 class UsersController < ApplicationController
+  # SAMPLE USERS: test => test (pwdord), online_t => passwaord (NOT pword)
 
   get '/signup' do
     logged_in? ? (redirect '/tweets') : (erb :'users/create_user')
