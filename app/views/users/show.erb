@@ -4,14 +4,12 @@
   <%= flash[:message] %>
 <% end %>
 
-<h3>Current Balance</h3>
+<h3>Tweets</h3>
 
   <p>
-    <label for=balance><%= @user.balance %></label>
+    <% @user.tweets.each do |tweet| %>
+      <li><%= tweet.content %></li>
+    <% end %>
   </p>
 
-  <p>
-    <a href="/deposit">Deposit</a> <a href="/withdrawal">Withdrawal</a>
-  </p>
-  <p>We are currently working on your account.</p>
 <p><a href="/logout">Log Out</a></p>

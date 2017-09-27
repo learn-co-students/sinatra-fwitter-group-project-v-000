@@ -1,6 +1,8 @@
+require 'rack-flash'
 # must inherit from ApplicationController not Sinatra::Base
 class UsersController < ApplicationController
   # SAMPLE USERS: test => test (pwdord), online_t => passwaord (NOT pword)
+  use Rack::Flash
 
   get '/signup' do
     logged_in? ? (redirect '/tweets') : (erb :'users/create_user')
@@ -39,6 +41,12 @@ class UsersController < ApplicationController
     else
       redirect '/login'
     end
+  end
+
+  get "/users/:slug" do
+    @user = User.find_by_slug(params[:slug])
+
+    erb :'users/show'
   end
 
   get '/logout' do
