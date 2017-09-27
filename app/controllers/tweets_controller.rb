@@ -1,8 +1,10 @@
 require 'rack-flash'
 class TweetsController < ApplicationController
   use Rack::Flash
-  
+
   get '/tweets' do
+    @tweets = Tweet.all
+    
     logged_in? ? (erb :'tweets/tweets') : (redirect '/login')
   end
 
