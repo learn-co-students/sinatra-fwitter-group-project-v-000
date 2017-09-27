@@ -1,7 +1,5 @@
-<h2>Welcome,  you </h2>
+<h2>Welcome,  </h2>
 <h3>Twitter Feed</h3>
-<%= @tweets.each do |tweet| %>
-<div>
-  <%= tweet.content %>
-</div>
+<% @tweets.each do |tweet| %>
+<%= tweet.content %>
 <% end %>

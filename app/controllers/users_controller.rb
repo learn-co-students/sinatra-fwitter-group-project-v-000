@@ -15,23 +15,22 @@ class UsersController < ApplicationController
   #displays the user signup
   #only shows the sign-up page if user is not logged in if they are logged in, redirects them to their tweets
     get "/signup" do
-    if logged_in?
-      redirect '/tweets'
+    if !logged_in?
+      erb :"users/signup"
     else
-      !logged_in?
-  		erb :"users/signup"
+  		redirect '/tweets'
   	end
   end
 
   #Users submission form is loaded via the POST request to /signup
     post "/signup" do
-      if params[:username].empty? || params[:email].empty? || params[:password].empty?
+      if params[:username]== "" || params[:email]== "" || params[:password] == ""
        redirect '/signup'
      else
   		@user = User.new(username: params[:username], email: params[:email], password: params[:password])
-  		@user.save
+      @user.save
       session[:user_id] = @user.id
-      redirect "/tweets"
+      redirect to "/tweets"
   	end
   end
 
@@ -40,16 +39,17 @@ class UsersController < ApplicationController
     get "/login" do
       if logged_in?
       redirect "/tweets"
-    end
+    else
       erb :'/users/login'
   end
+end
 
   #login form is loaded via post /login request
     post "/login" do
       user = User.find_by(:username => params[:username])
-      if user && @user.authenticate(params[:password])
+      if user && user.authenticate(params[:password])
           session[:user_id] = user.id
-          redirect "/tweets"
+          redirect to "/tweets"
       else
           redirect "/signup"
       end
