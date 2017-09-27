@@ -89,6 +89,16 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/tweets/:id' do
+    if logged_in?
+      @user = current_user
+      @tweet = Tweet.find(params[:id])
+
+      erb :'/tweets/show'
+    else
+      redirect('/login')
+    end
+  end
 
 
 
