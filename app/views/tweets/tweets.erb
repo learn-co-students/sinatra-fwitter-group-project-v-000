@@ -1,5 +1,11 @@
 <h1>Welcome, Tweeters</h1>
 
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% else %>
+  <%= @welcome_msg %>
+<% end %>
+
 <p>
   <% @tweets.each do |tweet| %>
     <li><%= tweet.content %></li>

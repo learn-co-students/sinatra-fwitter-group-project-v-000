@@ -13,7 +13,6 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  # all contorller have access to these methods here
   helpers do
     def logged_in?
       !!session[:user_id]

@@ -5,7 +5,13 @@ class TweetsController < ApplicationController
   get '/tweets' do
     @tweets = Tweet.all
 
-    logged_in? ? (erb :'tweets/tweets') : (redirect '/login')
+    if logged_in?
+      @welcome_msg = session[:welcome]
+    
+      erb :'tweets/tweets'
+    else
+      redirect '/login'
+    end
   end
 
   get '/tweets/new' do
@@ -17,10 +23,12 @@ class TweetsController < ApplicationController
       redirect '/tweets/new'
     else
       tweet = Tweet.create(content: params[:content])
-      # binding.pry
+
       tweet.user = User.find(session[:user_id])
 
       tweet.save
+
+      flash[:message] = "Here is your new tweet!"
 
       redirect "/tweets/#{tweet.id}"
     end
@@ -38,14 +46,6 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find(params[:id])
 
     erb :"tweets/edit_tweet"
-
-    # if logged_in?
-    #   @tweet = Tweet.find(params[:id])
-    #
-    #   erb :"tweets/edit_tweet"
-    # else
-    #   redirect "/login"
-    # end
   end
 
   post '/tweets/:id/edit' do
@@ -56,15 +56,20 @@ class TweetsController < ApplicationController
     else
       @tweet.update(content: params[:content])
 
+      flash[:message] = "Your edit was successfully. Enjoy Learning!!!"
+
       redirect "/tweets/#{@tweet.id}"
     end
   end
 
-  post '/tweets/:id/delete' do
+  delete '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
 
-    @tweet.delete
+    current_user.id == @tweet.user_id ? @tweet.delete :
+                                        (redirect "/tweets/#{@tweet.id}")
 
-    redirect :'/tweets/tweets'
+    flash[:message] = "Successfully deleted your tweet. Happy Tweeting!"
+
+    redirect :'/tweets'
   end
 end
