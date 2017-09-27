@@ -100,11 +100,38 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/tweets/:id/edit' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user_id = current_user.id
+        erb :'/tweets/edit'
+      else
+        redirect('/tweets')
+      end
+    else
+      redirect('/login')
+    end
+  end
 
+  post "/tweets/:id" do
+    @tweet = Tweet.find(params[:id])
+    @tweet.update(params)
+    redirect('/tweets/#{@tweet.id}')
+  end
 
-
-
-
+  post '/tweets/:id/delete' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user_id = current_user.id
+        @tweet = Tweet.delete(params[:id])
+        redirect('/tweets')
+      else
+        redirect('/tweets')
+      end
+    else
+      redirect('/login')
+    end
+  end
 
   helpers do
 
