@@ -8,12 +8,6 @@ class TweetsController < ApplicationController
     logged_in? ? (erb :'tweets/tweets') : (redirect '/login')
   end
 
-  get "/users/:slug" do
-    @user = User.find_by_slug(params[:slug])
-
-    erb :'tweets/show_tweet'
-  end
-
   get '/tweets/new' do
     logged_in? ? (erb :'tweets/create_tweet') : (redirect '/login')
   end
@@ -28,8 +22,21 @@ class TweetsController < ApplicationController
 
       tweet.save
 
-      # redirect "/tweets/#{tweet.id}"
+      redirect "/tweets/#{tweet.id}"
     end
+  end
 
+  get '/tweets/:id' do
+    @tweet = Tweet.find(params[:id])
+
+    erb :'tweets/show_tweet'
+  end
+
+  post 'tweets/:id/delete' do
+    @tweet = Tweet.find(params[:id])
+
+    @tweet.delete
+
+    redirect :'/tweets/tweets'
   end
 end
