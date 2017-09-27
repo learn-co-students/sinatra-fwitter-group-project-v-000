@@ -4,6 +4,8 @@ class ApplicationController < Sinatra::Base
 
   configure do
     set :public_folder, 'public'
+    enable :sessions
+    set :session_secret, "password_security"
     set :views, 'app/views'
   end
 
@@ -23,7 +25,7 @@ class ApplicationController < Sinatra::Base
       user = User.create(username: params[:username], email: params[:email],
              password: params[:password])
 
-      redirect '/tweets'
+      redirect '/tweets'      
     end
 
   end
