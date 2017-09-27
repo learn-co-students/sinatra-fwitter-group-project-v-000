@@ -1,0 +1,6 @@
+<h3><%= @user.username %>'s Twitter Timeline</h3>
+<% @user.tweets.each do |tweet| %>
+  <div>
+    <%= tweet.content %>
+  </div>
+<% end %>
