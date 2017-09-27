@@ -69,6 +69,32 @@ class UsersController < ApplicationController
     erb :'/users/show'
   end
 
+  get '/tweets/new' do
+    if logged_in?
+      @user = current_user
+      erb :'/tweets/new'
+    else
+      redirect('/login')
+    end
+  end
+
+  post "/tweets" do
+    @tweet = Tweet.create(params)
+    if @tweet.content == " " || @tweet.content == nil
+      redirect('/tweets/new')
+    else
+      @tweet.user_id = current_user.id
+      @tweet.save
+      redirect('/tweets')
+    end
+  end
+
+
+
+
+
+
+
 
   helpers do
 
