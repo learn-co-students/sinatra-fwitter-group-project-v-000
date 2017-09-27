@@ -1,32 +1,43 @@
-require './config/environment'
-
-class ApplicationController < Sinatra::Base
-
-  configure do
-    set :public_folder, 'public'
-    enable :sessions
-    set :session_secret, "password_security"
-    set :views, 'app/views'
-  end
-
-  get '/' do
-    erb :index
-  end
+# must inherit from ApplicationController not Sinatra::Base
+class UsersController < ApplicationController
 
   get '/signup' do
-    erb :'users/create_user'
+    logged_in? ? (redirect '/tweets') : (erb :'users/create_user')
+
+    # if !logged_in?
+    #   erb :'users/create_user'
+    # else
+    #   redirect '/tweets'
+    # end
   end
 
   post '/signup' do
-    # binding.pry
-    if  params[:username].empty? || params[:email].empty? || params[:password].empty?
-      erb :failure
+    if  params[:username].empty? || params[:email].empty? ||
+        params[:password].empty?
+      redirect '/signup'
     else
       user = User.create(username: params[:username], email: params[:email],
              password: params[:password])
 
-      redirect '/tweets'      
-    end
+      session[:user_id] = user.id
 
+      redirect '/tweets'
+    end
   end
+
+  get '/login' do
+    erb :'users/login'
+  end
+
+  post '/login' do
+    user = User.find_by(username: params[:username])
+
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect '/tweets'
+    else
+      redirect '/login'
+    end
+  end
+
 end
