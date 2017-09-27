@@ -1,15 +1,10 @@
-<<<<<<< HEAD
 class UsersController < ApplicationController
-=======
-class UsersController < Sinatra::Base
->>>>>>> 6391bb04cfdbb199542f953eacc0cf7545b6beeb
 
   get '/signup' do
     logged_in? ? (redirect '/tweets') : (erb :'users/create_user')
   end
 
   post '/signup' do
-<<<<<<< HEAD
     if  params[:username].empty? || params[:email].empty? ||
         params[:password].empty?
      
@@ -23,9 +18,6 @@ class UsersController < Sinatra::Base
                               "Programmer Media! =D "
       redirect '/tweets'
     end
-=======
-
->>>>>>> 6391bb04cfdbb199542f953eacc0cf7545b6beeb
   end
 
   get '/login' do

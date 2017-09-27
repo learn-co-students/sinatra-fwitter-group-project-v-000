@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 require 'rack-flash'
 class TweetsController < ApplicationController
   use Rack::Flash
@@ -73,10 +72,4 @@ class TweetsController < ApplicationController
 
     redirect :'/tweets'
   end
-=======
-class TweetsController < Sinatra::Base
-
-
-
->>>>>>> 6391bb04cfdbb199542f953eacc0cf7545b6beeb
 end
