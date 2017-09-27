@@ -85,7 +85,6 @@ describe ApplicationController do
         :password => "kittens"
       }
       post '/login', params
-      binding.pry
       expect(last_response.status).to eq(302)
       follow_redirect!
       expect(last_response.status).to eq(200)

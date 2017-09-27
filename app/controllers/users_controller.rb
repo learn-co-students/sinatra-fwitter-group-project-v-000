@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    erb :'users/login'
+    logged_in? ? (redirect '/tweets') : (erb :'users/login')
   end
 
   post '/login' do
@@ -38,6 +38,12 @@ class UsersController < ApplicationController
     else
       redirect '/login'
     end
+  end
+
+  get '/logout' do
+    # if the user is loged-in then they can log out & b redirected 2 login pg,
+      # else it goes 2 the hmpg, where the user can choose 2 signup/login
+    logged_in? ? session.clear && (redirect '/login') : (redirect '/')
   end
 
 end
