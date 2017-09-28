@@ -44,49 +44,41 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id/edit' do
-    @tweet = Tweet.find(params[:id])
-    if !logged_in?
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user_id == current_user.id
+        erb :"tweets/edit"
+      end
+    else
       redirect "/login"
-    elsif logged_in? && current_user == @tweet.user
-      erb :"tweets/edit"
-    elsif logged_in?
-      redirect "/tweets"
     end
   end
 
   post '/tweets/:id' do
     tweet = Tweet.find(params[:id])
-    if params[:content] != ""
+    if params[:content] != "" && current_user == tweet.user
       tweet.content = params[:content]
       tweet.save
       redirect "/tweets/#{tweet.id}"
-    else
-      flash[:message] = "Edited tweets must contain text. Please click delete tweet to permanently remove tweet."
-      redirect "/tweets/#{tweet.id}"
-    end
-  end
-
-  get '/tweets/:id/delete' do
-    tweet = Tweet.find(params[:id])
-    if logged_in? && current_user == tweet.user
-      tweet.delete
-      redirect "/tweets"
-    elsif logged_in?
-      redirect "/tweets"
+    elsif params[:content] == "" && current_user == tweet.user
+      flash[:message] = "Edited tweets must contain text."
+      redirect "/tweets/#{tweet.id}/edit"
     else
       redirect "/tweets"
     end
   end
 
   post '/tweets/:id/delete' do
-    tweet = Tweet.find(params[:id])
-    if logged_in? && current_user == tweet.user
-      tweet.delete
-      redirect "/tweets"
-    elsif logged_in?
-      redirect "/tweets"
+    if logged_in?
+      tweet = Tweet.find(params[:id])
+      if current_user.id == tweet.user_id
+        tweet.delete
+        redirect "/tweets"
+      else
+        redirect "/tweets"
+      end
     else
-      redirect "/tweets"
+      redirect "/login"
     end
   end
 end

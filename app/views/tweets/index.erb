@@ -8,10 +8,7 @@
 </p>
 
 <% @tweets.each do |tweet| %>
-  <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
-  <% if !!tweet.user %>
-      --  <a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a>
-  <% end %>
+  <a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a>: <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
   <br />
 <% end %>
 <p>
