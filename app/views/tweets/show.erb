@@ -1,10 +1,18 @@
 <h2><%= @tweet.content %></h2>
-<h3><%= @tweet.user.username %></h3>
+<h3><a href="/users/<%= @tweet.user.slug %>"><%= @tweet.user.username %></a></h3>
 
+<% if flash.has?(:message) %>
+  <p>
+    <%= flash[:message] %>
+  </p>
+<% end %>
+
+<% if @tweet.user == @user %>
   <a href="/tweets/<%= @tweet.id %>/edit"><button>Edit Tweet</button></a><br /><br />
   <form method="post" action="/tweets/<%= @tweet.id %>/delete">
     <button type="submit">Delete Tweet</button>
   </form>
+<% end %>
 
 <p>
   <a href="/tweets">Home</a>

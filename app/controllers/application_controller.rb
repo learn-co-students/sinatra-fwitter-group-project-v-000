@@ -62,101 +62,6 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  #will need to create two helper methods:
-    #  #current_user & #logged_in?
-    # to help prevent people from editing/deleting/creating tweets unless they are logged in as a specific user
-
-  get '/tweets' do
-    if logged_in?
-      @user = current_user
-      @tweets = Tweet.all
-      erb :"tweets/index"
-    else
-      redirect "/login"
-    end
-  end
-
-  get '/tweets/new' do
-    if logged_in?
-      @user = current_user
-      erb :"tweets/new"
-    else
-      redirect "/login"
-    end
-  end
-
-  post '/tweets' do
-    if logged_in? && params[:content] == ""
-       redirect "/tweets/new"
-    elsif logged_in?
-       tweet = Tweet.create(params)
-       tweet.user = current_user
-       current_user.tweets << tweet
-       current_user.save
-       tweet.save
-       redirect "/tweets"
-    else
-      redirect "/login"
-    end
-  end
-
-  get '/tweets/:id' do
-    if logged_in?
-      @user = current_user
-      @tweet = Tweet.find(params[:id])
-      erb :"tweets/show"
-    else
-      redirect "/login"
-    end
-  end
-
-  get '/tweets/:id/edit' do
-    @tweet = Tweet.find(params[:id])
-    if !logged_in?
-      redirect "/login"
-    elsif logged_in? && current_user == @tweet.user
-      erb :"tweets/edit"
-    elsif logged_in?
-      redirect "/tweets"
-    end
-  end
-
-  post '/tweets/:id' do
-    tweet = Tweet.find(params[:id])
-    if params[:content] != ""
-      tweet.content = params[:content]
-      tweet.save
-      redirect "/tweets/#{tweet.id}"
-    else
-      flash[:message] = "Edited tweets must contain text. Please click delete tweet to permanently remove tweet."
-      redirect "/tweets/#{tweet.id}/edit"
-    end
-  end
-
-  get '/tweets/:id/delete' do
-    tweet = Tweet.find(params[:id])
-    if logged_in? && current_user == tweet.user
-      tweet.delete
-      redirect "/tweets"
-    elsif logged_in?
-      redirect "/tweets"
-    else
-      redirect "/tweets"
-    end
-  end
-
-  post '/tweets/:id/delete' do
-    tweet = Tweet.find(params[:id])
-    if logged_in? && current_user == tweet.user
-      tweet.delete
-      redirect "/tweets"
-    elsif logged_in?
-      redirect "/tweets"
-    else
-      redirect "/tweets"
-    end
-  end
-
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     erb :"/users/show"
@@ -171,5 +76,4 @@ class ApplicationController < Sinatra::Base
       User.find(session[:user_id])
     end
   end
-
 end
