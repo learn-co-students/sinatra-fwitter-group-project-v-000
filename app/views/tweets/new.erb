@@ -1,0 +1,8 @@
+<h1>Add New Tweet</h1>
+
+<h3>What's on your mind <%= @user.username %>?</h3>
+
+<form method="POST" action="/tweets">
+  <input type="text" name="content" id="content"  />
+  <input type="submit" id="submit" value="Tweet" />
+</form>
