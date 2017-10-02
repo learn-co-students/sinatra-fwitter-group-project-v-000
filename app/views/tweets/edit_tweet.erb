@@ -1,1 +1,34 @@
-edit_tweet.erb
+<body class="background-color">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand navbar-center" href="/">fwitter</a>
+    </div>
+    <div  class="padding-right">
+    <ul class="nav navbar-nav navbar-right">
+    	<li class="left-divider"><a href="/logout"><span class="glyphicon glyphicon-log-out gi-2x"></span></a></li>
+
+    	<li><form><button class="btn btn-md btn-info btn-block roundify navbtn" type="submit"><strong>fweet</strong></button></form></li>
+    </ul>
+    </div>
+  </div>
+</nav>
+
+	<div class="container">
+			<div class="row vertical-tweak">
+				<div class="col-md-12 content-box">
+					<h3><strong>Tell the World.</strong></h3>
+					
+					  	<form method="post" action="/tweets/<%=@tweet.id%>/edit">
+					  		<div class=" col-md-12 small-spacer"></div>
+					  		<textarea class="form-control" name="content" id="content" maxlength="99" rows="3"><%=@tweet.content%></textarea>
+					  		<div class=" col-md-12 small-spacer"></div>
+					  		<div class="pull-left" id="textarea_feedback"></div>
+					        <button class="btn btn-md pull-right btn-info roundify" id="submit" type="submit"><strong>Update</strong></button>
+					    	<div class=" col-md-12 small-spacer"><br></div>
+					    </form>
+					<br>
+				</div>
+			</div>
+	</div>
+</body>

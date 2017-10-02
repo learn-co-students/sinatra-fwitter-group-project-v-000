@@ -1,3 +1,19 @@
+<head>    
+	<script src="http://code.jquery.com/jquery-1.5.js"></script>
+    <script>
+    	 setTimeout(function() {
+        $('#successMessage').fadeOut('fast');
+       }, 3000);
+      function countChar(val) {
+        var len = val.value.length;
+        if (len >= 150) {
+          val.value = val.value.substring(0, 150);
+        } else {
+          $('#charNum').text(150 - len);
+        }
+      };
+    </script>
+</head>
 <body class="background-color">
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -15,7 +31,6 @@
 </nav>
 
 <div class="container">
-
 	<div class="row"> 
 
 	  <div class="col-md-3">
@@ -30,9 +45,9 @@
 		  	<div>
 			  	<form method="post" action="/tweets/new">
 			  		<div class=" col-md-12 small-spacer"></div>
-			  		<textarea class="form-control" name="tweet_content" id="textarea" maxlength="99" rows="3"></textarea>
+			  		<textarea class="form-control" name="tweet_content" id="field" onkeyup="countChar(this)" maxlength="150" rows="3"></textarea>
 			  		<div class=" col-md-12 small-spacer"></div>
-			  		<div class="pull-left" id="textarea_feedback"></div>
+			  		<div class="pull-left" id="charNum"></div>
 			        <button class="btn btn-sm pull-right btn-info roundify" type="submit"><strong>fweet</strong></button>
 			    	<div class=" col-md-12 small-spacer"><br></div>
 			    </form>
@@ -40,7 +55,7 @@
 	  	</div>
 	  	<div class=" col-xs-12 spacer"></div>	
 	     	<br>
-	     	<%tweets =  @user.tweets.all.sort_by{|tweet|tweet.created_at}.reverse%>
+	     	<%tweets =  @tweets.all.sort_by{|tweet|tweet.created_at}.reverse%>
 	        <% tweets.each do |tweet|%>
 	        	<div class="col-md-12 content-box"> 
 	        		<h6><%="@#{tweet.user.username} - #{tweet.created_at.localtime}"%></h6>

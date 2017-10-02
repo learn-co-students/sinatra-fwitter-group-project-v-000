@@ -1,5 +1,6 @@
 require './config/environment'
 
+
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -7,6 +8,7 @@ class ApplicationController < Sinatra::Base
   	set :session_secret, "Tony-b4G-a-dOoOoonUt$$$$"
     set :public_folder, 'public'
     set :views, 'app/views'
+    register Sinatra::Flash
   end
 
   get '/' do
@@ -15,12 +17,46 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/new' do
-    redirect '/signup' if !logged_in?
+    redirect '/login' if !logged_in?
     @user = current_user
     erb :'/tweets/create_tweet'
   end
 
+  get '/tweets/:id' do
+    redirect 'login' if !logged_in?
+    @tweet = Tweet.find(params[:id].to_i)
+    erb :'/tweets/show_tweet'
+  end
+
+  get '/tweets/:id/edit' do
+    redirect '/login' if !logged_in?
+    @tweet = Tweet.find(params[:id].to_i)
+    if @tweet.user_id == session[:user_id]
+      erb :'/tweets/edit_tweet'
+    else
+      redirect '/login'
+    end
+  end
+
+  post '/tweets/:id/edit' do
+    tweet = Tweet.find(params[:id].to_i)
+    tweet.update(content: params[:content])
+    redirect "/tweets/#{tweet.id}"
+  end
+
+  delete '/tweets/:id/delete' do
+    tweet = Tweet.find(params[:id].to_i)
+    if tweet.user_id == session[:user_id].to_i
+      tweet.destroy
+      flash[:success] = "Tweet succesfully deleted"
+      redirect '/tweets'
+    else
+      redirect '/tweets'
+    end
+  end
+
   get '/signup' do
+    redirect '/tweets' if logged_in?
   	erb :'/users/create_user'
   end
 
@@ -38,12 +74,18 @@ class ApplicationController < Sinatra::Base
     
   end
 
+  get '/users/:username' do
+    @user = User.find_by_slug(params[:username])
+    erb :'/users/show'
+  end
+
   get '/logout' do
     session.clear
-    redirect '/'
+    redirect '/login'
   end
 
   get '/login' do
+    redirect '/tweets' if logged_in?
   	erb :'/users/login'
   end
 
@@ -58,10 +100,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    redirect '/tweets' if logged_in?
-    user = User.find_by(username: params[:user_name])
-    if user && user.authenticate(params[:user_pass])
+    user = User.find_by(username: params[:username])
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
+      flash[:success] = "Welcome, #{user.username}"
       redirect '/tweets'
       #set up flash message to alert user they logged in
     else
@@ -74,6 +116,7 @@ class ApplicationController < Sinatra::Base
   get '/tweets' do
     redirect '/login' if !logged_in?
     @user = current_user
+    @tweets = Tweet.all
     erb :'/tweets/tweets'
   end
 
