@@ -4,7 +4,7 @@
       <a class="navbar-brand navbar-center" href="/">fwitter</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-    	<li><a href="">Don't have an account? <strong>Create one.</strong></a></li>
+    	<li><a href="/signup">Don't have an account? <strong>Create one.</strong></a></li>
     </ul>
   </div>
 </nav>
@@ -16,11 +16,11 @@
 					<br>
 					<form action="/login" method="post">
 						<h3><strong>Please Sign in.</strong></h3>
-						<input placeholder="Account Name" class="form-control" type="text" name="user_name">
+						<input placeholder="Account Name" class="form-control" id="username" type="text" name="user_name">
 						<br>
-						<input placeholder="Password" class="form-control" type="password" name="user_pass">
+						<input placeholder="Password" class="form-control" id="password" type="password" name="user_pass">
 						<br>
-						<button class="btn btn-md btn-primary btn-block roundify"  type="submit"> Create Account</button>
+						<button class="btn btn-md btn-primary btn-block roundify" id="submit"  type="submit"> Create Account</button>
 					</form>
 					<br>
 				</div>

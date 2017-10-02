@@ -6,6 +6,7 @@
   align-items: center;
 }
 
+
 .mountain-background {
     background-image: url("../images/mountainclouds.jpg");
     background-repeat: no-repeat;
@@ -27,6 +28,26 @@
 	border-radius: 5px;
 }
 
+.background-color {
+  background-color: #eaeaea;
+}
+
+.content-box {
+  background-color: white;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+.tweet-box {
+  background-color: #e6f1ff;
+  border-style: solid;
+  border-color: #2C3E50;
+  border-width: 3px;
+  border-radius: 5px;
+}
+
 .navbar-center {
     position: absolute;
     width: 100%;
@@ -40,6 +61,16 @@
   margin:0 auto;
 }
 
+.profile-btn {
+    margin-top: 20px;
+}
+
+.bottom-border {
+  border-color: #eaeaea;
+  border-bottom: 1px;
+
+}
+
 .navbtn{
       margin-top: 7px;
     }
@@ -49,22 +80,32 @@
   font-size: 1.2em;
 }
 
-.gi-3x {
-  font-size: 3em;
-}
-
-.gi-4x {
-  font-size: 4em;
-}
-
-.gi-5x {
-  font-size: 5em;
-}
-
 .padding-right {
   padding-right: 14em;
 }
 
 .left-divider {
   padding-right: 1em;
+}
+
+.spacer {
+  height: 15px;
+}
+
+.small-spacer {
+  height: 7px;
+}
+
+.xs-spacer {
+  height: 2px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 15px;
 }
