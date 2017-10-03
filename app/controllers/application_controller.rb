@@ -25,6 +25,7 @@ class ApplicationController < Sinatra::Base
   get '/tweets/:id' do
     redirect 'login' if !logged_in?
     @tweet = Tweet.find(params[:id].to_i)
+    @owned = true if @tweet.user_id == session[:user_id]
     erb :'/tweets/show_tweet'
   end
 
@@ -40,15 +41,20 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets/:id/edit' do
     tweet = Tweet.find(params[:id].to_i)
-    tweet.update(content: params[:content])
-    redirect "/tweets/#{tweet.id}"
+    if params[:content].empty?
+      flash[:error] = "Tweets must have content."
+      redirect "/tweets/#{tweet.id}/edit"
+    else   
+      tweet.update(content: params[:content])
+      redirect "/tweets/#{tweet.id}"
+    end
   end
 
   delete '/tweets/:id/delete' do
     tweet = Tweet.find(params[:id].to_i)
     if tweet.user_id == session[:user_id].to_i
       tweet.destroy
-      flash[:success] = "Tweet succesfully deleted"
+      flash[:success] = "Fweet succesfully deleted."
       redirect '/tweets'
     else
       redirect '/tweets'
@@ -64,12 +70,12 @@ class ApplicationController < Sinatra::Base
     user = User.new(username: params[:username], email: params[:email] , password: params[:password])
     redirect '/signup' if params[:username].empty? || params[:email].empty?
     if user.save
-      #flash message: account succesfully created
+      flash[:success] = "Account created."
       session[:user_id] = user.id
       redirect '/tweets'
     else
       redirect '/signup'
-      #flash message: error
+      flash[:error] = "Error creating account."
     end
     
   end
@@ -91,7 +97,7 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets/new' do
    if params[:tweet_content].empty?
-    #flash message with error
+    flash[:error] = "Fweets must have content."
     redirect '/tweets/new'
    else
     Tweet.create(content: params[:tweet_content], user: current_user)

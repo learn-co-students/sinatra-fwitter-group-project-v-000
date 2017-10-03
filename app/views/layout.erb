@@ -8,15 +8,20 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/custom.css">
-     <script src="/javascripts/script.js"></script> 
+    <script src="http://code.jquery.com/jquery-1.5.js"></script>
+    <script>
+       setTimeout(function() {
+        $('#flashMessage').fadeOut('fast');
+       }, 3000);
+    </script>
   </head>
 
   <body>
   <% if flash[:success] %>
-    <div id="successMessage" class="alert alert-success"><%= flash[:success] %></div>
+    <div id="flashMessage" class="alert alert-success"><%= flash[:success] %></div>
   <% end %>
   <% if flash[:error] %>
-    <div id="flash" class="error"><%= flash[:error] %></div>
+    <div id="flashMessage" class="alert alert-error"><%= flash[:error] %></div>
   <% end %>
       <%= yield %>
   </body>

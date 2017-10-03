@@ -7,7 +7,7 @@
     <div  class="padding-right">
     <ul class="nav navbar-nav navbar-right">
     	<li class="left-divider"><a href="/logout"><span class="glyphicon glyphicon-log-out gi-2x"></span></a></li>
-    	<li><form><button class="btn btn-md btn-info btn-block roundify navbtn" type="submit"><strong>fweet</strong></button></form></li>
+    	<li><form method="get" action="/tweets/new" ><button class="btn btn-md btn-info btn-block roundify navbtn" type="submit"><strong>fweet</strong></button></form></li>
     </ul>
     </div>
   </div>
@@ -23,19 +23,21 @@
 				</div>
 				</div>
 				</div>
+				<% if @owned == true %>
 				<div class="row">
 				<div class="form-group col-md-8 col-md-offset-2">
 					<div class="my-btn-group pull-right" style="display: inline;">
 						<br>
 					 <form action="/tweets/<%=@tweet.id%>/edit" method="get" style="display: inline;">
-					 	<button class="btn btn-primary">Edit</button>
+					 	<button class="btn btn-primary">Edit Tweet</button>
 						<input id="hidden" type="hidden" value="Edit Tweet">
 					 </form>
  					 <form action="/tweets/<%=@tweet.id%>/delete" method="post" style="display: inline;" >
 						<input id="hidden" type="hidden" name="_method" value="DELETE">
 						<input id="hidden" type="hidden" value="Delete Tweet">
- 					 	<button class="btn btn-default">Delete</button></form>
+ 					 	<button class="btn btn-default">Delete Tweet</button></form>
 					</div>
 				</div>
 			</div>
+			<% end %>
 </body>
