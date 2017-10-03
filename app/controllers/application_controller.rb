@@ -96,7 +96,7 @@ class ApplicationController < Sinatra::Base
     if params[:content].empty?
       redirect "/tweets/new"
     else
-      tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
+      tweet = current_user.tweets.create(content: params[:content])
       redirect "/tweets"
     end
   end
@@ -113,7 +113,11 @@ class ApplicationController < Sinatra::Base
   get "/tweets/:id/edit" do
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
-      erb :'tweets/edit'
+      if @tweet.user_id == current_user.id
+        erb :'tweets/edit'
+      else
+        redirect "/tweets"
+      end
     else
       redirect "/login"
     end
@@ -130,7 +134,7 @@ class ApplicationController < Sinatra::Base
 
   delete "/tweets/:id/delete" do
     @tweet = Tweet.find_by_id(params[:id])
-    if logged_in? && (session[:user_id] == @tweet.user_id)
+    if logged_in? && (current_user.id == @tweet.user_id)
       @tweet.delete
       erb :'tweets/delete'
     else
