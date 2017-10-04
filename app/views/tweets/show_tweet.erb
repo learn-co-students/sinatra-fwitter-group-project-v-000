@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <em>Tweet from <%= @tweet.user.username %> on <%= @tweet.created_at.in_time_zone('Central Time (US & Canada)').strftime("%A, %B %d, %Y at %I:%M%p") %></em>
+  </div>
+  <div class="panel-body">
+    <%= @tweet.content %>
+  </div>
+  <div class="panel-footer">
+    
+    <a class="btn btn-warning" href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+    
+    <form style="display: inline-block;" action="/tweets/<%= @tweet.id %>" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
+      <input id="submit" class="btn btn-danger" type="submit" value="Delete Tweet">
+    </form>
+
+  </div>
+</div>

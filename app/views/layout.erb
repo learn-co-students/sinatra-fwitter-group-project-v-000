@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <title>Fwitter</title>
+</head>
+<body>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h1>Welcome to Fwitter!</h1>
+    </div>
+  </div>
+
+  <% if User.is_logged_in?(session) %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>Welcome, <%= User.current_user(session).username %></h3>
+        <p><a href="/logout">Logout</a></p>
+      </div>
+    </div>
+  <% end %>
+
+  <%= yield  %>
+
+</body>
+</html>

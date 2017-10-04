@@ -1,0 +1,15 @@
+<div class="panel panel-info">
+  <div class="panel-heading">
+    Latest Tweets:
+  </div>
+</div>
+<% Tweet.all.each do |tweet|  %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <em>Tweet from <a href="/users/<%= tweet.user.username %>"><%= tweet.user.username %></a> on <%= tweet.created_at.in_time_zone('Central Time (US & Canada)').strftime("%A, %B %d, %Y at %I:%M%p") %></em>
+    </div>
+    <div class="panel-body">
+      <%= tweet.content %>
+    </div>
+  </div>
+<% end %>
