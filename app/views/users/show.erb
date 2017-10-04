@@ -1,0 +1,13 @@
+<h1> HERE ARE A SINGLE USER'S TWEETS </h1>
+
+<br></br>
+
+<h1><%=@user.username%></h1>
+
+<br></br>
+
+<%@tweets.each do |tweet|%>
+<%=tweet.content%>
+<%end%>
+
+<br></br>
