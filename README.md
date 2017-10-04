@@ -1,4 +1,7 @@
 # Fwitter Group Project
+1. $ bundle install
+2. $ rake db:migrate
+3. $ shotgun
 
 ## Objectives
 
