@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <!-- Styles -->
+      <link href="/css/custom.css" rel="stylesheet">
+      <link href="/css/bootstrap.css" rel="stylesheet">
+      <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+   </head>
+   <body>
+      
+      <!-- Page Container -->
+      <div class="container-fluid">
+         <!-- View Insertion -->
+         <%= yield %>
+      </div>
+      <!-- jQuery via Google + local fallback, see h5bp.com -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+      <script>window.jQuery || document.write('<script src="js/jquery-1.7.1.min.js"><\/script>')</script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+      <!-- Bootstrap jQuery Plugins, compiled and minified -->
+      <script src="/js/bootstrap.min.js"></script>
+      <!-- Password Meter -->
+      <script type="text/javascript" src="/js/pwstrength-bootstrap.min.js"></script>
+   </body>
+</html>
