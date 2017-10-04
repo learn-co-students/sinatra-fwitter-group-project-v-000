@@ -1,0 +1,15 @@
+<h1>Tweets Page</h1>
+<h2>Welcome,</h2>
+<h2>Here Are All Tweets:</h2>
+<% @tweets.each do |tweet| %>
+  <%= tweet.content%>  -  <%=tweet.user.username %>
+  <%if tweet.user == @user%>
+  <form action='/tweets/<%=tweet.id%>/edit' method="GET">
+    <input type="submit" value="edit" name="tweet[content]" id="submit">
+  </form>
+  <%end%>
+
+  <br></br>
+  <%end%>
+
+  <p>Click the link to <a href="/tweets/new">Create a Tweet<a/>

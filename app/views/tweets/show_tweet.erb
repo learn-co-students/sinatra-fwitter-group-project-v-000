@@ -1,0 +1,23 @@
+<h1>Show Tweet Page</h1>
+
+<h3><%=@tweet.content%> - <%=@user.username%></h3>
+
+<form action='/tweets/<%=@tweet.id%>' method="POST">
+
+  <input type="text" name="tweet[content]" placeholder="<%=@tweet.content%>" id="content">
+  <br></br>
+
+  <input type="submit" value="Edit Tweet" id="submit">
+</form>
+<br></br>
+<form method="post" action="/tweets/<%= @tweet.id %>/delete">
+  <input type="submit" value="Delete Tweet" id="Delete Tweet">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+</form>
+<br></br>
+<form method="get" action="/tweets">
+
+  <input type="submit" value="See All Tweets" >
+</form>
+
+
