@@ -1,0 +1,7 @@
+<h1>Welcome, <%= @user.username %><h1>
+  <h2> Tweets: </h2>
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li><a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a> says: <%= tweet.content %> &nbsp;<br><a href="/tweets/<%= tweet.id %>/edit">Edit</a>&nbsp;<a href="/tweets/<%= tweet.id %>">Delete</a></li>
+  <% end %>
+</ul>
