@@ -1,0 +1,6 @@
+<h1><label>Welcome, <%=@user.username%></label></h1>  
+ <h3>Session[:user_id]: <%= session[:user_id] %></h3>
+ <h4>Tweets: </h4>
+   <% @user.tweets.each do |t| %>
+ <p><%=t.id%>: <a href="/tweets/<%=t.id.to_s%>"><%= t.content%></a></p>
+   <% end %>
