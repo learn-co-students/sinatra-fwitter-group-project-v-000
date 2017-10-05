@@ -1,0 +1,7 @@
+Tweets.erb<br>
+
+Welcome, <%= @user.username %>
+
+<% @tweets.each do |tweet| %>
+  <%= tweet %><br>
+<% end %>
