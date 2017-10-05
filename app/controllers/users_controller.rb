@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 
 get '/signup' do
-  erb :'users/create_user'
+  if session[:user_id]
+    redirect '/tweets'
+  else
+    erb :'users/create_user'
+  end
 end
 
 post '/signup' do
