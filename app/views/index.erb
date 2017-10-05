@@ -1,0 +1,16 @@
+<h1>Welcome to Fwitter</h1>
+
+<p>Users List:</p>
+<p>
+  <% @users.each do |user| %>
+  <div>
+    <a href="/users/<%= user.username %>"><%= user.username %></a>
+  </div>
+  <% end %>
+</p>
+
+<div>
+  <p><a href="/tweets">View Tweets</a></p>
+  <p><a href="/signup">Signup</a></p>
+  <p><a href="/login">Login</a></p>
+</div>
