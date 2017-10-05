@@ -48,4 +48,9 @@ get '/logout' do
   end
 end
 
+get '/users/:slug' do
+  @user = 
+  erb :'users/show'
+end
+
 end
