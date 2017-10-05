@@ -20,13 +20,21 @@ post '/signup' do
 end
 
 get '/login' do
-  erb :'users/login'
-  redirect '/tweets'
+  if session[:user_id]
+    redirect '/tweets'
+  else
+    erb :'users/login'
+  end
 end
 
 post '/login' do
-  session[:user_id] = @user.id
-  redirect '/tweets'
+  user = User.find_by(:username => params[:username])
+  if user && user.authenticate(params[:password])
+    session[:user_id] = user.id
+    redirect "/tweets"
+  else
+    redirect to '/signup'
+  end
 end
 
 
