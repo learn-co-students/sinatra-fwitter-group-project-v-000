@@ -21,6 +21,7 @@ end
 
 get '/login' do
   erb :'users/login'
+  redirect '/tweets'
 end
 
 post '/login' do
