@@ -1,3 +1,6 @@
 Hi hi hi show.erb
 <p>Welcome, <%= @user.username %>
+<p><% @user.tweets.each do |tweet| %>
+  <%= tweet.content %>
+<% end %>
 <p><a href="/logout">Logout</a>
