@@ -49,7 +49,8 @@ get '/logout' do
 end
 
 get '/users/:slug' do
-  @user = 
+  binding.pry
+  @user = User.find_by_slug(params[:slug])
   erb :'users/show'
 end
 
