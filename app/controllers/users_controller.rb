@@ -19,8 +19,13 @@ post '/signup' do
   end
 end
 
-get 'login' do
+get '/login' do
   erb :'users/login'
+end
+
+post '/login' do
+  session[:user_id] = @user.id
+  redirect '/tweets'
 end
 
 
