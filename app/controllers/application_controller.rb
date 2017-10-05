@@ -80,6 +80,7 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets' do
     @tweet = Tweet.create(:content => params[:content], :user_id => params[:user_id])
+    @tweet.save
   end
 
   # get '/tweets/:id' do
