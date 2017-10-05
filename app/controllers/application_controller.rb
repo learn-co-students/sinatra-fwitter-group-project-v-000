@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
 
   get '/signup' do
     if !logged_in?
-      erb :'/users/create_user'
+      # erb :'/users/create_user'
     else
       redirect to "/tweets"
     end
@@ -48,7 +48,7 @@ class ApplicationController < Sinatra::Base
 #
 #   end
 #
-#   get '/login' do
+  # get '/login' do
 #     #INVESTIGATE
 #     # if logged_in? #prevents logged in user from seeing login page
 #     #   # binding.pry
