@@ -19,4 +19,9 @@ post '/signup' do
   end
 end
 
+get 'login' do
+  erb :'users/login'
+end
+
+
 end
