@@ -30,6 +30,7 @@ class TweetsController < ApplicationController
     end
 
     get '/tweets/:id' do
+      @tweet = Tweet.find_by(:content => params[:content])
       erb :show_tweet
     end
 
@@ -42,7 +43,7 @@ class TweetsController < ApplicationController
     end
 
     post 'tweets/:id/delete' do
-      
+
     end
 
 end
