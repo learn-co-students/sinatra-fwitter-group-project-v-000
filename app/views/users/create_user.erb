@@ -1,0 +1,23 @@
+<h1>Sign Up for Fwitter</h1>
+<%= "Must include username, email and password" if @user && @user.errors.any? %>
+
+<br></br>
+
+<form action="/signup" method="POST">
+  <label for="username">Username:</label>
+  <input type="text" name="username" id="username">
+
+  <br></br>
+
+  <label for="email">Email:</label>
+  <input type="text" name="email" id="email">
+
+  <br></br>
+
+  <label for="password">Password:</label>
+  <input type="text" name="password" id="password">
+
+  <br></br>
+
+  <input type="submit" value="submit">
+</form>
