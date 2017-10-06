@@ -45,7 +45,8 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     @user = User.find_by(:username => params[:username])
-    if @user && @user.authenticate(params[:password])
+    if @user
+    # if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect to "/tweets"
     else
@@ -54,7 +55,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/users/:slug' do
-    @user = User.find_by(:username => params[:username])
+    # @user = User.find_by(:username => params[:username])
+    @user = User.find_by(:slug => params[:slug])
     erb :'/users/show'
   end
 
@@ -85,6 +87,7 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by(:username => params[:username])
     if params[:content] != ""
       @tweet = current_user.tweets.create(:content => params[:content], :user_id => [:user_id])
+      redirect to "/tweets"
     else
       redirect to "/tweets/new"
     end
@@ -126,7 +129,8 @@ class ApplicationController < Sinatra::Base
   post '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id])
     if logged_in? && @tweet.user_id == session[:user_id]
-      @tweet.delete
+      @tweet.destroy
+      redirect to "/tweets"
     end
   end
 

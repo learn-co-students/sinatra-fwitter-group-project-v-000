@@ -1,7 +1,6 @@
-Tweets.erb<br>
+Welcome, <%= current_user.username %><br>
+<a href="/tweets/new">New Tweet</a> | <a href="/logout">Logout</a>
 
-Welcome, <%= current_user.username %>
-
-<% @tweets.each do |tweet| %>
-  <%= tweet.content %><br>
+<p><% @tweets.each do |tweet| %>
+  <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a><br>
 <% end %>
