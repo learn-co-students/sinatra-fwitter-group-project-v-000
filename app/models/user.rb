@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug)
-    self.all.find{|s| s.slug == slug}
+    self.all.find{|user| user.slug == slug}
+    # binding.pry
   end
 
 end
