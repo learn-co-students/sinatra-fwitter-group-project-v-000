@@ -24,7 +24,7 @@ class ApplicationController < Sinatra::Base
   helpers do
 
     def current_user
-      @current_user ||= User.find(id: session[:user_id]) if session[:user_id].present?
+      @current_user ||= User.find(session[:user_id]) if session[:user_id].present?
 
     end
 
