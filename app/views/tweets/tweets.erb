@@ -1,6 +1,15 @@
-Welcome, <%= current_user.username %><br>
-<a href="/tweets/new">New Tweet</a> | <a href="/logout">Logout</a>
+Welcome, <%= current_user.username %>!
+
+<p><a href="/tweets/new">New Tweet</a> | <a href="/logout">Logout</a>
 
 <p><% @tweets.each do |tweet| %>
-  <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a><br>
+  <% if tweet.user_id == current_user.id %>
+    <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
+      <% if tweet.user != nil %>
+        - <%= tweet.user.username %>
+      <% end %>
+  <% else %>
+    <%= tweet.content %>
+  <% end %>
+  <br>
 <% end %>

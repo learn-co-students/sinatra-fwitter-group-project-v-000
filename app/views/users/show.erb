@@ -1,6 +1,7 @@
 <h2>Account Page</h2>
 <p>Welcome, <%= @user.username %>
+<p>My Tweets
 <p><% @user.tweets.each do |tweet| %>
-  <%= tweet.content %>
+  <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
 <% end %>
 <p><a href="/logout">Logout</a>
