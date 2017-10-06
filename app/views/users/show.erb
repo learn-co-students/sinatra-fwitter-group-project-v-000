@@ -1,0 +1,6 @@
+<h2><%= current_user.username %>'s Account Page</h2>
+<p>My Tweets
+<p><% current_user.tweets.each do |tweet| %>
+  <a href="/tweets/<%= tweet.id %>"><%= tweet.content %><br></a>
+<% end %>
+<p><a href="/tweets">All Tweets</a> | <a href="/logout">Logout</a>
