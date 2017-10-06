@@ -1,5 +1,4 @@
 require './config/environment'
-require 'pry'
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -12,13 +11,9 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "secret"
   end
 
-  get '/' do
-    if Helper.is_logged_in?(session)
-      @tweets = Tweet.all
-      erb :show
-    else
-      erb :index
-    end
-  end
+get '/logout' do
+   session[:user_id] = nil
+   redirect :'/login'
+end
 
 end
