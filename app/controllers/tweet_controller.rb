@@ -18,9 +18,9 @@ class TweetController < ApplicationController
   end
 
   post '/tweets' do
-    # @user = User.find_by(:username => params[:username])
     if params[:content] != "" #if tweet is not blank
       @tweet = current_user.tweets.create(:content => params[:content])
+      @tweet.user_id = current_user.id
       redirect to "/tweets"
     else
       redirect to "/tweets/new"
@@ -40,9 +40,13 @@ class TweetController < ApplicationController
   end
 
   get '/tweets/:id/edit' do
-    if logged_in?
+    if logged_in? #add code to be user specific - prevent other user from editing
       @tweet = Tweet.find_by_id(params[:id])
-      erb :"/tweets/edit_tweet"
+      if @tweet.user_id == current_user.id
+        erb :"/tweets/edit_tweet"
+      else
+        redirect to '/tweets'
+      end
     else
       redirect to "/login"
     end
@@ -75,7 +79,7 @@ class TweetController < ApplicationController
     end
     # @tweet = Tweet.find_by_id(params[:id])
     # if logged_in? && @tweet.user_id == session[:user_id]
-    #   @tweet.destroy
+    #   @tweet.delete
     #   redirect to "/tweets"
     # else
     #   redirect to "/login"

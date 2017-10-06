@@ -1,5 +1,11 @@
 class UserController < ApplicationController
 
+  get '/users/:slug' do
+    @user = User.find_by(:username => params[:username])
+    # @user = User.find_by_slug(params[:slug])
+    erb :'/users/show'
+  end
+
   get '/signup' do
     if !logged_in?
       erb :'/users/create_user'
@@ -32,8 +38,7 @@ class UserController < ApplicationController
 
   post '/login' do
     @user = User.find_by(:username => params[:username])
-    if @user
-    # if @user && @user.authenticate(params[:password])
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect to "/tweets"
     else
@@ -41,15 +46,8 @@ class UserController < ApplicationController
     end
   end
 
-  get '/users/:slug' do
-    @user = User.find_by(:username => params[:username])
-    # @user = User.find_by_slug(params[:slug])
-    erb :'/users/show'
-  end
-
   get '/logout' do
-    session.clear
-    current_user = nil
+    session.destroy
     redirect to "/login"
   end
 

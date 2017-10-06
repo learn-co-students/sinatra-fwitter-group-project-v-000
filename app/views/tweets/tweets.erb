@@ -1,13 +1,10 @@
-Welcome, <%= current_user.username %>!
+<h2>Welcome, <%= current_user.username %>!</h2>
 
 <p><a href="/tweets/new">New Tweet</a> | <a href="/logout">Logout</a>
 
 <p><% @tweets.each do |tweet| %>
   <% if tweet.user_id == current_user.id %>
-    <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
-      <% if tweet.user != nil %>
-        - <%= tweet.user.username %>
-      <% end %>
+    <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a> - <%= tweet.user.username %>
   <% else %>
     <%= tweet.content %>
   <% end %>
