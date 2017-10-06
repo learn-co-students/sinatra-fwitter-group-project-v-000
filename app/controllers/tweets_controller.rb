@@ -29,4 +29,20 @@ class TweetsController < ApplicationController
       @user = User.find_by(:username => params[:username])
     end
 
+    get '/tweets/:id' do
+      erb :show_tweet
+    end
+
+    get '/tweets/:id/edit' do
+
+    end
+
+    post '/tweets/:id' do
+
+    end
+
+    post 'tweets/:id/delete' do
+      
+    end
+
 end
