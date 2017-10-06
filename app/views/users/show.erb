@@ -1,0 +1,9 @@
+<h1>Here's Your Tweet History, <%= @user.username %>!</h1>
+
+<h2>All Tweets by Prolific Tweeter <%= @user.username %>:</h2>
+
+<ul>
+  <% @user.tweets.each do |tweet| %>
+    <li><%= tweet.content %></li>
+  <% end %>
+</ul>
