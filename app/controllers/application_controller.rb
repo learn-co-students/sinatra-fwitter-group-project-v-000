@@ -2,16 +2,13 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
-  # configure do
-  #   set :public_folder, 'public'
-  #   set :views, 'app/views'
-  # end
-
-  set :views, Proc.new { File.join(root, "../views/") }
-  register Sinatra::Twitter::Bootstrap::Assets
+  configure do
+    set :public_folder, 'public'
+    set :views, 'app/views'
+  end
 
   get '/' do
-    erb :'/users/create_user'
+    erb :'/index'
   end
 
 
