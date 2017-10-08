@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-    get '/users' do
+    get '/login' do
         erb :'/users/login'
     end
 
@@ -8,8 +8,16 @@ class UsersController < ApplicationController
         erb :'/users/create_user'
     end
 
-    post '/users' do
-        @user = User.new(params[:user])
+    post '/signup' do
+        if params[:username] == "" || params[:password] == "" || params[:email] == ""
+            redirect "/signup"
+        else
+            User.create(username: params[:username], email: params[:email], password: params[:password])
+            redirect "/tweets"
+        end
+    end
+
+    get '/failure' do
         redirect '/'
     end
 end
