@@ -6,6 +6,6 @@ class TweetsController < ApplicationController
 
     get '/tweets/:id' do
         erb :'/tweets/show_tweet'
-
+    end
     
 end

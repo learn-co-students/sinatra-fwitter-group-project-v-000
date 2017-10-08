@@ -7,7 +7,7 @@ gem 'rake'
 gem 'require_all'
 gem 'sqlite3'
 gem 'thin'
-gem 'shotgun', '~> 0.9.2'
+gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem "tux"
