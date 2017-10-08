@@ -33,7 +33,7 @@ class ApplicationController < Sinatra::Base
     if !params['username'].empty? && !params['email'].empty? && !params['password'].empty?
       @user = User.new(username: params['username'], email: params['email'], password: params['password'])
       @user.save
-      session[:id] = @user.id
+      session[:id] = @user.id # @user is now logged in
       redirect '/tweets'
     else
       redirect '/signup'
@@ -44,11 +44,24 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by(:username => params[:username])
 
     if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id 
+      session[:user_id] = @user.id # @user is now logged in
       redirect '/tweets'
     else
       erb :login
     end
+  end
+
+  get '/tweets/new' do
+    if Helpers.is_logged_in?(session)
+      erb :'/tweets/new'
+    else
+      redirect '/login'
+    end
+  end
+
+  post '/tweets' do
+    @tweet = Tweet.create(content: params["content"])
+    redirect '/tweets'
   end
 
   get '/tweets' do
@@ -61,7 +74,7 @@ class ApplicationController < Sinatra::Base
 
   get '/logout' do
     if Helpers.is_logged_in?(session)
-      session.clear
+      session.clear # @user is now logged out
     end
     redirect '/login'
   end
