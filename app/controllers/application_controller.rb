@@ -55,8 +55,15 @@ class ApplicationController < Sinatra::Base
     if Helpers.is_logged_in?(session)
       erb :'tweets/main'
     else
-      redirect '/signup'
+      redirect '/login'
     end
+  end
+
+  get '/logout' do
+    if Helpers.is_logged_in?(session)
+      session.clear
+    end
+    redirect '/login'
   end
 
 end
