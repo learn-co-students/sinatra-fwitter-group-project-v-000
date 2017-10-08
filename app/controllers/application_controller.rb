@@ -31,7 +31,7 @@ class ApplicationController < Sinatra::Base
 
   post '/signup' do
     if !params['username'].empty? && !params['email'].empty? && !params['password'].empty?
-      @user = User.new(username: params['username'], email: params['email'], password: params['password'])
+      @user = User.create(username: params['username'], email: params['email'], password: params['password'])
       @user.save
       session[:id] = @user.id # @user is now logged in
       redirect '/tweets'
@@ -60,8 +60,9 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets' do
-    if params["content"] != ""
-      @tweet = Tweet.create(content: params["content"])
+    @user = Helpers.current_user(session)
+    if !params["content"].empty?
+      @tweet = @user.tweets.create(content: params["content"])
     else
       redirect '/tweets/new'
     end
