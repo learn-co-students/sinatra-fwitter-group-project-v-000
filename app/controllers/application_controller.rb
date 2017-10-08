@@ -78,6 +78,22 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/tweets/:id/edit' do
+    @user = Helpers.current_user(session)
+    @tweet = Tweet.find_by(id=params[:id])
+    if Helpers.is_logged_in?(session) && @tweet.user_id == @user.id
+      erb :'/tweets/edit'
+    else
+      redirect '/login'
+    end
+  end
+
+  post '/tweets/:id/edit' do
+    @tweet = Tweet.find_by(id: params[:id])
+    @tweet.update(content: params[:content])
+    @tweet.save
+  end
+
   get '/tweets' do
     if Helpers.is_logged_in?(session)
       erb :tweets
@@ -96,6 +112,12 @@ class ApplicationController < Sinatra::Base
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     erb :'users/show'
+  end
+
+  post '/tweets/:id/delete' do
+    @tweet = Tweet.find_by(id: params[:id])
+    @tweet.delete if @tweet.user == Helpers.current_user(session)
+    redirect '/tweets'
   end
 
 end
