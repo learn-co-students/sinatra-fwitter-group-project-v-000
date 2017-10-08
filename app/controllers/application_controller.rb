@@ -14,18 +14,49 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb :signup
+    if Helpers.is_logged_in?(session)
+      redirect '/tweets'
+    else
+      erb :signup
+    end
   end
 
-  post '/users' do
-    @user = User.new(username: params['username'], email: params['email'], password: params['password'])
-    @user.save
+  get '/login' do
+    if Helpers.is_logged_in?(session)
+      redirect '/tweets'
+    else
+      erb :login
+    end
+  end
 
-    redirect '/tweets'
+  post '/signup' do
+    if !params['username'].empty? && !params['email'].empty? && !params['password'].empty?
+      @user = User.new(username: params['username'], email: params['email'], password: params['password'])
+      @user.save
+      session[:id] = @user.id
+      redirect '/tweets'
+    else
+      redirect '/signup'
+    end
+  end
+
+  post '/login' do
+    @user = User.find_by(:username => params[:username])
+
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id 
+      redirect '/tweets'
+    else
+      erb :login
+    end
   end
 
   get '/tweets' do
-    erb :'tweets/main'
+    if Helpers.is_logged_in?(session)
+      erb :'tweets/main'
+    else
+      redirect '/signup'
+    end
   end
 
 end
