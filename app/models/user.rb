@@ -1,3 +1,4 @@
 class User < ActiveRecord::Base
-
-end 
+  has_many :tweets
+  has_secure_password
+end

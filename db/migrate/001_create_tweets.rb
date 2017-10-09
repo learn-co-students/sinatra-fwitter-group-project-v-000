@@ -4,4 +4,4 @@ class CreateTweets < ActiveRecord::Migration
       t.string :content
     end
   end
-
+end
