@@ -1,4 +1,17 @@
-<h2>Please Sign up or Log in Here</h2>
+<style>
+  .flash {
+    color: red;
+    font-size: 20px;
+  }
+</style>
+
+<div class="flash">
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+</div>
+
+<h2>Please Sign Up Here</h2>
 
 <form action="/signup" method="POST">
 
@@ -7,7 +20,7 @@
   <label for="email">Email: </label>
   <input id="email" type="text" name="email" placeholder="Email"></input><br></br>
   <label for="password">Password: </label>
-  <input id="password" type="text" name="password" placeholder="Password"></input><br></br>
+  <input id="password" type="password" name="password" placeholder="Password"></input><br></br>
 
   <p><input type="submit" value="submit"></input></p>
 
