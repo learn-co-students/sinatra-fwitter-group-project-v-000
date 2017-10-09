@@ -1,0 +1,28 @@
+<style>
+  textarea {
+    width: 300px;
+    height: 100px;
+  }
+
+  .flash {
+    color: red;
+    font-size: 20px;
+  }
+</style>
+
+<div class="flash">
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+</div>
+
+<h2>Create A New Tweet Here</h2>
+
+<form action="/tweets" method="POST">
+
+  <label for="content">Please enter the content of your new tweet: </label><br></br>
+  <textarea id="content" name="content" placeholder="Your new tweet"></textarea>
+
+  <p><input type="submit" value="submit"></p>
+
+</form>

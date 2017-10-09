@@ -1,0 +1,31 @@
+<style>
+  .flash {
+    color: red;
+    font-size: 20px;
+  }
+</style>
+
+<div class="flash">
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+</div>
+
+<h1>Welcome, <%= @user.username %>!</h1>
+
+<h2>You can view all the tweets here</h2>
+
+<br>
+
+<% @tweets.each do |tweet| %>
+  <% @user = User.find(tweet.user_id) %>
+  <a href="/tweets/<%= tweet.id %>">Tweet # <%= tweet.id %></a>, posted by:
+  <a href="/users/<%= @user.slug %>"><%= @user.username %></a>
+  <p><%= tweet.content %></p><br>
+<% end %>
+
+<br>
+
+<p><a href="/tweets/new">Click here to post a new tweet</a></p>
+
+<p><a href="/logout">Click here to log out</a></p>
