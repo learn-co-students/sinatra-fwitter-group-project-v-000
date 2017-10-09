@@ -1,7 +1,7 @@
-<h1> <%= @user.username %> Fweets: </h1>
+<h1> <%= @user.username %> Tweets: </h1>
 <br>
 <ul>
 <% @user.tweets.each do |tweet| %>
-<li> tweet.content </li>
+<li><%= tweet.content %> </li>
 <% end %>
 </ul>

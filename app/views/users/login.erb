@@ -1,3 +1,5 @@
+<% if !logged_in? %>
+
 <h2> Log In to Fwitter </h2>
 <form method="post" action="/login">
   <label> Username </label>
@@ -7,3 +9,7 @@
   <input type="text" name="password" id="password">
   <input type="submit" id="Log In">
 </form>
+<% else %>
+<p> Looks like you are logged in already </p>
+<a href="/logout">Log out</a>
+<% end %>
