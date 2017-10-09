@@ -23,6 +23,7 @@ class ApplicationController < Sinatra::Base
   get '/tweets' do
     if logged_in?
       @user = current_user
+      @tweets = Tweet.all
       erb :'/tweets/index'
     else
       redirect "/login"
@@ -70,6 +71,21 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by_slug(:slug)
 
     erb :'users/show'
+  end
+
+  get '/tweets/new' do
+    if logged_in?
+      erb :'tweets/create_tweet'
+    else
+      redirect "/login"
+    end
+  end
+
+  post '/tweets/new' do
+    @user = current_user
+    @tweet = Tweet.create(content: params[:content], user_id: @user.id) if !params[:content].empty?
+          # lets user create a tweet if they are logged in []
+          # does not let a user tweet from another user []
   end
 
 
