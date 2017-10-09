@@ -17,7 +17,7 @@ class TweetsController < ApplicationController
       redirect "/login"
     end
   end
-  
+
   post '/tweets/new' do
       @user = current_user
       if !params[:content].empty?
@@ -38,11 +38,13 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id/edit' do
-    @tweet = Tweet.find(params[:id])
-    if logged_in? && current_user == @tweet.user
-      erb :'tweets/edit_tweet'
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      if current_user == @tweet.user
+        erb :'tweets/edit_tweet'
+      end
     else
-      redirect "/login"
+      redirect to "/login"
     end
   end
 
