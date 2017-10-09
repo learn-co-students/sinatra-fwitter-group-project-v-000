@@ -1,0 +1,8 @@
+<h1> <%= @user.username.capitalize %> Tweets: </h1>
+<br>
+
+<% @user.tweets.each do |tweet| %>
+<h4><%= tweet.content %> </h4>
+<% end %>
+
+<p><a href="/tweets"> Back to Tweets </a></p>
