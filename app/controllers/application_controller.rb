@@ -84,8 +84,6 @@ class ApplicationController < Sinatra::Base
   post '/tweets/new' do
     @user = current_user
     @tweet = Tweet.create(content: params[:content], user_id: @user.id) if !params[:content].empty?
-          # lets user create a tweet if they are logged in []
-          # does not let a user tweet from another user []
   end
 
 
