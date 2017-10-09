@@ -1,9 +1,9 @@
 <h1> Welcome, <%= current_user.username %></h1>
-<% Tweet.all.each do |tweet| %>
-<a href="/tweets/<%= tweet.id%>"><%= tweet.content %> </a>
+<% @tweets.each do |tweet| %>
+<p><a href="/tweets/<%=tweet.id%>"><%= tweet.content %> </a></p>
 <% end %>
 <br>
-<a href="/tweets/new">New Tweet</a>
-<a href="/users/<%= current_user.slug %>">My Tweets</a>
+<p><a href="/tweets/new">New Tweet</a></p>
+<p><a href="/users/<%=current_user.slug %>">My Tweets</a></p>
 <br>
-<a href="/logout">Log out</a>
+<p><a href="/logout">Log out</a></p>
