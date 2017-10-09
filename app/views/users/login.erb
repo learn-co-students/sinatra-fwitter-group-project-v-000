@@ -1,15 +1,16 @@
-<% if !logged_in? %>
-
 <h2> Log In to Fwitter </h2>
+<br>
 <form method="post" action="/login">
-  <label> Username </label>
-  <input type="text" name="username" id="username">
+  <p><label> Username: </label>
+  <input type="text" name="username" id="username"></p>
   <br>
-  <label> Password </label>
-  <input type="text" name="password" id="password">
-  <input type="submit" id="Log In">
+  <p><label> Password: </label>
+  <input type="text" name="password" id="password"></p>
+  <br>
+  <p><input type="submit" value="Log In" id="submit"></p>
+  <!--<button type="submit" value="Log In" id="Log In"> Log In </button> -->
+  <!--<input type="submit" id="Log In"> -->
 </form>
-<% else %>
-<p> Looks like you are logged in already </p>
-<a href="/logout">Log out</a>
-<% end %>
+<br>
+
+<p><a href="/signup"> Sign up </a></p>
