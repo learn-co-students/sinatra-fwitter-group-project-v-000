@@ -1,0 +1,12 @@
+<div class ="logged_in">
+  Logged In:  <%=User.find(session[:user_id]).slug.upcase%> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/users/<%=User.find(session[:user_id]).slug%>">Your Tweets</b> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/tweets"> View All Tweets</b> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/tweets/new"> Create New Tweet</b> &nbsp;&nbsp; | &nbsp;&nbsp; <u><a href="/logout">Log Out</a></u>
+</div>
+
+<div class="content-new">
+  <b>COMPOSE NEW TWEET</b> <br></br><br>
+
+  <form action="/tweets" method="POST">
+    <textarea type="text" name="content" style="max-width:250px;min-width:250px;min-height:60px;max-height:60px;" maxlength="140" placeholder="&nbsp;Tweet up to 140 characters..." ></textarea><br></br>
+    <input type="submit" value="submit">
+  </form>
+</div>

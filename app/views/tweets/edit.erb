@@ -1,0 +1,13 @@
+<div class ="logged_in">
+  Logged In:  <%=User.find(session[:user_id]).slug.upcase%> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/users/<%=User.find(session[:user_id]).slug%>">Your Tweets</b> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/tweets"> View All Tweets</b> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/tweets/new"> Create New Tweet</b> &nbsp;&nbsp; | &nbsp;&nbsp; <u><a href="/logout">Log Out</a></u>
+</div>
+
+<div class = "content-edit">
+  <b>EDIT TWEET</b>
+
+  <form action="/tweets/<%=@tweet.id%>" method="POST">
+    <input type="hidden" name="_method" id="hidden" value="patch"><br></br>
+    <textarea type="text" name="content" style="max-width:250px;min-width:250px;min-height:60px;max-height:60px;" maxlength="140"> <%=@tweet.content%></textarea><br></br>
+    <input type="submit" value="submit">
+  </form>
+</div>

@@ -1,0 +1,18 @@
+<div class="tweets-welcome">
+  <h2>Welcome, <%=User.find(session[:user_id]).username%></h2>
+
+  <b><a href="/users/<%=User.find(session[:user_id].to_i).slug%>">My Tweets</a></b> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/tweets/new">Create New Tweet</a></b> &nbsp;&nbsp; | &nbsp;&nbsp; <u><a href="/logout">Log Out</a></u>
+</div>
+
+
+<div class="tweets">
+  <b>TWEETS BY ALL USERS</b> <br></br>
+</div>
+
+<%Tweet.all.sort { |a,b| b.id <=> a.id }.each do |tweet|%>
+  <%@user = User.find(tweet.user_id)%>
+  <div class ="tweet-div-1">
+    <i><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></i><br></br>
+    &nbsp;&nbsp;&nbsp; by: <b><a href="/users/<%=@user.slug%>"><%=@user.username%></a></b>,&nbsp; <%=tweet.created_at%>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+<div class ="logged_in">
+  Logged In:  <%=User.find(session[:user_id]).slug.upcase%> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/users/<%=User.find(session[:user_id]).slug%>">Your Tweets</b> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/tweets"> View All Tweets</b> &nbsp;&nbsp; | &nbsp;&nbsp; <b><a href="/tweets/new"> Create New Tweet</b> &nbsp;&nbsp; | &nbsp;&nbsp; <u><a href="/logout">Log Out</a></u>
+</div>
+
+<br></br><br></br>
+
+<div class="content">
+  <b>TWEET DETAILS</b><br></br><br>
+
+  <i><%=@tweet.content%></i> <br></br>
+
+  <% if (@tweet.user_id.to_i == session[:user_id].to_i) %>
+
+    &nbsp;&nbsp;&nbsp; written by: <%=User.find(session[:user_id]).username%> (you),&nbsp; <%=@tweet.created_at%> <br></br>
+
+    <p><u><a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a></u></p>
+
+    <form action="/tweets/<%=@tweet.id%>/delete" method="post">
+      <input id="hidden" type="hidden" name="_method" value="delete"><button type="submit">Delete Tweet</button>
+    </form>
+
+  <% else %>
+    <%@user = User.find(@tweet.user_id)%>
+    &nbsp;&nbsp;&nbsp;written by: <b><a href="/users/<%=@user.slug%>"><%=@user.username%></a></b>,&nbsp; <%=@tweet.created_at%>
+
+  <% end %>
+</div>
