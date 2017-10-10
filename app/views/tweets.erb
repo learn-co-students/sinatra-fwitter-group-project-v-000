@@ -1,0 +1,21 @@
+<div align="left">
+  <div class="container">
+    <h3>Welcome, <%= @user.username%></h3>
+    <a href="/users/<%=@user.slug%>/new" class="btn btn-outline-info btn-primary btn-primary:hover btn-sm">Tweet</a>
+    <a href="/logout" class="btn btn-outline-info btn-primary btn-primary:hover btn-sm">Log Out</a>
+
+    <br><br>
+
+    <h4>Your Feed</h4>
+    <br>
+    <div class="container">
+      <dl>
+        <% @tweets.order(id: :desc).each do |tweet| %>
+            <dt><a href="/users/<%=tweet.user.slug%>"><%="#{tweet.user.username} "%></a>&bull; <%=(tweet.created_at + Time.zone_offset('PST')).strftime("%b %d") %></dt>
+            <dd><a href="/tweets/<%=tweet.id%>"><%=tweet.content %></a></dd>
+            <br>
+    <% end %>
+      </dl>
+    </div> <!-- 2nd container -->
+  </div> <!-- 1st container -->
+</div> <!-- alignment -->
