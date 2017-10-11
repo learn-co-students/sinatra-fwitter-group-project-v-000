@@ -22,7 +22,7 @@ class TweetsController < ApplicationController
             redirect '/tweets/new'
         else
             @tweet = current_user.tweets.create(content: params[:content])
-            redirect '/tweets/#{@tweet.id}'
+            redirect "tweets/#{@tweet.id}"
         end 
     end
 
@@ -50,12 +50,12 @@ class TweetsController < ApplicationController
 
     patch '/tweets/:id' do
         if params[:content] == ""
-            redirect '/tweets/#{params[:id]}/edit'
+            redirect "/tweets/#{params[:id]}/edit"
         else
             @tweet = Tweet.find_by_id(params[:id])
             @tweet.content = params[:content]
             @tweet.save
-            redirect '/tweets/#{@tweet.id}'
+            redirect "/tweets/#{@tweet.id}"
         end 
     end
 
