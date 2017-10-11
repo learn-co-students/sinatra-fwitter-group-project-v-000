@@ -137,7 +137,7 @@ describe ApplicationController do
 
       fill_in(:username, :with => "becky567")
       fill_in(:password, :with => "kittens")
-      click_button 'submit'
+      click_button 'Log In' #changed from 'submit' from initial test for authentic experience
       expect(page.current_path).to eq('/tweets')
     end
   end
@@ -168,10 +168,11 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' #changed from 'submit' from initial test for authentic experience
         visit "/tweets"
-        expect(page.body).to include(tweet1.content)
-        expect(page.body).to include(tweet2.content)
+        binding.pry
+        expect(page.body).to include(tweet1.content) #confused why not passing.
+        expect(page.body).to include(tweet2.content) #confused why not passing.
       end
     end
 
@@ -192,7 +193,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit '/tweets/new'
         expect(page.status_code).to eq(200)
       end
@@ -204,17 +205,18 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
 
         visit '/tweets/new'
         fill_in(:content, :with => "tweet!!!")
-        click_button 'submit'
+        click_button 'Tweet'
 
         user = User.find_by(:username => "becky567")
         tweet = Tweet.find_by(:content => "tweet!!!")
         expect(tweet).to be_instance_of(Tweet)
         expect(tweet.user_id).to eq(user.id)
-        expect(page.status_code).to eq(200)
+        expect(page.current_path).to eq("/tweets/new") #custom error
+        expect(page.status_code).to eq(200)  #expected path /tweets/1
       end
 
       it 'does not let a user tweet from another user' do
@@ -225,12 +227,12 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
 
         visit '/tweets/new'
 
         fill_in(:content, :with => "tweet!!!")
-        click_button 'submit'
+        click_button 'Tweet'
 
         user = User.find_by(:id=> user.id)
         user2 = User.find_by(:id => user2.id)
@@ -247,13 +249,12 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
 
         visit '/tweets/new'
 
         fill_in(:content, :with => "")
-        click_button 'submit'
-
+        click_button 'Tweet'
         expect(Tweet.find_by(:content => "")).to eq(nil)
         expect(page.current_path).to eq("/tweets/new")
       end
@@ -278,7 +279,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
 
         visit "/tweets/#{tweet.id}"
         expect(page.status_code).to eq(200)
@@ -307,7 +308,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit '/tweets/1/edit'
         expect(page.status_code).to eq(200)
         expect(page.body).to include(tweet.content)
@@ -324,7 +325,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         session = {}
         session[:user_id] = user1.id
         visit "/tweets/#{tweet2.id}/edit"
@@ -338,7 +339,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit '/tweets/1/edit'
 
         fill_in(:content, :with => "i love tweeting")
@@ -356,7 +357,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit '/tweets/1/edit'
 
         fill_in(:content, :with => "")
@@ -384,7 +385,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit 'tweets/1'
         click_button "Delete Tweet"
         expect(page.status_code).to eq(200)
@@ -402,7 +403,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In'
         visit "tweets/#{tweet2.id}"
         click_button "Delete Tweet"
         expect(page.status_code).to eq(200)

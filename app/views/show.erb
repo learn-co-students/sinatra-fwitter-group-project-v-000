@@ -1,14 +1,14 @@
 <div align="left">
   <div class="container">
-    <h3>Welcome, <%= @user.username%></h3>
+    <h3><%= @user.username%> tweets</h3>
+    <a href="/tweets" class="btn btn-outline-info btn-primary btn-primary:hover btn-sm">Back to Tweets</a>
     <br>
-    <h4>Your tweets</h4>
     <br>
     <div class="container">
       <dl>
         <% @user.tweets.order(id: :desc).each do |tweet| %>
             <dt><h5><%=tweet.content %></h5></dt>
-            <dd>&nbsp;&nbsp;&nbsp; - <%=(tweet.created_at + Time.zone_offset('PST')).strftime("%a. %b. %d, %Y %I:%M %p") %></dd>
+            <dd>&nbsp;&nbsp;&nbsp; - <%=(tweet.created_at + Time.zone_offset('PST') + 3600).strftime("%a. %b. %d, %Y %I:%M %p") %></dd>
     <% end %>
       </dl>
     </div> <!-- 2nd container -->
