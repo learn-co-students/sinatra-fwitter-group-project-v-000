@@ -1,0 +1,27 @@
+
+<div align="left">
+
+  <div class="container">
+    <h3>Welcome, <%= @user.username%></h3>
+    <% if flash.has?(:message) %>
+    <p> <%= flash[:message]%> <a href="/logout"><u>Not <%= @user.username %>?</u></a> </p>
+    <% end %>
+
+    <a href="/tweets/new" class="btn btn-outline-info btn-primary btn-primary:hover btn-sm">Tweet</a>
+    <a href="/logout" class="btn btn-outline-info btn-primary btn-primary:hover btn-sm">Log Out</a>
+
+    <br><br>
+
+    <h4>Your Feed</h4>
+    <br>
+    <div class="container">
+      <dl>
+        <% @tweets.order(id: :desc).each do |tweet| %>
+            <dt><a href="/users/<%=tweet.user.slug%>"><%="#{tweet.user.username} "%></a>&bull; </dt>
+            <dd><a href="/tweets/<%=tweet.id%>"><%=tweet.content %></a></dd>
+            <br>
+    <% end %>
+      </dl>
+    </div> <!-- 2nd container -->
+  </div> <!-- 1st container -->
+</div> <!-- alignment -->

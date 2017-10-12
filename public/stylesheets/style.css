@@ -1,0 +1,46 @@
+body {
+  background: rgba(104,162,235,1.0);
+  color: white;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Oswald', sans-serif;
+}
+
+ul{
+  list-style-type: none;
+}
+
+
+/* unvisited link */
+a:link {
+    color: white;
+    background-color: rgba(104,162,235,1.0);
+}
+
+/* visited link */
+a:visited {
+    color: white;
+}
+
+/* mouse over link */
+a:hover {
+    color: white;
+}
+
+/* selected link */
+a:active {
+    color: red;
+}
+
+.btn-primary {
+    border-color: white; /*set the color you want here*/
+    color: white;
+    background-color: rgba(104,162,235,1.0);
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    color: rgba(104,162,235,1.0);
+    background-color: white;
+    border-color: white; /*set the color you want here*/
+}

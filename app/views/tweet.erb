@@ -1,0 +1,14 @@
+<div align="left">
+  <div class="container">
+    <dl>
+      <dt><a href="/users/<%=@tweet.user.slug%>"><%="#{@tweet.user.username} "%></a></dt>
+      <dd><%=@tweet.content %></dd>
+    </dl>
+      <a href="/tweets/<%=@tweet.id%>/edit" class="btn btn-outline-info btn-primary btn-primary:hover btn-sm">Edit Tweet</a>
+      <br><br>
+      <form action="/tweets/<%=@tweet.id%>/delete" method="POST">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+        <button type="submit" name="button" class="btn btn-outline-info btn-primary btn-primary:hover btn-sm">Delete Tweet</button>
+      </form>
+  </div> <!-- 1st container -->
+</div>

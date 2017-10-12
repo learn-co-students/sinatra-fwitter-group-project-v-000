@@ -1,0 +1,26 @@
+<div align="left">
+
+  <div class="container">
+    <h3>What did you mean to say, <%= @user.username%>?</h3>
+    <% if flash.has?(:message) %>
+      <p> <%= flash[:message] %> </div>
+    <% end %>
+    <form method ="POST" action="/tweets/<%=@tweet.id%>" id="tweetform">
+      <input id="hidden" type="hidden" name="_method" value="patch">
+      <div class="form-group">
+        <textarea class="form-control" name="content" id="tweetform" rows="2"><%=@tweet.content%></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+    </form>
+
+
+
+
+
+
+    <br>
+    <a href="/tweets"><u>Feed</u></a>
+    <a href="/logout"><u>Log Out</u></a>
+
+  </div> <!-- 1st container -->
+</div> <!-- alignment -->
