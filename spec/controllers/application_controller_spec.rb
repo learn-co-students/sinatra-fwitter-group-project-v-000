@@ -170,7 +170,6 @@ describe ApplicationController do
         fill_in(:password, :with => "kittens")
         click_button 'Log In' #changed from 'submit' from initial test for authentic experience
         visit "/tweets"
-        binding.pry
         expect(page.body).to include(tweet1.content) #confused why not passing.
         expect(page.body).to include(tweet2.content) #confused why not passing.
       end
@@ -215,7 +214,7 @@ describe ApplicationController do
         tweet = Tweet.find_by(:content => "tweet!!!")
         expect(tweet).to be_instance_of(Tweet)
         expect(tweet.user_id).to eq(user.id)
-        expect(page.current_path).to eq("/tweets/new") #custom error
+        expect(page.current_path).to eq("/tweets/1") #custom error
         expect(page.status_code).to eq(200)  #expected path /tweets/1
       end
 
@@ -344,7 +343,7 @@ describe ApplicationController do
 
         fill_in(:content, :with => "i love tweeting")
 
-        click_button 'submit'
+        click_button 'Edit'
         expect(Tweet.find_by(:content => "i love tweeting")).to be_instance_of(Tweet)
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)
         expect(page.status_code).to eq(200)
@@ -362,7 +361,7 @@ describe ApplicationController do
 
         fill_in(:content, :with => "")
 
-        click_button 'submit'
+        click_button 'Edit'
         expect(Tweet.find_by(:content => "i love tweeting")).to be(nil)
         expect(page.current_path).to eq("/tweets/1/edit")
       end

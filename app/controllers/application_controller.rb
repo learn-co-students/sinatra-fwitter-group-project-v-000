@@ -81,8 +81,42 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/tweets/:id" do
+    if session[:user_id]
+      @tweet = Tweet.find(params[:id])
+      erb :tweet
+    else
+      flash[:message] = "Please login/register to view this particular tweet."
+      redirect "/login"
+    end
+  end
+
+  patch "/tweets/:id" do
     @tweet = Tweet.find(params[:id])
-    erb :tweet
+    if params[:content] != ""
+      @tweet.update(content: params[:content])
+      redirect "/tweets/#{@tweet.id}"
+    else
+      flash[:message] = "Please don't post a blank tweet."
+
+      redirect "/tweets/#{@tweet.id}/edit"
+    end
+  end
+
+
+  get "/tweets/:id/edit" do
+    if session[:user_id] #if you're a member of twitter...
+      @tweet = Tweet.find(params[:id])
+      @user = @tweet.user
+      if @user.id == session[:user_id]
+        erb :edit
+      else
+        flash[:message] = "Please don't edit what isn't yours."
+        redirect "/tweets"
+      end
+    else
+      flash[:message] = "Please login to edit a tweet!"
+      redirect "/login"
+    end
   end
 
   post '/signup' do
@@ -112,6 +146,38 @@ class ApplicationController < Sinatra::Base
   get "/users/:slug" do
     @user = User.find_by_slug(params[:slug])
     erb :show
+  end
+
+  delete '/tweets/:id/delete' do
+    if session[:user_id] #if you're a member of twitter...
+      @tweet = Tweet.find(params[:id])
+      @user = @tweet.user
+      if @user.id == session[:user_id]
+        @tweet.destroy
+        flash[:message] = "The tweet has been deleted."
+      else
+        flash[:message] = "Please don't delete what isn't yours."
+      end
+    else
+      flash[:message] = "Please login if you're trying to delete a tweet."
+    end
+    redirect "/tweets"
+  end
+
+  get "/tweets/:id/edit" do
+    if session[:user_id] #if you're a member of twitter...
+      @tweet = Tweet.find(params[:id])
+      @user = @tweet.user
+      if @user.id == session[:user_id]
+        erb :edit
+      else
+        flash[:message] = "Please don't edit what isn't yours."
+        redirect "/tweets"
+      end
+    else
+      flash[:message] = "Please login to edit a tweet!"
+      redirect "/login"
+    end
   end
 
 

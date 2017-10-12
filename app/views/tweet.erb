@@ -1,12 +1,14 @@
 <div align="left">
   <div class="container">
     <dl>
-      <dt><a href="/users/<%=@tweet.user.slug%>"><%="#{@tweet.user.username} "%></a>&bull; <%=(@tweet.created_at + Time.zone_offset('PST') + 3600).strftime("%b %d") %></dt>
+      <dt><a href="/users/<%=@tweet.user.slug%>"><%="#{@tweet.user.username} "%></a></dt>
       <dd><%=@tweet.content %></dd>
     </dl>
-    <%if @tweet.user.id == session[:user_id]%>
-      <a href="/tweet/edit" class="btn btn-outline-info btn-primary btn-primary:hover btn-sm">Edit</a>
-      <a href="/tweet/delete" class="btn btn-outline-info btn-primary btn-primary:hover btn-sm">Delete</a>
-    <%end%>
+      <a href="/tweets/<%=@tweet.id%>/edit" class="btn btn-outline-info btn-primary btn-primary:hover btn-sm">Edit Tweet</a>
+      <br><br>
+      <form action="/tweets/<%=@tweet.id%>/delete" method="POST">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+        <button type="submit" name="button" class="btn btn-outline-info btn-primary btn-primary:hover btn-sm">Delete Tweet</button>
+      </form>
   </div> <!-- 1st container -->
 </div>
