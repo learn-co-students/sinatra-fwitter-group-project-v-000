@@ -1,0 +1,11 @@
+<h1>Log In To Fwitter</h1>
+
+<% if @login_error %>
+  <p style="color:red">The username or password did not match our records. Please check your login credentials and try again.</p>
+<% end %>
+
+<form action="/login" method="post">
+  <p>Username: <input type="text" name="username" id="username"></p>
+  <p>Password: <input type="password" name="password" id="password"></p>
+  <input type="submit" value="submit">
+</form>

@@ -1,0 +1,13 @@
+<h1>Create New Tweet</h1>
+
+<% if @tweet_error %>
+<p style="color: red">You cannot create a blank tweet. Please try again.</p>
+<% end %>
+
+<form action="/tweets/new" method="post">
+<p>What Would You Like To Say?</p>
+<p><textarea maxlength="280" cols="50" rows="4" name="content"></textarea></p>
+<input type="submit" name="" value="submit">
+</form>
+
+<p><a href="/logout">Logout</a></p>
