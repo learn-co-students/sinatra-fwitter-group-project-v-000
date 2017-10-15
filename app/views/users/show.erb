@@ -1,0 +1,17 @@
+<h1>User Overview For <%= @user.username %></h1>
+
+<% @user.tweets.each do |tweet| %>
+
+<div style="border: 1px solid gray;  padding: 1em; width: 33%; height: auto">
+
+  <%= tweet.content %>
+
+</div>
+
+<% end %>
+
+<% if logged_in? %>
+
+<% else %>
+<p><a href="/login">Login</a> or <a href="/signup">Signup</a></p>
+<% end %>

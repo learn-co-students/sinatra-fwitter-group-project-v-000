@@ -1,0 +1,21 @@
+<h1>Welcome, <%= @user.username %></h1>
+
+<p><a href="/tweets/new">Create New Tweet</a></p>
+
+<h3>Tweet Overview:</h3>
+
+<% @tweets.each do |tweet| %>
+
+<div style="border: 1px solid gray;  padding: 1em; width: 33%; height: auto">
+  <p> <%= tweet.user.username %>: <%= tweet.content %>
+  </p>
+  <% if tweet.user == @user %>
+  <a href="/tweets/<%= tweet.id %>/edit"><button type="button" >Edit Tweet</button></a>
+  <a href="/tweets/<%= tweet.id %>/delete"><button type="button" >Delete Tweet</button></a>
+  <% end %>
+</div>
+
+<% end %>
+
+
+<p><a href="/logout">Logout</a></p>
