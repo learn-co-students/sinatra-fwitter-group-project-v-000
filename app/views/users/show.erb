@@ -1,23 +1,28 @@
 <h1>User Overview For <%= @user.username %></h1>
 
 <% @user.tweets.each do |tweet| %>
+  <div class="" style="border: 3px solid grey; padding: 4px; margin: 5px; width: 450px; text-align: center">
+    <div class="" style="width: 325px; display: inline-block;">
+      <p> <%= tweet.content %> </p>
+    </div>
 
-<div style="border: 1px solid gray;  padding: 1em; width: 33%; height: auto">
+    <% if @user == current_user %>
+    <div style="padding: 1px; width: 450px; position: relative; bottom: 5px">
+      <div style="display:inline-block">
+        <a href="/tweets/<%= tweet.id %>/edit"><button type="button" >Edit Tweet</button></a>
+      </div>
 
-  <p><%= tweet.content %></p>
-
-  <% if tweet.user == current_user %>
-  <a href="/tweets/<%= tweet.id %>/edit"><button type="button" >Edit Tweet</button></a> <br></br>
-  <form action="/tweets/<%= tweet.id %>/delete" method="post">
-    <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit" style="float:top; margin-bottom:1em" value="Delete Tweet">
-  </form>
-  <% end %>
-
-</div>
-
+      <div style="display:inline-block">
+        <form action="/tweets/<%= tweet.id %>/delete" method="post">
+          <input id="hidden" type="hidden" name="_method" value="delete">
+          <input type="submit" value="Delete Tweet">
+        </form>
+      </div>
+    </div>
+    <% end %>
+  </div>
 <% end %>
 
 <% if !logged_in? %>
-<p><a href="/login">Login</a> or <a href="/signup">Signup</a></p>
+  <p><a href="/login">Login</a> or <a href="/signup">Signup</a></p>
 <% end %>

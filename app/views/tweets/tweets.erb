@@ -4,17 +4,28 @@
 
 <h3>Tweet Overview:</h3>
 
+
 <% @tweets.each do |tweet| %>
+  <div class="" style="border: 3px solid grey; padding: 4px; margin: 5px; width: 450px; text-align: center">
+    <div class="" style="width: 325px; display: inline-block;">
+      <p> <b> <%= tweet.user.username %>: </b> <%= tweet.content %> </p>
+    </div>
 
-<div style="border: 1px solid gray;  padding: 1em; width: 33%; height: auto">
-  <p> <%= tweet.user.username %>: <%= tweet.content %>
-  </p>
-  <% if tweet.user == @user %>
-  <a href="/tweets/<%= tweet.id %>/edit"><button type="button" >Edit Tweet</button></a>
-  <a href="/tweets/<%= tweet.id %>/delete"><button type="button" >Delete Tweet</button></a>
-  <% end %>
-</div>
+    <% if tweet.user == @user %>
+    <div style="padding: 1px; width: 450px; position: relative; bottom: 5px">
+      <div style="display:inline-block">
+        <a href="/tweets/<%= tweet.id %>/edit"><button type="button" >Edit Tweet</button></a>
+      </div>
 
+      <div style="display:inline-block">
+        <form action="/tweets/<%= tweet.id %>/delete" method="post">
+          <input id="hidden" type="hidden" name="_method" value="delete">
+          <input type="submit" value="Delete Tweet">
+        </form>
+      </div>
+    </div>
+    <% end %>
+  </div>
 <% end %>
 
 
