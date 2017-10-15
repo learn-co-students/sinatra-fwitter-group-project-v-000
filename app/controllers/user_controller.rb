@@ -10,7 +10,8 @@ class UserController < ApplicationController
 
   post '/signup' do
     if params[:username] != "" && params[:email] != "" && params[:password] != ""
-      @new_user = User.create(params)
+      @new_user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+      @new_user.save
       session[:user_id] = @new_user.id
       redirect to '/tweets'
     else
