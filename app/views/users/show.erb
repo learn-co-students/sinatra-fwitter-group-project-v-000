@@ -4,14 +4,20 @@
 
 <div style="border: 1px solid gray;  padding: 1em; width: 33%; height: auto">
 
-  <%= tweet.content %>
+  <p><%= tweet.content %></p>
+
+  <% if tweet.user == current_user %>
+  <a href="/tweets/<%= tweet.id %>/edit"><button type="button" >Edit Tweet</button></a> <br></br>
+  <form action="/tweets/<%= tweet.id %>/delete" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" style="float:top; margin-bottom:1em" value="Delete Tweet">
+  </form>
+  <% end %>
 
 </div>
 
 <% end %>
 
-<% if logged_in? %>
-
-<% else %>
+<% if !logged_in? %>
 <p><a href="/login">Login</a> or <a href="/signup">Signup</a></p>
 <% end %>
