@@ -1,10 +1,8 @@
-<center><h1><font color="pink"><%= @tweet.user.username.capitalize %>'s Fweets</font></h1>
+<center><h1><font color="pink"><%= @user.username.capitalize %>'s Fweets</font></h1>
 <br>
 <br>
 <br>
-<% @tweets.each do |t| %>
-<%= t.content %>
-<% end %>
+<%= @tweet.content %>
 <br>
 <br>
 <br>
@@ -15,8 +13,8 @@
 <br>
 <br>
 
-<form class="" action="/tweets/<%= @tweets.id %>/edit" method="post">
-  <input type="submit" value="Edit Fweet">
+<form class="" action="/tweets/<%= @tweet.id %>/edit" method="post">
+  <input type="submit" value="Edit Tweet">
 
 </form>
-<a href="#">Delete Fweet</a>
+<a href="#">Delete Tweet</a>
