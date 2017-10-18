@@ -15,4 +15,16 @@ class TweetsController < ApplicationController
   erb :'tweets/show'
   end
 
+  get '/tweets/new' do
+    if logged_in?
+    erb :'/tweets/new'
+    else
+    end
+  end
+
+  post '/tweets' do
+    @tweets = Tweet.create(content: params[:conent])
+  end
+
+
 end
