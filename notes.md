@@ -26,7 +26,7 @@ x    loads the signup page
   login
 x    loads the login page
     loads the tweets index after login (FAILED - 6)
-    does not let user view login page if already logged in (FAILED - 7)
+x    does not let user view login page if already logged in (FAILED - 7)
   logout
     lets a user logout if they are already logged in (FAILED - 8)
     does not let a user logout if not logged in (FAILED - 9)
