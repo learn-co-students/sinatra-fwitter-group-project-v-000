@@ -1,16 +1,14 @@
-<center><font color="pink"><h1> Edit here </h1></font>
+<center><font color="pink"><h1> Edit Page </h1></font>
   <b>Tweet:</b> "<%= @tweet.content %>"
   <br>
   <br>
   <form action="/tweets/<%= @tweet.id %>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
-  <input type="text" name="content"><br>
+  <input type="text" name="content" id="content"><br>
   <br>
   <input type="submit" id="submit" value="Edit Tweet">
-
-<a href="/tweets/:id/edit" value="submit">Logout</a>
-
-<form action="/tweets/<%= @tweet.id %>/delete" method="post">
+  </form>
+  <br>
+  <form action="/tweets/<%= @tweet.id %>/delete" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="delete">
-</form>

@@ -2,7 +2,9 @@
 <br>
 <br>
 <br>
-<%= @tweet.content %>
+<% @tweet.each do |t| %>
+<%= t.content %>
+<% end %>
 <br>
 <br>
 <br>
@@ -12,8 +14,11 @@
 <br>
 <br>
 <br>
-
-
+  <form action="/tweets/<%= @tweet.id %>/edit">
+      <input type="submit" value="Edit Tweet" />
+  </form>
+<br>
+<br>
   <form action="/tweets/<%= @tweet.id %>/delete" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
     <input type="submit" value="delete" id="Delete Tweet">
