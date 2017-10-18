@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb :'/users/new'
+    erb :'/tweets'
   end
 
   post '/signup' do
