@@ -1,3 +1,5 @@
+#different users can see each others posts and edit
+
 class TweetsController < ApplicationController
 
   get '/tweets' do
@@ -41,17 +43,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  delete 'tweets/:id/delete' do
-    @tweet = Tweet.find_by_id(params[:id])
-    @user = current_user
-    if logged_in? && @tweet.user == current_user
-      @tweet.delete
-      redirect '/tweets'
-    else
-      redirect "/tweets/#{@tweet.id}"
-    end
-  end
-
   get '/tweets/:id/edit' do
     @tweet = Tweet.find_by(id: params[:id])
     if logged_in? && @tweet.user == current_user
@@ -75,6 +66,16 @@ class TweetsController < ApplicationController
     end
   end
 
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find_by_id(params[:id])
+    @user = current_user
+    if logged_in? && @tweet.user == current_user
+      @tweet.delete
+      redirect '/tweets'
+    else
+      redirect "/tweets/#{@tweet.id}"
+    end
+  end
 
 
 
