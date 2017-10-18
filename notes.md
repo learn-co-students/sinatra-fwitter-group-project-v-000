@@ -11,6 +11,18 @@ What I've done so far:
 8. Created index view
 
 
+Second Session - 10/18 5:46 PM
+1. Updated '/signup' route to:
+`get "/signup" do
+  if logged_in?
+    redirect "/tweets"
+  else
+    erb :'/users/create_user'
+  end
+end`
+
+
+
 Test Tasks
 ApplicationController
 
