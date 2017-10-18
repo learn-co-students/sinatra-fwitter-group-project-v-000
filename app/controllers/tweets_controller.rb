@@ -1,3 +1,5 @@
+# :note to self= problem was that login and signup posts lead
+# to login through tweets route. cant figure out problem. 
 class TweetsController < ApplicationController
 
   get '/tweets' do
