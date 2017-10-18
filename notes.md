@@ -13,6 +13,7 @@ What I've done so far:
 
 Test Tasks
 ApplicationController
+
   Homepage
 x    loads the homepage
   Signup Page
