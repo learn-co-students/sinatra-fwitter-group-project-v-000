@@ -1,13 +1,12 @@
-# :note to self= problem was that login and signup posts lead
-# to login through tweets route. cant figure out problem. 
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    @user = current_user
     if logged_in?
-    erb :'tweets/index'
+      @user = current_user
+      @tweets = Tweet.all
+      erb :'tweets/index'
     else
-    redirect '/login'
+      redirect '/login'
     end
   end
 
