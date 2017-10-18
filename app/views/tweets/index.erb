@@ -1,0 +1,19 @@
+<center><h1><font color='pink'>Welcome, <%= @user.username.capitalize %></font> </h1>
+  <br>
+  <br>
+  <h3><b><font color='pink'>Fweets:</font></b></h3>
+  <% @tweets.each do |t| %>
+  <%= t.content %><br>
+  <br>
+  <% end %>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <a href="/logout" value="submit">Logout</a>
