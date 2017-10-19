@@ -49,6 +49,12 @@ end
     end
   end
 
+#User Show page
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'users/show'
+  end
+
 
 
 end
