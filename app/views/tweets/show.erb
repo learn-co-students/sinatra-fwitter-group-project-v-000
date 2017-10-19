@@ -1,0 +1,16 @@
+<!--show tweet form-->
+
+<h1><%= @user.username.capitalize %>'s Fweets</h1>
+<br>
+<%= @tweet.content %>
+<br>
+<br>
+<form action="/tweets/<%= @tweet.id %>/edit">
+      <input type="submit" value="Edit Tweet" />
+  </form>
+<br>
+<br>
+  <form action="/tweets/<%= @tweet.id %>/delete" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="delete" id="Delete Tweet">
+  </form>
