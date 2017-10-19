@@ -20,37 +20,14 @@ Second Session - 10/18 5:46 PM
     erb :'/users/create_user'
   end
 end`
+2. Created Tweets page, added '/tweets' route to Tweets Controller
+3. Created User Show Page, added '/users/:id' route to Users Controller
+4. Added id="submit" to login page form button
 
 
 
 Test Tasks
-ApplicationController
 
-  Homepage
-x    loads the homepage
-  Signup Page
-x    loads the signup page
-    signup directs user to twitter index (FAILED - 1)
-    does not let a user sign up without a username (FAILED - 2)
-    does not let a user sign up without an email (FAILED - 3)
-    does not let a user sign up without a password (FAILED - 4)
-    does not let a logged in user view the signup page (FAILED - 5)
-  login
-x    loads the login page
-    loads the tweets index after login (FAILED - 6)
-x    does not let user view login page if already logged in (FAILED - 7)
-  logout
-    lets a user logout if they are already logged in (FAILED - 8)
-    does not let a user logout if not logged in (FAILED - 9)
-    does not load /tweets if user not logged in (FAILED - 10)
-    does load /tweets if user is logged in (FAILED - 11)
-  user show page
-    shows all a single users tweets (FAILED - 12)
-  index action
-    logged in
-      lets a user view the tweets index if logged in (FAILED - 13)
-    logged out
-      does not let a user view the tweets index if not logged in (FAILED - 14)
   new action
     logged in
       lets user view new tweet form if logged in (FAILED - 15)
@@ -78,8 +55,3 @@ x    does not let user view login page if already logged in (FAILED - 7)
       does not let a user delete a tweet they did not create (FAILED - 28)
     logged out
       does not load let user delete a tweet if not logged in (FAILED - 29)
-
-User
-x  can slug the username
-x  can find a user based on the slug
-x  has a secure password
