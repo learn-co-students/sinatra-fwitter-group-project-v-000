@@ -1,1 +1,6 @@
-tweets
+<h1>Welcome, <%= @user.username %></h1>
+
+<h2>Latest Tweets</h2>
+  <ul><% Tweet.all.each do |tweet| %>
+    <li><%= tweet.content %></li>
+  <% end %></ul>
