@@ -23,6 +23,7 @@ end`
 2. Created Tweets page, added '/tweets' route to Tweets Controller
 3. Created User Show Page, added '/users/:id' route to Users Controller
 4. Added id="submit" to login page form button
+5. Created '/tweets/:id/edit' route and edit_tweet view (not fully tested yet)
 
 
 
