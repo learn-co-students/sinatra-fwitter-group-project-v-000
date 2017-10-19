@@ -2,14 +2,13 @@ require 'pry'
 
 class UsersController < ApplicationController
 
-  #Signup
-
+  # Signup
   get "/signup" do
     if logged_in?
       redirect "/tweets"
+    else
+      erb :"/users/create_user"
     end
-
-    erb :"/users/create_user"
   end
 
   post "/signup" do
@@ -22,8 +21,7 @@ class UsersController < ApplicationController
     end
   end
 
-  #Login
-
+  # Login
   get "/login" do
     if logged_in?
       redirect "/tweets"
@@ -42,8 +40,7 @@ class UsersController < ApplicationController
     end
   end
 
-  #Logout
-
+  # Logout
   get '/logout' do
     if logged_in?
       session.clear
@@ -51,6 +48,12 @@ class UsersController < ApplicationController
     else
       redirect to '/'
     end
+  end
+
+  #User Show page
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'users/show'
   end
 
 end

@@ -1,7 +1,5 @@
-<h1>Tweeting!</h1>
+<h1>Tweets from <%= @user.username %></h1>
 
-<h1>Tweets from @<%= @user.username %></h1>
-
-<ul><% @user.tweets.each do |tweet| %>
-  <li><%= tweet.content %></li>
-<% end %></ul>
+  <ul><% @user.tweets.each do |tweet| %>
+    <li><%= tweet.content %></li>
+  <% end %></ul>

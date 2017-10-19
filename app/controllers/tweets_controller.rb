@@ -2,8 +2,7 @@ require 'pry'
 
 class TweetsController < ApplicationController
 
-#Tweet Index
-
+  #Tweet Index
   get "/tweets" do
     if logged_in?
       @user = current_user
@@ -14,8 +13,7 @@ class TweetsController < ApplicationController
     end
   end
 
-#Create Tweet
-
+  #Create Tweet
   get '/tweets/new' do
     if logged_in?
       erb :'/tweets/create_tweet'
@@ -44,8 +42,27 @@ class TweetsController < ApplicationController
     end
   end
 
-#Delete Tweet
+  #Edit Tweet
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if logged_in?
+      erb :'/tweets/edit_tweet'
+    else
+      redirect '/login'
+    end
+  end
 
+  patch '/tweets/:id' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if params[:content] != ""
+      @tweet.update(content: params[:content])
+      redirect "/tweets/#{@tweet.id}"
+    else
+      redirect "/tweets/#{@tweet.id}/edit"
+    end
+  end
+
+  #Delete Tweet
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id])
     if logged_in? && @tweet.user_id == current_user.id
