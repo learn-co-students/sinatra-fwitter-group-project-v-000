@@ -26,6 +26,13 @@ end`
 5. Created '/tweets/:id/edit' route and edit_tweet view (not fully tested yet)
 
 
+Third Session - 10/18 10ish PM
+1. In show_tweet.erb, fixed typo in word 'edit' on line 11
+2. Updated get '/tweets/:id/edit' to TweetsController
+3. Added patch '/tweets/:id' to TweetsController
+4. Made minor edits to edit_tweet.erb
+
+
 
 Test Tasks
 
