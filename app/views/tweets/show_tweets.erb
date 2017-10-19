@@ -1,16 +1,25 @@
-<div class="ui container">
-  <%= @tweet.content %>
+<div class="container">
+  <div class="single-tweet">
+    <div class="content">
+      <%= @tweet.content %>
+    </div>
 
-  <div class="ui green button">
-    <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+    <% if @tweet.user == current_user %>
+      <div>
+        <a class="button" href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+      </div>
+    <% end %>
   </div>
 
-  <br></br>
+   <form action="/tweets/<%= @tweet.id %>/delete" method="post">
+      <input type="hidden" id="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete Tweet">
+      </form>
+
+  <div class="back">
+    <a href="/tweets">Back to All Tweets</a>
+  </div>
   
-  <form action="/tweets/<%= @tweet.id %>/delete" method="post">
-    <input type="hidden" id="hidden" name="_method" value="delete">
-      <input class="ui red button" type="submit" value="Delete Tweet">
-  </form>
 </div>
 
 

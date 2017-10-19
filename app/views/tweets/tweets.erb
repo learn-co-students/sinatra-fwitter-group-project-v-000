@@ -1,21 +1,17 @@
-<div class="ui container">
+<div class="container">
+  
   <h1>Welcome, <%= @user.username %>!</h1>
 
-  <div class="ui middle aligned divided list">
+  <div>
     <% @tweets.each do |tweet| %>
-    <div class="item">
-      <div class="right floated content">
-        <div class="ui button">
-          <a href="/tweets/<%= tweet.id %>">View Tweet</a>
-        </div>
-      </div>
-      <div class="content">
-        <%= tweet.content %>
+    <div class="center">
+      <div class="list-content"><%= tweet.content %>
+      <div class="user">Posted by: <%= tweet.user.username %></div>
+        <a href="/tweets/<%= tweet.id %>">View</a>
       </div>
     </div>
-  <% end %>
+    
+    
+    <% end %>
   </div>
-  
-
-  <a class="ui red button" href="/logout">Log Out</a>
 </div>

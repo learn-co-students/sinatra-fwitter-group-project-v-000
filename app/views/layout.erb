@@ -2,11 +2,27 @@
 <html>
   <head>
     <title>Fwitter</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
   </head>
   <body>
+    <% if logged_in? %>
+      <div class="nav-items">
+        Logged in as <%= current_user.username %>
+        (<a href="/logout">Log Out</a>) 
+        <a style="float: right" href="/tweets/new">New Tweet</a>
+      </div>
+    <% else %>
+      <div class="nav-items">
+        <a href="/signup">Sign Up</a> |
+        <a href="/login">Log In</a>
+      </div>
+    <% end %>
+        
+   
+
     <%= yield %>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js">
   </body>
 </html>

@@ -1,28 +1,18 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    if Helpers.logged_in?(session)
-      @user = User.find(session[:user_id])
+    if logged_in?
+      @user = current_user
       @tweets = Tweet.all
-
+    
       erb :'tweets/tweets'
-    else
-      redirect 'users/login'
-    end
-  end
-
-  get '/users/:slug' do
-    if @user = Helpers.current_user(session)
-      @tweets = @user.tweets
-  
-      erb :'/users/show'
     else
       redirect '/login'
     end
   end
 
   get '/tweets/new' do
-    if Helpers.logged_in?(session)
+    if logged_in?
       erb :'tweets/create_tweet'
     else
       redirect '/login'
@@ -30,21 +20,18 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    if params[:content].empty?
-      redirect '/tweets/new'
-    end
-
-    if user = Helpers.current_user(session)
-      tweet = Tweet.new(params)
-      tweet.user = user
-      tweet.save
+    redirect '/tweets/new' if params[:content].empty?
+  
+    if user = current_user
+      Tweet.new(params).tap { |tweet| tweet.user = user }.save
+      redirect '/tweets'
     else
       redirect '/login'
     end
   end
 
   get '/tweets/:id' do
-    if Helpers.logged_in?(session)
+    if logged_in?
       @tweet = Tweet.find(params[:id])
       erb :'tweets/show_tweets'
     else
@@ -53,12 +40,14 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id/edit' do
-
-    if Helpers.logged_in?(session)
-      user = Helpers.current_user(session)
-      @tweet = user.tweets.find(params[:id])
-    
-      erb :'tweets/edit_tweets'
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      
+      if @tweet.user == current_user
+        erb :'tweets/edit_tweets'
+      else
+        redirect '/tweets'
+      end
     else
       redirect '/login'
     end
@@ -78,7 +67,7 @@ class TweetsController < ApplicationController
   delete '/tweets/:id/delete' do
     tweet = Tweet.find(params[:id])
 
-    if tweet.user == Helpers.current_user(session)
+    if tweet.user == current_user
       tweet.destroy
 
       redirect '/tweets'

@@ -1,6 +1,7 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
+  include Helpers
 
   configure do
     set :public_folder, 'public'
@@ -10,6 +11,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    redirect '/tweets' if logged_in?
+    
     erb :index
   end
 end
