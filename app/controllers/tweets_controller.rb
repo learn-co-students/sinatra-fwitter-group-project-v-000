@@ -1,14 +1,10 @@
-require 'rack-flash'
-
+# require 'rack-flash'
 class TweetsController < ApplicationController
-  use Rack::Flash
+  # use Rack::Flash
 
   get '/tweets/new' do
-    if logged_in?
-      erb :'tweets/new'
-    else
-      redirect '/login'
-    end
+    login_check
+    erb :'tweets/new'
   end
 
   post '/tweets' do
@@ -23,25 +19,19 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets' do
-    if !logged_in?
-      redirect '/login'
-    end
+    login_check
     @user = User.find(session[:user_id])
     erb :'tweets/index'
   end
 
   get '/tweets/:id' do
-    if !logged_in?
-      redirect '/login'
-    end
+    login_check
     @tweet = Tweet.find(params[:id])
     erb :'tweets/show'
   end
 
   get '/tweets/:id/edit' do
-    if !logged_in?
-      redirect '/login'
-    end
+    login_check
     @tweet = Tweet.find(params[:id])
     erb :'/tweets/edit'
   end
@@ -58,9 +48,7 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
-    if !logged_in?
-      redirect '/login'
-    end
+    login_check
       @tweet = Tweet.find(params[:id])
       if session[:user_id] == @tweet.user_id
         @tweet.destroy
