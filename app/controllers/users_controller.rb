@@ -1,6 +1,11 @@
 require 'pry'
 class UsersController < ApplicationController
 
+  get '/users/:slug' do #user index page
+    @user = User.find_by_slug(params[:slug])
+    erb :"/users/show"
+  end
+  
   get '/signup' do
     if logged_in?
       redirect "/tweets"
@@ -42,24 +47,6 @@ class UsersController < ApplicationController
       redirect "/"
     end
 	end
-
-  get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    erb :"/users/show"
-  end
-
-
-  helpers do
-
-    def logged_in?
-      !!session[:user_id]
-    end
-
-    def current_user
-      User.find(session[:user_id])
-    end
-
-  end
 
 
 end
