@@ -1,0 +1,12 @@
+<h1>Welcome, <%=@user.username%>!</h1>
+<%if !@user.tweets.empty? %>
+  <%@user.tweets.each.with_index(1) do |tweet, i|%>
+    <h3><%=i%>. <%=tweet.content%></h3>
+    <a href="/tweets/<%=tweet.id%>">Edit or delete this tweet</a><br>
+    <%end%>
+<%end%>
+<br>
+<br>
+<a href="/tweets/new">Write a new tweet</a><br>
+<a href="/tweets">All Tweets</a><br>
+<a href="/logout">Logout</a>
