@@ -12,13 +12,15 @@ class UsersController < ApplicationController
     #   flash[:message] = "This email address is already associated with an account.  Try logging in instead."
     #   redirect '/login'
     # end
-    if params[:username] != "" && params[:email] != "" && params[:password] != ""
-      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-      session[:user_id] = @user.id
-      redirect '/tweets'
-    else
-      flash[:message] = "All fields are required to create an account."
-      redirect '/signup'
+    # if params[:username] != "" && params[:email] != "" && params[:password] != ""
+    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+    # binding.pry
+      if @user.save
+        session[:user_id] = @user.id
+        redirect '/tweets'
+      else
+        flash[:message] = "All fields are required to create an account."
+        redirect '/signup'
     end
   end
 
