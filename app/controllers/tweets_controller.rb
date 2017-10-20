@@ -1,6 +1,4 @@
-# require 'rack-flash'
 class TweetsController < ApplicationController
-  # use Rack::Flash
 
   get '/tweets/new' do
     login_check

@@ -8,11 +8,16 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
+    # if User.find_by(email: params[:email])
+    #   flash[:message] = "This email address is already associated with an account.  Try logging in instead."
+    #   redirect '/login'
+    # end
     if params[:username] != "" && params[:email] != "" && params[:password] != ""
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
       session[:user_id] = @user.id
       redirect '/tweets'
     else
+      flash[:message] = "All fields are required to create an account."
       redirect '/signup'
     end
   end
@@ -27,6 +32,7 @@ class UsersController < ApplicationController
   post '/login' do
     @user = User.find_by(username: params[:username])
     if @user
+      # && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect '/tweets'
     else

@@ -3,7 +3,7 @@
 <% end %>
 
 <h1>Your Tweet</h1>
-<h3><%=@tweet.user.username%>: <%=@tweet.content%></h3>
+<h3>@<%=@tweet.user.username%>: <%=@tweet.content%></h3>
 
 <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a><br>
 <form action="/tweets/<%=@tweet.id%>/delete" method="post">
@@ -11,4 +11,5 @@
   <input type="submit" name="delete" value="Delete Tweet">
 </form>
 
+<a href="/users/<%=@tweet.user.slug%>">Your tweets</a><br>
 <a href="/tweets">See all tweets</a>
