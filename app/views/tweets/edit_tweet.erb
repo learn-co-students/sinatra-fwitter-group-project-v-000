@@ -1,0 +1,8 @@
+<h1>Didn't mean to say that? Edit your tweet below</h1>
+
+<form action="/tweets/<%=@tweet.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch"> 
+  Content: <input type="text" name="content" id="content" value="<%=@tweet.content%>"></input>
+
+  <input type="submit" value="submit">
+</form>
