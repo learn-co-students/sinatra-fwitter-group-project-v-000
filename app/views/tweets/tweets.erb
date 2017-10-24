@@ -1,0 +1,15 @@
+<h1>All Ftweets</h1>
+
+<h2><a href="/tweets/new">Post a new Ftweet</a></h2>
+
+<% if flash.has?(:message) %>
+  <p><%= flash[:message] %></p>
+<% end %>
+
+
+<% User.all.reverse.each do |user| %>
+  <% user.tweets.reverse.each do |tweet| %>
+    <h3><%= user.username %> tweeted: </h3>
+    <p> - <%= tweet.content %> </p>
+  <% end %>
+<% end %>
