@@ -84,25 +84,72 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/new' do
-    if is_logged_in?
-      erb :'/tweets/create_tweet'
-    else
+    if !is_logged_in?
       redirect('/login')
+    else
+      erb :'/tweets/create_tweet'
     end
   end
 
   get '/tweets/:id' do
-    erb :'/tweets/single_tweet'
+
+    if !is_logged_in?
+      redirect('/login')
+    else
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/single_tweet'
+    end
   end
 
   post '/tweets' do
-    @tweet = Tweet.create(:content => params[:content])
-    @tweet.save
-    current_user.tweets << @tweet
-    
-    redirect('/tweets/:id')
+    @tweet = Tweet.new(:content => params[:content])
+
+    if @tweet.content != ""
+      @tweet = Tweet.create(:content => params[:content])
+      @tweet.save
+      #binding.pry
+      current_user.tweets << @tweet
+      redirect to "/tweets/#{@tweet.id}"
+    else
+      redirect('/tweets/new')
+    end
   end
 
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find_by(id: params[:id])
+
+    if !is_logged_in?
+      redirect('/login')
+    elsif current_user.tweets.include?(@tweet)
+      erb :'/tweets/single_tweet'
+    else
+      redirect('/tweets')
+    end
+  end
+
+  patch '/tweets/:id' do
+    @tweet = Tweet.find_by(id: params[:id])
+
+    if params[:content] != ""
+      @tweet.update(content: params[:content])
+      redirect to "/tweets/#{@tweet.id}"
+    else
+      redirect to "/tweets/#{@tweet.id}/edit"
+    end
+  end
+
+  delete '/tweets/:id/delete' do
+    if is_logged_in?
+      @tweet = Tweet.find_by(id: params[:id])
+
+      if current_user.tweets.include?(@tweet)
+        @tweet.delete
+        redirect to '/tweets'
+      else
+        redirect to '/tweets'
+      end
+   end
+end
 
   helpers do
     def current_user
