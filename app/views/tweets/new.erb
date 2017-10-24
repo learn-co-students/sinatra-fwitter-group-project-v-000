@@ -1,15 +1,7 @@
-<!DOCTYPE HTML>
-<html>
-  <head>
-    <title>Fwitter - NEW Tweets</title>
-  <head>
-    <body>
-      <h1>new tweet<h1>
-      <br>
-      <form method="post" action="/tweets/<%=tweet.id%>">
-        <input type="text" id="username" name="username" value="<%=@user.username%>">
-        <input type="text" id="password" name="password" value="<%=@user.password%>">
-        <input type="submit" value="submit">submit</input>
-      </form>
-    </body>
-</html>
+    <h1>new tweet<h1>
+    <br>
+    <form method="post" action="/tweets">
+      <input type="text" id="username" name="username" value="<%=@user.username%>">
+      <input type="text" id="password" name="password" value="<%=@user.password%>">
+      <input type="submit" value="submit">submit</input>
+    </form>

@@ -17,8 +17,11 @@ class ApplicationController < Sinatra::Base
 #--- Tweet Homepage ---
 
   get '/tweets' do
-    # @user = current_user
-    erb :'/tweets/tweets'
+    if !logged_in
+      redirect '/login'
+    else
+      erb :'/tweets/tweets'
+    end
   end
 
 #--- signup ---
@@ -50,9 +53,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    # binding.pry
     @user = User.find_by(username: params[:username])
-    # binding.pry
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect "/tweets"
@@ -79,14 +80,16 @@ class ApplicationController < Sinatra::Base
     erb :'/users/show'
   end
 
-#--- index action ---
+#--- new action ---
 
+  get '/tweets/new' do
+    erb :'tweets/new'
+  end
 
-
-
-#--- show action ---
-
-
+  post '/tweets' do
+    @tweet = Tweet.create(name: params[:name], content: params[:content])
+    redirect '/tweets'
+  end
 
 
 #--- edit action ---
