@@ -16,13 +16,35 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  helpers do
-    def logged_in?
-      !!session[:user_id]
-    end
-
-    def current_user
-      User.find(session[:user_id])
+  get '/signup' do
+    if Helpers.is_logged_in?(session) == true
+      redirect('/tweets')
+    else
+      erb :'/users/create_user'
     end
   end
+
+  post '/signup' do
+    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+
+    if @user.username == ""
+      redirect('/signup')
+    elsif @user.email == ""
+      redirect('/signup')
+    elsif @user.save == false
+      redirect('/signup')
+    else
+      @user.save
+      Helpers.is_logged_in?(session) == true
+      session[:user_id] = @user.id
+      redirect('/tweets')
+    end
+  end
+
+  get '/tweets' do
+    @tweets = Tweet.all
+
+    erb :'/tweets/show_tweets'
+  end
+
 end
