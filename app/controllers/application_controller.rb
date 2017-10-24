@@ -42,7 +42,6 @@ class ApplicationController < Sinatra::Base
 
 #--- login ---
   get '/login' do
-    # binding.pry
     if !logged_in #user can't view login page in logged_in
       erb :'/login'
     else
@@ -52,9 +51,9 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     # binding.pry
-    user = User.find_by(username: params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
       redirect "/tweets"
     else
       redirect "/login"
