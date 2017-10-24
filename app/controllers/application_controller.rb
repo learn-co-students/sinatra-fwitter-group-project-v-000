@@ -17,7 +17,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    if Helpers.is_logged_in?(session) == true
+    if is_logged_in?
       redirect('/tweets')
     else
       erb :'/users/create_user'
@@ -35,14 +35,14 @@ class ApplicationController < Sinatra::Base
       redirect('/signup')
     else
       @user.save
-      Helpers.is_logged_in?(session) == true
+      is_logged_in? == true
       session[:user_id] = @user.id
       redirect('/tweets')
     end
   end
 
   get '/login' do
-    if Helpers.is_logged_in?(session) == true
+    if is_logged_in?
       redirect('/tweets')
     else
       erb :'/users/login'
@@ -58,9 +58,10 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-    if Helpers.is_logged_in?(session) == true
-      @tweets = Tweet.all
+    if is_logged_in?
       @user = User.find(session[:user_id])
+      @tweets = Tweet.all
+      #binding.pry
       erb :'/tweets/show_tweets'
     else
       redirect('/login')
@@ -68,7 +69,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    if Helpers.is_logged_in?(session) == true
+    if is_logged_in?
       session.clear
       redirect('/login')
     else
@@ -77,12 +78,39 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/users/:slug' do
-    if Helpers.is_logged_in?(session) == true
       @user = User.find_by_slug(params[:slug])
 
      erb :'/users/show'
-   else
-     redirect('/login')
-   end
+  end
+
+  get '/tweets/new' do
+    if is_logged_in?
+      erb :'/tweets/create_tweet'
+    else
+      redirect('/login')
+    end
+  end
+
+  get '/tweets/:id' do
+    erb :'/tweets/single_tweet'
+  end
+
+  post '/tweets' do
+    @tweet = Tweet.create(:content => params[:content])
+    @tweet.save
+    current_user.tweets << @tweet
+    
+    redirect('/tweets/:id')
+  end
+
+
+  helpers do
+    def current_user
+      User.find(session[:user_id])
+    end
+
+    def is_logged_in?
+      !!session[:user_id]
+    end
   end
 end
