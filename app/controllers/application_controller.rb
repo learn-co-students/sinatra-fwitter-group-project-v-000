@@ -51,7 +51,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    binding.pry
+    # binding.pry
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
@@ -62,15 +62,15 @@ class ApplicationController < Sinatra::Base
   end
 
 #--- logout ---
-  # get '/logout' do
-  #   if !logged_in
-  #     #don't load /tweets
-  #     redirect "/"
-  #   else
-  #     # session.clear
-  #     redirect "/login"
-  #   end
-  # end
+  get '/logout' do
+    if !logged_in
+      #don't load /tweets
+      redirect "/"
+    else
+      # session.clear
+      redirect "/login"
+    end
+  end
 
 #--- user show page ---
 
@@ -122,6 +122,12 @@ class ApplicationController < Sinatra::Base
     #
     # post '/tweets/:slug' do
     #
+    # end
+    # get '/users/:slug' do
+    #   @user = User.find_by_slug(params[:slug])
+    #   # @user = User.create([:user])
+    #   # @tweets = Tweets.all
+    #   erb :'/users/show'
     # end
 
 end
