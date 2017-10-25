@@ -1,0 +1,7 @@
+<h2><%= @user.username %></h2>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+<% @user.tweets.each do |tweet| %>
+  <li><%= tweet.name %></li>
+<% end %>
