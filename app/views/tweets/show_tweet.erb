@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Show Selected Tweets</title>
+</head>
+<body>
+  <h3><%=@tweet.content%></h3>
+  <form action="/tweets/<%=@tweet.id%>/delete" method="post">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" name="delete" value="Delete Tweet">
+    <input type="submit" name="edit" value="Edit Tweet">
+  </form>
+</body>
+</html>
