@@ -113,42 +113,44 @@ class ApplicationController < Sinatra::Base
 
 #--- edit action ---
 
-  get '/tweets/edit' do
+  get '/tweets/:id/edit' do
     if !logged_in
       redirect '/login'
     else
       @tweet = Tweet.find_by(params[:id])
-      erb :"/tweets//edit"
+      if @tweet.user_id == current_user.id
+        erb :"/tweets/edit"
+      else
+        redirect :'/tweets'
+      end
     end
   end
 
-  post '/tweets/id/edit' do
-    if params.has_value?("")
-      redirect '/tweets/edit'
+  patch '/tweets/:id' do
+    if params[:content] == ""
+      redirect "/tweets/#{params[:id]}/edit"
     else
-      @tweet = current_user.tweets.find_by(tweet.id)
-      @tweet.update = params[:content]
+      @tweet = Tweet.find_by(params[:id])
+      @tweet.content = params[:content]
       @tweet.save
-      redirect "/tweets/#{tweet.id}"
+      redirect "/tweets/#{@tweet.id}"
     end
   end
 
 #--- delete action ---
 
-  get '/tweets/delete' do
+  delete '/tweets/:id/delete' do
     if !logged_in
       redirect '/login'
     else
-      redirect "/tweets/#{tweet.id}/delete"
+      @tweet = Tweet.find_by(params[:id])
+      if @tweet.user_id == current_user.id
+        @tweet.delete
+        redirect "/tweets"
+      else
+        redirect "/tweets/#{@tweet.id}/delete"
+      end
     end
-  end
-
-  post '/tweets/:id/delete' do
-    # if !logged_in
-    #   redirect '/login'
-    # else
-    #   erb :'/tweets/delete'
-    # end
   end
 
 #--- helper methods ---
