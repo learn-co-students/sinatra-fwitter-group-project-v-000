@@ -1,0 +1,9 @@
+<h1>All tweets by <%=@user.username%></h1>
+<ul>
+  <%@user.tweets.each do |t|%>
+      <li><%=t.content%></li>
+  <%end%>
+</ul>
+<br></br>
+<p><a href="/tweets/new">Create New Tweet</a></p>
+<p><a href="/logout">Log Out</a></p>
