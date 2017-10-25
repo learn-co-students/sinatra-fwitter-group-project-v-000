@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Fwitter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+    body {
+    padding: 80px 30px;
+    }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <img alt="Fwitter" src="">
+          </a>
+        </div>
+        <div class="navbar-links">
+          <ul class="nav nav-pills pull-right">
+            <% if logged_in? %>
+              <li><a href="/tweets/new"> Create Tweet </a></li>
+              <li><a href="/logout"> Log Out </a></li>
+            <% else %>
+              <li><a href="/signup">Sign Up</a></li>
+              <li><a href="/login"> Sign In </a></li>
+            <%end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="fluid-container">
+      <%= yield %>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
