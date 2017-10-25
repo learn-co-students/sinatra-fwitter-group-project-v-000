@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Fwitter - Show Page</title>
+  <head>
+    <body>
+      <h1><%=@user.username%> tweets!<h1>
+      <br>
+      <%= @user.tweets.each do |tweet| %>
+        <p><%=tweet.content%></p>
+      <% end %>
+    </body>
+</html>
