@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<a href="/">Home</a>
+
+ <h1>Tweet's Content</h1></br>
+    
+   <%= @tweet.content%> </br>
+
+   
+  
+   
+     <form action="/tweets/<%= @tweet.id%>/delete" method="POST">
+       <input type="hidden" name="_method" value="delete">
+       <input type="submit" name="Delete Tweet" value="Delete Tweet" id="Delete Tweet">
+     </form> 
+   
+
+     <form action="/tweets/<%= @tweet.id%>/edit" method="POST">
+       <input type="hidden" name="_method" value="patch">
+       <input type="submit" name="Edit Tweet" value="Edit Tweet" id="Edit Tweet">
+     </form> 
+   
+  
+   
+</body>
+</html>
