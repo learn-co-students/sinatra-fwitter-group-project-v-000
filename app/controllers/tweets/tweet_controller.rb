@@ -71,7 +71,6 @@ class TweetController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
-    #binding.pry
     if Helpers.is_logged_in?(session)
       @tweet = Tweet.find_by_id(params[:id])
       if @tweet.user_id == session[:user_id]
