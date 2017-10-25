@@ -65,7 +65,6 @@ class ApplicationController < Sinatra::Base
 #--- logout ---
   get '/logout' do
     if !logged_in
-      #don't load /tweets
       redirect "/"
     else
       session.clear
@@ -83,24 +82,74 @@ class ApplicationController < Sinatra::Base
 #--- new action ---
 
   get '/tweets/new' do
-    erb :'tweets/new'
+    if !logged_in
+      redirect '/login'
+    else
+      erb :'/tweets/new'
+    end
   end
 
   post '/tweets' do
-    @tweet = Tweet.create(name: params[:name], content: params[:content])
-    redirect '/tweets'
+    # binding.pry
+    if params[:content] == ""
+      redirect "/tweets/new"
+    else
+      @tweet = current_user.tweets.create(content: params[:content])
+      redirect "/tweets/#{@tweet.id}"
+    end
+  end
+
+#--- show action ---
+
+  get '/tweets/:id' do
+    if !logged_in
+      redirect '/login'
+    else
+      @tweet = Tweet.find_by(params[:id])
+      erb :'/tweets/show'
+    end
   end
 
 
 #--- edit action ---
 
+  get '/tweets/edit' do
+    if !logged_in
+      redirect '/login'
+    else
+      @tweet = Tweet.find_by(params[:id])
+      erb :"/tweets//edit"
+    end
+  end
 
+  post '/tweets/id/edit' do
+    if params.has_value?("")
+      redirect '/tweets/edit'
+    else
+      @tweet = current_user.tweets.find_by(tweet.id)
+      @tweet.update = params[:content]
+      @tweet.save
+      redirect "/tweets/#{tweet.id}"
+    end
+  end
 
 #--- delete action ---
 
+  get '/tweets/delete' do
+    if !logged_in
+      redirect '/login'
+    else
+      redirect "/tweets/#{tweet.id}/delete"
+    end
+  end
 
-
-
+  post '/tweets/:id/delete' do
+    # if !logged_in
+    #   redirect '/login'
+    # else
+    #   erb :'/tweets/delete'
+    # end
+  end
 
 #--- helper methods ---
   def current_user
@@ -110,27 +159,5 @@ class ApplicationController < Sinatra::Base
   def logged_in
     !!session[:user_id]
   end
-
-
-
-    # get '/tweets/new' do
-    #   erb :"tweets/:slug"
-    # end
-    #
-    # get '/tweets/:slug' do
-    #   if logged_in?
-    #     redirect to '/tweets/new'
-    #   end
-    # end
-    #
-    # post '/tweets/:slug' do
-    #
-    # end
-    # get '/users/:slug' do
-    #   @user = User.find_by_slug(params[:slug])
-    #   # @user = User.create([:user])
-    #   # @tweets = Tweets.all
-    #   erb :'/users/show'
-    # end
 
 end
