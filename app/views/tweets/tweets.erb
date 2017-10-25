@@ -1,0 +1,6 @@
+<h1>Welcome, <%= current_user.username %>!</h1>
+
+<% Tweet.all.each.with_index(1) do |tweet, i| %>
+  <p><%= "#{i}. " %><%= tweet.content %></p>
+  <p><%= "@" %><%= tweet.user.username %></p>
+<% end %>
