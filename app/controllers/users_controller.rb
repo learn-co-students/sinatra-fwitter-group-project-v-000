@@ -10,12 +10,12 @@ class UsersController < ApplicationController
 
   post '/signup' do
     @user = User.new(username: params[:username], email: params[:email], password: params[:password])
-    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+    if params[:username] == "" || params[:email] == "" || params[:password] == "" #can't this be done by validates_presence_of macro (in 'models') alone?
       redirect '/signup'
     end
 
     if @user.save
-      session[:user_id] = @user.id
+      session[:user_id] = @user.id  #automatically login user on valid save
       redirect '/tweets'
     end
   end
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
    end
 
     get '/logout' do
-      if logged_in?
+      if logged_in? #only logged_in users can be logged out
         session.clear
         redirect '/login'
       else
