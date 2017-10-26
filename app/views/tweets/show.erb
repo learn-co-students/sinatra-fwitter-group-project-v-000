@@ -1,0 +1,14 @@
+<h2> <%= @tweet.content %> </h2>
+
+<p> By: <%= @tweet.user.username %> </p>
+
+<p> <a href="/tweets">Back to Your Tweets</a> </p>
+
+<p> <a href="/tweets/<%=@tweet.id%>/edit">Edit this Tweet</a> </p>
+
+<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input id="submit" type="submit" value="Delete Tweet">
+</form>
+
+<p> <a href="/logout">Log Out</a> </p>

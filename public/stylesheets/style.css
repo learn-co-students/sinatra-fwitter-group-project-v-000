@@ -1,0 +1,7 @@
+#wrapper {
+  margin: auto;
+}
+
+#wrapper a:hover {
+  color: red;
+}

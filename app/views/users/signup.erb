@@ -1,0 +1,31 @@
+<h1> Sign Up for Fwitter: </h1>
+
+<% if @user && @user.errors.any?%>
+  <p> Could not sign you up, please address the following errors: </p>
+  <p>
+  <% @user.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+  </p>
+<% end %>
+
+<form action="/signup" method="POST">
+  <p>
+  <label for="email">Email:</label>
+  <input id="email" type="text" name="user[email]" placeholder="Email Address">
+  </p>
+
+  <p>
+  <label for="username">Username:</label>
+  <input id="username" type="text" name="user[username]" placeholder="Username">
+  </p>
+
+  <p>
+  <label for="password">Password:</label>
+  <input id="password" type="password" name="user[password]" placeholder="Password">
+  </p>
+
+  <input type="submit" value="Sign Up">
+</form>
+
+<p> Already have an account? <a href="/login">Log In</a> </p>

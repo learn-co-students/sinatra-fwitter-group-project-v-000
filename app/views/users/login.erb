@@ -1,0 +1,27 @@
+<h1> Fwitter Log In: </h1>
+
+<% if @user && @user.errors.any?%>
+  <p> Could not log you in, please address the following errors: </p>
+  <p>
+  <% @user.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+  </p>
+<% end %>
+
+<form action="/login" method="post">
+  <p>
+  <label for="username">Username:</label>
+  <input id="username" type="text" name="username" placeholder="Username">
+  </p>
+
+  <p>
+  <label for="password">Password:</label>
+  <input id="password" type="password" name="password" placeholder="Password">
+  </p>
+
+  <input type="submit" value="Log In">
+</form>
+
+
+<p> Don't have an account? <a href="/signup">Sign Up</a> here! </p>
