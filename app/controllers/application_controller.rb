@@ -1,12 +1,11 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
-
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "password_security"
+    set :session_secret, 'password_security'
   end
 
   get '/' do
@@ -52,7 +51,6 @@ class ApplicationController < Sinatra::Base
   get '/logout' do
     session.clear
     redirect '/login'
-
   end
 
   get '/users/:slug' do
@@ -66,7 +64,6 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     if logged_in?
-      @current_user = self.current_user
       erb :'/tweets/tweets'
     else
       redirect '/login'
@@ -90,15 +87,31 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  delete '/tweets/:id/delete' do
+  get '/tweets/:id/edit' do
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
-      @tweet.delete
-      redirect '/tweets'
+      erb :"tweets/edit_tweet"
     else
       redirect '/login'
     end
+  end
 
+  patch '/tweets/:id' do
+    @tweet = Tweet.find_by_id(params[:id])
+
+    if params[:content].empty?
+      redirect "/tweets/#{@tweet.id}/edit"
+    elsif current_user.tweets.include?(@tweet)
+      @tweet.update(content: params[:content])
+      redirect "/tweets/#{@tweet.id}"
+    end
+  end
+
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find_by_id(params[:id])
+    @tweet.delete if current_user.tweets.include?(@tweet)
+
+    redirect '/tweets'
   end
 
   post '/tweets' do
@@ -108,7 +121,6 @@ class ApplicationController < Sinatra::Base
       @tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
       redirect "/tweets/#{@tweet.id}"
     end
-
   end
 
   helpers do
