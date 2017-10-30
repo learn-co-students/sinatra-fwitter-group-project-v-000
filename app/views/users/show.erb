@@ -3,6 +3,7 @@
 <h4>Here are your tweets:</h4>
 <ul>
 <%@user.tweets.each do |tweet| %>
-    <li><%tweet.content%></li>
+    <li><%=tweet.content%></li>
 <% end %>
 </ul>
+
