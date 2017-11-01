@@ -1,0 +1,10 @@
+<%   #Test looks for "Welcome," %>
+<h1>Welcome, Here Are the Tweets</h1>
+<% @tweets.each do |t| %>
+  <h3> <%= t.user %> </h3>
+  <br>
+  <p> <%= t.content %> </p>
+  <br>
+<% end %>
+
+<a href="/tweets/new">Click here to create a new tweet </a>
