@@ -17,7 +17,7 @@ class TweetsController < Sinatra::Base
     end
 
     post '/tweets' do
-      if params[:content]
+      if !params[:content].empty?
         @tweet = Tweet.new(content: params[:content])
         @tweet.save
         @user = User.find_by(id: session[:id])
@@ -25,6 +25,7 @@ class TweetsController < Sinatra::Base
         redirect to "/tweets/#{@tweet.id}"
       else
         flash[:message] = "Please write something to post!"
+        redirect to "/tweets/new"
       end
     end
 
