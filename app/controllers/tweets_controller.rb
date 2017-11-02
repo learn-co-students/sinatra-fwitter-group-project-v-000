@@ -1,10 +1,9 @@
-class TweetsController < Sinatra::Base
+require 'sinatra/base'
+require 'rack-flash'
+class TweetsController < ApplicationController
 
-    get '/' do
-
-      erb :index
-    end
-
+enable :sessions
+use Rack::Flash
   #Create The Tweet - C
     get '/tweets/new' do
       if logged_in?
@@ -34,7 +33,7 @@ class TweetsController < Sinatra::Base
     get '/tweets' do
       @user = current_user
 
-      erb :'/tweets'
+      erb :'/tweets/tweets'
     end
 
     get '/tweets/:id' do
@@ -59,6 +58,7 @@ class TweetsController < Sinatra::Base
         redirect '/tweets'
       else
       erb :'tweets/edit_tweet'
+      end
     end
 
     post '/tweets/:id' do

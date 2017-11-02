@@ -1,4 +1,4 @@
-class UserController < Sinatra::Base
+class UserController < ApplicationController
 
   get '/signup' do
     if !logged_in?
@@ -21,7 +21,7 @@ class UserController < Sinatra::Base
 
   get '/login' do
     if !logged_in?
-      erb :'users/login'
+      erb :'/users/login'
     else
       redirect to "/tweets"
     end
