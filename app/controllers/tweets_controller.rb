@@ -31,11 +31,6 @@ class TweetsController < Sinatra::Base
 
   #Show The Tweet - R
 
-    get '/tweets' do
-      @user = current_user
-      erb :'tweets/tweets'
-    end
-
     get '/tweets/:id' do
       #the spec says to not let someone see a single tweet if not logged in, although that makes no sense in a real twitter situation
       #This is only needed for the spec because our ':id' is @tweet.id not @user.id
