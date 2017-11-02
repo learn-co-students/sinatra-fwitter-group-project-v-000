@@ -32,9 +32,9 @@ class TweetsController < Sinatra::Base
   #Show The Tweet - R
 
     get '/tweets' do
-      @user = User.find_by(id: current_user.id)
+      @user = current_user
 
-      erb :'/users/show'
+      erb :'/tweets'
     end
 
     get '/tweets/:id' do
