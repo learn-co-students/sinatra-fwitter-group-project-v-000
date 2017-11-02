@@ -7,7 +7,7 @@ class TweetsController < Sinatra::Base
 
   #Create The Tweet - C
     get '/tweets/new' do
-      if session[:id]
+      if logged_in?
       erb :'tweets/create_tweet'
       else
         flash[:message] = "Please log in to write a tweet."
@@ -20,7 +20,7 @@ class TweetsController < Sinatra::Base
       if !params[:content].empty?
         @tweet = Tweet.new(content: params[:content])
         @tweet.save
-        @user = User.find_by(id: session[:id])
+        @user = current_user
         @user.tweets << @tweet
         redirect to "/tweets/#{@tweet.id}"
       else
@@ -32,12 +32,14 @@ class TweetsController < Sinatra::Base
   #Show The Tweet - R
 
     get '/tweets' do
-
+      @user = current_user
       erb :'tweets/tweets'
     end
 
     get '/tweets/:id' do
+      @user = current_user
 
+      @tweet = Tweet.find_by(id: params[:id])
       erb :'tweets/show_tweet'
     end
 

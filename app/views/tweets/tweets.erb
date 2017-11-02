@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head> <title><%=@user.username%>'s Tweets</title>
+  </head>
+
+  <body>
+    <%@user.tweets.all.each_with_index do |tweet, i|%>
+    <h3><%=i+1%>. <%=tweet.content%></h3>
+    <br></br>
+    <h3>  - <%=@user.username%></h3>
+    <%end%>
+  </body>
+</html>
