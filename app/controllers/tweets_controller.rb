@@ -17,7 +17,10 @@ class TweetsController < Sinatra::Base
     end
 
     post '/tweets' do
-
+      @tweet = Tweet.new(content: params[content])
+      @tweet.save
+      @user = User.find_by(id: session[:id])
+      @user.tweets << @tweet
       redirect to "/tweets/#{@tweet.id}"
     end
 
