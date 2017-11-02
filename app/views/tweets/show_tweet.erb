@@ -9,9 +9,13 @@
     <h3>  - <%=@user.username%></h3>
 
     <%if logged_in?%>
-      <form action="/tweets/<%=@user.id%>/delete" method="POST">Delete Tweet</a>
+      <form action="/tweets/<%=@tweet.id%>/delete" method="POST">Delete Tweet</a>
       <input id="hidden" type="hidden" name="_method" value="delete">
 		  <input type="submit" value="delete">
+      </form>
+
+      <form action="/tweets/<%=@tweet.id%>/edit" method="GET">Edit Tweet</a>
+      <input type="submit" value="submit">
       </form>
     <%end%>
   </body>

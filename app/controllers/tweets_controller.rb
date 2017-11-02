@@ -37,23 +37,29 @@ class TweetsController < Sinatra::Base
     end
 
     get '/tweets/:id' do
-      @user = current_user
+      #the spec says to not let someone see a single tweet if not logged in, although that makes no sense in a real twitter situation
+      #This is only needed for the spec because our ':id' is @tweet.id not @user.id
+      if logged_in?
+        @user = current_user
+        @tweet = Tweet.find_by(id: params[:id])
 
-      @tweet = Tweet.find_by(id: params[:id])
-
-      erb :'tweets/show_tweet'
+        erb :'tweets/show_tweet'
+      else
+        redirect to "/login"
+      end
     end
 
     #Edit the Tweet - U
 
     get '/tweets/:id/edit' do
 
+      @tweet = Tweet.find_by(id: params[:id])
       erb :'tweets/edit_tweet'
     end
 
     post '/tweets/:id' do
 
-      erb :'tweets/show_tweet'
+      redirect to "tweets/:id"
     end
 
     #Delete Tweet - D
@@ -61,7 +67,7 @@ class TweetsController < Sinatra::Base
     post '/tweets/:id/delete' do
       @tweet = Tweet.find_by_id(params[:id])
       @tweet.delete
-     		  
+
       redirect to "/tweets"
     end
 end
