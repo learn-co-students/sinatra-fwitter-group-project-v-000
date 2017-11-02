@@ -10,18 +10,22 @@ class TweetsController < Sinatra::Base
       if session[:id]
       erb :'tweets/create_tweet'
       else
-        flash [:message] = "Please log in to write a tweet."
+        flash[:message] = "Please log in to write a tweet."
 
         redirect to 'users/login'
       end
     end
 
     post '/tweets' do
-      @tweet = Tweet.new(content: params[content])
-      @tweet.save
-      @user = User.find_by(id: session[:id])
-      @user.tweets << @tweet
-      redirect to "/tweets/#{@tweet.id}"
+      if params[:content]
+        @tweet = Tweet.new(content: params[:content])
+        @tweet.save
+        @user = User.find_by(id: session[:id])
+        @user.tweets << @tweet
+        redirect to "/tweets/#{@tweet.id}"
+      else
+        flash[:message] = "Please write something to post!"
+      end
     end
 
   #Show The Tweet - R
