@@ -12,7 +12,7 @@ class TweetsController < Sinatra::Base
       else
         flash[:message] = "Please log in to write a tweet."
 
-        redirect to 'users/login'
+        redirect to '/login'
       end
     end
 
@@ -40,6 +40,7 @@ class TweetsController < Sinatra::Base
       @user = current_user
 
       @tweet = Tweet.find_by(id: params[:id])
+
       erb :'tweets/show_tweet'
     end
 
@@ -58,7 +59,9 @@ class TweetsController < Sinatra::Base
     #Delete Tweet - D
 
     post '/tweets/:id/delete' do
-
+      @tweet = Tweet.find_by_id(params[:id])
+      @tweet.delete
+     		  
       redirect to "/tweets"
     end
 end

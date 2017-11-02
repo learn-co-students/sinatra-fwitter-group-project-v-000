@@ -8,6 +8,11 @@
     <br></br>
     <h3>  - <%=@user.username%></h3>
 
-    <a href="/tweets/<%=@user.id%>/delete">Delete Tweet</a>
+    <%if logged_in?%>
+      <form action="/tweets/<%=@user.id%>/delete" method="POST">Delete Tweet</a>
+      <input id="hidden" type="hidden" name="_method" value="delete">
+		  <input type="submit" value="delete">
+      </form>
+    <%end%>
   </body>
 </html>
