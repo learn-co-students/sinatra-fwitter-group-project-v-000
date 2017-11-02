@@ -54,11 +54,15 @@ class TweetsController < Sinatra::Base
     get '/tweets/:id/edit' do
 
       @tweet = Tweet.find_by(id: params[:id])
+      if current_user != @tweet.user
+        redirect '/tweets'
+      else
       erb :'tweets/edit_tweet'
     end
 
     post '/tweets/:id' do
-
+      @tweet = Tweet.find_by(id: params[:id])
+      @tweet.update(content: params[:content])
       redirect to "tweets/:id"
     end
 
