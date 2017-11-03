@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome To Fwitter!</title>
+</head>
+<body>
+	Welcome,<br>
+
+	<%@tweets.each do |tweet|%>
+	<li><%=tweet.name%></li><br>
+	<%=tweet.content%><br><br>
+	<%end%>
+
+	<label><a href="/logout">Logout</a></label>
+
+</body>
+</html>

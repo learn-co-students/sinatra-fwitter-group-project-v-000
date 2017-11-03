@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Your Fweets!</title>
+</head>
+<body>
+  <h1><%=@user.name%></h1>
+  <br></br>
+		<%@user.tweets.each_with_index do |tweet, i|%>
+		<h3><%=i+1%>. <%=tweet.content%></h3>
+		<br></br>
+		<%end%>
+
+    <a href="/logout">Log Out</a>
+</body>
+</html>
