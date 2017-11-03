@@ -4,7 +4,21 @@ class TweetsController < ApplicationController
 
 enable :sessions
 use Rack::Flash
-  #Create The Tweet - C
+
+
+#We were missing a index of ALL tweets I think ? (not just the users) I threw it in here.
+
+  get '/tweets' do
+    if logged_in?
+      @tweets = Tweet.all
+    erb :'tweets/index'
+      else redirect to "/login"
+    end
+  end
+
+
+
+  #Create The Tweet - C -------------
     get '/tweets/new' do
       if logged_in?
       erb :'tweets/create_tweet'
@@ -28,7 +42,7 @@ use Rack::Flash
       end
     end
 
-  #Show The Tweet - R
+  #Show The Tweet - R -----------------------
 
     get '/tweets' do
       @user = current_user
@@ -37,8 +51,8 @@ use Rack::Flash
     end
 
     get '/tweets/:id' do
-      #the spec says to not let someone see a single tweet if not logged in, although that makes no sense in a real twitter situation
-      #This is only needed for the spec because our ':id' is @tweet.id not @user.id
+      # -----#the spec says to not let someone see a single tweet if not logged in, although that makes no sense in a real twitter situation
+      # -----#This is only needed for the spec because our ':id' is @tweet.id not @user.id
       if logged_in?
         @user = current_user
         @tweet = Tweet.find_by(id: params[:id])
@@ -49,30 +63,42 @@ use Rack::Flash
       end
     end
 
-    #Edit the Tweet - U
+    #Edit the Tweet - U -------------------------
 
     get '/tweets/:id/edit' do
-
+      
       @tweet = Tweet.find_by(id: params[:id])
-      if current_user != @tweet.user
-        redirect '/tweets'
+    
+      if logged_in?
+        erb :'tweets/edit_tweet'
       else
-      erb :'tweets/edit_tweet'
+        redirect '/login'    
       end
     end
 
-    post '/tweets/:id' do
-      @tweet = Tweet.find_by(id: params[:id])
-      @tweet.update(content: params[:content])
-      redirect to "tweets/:id"
-    end
-
-    #Delete Tweet - D
-
-    post '/tweets/:id/delete' do
+    patch '/tweets/:id' do
       @tweet = Tweet.find_by_id(params[:id])
-      @tweet.delete
-
-      redirect to "/tweets"
+      if logged_in? && !params["content"].empty?
+        @tweet.update(content: params[:content])
+        @tweet.save
+        
+      else 
+        redirect to "/tweets/1/edit"
+      end
     end
+
+    #Delete Tweet - D -----------------------------
+
+    delete '/tweets/:id/delete' do
+      if logged_in?
+        @tweet = Tweet.find_by_id(params[:id])
+        if @tweet.user_id == current_user.id
+          @tweet.delete
+          redirect to "/tweets"
+        end
+      else
+        redirect '/login'
+      end
+    end
+
 end

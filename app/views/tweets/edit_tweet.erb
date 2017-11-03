@@ -5,9 +5,15 @@
 
   <body>
     <h1>Edit Tweet </h1>
-    <form method="POST" action="/tweets">
-      <input type="text" name="content" placeholder="@tweet.content">
+    <h4>Original: <%=@tweet.content%></h4>
+    <form action="/tweets/<%=@tweet.id%>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+		New Content:<br>
+		<input type="text" name="content" id="content" placeholder="@tweet.content"><br><br>
       <button type="submit" value="submit">Submit</button>
     </form>
   </body>
 </html>
+
+
+
