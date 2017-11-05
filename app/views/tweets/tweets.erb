@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tweets</title>
+</head>
+<body>
+  <h2>Welcome, <%= @user.username %>!</h2>
+
+  <h3>Latest Tweets:</h3>
+  <br>
+    <% @tweets.each do |t| %>
+      <%= tweet.content %>
+    <% end %>
+</body>
+</html>
