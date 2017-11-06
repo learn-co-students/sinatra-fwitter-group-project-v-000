@@ -10,6 +10,7 @@ use Rack::Flash
 
   get '/tweets' do
     if logged_in?
+      @user = current_user
       @tweets = Tweet.all
     erb :'tweets/index'
       else redirect to "/login"
@@ -46,6 +47,7 @@ use Rack::Flash
 
     get '/tweets' do
       @user = current_user
+      @tweet =  Tweet.find_by(id: params[:id])
 
       erb :'/tweets/tweets'
     end
