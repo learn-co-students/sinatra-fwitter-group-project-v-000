@@ -4,10 +4,12 @@
 	<title>Your Fweets!</title>
 </head>
 <body>
-  <h1><%=@user.name%></h1>
+  <h1>Welcome, <%=@user.username%></h1>
   <br></br>
 		
-		<h3> <%=@tweet.content%></h3>
+		<h3> <%@tweets.each do |tweet|%>
+			<%=tweet.content%></h3>
+			<%end%>
 		<br></br>
 		
 
