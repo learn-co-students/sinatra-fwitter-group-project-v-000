@@ -1,6 +1,6 @@
 class CreatePosts < ActiveRecord::Migration
   def change
-    create_table :posts do |t|
+    create_table :tweets do |t|
       t.string :content
       t.integer :user_id
     end
