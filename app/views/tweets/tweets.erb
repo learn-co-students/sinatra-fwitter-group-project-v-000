@@ -1,0 +1,17 @@
+
+  <h1>Welcome,</h1>
+
+<% if Helpers.is_logged_in?(session) %>
+
+    <% Helpers.current_user(session).tweets.each do |t|%>
+      <p><%= t.content %>  </p><br>
+    <% end %>
+
+    <form method=post action='/logout'>
+      <input type='submit' value='Logout id='submit'>
+    </form>
+  <% else %>
+      <form method=post action='/login'>
+        <input type='submit' value='Log In' id='submit'>
+      </form>
+<% end %>
