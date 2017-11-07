@@ -2,8 +2,9 @@
   <h1>Welcome,</h1>
 
 <% if Helpers.is_logged_in?(session) %>
-
+<%= binding.pry %>
     <% Helpers.current_user(session).tweets.each do |t|%>
+
       <p><%= t.content %>  </p><br>
     <% end %>
 

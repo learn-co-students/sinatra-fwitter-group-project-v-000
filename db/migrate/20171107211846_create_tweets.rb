@@ -1,10 +1,7 @@
 class CreateTweets < ActiveRecord::Migration
-  def up
+  def change
     create_table :tweets do |t|
       t.string :content
     end
-  end
-
-  def down
   end
 end
