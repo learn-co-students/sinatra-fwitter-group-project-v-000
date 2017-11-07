@@ -1,9 +1,9 @@
-<h1>Welcome, <%= @user.username.capitalize %>!</h1>
+<h1><%= @user.username.capitalize %> Tweets</h1>
 
-<h3>What would you like to do?</h3>
+  <ol>
+    <% @user.tweets.each do |tweet| %>
 
-<ul>
-  <li><a href="/tweets/new">Create a tweet?</a></li>
-  <li><a href="/tweets/tweets">View your tweets?</a></li>
-  <li><a href="/logout">Logout</a></li>
-</ul>
+      <li><%= tweet.content %></li>
+
+    <% end %>  
+  </ol>

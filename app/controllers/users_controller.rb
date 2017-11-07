@@ -1,15 +1,11 @@
 class UserController < ApplicationController
 
-  get '/users/:id' do
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
     # binding.pry
-    if logged_in?
-      @user = current_user
-      erb :'users/show'
-    else
-      redirect to '/failure'
-    end
+    erb :'/users/show'
   end
 
-  
+
 
 end
