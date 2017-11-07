@@ -40,4 +40,8 @@ class TweetController < ApplicationController
       erb :login
     end
   end
+
+  get '/tweets/:id/delete' do
+    
+  end
 end
