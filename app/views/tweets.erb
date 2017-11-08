@@ -1,0 +1,11 @@
+
+<h1>Welcome,</h1>
+
+<% if Helpers.is_logged_in?(session) %>
+<a href="/tweets/new">Create Tweet</a>
+<br /><br />
+View all tweets<br />
+    <% Tweet.all.each do |t|%>
+      <a href="/tweets/<%=t.id%>"><%= t.content %> </a><br>
+    <% end %>
+<% end %>
