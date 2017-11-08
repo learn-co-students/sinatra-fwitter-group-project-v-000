@@ -1,8 +1,15 @@
-<%= @tweet.content %>
 
-<a href="/tweets/<%= @tweet.id/edit %>">Edit Tweet</a>
 
-<form action="/tweets/<%= @tweet.id %>/delete" method="post">
-<input id="hidden" type="hidden" name="_method" value="delete">
-<input type="submit" value="delete">
-</form>
+<% if Helpers.is_logged_in?(session) %>
+  <%=@tweet.content%>
+<br ><br /><br ><br />
+  <form action="/tweets/<%= @tweet.id%>/edit " method="get">
+    <br><button type="submit" name="submit" id="submit">Edit Tweet </button>
+  </form>
+
+
+  <form action="/tweets/<%= @tweet.id %>/delete" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <br><button type="submit" name="submit" id="submit">Delete Tweet </button>
+  </form>
+<%end %>

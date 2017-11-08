@@ -21,7 +21,6 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-
     if session[:id]
       redirect '/tweets'
     else
@@ -56,16 +55,13 @@ class ApplicationController < Sinatra::Base
   get '/tweets' do
     if session[:id]
       @user = Helpers.current_user(session)
-      erb :'/tweets/tweets'
+      erb :'/tweets'
     else
       redirect '/users/login'
     end
   end
 
   post '/login' do
-    # if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
-    #if User.find_(params)
-      #@user = User.find_(params)
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
@@ -73,50 +69,70 @@ class ApplicationController < Sinatra::Base
     else
       redirect '/users/login'
     end
-    #if !@user
-    #  redirect '/users/login'
-    #else
-    #  session[:id] = @user.id
-    #  redirect '/tweets/tweets'
-    #end
+
   end
 
   get '/tweets/new' do
-    erb :'/tweets/create_tweet'
+    if session[:id]
+      erb :'/tweets/create_tweet'
+    else
+      redirect '/users/login'
+    end
   end
 
   post '/tweets' do
-    @tweet = Tweet.create(params)
-    erb :'/tweets/show_tweet'
+    if !params[:content].empty?
+      @tweet = Tweet.create(content: params[:content])
+      @tweet.user_id = session[:id]
+      @user = @tweet.user
+      @user.tweets << @tweet
+      erb :'/tweets/show_tweet'
+    else
+      redirect '/tweets/new'
+    end
   end
 
   get '/tweets/:id' do
-    @tweet = Tweet.find(params)
-    erb :'/tweets/show_tweet'
+    if session[:id]
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/show_tweet'
+    else redirect '/login'
+    end
   end
 
   get '/tweets/:id/edit' do
-    @tweet = Tweet.find(params)
-    erb :'/tweets/edit_tweet'
+    if session[:id]
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/edit_tweet'
+    else redirect '/login'
+    end
   end
 
   patch '/tweets/:id' do
-    @tweet = Tweet.find_by_id(id: params[:id])
-    @tweet.content = params[:content]
-    @tweet.save
-    redirect "/tweets/#{@tweet.id}"
+    if !params[:content].empty?
+      @tweet = Tweet.find(params[:id])
+      @tweet.content = params[:content]
+      @tweet.save
+      redirect "/tweets/#{@tweet.id}"
+    else
+      redirect "/tweets/#{params[:id]}/edit"
+    end
   end
 
+
   delete '/tweets/:id/delete' do
-    @tweet = Tweet.find_by_id(params[:id])
-    @tweet.delete
-    redirect '/index'
-    #redirect '/users/login'
+
+    if session[:id] == params[:id].to_i
+      @tweet = Tweet.find(params[:id])
+      @tweet.destroy
+puts "in if statments"
+    end
+      redirect '/tweets'
   end
 
   get "/users/:slug" do
     @user = User.find_by_slug(params[:slug])
-    erb :'/users/show' 
-  end 
+    erb :'/users/show'
+  end
 
 end
