@@ -4,14 +4,16 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
-  configure do
-    enable :sessions
-    set :session_secret, "secret"
-  end
+  # configure do
+  #   enable :sessions
+  #   set :session_secret, "secret"
+  # end
 
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "secret"
   end
 
   get '/' do
@@ -21,7 +23,7 @@ class ApplicationController < Sinatra::Base
   get '/signup' do
 
     if session[:id]
-      redirect '/tweets/tweets'
+      redirect '/tweets'
     else
       erb :'/users/create_user'
     end
@@ -32,7 +34,7 @@ class ApplicationController < Sinatra::Base
       @user = User.new(params)
       @user.save
       session[:id] = @user.id
-      redirect '/tweets/tweets'
+      redirect '/tweets'
     else
       redirect '/signup'
     end
@@ -40,7 +42,7 @@ class ApplicationController < Sinatra::Base
 
   get '/login' do
     if session[:id]
-      redirect '/tweets/tweets'
+      redirect '/tweets'
     else
       erb :'/users/login'
     end
@@ -51,14 +53,13 @@ class ApplicationController < Sinatra::Base
       redirect '/users/login'
   end
 
-  get '/tweets/tweets' do
+  get '/tweets' do
     if session[:id]
       @user = Helpers.current_user(session)
-    end
       erb :'/tweets/tweets'
-    # else
-    #   redirect '/users/login'
-    # end
+    else
+      redirect '/users/login'
+    end
   end
 
   post '/login' do
@@ -68,7 +69,7 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
-      redirect '/tweets/tweets'
+      redirect '/tweets'
     else
       redirect '/users/login'
     end
@@ -80,7 +81,7 @@ class ApplicationController < Sinatra::Base
     #end
   end
 
-  get '/tweets/create' do
+  get '/tweets/new' do
     erb :'/tweets/create_tweet'
   end
 
@@ -110,6 +111,12 @@ class ApplicationController < Sinatra::Base
     @tweet = Tweet.find_by_id(params[:id])
     @tweet.delete
     redirect '/index'
+    #redirect '/users/login'
   end
+
+  get "/users/:slug" do
+    @user = User.find_by_slug(params[:slug])
+    erb :'/users/show' 
+  end 
 
 end

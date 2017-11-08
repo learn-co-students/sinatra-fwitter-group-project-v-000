@@ -1,18 +1,24 @@
 
-  <h1>Welcome,</h1>
+<h1>Welcome,</h1>
 
 <% if Helpers.is_logged_in?(session) %>
-<%= binding.pry %>
     <% Helpers.current_user(session).tweets.each do |t|%>
-
       <p><%= t.content %>  </p><br>
     <% end %>
 
-    <form method=post action='/logout'>
-      <input type='submit' value='Logout id='submit'>
+    
+<form action="/tweets" method="post">
+  Content: <br><input type="text" name="content" id="content"><br>
+  <br><button type="submit" name="submit" id="submit">Submit</button>
+</form>
+
+
+   <%# <form method="post" action='/logout'>
+      <input type="submit" value="logout" id="submit">
     </form>
   <% else %>
-      <form method=post action='/login'>
-        <input type='submit' value='Log In' id='submit'>
-      </form>
-<% end %>
+      <form method="post" action="/login">
+        <input type="submit" value="Log In" id="submit">
+      </form> %>
+<% end %> 
+
