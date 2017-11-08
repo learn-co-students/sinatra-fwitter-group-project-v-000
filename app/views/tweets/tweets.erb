@@ -1,0 +1,12 @@
+<h1>Welcome, <%= @user.username.capitalize %>!</h1>
+
+<h2>Timeline</h2>
+
+
+<ol>
+  <% @tweets.each do |tweet| %>
+    <li><%= "#{tweet.content} posted by #{tweet.user.username}" %></li>
+  <% end %>
+</ol>
+
+<a href="/tweets/new">Tweet now!</a>

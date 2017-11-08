@@ -370,6 +370,7 @@ describe ApplicationController do
     context "logged out" do
       it 'does not load let user view tweet edit form if not logged in' do
         get '/tweets/1/edit'
+        # binding.pry
         expect(last_response.location).to include("/login")
       end
     end
@@ -406,6 +407,7 @@ describe ApplicationController do
         visit "tweets/#{tweet2.id}"
         click_button "Delete Tweet"
         expect(page.status_code).to eq(200)
+        # binding.pry
         expect(Tweet.find_by(:content => "look at this tweet")).to be_instance_of(Tweet)
         expect(page.current_path).to include('/tweets')
       end
