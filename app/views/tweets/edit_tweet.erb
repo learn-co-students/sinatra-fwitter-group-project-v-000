@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Try to Rewrite the Past:</h1>
+    <h4>Original: <%=@tweet.content%></h4>
+    <form action="/tweets/<%=@tweet.id%>" method="post">
+      <input id="hidden" type="hidden" name="_method" value="patch">
+      <label>New Content:</label>
+        <br>
+      <input type="text" name="content" id="content" placeholder="@tweet.content">
+        <br>
+      <button type="submit" value="submit">Submit</button>
+    </form>
+  </body>
+</html>

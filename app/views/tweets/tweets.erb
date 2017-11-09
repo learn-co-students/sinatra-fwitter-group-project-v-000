@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tweet your Thoughts!</title>
+  </head>
+
+  <body>
+    <h1>Welcome,<%=@user.name%></h1>
+      <%@tweets.each do |tweet|%>
+        <li><%=tweet.name%>
+          <br>
+        <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
+          <br></li>
+      <%end%>
+      <label><a href="/logout">Logout</a></label>
+  </body>
+</html>
