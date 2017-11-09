@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head> <title><%=@user.username%>'s Tweet</title>
+  </head>
+
+  <body>
+    <h3><%=@tweet.content%></h3>
+    <br></br>
+    <h3>  - <%=@user.username%></h3><br><br>
+    
+      <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a><br>
+        
+       <form method="post" action="/tweets/<%=@tweet.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="delete"><br><br>
+
+    <input type="submit" value="delete" id="Delete Tweet">
+    <form>
+
+    
+  </body>
+</html>
