@@ -1,0 +1,11 @@
+<h1>Welcome, <%= @user.username %></h1>
+
+<h4>Take a moment to keep up with the lastest fweets:</h4>
+
+<ul><% @tweets.each do |tweet| %>
+  <li><%= tweet.content %></li>
+<% end %>
+</ul>
+
+<h4><a href="/tweets/new">What's on your mind? Fweet here</a></h4>
+<h4><a href="/logout">Log Out</a></h4>
