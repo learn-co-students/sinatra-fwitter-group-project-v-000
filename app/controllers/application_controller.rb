@@ -3,6 +3,7 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
+    enable :sessions
     set :public_folder, 'public'
     set :views, 'app/views'
   end
@@ -15,14 +16,23 @@ class ApplicationController < Sinatra::Base
     erb :'users/create_user'
   end
 
+  get 'tweets/tweets' do
+    #binding.pry
+      erb :'tweets/tweets'
+  end
+
   post '/signup' do
     @user = User.new(username: params[:username],
                      email: params[:email],
-                     password_digest: params[:password]
+                     password: params[:password]
                   )
-    @user.save
 
-    erb :'tweets/tweets'
+    if @user.save
+      session[:user_id] = @user.id
+      redirect "tweets/tweets"
+    else
+      redirect '/signup'
+    end
   end
 
 end
