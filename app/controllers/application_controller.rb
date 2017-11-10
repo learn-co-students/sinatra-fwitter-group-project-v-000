@@ -115,7 +115,7 @@ class ApplicationController < Sinatra::Base
       redirect '/login'
     end
   end
-
+ 
   post '/tweets/:id' do
     if !params[:content].empty?
       @tweet = Tweet.find_by_id(params[:id])
