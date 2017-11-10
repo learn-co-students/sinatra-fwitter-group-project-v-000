@@ -1,0 +1,15 @@
+<% if Helpers.is_logged_in?(session) %>
+
+<% @user = User.find_by( username: session[:username] )%>
+  "Welcome, <%= @user.username %> look at this tweet"
+
+  <br><br>
+  <ul>
+    <% @user.tweets.each do |tweet| %>
+      <li><%= tweet.content %></li>
+    <% end %>
+  </ul>
+
+<% else %>
+  <% redirect to '/login' %>
+<% end %>
