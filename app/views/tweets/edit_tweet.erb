@@ -1,0 +1,7 @@
+<h1>Edit Tweet</h1>
+<form action="/tweets/<%=@tweet.id%>" method="post">
+  <label for="content">Tweet Content:</label>
+  <input type="text" name="content" id="content" value="<%=@tweet.content%>">
+  <input type="submit" id="submit" value="submit">
+</form>
+<a href='/logout'>Log Out</a>
