@@ -58,8 +58,17 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  # get '/tweets' do
+  #   if logged_in?
+  #     erb :tweets
+  #   else
+  #     redirect '/login'
+  #   end
+  # end
+
   get '/tweets' do
     if logged_in?
+      @tweets = Tweet.all
       erb :tweets
     else
       redirect '/login'
