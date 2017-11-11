@@ -89,6 +89,11 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/tweets/:id' do
+    @tweet = Tweet.find(params[id])
+    erb :show
+  end
+
   helpers do
 
     def logged_in?
