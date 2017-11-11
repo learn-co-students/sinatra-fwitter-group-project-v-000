@@ -1,4 +1,9 @@
 <h1>Welcome, <%= current_user.username %>!</h1>
-<form action="/logout" method="POST">
-  <input type="submit" value="Log Out">
-</form>
+
+<ul>
+  <% current_user.tweets.each do |tweet| %>
+    <li><%= tweet.content %></li>
+  <% end %>
+</ul>
+
+<a href="/logout">Log Out</a>

@@ -32,7 +32,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    erb :'/login'
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :'/login'
+    end
   end
 
   post '/login' do
@@ -45,14 +49,26 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post '/logout' do
-    session.clear
-    redirect '/'
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect '/login'
+    else
+      redirect '/'
+    end
   end
 
   get '/tweets' do
+    if logged_in?
+      erb :tweets
+    else
+      redirect '/login'
+    end
+  end
 
-    erb :tweets
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :user
   end
 
   helpers do
