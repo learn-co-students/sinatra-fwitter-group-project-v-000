@@ -2,11 +2,9 @@
 
 <%= @tweet.content %>
 
-<% if current_user == @tweet.user %>
-  <p>
-  <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
-  </p>
-<% end %>
+<p>
+<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
+</p>
 
 <form action="/tweets/<%=@tweet.id%>/delete" method="POST">
   <input type="submit" value="Delete Tweet">
