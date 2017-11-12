@@ -2,8 +2,10 @@
 
 <ul>
   <% @tweets.each do |tweet| %>
-    <li><%= tweet.content %>__<%= tweet.id %></li>
+    <li><a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a> by <%=tweet.user.username%></li>
   <% end %>
 </ul>
 
-<a href="/logout">Log Out</a>
+<a href="/tweets/new">New Tweet</a>
+
+<p><a href="/logout">Log Out</a></p>
