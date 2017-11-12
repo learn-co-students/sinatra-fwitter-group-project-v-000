@@ -98,7 +98,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post '/tweets/:id/edit' do
+  get '/tweets/:id/edit' do
     @tweet = Tweet.find(params[:id])
     erb :edit
   end
