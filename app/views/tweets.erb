@@ -2,7 +2,7 @@
 
 <ul>
   <% @tweets.each do |tweet| %>
-    <li><%= tweet.content %></li>
+    <li><%= tweet.content %>__<%= tweet.id %></li>
   <% end %>
 </ul>
 
