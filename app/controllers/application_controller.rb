@@ -20,6 +20,8 @@ class ApplicationController < Sinatra::Base
 #
 #   end
   get '/signup' do
+    binding.pry
+    user = User.find(session[:id])
 # # binding.pry
 # #     if session[:id]
 # #
@@ -37,7 +39,7 @@ class ApplicationController < Sinatra::Base
 #       user.save
 #       session[:id] = user.id
 #
-      redirect to '/tweets/tweets'
+    redirect to '/tweets/tweets'
     end
     redirect to '/users/signup'
   end
