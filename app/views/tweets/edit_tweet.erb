@@ -1,0 +1,5 @@
+<form method="post" action="/tweets/<%= @tweet.id %>">
+  <label for="content">Tweet Content</label>
+    <input type="text=area" id="content" name="content" value="<%= @tweet.content %>">
+  <input type="submit" id="submit" value="submit"/>
+</form>

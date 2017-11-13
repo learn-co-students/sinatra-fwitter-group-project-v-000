@@ -1,1 +1,10 @@
-Hellow World!
+Welcome,
+
+<% @tweets.each do |tweet| %>
+  <p><%= tweet.content %></p>
+<% end %>
+
+<form method="get" action="/logout">
+
+  <input type="submit" id="submit" value="Logout"/>
+</form>

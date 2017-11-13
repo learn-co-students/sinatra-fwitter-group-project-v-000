@@ -3,8 +3,15 @@ class User < ActiveRecord::Base
   has_secure_password
 
 
-  #need slug methods here
-  #plus macro for password
+  def slug
+    username.downcase.gsub(" ", "-")
+  end
 
+  def self.find_by_slug(slug)
+    Self.all.find{|user| user.slug == slug}
+  end
 
+  def self.current_user(session)
+    self.find(session[:id])
+  end
 end
