@@ -14,61 +14,58 @@ class ApplicationController < Sinatra::Base
 
     erb :index
   end
-#
-#   get '/tweets' do
-#
-#
-#   end
+
   get '/signup' do
-    binding.pry
-    user = User.find(session[:id])
-# # binding.pry
-# #     if session[:id]
-# #
-# #       redirect to '/tweets/tweets'
-# #     else
+
+    # user = User.find(session[:id])
+    # if !logged_in?(session)
       erb :'/users/create_user'
-# #     end
+    # end
+
+
+
   end
 #
   post '/signup' do
 #
 #     user = User.new(username: params[:username], email: params[:email], password: params[:password])
-#
+    user = User.find_by(username: params[:username]git )
+binding.pry
     if params[:username] != "" && params[:email] != "" && params[:password] != ""
 #       user.save
 #       session[:id] = user.id
 #
     redirect to '/tweets/tweets'
+
     end
     redirect to '/users/signup'
   end
 #
-#   get '/login' do
-#     erb :'/users/login'
-#   end
+  get '/login' do
+    erb :'/users/login'
+  end
 #
-#   post '/login' do
-#     user = User.find_by(username: params[:username])
-#     if user && user.authenticate(params[:password])
-#       session[:id] = user.id
-#     redirect to '/tweets/tweets'
-#     end
-#     redirect to '/signup'
-#   end
+  post '/login' do
+    user = User.find_by(username: params[:username])
+    if user && user.authenticate(params[:password])
+      session[:id] = user.id
+    redirect to '/tweets/tweets'
+    end
+    redirect to '/signup'
+  end
 #    #### controller actions for tweets ----> or add separate controller
 #
-#   get '/tweets/tweets' do
-#     erb :'/tweets/tweets'
-#   end
+  get '/tweets' do
+    erb :'/tweets/tweets'
+  end
 
 
 
 
   helpers do
-    # def logged_in?(session)
-    #   !!session[:user_id]
-    # end
+    def logged_in?(session)
+      !!session[:id]
+    end
     #
     # def self.current_user(session)
     #   User.find(session[:user_id])
