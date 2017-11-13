@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug)
-    Self.all.find{|user| user.slug == slug}
+    self.all.find{|user| user.slug == slug}
   end
 
   def self.current_user(session)
