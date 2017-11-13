@@ -1,42 +1,33 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
+  register Sinatra::ActiveRecordExtension
+  set :views, Proc.new { File.join(root, "../views/") }
 
   configure do
-    register Sinatra::ActiveRecordExtension
-    set :session_secret, "my_application_secret"
+    enable :sessions
+    set :session_secret, "secret"
     set :public_folder, 'public'
-    set :views, 'app/views'
   end
 
   ##### controller actions for users  ----> or add separate controller
   get '/' do
-
     erb :index
   end
-#
-#   get '/tweets' do
-#
-#
-#   end
+
   get '/signup' do
-# # binding.pry
-# #     if session[:id]
-# #
-# #       redirect to '/tweets/tweets'
-# #     else
+    if !logged_in?(session)
       erb :'/users/create_user'
-# #     end
+    else
+      redirect to '/tweets/tweets'
+    end
   end
-#
+
   post '/signup' do
-#
-#     user = User.new(username: params[:username], email: params[:email], password: params[:password])
-#
+    user = User.new(username: params[:username], email: params[:email], password: params[:password])
     if params[:username] != "" && params[:email] != "" && params[:password] != ""
-#       user.save
-#       session[:id] = user.id
-#
+      user.save
+      session[:id] = user.id
       redirect to '/tweets/tweets'
     end
     redirect to '/users/signup'
@@ -56,21 +47,21 @@ class ApplicationController < Sinatra::Base
 #   end
 #    #### controller actions for tweets ----> or add separate controller
 #
-#   get '/tweets/tweets' do
-#     erb :'/tweets/tweets'
-#   end
+  get '/tweets/tweets' do
+    erb :'/tweets/tweets'
+  end
 
 
 
 
   helpers do
-    # def logged_in?(session)
-    #   !!session[:user_id]
-    # end
-    #
-    # def self.current_user(session)
-    #   User.find(session[:user_id])
-    # end
+    def logged_in?(session)
+      !!session[:id]
+    end
+
+    def self.current_user(session)
+      User.find(session[:id])
+    end
 
   end
 
