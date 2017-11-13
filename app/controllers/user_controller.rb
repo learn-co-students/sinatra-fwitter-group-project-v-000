@@ -31,17 +31,13 @@ class UserController < ApplicationController
   end
 
   post "/login" do
-    if logged_in?
-      redirect "/tweets"
-    else
-	    user = User.find_by(:username => params[:username])
+    user = User.find_by(:username => params[:username])
 
-	    if user && user.authenticate(params[:password])
-		    session[:user_id] = user.id
-		    redirect "/tweets"
-	    else
-		    redirect "/login"
-	    end
+    if user && user.authenticate(params[:password])
+	    session[:user_id] = user.id
+	    redirect "/tweets"
+    else
+	    redirect "/login"
     end
 	end
 
@@ -54,8 +50,9 @@ class UserController < ApplicationController
     end
   end
 
-  # get '/users/:slug' do
-  #
-  # end
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'users/show'
+  end
 
 end
