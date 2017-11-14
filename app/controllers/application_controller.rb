@@ -21,6 +21,13 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/tweets/:id' do
+    @tweet = Tweet.find(params[:id])
+
+    erb :'tweets/show_tweet'
+  end
+
+
   get '/signup' do
     if !logged_in?
       erb :'users/create_user'
@@ -94,12 +101,11 @@ class ApplicationController < Sinatra::Base
     if !params[:content].blank?
       @tweet = Tweet.create(content: params[:content])
       current_user.tweets << @tweet
+
+      redirect "/tweets/#{@tweet.id}"
     else
       redirect '/tweets/new'
     end
-
-    redirect '/tweets'
-
   end
 
   helpers do
