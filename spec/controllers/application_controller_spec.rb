@@ -162,7 +162,7 @@ describe ApplicationController do
         tweet1 = Tweet.create(:content => "tweeting!", :user_id => user1.id)
 
         user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
-        tweet2 = Tweet.create(:content => "look at this tweet", :user_id => user2.id)
+        tweet2 = Tweet.create(:content => "look at this tweet", :user_id => user1.id)
 
         visit '/login'
 
