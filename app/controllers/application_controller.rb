@@ -14,6 +14,7 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  #moved .current_user to user class
   helpers do
     def logged_in?(session)
       !!session[:id]
