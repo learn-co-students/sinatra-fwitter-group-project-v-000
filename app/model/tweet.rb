@@ -1,3 +1,5 @@
-class User < ActiveRecord::Base
-    has_many :tweets
+class Tweet < ActiveRecord::Base
+    belongs_to :user
+
+
 end
