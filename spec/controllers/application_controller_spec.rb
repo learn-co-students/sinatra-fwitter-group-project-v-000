@@ -1,6 +1,7 @@
 require 'spec_helper'
 
-describe ApplicationController do
+describe ApplicationController, :type => :controller do
+  include Rack::Test::Methods
 
   describe "Homepage" do
     it 'loads the homepage' do
