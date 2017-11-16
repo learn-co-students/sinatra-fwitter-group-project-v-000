@@ -1,18 +1,46 @@
 class UserController < ApplicationController
 
-  # get '/signup' do
-  #   erb :'users/create_user'
-  # end
-  #
-  # post '/signup' do
-  #   # if params[:user_name].empty? || params[:]
-  #     @user = User.create(params[:user])
-  #     session[:user_id] = @user.id
-  #     @user.save
-  #     redirect '/tweets'
-  #   # else
-  #   #   redirect '/signup'
-  #   # end
-  # end
+  # users
+    get '/signup' do
+      erb :'users/create_user'
+    end
+
+    post '/signup' do
+      if !params[:user][:user_name].empty? && !params[:user][:email].empty? && !params[:user][:password].empty?
+        @user = User.create(params[:user])
+        session[:user_id] = @user.id
+        redirect '/tweets'
+      else
+        redirect '/signup'
+      end
+    end
+
+    get '/login' do
+      if logged_in?
+        redirect '/tweets'
+      else
+        erb :'users/login'
+      end
+    end
+
+    post '/login' do
+      # binding.pry
+      @user = User.find_by(email: params[:email])
+      if @user.authenticate(params[:password])
+        session[:user_id] = @user.id
+        redirect '/tweets'
+      else
+        redirect '/login'
+      end
+    end
+
+    get '/logout' do
+      if logged_in?
+        session.destroy
+        redirect 'login'
+      else
+        redirect '/'
+      end
+    end
 
 end

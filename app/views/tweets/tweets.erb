@@ -1,1 +1,7 @@
-<a href="/signup">Sign up!</a>
+<% Tweet.all.each do |t| %>
+  <p><a href="#"><%=t.user.user_name%></a></p>
+  <p><%=t.content%></p>
+  <% if t.user == current_user %>
+    <a href="/tweets/<%=t.id%>/edit">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/tweets/<%=t.id%>/delete">Delete</a>
+  <% end %>
+<% end %>
