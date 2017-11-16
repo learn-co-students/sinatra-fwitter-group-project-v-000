@@ -6,8 +6,8 @@ class UserController < ApplicationController
     end
 
     post '/signup' do
-      if !params[:user][:user_name].empty? && !params[:user][:email].empty? && !params[:user][:password].empty?
-        @user = User.create(params[:user])
+      if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
+        @user = User.create(params)
         session[:user_id] = @user.id
         redirect '/tweets'
       else
@@ -24,7 +24,7 @@ class UserController < ApplicationController
     end
 
     post '/login' do
-      # binding.pry
+      binding.pry
       @user = User.find_by(email: params[:email])
       if @user.authenticate(params[:password])
         session[:user_id] = @user.id
