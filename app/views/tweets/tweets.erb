@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Fwitter</title>
+  </head>
+  <body>
+
+    <h3>Tweets</h3>
+
+<ul>
+  <% @tweets.each_with_index do |tweet, i| %>
+    <li> <%= i + 1 %>, <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></li>
+  <% end %>
+</ul>
+
+  </body>
+</html>
