@@ -9,11 +9,11 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "password_security"
   end
 
-  get '/' do
+  get '/' do      #route going to index page
     erb :index
   end
 
-  helpers do
+  helpers do              #helper methods to show user being logged in or current user
     def logged_in?
       !!session[:user_id]
     end
