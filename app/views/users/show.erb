@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>title</title>
+  </head>
+  <body>
+    <% if Helpers.is_logged_in?(session) %>
+      <h1>Welcome <%= Helpers.current_user(session).username %></h1>
+
+
+      <a href="/sessions/logout">Log Out</a>
+    <% end %>
+
+  </body>
+</html>

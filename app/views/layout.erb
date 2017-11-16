@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Fwitter</title>
+  </head>
+
+  <body>
+
+    <%= yield %>
+
+      <% if !!session[:user_id] %>
+
+        <a href="/tweets/new"> Create Tweet </a>
+        <a href="/logout"> Log Out </a>
+        <p>Welcome, <%=current_user.username %></p>
+
+      <%end %>
+
+
+
+  </body>
+</html>
