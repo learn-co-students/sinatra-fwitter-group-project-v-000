@@ -1,0 +1,8 @@
+ <h1>Welcome, <% @user.user_name %>!</h1>
+  <h3>Here is a list of the last twenty tweets:</h3>
+
+     <ul>
+       <% Tweet.all.each do |tweet| %>
+        <li><%= User.find(tweet.user_id).user_name %><%= tweet.content %></li>
+        <% end %>
+      </ul>

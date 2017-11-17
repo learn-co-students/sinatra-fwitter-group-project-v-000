@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe 'User' do 
+describe 'User' do
   before do
-    @user = User.create(:username => "test 123", :email => "test123@aol.com", :password => "test")
+    @user = User.create(:user_name => "test 123", :email => "test123@aol.com", :password => "test")
   end
   it 'can slug the username' do
     expect(@user.slug).to eq("test-123")
@@ -10,7 +10,7 @@ describe 'User' do
 
   it 'can find a user based on the slug' do
     slug = @user.slug
-    expect(User.find_by_slug(slug).username).to eq("test 123")
+    expect(User.find_by_slug(slug).user_name).to eq("test 123")
   end
 
   it 'has a secure password' do
