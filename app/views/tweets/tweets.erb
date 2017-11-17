@@ -1,7 +1,9 @@
+<h1>Welcome, to Fwitter</h1>
+
 <% Tweet.all.each do |t| %>
-  <p><a href="#"><%=t.user.username%></a></p>
+  <p><a href="/users/<%=t.user.slug%>"><%=t.user.username%></a></p>
   <p><%=t.content%></p>
   <% if t.user == current_user %>
-    <a href="/tweets/<%=t.id%>/edit">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/tweets/<%=t.id%>/delete">Delete</a>
+    <a href="/tweets/<%=t.id%>/edit">Edit Tweet</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/tweets/<%=t.id%>/delete">Delete Tweet</a>
   <% end %>
 <% end %>

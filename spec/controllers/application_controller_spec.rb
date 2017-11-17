@@ -24,7 +24,6 @@ describe ApplicationController do
         :password => "rainbows"
       }
       post '/signup', params
-      binding.pry
       expect(last_response.location).to include("/tweets")
     end
 
@@ -149,7 +148,6 @@ describe ApplicationController do
       tweet1 = Tweet.create(:content => "tweeting!", :user_id => user.id)
       tweet2 = Tweet.create(:content => "tweet tweet tweet", :user_id => user.id)
       get "/users/#{user.slug}"
-
       expect(last_response.body).to include("tweeting!")
       expect(last_response.body).to include("tweet tweet tweet")
 
@@ -389,6 +387,7 @@ describe ApplicationController do
         visit 'tweets/1'
         click_button "Delete Tweet"
         expect(page.status_code).to eq(200)
+        binding.pry
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)
       end
 

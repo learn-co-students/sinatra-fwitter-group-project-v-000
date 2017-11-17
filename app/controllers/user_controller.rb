@@ -2,7 +2,11 @@ class UserController < ApplicationController
 
   # users
     get '/signup' do
-      erb :'users/create_user'
+      if logged_in?
+        redirect '/tweets'
+      else
+        erb :'users/create_user'
+      end
     end
 
     post '/signup' do
@@ -24,8 +28,7 @@ class UserController < ApplicationController
     end
 
     post '/login' do
-      binding.pry
-      @user = User.find_by(email: params[:email])
+      @user = User.find_by(username: params[:username])
       if @user.authenticate(params[:password])
         session[:user_id] = @user.id
         redirect '/tweets'
@@ -40,6 +43,16 @@ class UserController < ApplicationController
         redirect 'login'
       else
         redirect '/'
+      end
+    end
+
+    get '/users/:slug' do
+      @user = User.find_by_slug(params[:slug])
+      if @user
+        @tweets = @user.tweets
+        erb :'users/show'
+      else
+        erb :'users/noshow'
       end
     end
 

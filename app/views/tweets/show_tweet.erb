@@ -1,0 +1,6 @@
+<h1>Tweet No. <%=@tweet.id%></h1>
+<p><a href="/users/<%=@user.slug%>"><%=@user.username%></a></p>
+<p><%=@tweet.content%></p>
+<% if @tweet.user == current_user %>
+  <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/tweets/<%=@tweet.id%>/delete"><button>Delete Tweet</button></a>
+<% end %>
