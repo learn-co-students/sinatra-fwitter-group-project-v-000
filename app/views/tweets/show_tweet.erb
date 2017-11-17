@@ -4,10 +4,10 @@
 <br></br>
 
 <br></br>
-<form method="GET" action="/tweets/<%=@tweet.id%>/edit">
-  <input type="submit" id="Edit Tweet" value="Edit Tweet">
-</form>
-<br></br>
 <form action="/tweets/<%=@tweet.id%>/delete" method="POST">
   <input type="submit" id="Delete Tweet" value="Delete Tweet">
 </form>
+
+<br></br>
+
+<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet </a>

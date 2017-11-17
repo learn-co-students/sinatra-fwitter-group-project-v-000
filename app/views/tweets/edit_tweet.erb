@@ -5,9 +5,8 @@
 <h2>Content:</h2>
 <br></br>
 <form action="/tweets/<%=@tweet.id%>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
   <input type="text" id="content" name="content" value="<%=@tweet.content%>">
-
-  <br></br>
 
   <input type="submit" value="submit">
 </form>

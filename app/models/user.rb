@@ -7,12 +7,11 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: true
 
   def slug
-    username.split(" ").join('-')
+    username.downcase.gsub(" ", "-")
   end
 
   def self.find_by_slug(slug)
-    username = slug.split('-').join(" ")
-    self.find_by(username: username)
+    self.all.detect { |user| user.slug == slug }
   end
 
 end
