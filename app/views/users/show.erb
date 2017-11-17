@@ -1,0 +1,9 @@
+
+
+<ul>
+<%Tweet.all.each do |tweet|%>
+  <%if tweet.user_id == @user.id%>
+    <li><%=tweet.content%></li>
+  <% end %>
+<% end %>
+</ul>
