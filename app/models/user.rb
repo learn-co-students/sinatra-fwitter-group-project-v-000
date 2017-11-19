@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :tweets
   has_secure_password
+  validates :username, :password, :email, presence: true
 
   def slug
     username.downcase.gsub(" ", "-")
@@ -10,7 +11,8 @@ class User < ActiveRecord::Base
     self.all.find{|user| user.slug == slug}
   end
 
-  def self.current_user(session)
-    self.find(session[:id])
-  end
+ ##moved back to main ApplicationController
+  # def self.current_user(session)
+  #   @current_user ||= User.find(session[:id]) if session[:id]
+  # end
 end
