@@ -1,0 +1,10 @@
+<h1>Hi, <%= @user.username%> </h1>
+
+<% @tweets.each.with_index(1) do |tweet, index| %>
+<p><%= index%>.
+   <%= tweet.content %></p>
+<%end%>
+
+<form>
+<input type="button" value="Log Out" onclick="window.location.href = '/logout'"/>
+</form>

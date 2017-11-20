@@ -1,0 +1,12 @@
+<h1>Welcome, <%= @user.username%> </h1>
+
+<% Tweet.all.each.with_index(1) do |tweet, index| %>
+<p><%= index%>.
+   <a href="/tweets/<%=tweet.id%>">
+   <%= tweet.content %></a></p>
+<%end%>
+
+<form>
+<input type="button" value="Log Out" onclick="window.location.href = '/logout'"/>
+<input type="button" value="Create a Tweet" onclick="window.location.href = '/tweets/new'"/>
+</form>
