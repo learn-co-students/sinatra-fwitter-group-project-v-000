@@ -7,9 +7,13 @@
   <%end%>
 </ul>
 <%#binding.pry%>
+<form action="/tweets/new" method="GET">
+<input type="submit" name="New Tweet" id="New Tweet" value="New Tweet">
+</form>
 <form action="/users/<%=@user.slug%>" method="GET">
 <input type="submit" name="Show My Tweets" id="Show My Tweets" value="Show My Tweets">
 </form>
+
 <br>
 <form action="/logout" method="POST">
   <input type="submit" name="logout" value="logout">
