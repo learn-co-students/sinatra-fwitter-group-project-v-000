@@ -1,9 +1,15 @@
-display a single tweet
+
+<h3> Your Tweet:</h3>
 
 <p><%=@tweet.content%></p>
 <form action="/tweets/<%=@tweet.id%>/delete" method="POST">
   <input type="submit" name="Delete Tweet" id="Delete Tweet" Value="Delete Tweet">
 </form>
+<br>
 <form action="/tweets/<%=@tweet.id%>/edit" method="GET">
   <input type="submit" name="Edit Tweet" id="Edit Tweet" Value="Edit Tweet">
+</form>
+<br>
+<form action="/tweets/new" method="GET">
+<input type="submit" name="New Tweet" id="New Tweet" value="New Tweet">
 </form>

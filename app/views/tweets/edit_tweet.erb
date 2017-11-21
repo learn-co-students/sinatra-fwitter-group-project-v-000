@@ -1,5 +1,5 @@
-edit an existing tweet
+<h3> Edit Tweet </h3>
 <form action="/tweets/<%=@tweet.id%>" method="POST">
-<input name="content" type="text" size="140" id="content" value="<%=@tweet.content%>">
+<p><input name="content" type="text" size="80" id="content" value="<%=@tweet.content%>"></p>
 <input type="submit" value="Save" id="submit">
 </form>

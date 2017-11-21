@@ -1,5 +1,6 @@
 
 <h3>Welcome, <%=@user.username%></h3>
+<h5>Tweets:</h5>
 
 <ul>
   <%Tweet.all.each do |tweet|%>
@@ -10,6 +11,8 @@
 <form action="/tweets/new" method="GET">
 <input type="submit" name="New Tweet" id="New Tweet" value="New Tweet">
 </form>
+<br>
+
 <form action="/users/<%=@user.slug%>" method="GET">
 <input type="submit" name="Show My Tweets" id="Show My Tweets" value="Show My Tweets">
 </form>
