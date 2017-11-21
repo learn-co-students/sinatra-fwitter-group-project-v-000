@@ -34,4 +34,16 @@ class TweetsController < ApplicationController
       redirect '/login'
     end
   end
+
+  patch '/tweets/:id' do
+    @tweet = Tweet.find_by(params[:id])
+    if params[:content] != ""
+      @tweet.update(params[:content])
+      @tweet.save
+      redirect "/tweets/#{@tweet.id}"
+    else
+      redirect "/tweets/#{@tweet.id}/edit"
+    end
+  end
+
 end
