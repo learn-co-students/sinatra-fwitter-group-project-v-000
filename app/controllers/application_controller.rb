@@ -18,12 +18,16 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    if !params.value("")
-      @user = User.create(params)
-      redirect 'tweets/tweets'
+    if !params.value?("")
+      redirect '/tweets'
     else
-      redirect 'users/create_user'
+      redirect '/signup'
     end
+  end
+
+  get '/tweets' do
+    @tweets = Tweet.all
+    erb :'tweets/tweets'
   end
 
 
