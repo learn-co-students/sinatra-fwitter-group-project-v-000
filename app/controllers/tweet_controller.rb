@@ -51,7 +51,7 @@ class TweetController < ApplicationController
       end
     end
 
-    post '/tweets/:id' do
+    patch '/tweets/:id' do
       @tweet = Tweet.find(params[:id])
       if params[:content] == ""
         redirect to("/tweets/#{@tweet.id}/edit")
@@ -62,7 +62,7 @@ class TweetController < ApplicationController
       end
     end
 
-    post '/tweets/:id/delete' do
+    delete '/tweets/:id/delete' do
       @tweet = Tweet.find(params[:id])
       if @tweet.user_id == current_user.id
       @tweet.destroy
