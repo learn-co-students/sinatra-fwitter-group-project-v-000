@@ -1,0 +1,5 @@
+<h3>Welcome, <%= current_user.username %></h3>
+
+<% Tweet.all.each do |tweet| %>
+  <p>Tweet # <%=tweet.id%> <b>|</b> <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a></p>
+<% end %>
