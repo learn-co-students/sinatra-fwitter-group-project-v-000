@@ -1,0 +1,11 @@
+<h1 class="milk-text">Edit Tweet</h1>
+<section class="col-3 first shadow">
+<form method="POST" action="/tweets/<%= @tweet.id %>">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="text" name="content" value="<%= @tweet.content %>">
+
+  <input type="submit" value="submit">
+</form>
+
+<a href="/tweets/<%= @tweet.id %>">Cancel</a>
+</section>

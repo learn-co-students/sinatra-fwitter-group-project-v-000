@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+  <title>Fwitter</title>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+</head>
+<body class="background-img">
+  <div>
+    <header class="medium-fade shadow">
+      <div class="wrapper">
+        <div id="logo">
+          <h1>Fwitter</h1>
+          <h2>Fwitter</h2>
+        </div>
+      </div><!-- .wrapper -->
+      <div id="navbar" class="light-fade">
+        <div class="wrapper">
+          <nav>
+            <% if !!current_user %>
+              <a href="/tweets">Timeline</a>
+              <a href="/users/<%= current_user.username %>">Profile</a>
+              <a href="/tweets/new">New Tweet</a>
+              <a href="/logout">Logout</a>
+            <% else %>
+              <a href="/login">Login</a>
+              <a href="/signup"> Signup</a>
+            <% end %> 
+            <a class="menu-icon">&#9776;</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <div class="wrapper clearfix">
+      <%=yield%>
+    </div>
+  </div>
+  <footer>
+    &copy; 2016 Fwitter - All Rights Reserved - Designed by Branden Miller
+    <% if !!current_user %>
+      - <a href="/logout">Logout</a>
+    <% end %>
+  </footer>
+</body>
+</html>
