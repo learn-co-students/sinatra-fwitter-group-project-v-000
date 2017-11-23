@@ -1,0 +1,19 @@
+<h1>Editing Your Tweet</h1>
+
+<% if flash.has?(:success) %>
+  <div class="success-message">
+    <%= flash[:success] %>
+  </div>
+<% elsif flash.has?(:error) %>
+  <div class="error-message">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<form action="/tweets/<%= @tweet.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <div class="write-tweet">
+    <input type="text" name="content" value="<%= @tweet.content %>" id=":content">
+  </div>
+  <input class="submit" type="submit" value="Update Tweet" id="submit">
+</form>

@@ -1,0 +1,225 @@
+/*/////// GENERAL /////////*/
+
+/* color ref: Twitter - #1DA1F2 */
+
+
+body {
+  font-family: 'Lato', 'Helvetica', sans-serif;
+  margin: 0;
+  background-image: url("/images/20151010_212601.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+p {
+  font-size: 1.2em;
+}
+
+h1 {
+  font-family: 'Oswald', 'Helvetica', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #444;
+  font-kerning: normal;
+}
+
+h2 {
+  font-weight: 400;
+}
+
+a {
+  color: #1DA1F2;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+table {
+  display: inline-block;
+}
+
+td {
+  padding: 5px;
+}
+
+td.col-1 {
+  text-align: right;
+  font-size: 1.1em;
+}
+
+div.wrapper {
+  width: 55%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, .85);
+  z-index: 0;
+  margin-top: 100px;
+  text-align: center;
+}
+
+div.content {
+  display: inline-block;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 60px;
+  overflow: auto;
+}
+
+div.navbar {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  border-bottom: #666 2px solid;
+  background-color: #FFF;
+  z-index: 1
+}
+
+div.navbar img#logo {
+  display: block;
+  height: 100px;
+  float: left;
+  padding: 8px;
+}
+
+div.success-message {
+  padding: 10px;
+  font-size: 1.2em;
+  color: #08A173;
+}
+
+div.error-message {
+  padding: 10px;
+  font-size: 1.2em;
+  color: #EC1C2A;
+}
+
+div.button, input.submit {
+  display: inline-block;
+  background-color: #1DA1F2;
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 1.1em;
+}
+
+div.tweet-text a {
+  text-decoration: none;
+  color: #444;
+}
+
+div#logout {
+  float: right;
+  color: #fff;
+  font-weight: 700;
+  height: 2.5em;
+  margin-top: 40px;
+  margin-right: 30px;
+}
+
+div#new-tweet, div#profile  {
+  float: right;
+  height: 2.5em;
+  margin-top: 40px;
+  margin-right: 5px;
+}
+
+div#profile img {
+  height: 1.5em;
+}
+
+input.submit {
+  border: none;
+  outline: none;
+  color: #FFF;
+  font-weight: 700;
+  text-decoration: none;
+  padding-top: 11px;
+  padding-bottom: 9px;
+  cursor: pointer;
+}
+
+div.button a {
+  color: #FFF;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+div.button-2 {
+  display: inline-block;
+  margin: none;
+  padding: none;
+}
+
+div.no-click div.button,
+div.no-click input.submit {
+  background-color: #666;
+}
+
+/*/////// FORM STYLING /////////*/
+
+td.textbox input[type="text"],
+td.textbox input[type="password"] {
+  padding: 5px;
+}
+
+td.textbox input[type="text"],
+td.textbox input[type="password"],
+div.write-tweet input[type="text"] {
+  border: 1px solid #666;
+  transition: box-shadow 0.3s, border 0.3s;
+  font-size: 1.2em;
+  font-family: 'Lato', 'Helvetica', sans-serif;
+}
+
+div.write-tweet input[type="text"] {
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.write-tweet input[type="text"]:focus, div.write-tweet input[type="text"].focus {
+  border: solid 1px #1DA1F2;
+  box-shadow: 0 0 5px 1px #1DA1F2;
+}
+
+/*//////// TWEET STYLING ///////*/
+
+div.tweet {
+  display: inline-block;
+  margin: 0 auto;
+  width: 100%;
+  border: 2px solid #666;
+  margin-bottom: 15px;
+  padding: 5px;
+  background-color: #fff;
+  text-align: left;
+}
+
+div.tweet div {
+  padding: 5px;
+  font-size: 1.2em;
+}
+
+div.tweet div.username {
+  font-weight: 700;
+}
+
+/*//////// FIXES ////////*/
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
+}

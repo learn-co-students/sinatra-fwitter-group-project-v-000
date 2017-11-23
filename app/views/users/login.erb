@@ -1,0 +1,37 @@
+<h1>Log in to your account</h1>
+
+<% if flash.has?(:success) %>
+  <div class="success-message">
+    <%= flash[:success] %>
+  </div>
+<% elsif flash.has?(:error) %>
+  <div class="error-message">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<form action="/login" method="post">
+  <table>
+    <tr>
+      <td class="col-1">
+        <label>Username:</label>
+      </td>
+      <td class="textbox">
+        <input type="text" name="username" id=":username">
+      </td>
+    </tr>
+    <tr>
+      <td class="col-1">
+        <label>Password: </label>
+      </td>
+      <td class="textbox">
+        <input type="password" name="password" id=":password">
+      </td>
+    </tr>
+  </table>
+  <p><input class="submit" type="submit" value="Log In" id="submit"></p>
+</form>
+
+<p>
+  <a href="/signup">Don't have an account? Create one here.</a>
+</p>

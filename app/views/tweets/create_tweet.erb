@@ -1,0 +1,18 @@
+<h1>What's happening?</h1>
+
+<% if flash.has?(:success) %>
+  <div class="success-message">
+    <%= flash[:success] %>
+  </div>
+<% elsif flash.has?(:error) %>
+  <div class="error-message">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<form action="/tweets" method="post">
+<div class="write-tweet">
+  <input type="text" name="content" value="" id=":content">
+</div>
+  <input class="submit" type="submit" value="Tweet" id="submit">
+</form>

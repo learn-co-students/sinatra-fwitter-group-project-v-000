@@ -1,0 +1,25 @@
+<h1>Welcome, <%= current_user.username %> </h1>
+
+<% if flash.has?(:success) %>
+  <div class="success-message">
+    <%= flash[:success] %>
+  </div>
+<% elsif flash.has?(:error) %>
+  <div class="error-message">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<p>
+  Here's the latest:
+</p>
+<% @tweets.each do |tweet| %>
+<div class="tweet">
+  <div class="username">
+    <a href="/users/<%= tweet.user.slug %>">@<%= tweet.user.username %></a>
+  </div>
+  <div class="tweet-text">
+      <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
+  </div>
+</div>
+<% end %>
