@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fwitter</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+  </head>
+<body>
+  <div id='main'>
+    <div class="main_display">
+      <h4> ------- Fwitter ------- </h4><br>
+      <%= yield %>
+    </div>
+  </div>
+  <footer>
+    <div class="main_display">
+    <p>The only place to Fwitter away your time!</p>
+    <form action="/tweets" method="GET">
+      <input type="submit" name="Home" id="Home" Value="Home">
+    </div>
+    </form>
+  </footer>
+</body>
+
+</html>
+
+
+
+<!--/Users/richardsteinbach/fi-dev/sinatra-fwitter-group-project-v-000/app/css-->
