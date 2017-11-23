@@ -1,0 +1,7 @@
+<h1>Edit this Tweet:</h1>
+
+<form action="/tweets/<%= @tweet.id %>" method="post">
+  <textarea name="content" rows="10" cols="50"><%= @tweet.content %></textarea>
+  <br>
+  <input type="submit" id="submit" value="Edit Tweet">
+</form>
