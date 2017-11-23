@@ -1,0 +1,14 @@
+<h1>Welcome, <%=@user.username %></h1>
+<h2>This page shows all tweets by all users.</h2>
+<% User.all.each do |u| %>
+  <%= "<h3><a href=\"users/"+u.slug+"\">"+u.username+"</a></h3>" %>
+  <%= if u.tweets==[] then "This user has no tweet yet." end %>
+  <%= "<ul>" %>
+  <% u.tweets.each do |t| %>
+     <%= "<li><a href=\"tweets/"+t.id.to_s+"\">"+t.content+"</a></li>" %>
+   <%= "</ul>" %>
+  <% end %>
+<% end %>
+
+<p><a href="/tweets/new">Make a new tweet</a></p>
+<p><a href="/logout">Logout</a></p>
