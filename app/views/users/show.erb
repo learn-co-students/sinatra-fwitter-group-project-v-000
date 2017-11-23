@@ -1,0 +1,8 @@
+<%= @user.inspect %>
+
+
+<h1>Welcome, <%= @user.username %></h1>
+
+<% @user.tweets.each do |tweet|%>
+  <li><%= tweet.content %></li>
+<% end %>
