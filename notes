@@ -1,0 +1,40 @@
+Migrations 
+1. users table ( username, email, password)
+2. tweets table ( content)
+
+1. User Model
+- has_many :tweets
+2. Tweet model 
+:belong_to :user
+** both ActiveRecord::Base inherit 
+
+
+Controller
+1. get home page with link to a login page and a signup page. get '/' - erb index
+
+2. get '/tweets/new'
+post '/tweets'
+erb show
+
+3. get '/tweets' - shows the tweets. erb show
+
+4. get '/tweets/:id/edit'
+post '/tweets/:id'
+erb show ( has an edit link)
+
+5. Delete tweet - post 'tweets/:id/delete' ** no form, just a delete button on the show page
+
+
+6. Sign up - get '/signup'
+post '/signup'
+*should log in the user and add the user_id to the sessions hash 
+*signup link on home page
+
+7. login - get '/login' - form to login
+post '/login'
+
+8. get '/logout' - clears session hash
+
+Helper methods:
+current_user
+is_logged_in
