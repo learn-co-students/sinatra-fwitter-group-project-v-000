@@ -1,0 +1,16 @@
+<h2><%=@user.username%> Page</h2>
+<%@user.tweets.reverse_each do |tweet|%>
+  <div class="content">
+    <p class="user">@<%=@user.username%></p>
+    <p><%=tweet.content%></p>
+    <%if @user == current_user%>
+      <div class="delete"><a class="options" href="/tweets/<%=tweet.id%>/edit">Edit</a> /<form class="options" action="/tweets/<%=tweet.id%>/delete" method="post">
+        <input type="hidden" id="hidden" name="_method" value="delete">
+        <input type="submit" class="button" value="Delete Tweet">
+      </form></div>
+    <%end%>
+  </div>
+<%end%>
+<a class="button" href="/tweets">All Tweets</a>
+<a class="button" href="/tweets/new">Tweet</a>
+<a class="button" href="/logout">Logout</a>
