@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fwitter</title>
+</head>
+	<body>
+	<nav>
+		<% if is_logged_in? %>
+		<a href="/tweets/new">Create a New Tweet</a>
+		<a href="/logout">Log Out</a>
+		<p>Welcome <%= current_user.username %></p>
+
+		<% else %>
+		Click <a href="/signup">HERE</a> to create a new account.
+		Click <a href="/login">HERE</a> to login to your account.
+		<% end %>
+	</nav>
+	<h1>Fwitter</h1>
+		<%= yield %>
+	</body>
+</html>
