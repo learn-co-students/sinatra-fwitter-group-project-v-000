@@ -1,0 +1,6 @@
+<h2>Here's all your tweets, <%=@user.username%></h2>
+
+<% binding.pry %>
+  <%@user.tweets.each do |tweet|%>
+  <h4><%=tweet.content%></h4>
+  <%end%>
