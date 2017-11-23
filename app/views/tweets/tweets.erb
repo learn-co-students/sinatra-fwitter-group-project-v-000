@@ -1,0 +1,10 @@
+<% if @tweets.empty? %>
+  <h2>Your feed is empty.</h2>
+<% else %>
+  <h2>Twitter Feed:</h2>
+  <% @tweets.each do |tweet| %>
+    <ul>
+      <li><%= tweet.content %></li>
+    </ul>
+  <% end %>
+<% end %>
