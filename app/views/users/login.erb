@@ -1,0 +1,19 @@
+<h2>Log In</h2>
+
+<%# Login form takes in username and password %>
+<form method="POST" action="/login">
+
+  <label for="username">Username</label>
+  <input type="text" id="username" name="username">
+  <br>
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password">
+  <br>
+
+  <input type="submit" value="submit">
+
+</form>
+
+<%# If the user doesn't have an account, they can sign up instead of logging in%>
+<p>Don't have an account yet? <a href="/signup">Sign up!</a></p>
