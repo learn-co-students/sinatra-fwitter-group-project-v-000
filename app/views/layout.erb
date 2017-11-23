@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+
+  <body>
+    <%= yield %>
+
+    <% if !!session[:id] %>
+      <a href="/tweets/new">Tweet!</a>
+      <br>
+      <a href="/tweets">All Tweets</a>
+      <br>
+      <a href="/logout">Log out</a>
+    
+    <% end %>
+  </body>
+</html>
