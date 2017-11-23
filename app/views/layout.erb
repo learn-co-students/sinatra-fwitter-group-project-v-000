@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fwitter</title>
+  </head>
+  <body>
+    <a href="/">Home</a>
+    <% if logged_in? %>
+    <a href="/tweets">My Tweets</a>
+    <a href="/tweets/new">New Tweet</a>
+    <a href="/logout">Log Out</a>
+    <% else %>
+    <a href="/login">Log In</a>
+    <a href="/signup">Sign Up</a>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
