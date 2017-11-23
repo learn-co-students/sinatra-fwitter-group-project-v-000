@@ -1,0 +1,15 @@
+<a href="/"><img src="https://farm2.staticflickr.com/1515/25704872810_fa439133c1_n.jpg"></a><br><br>
+
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
+<h1>Welcome, <a href="/users/<%=@user.slug%>"><%= current_user.username %>!</a></h1>
+
+<h2>Here are your latest tweets:</h2>
+<% Tweet.all.each do |tweet| %>
+  <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a> @<%=tweet.user.username%> · <%= tweet.created_at.to_datetime.in_time_zone('Eastern Time (US & Canada)').strftime("%b %d, %Y @%l:%M%p")%> -EST <br>
+<% end %>
+
+<br><br><a href="/tweets/new"><input type="submit" value="New Tweet"></a><br><br>
+<a href="logout"><input type="submit" value="Log Out"></a>

@@ -1,0 +1,16 @@
+<a href="/"><img src="https://farm2.staticflickr.com/1515/25704872810_fa439133c1_n.jpg"></a><br><br>
+
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
+<h1>Log in to Fwitter</h1>
+
+<form method="post" action='/login'>
+  Username: <input required type="text" id="username" name="username"><br><br>
+  Password: <input required type="password" id="password" name="password"><br><br>
+  <input type="submit" id="submit" value="Login">
+</form><br>
+
+Need an account?
+  <a href="signup"><input type="submit" value="Sign Up"></a>
