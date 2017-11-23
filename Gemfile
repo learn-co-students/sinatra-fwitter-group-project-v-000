@@ -10,7 +10,8 @@ gem 'thin'
 gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
-gem "tux"
+gem 'tux'
+gem 'rack-flash3'
 
 group :test do
   gem 'rspec'
@@ -18,3 +19,4 @@ group :test do
   gem 'rack-test'
   gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
 end
+gem 'learn-co'
