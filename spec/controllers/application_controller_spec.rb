@@ -60,7 +60,7 @@ describe ApplicationController do
     it 'does not let a logged in user view the signup page' do
       user = User.create(:username => "skittles123", :email => "skittles@aol.com", :password => "rainbows")
       params = {
-        :username => "skittles123",
+        :username => "skittles1234",
         :email => "skittles@aol.com",
         :password => "rainbows"
       }
