@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <link rel="stylesheet" type="text/css" href="/style.css">
+    </head>
+    <body>
+    <div class="body">
+      <div class="header">
+        <h1>Welcome, <%= current_user(session).username %></h1>
+      </div>
+      <div class="banner">
+        <h2>Tweets</h2>
+      </div>
+      <div class ="tweet_background">
+        <div class="tweets">
+          <% @tweets.all.each do |tweet| %>
+          <div class="tweet">
+            <p><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></p>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="footer">
+        <br>
+          <h3><center><a href="/tweets/new">Create a New Tweet</a></center></h3>
+        <br>
+        <h4><a href="/logout"><input type="submit" value="Log Out"></a></h4>
+      </div>
+    </div>
+  </body>
+  </html>
