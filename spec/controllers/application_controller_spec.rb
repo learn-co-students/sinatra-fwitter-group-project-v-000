@@ -178,6 +178,7 @@ describe ApplicationController do
     context 'logged out' do
       it 'does not let a user view the tweets index if not logged in' do
         get '/tweets'
+        
         expect(last_response.location).to include("/login")
       end
     end

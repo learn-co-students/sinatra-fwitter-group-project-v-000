@@ -1,0 +1,15 @@
+<div class="body-content">
+  <h2>Welcome, <%= current_user.username %></h2>
+  <h4>Tweets</h4>
+
+  <a href="/tweets/new" class="btn btn-default">Add Tweet</a>
+
+  <div class="tweets">
+    <ul>
+      <% @tweets.each do |tweet| %>
+        <li><%= tweet.user.username %></li>
+        <li><%= tweet.content %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
