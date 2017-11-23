@@ -1,0 +1,11 @@
+<h1>Tweets from <%= @user.username %></h1>
+<% if !@user.tweets.empty? %>
+<ul>
+  <% @user.tweets.each do |tweet| %>
+    <li><%= tweet.content %></li>
+  <% end %>
+</ul>
+<% else %>
+  <p>No tweets here.</P.
+<% end %>
+
