@@ -1,0 +1,16 @@
+<div class="blog-post">
+  <h2 class="blog-post-title"><%= @tweet.content %></h2>
+  <p class="blog-post-meta">@<%=User.find(@tweet.user_id).username%></p>
+</div><!-- /.blog-post -->
+
+<div class='row'>
+  <div class="col-xs-4">
+    <a href="/tweets/<%=@tweet.id%>/edit" class="btn btn-primary btn-block btn-sm" role="button">Edit Tweet</a>
+  </div>
+  <div class="col-xs-4">
+    <form method="post" action="/tweets/<%=@tweet.id%>/delete">
+      <input id="hidden" type="hidden" name="_method" value="delete">
+      <button type="submit" class="btn btn-danger btn-sm btn-block">Delete Tweet</button>
+    </form>
+  </div>
+</div>

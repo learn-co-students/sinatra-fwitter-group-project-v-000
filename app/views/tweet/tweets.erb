@@ -1,0 +1,6 @@
+<% @tweets.each do |tweet| %>
+  <div class="blog-post">
+    <h2 class="blog-post-title"><a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a></h2>
+    <p class="blog-post-meta">@<%=User.find(tweet.user_id).username%></p>
+  </div><!-- /.blog-post -->
+<% end %>
