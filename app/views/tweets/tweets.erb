@@ -1,0 +1,8 @@
+<% if logged_in? %>
+  <h3>Welcome, <%= current_user.username %></h3>
+<% end %>
+<h1>Here's the latest</h1>
+<% Tweet.all.each do |tweet| %>
+  <p><%= tweet.user.username %></p>
+  <h5><%= tweet.content %></h5>
+<% end %>
