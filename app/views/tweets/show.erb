@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Show A Tweet</title>
+  </head>
+  <body>
+    <h2><%= @tweet.content %></h2>
+
+    <br />
+
+    <a href="/tweets/<%= @tweet.id %>/edit"><input type="button" value="Edit Tweet"></a>
+
+    <br /><br />
+
+    <form action="/tweets/<%= @tweet.id %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value="Delete Tweet">
+    </form>
+  </body>
+</html>
