@@ -12,19 +12,19 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb :'user/create_user'
+    erb :'users/create_user'
   end
 
   get '/login' do
-    erb :'user/login'
+    erb :'users/login'
   end
 
   get '/logout' do
     erb :index
   end
 
-  get '/show' do
-    erb :'user/show'
+  get '/tweets' do
+    erb :'tweets/tweets'
   end
 
   get '/tweets/new' do
@@ -43,26 +43,23 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    user = User.new(:username => params[:username], :password => params[:password])
-
-    if user.save
-      if user && user.authenticate(params[:password])
-        session[:user_id] = user.id
-        redirect "/show"
-      else
-        redirect "/"
-      end
-       redirect "/show"
+    user = User.new(:username => params[:username], :password => params[:password], :email => params[:email])
+    user.save
+    binding.pry
+    if user(:username) != nil && user(:password) != nil && user(:email) != nil &&
+      session[:user_id] = user.id
+      redirect to "/tweets"
     else
-       redirect "/signup"
+      redirect to "/signup"
     end
+
   end
 
   post '/login' do
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect "/show"
+      redirect "/"
     else
       redirect "/"
     end
