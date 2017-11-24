@@ -23,6 +23,10 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  get '/show' do
+    erb :'user/show'
+  end
+
   get '/tweets/new' do
 
     erb :"tweet/create_tweet"
@@ -39,11 +43,29 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    redirect to
+    user = User.new(:username => params[:username], :password => params[:password])
+
+    if user.save
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        redirect "/show"
+      else
+        redirect "/"
+      end
+       redirect "/show"
+    else
+       redirect "/signup"
+    end
   end
 
   post '/login' do
-    redirect to
+    user = User.find_by(:username => params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect "/show"
+    else
+      redirect "/"
+    end
   end
 
   post '/tweets' do
@@ -55,4 +77,13 @@ class ApplicationController < Sinatra::Base
     redirect to "tweets/show"
   end
 
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
+    end
+  end
 end
