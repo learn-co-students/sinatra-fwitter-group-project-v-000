@@ -54,8 +54,6 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/users/:slug" do
-
-      
       @user = User.find_by_slug(params[:slug])
       erb :'users/show'
 
@@ -73,7 +71,7 @@ class ApplicationController < Sinatra::Base
   get '/tweets/:id/edit' do
     if logged_in?
       @tweet = Tweet.find_by(id: params['id'])
-      erb :"tweet/edit_tweet"
+      erb :"tweets/edit_tweet"
     else
       redirect to 'login'
     end
@@ -117,7 +115,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets/:id'do
+  
     @tweet = Tweet.find_by(id: params['id'])
+    @tweet.content = params['content']
+    @tweet.save
     redirect to "tweets/show"
   end
 
