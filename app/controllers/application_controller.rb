@@ -115,17 +115,26 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets/:id'do
-  
-    @tweet = Tweet.find_by(id: params['id'])
-    @tweet.content = params['content']
-    @tweet.save
-    redirect to "tweets/show"
+    if params['content'] == ""
+      redirect to "/tweets/#{params['id']}/edit"
+    else
+      @tweet = Tweet.find_by(id: params['id'])
+      @tweet.content = params['content']
+      @tweet.save
+      redirect to "/tweets"
+    end
   end
 
   post '/tweets/:id/delete' do
-    binding.pry
-    Tweet.find_by(id: params['id']).delete
-    redirect to '/tweets'
+    
+    tweet = Tweet.find_by(id: params['id'])
+    if tweet.user_id == session[:user_id]
+      tweet.delete
+      tweet.save
+      redirect to '/tweets'
+    else
+      redirect to '/tweets'
+    end
   end
 
 
