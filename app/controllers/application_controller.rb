@@ -5,6 +5,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "password_security"
   end
 
   get '/' do
@@ -12,24 +14,49 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb :'users/create_user'
+
+    if logged_in?
+      redirect to "/tweets"
+    else
+      erb :'users/create_user'
+    end
   end
 
   get '/login' do
-    erb :'users/login'
+    if logged_in?
+      redirect to '/tweets'
+    else
+      erb :'users/login'
+    end
   end
 
   get '/logout' do
-    erb :index
+    session.clear
+    redirect to '/login'
   end
 
   get '/tweets' do
-    erb :'tweets/tweets'
+
+    if logged_in?
+      @user = User.find(session[:user_id])
+      erb :'tweets/tweets'
+    else
+      redirect to '/login'
+    end
   end
 
   get '/tweets/new' do
 
-    erb :"tweet/create_tweet"
+    if logged_in?
+      erb :"tweets/create_tweet"
+    else
+      redirect to "/login"
+    end
+  end
+
+  get "/users/:slug" do
+    @user = User.find_by_slug(params[:slug])
+    erb :'users/show'
   end
 
   get '/tweets/:id' do
@@ -43,11 +70,13 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    user = User.new(:username => params[:username], :password => params[:password], :email => params[:email])
-    user.save
-    binding.pry
-    if user(:username) != nil && user(:password) != nil && user(:email) != nil &&
-      session[:user_id] = user.id
+
+    @user = User.new(:username => params[:username], :password => params[:password], :email => params[:email])
+    @user.save
+
+    if @user.save
+
+      session[:user_id] = @user.id
       redirect to "/tweets"
     else
       redirect to "/signup"
@@ -56,17 +85,25 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    user = User.find_by(:username => params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect "/"
+
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect to '/tweets'
     else
-      redirect "/"
+      redirect to "/login"
     end
   end
 
   post '/tweets' do
-    redirect to "tweets/show"
+    if params[:content] != ""
+      tweet = Tweet.create(content: params[:content])
+      tweet.user_id = session[:user_id]
+      tweet.save
+      redirect to "tweets/show"
+    else
+      redirect to 'tweets/new'
+    end
   end
 
   post '/tweets/:id'do

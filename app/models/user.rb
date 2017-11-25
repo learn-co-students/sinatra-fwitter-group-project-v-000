@@ -1,5 +1,21 @@
 class User < ActiveRecord::Base
-  validates :username, presence: true
+  validates_presence_of :username, :email
   has_secure_password
   has_many :tweets
+
+  def slug
+    slug = self.username.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+  end
+
+  def self.find_by_slug(slug)
+    sluged_user = ""
+
+    self.all.each do |user|
+      if user.slug == slug
+         sluged_user = artist
+      end
+
+    end
+      sluged_user
+  end
 end
