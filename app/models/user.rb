@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
     self.all.each do |user|
       if user.slug == slug
-         sluged_user = artist
+         sluged_user = user
       end
 
     end
