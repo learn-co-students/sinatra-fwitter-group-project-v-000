@@ -1,0 +1,18 @@
+<%=session[:user_id]%>
+
+<br/>
+Welcome, <%=@user.username%>
+
+Here are all your tweets:
+
+<%Tweet.all.each do |tweet|%>
+<%=tweet.content%><br/>
+<%end%>
+
+<br/>
+Create a New Tweet!
+<form method="POST" action="/tweets">
+  Content<input type="text" name="content">
+  <input type="submit" value="submit">
+</form>
+<a href="/logout">Logout</a>
