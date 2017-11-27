@@ -3,6 +3,7 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
+    # enable sessions to check current user
     enable :sessions unless test?
     set :session_secret, 'super_secret_phrase'
     set :public_folder, 'public'
@@ -20,10 +21,12 @@ class ApplicationController < Sinatra::Base
       !!current_user
     end
 
+    # Find the current_user by finding their session[:user_id] if one exists #
     def current_user
       @current_user = User.find(session[:user_id]) if session[:user_id]
     end
 
+    # Logout method to clear the session #
     def logout!
       session.clear
     end

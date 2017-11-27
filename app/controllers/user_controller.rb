@@ -1,5 +1,6 @@
 class UserController < ApplicationController
 
+  # If not logged_in? Load Signup form, else load user tweets page #
   get '/signup' do
     if !logged_in?
       erb :'/users/create_user'
@@ -8,6 +9,7 @@ class UserController < ApplicationController
     end
   end
 
+  # If: any empty fields => load /signup again. Else: Create the user with params, assign session[:user_id] to user, load /tweets #
   post '/signup' do
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect '/signup'
@@ -18,6 +20,7 @@ class UserController < ApplicationController
     end
   end
 
+  # If logged_in? redirect to /tweets, otherwise redirect to /login #
   get '/login' do
     if logged_in?
       redirect '/tweets'
@@ -26,6 +29,7 @@ class UserController < ApplicationController
     end
   end
 
+  # Find user by username, if exists && password is authenticated, assign session[:user_id] to user, load /tweets. Else: load /login #
   post '/login' do
     @user = User.find_by(username: params[:username])
 
@@ -37,11 +41,13 @@ class UserController < ApplicationController
     end
   end
 
+  # Find user by slugified name, display show page #
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     erb :'/users/show'
   end
 
+  # If logged_in?: Logout, redirect to /login. Else redirect to index #
   get '/logout' do
     if logged_in?
       logout!
