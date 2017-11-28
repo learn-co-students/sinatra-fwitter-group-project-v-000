@@ -1,0 +1,5 @@
+<h1> Welcome, Hannah</h1>
+<label><h4> Here are your tweets: <h4></label>
+  <li><%@user.tweets.each do |tweet|%>
+    <label><%=tweet.content%></label>
+    <%end%>
