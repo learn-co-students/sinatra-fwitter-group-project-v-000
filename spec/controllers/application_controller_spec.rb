@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe ApplicationController do
 
@@ -369,6 +370,7 @@ describe ApplicationController do
 
     context "logged out" do
       it 'does not load let user view tweet edit form if not logged in' do
+        #binding.pry
         get '/tweets/1/edit'
         expect(last_response.location).to include("/login")
       end
