@@ -4,6 +4,10 @@ class TweetsController < ApplicationController
     erb :'/tweets/create_tweet'
   end
 
+  get '/tweets' do
+    erb :'/tweets/tweets'
+  end
+
   post '/tweets' do
     @tweet = Tweet.create(params[:tweet])
     @tweet.save
