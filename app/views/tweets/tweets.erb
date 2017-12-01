@@ -1,0 +1,16 @@
+<header>
+  <div align= "right">
+    <a href="/tweets/new"><input type="button" value="Create Tweet" /></a>
+    <a href="/logout"><input type="button" value="Log Out" /></a>
+  </div>
+</header>
+
+<p>Welcome, <%=@user.username%></p>
+
+<h2>Tweets</h2>
+
+<% @tweets.each do |tweet| %>
+  <div>
+    <%= tweet.content %>
+  </div>
+<% end %>

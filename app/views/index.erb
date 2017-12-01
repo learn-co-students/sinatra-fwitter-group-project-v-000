@@ -1,0 +1,21 @@
+<header>
+  <div align= "right">
+    <!-- if the user is currently logged in, they can create tweet or logout -->
+    <% if session[:user_id] != nil %>
+      <a href="/tweets/new"><input type="button" value="Create Tweet" /></a>
+      <a href="/logout"><input type="button" value="Log Out" /></a>
+      <div align= "left">
+        <a>You are logged in as <%=@user.username%>.</a><br>
+      </div>
+
+    <!-- If the user is not logged in, they can sign in or create an account -->
+    <% else %>
+      <a href="/signup"><input type="button" value="Sign Up" /></a>
+      <a href="/login"><input type="button" value="Log In" /></a>
+    <%end%>
+  </div>
+</header>
+
+<div style="text-align: center">
+  <h2>Welcome to Fwitter</h2>
+</div>
