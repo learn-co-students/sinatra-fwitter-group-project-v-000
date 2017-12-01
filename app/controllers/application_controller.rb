@@ -27,8 +27,9 @@ class ApplicationController < Sinatra::Base
       if params[:username] == "" || params[:password] == "" || params[:email] == ""
         redirect "/signup"
       else
-        user = User.new(:username => params[:username], :password => params[:password])
-        user.save
+        @user = User.new(:username => params[:username], :password => params[:password])
+        @user.save
+        session[:user_id] = @user.id
         redirect "/tweets"
      end
     end
@@ -49,10 +50,10 @@ class ApplicationController < Sinatra::Base
     end
 
     post "/login" do
-      user = User.find_by(:username => params[:username])
+      @user = User.find_by(:username => params[:username])
 
-      if user && user.authenticate(params[:password])
-          session[:user_id] = user.id
+      if @user && @user.authenticate(params[:password])
+          session[:user_id] = @user.id
           redirect "/show"
       else
           redirect "/signup"
@@ -65,17 +66,44 @@ class ApplicationController < Sinatra::Base
         redirect "/login"
       else
         session.clear
-        redirect "/login"
+        redirect "/"
       end
     end
 
-    get '/tweets' do
+    get '/tweets/new' do
       erb :'/tweets/create_tweet'
     end
 
     post '/tweets' do
      Tweet.create(content: params[:content])
      redirect '/tweets'
+    end
+
+    get '/tweets' do
+      @tweets = Tweet.all
+      erb :'/tweets/tweets'
+    end
+
+    get '/tweets/:id'do
+     @tweet = Tweet.find(params[:id])
+     erb :'tweets/show_tweet'
+    end
+
+    get '/tweets/:id/edit' do
+     @tweet = Tweet.find(params[:id])
+     erb :'tweets/edit_tweet'
+    end
+
+    patch '/tweets/:id' do
+     @tweet = Tweet.find(params[:id])
+     @tweet.update(content: params[:content])
+     redirect "/tweets/#{params[:id]}"
+    end
+
+    delete '/tweets/:id/delete' do
+      @tweet = Tweet.find(params[:id])
+      @tweet.delete
+      erb :delete
     end
 
     helpers do
@@ -87,6 +115,8 @@ class ApplicationController < Sinatra::Base
         User.find(session[:user_id])
       end
     end
+
+
 
 
 end
