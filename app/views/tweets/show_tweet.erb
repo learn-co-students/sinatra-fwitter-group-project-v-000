@@ -4,6 +4,6 @@
 <br></br>
 
 <form action= '/tweets/<%= @tweet.id %>/delete' method= "POST">
-  <!-- <input id="hidden" type="hidden" name="_method" value="DELETE"> -->
-  <button type= "submit" name= "Delete Tweet" id= "Delete Tweet" value= "Delete Tweet"></button>
+  <input name="_method" type="hidden" value="delete">
+  <input type= "submit" value= "Delete Tweet">
 </form>
