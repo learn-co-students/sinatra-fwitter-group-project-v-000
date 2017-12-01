@@ -1,0 +1,5 @@
+<h1>Welcome <%=@user.username%></h1>
+<%@tweets.each.with_index(1) do |tweet, index|%>
+<h2>index. </h2><h2><%=tweet.content%></h2><br>
+<%end%>
+
