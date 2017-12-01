@@ -1,25 +1,26 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    if !Helpers.is_logged_in?(session)
+    if !is_logged_in?
       erb :'/users/create_user'
     else
-      erb :'/tweets'
+      redirect to '/tweets'
     end
   end
 
   post '/signup' do
-    if !(params[:username]).empty? && !(params[:email]).empty? && !(params[:password]).empty?
+    if (params[:username]).empty? || (params[:email]).empty? || (params[:password]).empty?
+      redirect to '/signup'
+    else
       @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
       @user.save
+      session[:user_id] = @user.id
       redirect to '/tweets'
-    else
-      redirect to '/'
     end
   end
 
   get '/login' do
-    if !Helpers.is_logged_in?(session)
+    if !is_logged_in?
       erb :'/users/login'
     else
       redirect to '/tweets'
