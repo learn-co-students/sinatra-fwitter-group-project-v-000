@@ -1,0 +1,10 @@
+<h1>Welcome, </h1>
+
+<%Tweet.all.each.with_index do |tweet, index|%>
+<h2><%=index%>. </h2><h2><%=tweet.content%></h2><br><br>
+<%end%>
+
+
+<br><br>
+<input type="submit" value="submit">
+<a href="/logout"><input type="submit" value="Logout"></a>
