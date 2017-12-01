@@ -1,0 +1,22 @@
+<header>
+  <div align= "right">
+    <a href="/tweets/new"><input type="button" value="Create Tweet" /></a>
+    <a href="/logout"><input type="button" value="Log Out" /></a>
+  </div>
+</header>
+
+You are logged in as <%= @user.username %>
+
+<h2>All of your Tweets</h2>
+
+<% @user.tweets.each do |tweet| %>
+  <div>
+    <%= tweet.content %>
+  </div>
+<% end %>
+
+<br>
+
+<form action="/tweets">
+  <input type="submit" value="Home Timeline"/>
+</form>
