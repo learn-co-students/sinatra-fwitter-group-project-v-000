@@ -35,6 +35,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
+    @tweets = Tweet.all
 
   end
 
@@ -43,7 +44,14 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets' do
+    @tweet = Tweet.create(params)
+    redirect to "/tweets/#{@tweet.id}"
+  end
 
+  get '/tweets/:id' do
+    binding.pry
+    @tweet = Tweet.find_by_id(params[:id])
+    erb :'/tweets/show_tweet'
   end
 
 
