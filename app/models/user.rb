@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :tweets
+  validates_presence_of :username, :password, :email
+  has_secure_password
 
   def slug
     self.username.gsub(" ", "-").downcase
@@ -9,5 +11,4 @@ class User < ActiveRecord::Base
     self.all.find{ |instance| instance.slug == slug }
   end
 
-  has_secure_password
 end

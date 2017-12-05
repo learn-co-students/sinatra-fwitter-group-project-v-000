@@ -21,13 +21,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
+    @user = User.new(params)
 
-    if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
-      user = User.new(params)
-    else
-      redirect to '/signup'
-    end
-    if user.save
+    if @user.save
+      session[:user_id] = @user.id
       redirect to '/tweets'
     else
       redirect to '/signup'
@@ -35,8 +32,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
+    if !logged_in?
+      redirect to '/login'
+    end
     @tweets = Tweet.all
-
+    erb :'tweets/tweets'
   end
 
   get '/tweets/new' do
@@ -44,16 +44,39 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets' do
+
     @tweet = Tweet.create(params)
+    @tweet.user = current_user
     redirect to "/tweets/#{@tweet.id}"
   end
 
   get '/tweets/:id' do
-    binding.pry
     @tweet = Tweet.find_by_id(params[:id])
     erb :'/tweets/show_tweet'
   end
 
+  get '/login' do
+    if logged_in?
+      redirect to '/tweets'
+    end
+    erb :'users/login'
+  end
+
+  post '/login' do
+    user = User.find_by(:username => params[:username])
+
+    if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        redirect "/tweets"
+    else
+        redirect "/login"
+    end
+  end
+
+  get '/logout' do
+    session.clear
+    redirect to '/login'
+  end
 
 
 
