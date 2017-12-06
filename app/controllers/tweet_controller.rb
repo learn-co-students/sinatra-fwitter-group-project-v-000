@@ -17,16 +17,33 @@ class TweetController < ApplicationController
   end
 
   post '/tweets' do
-
     @tweet = Tweet.create(params)
-    @tweet.user_id = current_user
-    @tweet.save
-    redirect to "/tweets/#{@tweet.id}"
+    @tweet.user = current_user
+    if @tweet.save
+      redirect to "/tweets"
+    else
+      redirect to "/tweets/new"
+    end
   end
 
   get '/tweets/:id' do
     @tweet = Tweet.find_by_id(params[:id])
     erb :'/tweets/show_tweet'
+  end
+
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if logged_in?
+      erb :'/tweets/edit_tweet'
+    else
+      redirect to '/login'
+    end
+  end
+
+  post '/tweets/:id/edit' do
+    @tweet = Tweet.find_by_id(params[:id])
+    @tweet.content = params["content"]
+    redirect to '/tweets/:id'
   end
 
 end
