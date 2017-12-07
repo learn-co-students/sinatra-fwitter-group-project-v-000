@@ -1,0 +1,13 @@
+<article class="pa4 black-80">
+  <form action="/tweets/<%= @tweet.id %>" method="post" accept-charset="utf-8">
+    <input type="hidden" name="_method" value="patch">
+      <div class="mt3">
+        <label class="db fw4 lh-copy f6" for="content">Edit Tweet content</label>
+        <input class="pa2 input-reset ba bg-transparent w-100 measure" type="text" name="content"  id="content" value="<%= @tweet.content %>">
+      </div>
+    </fieldset>
+    <div class="mt3">
+      <input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6" type="submit" value="submit">
+    </div>
+  </form>
+</article>
