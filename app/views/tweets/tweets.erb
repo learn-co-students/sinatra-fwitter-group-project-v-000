@@ -1,0 +1,8 @@
+<h1 class="f4 bold center mw5">Welcome, <%= current_user.username %></h1>
+<div class="pa3 pa5-ns">
+  <ul class="list pl0 measure center">
+    <% @tweets.each do |tweet| %>
+    <li class="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30"><a href="/tweets/<%= tweet.id %>" class="f4 fw6 db black link hover-hot-pink"><%= tweet.content %></a></li>
+    <% end %>
+  </ul>
+</div>

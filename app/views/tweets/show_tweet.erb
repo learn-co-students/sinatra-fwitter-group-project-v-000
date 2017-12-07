@@ -1,0 +1,8 @@
+<div class="tc pb3">
+  <p class="fl w-100 pa2"><%= @tweet.content %></p>
+  <a href="/tweets/<%= @tweet.id %>/edit"><input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Edit Tweet"></a><br>
+  <form action="/tweets/<%= @tweet.id %>/delete" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <a href="/delete"><input class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" type="submit" value="Delete Tweet"></a>
+  </form>
+</div>
