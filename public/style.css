@@ -1,0 +1,15 @@
+h1  {
+  text-align: center;
+}
+
+form {
+  text-align: center;
+}
+
+div.form {
+  text-align: none;
+}
+
+ul {
+  list-style-type:square;
+}
