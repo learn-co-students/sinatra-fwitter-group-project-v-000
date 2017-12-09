@@ -1,4 +1,7 @@
-Wow, just setting up folders and creating migrations takes awhile 
+Wow, just setting up folders and creating migrations takes awhile
+DONE, haven't yet done views, and then there's the login/sessions, looking at older labs
+
+Just keep working through one step at a time. 
 
 1. login/logout
   -- GET to /login and get login form

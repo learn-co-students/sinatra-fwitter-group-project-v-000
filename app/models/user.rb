@@ -5,5 +5,8 @@ class User
   end
 
   def find_by_slug
-  end 
+  end
+
+  def has_secure_password
+  end
 end
