@@ -1,4 +1,4 @@
-require './config/environment'
+# require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
@@ -13,16 +13,17 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+# SENDS signup form
   get '/registration/signup' do
     erb :signup
   end
 
+# POSTS sign up form and CREATES user
   post '/registration/signup' do
-    CREATES user
-    @user = User.create(name: params[:username], email: params[:email]), password: params[:password]
+    @user = User.create(name: params[:username], email: params[:email], password: params[:password])
     session[:id] = @user.id
     redirect to erb :"/twitter/index"
-
+  end
 end
 
 
