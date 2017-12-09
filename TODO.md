@@ -66,18 +66,36 @@
 
   #### Show Tweet
 
+    - `/tweets/:id` display the info of a single tweet
+
   #### Edit Tweet
+    - `/tweets/:id/edit` loads the edit form
+    - `/tweets/:id` form submission via POST
+    - create an edit link on the tweet show page
 
   #### Delete Tweet
+    - one controller is need to delete a tweet
+    - just a submit button is needed
+    - the form submits to POST `tweets/:id/delete`
 
   #### Sign Up
+    - 2 controllers
+    - Make sure you add the Signup link to the home page
+    - one to display the user signup
+      GET `/signup`
+    controller action that processes the form submission should create the user and save it to the database.
+      - The signup action should also log the user in and add the user_id to the sessions hash.
+    - one to process the form submission
 
   #### Log In
+     - You'll need two more controller actions
+      - display the form to log in
+      - one to log add the `user_id` to the sessions hash
+      - The form to login should be loaded via a GET   request to `/login` and submitted via a POST request to `/login`
 
   #### Log Out
+    - You'll need to create a controller action to process a GET request to /logout to log out. The controller action should clear the session hash
 
   #### Protecting The Views
-    - creating helper methods
-
-
- > Sinatra::Base is this a namespace of Sinatra gem or SinatraActiveRecord gem ?
+    - create two helper methods `current_user` and `logged_in?` (no one can create, read, edit or delete any tweets)
+    **Use these helper methods to block content if a user is not logged in**
