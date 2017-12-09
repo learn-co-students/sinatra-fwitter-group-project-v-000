@@ -1,0 +1,22 @@
+Wow, just setting up folders and creating migrations takes awhile 
+
+1. login/logout
+  -- GET to /login and get login form
+  -- POST to /login to submit login form
+  -- GET to /logout -- clear the session hash
+2. current_user and logged_in?
+3. only user can edit their own tweets
+4. Signup
+  -- Put signup link on homepage
+  -- GET to get the form /signup. log in user, add user_id to sessions hash
+  -- POST to /signup submit -- this should create the user and save to db
+
+5.
+
+5. edit -- two actions
+  -- GET /tweets/:id/edit
+  -- POST /tweets/:id
+  -- put edit link on tweet show page
+
+6. delete POST to tweets/:id/delete
+  -- the form should be on the tweet show page. No fields, just a button.
