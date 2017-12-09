@@ -9,4 +9,17 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "wubbawubba"
   end
 
+  get '/' do
+    erb :index
+  end
+
+  get '/signup' do
+    erb :'users/create_user'
+  end
+
+  post '/signup' do
+    
+
+  end
+
 end
