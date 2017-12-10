@@ -3,6 +3,7 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   helpers SessionHelpers
+  
   enable :sessions
   set :session_secret, "secret"
   use Rack::Flash
@@ -26,7 +27,7 @@ class ApplicationController < Sinatra::Base
 # POSTS sign up form and CREATES user
   post '/registrations/signup' do
 
-    if params[:username] == "" || params[:email] == "" ||  params[:password] == "" 
+    if params[:username] == "" || params[:email] == "" ||  params[:password] == ""
       redirect to '/registrations/signup'
     else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
