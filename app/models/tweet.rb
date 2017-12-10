@@ -1,4 +1,4 @@
-class Tweet
-  belongs_to :User
+class Tweet < ActiveRecord::Base
+  belongs_to :user
 
 end

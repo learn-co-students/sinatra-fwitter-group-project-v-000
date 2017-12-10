@@ -12,6 +12,9 @@ gem 'pry'
 gem 'bcrypt'
 gem "tux"
 gem "require_all"
+gem "sinatra-flash"
+gem "rack-flash3", :require => "rack-flash"
+
 
 group :test do
   gem 'rspec'

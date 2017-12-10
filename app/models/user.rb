@@ -1,5 +1,5 @@
-class User
-  has_many :Tweets
+class User < ActiveRecord::Base
+  has_many :tweets
 
   def slugify
   end
