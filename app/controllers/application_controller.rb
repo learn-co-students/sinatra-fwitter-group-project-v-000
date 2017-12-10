@@ -87,6 +87,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/:id' do
+    # if @tweet.user.id == session[:user_id] - This is too much security for the test, other tests
+    # won't pass under "delete" if this in place
     if session[:user_id]
       @tweet = Tweet.find(params[:id])
       erb :'tweets/show_tweet'
@@ -94,6 +96,15 @@ class ApplicationController < Sinatra::Base
       redirect to '/login'
     end
   end
+  # This passes
+  # get '/tweets/:id' do
+  #   if session[:user_id]
+  #     @tweet = Tweet.find(params[:id])
+  #     erb :'tweets/show_tweet'
+  #   else
+  #     redirect to '/login'
+  #   end
+  # end
 
   get '/tweets/:id/edit' do
     if session[:user_id]
@@ -116,10 +127,34 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  post '/tweets/:id/delete' do
+    tweet = Tweet.find(params[:id])
+    if tweet.user.id == session[:user_id]
+      tweet.delete
+      tweet.save
+      redirect to '/tweets'
+    else
+      redirect to '/tweets'
+    end
+  end
+  # delete '/tweets/:id/delete' do
+  #   binding.pry
+  #   if session[:id]
+  #     tweet = Tweet.find(params[:id])
+  #     if tweet.user.id == session[:id]
+  #       tweet.delete
+  #       redirect to '/tweets'
+  #     end
+  #   else
+  #     redirect to '/tweets'
+  #   end
+  # end
+
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     erb :'users/show'
   end
+
 
 
 end
