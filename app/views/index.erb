@@ -3,12 +3,12 @@
 
 <ul>
   <li><a href="/">Home</a></li>
-    <% if is_logged_in? %>
+    <% if is_logged_in?(session) %>
       <li><a href="/sessions/logout">Logout</a> </li>
       <li><a href="/tweets/new">New Tweet</a> </li>
 
     <% else %>
       <li><a href="/sessions/login">Login</a> </li>
       <li><a href="/registrations/signup">Signup</a> </li>
-
+    <% end %>
 </ul>

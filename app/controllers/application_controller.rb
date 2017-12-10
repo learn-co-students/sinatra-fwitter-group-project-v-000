@@ -3,7 +3,7 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   helpers SessionHelpers
-  
+
   enable :sessions
   set :session_secret, "secret"
   use Rack::Flash
@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
 
 # SENDS signup form
   get '/registrations/signup' do
-    redirect to "/tweets" if is_logged_in?
+    redirect to "/tweets" if is_logged_in?(session)
     erb :'/registrations/signup'
   end
 
@@ -32,7 +32,7 @@ class ApplicationController < Sinatra::Base
     else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
-      session[user_id] = @user.id
+      session[:id] = @user.id
       redirect to '/tweets/index'
     end
   end
@@ -42,9 +42,11 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/sessions/login' do
-    @user = User.find_by(username: params["username"], password: params["password"])
+    @user = User.find_by(username: params["username"])
+      # , password: params["password"])
+  
 
-    if @user && @user.authenticate(params[:password])
+    if @user && @user.authenticate(params["password"])
 
       session[:user_id] = @user.id
       redirect 'tweets/index' # or users/index
