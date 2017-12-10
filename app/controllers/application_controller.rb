@@ -99,7 +99,7 @@ class ApplicationController < Sinatra::Base
      end
   end
 
-  post '/tweets/:id' do
+  patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
     if params[:content] != ""
       @tweet.update(content: params[:content])
@@ -109,7 +109,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  post '/tweets/:id/delete' do
+  delete '/tweets/:id/delete' do
      @tweet = Tweet.find(params[:id])
        if current_user == tweet.user
          @tweet.delete

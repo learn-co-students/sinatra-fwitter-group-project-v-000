@@ -1,4 +1,4 @@
-<h2>Your tweet:</h2>
+<h2>Your tweet, <%= @user.username %>:</h2>
 <%@user.tweets.each do |tweet|%>
  <%=tweet.content%><br/>
 <%end%>
