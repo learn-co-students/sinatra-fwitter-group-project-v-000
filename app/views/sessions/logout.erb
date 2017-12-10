@@ -1,0 +1,10 @@
+<h2>Logout Page </h2>
+<h3> "Welcome, <%=@user.name%>!"</h3>
+
+ <form  action="/sessions/logout" method="POST">
+   <input type="text" value="Logout">
+ </form>
+
+
+<!-- can also be a link, since no data is being transferred:
+<a href="/sessions/logout">Log Out</a> -->

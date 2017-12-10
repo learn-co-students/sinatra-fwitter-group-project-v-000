@@ -1,0 +1,14 @@
+<h2>Tweets Index Page </h2>
+<h2>Tweets from <%= #{current_user.name} %> </h2>
+
+<ul>
+	<% @tweets.each do |tweet| %>
+		<div>
+      <%= tweet.content %>
+    </div>
+	<%end%>
+</ul>
+
+
+<h3><a href="/tweets/new"></a>Create</h3>
+<h3><a href="/tweets/edit"></a>Edit</h3>
