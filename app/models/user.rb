@@ -18,7 +18,11 @@ class User < ActiveRecord::Base
     def has_secure_password
     end
 
-    def is_logged_in?
-      user.id = sessions[:id]
+    def is_logged_in?(session)
+      !!sessions[:id]
+    end
+
+    def current_user(session)
+      User.find_by_id(session[:id])
     end
 end

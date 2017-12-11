@@ -30,21 +30,26 @@ class ApplicationController < Sinatra::Base
     if params[:username] == "" || params[:email] == "" ||  params[:password] == ""
       redirect to '/registrations/signup'
     else
+      if current_user
+        redirect to '/tweets/index'
+      else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
-      @user.save
+      @user.save # or @user.save!
       session[:id] = @user.id
       redirect to '/tweets/index'
+      end
     end
   end
+  
 #SHOW LOGIN form
   get '/sessions/login' do
     erb :'sessions/login'
   end
 
+#PULL IN data from login form
   post '/sessions/login' do
-    @user = User.find_by(username: params["username"])
-      # , password: params["password"])
-  
+    @user = User.find_by_username(params["username"])
+      # , password: params["password"])-- no, bec password_diest
 
     if @user && @user.authenticate(params["password"])
 
