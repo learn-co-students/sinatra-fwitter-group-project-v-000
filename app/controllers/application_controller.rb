@@ -10,7 +10,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    if logged_in?
+      user = User.find(current_user.id)
+      redirect to "/users/#{user.slug}"
+    else
+      erb :index
+    end
   end
 
   get '/signup' do
@@ -60,7 +65,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     if logged_in?
-      @user = User.find(session[:user_id])
+      @user = User.find(current_user.id)
       erb :'tweets/tweets'
     else
       redirect to "/login"
@@ -69,7 +74,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/new' do
     if logged_in?
-      @user = User.find(session[:user_id])
+      @user = User.find(current_user.id)
       erb :'tweets/create_tweets'
     else
       redirect to '/login'
@@ -78,7 +83,7 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets' do
     if params[:content] != ""
-      user = User.find(session[:user_id])
+      user = User.find(current_user.id)
       tweet = Tweet.create(content: params[:content])
       user.tweets << tweet
       redirect to "tweets/#{tweet.id}"
@@ -87,8 +92,8 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-# # This works but causes a later error in the "delete", because the tests expect a delete button even
-# # if a different user is logged in:
+# This works at first but causes a later error in the "delete" tests, because the tests
+# expect a delete button even if a different user is logged in:
 #   get '/tweets/:id' do
 #     @tweet = Tweet.find(params[:id])
 #     if logged_in? && current_user.id == @tweet.user.id
@@ -107,9 +112,25 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+
+  # Tests under "logged out" will not pass with this, even though it appears to work functionality-wise
+  #  get '/tweets/:id/edit' do
+  #   @tweet = Tweet.find(params[:id])
+  #   if logged_in?
+  #     @user = User.find(current_user.id)
+  #     if @tweet.user.id == current_user.id
+  #       erb :'tweets/edit_tweet'
+  #     else
+  #       redirect to '/tweets' # tests requirments mean this won't work: redirect to "/users/#{@user.slug}"
+  #     end
+  #   else
+  #     redirect to '/login'
+  #   end
+  # end
+
   get '/tweets/:id/edit' do
     if logged_in?
-      @user = User.find(session[:user_id])
+      @user = User.find(current_user.id)
       @tweet = Tweet.find(params[:id])
       erb :'tweets/edit_tweet'
     else
@@ -129,29 +150,6 @@ class ApplicationController < Sinatra::Base
       redirect to "/tweets/#{params[:id]}/edit"
     end
   end
-
-  # patch '/tweets/:id' do
-  #   tweet = Tweet.find(params[:id])
-  #   if params[:content] != "" && tweet.user.id == current_user.id
-  #     tweet.content = params[:content]
-  #     tweet.save
-  #     redirect to "/tweets/#{tweet.id}"
-  #   else
-  #     redirect to "/tweets/#{params[:id]}/edit"
-  #   end
-  # end
-
-  # patch '/tweets/:id' do
-  #   # This is the edit post
-  #   if params[:content] != ""
-  #     tweet = Tweet.find(params[:id])
-  #     tweet.content = params[:content]
-  #     tweet.save
-  #     redirect to "/tweets/#{tweet.id}"
-  #   else
-  #     redirect to "/tweets/#{params[:id]}/edit"
-  #   end
-  # end
 
   post '/tweets/:id/delete' do
     tweet = Tweet.find(params[:id])
