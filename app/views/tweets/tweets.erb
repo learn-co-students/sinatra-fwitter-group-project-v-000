@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <h1> <a href="/tweets/new">Create New Tweet</a> </h1>
+    
+    <h1> <a href="/logout">Logout</a></h1>
+
+    <h1> Welcome, <%= @user.username%> </h1>
+    <h1> Here are all the tweets: </h1>
+    <h1> ~~~~~~~~~~~~~~~~~~~~~~~~~~~ </h1>
+
+
+    <% User.all.each do |user| %>
+
+      <h2> Tweets by <a href="/users/<%= user.slug %>"> <%= user.username %> </a>: </h2>
+
+      <% user.tweets.each do |tweet| %>
+        <h3> <%= tweet.content %> </h3>
+        <h3> <a href="/tweets/<%= tweet.id %>">Link to Tweet</a> </h3>
+        <h3> -------------------- </h3>
+      <% end %>
+        <h3> %%%%%%%%%%%%%%%%%%%% </h3>
+    <% end %>
+
+  </body>
+</html>
