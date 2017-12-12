@@ -48,7 +48,6 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = user.id
         redirect :"tweets/tweets"
     end
-
   end
 
   # get "/logout" do
