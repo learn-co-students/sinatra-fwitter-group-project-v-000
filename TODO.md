@@ -1,7 +1,7 @@
 ## TODO
   ### Model and Association
-  - [ ] Create the file structure for the application.
-   -  [ ] file structure describe on learn.
+  - [x] Create the file structure for the application.
+   -  [x] file structure describe on learn.
    ```
    ├── CONTRIBUTING.md
    ├── Gemfile
@@ -44,10 +44,9 @@
    ```
    - [ ] create or find a gem that does this automatically
 
-  - [ ] Need to setup my testing environment either in the rake file by reloading the env or a gem
+  - [x] setup my testing environment either in the rake file by reloading the env or a gem
 
-  - [ ] Create 2 model User and Tweet. This both should inherit
-  from Activerecord::Base
+  - [ ] Create 2 model, User and Tweet.Both should      inherit from `Activerecord::Base`
 
   - [ ] User table should include username, email, password and have my tweets
 
