@@ -43,6 +43,5 @@ class AccountsController < ApplicationController
     else
       redirect :'/'
     end
-
   end
 end
