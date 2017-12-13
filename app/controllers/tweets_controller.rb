@@ -23,4 +23,23 @@ class TweetsController < ApplicationController
     end
   end
 
+  post "/tweets" do
+    if params[:content] && params[:content] != ""
+      tweet=Tweet.create(content: params[:content])
+      current_user.tweets << tweet
+      redirect :"/tweets"
+    else
+      redirect :"/tweets/new"
+    end
+  end
+
+  get "/tweets/:id" do
+    if logged_in?
+      @tweet = Tweet.find_by(params[:id])
+      erb :"tweets/show_tweet"
+    else
+      redirect :"/login"
+    end
+  end
+
 end
