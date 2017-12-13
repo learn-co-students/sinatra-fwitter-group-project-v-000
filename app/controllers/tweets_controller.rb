@@ -1,4 +1,4 @@
-class TweetsController < Sinatra::Base
+class TweetsController < ApplicationController
 
   configure do
     set :public_folder, 'public'
@@ -7,7 +7,11 @@ class TweetsController < Sinatra::Base
   end
 
   get "/tweets" do
-    erb :"tweets/tweets"
+    if logged_in?
+      erb :"tweets/tweets"
+    else
+      redirect :"/login"
+    end
   end
 
 end

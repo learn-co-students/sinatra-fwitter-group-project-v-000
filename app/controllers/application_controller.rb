@@ -1,5 +1,6 @@
 require './config/environment'
 require "./app/models/user"
+require "./app/models/tweet"
 
 class ApplicationController < Sinatra::Base
 
@@ -15,7 +16,7 @@ class ApplicationController < Sinatra::Base
 
   get "/signup" do
     if logged_in?
-      redirect :"tweets/tweets"
+      redirect :"/tweets"
     else
       erb :signup
     end
@@ -35,7 +36,7 @@ class ApplicationController < Sinatra::Base
 
   get "/login" do
     if logged_in?
-      redirect :"tweets/tweets"
+      redirect :"/tweets"
     else
       erb :login
     end
@@ -51,8 +52,13 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/logout" do
-		session.clear
-		redirect "/login"
+    # binding.pry
+    if logged_in?
+		    session.clear
+		    redirect :"/login"
+    else
+        redirect :"/"
+    end
 	end
 
   helpers do
