@@ -35,7 +35,6 @@ class TweetsController < ApplicationController
 
    get '/tweets/:id' do
      if logged_in? && current_user
-      binding.pry
           @tweet = Tweet.find(params[:id]) 
           erb :"/tweets/show"
       else

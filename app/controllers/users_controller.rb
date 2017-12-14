@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
 
 # SIGNUP FORM: send
-  get '/users/signup' do
+  get '/signup' do
   	if !logged_in?
     	erb :'users/signup'
     	# , locals: {message: "Please sign up before you sign in"}
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
    	  @user.save	
       session[:user_id] = @user.id
-      redirect to '/tweets/'
+      redirect to "/tweets/"
     end
   end
 
