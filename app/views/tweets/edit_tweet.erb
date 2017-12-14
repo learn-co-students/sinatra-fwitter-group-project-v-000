@@ -1,0 +1,12 @@
+<h1>Fwitter</h1>
+
+<h2>Current Tweet:</h2>
+<%=@tweet.content%>
+<h2>Edit a New Tweet:</h2>
+<form action="/tweets/<%=@tweet.id%>" method="POST">
+ <input type="hidden" name="_method" value="PATCH">
+
+ <input name="content" id="content" value="<%= @tweet.content %>" type="text" required="required">
+
+ <input type="submit" value="submit">
+</form>
