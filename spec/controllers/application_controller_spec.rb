@@ -13,7 +13,7 @@ describe ApplicationController do
   describe "Signup Page" do
 
     it 'loads the signup page' do
-      get '/signup'
+      get '/users/signup'
       expect(last_response.status).to eq(200)
     end
 
