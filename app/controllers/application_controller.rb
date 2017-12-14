@@ -18,19 +18,19 @@ class ApplicationController < Sinatra::Base
     erb :'index'
   end
 
-# SENDS signup form
-  get '/registrations/signup' do
+# SIGNUP FORM: send
+  get '/users/signup' do
     redirect to "/tweets" if is_logged_in?(session)
     erb :'/registrations/signup'
   end
 
-# POSTS sign up form and CREATES user
-  post '/registrations/signup' do
+# SIGNUP FORM: get data and CREATE user
+  post '/users/signup' do
 
     if params[:username] == "" || params[:email] == "" ||  params[:password] == ""
-      redirect to '/registrations/signup'
+      redirect to '/users/signup'
     else
-      if current_user
+      if current_user(session)
         redirect to '/tweets/index'
       else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
@@ -40,14 +40,14 @@ class ApplicationController < Sinatra::Base
       end
     end
   end
-  
-#SHOW LOGIN form
+
+#LOGIN form SEND
   get '/sessions/login' do
     erb :'sessions/login'
   end
 
-#PULL IN data from login form
-  post '/sessions/login' do
+#LOGIN FORM: PULL IN data
+  post '/users/login' do
     @user = User.find_by_username(params["username"])
       # , password: params["password"])-- no, bec password_diest
 
@@ -56,23 +56,19 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = @user.id
       redirect 'tweets/index' # or users/index
     else
-      redirect to '/sessions/login' # or message about trying again.error page?
+      redirect to '/users/login' # or message about trying again.error page?
     end
   end
 
-#CLEAR the session
-  get '/sessions/logout' do
+#LOGOUT SEND FORM
+  get '/users/logout' do
     erb :'sessions/logout'
   end
 
-  post '/sessions/logout' do
+#LOGOUT execute
+  post '/user/logout' do
     session.clear
     redirect to  '/'
   end
 
-  get '/users/index' do
-     #render user's homepage view
-     @user = User.find(session[:id])
-      erb :'/users/index'
-  end
 end

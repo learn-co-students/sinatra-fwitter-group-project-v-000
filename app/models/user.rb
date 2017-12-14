@@ -14,10 +14,6 @@ class User < ActiveRecord::Base
 			self.all.find {|thing| thing.slug == slug}
 		end
 
-
-    def has_secure_password
-    end
-
     def is_logged_in?(session)
       !!sessions[:id]
     end
@@ -26,3 +22,7 @@ class User < ActiveRecord::Base
       User.find_by_id(session[:id])
     end
 end
+
+
+# slug = @user.slug
+#     expect(User.find_by_slug(slug).username).to eq("test 123")
