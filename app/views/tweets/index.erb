@@ -1,11 +1,12 @@
 <h2>Tweets Index Page </h2>
-<h2>Tweets from <%= #{current_user.name} %> </h2>
+<<h2>Tweets from <%= #{current_user.name} %> </h2> 
+<!-- or username, check  -->
 
 <ul>
 	<% @tweets.each do |tweet| %>
 		<div>
       <%= tweet.content %>
-    </div>
+    	</div>
 	<%end%>
 </ul>
 

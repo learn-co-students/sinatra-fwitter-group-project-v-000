@@ -5,27 +5,21 @@ class TweetsController < ApplicationController
   use Rack::Flash
 
 
-  get '/tweets/index' do
-    if is_logged_in?(session)
-      @tweets = Tweets.all
-     erb :'tweets/index'
+  get '/tweets' do
+     if is_logged_in?
+        @tweets = Tweets.all
+        erb :'/tweets/index'
      else
-       redirect to '/sessions/login'
+        redirect to '/users/login'
      end
    end
-
-   get '/tweets/' do
-     @tweets = Tweets.all
-      erb :"tweets/index"
-   end
-
 
 
    get '/tweets/new' do
      if is_logged_in?
-       erb :"tweets/new"
+       erb :"/tweets/new"
      else
-       redirect to "/login"
+       redirect to "/users/login"
      end 
    end
 
@@ -40,14 +34,14 @@ class TweetsController < ApplicationController
    end
 
    get '/tweets/:id' do
-     @tweet = Tweet.find(params[:id]) #??? or delete this line.
-     erb :"tweets/show"
+     @tweet = Tweet.find(params[:id]) 
+     erb :"/tweets/show"
    end
 
    get '/tweets/:id/edit' do
-     @tweet = Tweet.find(params[:id]) # ?? why is this here?
+     @tweet = Tweet.find(params[:id]) 
 
-     erb :"tweets/edit"
+     erb :"/tweets/edit"
    end
 
    patch '/tweets/:id' do
@@ -56,7 +50,6 @@ class TweetsController < ApplicationController
 
      redirect "/tweets/#{@tweet.id}"
    end
-
 
    delete '/tweets/:id/delete' do
      @tweet = Tweet.find(params[:id]) # or find_by_id
