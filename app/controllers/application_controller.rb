@@ -14,20 +14,22 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/signup" do
-    if logged_in?
-       redirect '/tweets'
+    #binding.pry
+    if !logged_in?
+      erb :'users/create_user'
     else
-      erb :signup
+      redirect '/tweets'
     end
   end
 
   post "/signup" do
-    user = User.new(params)
+    user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
     if user.save
       session[:user_id]= user.id
+      #binding.pry
       redirect "/tweets"
-    elsif !logged_in?
-      redirect '/signup'
+    else
+      redirect to '/signup'
     end
   end
 
@@ -118,7 +120,7 @@ class ApplicationController < Sinatra::Base
 
    get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    erb :'/users/show'
+    erb :'/users/`show`'
    end
 
   get '/logout' do
@@ -132,11 +134,11 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def logged_in?
-      !!session[:user_id]
+      !!current_user
     end
 
     def current_user
-      User.find(session[:user_id]) if session[:user_id]
+      @current_user ||= User.find_by(session[:user_id]) if session[:user_id]
     end
   end
 
