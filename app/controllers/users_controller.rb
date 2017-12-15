@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
 # SIGNUP FORM: get data and CREATE user
-  post '/users/signup' do
+  post '/signup' do
 
  	if params[:username] ==  "" || params[:email] ==  "" || params[:password] == ""
       redirect to '/signup'
@@ -35,32 +35,30 @@ class UsersController < ApplicationController
   get '/login' do
   	if !logged_in?
     	erb :'/users/login'
-	else
-		redirect to '/tweets/'
-	end
+	  else
+		 redirect to '/tweets'
+	 end
   end
 
 #LOGIN FORM: PULL IN data
   post '/login' do
-	 @user = User.find_by(:username => params[:username])
-	      # , password: params["password"])-- no, bec password_diest
-
+	  @user = User.find_by(:username => params[:username])
 	    if @user && @user.authenticate(params[:password])
-	    	session[:user_id] = @user.id
-	      	redirect to "/tweets" # or users/index
+	    	  session[:user_id] = @user.id
+	      	redirect to "/tweets" 
 	    else
-	      redirect to '/signup' # or message about trying again.error page?
+	        redirect to '/' # or message about trying again.error page?
    		end
 	end 
  
 
 #LOGOUT SEND FORM? Or just execute from href. 
   get '/logout' do
-  	if  logged_in?
-  		session.destroy #or session.clear? 
-  		redirect '/login'
-  	else 
-  		redirect to '/index'
+  	if !logged_in? 
+  		redirect to '/'
+    else 
+      session.destroy #or session.clear? 
+      redirect '/login'
   	end 
   end
 

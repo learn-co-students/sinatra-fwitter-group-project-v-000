@@ -1,3 +1,6 @@
+
+
+
 <%=  @tweet.content %>
 
 <form action="/tweets/<%= @tweet.id %>/delete" method="post">
@@ -7,3 +10,6 @@
 </form>
 
 <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+
+<h3><a href="/tweets/new"></a>Create</h3>
+<h3><a href="/tweets/edit"></a>Edit</h3>
