@@ -13,13 +13,15 @@ class TweetController < ApplicationController
   get '/tweets/new' do
     if logged_in?
     erb :'tweets/create_tweet'
-  else
+    else
     redirect '/login'
+    end
   end
-end
 
   post '/tweets' do
-    if params[:content] = ""
+    if !logged_in?
+      redirect '/login'
+    elsif params[:content].empty?
       redirect '/tweets/new'
     else
       @tweet = current_user.tweets.create(content: params[:content])
@@ -29,50 +31,43 @@ end
 
   get '/tweets/:id' do
     if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-      erb '/tweets/show_tweet'
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/show_tweet'
     else
       redirect '/login'
     end
   end
 
   get '/tweets/:id/edit' do
-    if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-      if @tweet.user_id == current_user.id
+    if !logged_in?
+      redirect '/login'
+    else
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user_id = current_user.id
         erb :'/tweets/edit_tweet'
       else
-        redirect '/tweets'
+        redirect "/tweets"
       end
-    else
-      redirect '/login'
     end
   end
 
-  post'/tweets/:id' do
+  patch '/tweets/:id' do
+    @tweet = Tweet.find(params[:id])
     if params[:content] != ""
-      @tweet = Tweet.find_by_id(params[:id])
-      @tweet.content = params[:content]
-      @tweet.save
-      redirect to "/tweets/#{@tweet.id}"
+      @tweet.update(content: params[:content])
+      redirect "/tweets/#{@tweet.id}"
     else
-      redirect "/tweets/#{params[:id]}/edit"
+      redirect "/tweets/#{@tweet.id}/edit"
     end
   end
 
   delete '/tweets/:id/delete' do
-    if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-      if @tweet.user_id == current_user.id
-        @tweet.delete
-        redirect '/tweets'
-      else
-        redirect 'tweets'
-      end
+    @tweet = Tweet.find(params[:id])
+    if logged_in? && @tweet.user_id == current_user.id
+      @tweet.destroy
+      redirect '/tweets'
     else
-      redirect to '/login'
+      redirect '/login'
     end
   end
-
-
 end

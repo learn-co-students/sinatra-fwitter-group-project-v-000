@@ -1,6 +1,4 @@
 require './config/environment'
-#require "./app/models/user"
-#require "./app/models/tweets"
 
 class ApplicationController < Sinatra::Base
 
@@ -8,7 +6,11 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "secret"
+    set :session_secret, "fwitter_secret"
+  end
+
+  get '/' do
+    erb :index
   end
 
   helpers do
@@ -20,10 +22,4 @@ class ApplicationController < Sinatra::Base
       User.find(session[:user_id])
     end
   end
-
-  get '/' do
-    erb :index
-  end
-
-
 end

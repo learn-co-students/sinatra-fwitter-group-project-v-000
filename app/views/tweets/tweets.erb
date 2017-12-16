@@ -1,6 +1,11 @@
 <h1>Welcome, <%= current_user.username %> </h1>
 <h2>Your Tweets: </h2>
 
+<ul>
 <% @tweets.each do |tweet| %>
-<p><%= tweet.content %></p>
+  <li><%= tweet.content %></li>
+  <br>
 <% end %>
+</ul>
+
+<a href="/logout">Log Out</a>

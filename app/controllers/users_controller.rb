@@ -4,40 +4,40 @@ class UserController < ApplicationController
     if !logged_in?
       erb :'/users/create_user'
     else
-    redirect '/tweets'
+      redirect to "/tweets"
+    end
   end
-end
+
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'/users/show'
+  end
 
   post '/signup' do
-    user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-
-    if params[:username] = "" || params[:email] = "" || params[:password] = ""
+    if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect '/signup'
     else
-      user.save
+      user = User.create(username: params[:username], email: params[:email], password: params[:password])
       session[:user_id] = user.id
       redirect '/tweets'
     end
-
   end
 
   get '/login' do
-    if !logged_in?
-    erb :'/users/login'
-  else
-    redirect '/tweets'
+    if logged_in?
+      redirect to "/tweets"
+    else
+      erb :'/users/login'
+    end
   end
-end
 
   post '/login' do
     user = User.find_by(username: params[:username])
-
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-
-      redirect '/tweets'
+      redirect to "/tweets"
     else
-      redirect '/signup'
+      redirect to "/login"
     end
   end
 
@@ -48,10 +48,5 @@ end
     else
       redirect '/'
     end
-  end
-
-  get '/users/:slug' do
-    @user = User.find_by_slug(params["slug"])
-    erb :'/users/show'
   end
 end
