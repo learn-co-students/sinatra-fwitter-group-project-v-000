@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= @user.username %> - Tweets</title>
+  </head>
+  <body>
+    <h1> Welcome, <%= current_user.username %></h1>
+    <h2> Your Tweets </h2>
+    <% @tweets.each do |tweet| %>
+      <div>
+        <%= tweet.content %>
+      </div>
+      <br>
+    <% end %>
+  </body>
+</html>

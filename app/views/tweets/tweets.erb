@@ -2,12 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title><%= @user.username %> - Tweets</title>
+    <title>Tweets</title>
   </head>
   <body>
-    <h1>Welcome, <%= @user.username %></h1>
+    <h1> Welcome, <%= current_user.username %></h1>
+    <a href="/logout">Logout</a> <a href="/tweets/new">New Tweet</a> <a href="/users/<%= current_user.username %>">Your Tweets</a>
+    <h2> Tweets </h2>
     <% @tweets.each do |tweet| %>
-      <%= tweet.content %>
+      <div>
+        <%= tweet.content %>
+      </div>
+      <br>
     <% end %>
   </body>
 </html>

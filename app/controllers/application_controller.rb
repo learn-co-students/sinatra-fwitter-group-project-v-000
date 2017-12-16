@@ -24,7 +24,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def logout
-      session.clear
+      session.destroy
     end
 
     def complete_info_signup?
