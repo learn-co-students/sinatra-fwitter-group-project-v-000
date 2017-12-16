@@ -1,8 +1,15 @@
-<p> Tweets for <%= @user.username %>
+
+
+
+<p> Tweets for <%= current_user.username %>
+<ul>
 <% @user.tweets.each do |tweet| %>
   <div>
     <%= tweet.content %>
   </div>
 <% end %>
+</ul>
 
-
+<h3><a href="/tweets/new">Create</a></h3>
+<h3><a href="/logout">Log out </a></h3>
+<!-- how would I delete a specific tweet from here?  -->

@@ -13,7 +13,8 @@ class ApplicationController < Sinatra::Base
 
 #HOMEPAGE
   get '/' do
-    erb :'/index'
+    session.clear
+    erb :'index'
   end
 
 

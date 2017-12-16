@@ -1,5 +1,5 @@
 <h2>Tweets Index Page </h2>
-<<h2>Welcome, <%= {tweet.user.username} %> </h2> 
+<h2>Welcome, <%=  current_user.username %> </h2> 
 
 <ul>
 	<% @tweets.each do |tweet| %>
@@ -10,5 +10,5 @@
 </ul>
 
 
-<h3><a href="/tweets/new"></a>Create</h3>
-<h3><a href="/tweets/edit"></a>Edit</h3>
+<h3><a href="/tweets/new">Create</a></h3>
+<h3><a href="/tweets/:id/edit">Edit</a></h3>
