@@ -10,40 +10,26 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    binding.pry
     erb :index
   end
-
-  get '/signup' do
-    erb :'/users/create_user'
-  end
-
-  post '/signup' do
-    redirect '/tweets'
-  end
-
-  get '/login' do
-    erb :'/users/login'
-  end
-
-  post '/login' do
-    redirect '/tweets'
-  end
-
-
 
   helpers do
 
     def logged_in?
-
+      !!session[:user_id]
     end
 
     def current_user
-
+      User.find(session[:user_id])
     end
 
     def logout
       session.clear
     end
 
+    def complete_info?
+      !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
+    end
   end
 end
