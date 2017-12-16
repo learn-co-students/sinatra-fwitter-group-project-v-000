@@ -1,0 +1,6 @@
+
+<%Tweet.all.each do |tweet|%>
+ <% if tweet.user == @user%>
+  <p><%= tweet.content%></p>
+ <%end%>
+<%end%>
