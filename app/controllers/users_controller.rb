@@ -12,18 +12,16 @@ class UsersController < ApplicationController
     	redirect to '/tweets'
       #or redirect to '/tweets' if logged_in?
     	# , locals: {message: "Please sign up before you sign in"}
-	 else
+	  else
       erb :'signup'
-	 end 
+	  end 
   end
 
 # SIGNUP FORM: get data and CREATE user
   post '/signup' do
-
- 	if params[:username] ==  "" || params[:email] ==  "" || params[:password] == ""
+ 	  if params[:username] ==  "" || params[:email] ==  "" || params[:password] == ""
       flash[:notice] = "All fields must be filled in."
       redirect to '/signup'
-
     else
       @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
    	  @user.save	
@@ -32,14 +30,13 @@ class UsersController < ApplicationController
     end
   end
 
-
 #LOGIN form SEND
   get '/login' do
   	if !logged_in?
     	erb :'/login'
 	  else
 		 redirect to '/tweets'
-	 end
+	  end
   end
 
 #LOGIN FORM: PULL IN data
@@ -51,7 +48,7 @@ class UsersController < ApplicationController
 	  if @user && @user.authenticate(params[:password])
 	    	session[:user_id] = @user.id
 	      redirect to "/tweets" 
-	   else
+	  else
       flash[:notice] = "Please provide a valid Username and Password."
 	     redirect to '/' # or message about trying again.error page?
    	end
