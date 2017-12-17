@@ -6,10 +6,12 @@
   </head>
   <body>
     <h1> Welcome, <%= current_user.username %></h1>
+    <a href="/logout"><input type="button" value="Logout"></a>
+    <a href="/tweets/new"><input type="button" value="New Tweet"></a>
     <h2> Your Tweets </h2>
     <% @tweets.each do |tweet| %>
       <div>
-        <%= tweet.content %>
+        <%= tweet.content %> <a href="/tweets/<%= tweet.id %>"><input type="button" value="Show"></a>
       </div>
       <br>
     <% end %>
