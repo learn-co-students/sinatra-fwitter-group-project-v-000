@@ -43,10 +43,15 @@ class UserController < ApplicationController
   get '/logout' do
     if Helpers.logged_in?(session)
         session.clear
-        redirect to '/login'
-    else
-      redirect to '/login'
     end
+      redirect to '/login'
   end
+
+  get '/users/:slug' do
+     @user = User.all.detect{|obj| obj.slug == params[:slug]}.tweets
+    erb :"/users/show"
+  end
+
+
 
 end
