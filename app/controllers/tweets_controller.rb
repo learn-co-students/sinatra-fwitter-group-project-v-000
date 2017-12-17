@@ -1,6 +1,8 @@
 
 require "rack-flash"
 
+
+# not getting "only edit your own tweets "
 class TweetsController < ApplicationController
   use Rack::Flash
 
@@ -30,7 +32,7 @@ class TweetsController < ApplicationController
     
         if current_user && params[:content] != ""
            @user = User.find_by(username: params[:username])
-           @tweet = current_user.tweets.create(:content => params[:content], :user_id => current_user.id)
+           @tweet = Tweet.create(:content => params[:content], :user_id => current_user.id)
            redirect to "users/#{current_user.username}"
         else
           flash[:notice] = "Tweets need content"
@@ -48,52 +50,55 @@ class TweetsController < ApplicationController
         redirect to "/login"
     else
      
-      @tweet = Tweet.find_by(params[:user_id])
+      @tweet = Tweet.find_by(id: params[:id])
+
           erb :'tweets/show'
      end 
   end 
 #update/form
  get '/tweets/:id/edit' do
-
-    @tweets = Tweet.all.find_by(params[:user_id])
-     if  logged_in? && @tweets
-        if current_user.id = @tweets.user_id
+  
+     @tweet = Tweet.find_by(id: params[:id])
+      if  logged_in? && @tweet
+        if current_user.id = @tweet.user_id
             erb :"tweets/edit"
           # @tweets = Tweet.all.find_by(params[:user_id])  
         else
           redirect to :'/tweets'
         end 
-     else
-        redirect to "/login"
-     end 
+    else
+      redirect to "/login"
+    end 
   end
 
 #update/data
   patch '/tweets/:id' do
-    @tweet = Tweet.find(params[:id])
+    @tweet = Tweet.find_by_id(params[:id])
 #if no content
-     if logged_in? and params[:content] == ""
+     redirect to "/login" if !logged_in? 
+
+     if params[:content] == "" || current_user.id != @tweet.user_id
         redirect to "/tweets/#{@tweet.id}/edit" 
-#if content and current user 
-     elsif
-        @tweet && current_user.id = @tweet.user_id
+
+     else
+        @tweet.update(:content => params[:content])
         redirect to "/tweets/#{@tweet.id}"
-     else 
-        redirect to "/login"
-      end 
+     
+     end 
   end
 
-  delete '/tweets/:id/' do
+  delete '/tweets/:id' do
+ 
      #can't do loggedin and current user in one line...
-     if logged_in?
-        @tweet = Tweet.find_by(:id => params[:user_id]) # or find_by_id
-        
+     @tweet = Tweet.find_by_id(params[:id])
+     
+
+     redirect to "/" if !logged_in?
+
         if @tweet && @tweet.user_id == current_user.id
             @tweet.delete
             redirect to '/'
         end 
-     else
-       redirect to "/"
-     end 
+     
    end
 end
