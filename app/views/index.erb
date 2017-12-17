@@ -4,10 +4,10 @@
 <ul>
     <% if logged_in? %>
       <li><a href="/users/logout">Logout</a> </li>
-      <li><a href="/tweets/index">New Tweet</a> </li>
+      <li><a href="/tweets">New Tweet</a> </li>
 
     <% else %>
-      <li><a href="/users/login">Login</a> </li>
-      <li><a href="/user/signup">Signup</a> </li>
+      <li><a href="/login">Login</a> </li>
+      <li><a href="/signup">Signup</a> </li>
     <% end %>
 </ul>

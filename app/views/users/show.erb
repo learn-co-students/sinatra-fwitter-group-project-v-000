@@ -1,13 +1,12 @@
 
+<p> Tweets for <%= @user.username %></p>
 
-
-<p> Tweets for <%= current_user.username %>
 <ul>
-<% @user.tweets.each do |tweet| %>
-  <div>
-    <%= tweet.content %>
-  </div>
-<% end %>
+	<% @user.tweets.each do |tweet| %>
+	  <li>
+	    <%= tweet.content %>
+	  </li>
+	<% end %>
 </ul>
 
 <h3><a href="/tweets/new">Create</a></h3>

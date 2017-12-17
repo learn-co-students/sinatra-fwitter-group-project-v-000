@@ -1,13 +1,13 @@
 <p>This page shows the tweet that was just created</p>
 
-<%= @tweets.content %>
+<%= @tweet.content %>
 
-<form action="/tweets/<%= @tweets.user_id %>/delete" method="POST">
+<form action="/tweets/<%= @tweet.user_id %>/delete" method="POST">
   <input type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete Tweet">
 </form>
 
-<a href="/tweets/<%=@tweets.user_id%>/edit">Edit this Tweet</a>
+<a href="/tweets/<%=@tweet.user_id%>/edit">Edit Tweet</a>
 
 <h3><a href="/tweets/new">Create</a></h3>
 <h3><a href="/tweets">See All</a></h3>
