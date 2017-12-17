@@ -1,0 +1,4 @@
+<% tweets = Tweet.all.find_all {|t| t.user_id = 1} %>
+<% tweets.each |t| do %>
+<p><%= t %></p>
+<% end %>

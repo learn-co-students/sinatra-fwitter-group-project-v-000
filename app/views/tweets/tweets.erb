@@ -1,0 +1,6 @@
+<h1>"Welcome, <%= @user.username %>"</h1>
+
+<% tweets = Tweet.all.find_all {|t| t.user_id = @user.id} %>
+<% tweets.each do |tweet| %>
+  <p><%= tweet.content %></p>
+<% end %>
