@@ -1,5 +1,5 @@
 module Slugifiable
      def slug
-       self.name.gsub(/\W/,"-").downcase
+        self.username.gsub(/\W/,"-").downcase
      end
  end
