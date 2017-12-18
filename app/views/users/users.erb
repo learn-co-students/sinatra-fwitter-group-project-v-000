@@ -1,0 +1,16 @@
+<h2>Here are all the great users of Fwitter</h2>
+<form action="/tweets/new">
+    <input type="submit" value="New Tweet" />
+</form>
+<hr>
+<% @users.each do |user| %>
+  <ul>
+    <li><a href="/users/<%= user.slug %>"><%= user.username %></a></li>
+  </ul>
+<% end %>
+<hr>
+<em>You are currently logged in as <%= current_user.username %></em>
+<br><br>
+<form action="/logout">
+    <input type="submit" value="Logout" />
+</form>

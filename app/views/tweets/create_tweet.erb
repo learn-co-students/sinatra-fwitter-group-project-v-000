@@ -1,0 +1,16 @@
+<h2>Create a Tweet</h2>
+<hr>
+<br>
+<form method="POST" action="/tweets">
+  <label for="content">Tweet Content: </label>
+  <input type="text" id="content" name="content" size="144">
+  <br><br>
+  <input type="submit" value="submit">
+  
+</form>
+<hr>
+<em>You are currently logged in as <%= current_user.username %></em>
+<br><br>
+<form action="/logout">
+    <input type="submit" value="Logout" />
+</form>

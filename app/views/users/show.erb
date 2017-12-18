@@ -1,0 +1,16 @@
+<h2>Tweets by <%= @user.username %></h2>
+<form action="/tweets/new">
+    <input type="submit" value="New Tweet" />
+</form>
+<hr>
+<% @user.tweets.each do |tweet| %>
+  <ul>
+    <li><%= tweet.content %></li>
+  </ul>
+<% end %>
+<hr>
+<em>You are currently logged in as <%= current_user.username %></em>
+<br><br>
+<form action="/logout">
+    <input type="submit" value="Logout" />
+</form>
