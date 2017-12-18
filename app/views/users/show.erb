@@ -1,0 +1,11 @@
+<h2>Here is/are the tweet(s):</h2>
+<% @user.tweets.each do |tweet| %>
+	<p><%= tweet.content %></p>
+	<p><% tweet.id %></p>
+
+	<a href="/tweets/<%=tweet.id%>/edit">Edit this tweet?</a>
+<% end %>
+
+<h3><a href="/tweets">Home Page</a></h3>
+<h3><a href="/tweets/new">Create a new Tweet</a></h3>
+<h3><a href="/logout">Logout</a></h3>
