@@ -27,14 +27,6 @@ class ApplicationController < Sinatra::Base
   		@user = User.find_by_id(session[:user_id])
   	end
 
-#    def login(email)
-#      if user = User.find_by(:email => email)
-#        session[:user_id] = user.id
-#      else
-#        redirect '/login'
-#      end
-#    end
-
     def logout!
       session.clear
       redirect to '/'
