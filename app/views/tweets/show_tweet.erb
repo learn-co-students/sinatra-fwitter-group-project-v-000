@@ -1,0 +1,20 @@
+<h2>Tweet <%= @tweet.id %></h2>
+<hr>
+<%= @tweet.content %>
+<br><br>
+<form action="/tweets/<%= @tweet.id %>/edit">
+    <input type="submit" value="Edit Tweet" />
+</form>
+<br>
+<form method="post" action="/tweets/<%= @tweet.id %>">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Tweet">
+</form>
+<hr>
+<em>You are currently logged in as <%= current_user.username %></em>
+<br><br>
+<form action="/logout">
+    <input type="submit" value="Logout" />
+</form>
+
+
