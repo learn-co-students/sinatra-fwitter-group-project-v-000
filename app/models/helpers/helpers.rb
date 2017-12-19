@@ -13,4 +13,10 @@ class Helpers
         @user = User.find_by(username: params[:username]).try(:authenticate, params[:password])
        @user
      end
+
+    def self.empty?(params)
+      params.values.collect{|values| values.strip}.include?("")
+    end
+
+
 end
