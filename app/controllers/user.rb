@@ -10,7 +10,7 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
-    if params.value?("")
+    if Helpers.empty?(params) #params.value?("")
        redirect to "/signup"
      else
        user = User.find_or_create_by(params)
