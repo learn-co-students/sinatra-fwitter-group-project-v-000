@@ -25,7 +25,6 @@ class UserController < ApplicationController
     else
       erb :"/users/login"
     end
-
   end
 
   post '/login' do
