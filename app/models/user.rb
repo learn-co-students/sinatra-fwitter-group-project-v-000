@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
 
   include Slugifiable
 
+  def self.find_by_slug(slug)
+    User.all.detect{|obj|obj.slug == slug}
+  end
+
 end
