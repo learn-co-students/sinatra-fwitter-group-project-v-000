@@ -10,7 +10,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    if logged_in?
+      redirect "/tweets"
+    else
+      erb :index
+    end
   end
 
   get '/tweets.new' do
@@ -21,7 +25,7 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       erb :'tweets/tweets'
     else
-      redirect "/signup"
+      redirect "/login"
     end
   end
 
@@ -77,9 +81,9 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    @user = User.find_by(username: params[:username])
-    if @user && user.authenticate(params[:password])
-      session[:user_id] = @user.id
+    user = User.find_by(username: params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
       redirect '/tweets'
     else
       redirect '/signup'
@@ -87,8 +91,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    session.clear
-    redirect "/"
+    if logged_in?
+      session.clear
+      redirect "/login"
+    else
+      redirect '/'
+    end
   end
 
   helpers do
@@ -99,6 +107,10 @@ class ApplicationController < Sinatra::Base
 		def current_user
 			User.find(session[:user_id])
 		end
+
+    def slug
+      self.username.downcase.gsub(" ", "-")
+    end
 	end
 
 end
