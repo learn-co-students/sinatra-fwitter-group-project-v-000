@@ -22,7 +22,8 @@ class TweetController < ApplicationController
   post '/tweets' do
     unless params[:content].empty?
       @tweet = Tweet.create(:content => params[:content])
-      current_user.tweets << @tweet
+      @tweet.user_id = current_user.id
+      @tweet.save
       erb "tweet/show_tweet"
     else
       redirect "/tweets/new"
