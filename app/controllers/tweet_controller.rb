@@ -1,7 +1,7 @@
 require './config/environment'
 
 class TweetController < ApplicationController
-  
+
   get '/tweets/new' do
     if logged_in?
       erb :'tweets/create_tweet'
@@ -20,8 +20,13 @@ class TweetController < ApplicationController
   end
 
   post '/tweets' do
-    @tweet = Tweet.create(params[:tweet])
-    redirect '/tweets/#{@tweet.id}'
+    unless params[:content].empty?
+      @tweet = Tweet.create(:content => params[:content])
+      current_user.tweets << @tweet
+      erb "tweet/show_tweet"
+    else
+      redirect "/tweets/new"
+    end
   end
 
   get '/tweets/:id' do
