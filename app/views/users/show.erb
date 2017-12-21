@@ -1,0 +1,17 @@
+
+
+<ul>
+
+<%@user.each do |obj|%>
+<li> <%=obj.content%> </li>
+<br>
+<%end%>
+
+</ul>
+
+<form class="" action="/tweets/<%=@tweet.id%>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <label for="">Delete Tweet:</label>
+   <br>
+  <input type="submit" name="submit" value="Delete Tweet" id="Delete Tweet">
+</form>

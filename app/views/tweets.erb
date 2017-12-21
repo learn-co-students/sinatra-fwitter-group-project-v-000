@@ -1,0 +1,13 @@
+<h2>Welcome, <%=@current_user.username%></h2
+
+
+  <% @users.each do |obj| %>
+    <h2> <%= obj.username %> </h2>
+    <br>
+    <ul>
+      <% obj.tweets.each do |tweet| %>
+      <li> <%= tweet.content %> </li>
+      <br>
+      <% end %>
+    </ul>
+  <% end %>
