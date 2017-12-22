@@ -1,2 +1,4 @@
-<h1>Tweets.erb </h1>
-<% @tweets.each do |tweet| %>
+<h1>Welcome, <%=@user.username%></h1>
+<%Tweet.all.each do |tweet|%>
+  <%=tweet.user.username%>: <%=tweet.content%>
+<%end%>
