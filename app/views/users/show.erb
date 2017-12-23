@@ -1,0 +1,10 @@
+<h2>Welcome, <%=current_user.username%></h2>
+<p><a href="/tweets/new">Create new tweet</a></p>
+<br></br>
+<p>Here are your tweets:</p>
+<%current_user.tweets.each do |tweet|%>
+<p><%=tweet.content%></p>
+<%end%>
+
+<p><a href="/tweets">View All Tweets</a></p>
+<p><a href="/logout">Log Out</a></p>
