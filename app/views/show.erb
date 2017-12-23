@@ -1,0 +1,10 @@
+
+<h2>Welcome, <%=@user.username%></h2>
+
+<ul>
+  <% #binding.pry%>
+  <% Tweet.all.each do |tweet| %>
+  <% #binding.pry%>
+    <li><%=tweet.content%></li>
+  <% end %>
+</ul>
