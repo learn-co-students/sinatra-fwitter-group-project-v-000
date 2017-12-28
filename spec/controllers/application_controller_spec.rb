@@ -205,7 +205,7 @@ describe ApplicationController do
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
-
+      
         visit '/tweets/new'
         fill_in(:content, :with => "tweet!!!")
         click_button 'submit'
