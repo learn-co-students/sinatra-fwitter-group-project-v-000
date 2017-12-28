@@ -12,7 +12,7 @@ class User<ActiveRecord::Base
     username=slug.split("-").join(" ")
     #puts name
     #binding.pry
-    return find_by_name(name).first
+    return find_by(username).first
   end
 
 
