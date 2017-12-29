@@ -16,15 +16,6 @@ class UserController<ApplicationController
   end
 
 
-  get '/tweets' do
-    if logged_in?
-      @tweets=Tweet.all
-      erb :'/tweets/tweets'
-    else
-      redirect to "/login"
-    end
-  end
-
   post '/signup' do
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect to '/signup'

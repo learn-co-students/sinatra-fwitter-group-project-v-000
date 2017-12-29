@@ -3,6 +3,7 @@ class TweetController<ApplicationController
   get '/tweets' do
     if logged_in?
       @tweets=Tweet.all
+      @username=current_user.username
       erb :'/tweets/tweets'
     else
       redirect to "/login"
@@ -27,9 +28,8 @@ class TweetController<ApplicationController
       redirect to "/tweets/#{@tweet.id}"
     end
   end
-
+\
   get '/tweets/:id' do
-
     if logged_in?
        @tweet = Tweet.find_by_id(params[:id])
        erb :'tweets/show_tweet'
@@ -50,6 +50,7 @@ class TweetController<ApplicationController
 
   end
 
+
   patch '/tweets/:id' do
     if params[:content].empty?
       redirect to "/tweets/#{params[:id]}/edit"
@@ -61,10 +62,11 @@ class TweetController<ApplicationController
     end
   end
 
+
   delete '/tweets/:id/delete' do
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
-      @tweet.delete if @tweet.user_id == session[:user_id]      
+      @tweet.delete if @tweet.user_id == session[:user_id]
       redirect to '/tweets'
     else
       redirect to '/login'
