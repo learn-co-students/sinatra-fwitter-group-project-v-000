@@ -1,20 +1,5 @@
-require './config/environment'
-
-class ApplicationController < Sinatra::Base
-
-  configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
-    enable :sessions
-    set :session_secret, "fwitter_secret"
-  end
-
-  get '/' do
-    erb :index
-  end
-
+class UserController<ApplicationController
   get '/signup' do
-    #binding.pry
     if logged_in?
       redirect to '/tweets'
     else
@@ -33,7 +18,6 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     if logged_in?
-      #@username=current_user.username
       @tweets=Tweet.all
       erb :'/tweets/tweets'
     else
@@ -42,8 +26,6 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    puts params
-    #binding.pry
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect to '/signup'
     else
@@ -52,17 +34,17 @@ class ApplicationController < Sinatra::Base
       session[:user_id]=@user.id
       redirect to '/tweets'
     end
-    #binding.pry
+
   end
 
   post '/login' do
     user = User.find_by(:username => params[:username])
-		if user && user.authenticate(params[:password])
-			 session[:user_id] = user.id
-			 redirect "/tweets"
-	 else
-			 redirect "/signup"
-	 end
+    if user && user.authenticate(params[:password])
+       session[:user_id] = user.id
+       redirect "/tweets"
+   else
+       redirect "/signup"
+   end
   end
 
   get '/logout' do
@@ -74,34 +56,8 @@ class ApplicationController < Sinatra::Base
   end
 end
 
-
-
-get 'tweets/new' do
-  erb :'/tweets/create_tweet'
+get '/users/:slug' do
+  @user=User.find_by_slug(params[:slug])
+  erb :'/users/show'
 end
-
-get 'tweet/:id' do
-  if logged_in?
-     @tweet = Tweet.find_by_id(params[:id])
-     erb :'tweets/show_tweet'
-   else
-     redirect to '/login'
-   end
-end
-
-get 'tweet/:id/delete' do
-
-end
-
-
-  helpers do
-		def logged_in?
-			!!session[:user_id]
-		end
-
-		def current_user
-			User.find(session[:user_id])
-		end
-	end
-
 end

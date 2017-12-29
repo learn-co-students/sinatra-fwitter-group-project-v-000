@@ -3,7 +3,7 @@ class User<ActiveRecord::Base
   has_many :tweets
 
     def slug
-      puts self.username
+      #puts self.username
       slug=self.username.downcase.gsub(" ", "-")
     end
 
@@ -12,7 +12,7 @@ class User<ActiveRecord::Base
     username=slug.split("-").join(" ")
     #puts name
     #binding.pry
-    return find_by(username).first
+    return find_by(username: username)
   end
 
 
