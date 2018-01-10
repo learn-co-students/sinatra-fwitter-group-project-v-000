@@ -48,11 +48,10 @@ class ApplicationController < Sinatra::Base
     erb :'/users/login'
   end
 
-  post '/login' do
+  post "/login" do
     if complete_form?
       @user = User.find_by(username: params["username"], password: params["password"])
       session[:user_id] = @user.id
-
       redirect to "/tweets"
     else
       redirect to "/login"
