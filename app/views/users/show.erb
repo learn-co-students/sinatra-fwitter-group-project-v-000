@@ -1,0 +1,18 @@
+<h1><%= @user.username %>Tweets</h1>
+
+<% if @user.tweets.count == 0 %>
+  <p>There are no tweets</p>
+  <% else %>
+  <ul>
+    <% @user.tweets.each do |tweet| %>
+    <li><a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a>
+      <%= tweet.content %>
+      <% if current_user == tweet.user %>
+      <a href="/tweets/<%= tweet.id %>"></a>
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+  <% end %>
+
+  
