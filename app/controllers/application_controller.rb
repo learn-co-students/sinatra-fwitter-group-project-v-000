@@ -64,12 +64,32 @@ class ApplicationController < Sinatra::Base
   get '/logout' do
     if logged_in?
       session.clear
+      redirect to '/login'
+    else
+      redirect to '/'
+    end
+  end
+
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'tweets/tweets'
+  end
+
+  get '/tweets/new' do
+    if logged_in?
+      erb :'/tweets/create_tweet'
     else
       redirect to '/login'
     end
   end
 
-
+  post '/tweets' do
+    if logged_in? && params[:content] != ""
+      @tweet = Tweet.create(content: params["content"], user_id: session[:user_id])
+    else
+      redirect to '/tweets/new'
+    end
+  end
 
 
 
