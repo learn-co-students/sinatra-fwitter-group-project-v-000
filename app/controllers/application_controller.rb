@@ -61,22 +61,18 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-=begin
+  get '/logout' do
+    if logged_in?
+      session.clear
+    else
+      redirect to '/login'
+    end
+  end
 
-it 'loads the tweets index after login' do
-  user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-  params = {
-    :username => "becky567",
-    :password => "kittens"
-  }
-  post '/login', params
-  expect(last_response.status).to eq(302)
-  follow_redirect!
-  expect(last_response.status).to eq(200)
-  expect(last_response.body).to include("Welcome,")
-end
 
-=end
+
+
+
   helpers do
 
     def complete_form?
