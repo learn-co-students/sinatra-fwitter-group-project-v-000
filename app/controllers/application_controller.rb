@@ -50,7 +50,10 @@ class ApplicationController < Sinatra::Base
 
   post "/login" do
     if complete_form?
-      @user = User.find_by(username: params["username"], password: params["password"])
+      @user = User.find_by(username: params["username"])
+    end
+
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect to "/tweets"
     else
@@ -58,6 +61,22 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+=begin
+
+it 'loads the tweets index after login' do
+  user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+  params = {
+    :username => "becky567",
+    :password => "kittens"
+  }
+  post '/login', params
+  expect(last_response.status).to eq(302)
+  follow_redirect!
+  expect(last_response.status).to eq(200)
+  expect(last_response.body).to include("Welcome,")
+end
+
+=end
   helpers do
 
     def complete_form?
