@@ -61,7 +61,7 @@ describe ApplicationController do
       user = User.create(:username => "skittles123", :email => "skittles@aol.com", :password => "rainbows")
       params = {
         :username => "skittles123",
-        :email => "skittles@aol.com",
+        :email => "skittles123@aol.com",
         :password => "rainbows"
       }
       post '/signup', params
