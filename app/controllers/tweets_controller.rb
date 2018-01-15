@@ -48,10 +48,11 @@ class TweetsController < ApplicationController
   patch '/tweets/:id/edit' do
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
-      if @tweet.user_id == session[:user_id]
+      if @tweet.user_id == session[:user_id] && !@tweet.content.empty?
         @tweet.content = params[:content]
+        @tweet.save
       end
-      redirect to '/tweets'
+      redirect to "/tweets/#{@tweet.id}/edit"
     else
       redirect to '/login'
     end
