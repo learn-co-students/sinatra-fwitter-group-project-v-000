@@ -1,6 +1,10 @@
 class TweetController < ApplicationController
 
   get '/tweets' do
+    unless session[:user_id].nil?
+      @user = User.find(session[:user_id])
+      flash[:message] = "Welcome, #{@user.username}"
+    end
     @tweets = Tweet.all
     erb :'/tweets/index_tweet'
   end
@@ -10,7 +14,7 @@ class TweetController < ApplicationController
   end
 
   post '/tweets' do
-    @tweet = 
+    @tweet =
     erb :'/tweets/show_tweet'
   end
 
