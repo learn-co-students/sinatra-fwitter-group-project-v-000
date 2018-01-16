@@ -1,0 +1,10 @@
+
+<h1>Welcome, <%=@user.username%></h1>
+
+<h3>Below are existing tweets: </h3>
+<ul>
+  <li><%@twitters.each do |i|%>
+    <%=i.content%><br>
+    <%end%>
+  </li>
+</ul>

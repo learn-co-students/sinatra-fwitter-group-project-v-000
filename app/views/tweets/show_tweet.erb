@@ -1,0 +1,12 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h3><%=@tweet.content%></h3>
+
+<h4>
+  <form action="/tweets/<%=@tweet.id%>/delete" method="post">
+    <button type="submit" id="Delete Tweet">Delete Tweet?</button></a>
+  </form></h4>
+
+<h4> <a href="/tweets/<%=@tweet.id%>/edit"><button type="submit" id="Edit Tweet">Edit Tweet?</a></h4>
