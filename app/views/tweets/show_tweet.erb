@@ -1,3 +1,7 @@
 <% if flash.has?(:message) %>
   <%= flash[:message] %>
 <% end %>
+
+<h3><%=@tweet.content%></h3>
+<h4> <a href="/tweets/<%=@tweet.id%>/delete">Delete Tweet?</a></h4>
+<h4> <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet?</a></h4>
