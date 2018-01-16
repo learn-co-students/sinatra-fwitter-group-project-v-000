@@ -9,9 +9,8 @@ gem 'sqlite3'
 gem 'thin'
 gem 'shotgun'
 gem 'pry'
-gem 'bcrypt'
 gem "tux"
-gem 'bcrypt'
+gem 'bcrypt-ruby', '~> 3.1.5'
 
 group :test do
   gem 'rspec'
