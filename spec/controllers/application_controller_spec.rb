@@ -261,6 +261,7 @@ describe ApplicationController do
 
     context 'logged out' do
       it 'does not let user view new tweet form if not logged in' do
+
         get '/tweets/new'
         expect(last_response.location).to include("/login")
       end
