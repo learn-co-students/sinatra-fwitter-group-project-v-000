@@ -1,6 +1,10 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
+  register Sinatra::ActiveRecordExtension
+  enable :sessions
+  set :session_secret, "my_application_secret"
+  use Rack::Flash
 
   configure do
     set :public_folder, 'public'
@@ -8,7 +12,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    "Welcome to Fwitter"
   end
 
 end

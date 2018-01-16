@@ -1,8 +1,8 @@
 class UserController < ApplicationController
 
-
   get "/signup" do
-    if session[:user_id].empty?
+    # binding.pry
+    if session[:user_id].nil?
   		erb :"users/create_user"
     else
       flash[:message] = "You are already logged in.  Please log-out first."
@@ -11,8 +11,8 @@ class UserController < ApplicationController
 	end
 
   post "/signup" do
-      user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
-
+    # binding.pry
+      user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
       if user.save
           session[:user_id] = user.id
           redirect "/tweets"
