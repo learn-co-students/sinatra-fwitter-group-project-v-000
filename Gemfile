@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'sinatra'
+gem 'rails'
 gem 'activerecord', :require => 'active_record'
 gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
 gem 'rake'
@@ -10,7 +11,7 @@ gem 'thin'
 gem 'shotgun'
 gem 'pry'
 gem "tux"
-gem 'bcrypt-ruby', '~> 3.1.5'
+gem 'bcrypt-ruby'
 
 group :test do
   gem 'rspec'
