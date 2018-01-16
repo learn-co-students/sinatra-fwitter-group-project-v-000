@@ -294,6 +294,7 @@ describe ApplicationController do
         user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet = Tweet.create(:content => "i am a boss at tweeting", :user_id => user.id)
         get "/tweets/#{tweet.id}"
+        #binding.pry
         expect(last_response.location).to include("/login")
       end
     end
