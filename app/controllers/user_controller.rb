@@ -1,29 +1,34 @@
 class UserController < ApplicationController
 
-  get '/users' do
-    @users = User.all
-    erb :'/users/index'
-  end
 
-  get "/users/signup" do
-		erb :signup
+  get "/signup" do
+    if session[:user_id].empty?
+  		erb :"users/create_user"
+    else
+      flash[:message] = "You are already logged in.  Please log-out first."
+      redirect "/tweets"
+    end
 	end
 
-  post "/users/signup" do
-      user = User.new(:username => params[:username], :password => params[:password])
+  post "/signup" do
+      user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
 
       if user.save
-          redirect "/users/login"
+          session[:user_id] = user.id
+          redirect "/tweets"
       else
-          redirect "/failure"
+          flash[:message] = "Signup failure: please retry!"
+          redirect "/signup"
       end
   end
 
-  post "/users/login" do
+  post "/login" do
       user = User.find_by(:username => params[:username])
       if user
-          redirect "/users/show"
+        flash[:message] = "Welcome, #{user}"
+        redirect "/users/show"
       else
+        flash[:message] = "Successfully created..."
           redirect "/failure"
       end
   end
