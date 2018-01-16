@@ -29,7 +29,7 @@ class TweetController < ApplicationController
     @user = User.find(session[:user_id])
     @tweet = Tweet.new(content: params[:content], user_id: @user.id)
     if @tweet.save
-      redirect "/tweets/#{tweet.id}"
+      redirect "/tweets/#{@tweet.id}"
     else
       flash[:message] = "Creation failure: please retry!"
       redirect "/tweets/new"
@@ -60,6 +60,11 @@ class TweetController < ApplicationController
   post '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
     @tweet.update(content: params[:content])
+    if !@tweet.save
+      redirect "/tweets/#{@tweet.id}/edit"
+    else
+      redirect "/tweets/#{@tweet.id}"
+    end
   end
 
   post '/tweets/:id/delete' do
