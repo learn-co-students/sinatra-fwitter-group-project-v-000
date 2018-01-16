@@ -1,12 +1,15 @@
 class TweetController < ApplicationController
 
   get '/tweets' do
-    unless session[:user_id].nil?
+    if session[:user_id].nil?
+      redirect '/login'
+    else
       @user = User.find(session[:user_id])
-      flash[:message] = "Welcome, #{@user.username}"
+      "Welcome, #{@user.username}"
     end
-    @tweets = Tweet.all
-    erb :'/tweets/index_tweet'
+
+    # @tweets = Tweet.all
+    # erb :'/tweets/index_tweet'
   end
 
   get '/tweets/new' do
