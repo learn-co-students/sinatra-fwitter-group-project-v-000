@@ -62,10 +62,17 @@ class TweetController < ApplicationController
     @tweet.update(content: params[:content])
   end
 
-  get '/tweets/:id/delete' do
-    @tweet = Tweet.find(params[:id])
-    @tweet.destroy
-    redirect '/tweets'
+  post '/tweets/:id/delete' do
+    if session[:user_id].nil?
+      redirect '/login'
+    else
+      @tweet = Tweet.find(params[:id])
+      @user = User.find(session[:user_id])
+      if @user.tweets.include?(@tweet)
+        @tweet.destroy
+        redirect '/tweets'
+      end
+    end
   end
 
 end
