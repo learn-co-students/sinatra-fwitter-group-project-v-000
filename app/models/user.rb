@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
   has_many :tweets
-  extend  Useful::ClassMethods
-  include Useful::InstanceMethods
 
   # before_save { self.email = email.downcase }
   # validates :username, presence: true, length: { maximum: 50 }
@@ -11,4 +9,14 @@ class User < ActiveRecord::Base
   #                 uniqueness: { case_sensitive: false }
   has_secure_password
   # validates :password, presence: true
+  # binding.pry
+
+  def slug
+    self.username.downcase.split(" ").join("-")
+  end
+
+  def self.find_by_slug(object)
+    self.class.all.find {|item| item.slug == object}
+  end
+
 end
