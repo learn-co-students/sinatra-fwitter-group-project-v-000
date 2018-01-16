@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_slug(object)
-    self.class.all.find {|item| item.slug == object}
+    User.all.find {|i| i.slug == object}
   end
 
 end
