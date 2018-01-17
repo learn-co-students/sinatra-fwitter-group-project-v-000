@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
     elsif params[:username] == "" || params[:password] == "" || params[:email] == ""
       redirect '/signup'
     else
-      @user = User.new(username: params[:username])
+      @user = User.new(params)
       @user.save
       session[:user_id] = @user.id
       redirect '/tweets'
@@ -63,9 +63,6 @@ class ApplicationController < Sinatra::Base
   get '/logout' do
       session.clear
       redirect '/login'
-    # if !logged_in?
-    #   redirect '/login'
-    # end
   end
 
 #Helper methods
