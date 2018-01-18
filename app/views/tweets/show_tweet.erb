@@ -1,0 +1,11 @@
+<h1> Tweet <%=@tweet.id%> by  </h1>  <!-- add username and link to username-->
+
+<p>Posted on: <%=@tweet.created_at.strftime("%B %d, %Y at %I:%M%p")%> - <%=@tweet.content%></p>
+<p> <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a></p>
+<p><a href="/tweets">Back</a> to all tweets</p>
+
+
+<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="submit" value="Delete Tweet">
+</form>
