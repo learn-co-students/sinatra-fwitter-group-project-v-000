@@ -13,6 +13,10 @@ class ApplicationController < Sinatra::Base
     redirect '/tweets' if current_user
   end
 
+  before '/tweets' do
+    redirect '/login' unless current_user
+  end
+  
   get '/' do
     erb :index
   end
@@ -53,7 +57,7 @@ class ApplicationController < Sinatra::Base
 
   get '/logout' do
     session.clear
-    redirect '/'
+    redirect '/login'
   end
 
   def sign_in(user)
