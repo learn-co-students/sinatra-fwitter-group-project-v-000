@@ -5,12 +5,13 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    enable :sessions                    #sets sessions
+        enable :sessions                    #sets sessions
+        set :session_secret, "password_security"
 
   end
 
     get '/' do
-#binding.pry      
+#binding.pry
          erb :index
 
     end
