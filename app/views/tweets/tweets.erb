@@ -1,17 +1,11 @@
-<<<<<<< HEAD
 <h1>Welcome, <%=@user.username%>!</h1>
-=======
-<h1>Welcome, <%=@user.username%>!
->>>>>>> 8352c4dbace91617c6fc259f04a33a2a629e353c
-
+<h2>See all tweets below:</h2>
 <ul>
   <%@tweets.each do |t|%>
     <li><a href='/tweets/<%=t.id%>'><%=t.content%></a></li>
   <%end%>
 </ul>
 
-<<<<<<< HEAD
 <p><a href="/tweets/new">Create a new tweet</a></p>
-=======
->>>>>>> 8352c4dbace91617c6fc259f04a33a2a629e353c
+
 <p><a href="/logout">Logout</a></p>
