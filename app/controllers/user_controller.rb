@@ -4,34 +4,46 @@ class UserController < ApplicationController
   use Rack::Flash
 
     get '/signup' do
+    #  @session = session
 #binding.pry
-         erb :"/users/create_user"
+          if !!logged_in?
+              redirect '/tweets'
+          else
+              erb :"/users/create_user"
+          end
+
     end
 
 
     post '/signup' do
+      #:username => "skittles123",
+      #:email => "skittles@aol.com",
+      #:password => "rainbows"
 
-          if params[:user][:name]=="" || params[:user][:email]=="" || params[:user][:password]==""
+
+          if params[:username]=="" || params[:email]=="" || params[:password]==""
                flash[:message] = "Do not leave Username/Email/Password sections blank."
                 redirect to '/signup'
-          elsif  !!User.find_by(username: params[:user][:name])
+          elsif  !!User.find_by(username: params[:username])
                 flash[:message] = "This username has already been taken. Please makeup a new username."
                  redirect to '/signup'
-         elsif  !!User.find_by(email: params[:user][:email])
+         elsif  !!User.find_by(email: params[:email])
                  flash[:message] = "This email has already been taken. Please use a new email."
                 redirect to '/signup'
           else
 
-              @user = User.create(username: params[:user][:name], email: params[:user][:email], password_digest: params[:user][:password])
+              @user = User.create(username: params[:username], email: params[:email], password: params[:password])
               session[:user_id] = @user.id
-binding.pry
-              redirect to '/tweets'
+#binding.pry
+              redirect '/tweets'
           end
 
     end
 
 
 end
+
+
 
 
 #SIGN UP
