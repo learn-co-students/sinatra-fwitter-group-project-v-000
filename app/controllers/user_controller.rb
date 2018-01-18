@@ -18,19 +18,12 @@ class UserController < ApplicationController
       redirect '/tweets'
     end
       @user = User.new(params)
+      #binding.pry
       if @user.save
       session[:user_id] = @user.id
       redirect '/tweets'
     else
       redirect '/signup'
-    end
-  end
-
-  get '/tweets' do
-    if logged_in?
-      erb :tweets
-    else
-      redirect '/login'
     end
   end
 
@@ -44,7 +37,7 @@ class UserController < ApplicationController
 
   post '/login' do
     @user = User.find_by(username: params[:username])
-    if @user != nil && @user.authenticate(params[:password])
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect '/tweets'
     else
@@ -53,19 +46,12 @@ class UserController < ApplicationController
   end
 
   get '/logout' do
-      session.clear
-      redirect '/login'
+    session.clear
+    redirect '/login'
   end
 
-  #Helper methods
-  helpers do
-    def logged_in?
-      !!session[:user_id]
-    end
-
-    def current_user
-      @current_user = User.find(id:session[:user_id])
-    end
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'users/show'
   end
-
 end

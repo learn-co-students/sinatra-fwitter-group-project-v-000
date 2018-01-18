@@ -1,6 +1,6 @@
-<h1> Tweet <%=@tweet.id%> by  </h1>  <!-- add username and link to username-->
-
-<p>Posted on: <%=@tweet.created_at.strftime("%B %d, %Y at %I:%M%p")%> - <%=@tweet.content%></p>
+<h2><%=@tweet.content%></h2>
+<p>Tweeted by: <%=@user.username%></p>
+<p>Posted on: <%=@tweet.created_at.strftime("%B %d, %Y at %I:%M%p")%></p>
 <p> <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a></p>
 <p><a href="/tweets">Back</a> to all tweets</p>
 

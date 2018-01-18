@@ -1,10 +1,10 @@
 require 'pry'
 class TweetController < ApplicationController
 
-#EDIT WITH SESSIONS AND USERS
-
   get '/tweets' do
+    #binding.pry
     if logged_in?
+      @user = User.find(session[:user_id])
       @tweets = Tweet.all
       erb :'tweets/tweets'
     else redirect '/login'
@@ -12,44 +12,60 @@ class TweetController < ApplicationController
   end
 
   get '/tweets/new' do
-     if logged_in?
+    if logged_in?
       @user = User.find(session[:user_id])
       erb :'tweets/create_tweet'
-    else redirect '/index'
+    else
+      redirect '/login'
     end
   end
 
   post '/tweets' do
-
-    @tweet = Tweet.create(content:params[:content])
-    redirect "/tweets/#{@tweet.id}"
+    @tweet = Tweet.new(content:params[:content],user_id:session[:user_id])
+    if @tweet.save
+      redirect "/tweets/#{@tweet.id}"
+    else
+      redirect "/tweets/new"
+    end
   end
 
   get '/tweets/:id' do
-    @tweet = Tweet.find(params[:id])
-    erb :'tweets/show_tweet'
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      @user = User.find(@tweet.user_id)
+      erb :'tweets/show_tweet'
+    else
+      redirect '/login'
+    end
   end
 
   get '/tweets/:id/edit' do
     @tweet = Tweet.find(params[:id])
-    erb :'tweets/edit_tweet'
+    #binding.pry
+    if logged_in? && @tweet.user_id == session[:user_id]
+      erb :'tweets/edit_tweet'
+    else
+      redirect "/login"
+    end
   end
 
   post '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    @tweet.update(content:params[:content])
-    redirect "/tweets/#{@tweet.id}"
+    if @tweet.update(content:params[:content])
+      redirect "/tweets/#{@tweet.id}"
+    else
+      redirect "/tweets/#{@tweet.id}/edit"
+    end
   end
 
   patch '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
-    @tweet.delete
-    redirect '/tweets'
-  end
-
-  helpers do
-    def logged_in?
-      !!session[:user_id]
+    if @tweet.user_id == session[:user_id]
+      @tweet.delete
+      redirect '/tweets'
+    else
+      redirect '/tweets'
     end
   end
+
 end
