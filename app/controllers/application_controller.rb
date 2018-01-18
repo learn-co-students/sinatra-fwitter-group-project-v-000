@@ -9,11 +9,7 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "password_security"
   end
 
-  before '/signup' do
-    redirect '/tweets' if current_user
-  end
-
-  before '/login' do
+  before /\/(signup|login)/ do
     redirect '/tweets' if current_user
   end
 
