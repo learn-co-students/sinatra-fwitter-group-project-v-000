@@ -7,12 +7,13 @@
     <h1>Tweets Index?</h1>
     Welcome, <%= current_user.username %> </br>
 
-    Tweets: 
-            <ul>
-              <% @tweets.each do |tweet| %>
-               <li><%= tweet.content %></li>
-              <% end %>
-            </ul>
+    <a href="/tweets/new">New Tweet</a>
+    <br>
+    <ul>
+      <% @tweets.each do |tweet| %>
+        <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></li>
+      <% end %>
+    </ul>
 
   </body>
 </html>

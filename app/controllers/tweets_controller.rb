@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-  set :views, 'app/views/tweets'
+  set :views, Proc.new { File.join(root, "../views/tweets") }
 
   get '/tweets' do
     @tweets = Tweet.all
@@ -29,5 +29,23 @@ class TweetsController < ApplicationController
     tweet = current_user.tweets.find(params[:id])
     tweet.destroy
     redirect '/tweets'
+  end
+
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find(params[:id])
+    erb :edit
+  end
+  
+  patch '/tweets/:id' do
+    tweet = current_user.tweets.find(params[:id])
+    if tweet.update(params[:tweet])
+      redirect '/tweets'
+    else
+      redirect "/tweets/#{tweet.id}/edit"
+    end
+  end
+
+  error ActiveRecord::RecordNotFound do
+    [404, "Tweet not found"]
   end
 end

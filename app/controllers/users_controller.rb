@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
+  set :views, Proc.new { File.join(root, "../views/users") }
 
   get '/signup' do
-    erb :'users/create_user'
+    erb :create_user
   end
 
   post '/signup' do
@@ -16,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    erb :'users/login'
+    erb :login
   end
 
   post '/login' do
