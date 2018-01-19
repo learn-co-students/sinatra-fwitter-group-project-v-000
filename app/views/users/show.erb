@@ -1,0 +1,9 @@
+<h1>User Show Page for <%=@user.username%></h1>
+
+<%@user.tweets.each do |t|%>
+    <li><%=t.content%></li>
+<%end%>
+
+<br></br>
+
+<a href="/logout">Logout</a>
