@@ -1,13 +1,11 @@
 class TweetsController < ApplicationController
-  set :views, Proc.new { File.join(root, "../views/tweets") }
-
   get '/tweets' do
     @tweets = Tweet.all
-    erb :index
+    erb :'tweets/index'
   end
 
   get '/tweets/new' do
-    erb :new
+    erb :'tweets/new'
   end
 
   post '/tweets' do
@@ -22,7 +20,7 @@ class TweetsController < ApplicationController
 
   get '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    erb :show
+    erb :'tweets/show'
   end
 
   delete '/tweets/:id' do
@@ -33,7 +31,7 @@ class TweetsController < ApplicationController
 
   get '/tweets/:id/edit' do
     @tweet = Tweet.find(params[:id])
-    erb :edit
+    erb :'tweets/edit'
   end
   
   patch '/tweets/:id' do

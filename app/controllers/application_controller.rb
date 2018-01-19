@@ -7,9 +7,8 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "password_security"
     set :show_exceptions, false unless ENV['SINATRA_ENV'] == 'development'
+    set :views, Proc.new { File.join(root, "../views") }
   end
-
-  set :views, Proc.new { File.join(root, "../views") }
 
   get '/' do
     erb :index

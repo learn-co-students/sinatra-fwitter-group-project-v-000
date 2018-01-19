@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
-  set :views, Proc.new { File.join(root, "../views/users") }
-
   get '/signup' do
-    erb :create_user
+    erb :'users/create_user'
   end
 
   post '/signup' do
@@ -17,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    erb :login
+    erb :'users/login'
   end
 
   post '/login' do
@@ -38,6 +36,6 @@ class UsersController < ApplicationController
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    erb :show
+    erb :'users/show'
   end
 end
