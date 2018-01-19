@@ -19,4 +19,15 @@ class TweetsController < ApplicationController
       redirect '/tweets/new'
     end
   end
+
+  get '/tweets/:id' do
+    @tweet = Tweet.find(params[:id])
+    erb :show
+  end
+
+  delete '/tweets/:id' do
+    tweet = current_user.tweets.find(params[:id])
+    tweet.destroy
+    redirect '/tweets'
+  end
 end
