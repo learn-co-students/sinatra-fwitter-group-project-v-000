@@ -1,0 +1,54 @@
+separate classes for User and Tweet (2 databases)
+
+a user should not be able to take any actions (except sign-up), unless they are logged in.
+
+Once a user is logged in, they should be able to create, edit and delete their own tweets, as well as view all the tweets.
+
+
+MODELS
+      You'll need to create two models in app/models, one User model and one Tweet. Both classes should inherit from ActiveRecord::Base.
+            #occures after creating databases
+
+database
+    MIGRATIONS
+    You'll need to create 2 migrations to create the users and the tweets table.
+        1)Users should have a username(string), email(string), and password(string) SHOULD BE SETUP AS PASSWORD DIGEST SO THAT BCRYPT CAN WORK PROPERLY, and have many tweets.
+        2)Tweets should have content, belong to a user.
+
+models
+        ASSOCIATIONS{}
+        1)  users have many tweets
+        2) tweets belong to a usr
+
+sessions
+        sessions should be enabled
+
+
+views / controller steps
+      HOME PAGE
+            You'll need a controller action to load the home page. You'll want to create a view that will eventually link to both a login page and signup page. The homepage should respond to a GET request to /.
+      CREATE TWEET
+            You'll need to create two controller actions, one to load the create tweet form, and one to process the form submission. The tweet should be created and saved to the database. The form should be loaded via a GET request to /tweets/new and submitted via a POST to /tweets.
+        SHOW TWEET
+            You'll need to create a controller action that displays the information for a single tweet. You'll want the controller action respond to a GET request to /tweets/:id.
+      EDIT TWEET
+            You'll need to create two controller actions to edit a tweet: one to load the form to edit, and one to actually update the tweet entry in the database. The form to edit a tweet should be loaded via a GET request to /tweets/:id/edit. The form should be submitted via a POST request to /tweets/:id.
+            You'll want to create an edit link on the tweet show page.
+      DELETE TWEET
+            You'll only need one controller action to delete a tweet. The form to delete a tweet should be found on the tweet show page.
+            The delete form doesn't need to have any input fields, just a submit button.
+            The form to delete a tweet should be submitted via a POST request to tweets/:id/delete.
+      SIGN UP
+            You'll need to create two controller actions, one to display the user signup and one to process the form submission. The controller action that processes the form submission should create the user and save it to the database.
+            The form to sign up should be loaded via a GET request to /signup and submitted via a POST request to /signup.
+        #   The signup action should also log the user in and add the user_id to the sessions hash.
+            Make sure you add the Signup link to the home page.
+      LOG IN
+            You'll need two more controller actions to process logging in: one to display the form to log in and one to log add the user_id to the sessions hash.
+            The form to login should be loaded via a GET request to /login and submitted via a POST request to /login.
+      LOG OUT
+            You'll need to create a controller action to process a GET request to /logout to log out. The controller action should clear the session hash
+PROTECTING THE VIEWS
+            You'll need to make sure that no one can create, read, edit or delete any tweets.
+            You'll want to create two helper methods current_user and logged_in?. You'll want to use these helper methods to block content if a user is not logged in.
+            It's especially important that a user should not be able to edit or delete the tweets created by a different user. A user can only modify their own tweets.

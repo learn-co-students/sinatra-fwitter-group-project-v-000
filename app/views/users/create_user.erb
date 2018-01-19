@@ -1,0 +1,22 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h1>Create User Page</h1>
+
+<form action="/signup" method="POST">
+
+        <b><label>Input New User Name:</label></b>
+        <input type="text" name="username" id="username" placeholder="">
+      <br></br>
+        <b><label>What is your email?</label></b>
+        <input type="text" name="email" id="email" placeholder="">
+      <br></br>
+        <b><label>What is your password?</label></b>
+        <input type="text" name="password" id="password" placeholder="">
+    <br></br>
+        <input type="submit" name="submit" value="Create New User">
+
+</form>
+
+<a href="/login">Already a user. Click here to login</a>
