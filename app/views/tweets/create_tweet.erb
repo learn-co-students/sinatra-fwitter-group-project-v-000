@@ -1,0 +1,5 @@
+<% redirect "/login" unless logged_in? %>
+<form action="/tweets" method="post">
+  <input type="text" name="content" value="content">
+  <input type="submit" name="submit" value="submit" placeholder="Create Tweet">
+</form>
