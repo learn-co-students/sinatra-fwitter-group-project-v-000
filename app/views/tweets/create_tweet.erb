@@ -1,5 +1,8 @@
 <% redirect "/login" unless logged_in? %>
+<h4>Create a New Tweet:</h4>
+<br>
 <form action="/tweets" method="post">
-  <input type="text" name="content" value="content">
-  <input type="submit" name="submit" value="submit" placeholder="Create Tweet">
+  <textarea rows="4" cols="50" name="content"></textarea>
+  <button type="submit" value="submit" name="submit">Create</button>
 </form>
+<br>

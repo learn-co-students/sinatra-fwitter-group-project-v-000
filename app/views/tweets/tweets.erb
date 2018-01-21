@@ -1,14 +1,12 @@
-<h2>Welcome,<%= @user.username %></h2>
-<br>
-<p>Here are your tweets:</p>
-<ul>
+<h2>Welcome, &nbsp<%= @user.username %></h2>
+
+<h4>Here's what's happening on Fwitter:</h4>
   <% @tweets.each do |tweet| %>
-    <li><%= tweet.id %></li>
-    <li><%= tweet.content %></li>
+    <%= tweet.user.username %> wrote:<br>
+    <i><%= tweet.content %></i>
+    <br>
     <br>
   <% end %>
-</ul>
-
-<form action="/logout" method="get">
-  <label>Log Out</label><input type="click_button" name="submit" value="submit">
-</form>
+  <form action="/users/<%= current_user.id %>" method="get">
+    <button type="submit" name="my_tweets">View My Tweets</button>
+  </form><br>

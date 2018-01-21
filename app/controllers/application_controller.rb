@@ -23,7 +23,7 @@ class ApplicationController < Sinatra::Base
     @user = User.create(username: params[:username], email: params[:email], password: params[:password])
     if @user && @user.save
       session[:id] = @user.id
-      redirect '/tweets/tweets'
+      redirect '/tweets'
     else
       redirect '/signup'
     end
@@ -82,7 +82,7 @@ class ApplicationController < Sinatra::Base
       @tweet = Tweet.create(:content => params[:content])
       @tweet.user_id = @user.id
       @tweet.save
-      redirect '/tweets'
+      redirect "/users/#{@user.id}"
     else
       redirect '/tweets/new'
     end

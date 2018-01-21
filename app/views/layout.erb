@@ -6,18 +6,15 @@
   </head>
   <body>
     <%= yield %>
+    <br>
     <% if logged_in? %>
-      <form action="/tweets/new" method="get">
-        <button type="submit" name="create_tweet">Create Tweet</button>
-      </form>
       <form action="/logout" method="get">
         <button type="submit" name="logout">Log Out</button>
       </form>
     <% else %>
       <form action="/login" method="get">
         <button type="submit" name="login">Log In</button><br>
-      </form>
-      or <br>
+      </form><br>
       <form action="/signup" method="get">
         <button type="submit" name="signup">Sign Up</button>
       </form>
