@@ -1,0 +1,12 @@
+<h2>Welcome, &nbsp<%= @user.username %></h2>
+
+<h4>Here's what's happening on Fwitter:</h4>
+  <% @tweets.each do |tweet| %>
+    <%= tweet.user.username %> wrote:<br>
+    <i><%= tweet.content %></i>
+    <br>
+    <br>
+  <% end %>
+  <form action="/users/<%= current_user.id %>" method="get">
+    <button type="submit" name="my_tweets">View My Tweets</button>
+  </form><br>

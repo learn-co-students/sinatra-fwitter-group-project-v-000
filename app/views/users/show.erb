@@ -1,0 +1,13 @@
+<h2>Welcome, &nbsp<%= @user.username %></h2>
+<br>
+<h4>Here are your tweets:</h4>
+  <% @user.tweets.all.each do |tweet| %>
+    <i><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></i></a>
+    <br><br>
+  <% end %>
+  <form action="/tweets/new" method="get">
+    <button type="submit" name="create_tweet">Create New Tweet</button>
+  </form><br>
+  <form action="/tweets" method="get">
+    <button type="submit" name="all_tweets">View All Tweets</button>
+  </form><br>

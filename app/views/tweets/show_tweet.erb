@@ -1,0 +1,20 @@
+<h2>Your Tweet:</h2>
+<br>
+<p><%= @tweet.content %></p>
+<br>
+<form action="/tweets/new" method="get">
+  <button type="submit" name="create_tweet">Create New Tweet</button>
+</form>
+<br>
+<form action="/tweets/<%= @tweet.id %>/edit" method="get">
+  <button type="submit" name="edit_tweet">Edit Tweet</button>
+</form>
+<br>
+<form action="/tweets/<%= @tweet.id %>/delete" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit" name="submit">Delete Tweet</button>
+</form>
+<br>
+<form action="/users/<%= current_user.id %>" method="get">
+  <button type="submit" name="my_tweets">View All My Tweets</button>
+</form>
