@@ -24,7 +24,7 @@ class TweetsController < ApplicationController
       if @tweet.user_id == current_user.id
        erb :'tweets/edit_tweet'
       else
-        "current user id does not match the tweet's user id"
+        "ACCESS DENIED ... Stop trying to URL hack me!"
         # redirect to '/tweets'
       end
     else

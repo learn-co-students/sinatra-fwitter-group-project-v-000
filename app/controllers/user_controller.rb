@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       "Sorry, can you go back and fill out all three fields: Name, email, and password?"
       # redirect to '/signup'
     elsif logged_in?
-      redirect to '/tweets' # <= This isn't working cause UR not logging in.
+      redirect to '/tweets'
     elsif
       user = User.find_by(:username => params[:username])
       if
