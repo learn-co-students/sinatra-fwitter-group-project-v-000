@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html>
+  <head>
+    <body value="Tweets">
+<p> Welcome <%= current_user.username %>
+<h1><b> Tweets </b></h1>
+
+<ul>
+<% @tweets.each do |tweet| %>
+  <div>
+    <h2>
+      <li>
+       <%= tweet.content %>
+       <sec style="font-size:60%; color: #297b5c;">&emsp; ...written by:
+         <!-- This doesn't work cause the class can't find the "slug" method: -->
+         <!--            "...tweet.user.username.slug" -->
+         <a href="/users/<%= tweet.user.username.downcase.gsub(" ","-") %>">
+         <%= tweet.user.username %></a>
+       </sec>
+        <h3>
+          <b>
+            <% if tweet.user_id == session[:user_id] %>
+            <form action="/tweets/<%=tweet.id%>">
+              <input type="submit" style="font-size:60%; color: #297b5c;" value="Modify Tweet"/>
+            </form>
+            <% end %>
+          </b>
+        </h3>
+      </li>
+    </h2>
+  </div>
+<% end %>
+</ul>
+ </body>
+</html>
