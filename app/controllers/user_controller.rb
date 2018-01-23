@@ -12,9 +12,23 @@ class UsersController < ApplicationController
     end
   end
 
+
+
   post '/signup' do
+    # raise params.inspect
+    # params = {"username"=>"Nancy", "email"=>"nancy@yahoo.com", "password"=>"asdf"}
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
-      redirect to '/signup'
+      "Sorry, can you go back and fill out all three fields: Name, email, and password?"
+      # redirect to '/signup'
+    elsif logged_in?
+      redirect to '/tweets' # <= This isn't working cause UR not logging in.
+    elsif
+      user = User.find_by(:username => params[:username])
+      if
+        user.username == params[:username] && user.email == params[:email]
+        "Oops, sorry but that name and password are already taken!"
+      end
+
     else
       @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
       @user.save
@@ -22,6 +36,7 @@ class UsersController < ApplicationController
       redirect to '/tweets'
     end
   end
+
 
   get '/login' do
     if !logged_in?
@@ -37,7 +52,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect "/tweets"
     else
-      redirect to '/signup'
+      erb :'users/login_error'
     end
   end
 

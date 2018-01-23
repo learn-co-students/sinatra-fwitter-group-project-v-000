@@ -1,14 +1,21 @@
+<!--
+OK so this used to be called "login.erb" but that's kinda shitty cause 'signing-up' for the first time
+is totally different than 'logging-in' as a first-time user and besides, the whole program is fucked up
+cause if you don't logout, the cookies will remember you and let you login again & create a whole second user.
+I'm going to try & fiz this whole mess.
+
+When I'm done doing that...thos page will be obselete and not used anymore.
+-->
+
 <h2>Users</h2>
 
 <% unless locals.empty? %>
   <%= message %>
 <% end %>
 
-
-<h3>Sign Up</h3>
-<form action="/signup" method="POST">
+<h3>Sign in below if you're a current user</h3>
+<form action="/login" method="POST">
   <p>Name: <input type="text" name="username"></p>
-  <p>Email: <input type="text" name="email"></p>
   <p>Password: <input type="text" name="password"></p>
   <input class="btn btn-primary" type="submit">
 </form>

@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html>
   <head>
     <title>Fwitter</title>
@@ -6,16 +7,19 @@
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
+    <!-- <style> nav {background: #fbff9c} </style> -->
+    <style> nav {background: linear-gradient(to right, #fbff9c , white)}</style>
     <nav>
       <% if logged_in? %>
 
-        <a href="/tweets/new"> Create Tweet </a>
-        <a href="/logout"> Log Out </a>
-        <p>Welcome, <%=current_user.username %></p>
-
+        <b><a href="/tweets/new"> Create Tweet </a></b>
+        <b><a href="/logout">&emsp; &emsp; &emsp; &emsp; Log Out </a></b>
+        <p>
+          <p1 style="font-size:220%; font-family:verdana; color: grey;">Welcome, <%=current_user.username %></p1>
+        </p>
       <% else %>
-        <a href="/signup">Sign Up</a>
-        <a href="/login"> Sign In </a>
+        <b><a href="/signup"> Sign Up </a></b>
+        <b><a href="/login">&emsp; &emsp; &emsp; &emsp; Sign In </a></b>
       <%end %>
 
     </nav>
