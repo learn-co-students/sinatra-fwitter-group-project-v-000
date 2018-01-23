@@ -1,0 +1,6 @@
+Tweet.create(:content => "Helloooooo", :user_id => 1)
+Tweet.create(:content => "HIIIIIIII", :user_id => 1)
+Tweet.create(:content => "Helloooooo", :user_id => 2)
+Tweet.create(:content => "HellooHIIIIIoooo", :user_id => 2)
+Tweet.create(:content => "HellJJJJoooooo", :user_id => 3)
+Tweet.create(:content => "HelloJJJooooo", :user_id => 3)
