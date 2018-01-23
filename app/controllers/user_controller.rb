@@ -8,7 +8,7 @@ class UserController < ApplicationController
     if Helpers.logged_in?(session)
       redirect to '/tweets'
     else
-      erb :'users/signup'
+      erb :'users/create_user'
     end
   end
   
@@ -43,7 +43,7 @@ class UserController < ApplicationController
   
   get '/users/:slug' do
     @tweets = User.find_by_slug(params[:slug]).tweets
-    erb :'/users/index'
+    erb :'/users/show'
   end
   
   get '/logout' do
