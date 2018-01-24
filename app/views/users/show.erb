@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.css" type="text/css">
+  </head>
+  <body id="page-top">
+    <h2>Below are your tweets, <%= @user.username %>:</h2><br>
+    <% @user.tweets.each do |tweet| %>
+       <%= tweet.content %></br>
+         <%end%>
+  </body>
+</html>

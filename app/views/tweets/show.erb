@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Tweet</title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.css" type="text/css">
+  </head>
+  <body id="page-top">
+    <h1><label>Tweets</label></h1><br>
+  <h3><%= @tweet.content %></h3><br></br>
+
+    <form action="/tweets/<%=@tweet.id%>/delete" method="POST">
+      <input type="hidden" name="_method" value="DELETE">
+   <button type="submit" value="Delete Tweet">Delete Tweet</button><br></br>
+ </form>
+
+     <h3><a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a></h3>
+  </body>
+</html>
