@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   extend Slugable::ClassMethods
   include Slugable::InstanceMethods
   
-  validates :username, presence: true
-  validates :username, uniqueness: true
-  validates :email, presence: true
-  validates :email, uniqueness: true
+  #validates :username, presence: true
+  #validates :username, uniqueness: true
+  #validates :email, presence: true
+  #validates :email, uniqueness: true
 end

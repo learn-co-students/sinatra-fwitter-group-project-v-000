@@ -8,7 +8,7 @@ module Slugable
 
   module InstanceMethods
     def slug
-      self.name.downcase.gsub(" ", "-").delete("/\W/")
+      self.username.downcase.gsub(" ", "-").delete("/\W/")
     end
   end
 end
