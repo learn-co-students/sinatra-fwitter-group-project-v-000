@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fwitter</title>
+</head>
+<body>
+	<%=yield%>
+	<% if logged_in?%>
+		<form action="/logout" method="get">
+			<input type="submit" name="logout" value="Log Out">
+		</form>
+	<%end%>
+</body>
+</html>
