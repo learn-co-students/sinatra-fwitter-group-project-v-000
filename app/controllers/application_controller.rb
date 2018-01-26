@@ -18,11 +18,31 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    @user = User.create(params[:user])
-    @user.save
-    session[:user_id] = @user.id
-    redirect '/tweets'
+    user = User.create(params[:user])
+
+    if user.save
+      session[:user_id] = @user.id
+      redirect '/tweets'
+    else
+      redirect '/signup'
+    end
   end
+
+  post 'login' do
+    if params[:username] == "" || params[:password] == "" || params[:email] == ""
+      redirect '/signup'
+    else
+      user = User.find_by_slug(params[:username])
+        if user && user.authenticate(params[:password])
+          session[:user_id] = user.id
+          redirect '/tweets'
+        else
+          redirect '/signup'
+        end
+      end
+
+  end
+
 
   get '/tweets' do
     @tweets = Tweet.all
