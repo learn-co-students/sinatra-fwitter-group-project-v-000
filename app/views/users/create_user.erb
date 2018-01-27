@@ -1,10 +1,10 @@
 <h2>Users</h2>
   <% unless locals.empty? %>
     <%= message %>
-  <%= end %>
+  <% end %>
 
 <h3>Sign Up</h3>
-<form action="/signup" method="POST"></form>
+<form action="/signup" method="POST">
        <label>Name: </label>
         <input type="text" name="username"><br>
        <label>Email Address: </label>
