@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
 	get '/tweets' do
 		@tweets = Tweet.all
-		erb :'tweets'
+		erb :'tweets/tweets'
 	end
 
 	get '/tweets/:slug' do
