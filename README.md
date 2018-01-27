@@ -1,5 +1,9 @@
 # Fwitter Group Project
 
+## Participants
+Joshua Needham
+Aellon Krider
+
 ## Objectives
 
 1. Build a full scale Sinatra application that uses:
