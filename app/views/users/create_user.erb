@@ -1,4 +1,7 @@
-<h2>Users Sign Up</h3>
+<h2>Users</h3>
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
 <form action="/signup" method="POST">
        <label>User Name: </label>
         <input type="text" name="username"><br>
