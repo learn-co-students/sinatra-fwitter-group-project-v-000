@@ -4,6 +4,15 @@ class TweetsController < ApplicationController
 		erb :'tweets/tweets'
 	end
 
+	get '/tweets/new' do
+		erb :'tweets/create_tweet'
+	end
+
+	post 'tweets' do
+		@tweet = Tweet.new(content: params[:content])
+		erb :'tweets/show_tweet'
+	end
+
 	get '/tweets/:slug' do
     	@tweet = Tweet.find_by_slug(params[:slug])
     erb :'tweets/tweets/show'
