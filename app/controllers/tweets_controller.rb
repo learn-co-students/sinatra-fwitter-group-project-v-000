@@ -8,7 +8,7 @@ class TweetsController < ApplicationController
 		erb :'tweets/create_tweet'
 	end
 
-	post 'tweets' do
+	post '/tweets' do
 		@tweet = Tweet.new(content: params[:content])
 		erb :'tweets/show_tweet'
 	end
