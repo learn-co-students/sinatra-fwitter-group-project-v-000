@@ -15,13 +15,13 @@ class TweetsController < ApplicationController
 
 	get '/tweets/:slug' do
     	@tweet = Tweet.find_by_slug(params[:slug])
-    erb :'tweets/tweets/show'
+    erb :'tweets/show_tweet'
   end
 
   get '/tweets/:slug/edit' do
   	if logged_in?
 	    @tweet = Tweet.find_by_slug(params[:slug])
-	    erb :'tweets/tweets/edit'
+	    erb :'tweets/edit'
 	else
 		redirect to '/login'
 	end
