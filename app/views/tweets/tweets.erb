@@ -1,0 +1,7 @@
+<a class="btn btn-outline-success" role="button" href="/tweets/new">Tweet Here</a>
+<h1>All Tweets</h1>
+<% @tweets.each do |tweet| %>
+<blockquote class="blockquote">
+  <p><a href="/tweets/<%= tweet.id %>"><%= tweet.id %>: </a><%= tweet.content %></p>
+</blockquote>
+<% end %>
