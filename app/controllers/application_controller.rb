@@ -15,6 +15,10 @@ class ApplicationController < Sinatra::Base
     erb :'users/create_user'
   end
 
+  post 'signup' do
+    erb :'users/show'
+  end
+
   helpers do
     def logged_in?
       !!current_user
