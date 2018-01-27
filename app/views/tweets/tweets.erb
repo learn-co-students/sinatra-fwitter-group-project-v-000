@@ -1,3 +1,7 @@
 <a href="/tweets/new">Tweet Here</a>
 <h1>All Tweets</h1>
-<% @tweets %>
+<% @tweets.each do |tweet| %>
+<div>
+  <p><%= tweet.content %></p>
+</div>
+<% end %>
