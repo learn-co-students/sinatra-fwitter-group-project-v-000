@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  validates :email, :presence => true
+
   def slug
     username.downcase.gsub(" ", "-")
   end
