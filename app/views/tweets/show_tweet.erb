@@ -3,3 +3,10 @@ User: <%=@tweet.user.username%>
 <br></br>
 
 <a href="/tweets/<%=@tweet.id%>/edit">EDIT TWEET</a>
+
+<% if current_user == @tweet.user.id %>
+  <form method="post" action="/tweets/<%=@tweet.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+   <input type="submit" value="Delete">
+  </form>
+<% end %>

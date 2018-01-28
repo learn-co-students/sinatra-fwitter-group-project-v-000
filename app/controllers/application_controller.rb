@@ -78,6 +78,12 @@ class ApplicationController < Sinatra::Base
       redirect "/tweets/#{@tweet.id}"
   end
 
+post '/tweets/:id/delete' do
+  @tweet = Tweet.find_by_id(params[:id])
+  @tweet.delete
+end
+
+
   helpers do
 		def logged_in?
 			!!session[:user_id]
