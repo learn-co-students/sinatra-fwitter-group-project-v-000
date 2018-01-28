@@ -75,6 +75,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/:id' do
     @tweet = Tweet.find_by_id(params[:id])
+    binding.pry
     erb :'/tweets/show_tweet'
   end
 
@@ -97,7 +98,12 @@ post '/tweets/:id/delete' do
 end
 
 get '/logout' do
-  session.clear
+
+  if logged_in
+    session.clear
+  else
+    redirect '/login'
+  end
 end
 
   helpers do
