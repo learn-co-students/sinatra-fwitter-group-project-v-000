@@ -61,10 +61,23 @@ class ApplicationController < Sinatra::Base
     erb :'/tweets/tweets'
   end
 
+  get '/tweets/create' do
+    erb :'/tweets/create_tweet'
+  end
+
+  post '/tweets' do
+    @tweet = Tweet.create(params[:tweet])
+    binding.pry
+    @tweet.username = current_user.username
+    @tweet.save
+  end
+
+
   get '/tweets/:id' do
     @tweet = Tweet.find_by_id(params[:id])
     erb :'/tweets/show_tweet'
   end
+
 
   get '/tweets/:id/edit' do
     @tweet = Tweet.find_by_id(params[:id])
@@ -83,6 +96,9 @@ post '/tweets/:id/delete' do
   @tweet.delete
 end
 
+get '/logout' do
+  session.clear
+end
 
   helpers do
 		def logged_in?

@@ -1,0 +1,8 @@
+<form action="/tweets" method="post">
+  <h3><%= current_user.username %></h3>
+  <br></br>
+  <label>New Tweet:</label><br>
+  <textarea name="tweet[content]" cols="50" rows="10"></textarea>
+  <br></br>
+  <input type="submit" name="submit" value="Submit">
+</form>
