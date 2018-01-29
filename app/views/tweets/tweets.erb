@@ -1,2 +1,10 @@
 <h1>Tweets Index Page </h1>
 <h2>Welcome,</h2>
+
+<% Tweet.all.each do |tweet| %>
+
+  <div>
+    <h4> <%= tweet.content %></h4>
+  </div>
+
+<% end %>
