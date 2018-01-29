@@ -1,0 +1,12 @@
+<h1>Edit Your Tweet</h1>
+
+<div>
+  <form method="POST" action="/tweets/<%=@tweet.id%>">
+    <input type="hidden" id="hidden" name="_method" value="PATCH">
+    <textarea type="text" name="content" id="content"> <%=@tweet.content%> </textarea>
+    <br></br>
+    <button type="submit" value="submit">Submit Changes</button>
+
+  </form>
+
+</div>
