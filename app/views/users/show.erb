@@ -1,5 +1,9 @@
 <h1>Welcome <%=@user.username%></h1>
 
-tweeting!
+<% @user.tweets.each do |tweet| %>
+  <div>
+    <p> <%=tweet.content%>  </p>
+  </div>
+<% end %>
 
-"tweet tweet tweet"
+<button><a href="/logout">Log Out</a></button>

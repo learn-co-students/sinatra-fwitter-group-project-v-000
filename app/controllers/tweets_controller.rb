@@ -18,13 +18,14 @@ class TweetsController < ApplicationController
 
   post '/tweets' do
     @user = current_user
-    @tweet = Tweet.new(content: params[:content])
-    @tweet.user = @user
-    @user.save
-    redirect "users/#{@user.slug}"
-
-    #must fix this action, use pry to inspect what is going on
-
+    if params.all? {|key, value| value != ""}
+      @user.tweets.build(content: params[:content])
+      @user.save
+      redirect "users/#{@user.slug}"
+    else
+      redirect '/tweets/new'
+    end
   end
+
 
 end
