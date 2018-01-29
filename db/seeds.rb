@@ -1,0 +1,8 @@
+caroline = User.create(username: "CShields", email: "ha@co.com", password: "password")
+mom = User.create(username: "mom", email: "ham@co.com", password: "password")
+hank = User.create(username: "hank", email: "prettyboy@gmail.com", password: "password")
+rob = User.create(username: "rob", email: "pry4@yahoo.com", password: "password")
+Tweet.create(content: "Lorem ipsum dolor amet locavore freegan butcher raclette fashion axe. Mustache biodiesel flannel woke lomo. Tote bag fanny pack cray raclette whatever. Hoodie pitchfork chillwave, migas freegan 8-bit kale chips lyft asymmetrical pork belly meh vaporware af. ", user: caroline)
+Tweet.create(content: "Direct trade 8-bit fingerstache venmo disrupt. Distillery organic artisan beard woke. Kinfolk jean shorts pug, keytar knausgaard godard chartreuse freegan hashtag hexagon pitchfork.", user: mom)
+Tweet.create(content: "Gochujang 3 wolf moon intelligentsia vexillologist hot chicken, pug keytar austin single-origin coffee pabst williamsburg DIY irony. Four dollar toast tofu hot chicken live-edge organic.", user: hank)
+Tweet.create(content: "vinyl keffiyeh gluten-free post-ironic listicle yuccie cornhole", user: rob)

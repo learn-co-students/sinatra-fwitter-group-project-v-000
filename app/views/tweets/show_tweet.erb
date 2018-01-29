@@ -1,0 +1,13 @@
+You are logged in as User: <%=current_user.username%>
+
+<br></br>
+<h2><%=@tweet.user.username%></h2>
+<%=@tweet.content%>
+<br></br>
+
+  <form method="post" action="/tweets/<%=@tweet.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+   <input type="submit" value="Delete Tweet">
+  </form>
+
+  <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
