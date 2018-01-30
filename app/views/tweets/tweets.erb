@@ -1,0 +1,14 @@
+<h1>Tweets Index Page </h1>
+<h2>Welcome,</h2>
+
+<% Tweet.all.each do |tweet| %>
+
+  <div>
+    <p> <em><%=tweet.user.username%></em> <%= tweet.content %> <br>
+      <a href="/tweets/<%=tweet.id%>">View Tweet</a></p>
+
+  </div>
+
+<% end %>
+
+<a href="/logout">Log Out</a>
