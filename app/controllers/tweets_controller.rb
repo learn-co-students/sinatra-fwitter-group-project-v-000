@@ -34,15 +34,23 @@ class TweetsController < ApplicationController
     else
       redirect '/login'
     end
+  end
 
+  patch '/tweets/:id/edit' do
+    @tweet  = Tweet.find(params[:id])
+    redirect "/tweets/#{@tweet.id}/edit"
   end
 
   get '/tweets/:id/edit' do
-    @tweet  = Tweet.find(params[:id])
-    if @tweet.user.id == current_user.id
-      erb :'tweets/edit_tweet'
+    if logged_in?
+      @tweet  = Tweet.find(params[:id])
+      if tweet_ownership?(@tweet)
+        erb :'tweets/edit_tweet'
+      else
+        redirect '/tweets'
+      end
     else
-      redirect '/tweets'
+      redirect '/login'
     end
   end
 
@@ -50,11 +58,20 @@ class TweetsController < ApplicationController
     @tweet  = Tweet.find(params[:id])
     if !params[:content].empty?
       @tweet.update(content: params[:content])
-      redirect '/tweets'
+      redirect "/tweets/#{@tweet.id}"
     else
       redirect "/tweets/#{@tweet.id}/edit"
     end
   end
 
+  delete '/tweets/:id/delete' do
+    @tweet  = Tweet.find(params[:id])
+    if logged_in? && tweet_ownership?(@tweet)
+      @tweet.delete
+      redirect '/tweets'
+    else
+      redirect '/tweets'
+    end
+  end
 
 end

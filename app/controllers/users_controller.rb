@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    if session[:user_id]
+    if logged_in?
       redirect "/tweets"
     else
       erb :'users/create_user'
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     if logged_in?
       redirect '/tweets'
     else
-      erb :'users/login'
+      erb :'users/login', locals: {message: "Please sign up before you sign in"}
     end
   end
 
@@ -46,7 +46,5 @@ class UsersController < ApplicationController
     @user = User.find_by_slug(params[:slug])
     erb :'users/show'
   end
-
-
 
 end

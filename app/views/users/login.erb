@@ -1,5 +1,9 @@
 <h1> Welcome to Fwitter </h1>
 
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
 <h2>Please Log In Below:</h2>
 
 <form method="POST" action="/login">

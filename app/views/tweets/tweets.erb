@@ -4,9 +4,11 @@
 <% Tweet.all.each do |tweet| %>
 
   <div>
-    <p> <%= tweet.content %></p>
+    <p> <em><%=tweet.user.username%></em> <%= tweet.content %> <br>
+      <a href="/tweets/<%=tweet.id%>">View Tweet</a></p>
+
   </div>
 
 <% end %>
 
-<button><a href="/logout">Log Out</a></button>
+<a href="/logout">Log Out</a>

@@ -1,7 +1,11 @@
 <h1> Your Tweet</h1>
 
 <div>
-  <h4> <%=@tweet.content%> </h4>
+  <h3> <%=@tweet.content%> </h3>
+
+  <!-- <button><a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a></button>
+  <br></br>
+  <button><a href="/tweets/<%= @tweet.id %>/delete">Delete Tweet</a></button> -->
 
   <form method="POST" action="/tweets/<%= @tweet.id %>/edit">
     <input id="hidden" type="hidden" name="_method" value="patch">
@@ -9,7 +13,7 @@
   </form>
   <br>
 
-  <form method="POST" action="/tweets/<%= @tweet.id %>/delete">
+  <form method="POST" action="/tweets/<%=@tweet.id%>/delete">
     <input id="hidden" type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete Tweet">
   </form>
