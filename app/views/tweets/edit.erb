@@ -1,0 +1,7 @@
+
+<p> tweeting! </p>
+<form method='POST' action='/tweets/<%=@tweet.id%>'>
+  <input type="text" id="content" name="content">
+  <input type="hidden" id="hidden" name="_method" value="patch">
+  <input id="submit" type="submit" value="submit">
+</form>
