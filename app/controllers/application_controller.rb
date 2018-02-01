@@ -39,10 +39,7 @@ end
     end
   end
 
-get '/users/<%:user_id%>'
-    get '/login' do
-      erb :'/users/show'
-    end
+
 
 get '/logout' do
 session[:id].clear
