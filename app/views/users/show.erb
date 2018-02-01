@@ -1,1 +1,3 @@
-show page
+<% current_user.tweets.each.with_index(1) do |tweet, index| %>
+  <p> <%=index%>.  <%=tweent.content%> </p>
+  <% end %>

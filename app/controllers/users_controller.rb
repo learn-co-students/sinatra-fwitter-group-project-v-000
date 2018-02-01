@@ -1,16 +1,55 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    erb :'users/create_user'
+    if logged_in?
+      redirect to '/tweets'
+    else
+      erb :'users/create_user'
+    end
   end
 
   post '/signup' do
-    #get back infor from sign up form and add it here
+    if params["username"]=="" || params["email"]=="" || params["password"]==""
+     redirect to "/signup"
+    else
+     @user=User.create(username: params["username"], email: params["email"], password: params["password"])
+     session[:id] = @user.id
+     redirect to '/tweets'
+    end
   end
 
   get '/login' do
-    erb :'users/login'
+    if logged_in?
+      redirect to '/tweets'
+    else
+      erb :'users/login'
+    end
   end
 
-##need to continue on with login steps and rest of user
+  post '/login' do
+    @user=User.find_by(username: params[:username])
+      if @user && @user.authenticate(params[:password])
+        session[:user_id]=@user.id
+        redirect to '/tweets'
+      else
+         redirect to '/login'
+       end
+  end
+
+  get '/users/:slug' do
+    if logged_in?
+      @user=User.find_by_slug(params[:slug])
+      erb :'users/show'
+    else
+      redirect to '/login'
+    end
+  end
+
+  get '/logout' do
+    if logged_in?
+      session.clear
+    end
+    redirect to '/login'
+  end
+
 end
