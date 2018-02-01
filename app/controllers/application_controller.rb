@@ -39,6 +39,7 @@ end
     end
   end
 
+get '/users/<%:user_id%>'
     get '/login' do
       erb :'/users/login'
     end
