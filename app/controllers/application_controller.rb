@@ -1,5 +1,6 @@
 require './config/environment'
 require 'pry'
+
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -9,17 +10,22 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "password_security"
   end
 
+  def self.current_user(session)
+    User.find_by(id: session[:user_id])
+  end
+
+  def self.is_logged_in?(session)
+    session[:user_id] != nil
+  end
+
   get '/' do
-    binding.pry
     erb :'/application/index'
   end
 
   get '/signup' do
-    #binding.pry
-
-    #binding.pry
-    if logged_in?
-      #binding.pry
+     binding.pry
+    if self.class.is_logged_in?(session)
+  #    binding.pry
     redirect '/tweets'
   else
     erb :'/application/signup'
@@ -33,14 +39,6 @@ class ApplicationController < Sinatra::Base
     redirect '/tweets'
   end
 
-  helpers do
-      def logged_in?
-        binding.pry
-        !!session[:user_id]
-      end
 
-      def current_user
-        User.find(session[:user_id])
-      end
-    end
+
 end
