@@ -11,8 +11,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-
-    erb :"index.html"
+    
+    erb :"/index.html"
     end
 
 
