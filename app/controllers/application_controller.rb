@@ -45,7 +45,7 @@ end
 
 get '/logout' do
 session[:id].clear
-redirect :'/'
+redirect :'/login'
 end
 
 end
