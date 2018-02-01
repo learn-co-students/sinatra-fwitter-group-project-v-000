@@ -43,7 +43,8 @@ end
       erb :'/users/login'
     end
 
-
-
+get '/logout' do
+session[:id].clear
+end
 
 end
