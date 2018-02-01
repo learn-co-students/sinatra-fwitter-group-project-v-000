@@ -15,6 +15,7 @@ class ApplicationController < Sinatra::Base
   end
 
   def self.is_logged_in?(session)
+    #binding.pry
     session[:user_id] != nil
   end
 
@@ -23,7 +24,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-     binding.pry
+     #binding.pry
     if self.class.is_logged_in?(session)
   #    binding.pry
     redirect '/tweets'
