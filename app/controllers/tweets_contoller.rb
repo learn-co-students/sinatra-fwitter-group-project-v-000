@@ -58,7 +58,6 @@ class TweetsController < ApplicationController
 
       post '/tweets/:id' do
           if logged_in?
-
             if params[:content] == ""
               redirect to "/tweets/#{params[:id]}/edit"
             else
@@ -81,11 +80,9 @@ class TweetsController < ApplicationController
           @tweet=Tweet.find_by_id(params[:id])
           if @tweet.user_id==current_user.id
             @tweet.delete
+          end
             redirect to "/tweets"
           else
-            redirect to "/tweets"
-          end
-        else
           redirect to '/login'
         end
       end
