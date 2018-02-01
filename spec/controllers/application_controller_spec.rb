@@ -69,6 +69,7 @@ describe ApplicationController do
       session[:user_id] = user.id
       get '/signup'
       expect(last_response.location).to include('/tweets')
+
     end
   end
 
