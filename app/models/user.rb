@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug)
-    Artist.all.select do |artist|
-      artist.slug == slug
+    User.all.select do |user|
+      user.slug == slug
     end[0]
   end
 

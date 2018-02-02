@@ -1,6 +1,8 @@
 <p><%=@tweet.content%> </p>
 <p><%=@tweet.user %> </p>
-<% if current_user == @tweet.user %>
-<a href='/tweets/<%=@tweet.id%>/delete'>Delete Tweet</a>
+
+<form method='POST' action='/tweets/<%=@tweet.id%>/delete'>
+  <input type="hidden" id="hidden" name="_method" value="delete">
+<input type="submit" id="Delete Tweet" value="Delete Tweet">
+</form>
 <a href='/tweets/<%=@tweet.id%>/edit'>Edit Tweet</a>
-<% end %>
