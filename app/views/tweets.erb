@@ -7,9 +7,11 @@
   <h3><%= user.username %></h3>
   <ul>
     <% user.tweets.each_with_index do |tweet, index| %>
-      <li><%= index %>. <%= tweet.content %></li>
+      <li><%= index + 1 %>. <%= tweet.content %></li>
     <% end %>
   </ul>
 <% end %>
 
-<a href="/logout">Log Out</a>
+<a href="/tweets/new">Create a new tweet</a>
+
+<a href="/logout" style="display: block;">Log Out</a>
