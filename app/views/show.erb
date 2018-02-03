@@ -1,0 +1,15 @@
+<h1>Single Tweet Page</h1>
+
+<p>
+  <%= @tweet.content %>
+</p>
+
+<form action="/tweets/<%= @tweet.id %>/edit" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <button type="submit">Edit Tweet</button>
+</form>
+
+<form action="/tweets/<%= @tweet.id %>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <button type="submit">Delete Tweet</button>
+</form>

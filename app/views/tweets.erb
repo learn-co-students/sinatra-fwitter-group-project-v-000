@@ -1,0 +1,15 @@
+
+<h1>Welcome, <%= @current_user.username %></h1>
+
+<h2>Here are all of the tweets</h2>
+
+<% User.all.each do |user| %>
+  <h3><%= user.username %></h3>
+  <ul>
+    <% user.tweets.each_with_index do |tweet, index| %>
+      <li><%= index %>. <%= tweet.content %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<a href="/logout">Log Out</a>
