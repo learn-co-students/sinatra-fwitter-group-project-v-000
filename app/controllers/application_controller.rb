@@ -98,13 +98,14 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets' do
-    binding.pry
-    @user = User.find_by(session[:user_id])
+    # binding.pry
+    @user = User.find_by_id(session[:user_id])
 
     if params[:content].empty?
+      flash[:message] = "*Tweet content cannot be empty"
       redirect to "/tweets/new"
     else
-      binding.pry
+      # binding.pry
       @tweet = Tweet.create(params)
       @tweet.user = @user
       @tweet.save
@@ -115,7 +116,7 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/:id' do
     if session[:user_id]
-      @tweet = Tweet.find_by(params[:id])
+      @tweet = Tweet.find_by_id(params[:id])
       erb :'/show'
     else
       redirect to "/login"
@@ -123,16 +124,23 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/:id/edit' do
-    if session[:user_id]
-      @tweet = Tweet.find_by(params[:id])
-      erb :'/edit'
+    # binding.pry
+    if @user = User.find_by_id(session[:user_id])
+      @tweet = Tweet.find_by_id(params[:id])
+      if @user.tweets.include?(@tweet)
+        erb :'/edit'
+      else
+        flash[:message] = "*You need to be logged into the proper account to edit this tweet"
+        redirect to "/tweets"
+      end
     else
+      flash[:message] = "*You need to be logged into the proper account to edit this tweet"
       redirect to "/login"
     end
   end
 
   patch '/tweets/:id' do
-    @tweet = Tweet.find_by(params[:id])
+    @tweet = Tweet.find_by_id(params[:id])
     if params[:content].empty?
       redirect to "/tweets/#{@tweet.id}/edit"
     else
@@ -142,10 +150,21 @@ class ApplicationController < Sinatra::Base
   end
 
   delete '/tweets/:id/delete' do
+    @user = User.find_by_id(session[:user_id])
     @tweet = Tweet.find(params[:id])
-    @tweet.delete
 
-    erb :'delete'
+    if @user.tweets.include?(@tweet)
+      @tweet.delete
+      erb :'delete'
+    else
+      flash[:message] = "*You need to be logged into the proper account to delete this tweet"
+      redirect to "/tweets"
+    end
+
+  end
+
+  delete '/' do
+
   end
 
 end
