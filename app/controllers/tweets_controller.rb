@@ -2,7 +2,7 @@ class TweetsController < ApplicationController
 
 #TWEET INDEX
   get '/tweets' do
-#    binding.pry
+    #binding.pry
     if logged_in? #!!session[:user_id] == true
       erb :'/users/show'
     else
