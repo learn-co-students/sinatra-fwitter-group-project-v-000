@@ -1,0 +1,11 @@
+<body>
+  <h2>Welcome, <%=@user.username%>.</h2>
+
+  <%Tweet.all.each do |tweet|%>
+    <ul><h4> Tweet Content</h4> </ul></br></br>
+    <p> <%=tweet.content%> </p>
+  <%end%>
+
+</body>
+
+<a href= "/tweets/new">New Tweet</a></br></br>
