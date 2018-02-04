@@ -3,14 +3,33 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
-    #set :public_folder, 'public'
+    set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "secret"
+    set :session_secret, "GODisgreat"
   end
+
 # HOME PAGE
   get '/' do
     erb :index
+    #welcome to fwitter!!!
+  end
+#HELPERS
+  helpers do
+    def redirect_if_not_logged_in
+      if !logged_in?
+        redirect "/login?error=You have to be logged in to do that"
+      end
+    end
+
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
+    end
+
   end
 # SIGN UP
   get '/signup' do
@@ -41,8 +60,9 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
+    #binding.pry
     @user = User.find_by username: params["username"]
-    @user.slug = @user.username
+    #@user.slug = @user.username
     session[:user_id] = @user.id
     redirect '/tweets'
   end
@@ -56,4 +76,5 @@ class ApplicationController < Sinatra::Base
       redirect '/'
     end
   end
+
 end

@@ -1,2 +1,12 @@
-<h1> Welcome,</h1>
+<h1> Welcome, <%= @user.name </h1>
 <h2>tweets/tweets view</h2>
+
+<h2>Tweets</h2>
+<ul>
+<% @users.each do |tweet| %>
+  <li><a href="/clubs/<%=club.id%>"><%= club.name %></a></li>
+<% end%>
+</ul>
+<a href="/bags/<%=@bag.id%>/edit">Edit</a>
+<br />
+<br />
