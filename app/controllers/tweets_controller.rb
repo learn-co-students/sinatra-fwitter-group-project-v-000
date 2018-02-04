@@ -2,8 +2,9 @@ class TweetsController < ApplicationController
 
 #TWEET INDEX
   get '/tweets' do
-    if !!session[:user_id] == true
-      erb :'/tweets/index'
+#    binding.pry
+    if logged_in? #!!session[:user_id] == true
+      erb :'/users/show'
     else
       redirect '/login'
     end
