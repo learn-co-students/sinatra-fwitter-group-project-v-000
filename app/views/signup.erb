@@ -1,0 +1,19 @@
+<h1>Sign Up Page</h1>
+
+<% if flash.has?(:message) %>
+  <h3><%= flash[:message] %></h3>
+<% end %>
+
+<form method="post" action="/signup">
+  <label for="username">Username:</label>
+  <input style="display: block;" type="text" name="username"/>
+
+  <label for="email">Email:</label>
+  <input style="display: block;" type="text" name="email" />
+
+  <label for="password">Password:</label>
+  <input style="display: block;" type="text" name="password" />
+
+  <input style="display: block;" type="submit" value="Submit" />
+
+</form>

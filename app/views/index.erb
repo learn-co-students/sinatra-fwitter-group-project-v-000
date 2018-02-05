@@ -1,0 +1,12 @@
+<body style="text-align: center">
+  <h1 >Welcome to Fwitter</h1>
+
+  <a href="/login">Log in</a>
+  <a href="/signup">Sign Up</a>
+<!-- Just here so I know all of my created fake users -->
+  <ul>
+    <% User.all.each do |user| %>
+    <li> <%= user.username %> </li>
+    <% end %>
+  </ul>
+</body>
