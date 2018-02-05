@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    FWITTER
+    <meta charset="UTF-8">
+    <title>Fwitter </title>
   </head>
   <body>
     <%= yield %>
+    <a href="/">Home</a>
+      <% if !logged_in? %>
+        <a href="/signup">Sign Up</a>
+      <% end %>
+      <% if !logged_in? %>
+        <a href="/login">Log In</a>
+      <% end %>
+      <% if logged_in? %>
+        <a href="/tweets">Tweets</a>
+        <a href="/logout">Log Out</a>
+      <% end %>
+
   </body>
 
 </html>
