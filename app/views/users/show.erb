@@ -1,5 +1,7 @@
-<h2>/users/show view </h2>
 
-<% if logged_in? %>
-<h1> Welcome,  </h1>
+<% tweets.each do |tweet|
+  if tweet.user_id == current_user.id
+    <h4><%= tweet.content %></h4>
+    <%= binding.pry %>
+  end
 <% end %>

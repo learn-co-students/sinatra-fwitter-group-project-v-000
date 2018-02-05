@@ -12,7 +12,6 @@ class ApplicationController < Sinatra::Base
 # HOME PAGE
   get '/' do
     erb :index
-    #welcome to fwitter!!!
   end
 #HELPERS
   helpers do
@@ -34,7 +33,7 @@ class ApplicationController < Sinatra::Base
 # SIGN UP
   get '/signup' do
     if logged_in?
-      redirect '/tweets/tweets'
+      redirect '/tweets'
     else
       erb :'/users/create_user'
     end
@@ -45,7 +44,7 @@ class ApplicationController < Sinatra::Base
     if !!@user.username && !!@user.email && !!@user.password && @user.username != "" && @user.email != "" && @user.password != ""
       @user.save
       session[:user_id] = @user.id
-      redirect '/tweets/tweets'
+      redirect '/tweets'
     else
       redirect '/signup'
     end
@@ -53,7 +52,7 @@ class ApplicationController < Sinatra::Base
 # LOG IN
   get '/login' do
     if logged_in? #session[:user_id] != nil
-      redirect '/tweets/tweets'
+      redirect '/tweets'
     else
       erb :'/users/login'
     end
@@ -63,15 +62,18 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by username: params["username"]
     #@user.slug = @user.username
     session[:user_id] = @user.id
+    #binding.pry
     redirect '/tweets'
   end
 
 # LOG OUT
   get '/logout' do
+    #binding.pry
     if logged_in? #session[:user_id] != nil
       session.clear
       redirect '/login'
     else
+      #binding.pry
       redirect '/'
     end
   end
