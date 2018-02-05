@@ -2,6 +2,6 @@ Welcome, <%=@user.username %>
 
 <% Tweet.all.each do |tweet| %>
   <%= tweet.content %>
-  <%= tweet.user.name %>
+  <%= tweet.user.username %>
 <% end %>
 <a href="/tweets/new">New Tweet</a>

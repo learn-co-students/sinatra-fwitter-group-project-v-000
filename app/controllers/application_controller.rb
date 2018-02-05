@@ -16,7 +16,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :sessions_secret, "fwitter_secret"
+    set :session_secret, "fwitter_secret"
   end
 
   get '/' do
@@ -74,6 +74,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
+
     if logged_in?
       @user = User.find_by(id: session[:user_id])
       erb :'/tweets/tweets'
