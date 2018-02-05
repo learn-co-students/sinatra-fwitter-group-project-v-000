@@ -1,10 +1,14 @@
 <body>
-	<form action="/login" method="POST">
-		<label for="username">Username: </label>
-  			<input type="text" id="username" name="user[username]">
-  		<label for="password">Password:</label>
- 			  <input type="text" id="password" name=user[password]>
+<h1>Login</h1>
+<form action="/tweets" method="POST">
 
-  		<input type="submit" value="Submit">
+  		<input type="text" name="username" placeholder="Username:">
+ 		<input type="text" name="password" placeholder="Password:">
 
+  		<input type="submit" value="Submit" id="submit">
+
+  	</form>
 </body>
+  	<!-- loads the login page
+    loads the tweets index after login
+    does not let user view login page if already logged in  -->

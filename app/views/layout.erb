@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h1>Welcome to Fwitter</h1>
+	<head>
+		<title>Fwitter</title>
+		<link rel="stylesheet" type="text/css" href="/css/style.css">
+	</head>
+	<body>
+		<nav>
+			<% if logged_in? %>
+			<a href="/tweets/create"> Compose Tweet </a>. <!--changed "tweets/new" to 'tweets/create'-->
+			<a href="/logout">Log Out</a><br>
+			Welcome, <%=current_user.username%><br>
+
+			<%else%>
+			<a href="/signup"> Sign Up</a>
+			<a href="/login"> Sign In</a>
+		<%end%>
+
+		</nav>
+		<div class="container">
+		<h1>Welcome to Fwitter</h1>
+		<%=yield%>
+	</div>
 </body>
 </html>
