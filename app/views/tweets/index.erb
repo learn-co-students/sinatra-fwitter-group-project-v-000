@@ -1,0 +1,19 @@
+<h1>Welcome, here are some tweets!</h1>
+<h2>Tweets</h2>
+<% @tweets.each do |tweet| %>
+<%= tweet.content %><br /><br />
+<% end %>
+
+
+<h2>User:</h2>
+Status: <%= @user_status %><br /><br />
+<% if session[:user_id] %>
+  <% @user = User.find(session[:user_id]) %>
+  Username: <%= @user.username %><br />
+  Email: <%= @user.email %><br />
+<% end %><br /><br />
+
+usercount : <%= User.all.length %><br />
+<% User.all.each do |user| %>
+  <%= user.username %>: <%= user.email %><br />
+<% end %>
