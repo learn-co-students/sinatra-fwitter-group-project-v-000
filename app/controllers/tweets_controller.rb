@@ -41,14 +41,32 @@ class TweetsController < ApplicationController
 # EDIT TWEET
   get '/tweets/:id/edit' do
     #binding.pry
-    erb :'tweets/edit_tweet'
+    if logged_in?
+      id = params[:id].to_i
+      @tweet = Tweet.find(id)
+      erb :'/tweets/edit_tweet'
+    else
+      redirect '/login'
+    end
   end
 
   patch '/tweets/:id' do
-    #binding.pry
+    binding.pry
+    edited_tweet = {:content => params[:content]}
+    if edited_tweet && edited_tweet != ""
+      @tweet = Tweet.find(params[:id])
+      @tweet.update(edited_tweet)
+      @tweet.save
+      redirect to "/tweets/#{params[:id]}"
+    else
+      redirect to "'/tweets/#{params[:id]}"
+    end
   end
 # DELETE TWEET
-  delete '/tweets/:id/delete' do
-    #binding.pry
+  delete '/tweets/:id' do
+    binding.pry
+    # @post = Post.find_by_id(params[:id])
+    # @post.delete
+    # erb :deleted
   end
 end

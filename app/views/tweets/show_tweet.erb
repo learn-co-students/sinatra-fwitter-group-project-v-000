@@ -1,12 +1,12 @@
-<% id = @tweet.id %>
+<% @tweet %>
 <form method="POST" action="/tweet/form/:id">
-  <input type="hidden" id=":id" name= "#{<%= id %>}" >
+  <input type="hidden" id=":id" name= "#{<%= @tweet.id %>}" >
 </form>
 <p><%= @tweet.content %></p>
 
 
-<a href="/tweets/:id/edit">Edit Tweet</a>
-<a href="/tweets/:id/delete"> Delete Tweet </a>
+<a href="/tweets/edit/:id">Edit Tweet</a>
+<a href="/tweets/delete/:id"> Delete Tweet </a>
 
 
 <a href="/tweets/index">View All Tweets</a>
