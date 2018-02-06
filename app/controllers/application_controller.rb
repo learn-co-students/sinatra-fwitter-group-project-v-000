@@ -28,7 +28,6 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
-
   end
 # SIGN UP
   get '/signup' do
@@ -51,7 +50,7 @@ class ApplicationController < Sinatra::Base
   end
 # LOG IN
   get '/login' do
-    if logged_in? #session[:user_id] != nil
+    if logged_in?
       redirect '/tweets'
     else
       erb :'/users/login'
@@ -60,22 +59,16 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     @user = User.find_by username: params["username"]
-    #@user.slug = @user.username
     session[:user_id] = @user.id
-    #binding.pry
     redirect '/tweets'
   end
-
 # LOG OUT
   get '/logout' do
-    #binding.pry
-    if logged_in? #session[:user_id] != nil
+    if logged_in?
       session.clear
       redirect '/login'
     else
-      #binding.pry
       redirect '/'
     end
   end
-
 end

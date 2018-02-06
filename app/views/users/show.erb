@@ -1,7 +1,10 @@
 
-<% tweets.each do |tweet|
-  if tweet.user_id == current_user.id
-    <h4><%= tweet.content %></h4>
-    <%= binding.pry %>
-  end
-<% end %>
+  <h2>Welcome, <%= current_user.username %> </h2>
+  <% current_user.tweets.each do |tweet| %>
+    <%if tweet.user_id == current_user.id%>
+      <%=tweet.content%>
+    <%end%>
+  <%end%>
+
+
+  <a href="/logout"> Log Out </a>
