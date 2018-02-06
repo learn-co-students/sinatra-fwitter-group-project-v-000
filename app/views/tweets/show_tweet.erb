@@ -1,1 +1,13 @@
-<h2>tweets/show_tweet view</h2>
+<% id = @tweet.id %>
+<form method="POST" action="/tweet/form/:id">
+  <input type="hidden" id=":id" name= "#{<%= id %>}" >
+</form>
+<p><%= @tweet.content %></p>
+
+
+<a href="/tweets/:id/edit">Edit Tweet</a>
+<a href="/tweets/:id/delete"> Delete Tweet </a>
+
+
+<a href="/tweets/index">View All Tweets</a>
+<a href="/users/logout"> Log Out </a>
