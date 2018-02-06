@@ -12,11 +12,19 @@ class TweetsController < ApplicationController
 # CREATE TWEET
   get '/tweets/new' do
     #binding.pry
-    erb :'/tweets/create_tweet'
+    if logged_in?
+      erb :'/tweets/create_tweet'
+    else
+      redirect '/login'
+    end
   end
 
   post '/tweets' do
-    #binding.pry
+    if !params.empty? && params["content"]!= ""
+      @tweet = Tweet.create(:content => params["content"], :user_id => "#{current_user.id}")
+    else
+      redirect '/tweets/new'
+    end
   end
 # SHOW TWEET
   get '/tweets/:id' do
