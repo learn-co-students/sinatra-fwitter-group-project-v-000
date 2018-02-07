@@ -1,5 +1,3 @@
-require './config/environment'
-
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -8,7 +6,6 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "GODisgreat"
   end
-
 # HOME PAGE
   get '/' do
     erb :index
@@ -48,7 +45,6 @@ class ApplicationController < Sinatra::Base
       redirect '/signup'
     end
   end
-
 # LOG IN
   get '/login' do
     if logged_in?
