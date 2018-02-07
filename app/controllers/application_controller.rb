@@ -48,6 +48,7 @@ class ApplicationController < Sinatra::Base
       redirect '/signup'
     end
   end
+
 # LOG IN
   get '/login' do
     if logged_in?
@@ -58,9 +59,14 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    @user = User.find_by username: params["username"]
-    session[:user_id] = @user.id
-    redirect '/tweets'
+    #binding.pry
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect '/tweets'
+    else
+      redirect to '/signup'
+    end
   end
 # LOG OUT
   get '/logout' do
