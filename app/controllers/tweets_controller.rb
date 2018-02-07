@@ -2,7 +2,6 @@ class TweetsController < ApplicationController
 
 #TWEET INDEX
   get '/tweets' do
-    #binding.pry
     if logged_in?
       erb :'/tweets/index'
     else
@@ -11,7 +10,6 @@ class TweetsController < ApplicationController
   end
 # CREATE TWEET
   get '/tweets/new' do
-    #binding.pry
     if logged_in?
       erb :'/tweets/create_tweet'
     else
@@ -40,7 +38,6 @@ class TweetsController < ApplicationController
 
 # EDIT TWEET
   get '/tweets/:id/edit' do
-    #binding.pry
     if logged_in?
       id = params[:id].to_i
       @tweet = Tweet.find(id)
@@ -51,22 +48,23 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    binding.pry
-    edited_tweet = {:content => params[:content]}
-    if edited_tweet && edited_tweet != ""
+    if params[:content] && params[:content] != ""
+      edited_tweet = {:content => params[:content]}
       @tweet = Tweet.find(params[:id])
       @tweet.update(edited_tweet)
       @tweet.save
       redirect to "/tweets/#{params[:id]}"
     else
-      redirect to "'/tweets/#{params[:id]}"
+      redirect to "/tweets/#{params[:id]}/edit"
     end
   end
 # DELETE TWEET
-  delete '/tweets/:id' do
-    binding.pry
-    # @post = Post.find_by_id(params[:id])
-    # @post.delete
-    # erb :deleted
+  delete '/tweets/:id/delete' do
+    #binding.pry
+    if logged_in?
+      @tweet = Tweet.find_by_id(params[:id])
+      current_user.id == @tweet.user_id ? @tweet.delete : return
+      erb :'/tweets/deleted'
+    end
   end
 end
