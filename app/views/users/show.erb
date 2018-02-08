@@ -1,8 +1,7 @@
-<%=@user.username%>/'s Tweets
+<%= current_user.username%>'s Tweets
 
-<% @user.tweets.each do |tweet| %>
+<% @tweets.each do |tweet| %>
 	<div>
-		<%= tweet.content %>
+<a href="/tweets/<%=tweet.id%>/edit"><%= tweet.content %></a>
 	</div>
-
-	<%end%>
+<%end%>

@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
 get '/' do
   if logged_in?
     @user = User.find(current_user.id)
-    redirect to "/users/#{user.slug}"
+    redirect to "/users/#{@user.slug}"
   else
     erb :index
 end
@@ -27,60 +27,7 @@ end
       end
 
       def current_user
-        @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+        User.find_by(id: session[:user_id]) if session[:user_id]
       end
-
-
-
       end
     end
-
-
-
-=begin
-
-    post '/signup' do
-  if params[:username] == "" || params[:password] == "" || params[:email] == ""
-    redirect to '/signup'
-  else
-      @user = User.create(params)
-                @user.save
-          session[:id] = @user.id
-          redirect to "/tweets"
-          end
-  end
-
-get '/login' do
-  erb:'/users/login'
-end
-
-post '/login' do
-  @user = User.find_by(username: params["email"], password: params["password"])
-if user && user.authenticate(params[:password])
-  session[:id] = @user.id
-redirect to "/tweets"
-else
-  redirect to "/"
-end
-end
-
-
-
-get '/logout' do
-if logged_in?
-  session[:id].clear
-  redirect to '/login'
-else
-  redirect to '/'
-end
-end
-
-def logged_in?
-  !!session[:user_id]
-end
-
-def current_user
-  User.find(session[:user_id])
-end
-end
-=end
