@@ -1,3 +1,4 @@
+require 'pry'
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
@@ -9,6 +10,16 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
     "Welcome to Fwitter"
+  end
+
+  get '/signup' do
+    # @user = User.create(params["user"])
+    # binding.pry
+    erb :'/index'
+  end
+
+  post '/signup' do
+    redirect :'/tweets'
   end
 
 
