@@ -235,6 +235,8 @@ describe ApplicationController do
         user = User.find_by(:id=> user.id)
         user2 = User.find_by(:id => user2.id)
         tweet = Tweet.find_by(:content => "tweet!!!")
+        binding.pry
+
         expect(tweet).to be_instance_of(Tweet)
         expect(tweet.user_id).to eq(user.id)
         expect(tweet.user_id).not_to eq(user2.id)
