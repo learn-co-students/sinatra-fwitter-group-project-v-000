@@ -27,6 +27,7 @@ class ApplicationController < Sinatra::Base
   get '/tweets' do
     if !session[:user_id].nil?
       @user = User.find_by(id: session[:user_id])
+      @tweets = Tweet.all
       erb :user_home
     else
       flash[:message] = "You are not logged in!"
@@ -62,17 +63,78 @@ class ApplicationController < Sinatra::Base
 
     if !session[:user_id].nil?
       @user = User.find_by(id: session[:user_id])
-      erb :create_tweet
+      erb :create_tweet, :layout => :logged_in_layout
     else
         flash[:message] = "You're not logged in!"
         redirect '/login'
     end
   end
 
+  get '/tweets/:tweet_id' do
+    if !session[:user_id].nil?
+      @user = User.find_by(id: session[:user_id])
+      @tweet = Tweet.find_by(id: params[:tweet_id])
+      #if @tweet.user_id == @user.id
+        erb :single_tweet, :layout => :logged_in_layout
+    #   else
+    #     redirect '/login'
+    #   end
+     else
+       redirect '/login'
+    end
+  end
+
+  get '/tweets/:tweet_id/edit' do
+    if !session[:user_id].nil?
+      @user = User.find_by(id: session[:user_id])
+      @tweet = Tweet.find_by(id: params[:tweet_id])
+      if @tweet.user_id == @user.id
+        erb :edit_tweet, :layout => :logged_in_layout
+      else
+        redirect '/login'
+      end
+    else
+      redirect '/login'
+    end
+  end
+
+  patch '/tweets/:id/edit' do
+    @tweet = Tweet.find_by(id: params[:id])
+    content = params["content"]
+    if !content.empty?
+      @tweet.content = content
+      @tweet.save
+        redirect "/tweets/#{params[:id]}"
+    else
+        redirect "/tweets/#{params[:id]}/edit"
+    end
+
+
+  end
+
+  get '/tweets/:id/delete' do
+    @user = User.find_by(id: session[:user_id])
+    @tweet = Tweet.find_by(id: params[:id])
+    if !@tweet.nil?
+      if @user.id == @tweet.user_id
+        Tweet.delete(params[:id].to_i)
+      end
+    end
+    redirect '/tweets'
+
+  end
+
+
   post '/submit_tweet' do
     tweet = params["content"]
     user = User.find_by(id: session[:user_id])
-    user.tweets << Tweet.create(content: tweet)
+
+    if tweet.empty?
+      redirect '/tweets/new'
+    else
+      user.tweets << Tweet.create(content: tweet)
+    end
+
     redirect '/tweets'
   end
   post '/signup' do

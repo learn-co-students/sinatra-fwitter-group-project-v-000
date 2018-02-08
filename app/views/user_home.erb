@@ -8,7 +8,17 @@
 <% else %>
 <ul>
 <% @user.tweets.each do | tweet | %>
-  <li><%= tweet.content %></li>
+  <li><%= tweet.content %><br/>
+    <a href="/tweets/<%= tweet.id %>">View</a>
+  </li>
 <% end %>
 </ul>
+<% end %>
+
+<br/><br/>
+<h4>All Tweets</h4>
+<% @tweets.each do | tweet |  %>
+  <%= tweet.content  %><br/>
+  by <%= tweet.user.username  %>
+  <br/><br/>
 <% end %>
