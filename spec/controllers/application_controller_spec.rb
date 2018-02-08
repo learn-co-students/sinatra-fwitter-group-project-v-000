@@ -58,15 +58,12 @@ describe ApplicationController do
     end
 
     it 'does not let a logged in user view the signup page' do
-      user = User.create(:username => "skittles123", :email => "skittles@aol.com", :password => "rainbows")
       params = {
         :username => "skittles123",
         :email => "skittles@aol.com",
         :password => "rainbows"
       }
       post '/signup', params
-      session = {}
-      session[:user_id] = user.id
       get '/signup'
       expect(last_response.location).to include('/tweets')
     end
@@ -405,9 +402,9 @@ describe ApplicationController do
         click_button 'submit'
         visit "tweets/#{tweet2.id}"
         click_button "Delete Tweet"
-        expect(page.status_code).to eq(200)
+        expect(page.status_code).to eq(404)
         expect(Tweet.find_by(:content => "look at this tweet")).to be_instance_of(Tweet)
-        expect(page.current_path).to include('/tweets')
+        expect(page.body).to include("Tweet not found")
       end
     end
 

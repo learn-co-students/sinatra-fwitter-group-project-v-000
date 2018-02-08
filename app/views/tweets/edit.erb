@@ -1,0 +1,8 @@
+<h3 style="color:blue;">Edit Tweet</h3>
+<div>
+<form action="/tweets/<%= @tweet.id %>" method="post">
+    <input type="text" name="tweet[content]" id="content" placeholder="Tweet here" value="<%= @tweet.content %>">
+    <input type="hidden" name="_method" value="patch">
+    <input type="submit" value="Submit" id="submit">
+</form>
+</div>

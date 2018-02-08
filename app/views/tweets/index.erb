@@ -1,0 +1,14 @@
+<h2>Welcome, <%= current_user.username %>!</h2></br>
+<h4 style="color:blue;">Check out your tweets.</h4>
+
+Click <a href="/tweets/new">here</a> to creat a new tweet.</br>
+<br>
+<ul>
+<% @tweets.each do |tweet| %>
+  <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></li>
+<% end %>
+</ul>
+
+
+
+
