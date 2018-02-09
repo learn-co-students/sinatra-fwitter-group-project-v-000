@@ -1,1 +1,12 @@
+<<<<<<< HEAD
 index.erb
+=======
+
+<% if logged_in? %>
+  <% @tweets.each do |tweet| %>
+    <div>
+    <a href="/tweets/<%=tweet.id%>/edit"><%= tweet.content %></a>
+    </div>
+  <%end%>
+  <%end%>
+>>>>>>> af90a5abbf0fb76163fe5effb8517018d1b7a56a
