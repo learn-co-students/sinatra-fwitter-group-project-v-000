@@ -17,11 +17,11 @@ get '/' do
     redirect to "/users/#{@user.slug}"
   else
     erb :index
-  end
+end
 end
 
 
-    helpers do
+      helpers do
       def logged_in?
         !!current_user
       end
@@ -29,7 +29,5 @@ end
       def current_user
         User.find_by(id: session[:user_id]) if session[:user_id]
       end
-     
+      end
     end
-  end
-

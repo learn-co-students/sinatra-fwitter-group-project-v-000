@@ -1,0 +1,15 @@
+<<<<<<< HEAD
+tweets.erb
+=======
+<body>
+
+
+<h3>Tweets</h3>
+
+	<% @tweets.each do |tweet| %>
+		<div>
+		<a href="/tweets/<%=tweet.id%>/edit"><%= tweet.content %></a>
+		</div>
+	<%end%>
+</body>
+>>>>>>> af90a5abbf0fb76163fe5effb8517018d1b7a56a

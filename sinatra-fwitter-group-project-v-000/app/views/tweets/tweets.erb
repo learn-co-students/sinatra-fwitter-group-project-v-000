@@ -1,0 +1,11 @@
+<body>
+
+
+<h3>Tweets</h3>
+
+	<% @tweets.each do |tweet| %>
+		<div>
+		<a href="/tweets/<%=tweet.id%>/edit"><%= tweet.content %></a>
+		</div>
+	<%end%>
+</body>
