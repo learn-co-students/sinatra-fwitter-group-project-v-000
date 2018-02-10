@@ -5,10 +5,10 @@ class User < ActiveRecord::Base
   has_many :tweets
 
   def slug
-    self.name.downcase.gsub(" ","-").gsub(/[^a-zA-Z0-9-]/, "")
+    self.username.downcase.gsub(" ","-").gsub(/[^a-zA-Z0-9-]/, "")
   end
 
-  def find_by_slug(search_slug)
+  def self.find_by_slug(search_slug)
     self.all.detect{|i| i.slug == search_slug}
   end
 
@@ -24,6 +24,4 @@ class User < ActiveRecord::Base
       user
     end
   end
-end
-
 end
