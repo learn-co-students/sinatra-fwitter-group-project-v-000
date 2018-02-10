@@ -1,0 +1,11 @@
+<h1>Fweet #<%= @tweet.id %>:</h1>
+<h2><%= @tweet.content%></h2>
+
+<form action="/tweets/<%= @tweet.id %>/edit">
+    <input type="submit" value="Edit Tweet" />
+</form>
+
+<form action='/tweets/<%= @tweet.id %>/delete' method="POST">
+<input id="hidden" type="hidden" name="_method" value="delete">
+<input type="submit" name="delete" value="Delete Tweet">
+</form>

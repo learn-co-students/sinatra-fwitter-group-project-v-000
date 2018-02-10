@@ -5,6 +5,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "secret"
   end
 
   # HOME PAGE
@@ -13,57 +15,23 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  # CREATE TWEET
-  get '/tweets/new' do
+  helpers do
+    def logged_in?
+      !!session[:id]
+    end
 
-    erb :'/tweets/create_tweet'
-  end
+    def current_user
+      User.find(session[:id])
+    end
 
-  post '/tweets' do
+    def find_tweet
+        Tweet.find(params[:id])
+    end
 
-  end
+    def belongs_to_user?(tweet)
+        tweet.user == current_user
+    end
 
-  # SHOW TWEET
-  get '/tweets/:id' do
-
-    erb :'/tweets/show_tweet'
-  end
-
-  # EDIT TWEET
-  get '/tweets/:id/edit' do
-
-    erb :'tweets/edit_tweet'
-  end
-
-  patch '/tweets/:id' do
-
-  end
-
-  # DELETE TWEET
-  delete '/tweets/:id/delete' do
-
-  end
-
-  # SIGN UP
-  get '/signup' do
-
-    erb :'/users/create_user'
-  end
-
-  post '/signup' do
-
-  end
-
-  # LOG IN
-  get '/login' do
-
-    erb :'/users/login'
-  end
-
-
-  get '/logout' do
-
-    erb :index
   end
 
 end
