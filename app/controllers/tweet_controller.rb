@@ -1,6 +1,6 @@
 class TweetController < ApplicationController
 
-  get '/tweet' do
+  get '/tweets' do
     "TWEETS"
   end
 
