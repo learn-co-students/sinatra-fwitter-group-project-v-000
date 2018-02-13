@@ -1,0 +1,10 @@
+<h1>Below are the tweets for the user you selected:</h1>
+
+
+<strong>User:</strong>
+<p><%= @user.username %></p>
+<strong>Tweet(s):</strong>
+<% @user.tweets.each do |tweet| %>
+  <%= tweet.content %>
+
+<% end %>
