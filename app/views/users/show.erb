@@ -1,0 +1,13 @@
+<h1>TWEETS OF <%= @user.username.upcase %></h1>
+
+<% @user.tweets.each do |tweet| %>
+  <div class="row">
+    <div class="col">
+      <div class="card text-center">
+        <div class="card-body">
+          <p class="card-text"><%= tweet.content %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

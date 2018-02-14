@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col">
+    <div class="card text-center">
+      <div class="card-body">
+        <p class="card-text"><%= @tweet.content %></p>
+        <a href="/tweets/<%= @tweet.id %>/edit" class="btn btn-primary">Edit Tweet</a>
+        <form class="" action="/tweets/<%= @tweet.id %>/delete" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" name="" class="btn btn-danger" value="Delete Tweet">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

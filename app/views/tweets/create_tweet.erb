@@ -1,0 +1,15 @@
+<h1>Create Tweet</h1>
+
+<div class="row">
+  <div class="col">
+    <form class="" action="/tweets" method="post">
+      <div class="form-group">
+        <label for="content">Content</label>
+        <input type="text" class="form-control" id="content" name="tweet[content]" value="">
+        <input type="hidden" id="user_id" name="tweet[user_id]" value="<%= current_user.id %>">
+      </div>
+
+      <button type="submit" id="submit" name="submit" class="btn btn-primary">Tweet</button>
+    </form>
+  </div>
+</div>
