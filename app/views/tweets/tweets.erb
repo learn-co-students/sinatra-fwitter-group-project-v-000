@@ -1,0 +1,12 @@
+<h1>Welcome, <%= @user.username %>!</h1>
+
+<a href="/users/<%= @user.slug %>">Your Page</a>
+
+<h3>Current Tweets! </h3>
+<% @tweets.each do |tweet| %>
+  <li><%= tweet.content %></li>
+<% end %>
+
+<br><br>
+
+<a href='/logout'>Log Out</a>
