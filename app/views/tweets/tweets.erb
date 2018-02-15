@@ -6,7 +6,13 @@
   </head>
   <body>
     <form class="" action="/tweets" method="post">
-
+      <h1>Welcome, <%@user.username%> </h1>
+      <h3>Your Tweets</h3>
+      <% Tweet.all.each do |tweets| %>
+        <%=@tweets.content%>
+        <%=@tweets.username%>
+      <%end%>
+      <a href="/tweets/new">New Tweet</a>
     </form>
   </body>
 </html>
