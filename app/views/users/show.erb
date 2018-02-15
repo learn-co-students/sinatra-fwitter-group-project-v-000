@@ -1,5 +1,7 @@
 <%= @user.username %>
 <br>
-<% @user.tweets.each do |tweet| %>
-  <%= tweet.content %>
-<% end %>
+<ul>
+  <% @user.tweets.each do |tweet| %>
+  <li>  <%= tweet.content %> </li>
+  <% end %>
+</ul>

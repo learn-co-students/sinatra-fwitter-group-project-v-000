@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <form class="" action="/tweets" method="post">
-      <h1>Welcome, <%@user.username%> </h1>
-      <h3>Your Tweets</h3>
-      <% Tweet.all.each do |tweets| %>
-        <%=@tweets.content%>
-        <%=@tweets.username%>
-      <%end%>
-      <a href="/tweets/new">New Tweet</a>
-    </form>
-  </body>
-</html>
+<h1>Welcome, <%=@user.username%></h1>
+<br>
+<a href="/tweets/new"><h2>Add New Tweet</h2></a>
+<br><br>
+<h3>Tweets</h3>
+<ul>
+  <% Tweet.all.each do |tweet| %>
+    <li><%= tweet.content %></li>
+  <% end %>
+</ul>
