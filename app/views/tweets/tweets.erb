@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<header>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: lightblue;
+      }
+
+    h1 {color: white;
+      }
+
+    a
+    {color: black;
+    }
+
+    .logout {
+      color: blue;
+    }
+
+  </style>
+</header>
+
+<body>
+<h1>Welcome, <a href="/users/<%=current_user.slug%>"><%= current_user.username %></a></h1>
+<ul>
+  <% Tweet.all.each do |tweet| %>
+    <li> <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a> </li>
+  <% end %>
+</ul>
+
+<form method="GET" action="/tweets/new">
+  <input type="submit" value="New Tweet">
+</form>
+
+<br>
+<a class="logout" href="/logout">Log Out</a>
+
+</body>
+</html>
