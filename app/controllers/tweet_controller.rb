@@ -40,18 +40,19 @@ get '/tweets' do
   end
 
   get '/tweets/:id/edit' do
-    @tweet = Tweet.find_by_id(params[:id])
-    if is_logged_in? && @tweet.user == current_user
+    binding.pry
+    @tweet = Tweet.find_by(id: params[:id])
+    if logged_in? && @tweet.user == current_user
       erb :'/tweets/edit_tweet'
     else
-      redirect 'login'
+      redirect '/login'
     end
   end
 
 
   post "/tweets/:id/delete" do
-    tweet = current_user.tweets.find_by(id: params[:id])
-    if tweet && tweet.destroy
+    @tweet = current_user.tweets.find_by(id: params[:id])
+    if @tweet && tweet.destroy
       redirect "/tweets"
     else
       redirect "/tweets/#{tweet.id}"
