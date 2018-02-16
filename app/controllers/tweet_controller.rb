@@ -1,7 +1,6 @@
 require 'pry'
 
 class TweetController < ApplicationController
-
   get '/tweets' do
 
     if logged_in?
