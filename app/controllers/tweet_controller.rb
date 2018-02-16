@@ -1,13 +1,13 @@
 require 'pry'
 
 class TweetController < ApplicationController
-  get '/tweets' do
+get '/tweets' do
 
-    if logged_in?
-      @user = User.find_by_id(session[:user_id])
-      erb :'/tweets/tweets'
-    else
-      redirect to '/login'
+  if logged_in?
+    @user = User.find_by_id(session[:user_id])
+    erb :'/tweets/tweets'
+  else
+    redirect to '/login'
     end
   end
 
@@ -20,12 +20,13 @@ class TweetController < ApplicationController
   end
 
   post '/tweets' do
-    tweet = current_user.tweets.find_by(id: params[:id])
-    if tweet && tweet.destroy
-      redirect "/tweets"
-    else
-      redirect "/tweets/#{tweet.id}"
-    end
+    if !params[:content].empty?
+      @tweet = Tweet.create(content: params[:content], user: current_user)
+         @tweet.save
+         redirect '/tweets'
+       else
+         redirect to '/tweets/new'
+       end
 
   end
 
@@ -38,23 +39,22 @@ class TweetController < ApplicationController
     end
   end
 
-  get "/tweets/:id/edit" do
-    if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-      erb :"/tweets/edit_tweet"
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if is_logged_in? && @tweet.user == current_user
+      erb :'/tweets/edit_tweet'
     else
-      redirect "/login"
+      redirect 'login'
     end
   end
 
-  delete "/tweets/:id/delete" do
-    if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
-      if @tweet.user_id == current_user.id
-        @tweet.delete
-        @tweet.save
-      end
+
+  post "/tweets/:id/delete" do
+    tweet = current_user.tweets.find_by(id: params[:id])
+    if tweet && tweet.destroy
+      redirect "/tweets"
+    else
+      redirect "/tweets/#{tweet.id}"
     end
-    redirect "/tweets"
   end
 end
