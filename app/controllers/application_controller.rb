@@ -18,15 +18,25 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
+
+    #memoizing a call is using the conditional assignment operator ||=
+    #Because current_user  is called multiple times, Its better to only hit the database once and then 'cache' the user instance into an instance variable
     def current_user
-      User.find(session[:user_id])
+       @current_user ||= User.find(session[:id]) if session[:id]
     end
 
     def logged_in?
-      !!session[:user_id]
+      !!current_user
     end
+    # def current_user
+    #   User.find(session[:user_id])
+    # end
+    #
+    # def logged_in?
+    #   !!session[:user_id]
+    # end
   end
- 
+
 
 
 end
