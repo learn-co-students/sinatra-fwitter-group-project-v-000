@@ -59,18 +59,18 @@ get '/tweets' do
      end
    end
 
-   delete '/tweet/:id/delete' do
-    if logged_in? && current_user
-      @tweet = Tweet.find_by(params[:id])
-      if @tweet.user_id == current_user.id
-        @tweet.delete
-        redirect '/tweets'
+   post '/tweets/:id/delete' do
+      if logged_in? && current_user
+        @tweet = Tweet.find_by(params[:id])
+        if @tweet.user_id == current_user.id
+          @tweet.delete
+          redirect '/tweets'
+        else
+          redirect '/tweets'
+        end
       else
-        redirect '/tweets'
+        redirect '/login'
       end
-    else
-      redirect '/login'
     end
-  end
 
 end

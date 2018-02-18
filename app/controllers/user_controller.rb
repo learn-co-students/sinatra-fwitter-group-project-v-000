@@ -58,4 +58,6 @@ class UserController < ApplicationController
      @user = User.find_by(slug: params[:slug])
      erb :'/users/show'
   end
+
+  
 end
