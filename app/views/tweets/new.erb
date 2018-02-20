@@ -1,7 +1,11 @@
-<h1>Welcome, <%=@user.username%></h1>
+<h1>Fwitter</h1>
+<h4><a href="/tweets">Home</a> - <a href="/logout">Log Out</a></h4>
+<h4>Logged in as <%=@user.username%></h4>
 <h2>New Tweet</h2>
 
+
 <form action="/tweets" method="post">
-	<input type="text" name="content" id="content">
+	<textarea name="content" cols="30" rows="5"></textarea>
+	<br>
 	<input type="submit" name="submit" id="submit" value="submit">
 </form>
