@@ -1,0 +1,12 @@
+<h2>Welcome, <%=@user.username%></h2>
+<h4><a href="/tweets/new">New Tweet</a></h4>
+
+<h3>Tweets:</h3>
+<ul>
+<%Tweet.all.reverse.each do |t|%>
+<li><a href="/tweets/<%=t.id%>"><%=t.content%></a> - <%=User.find(t.user_id).username%></li>
+<%end%>
+</ul>
+
+<h4><a href="/tweets">Home</a></h4>
+<h4><a href="/logout">Log Out</a></h4>
