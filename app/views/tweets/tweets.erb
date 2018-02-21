@@ -1,0 +1,16 @@
+<h1>Welcome, <%= @user.username %>!</h1>
+
+<ul>
+  <% Tweet.all.each do |tweet| %>
+    <% if tweet.user_id == @user.id %>
+      <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></li>
+    <% else %>
+      <li><%= tweet.content %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<br>
+<a href="/tweets/new">New Tweet</a><br></br>
+
+<a href="/logout">Log Out</a>

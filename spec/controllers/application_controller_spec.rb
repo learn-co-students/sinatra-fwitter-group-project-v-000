@@ -170,6 +170,7 @@ describe ApplicationController do
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit "/tweets"
+        
         expect(page.body).to include(tweet1.content)
         expect(page.body).to include(tweet2.content)
       end
