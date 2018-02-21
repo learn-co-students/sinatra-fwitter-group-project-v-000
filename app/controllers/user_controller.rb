@@ -13,9 +13,9 @@ class UserController < ApplicationController
   end
 
   post '/login' do
-    @user = User.find_by(username: params["username"], password: params["password"])
+    @user = User.find_by(:username => params[:username])
 
-    if @user
+    if @user && @user.authenticate(params[:password])
       session[:id] = @user.id
       redirect to '/tweets'
     else
@@ -33,10 +33,10 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
-    @user = User.create(username: params["username"], password: params["password"], email: params["email"] )
-    @user.save
+    @user = User.new(:username => params[:username], :password => params[:password], :email => params[:email])
+    
 
-    if @user.username != "" && @user.password != "" && @user.email != ""
+    if @user.save && @user.username != "" && @user.email != ""
       session[:id] = @user.id
       redirect to '/tweets'
     else

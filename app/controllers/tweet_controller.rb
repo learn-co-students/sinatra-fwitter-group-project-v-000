@@ -60,7 +60,7 @@ get '/tweets' do
    end
 
    post '/tweets/:id/delete' do
-
+     #association collection method provided by has_many to query the user's tweets.
      tweet = current_user.tweets.find_by(id: params[:id])
        if tweet && tweet.destroy
          redirect "/tweets"
