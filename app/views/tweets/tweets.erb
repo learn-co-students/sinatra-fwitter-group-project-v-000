@@ -1,0 +1,9 @@
+
+<a href="/tweets/new"><h2>Add New Tweet</h2></a>
+<br><br>
+<h3>Tweets</h3>
+<ul>
+  <% Tweet.all.each do |tweet| %>
+    <li><%= tweet.content %></li>
+  <% end %>
+</ul>
