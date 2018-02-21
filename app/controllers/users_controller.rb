@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
 	get '/signup' do
-	  if session[:user_id] == nil
+	  if !logged_in?
 
 		erb :'/users/new'
 	  else

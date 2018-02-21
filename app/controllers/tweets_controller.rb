@@ -1,8 +1,9 @@
 class TweetsController < ApplicationController
 
 	get '/tweets' do
+		# binding.pry
       if session[:user_id] != nil  
-      	@user = User.find(session[:user_id])
+      	@user = current_user
 
 	  	erb :'/tweets/index'
 	  else
@@ -14,7 +15,7 @@ class TweetsController < ApplicationController
 
 	post '/tweets' do
 	  @tweet = Tweet.create(:content => params[:content])
-	  @tweet.user = User.find(session[:user_id])
+	  @tweet.user = current_user
 
 	  if !@tweet.save
 
@@ -28,8 +29,8 @@ class TweetsController < ApplicationController
 
 
 	get '/tweets/new' do
-		if session[:user_id] != nil
-		  @user = User.find(session[:user_id])
+		if logged_in?
+		  @user = current_user
 		  
 		  erb :'/tweets/new'
 		else
@@ -40,7 +41,7 @@ class TweetsController < ApplicationController
 
 
 	get '/tweets/:id' do
-	  if !!session[:user_id]
+	  if logged_in?
 		@tweet = Tweet.find(params[:id])
 
 		erb :'/tweets/show'
@@ -51,7 +52,7 @@ class TweetsController < ApplicationController
 	end
 
 	get '/tweets/:id/edit' do
-	  if session[:user_id] == nil
+	  if !logged_in?
 
 	  	redirect to '/login'
 	  elsif session[:user_id] == Tweet.find(params[:id]).user_id
