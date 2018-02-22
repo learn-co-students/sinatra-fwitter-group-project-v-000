@@ -46,11 +46,14 @@ class UsersController < ApplicationController
   post '/login' do
     @user = User.find_by(username: params[:username])
     if @user.nil?
-      flash[:message] = "Couldn't find an account with this username"
+      flash[:message] = "Could not find an account with the username you entered. Please try again."
       redirect to "/login"
-    else  @user.authenticate(params[:password])
+    elsif @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect to "/tweets"
+    else
+      flash[:message] = "You have entered an incorrect password. Please try again."
+      redirect to "/login"
     end
   end
 

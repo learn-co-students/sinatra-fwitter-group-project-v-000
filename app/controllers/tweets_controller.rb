@@ -8,6 +8,6 @@ class TweetsController < ApplicationController
       redirect to "/login"
     end
     @tweets = Tweet.all
-    erb :"/tweets/tweets"
+    erb :"tweets/tweets"
   end
 end
