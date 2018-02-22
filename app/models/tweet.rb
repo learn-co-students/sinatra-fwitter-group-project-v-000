@@ -1,5 +1,5 @@
 class Tweet < ActiveRecord::Base
-  extend Helpers
+  extend Helpifiable
 
   belongs_to :user
 end
