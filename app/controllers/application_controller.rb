@@ -20,26 +20,28 @@ class ApplicationController < Sinatra::Base
   # process the form submission (new tweet)
   post '/tweets' do
     @tweet = Tweet.create(params[:tweet])
-    redirect to '/tweets/show_tweet'
+    redirect to '/tweets/#{@tweet.id}'
   end
   # displays the information for a single tweet
   get '/tweets/:id' do
-
+    @tweet = Tweet.find_by(params[:id])
     erb :'/tweets/show_tweet'
   end
   # one to load the form to edit a tweet
   get '/tweets/:id/edit' do
-
+    @tweet = Tweet.find_by(params[:id])
     erb :'/tweets/edit_tweet'
   end
   # update the tweet entry in the database
   patch '/tweets/:id' do
-
-    erb :'/tweets/show_tweet'
+    @tweet = Tweet.find(params[:id])
+    @tweet.update(params[:tweet])
+    redirect to "/tweets/#{@tweet.id}"
   end
   # delete a tweet
   delete '/tweets/:id/delete' do
-
+    @tweet = Tweet.find(params[:id])
+    @tweet.delete
     redirect to '/tweets'
   end
   # display the user signup
