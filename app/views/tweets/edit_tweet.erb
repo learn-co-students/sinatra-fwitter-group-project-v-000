@@ -1,0 +1,12 @@
+<!--PAGE HEADER-->
+<h1>Edit Tweet:</h1>
+
+<!--CURRENT TWEET CONTENT-->
+Current Content: "<%=@tweet.content%>"<br><br>
+
+<!--EDIT FORM-->
+<form method="post" action="/tweets/<%=@tweet.id%>/edit">
+    <input id="hidden" type="hidden" name="_method" value=patch>
+    New Content:<input type="text" name=content><br><br>
+    <input type="submit" id="submit" value="Edit Tweet">
+</form>

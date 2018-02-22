@@ -1,0 +1,8 @@
+<!--PAGE HEADER-->
+<h1>Welcome, <%=@user.username%></h1>
+
+<!--LIST ALL TWEETS-->
+<h3>Tweets:</h3>
+<%Tweet.all.each do |tweet|%>
+    <%=tweet.content%><br>
+<%end%>
