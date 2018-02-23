@@ -23,6 +23,15 @@ helpers do
     session.clear
   end
 
+  def verify_user
+    if logged_in?
+      @current_user = current_user
+    else
+      flash[:message] = "Please log in to view tweets."
+      redirect to "/login"
+    end
+  end
+
 end
 
   use Rack::Flash
