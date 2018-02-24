@@ -21,4 +21,7 @@ class User < ActiveRecord::Base
     User.all.find{|user| user.slug == slug}
   end
 
+  # def self.valid_username(uname)
+  #   User.all.find{|u| u.username == uname}
+  # end
 end
