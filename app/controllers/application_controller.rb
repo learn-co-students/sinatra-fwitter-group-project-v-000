@@ -92,11 +92,37 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/tweets/:id/edit' do
+    if logged_in?(session)
+      @tweet = Tweet.find(params[:id])
+      if @tweet.user_id == current_user(session).id
+        erb :'/tweets/edit_tweet'
+      else
+        redirect '/tweets'
+      end
+    else
+      redirect to '/login'
+    end
+  end
+
+  post '/tweets/:id/edit' do
+    @tweet = Tweet.find(params[:id])
+    if !params["content"].empty?
+      @tweet.update(content: params["content"])
+    else
+      redirect "/tweets/#{@tweet.id}/edit"
+    end
+    redirect "tweets/#{@tweet.id}"
+  end
+
   post '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
-
-    @tweet.delete
-    erb :'tweets/tweets'
+    if @tweet.user_id == current_user(session).id
+      @tweet.delete
+    elsif !logged_in?(session)
+      redirect '/login'
+    end
+    redirect '/tweets'
   end
 
   get '/logout' do
