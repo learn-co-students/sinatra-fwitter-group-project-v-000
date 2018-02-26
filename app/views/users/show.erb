@@ -1,0 +1,5 @@
+<h3>Here are your tweets, <%=@user.username%></h3>
+<%@user.tweets.each do |tweet|%>
+  <p><%=tweet.content%></p>
+  <br></br>
+<%end%>
