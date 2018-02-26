@@ -1,0 +1,30 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand navbar-center" href="/">fwitter</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+    	<li><a href="/login">Have an account? <strong>Sign in.</strong></a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+	<div class="vertical-tweak row">
+				<div class="col-md-8 col-md-offset-2">
+					<br>
+					<form action="/signup" method="post">
+						<h3><strong>Join Fwitter Today.</strong></h3>
+						<br>
+						<input placeholder="Account Name" required class="form-control" type="text" name="username">
+						<br>
+						<input placeholder="Email" required class="form-control" type="text" name="email">
+						<br>
+						<input placeholder="Password" required class="form-control" type="password" name="password">
+						<br>
+						<button class="btn btn-md btn-primary btn-block roundify"  type="submit"> Create Account</button>
+					</form>
+					<br>
+				</div>
+	</div>
+</div>
