@@ -1,55 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <!--
-     Frank Sinatra
-
-  "The old crooner himself:"
-       QB"   .  . ....^FBQQBQBQ
-       #^   ..../,, ,/yyBQBDBt`"B
-     B"  ._L_yQ&Qy&&QQBQQDlL;S; (Q
-    B^   /DQQQBQQQQQQBQBDQQD1:   "B
-   Q~   ,GQBDQDQQQQQQBBQQDQ&EC    7B
-   D    lQQQQQBQBQQQQQQQQBBID('    {
-   E   .iDDBQQBQQQQBBBQBQQDQ1!:    (
-   3   .(BQBBQBBQQQQBBQBBBDBS'     }                     I'm
-   Q   '~~<MMBQQBBQBP"""<BD1EL.    Q                   dreaming
-   Q    LuL `7QBBB?../LL;.!JDL     Q                    of a
-  "  ,  ,__&L.DBBEEL1L_,'EylEE!  ,U                     white
-  1 :s&yyQQQ6-DQBBQ&QQQQQQQQJY!  lyB1Q                Christmas.
-  S  ?DDQQBD'.QQBDQDBQBQQQDD1<  LIQDG
-  Q   j8BQE2 LQQBE9EBBEBQQES{! /BQSE
-   Q_ 'TS7L  <#P~^,G1?TXC3({!  3PEy
-    Q, ,_>'.,___yBD1DU;,'('''  yQ
-     L "Qy,  'IIIZl',L/&;!;:  LQ
-     Q; FD(  (`IE2L/QDB&lY!   6Q
-      Q, (/. `!?"21iQDU&/~   L FB
-       Q_ (EL/&&QDBQBDJ"   ,y^  `FB
-        Qy 75EEBBQESf`   _yB^      "M
-        Q7  `'^""~`   _yQQM'         `"FQ
-        F;         _yQQQQF              Q
-  -->
+    <title>Fwitter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
     <nav>
-          <% if logged_in? %>
+      <% if logged_in? %>
 
-            <a href="/tweets/new"> Create Tweet </a>
-            <a href="/logout"> Log Out </a>
-            <p>Welcome, <%=current_user.username %></p>
+        <a href="/tweets/new"> Create Tweet </a>
+        <a href="/logout"> Log Out </a>
+        <p>Welcome, <%=current_user.username %></p>
 
-          <% else %>
-            <a href="/signup">Sign Up</a>
-            <a href="/login"> Sign In </a>
-          <%end %>
+      <% else %>
+        <a href="/signup">Sign Up</a>
+        <a href="/login"> Sign In </a>
+      <%end %>
 
-        </nav>
-        <div class="container">
-          <h1>Fwitter</h1>
-          <%= yield %>
+    </nav>
+    <div class="container">
+      <h1>Fwitter</h1>
+      <%= yield %>
 
 
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   </body>
-
 </html>

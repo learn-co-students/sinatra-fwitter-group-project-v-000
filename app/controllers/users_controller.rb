@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   get '/users/:slug' do
       @user = User.find_by_slug(params[:slug])
-      erb :'/users/show'
+      erb :'users/show'
   end
   # display the user signup
   get '/signup' do
     if !logged_in?
-      erb :'users/create_user', locals: {message: 'Please sign up before you sign in'}
+      erb :'users/create_user', locals: {message: 'Please sign up first'}
     else
       redirect to '/tweets'
     end
@@ -24,14 +24,14 @@ class UsersController < ApplicationController
   # display the form to log in
   get '/login' do
     if !logged_in?
-      erb :'/users/login'
+      erb :'users/login'
     else
       redirect to '/tweets'
     end
   end
   # log add the `user_id` to the sessions hash
   post '/login' do
-    user = User.find_by(:username => params[:username])
+    user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect to '/tweets'
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 # logout the user
   get '/logout' do
     if logged_in?
-      session.destroy
+      session.clear
       redirect to '/login'
     else
       redirect to '/'

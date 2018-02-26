@@ -1,13 +1,14 @@
-<h3>Create A New User</h3>
-<form class="" action="/signup" method="post">
-  <label for="">Email:</label>
-  <input type="text" name="user[email]" value="">
-  <br></br>
-  <label for="">Username:</label>
-  <input type="text" name="user[username]" value="">
-  <br></br>
-  <label for="">Password:</label>
-  <input type="text" name="user[password]" value="">
-  <br></br>
-  <input type="submit" name="" value="Create User">
+<h2>Users</h2>
+
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
+
+<h3>Sign Up</h3>
+<form action="/signup" method="POST">
+  <p>Name: <input type="text" name="username"></p>
+  <p>Email: <input type="text" name="email"></p>
+  <p>Password: <input type="text" name="password"></p>
+  <input class="btn btn-primary" type="submit">
 </form>
