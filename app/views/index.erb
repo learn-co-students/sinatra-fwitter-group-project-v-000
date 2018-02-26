@@ -1,0 +1,19 @@
+<h1>Welcome to Fwitter</h1><br>
+
+<% if logged_in? %>
+  <a href="/users/<%= @current_user.slug %>">User Page</a><br>
+  <a href="/logout">Logout</a><br>
+<% else %>
+  <a href="/signup">Sign Up!</a><br>
+  <a href="/login">Log In!</a><br>
+<% end %>
+
+<h2>Fweets!</h2>
+
+<br></br>
+
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li><b>Created by: <%= tweet.user.username %></b> at <%= tweet.created_at %>: <%= tweet.content %></li><br>
+  <% end %>
+</ul>

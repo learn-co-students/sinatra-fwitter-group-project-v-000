@@ -137,7 +137,7 @@ describe ApplicationController do
 
       fill_in(:username, :with => "becky567")
       fill_in(:password, :with => "kittens")
-      click_button 'submit'
+      click_button 'Log In' # changed 'submit' to 'Log In'
       expect(page.current_path).to eq('/tweets')
     end
   end
@@ -168,7 +168,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' # changed 'submit' to 'Log In'
         visit "/tweets"
         expect(page.body).to include(tweet1.content)
         expect(page.body).to include(tweet2.content)
@@ -192,7 +192,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' # changed 'submit' to 'Log In'
         visit '/tweets/new'
         expect(page.status_code).to eq(200)
       end
@@ -204,7 +204,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' # changed 'submit' to 'Log In'
 
         visit '/tweets/new'
         fill_in(:content, :with => "tweet!!!")
@@ -225,7 +225,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' # changed 'submit' to 'Log In'
 
         visit '/tweets/new'
 
@@ -247,7 +247,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' # changed 'submit' to 'Log In'
 
         visit '/tweets/new'
 
@@ -278,7 +278,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' # changed 'submit' to 'Log In'
 
         visit "/tweets/#{tweet.id}"
         expect(page.status_code).to eq(200)
@@ -307,7 +307,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' # changed 'submit' to 'Log In'
         visit '/tweets/1/edit'
         expect(page.status_code).to eq(200)
         expect(page.body).to include(tweet.content)
@@ -324,7 +324,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' # changed 'submit' to 'Log In'
         session = {}
         session[:user_id] = user1.id
         visit "/tweets/#{tweet2.id}/edit"
@@ -338,7 +338,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' # changed 'submit' to 'Log In'
         visit '/tweets/1/edit'
 
         fill_in(:content, :with => "i love tweeting")
@@ -356,7 +356,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' # changed 'submit' to 'Log In'
         visit '/tweets/1/edit'
 
         fill_in(:content, :with => "")
@@ -384,7 +384,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' # changed 'submit' to 'Log In'
         visit 'tweets/1'
         click_button "Delete Tweet"
         expect(page.status_code).to eq(200)
@@ -402,7 +402,7 @@ describe ApplicationController do
 
         fill_in(:username, :with => "becky567")
         fill_in(:password, :with => "kittens")
-        click_button 'submit'
+        click_button 'Log In' # changed 'submit' to 'Log In'
         visit "tweets/#{tweet2.id}"
         click_button "Delete Tweet"
         expect(page.status_code).to eq(200)
