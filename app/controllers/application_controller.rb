@@ -45,6 +45,25 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/tweets/new' do
+    if !logged_in?
+      redirect '/login'
+    else
+      erb :"/tweets/new"
+    end
+  end
+
+  get "/tweets/:id" do
+    # binding.pry
+    if !logged_in?
+      redirect '/login'
+    else
+      @user = current_user
+      @tweet = Tweet.find_by_id(:id => params[:id])
+      erb :"/tweets/show_tweet"
+    end
+  end
+
   get '/login' do
     if logged_in?
       redirect '/tweets'
@@ -77,13 +96,7 @@ class ApplicationController < Sinatra::Base
      erb :"/users/show"
    end
 
-  get '/tweets/new' do
-    if logged_in?
-      erb :"/tweets/new"
-    else
-      redirect '/'
-    end
-  end
+
 
   post '/tweets' do
     if params[:content] == ""
