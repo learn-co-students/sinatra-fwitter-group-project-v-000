@@ -25,6 +25,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
+    # binding.pry
     if params[:username].empty? || params[:password].empty? || params[:email].empty?
       redirect '/signup'
     else
@@ -72,10 +73,11 @@ class ApplicationController < Sinatra::Base
      end
    end
 
-   # get "/users/#{user.slug}" do
-   #   @user = User.find_by(:id => session[:user_id])
-   #   erb "/users/show"
-   # end
+   get "/users/:slug" do
+     @user = User.find_by(:username => params[:slug])
+
+     erb :"/users/show"
+   end
 
  helpers do
     def logged_in?
@@ -88,14 +90,6 @@ class ApplicationController < Sinatra::Base
 
     def logout!
       session.clear
-    end
-
-    def slug
-      self.username.gsub(" ", "-").downcase
-    end
-
-    def self.find_by_slug(slug)
-      self.all.find{ |instance| instance.slug == slug}
     end
   end
 end
