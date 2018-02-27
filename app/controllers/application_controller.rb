@@ -25,7 +25,6 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    # binding.pry
     if params[:username].empty? || params[:password].empty? || params[:email].empty?
       redirect '/signup'
     else
@@ -36,20 +35,39 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-    # binding.pry
     @tweets = Tweet.all
-    erb :"/tweets/index"
+    @user = User.find_by(:id => session[:user_id])
+    if logged_in?
+      erb :"/tweets/index"
+    end
   end
 
-  # post "/login" do
-  #    @user = User.find_by(username: params[:username])
-  #    if @user && @user.authenticate(params[:password])
-  #      session[:user_id] = @user.id
-  #      redirect to '/tweets'
-  #    else
-  #      redirect to 'failure'
-  #    end
-  #  end
+  get '/login' do
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :"users/login"
+    end
+  end
+
+  post "/login" do
+     @user = User.find_by(username: params[:username])
+     session[:user_id] = @user.id
+     if @user && @user.authenticate(params[:password])
+       redirect '/tweets'
+     else
+       redirect '/login'
+     end
+   end
+
+   get '/logout' do
+     if !logged_in?
+       redirect '/login'
+     else
+       logout!
+       redirect '/tweets'
+     end
+   end
 
  helpers do
     def logged_in?
