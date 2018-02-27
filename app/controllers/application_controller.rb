@@ -1,4 +1,5 @@
 require './config/environment'
+require './app/models/user'
 # require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
@@ -7,6 +8,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "password_security"
   end
 
   get '/' do
@@ -14,15 +17,22 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb :"/users/create_users"
+    # binding.pry
+    # if !logged_in?
+      erb :"/users/create_user"
+    # else
+    #   redirect '/tweets'
+    # end
   end
 
   post '/signup' do
-  if params[:username].empty? || params[:password].empty? || params[:email].empty?
+    # binding.pry
+    if params[:username].empty? || params[:password_digest].empty? || params[:email].empty?
       # flash[:message] = "Please enter all fields."
       redirect '/signup'
     else
-    redirect '/tweets'
+      # @user = User.create(params)
+      redirect '/tweets'
     end
   end
 
@@ -32,4 +42,27 @@ class ApplicationController < Sinatra::Base
     erb :"/tweets/index"
   end
 
+  # post "/login" do
+  #    @user = User.find_by(username: params[:username])
+  #    if @user && @user.authenticate(params[:password])
+  #      session[:user_id] = @user.id
+  #      redirect to '/tweets'
+  #    else
+  #      redirect to 'failure'
+  #    end
+  #  end
+
+ helpers do
+    def logged_in?
+      !!current_user
+    end
+
+    def current_user
+      @current_user ||= User.find(session[:id]) if session[:id]
+    end
+
+    def logout!
+      session.clear
+    end
+  end
 end
