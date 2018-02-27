@@ -17,21 +17,19 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    # binding.pry
-    # if !logged_in?
+    if !logged_in?
       erb :"/users/create_user"
-    # else
-    #   redirect '/tweets'
-    # end
+    else
+      redirect '/tweets'
+    end
   end
 
   post '/signup' do
     # binding.pry
-    if params[:username].empty? || params[:password_digest].empty? || params[:email].empty?
-      # flash[:message] = "Please enter all fields."
+    if params[:username].empty? || params[:password].empty? || params[:email].empty?
       redirect '/signup'
     else
-      # @user = User.create(params)
+      @user = User.create(params)
       redirect '/tweets'
     end
   end
