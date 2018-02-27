@@ -123,11 +123,17 @@ class ApplicationController < Sinatra::Base
   end
 
   patch '/tweets/:id' do
+    # binding.pry
     @tweet = Tweet.find_by_id(params[:id])
-    @tweet.update(:content => params[:content])
-    @tweet.save
+    if params[:content] == ""
+      redirect "/tweets/#{@tweet.id}/edit"
+    else
 
-    redirect '/tweets/:id'
+      @tweet.update(:content => params[:content])
+      @tweet.save
+
+      redirect "/tweets/#{@tweet.id}"
+    end
   end
 
  helpers do
