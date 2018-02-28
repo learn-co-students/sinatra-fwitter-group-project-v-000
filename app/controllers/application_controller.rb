@@ -88,11 +88,8 @@ class ApplicationController < Sinatra::Base
   get "/tweets/:id" do
     if logged_in?
       @user = current_user
-      @tweet = @user.tweets.find_by(:id => params[:id])
-      if @tweet.user_id == @user.id
-        erb :"/tweets/show_tweet"
-      else redirect '/login'
-      end
+      @tweet = Tweet.find_by(:id => params[:id])
+        erb :'/tweets/show_tweet'
     else
       redirect '/login'
     end
@@ -112,7 +109,7 @@ class ApplicationController < Sinatra::Base
        end
      end
 
-     erb :"/tweets/show_tweet"
+     erb :'/tweets/show_tweet'
    end
 
   get '/tweets/:id/edit' do
@@ -138,13 +135,12 @@ class ApplicationController < Sinatra::Base
     else
       @tweet.update(:content => params[:content])
       @tweet.save
-      redirect "/tweets"
+      redirect "/tweets/#{@tweet.id}"
     end
   end
 
   delete '/tweets/:id/delete' do
     @user = current_user
-
     if logged_in?
       if @user.tweets.find_by_id(params[:id])
         @tweet = @user.tweets.find_by_id(params[:id])
