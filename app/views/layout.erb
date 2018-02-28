@@ -32,6 +32,11 @@
   </head>
   <body>
     <%= yield %>
+    <% if logged_in? %>
+      <a href="/logout">logout</a>
+    <% else %>
+      <a href="/login">login</a>
+    <%end%>
   </body>
 
 </html>
