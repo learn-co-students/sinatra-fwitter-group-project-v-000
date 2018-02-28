@@ -17,10 +17,10 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    if !logged_in?
-      erb :"/users/create_user"
-    else
+    if logged_in?
       redirect '/tweets'
+    else
+      erb :"/users/create_user"
     end
   end
 
@@ -70,10 +70,10 @@ class ApplicationController < Sinatra::Base
     @tweets = Tweet.all
     @user = User.find_by(:id => session[:user_id])
 
-    if !logged_in?
-      redirect '/login'
-    else
+    if logged_in?
       erb :"/tweets/index"
+    else
+      redirect '/login'
     end
   end
 
@@ -86,12 +86,15 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/tweets/:id" do
-    if !logged_in?
-      redirect '/login'
-    else
+    if logged_in?
       @user = current_user
       @tweet = @user.tweets.find_by(:id => params[:id])
-      erb :"/tweets/show_tweet"
+      if @tweet.user_id == @user.id
+        erb :"/tweets/show_tweet"
+      else redirect '/login'
+      end
+    else
+      redirect '/login'
     end
   end
 
@@ -122,28 +125,34 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  post '/tweets/:id/edit' do
+    @user = current_user
+    @tweet = @user.tweets.find_by_id(params[:id])
+    redirect "/tweets/#{@tweet.id}/edit"
+  end
+
   patch '/tweets/:id' do
     @tweet = Tweet.find_by_id(params[:id])
     if params[:content] == ""
       redirect "/tweets/#{@tweet.id}/edit"
     else
-
       @tweet.update(:content => params[:content])
       @tweet.save
-
-      redirect "/tweets/#{@tweet.id}"
+      redirect "/tweets"
     end
   end
 
   delete '/tweets/:id/delete' do
-    @tweet = Tweet.find_by_id(params[:id])
     @user = current_user
 
     if logged_in?
-          binding.pry
-      if @tweet.user_id == @user.id
-        @tweet.delete
-        redirect '/tweets'
+      if @user.tweets.find_by_id(params[:id])
+        @tweet = @user.tweets.find_by_id(params[:id])
+        if @tweet.user_id == @user.id
+          @tweet.delete
+          @user.save
+          redirect '/tweets'
+        end
       else
         redirect '/tweets'
       end
