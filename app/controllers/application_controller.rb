@@ -104,12 +104,13 @@ class ApplicationController < Sinatra::Base
          @tweet = Tweet.new(:content => params[:content])
          @tweet.user_id = session[:user_id]
          @tweet.save
+         redirect '/tweets'
        else
-         redirect '/'
+         redirect '/login'
        end
      end
 
-     erb :'/tweets/show_tweet'
+
    end
 
   get '/tweets/:id/edit' do
