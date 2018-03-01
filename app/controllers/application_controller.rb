@@ -18,15 +18,8 @@ class ApplicationController < Sinatra::Base
       !!current_user
     end
     def current_user
+      #@current_user = @current_user || User.find(session[:user_id])
       @current_user ||= User.find(session[:user_id]) if !!session[:user_id]
-    end
-  get '/logout' do
-      if logged_in?
-        session.clear
-        redirect "/login"
-      else
-        redirect "/"
-      end
     end
   end
 end
