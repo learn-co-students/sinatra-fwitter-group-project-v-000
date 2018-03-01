@@ -35,7 +35,7 @@ class TweetsController < ApplicationController
   #show action
   get '/tweets/:id' do
     if logged_in?
-      @tweet = current_user.tweets.find(params[:id])
+      @tweet = Tweet.all.find(params[:id])
       erb :"tweets/show_tweet"
     else
       redirect "login"
@@ -62,11 +62,17 @@ class TweetsController < ApplicationController
       redirect "login"
     end
   end
+  #delete action
   delete '/tweets/:id/delete' do
     if logged_in?
-      tweet = current_user.tweets.find(params[:id])
-      tweet.destroy if !!tweet
-      redirect "tweets"
+      tweets_user = User.find(params[:id])
+      if current_user == tweets_user
+        tweet=current_user.tweets.find(params[:id])
+        tweet.destroy
+        redirect "tweets"
+      else
+        redirect "tweets/#{params[:id]}"
+      end
     else
       redirect "login"
     end
