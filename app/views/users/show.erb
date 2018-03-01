@@ -1,0 +1,6 @@
+<%=@user.username%>
+<ul>
+  <%@user.tweets.each do |tweet|%>
+    <li>Tweet<%=tweet.content%></li>
+  <%end%>
+</ul>
