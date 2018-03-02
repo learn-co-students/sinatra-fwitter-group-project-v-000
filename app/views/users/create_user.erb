@@ -1,3 +1,6 @@
+<% if flash.has?(:message) %>
+<%= flash[:message] %>
+<% end %>
 <h1>Welcome, new user.</h1>
 
 <h2>Please choose a user name:</h2>

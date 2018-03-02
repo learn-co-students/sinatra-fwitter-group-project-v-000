@@ -1,6 +1,7 @@
 require './config/environment'
-
+require 'rack-flash'
 class ApplicationController < Sinatra::Base
+use Rack::Flash
 
   configure do
     set :public_folder, 'public'
@@ -14,42 +15,6 @@ class ApplicationController < Sinatra::Base
 		erb :'/index'
 	end
 
-	get '/login' do 
-		erb :'/users/login'
-	end
-
-  post '/login' do 
-    redirect "/failure" if !filled_out(params)
-    user = User.find_by(username: params[:username])
-     if user && user.authenticate(params[:password])
-        session[:user_id] = user.id
-        redirect "/show"
-     end 
-	end
-
-	get '/signup' do 
-		erb :'/users/create_user'
-	end
-
-	post '/signup' do 
-		(redirect '/tweets') if logged_in?
-		@user = User.create(params) if filled_out(params)
-			if @user
-				@user.id = User.all.last.id 
-				session[:user_id] = @user.id
-				redirect '/tweets'
-			elsif !@user
-				redirect '/signup'
-			else
-				redirect '/tweets'
-			end
-		
-	end
-
-	get '/tweets' do
-		@user = current_user
-		erb :'/tweets/tweets'
-	end
 
   helpers do
     def logged_in?
@@ -61,8 +26,27 @@ class ApplicationController < Sinatra::Base
     end
 
     def filled_out(params)
-      params.all? {|k,v| v != ""}
+      params.none? {|k,v| v.empty?}
     end
+
+		def not_filled_out
+			flash[:message] = "The form was incomplete or not filled out correctly"
+		end
+
+		def please_login
+			flash[:message] = "Please log in to do that."
+		end
+		
+		def success
+			flash[:message] = "Success"
+		end
+
+		def failure
+			flash[:message] = "Failure."
+		end
+
+
   end
+
 
 end
