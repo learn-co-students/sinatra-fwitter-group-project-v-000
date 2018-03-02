@@ -7,4 +7,9 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
+  configure do
+    enable :sessions
+    set :session_secret, "allyson_fwitter"
+  end
+
 end
