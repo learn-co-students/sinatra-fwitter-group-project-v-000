@@ -9,18 +9,17 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    #username should be unique
-    @user = User.find_or_initialize_by(username: params[:username])
-    @user.email=params[:email]
+    @user = User.find_or_initialize_by(username: params[:username], email: params[:email])
     @user.password = params[:password]
 
-    if @user.save
+    if !!@user && @user.save
       session[:user_id]=@user.id
       redirect "/tweets"
     else
       redirect "/signup"
     end
   end
+
   get '/users/:slug' do
     #if logged_in?
       @user = User.find_by_slug(params[:slug])

@@ -1,6 +1,6 @@
 <h1>Welcome, <%=@user.username%></h1>
 <ul>
-  <%@tweets.each_with_index do |tweet, index|%>
-    <li>Tweet nr. <%=index%>: <%=tweet.content%></li>
+  <%@tweets.each do |tweet|%>
+    <li>Tweeter <%=tweet.user.username%> : <%=tweet.content%></li>
   <%end%>
 </ul>
