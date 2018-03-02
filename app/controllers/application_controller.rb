@@ -10,14 +10,18 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :home
+    if logged_in?
+      erb :"users/show"
+    else
+      erb :index
+    end
   end
 
   get "/signup" do
     if logged_in?
       redirect to "/tweets"
     else
-      erb :"registrations/signup"
+      erb :"/users/create_user"
     end
   end
 
@@ -35,7 +39,7 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       redirect to "/tweets"
     else
-      erb :"sessions/login"
+      erb :"users/login"
     end
   end
 
@@ -44,7 +48,7 @@ class ApplicationController < Sinatra::Base
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect "/tweets"
+      redirect to "/tweets"
     else
       redirect to "/login"
     end
@@ -52,17 +56,24 @@ class ApplicationController < Sinatra::Base
 
   get "/logout" do
     if logged_in?
-		    session.clear
+		  session.clear
     end
 		redirect to "/login"
 	end
 
   get "/tweets" do
-    if @user = current_user
-      erb :"tweet/index"
+    if logged_in?
+      @user = current_user
+      @tweets = Tweet.all
+      erb :"tweets/tweets"
     else
       redirect to "/login"
     end
+  end
+
+  get "/users/:slug" do
+    @user = User.find_by_slug(params[:slug])
+    erb :"users/show"
   end
 
   def logged_in?
