@@ -12,4 +12,18 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "allyson_fwitter"
   end
 
+  get "/" do
+    erb :home
+  end
+
+  get "/signup" do
+    erb :"registrations/signup"
+  end
+
+  def logged_in?
+  end
+
+  def current_user
+  end
+
 end
