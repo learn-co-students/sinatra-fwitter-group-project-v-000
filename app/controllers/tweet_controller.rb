@@ -5,7 +5,7 @@ class TweetController < ApplicationController
 
   # ----- READ -----
   get "/tweets" do
-    erb :"tweets/index"
+    erb :"tweet/index"
   end
 
   # ----- UPDATE -----
