@@ -1,0 +1,8 @@
+<h3>@<%= @user.username %> Tweet Central</h3>
+
+<table>
+<% @user.tweets.each do |tweet| %>
+<td class="timestamp"><%= tweet.created_at %>:</td>
+<td class="tweets"><%= tweet.content %></td>
+<%end%>
+</table>
