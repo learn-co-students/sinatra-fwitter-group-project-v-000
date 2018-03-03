@@ -1,2 +1,2 @@
-class TweetsController < ActiveRecord::Base
+class TweetsController < ApplicationController
 end
