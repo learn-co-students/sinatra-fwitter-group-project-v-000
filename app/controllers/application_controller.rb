@@ -12,6 +12,7 @@ use Rack::Flash
 
 
 	get '/' do 
+		flash[:message] = "Home is where the heart is"
 		erb :'/index'
 	end
 

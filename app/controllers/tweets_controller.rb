@@ -4,6 +4,7 @@ class TweetsController < ApplicationController
 	get '/tweets' do 
 		if logged_in?
 			@user = current_user
+			success
 			erb :'/tweets/tweets'
 		else
 			please_login

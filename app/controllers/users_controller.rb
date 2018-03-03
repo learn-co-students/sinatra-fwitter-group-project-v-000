@@ -1,6 +1,4 @@
-require 'rack-flash'
 class UsersController < ApplicationController
-use Rack::Flash
 
 	get '/login' do 
 		logged_in? ? (redirect '/tweets') : (erb :'/users/login')
@@ -13,8 +11,8 @@ use Rack::Flash
 				session[:user_id] = user.id
 				redirect '/tweets'
 			elsif !user
-				flash[:message] = "Invalid user.  Please sign up."
 				redirect '/signup'
+				flash[:message] = "Invalid user.  Please sign up."
 			end
 	end
 
