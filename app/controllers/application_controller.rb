@@ -11,17 +11,21 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     if logged_in?
+      @user = current_user
+      @tweets = current_user.tweets
       erb :"users/show"
     else
       erb :index
     end
   end
 
+  # ----- REGISTRATION & SESSIONS -----
+
   get "/signup" do
     if logged_in?
       redirect to "/tweets"
     else
-      erb :"/users/create_user"
+      erb :signup
     end
   end
 
@@ -29,6 +33,7 @@ class ApplicationController < Sinatra::Base
     user = User.new(params)
 
     if user.save
+      session[:user_id] = user.id
       redirect to "/tweets"
     else
       redirect to "/signup"
@@ -61,6 +66,7 @@ class ApplicationController < Sinatra::Base
 		redirect to "/login"
 	end
 
+  # ----- TWEETS -----
   get "/tweets" do
     if logged_in?
       @user = current_user
@@ -71,10 +77,74 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get "/tweets/new" do
+    if logged_in?
+      erb :"tweets/create_tweet"
+    else
+      redirect to "/login"
+    end
+  end
+
+  post "/tweets" do
+    if !params[:content].empty?
+      current_user.tweets.create(params)
+      redirect to "/tweets"
+    else
+      redirect to "/tweets/new"
+    end
+  end
+
+  get "/tweets/:id" do
+    @tweet = Tweet.find_by(id: params[:id])
+
+    if logged_in?
+      erb :"tweets/show_tweet"
+    else
+      redirect to "/login"
+    end
+  end
+
+  get "/tweets/:id/edit" do
+    @tweet = Tweet.find_by(id: params[:id])
+
+    if logged_in? && current_user.tweets.include?(@tweet)
+      erb :"tweets/edit_tweet"
+    else
+      redirect to "/login"
+    end
+  end
+
+  post "/tweets/:id" do
+    @tweet = Tweet.find_by(id: params[:id])
+
+    if !params[:content].empty?
+      @tweet.update(params)
+      erb :"tweets/show_tweet"
+    else
+      redirect to "/tweets/#{@tweet.id}/edit"
+    end
+  end
+
+  post "/tweets/:id/delete" do
+    @tweet = Tweet.find_by(id: params[:id])
+
+    if logged_in? && current_user.tweets.include?(@tweet)
+      Tweet.find_by(id: params[:id]).destroy
+      redirect to "/tweets"
+    else
+      redirect to "/tweets"
+    end
+
+  end
+
+  # ----- USERS -----
+
   get "/users/:slug" do
     @user = User.find_by_slug(params[:slug])
     erb :"users/show"
   end
+
+  # ----- HELPERS -----
 
   def logged_in?
     !!session[:user_id]

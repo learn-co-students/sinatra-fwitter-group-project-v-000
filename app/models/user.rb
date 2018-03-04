@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   extend Slugifiable::FindableBySlug
 
   has_secure_password
-  validates_presence_of :username, :email, :password
+  validates_presence_of :username, :email, :password_digest
   has_many :tweets
 
   def slug
