@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
    get '/login' do
       if !logged_in?
-         erb :'/users/login'
+         erb :'users/login'
       else
          redirect '/tweets'
       end
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
   get '/logout' do
     if logged_in?
-      session.clear
+      session.destroy
       redirect '/login'
     else
       redirect '/'
