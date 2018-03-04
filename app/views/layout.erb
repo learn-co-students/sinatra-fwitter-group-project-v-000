@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <title>Fwitter</title>
+  </head>
+  <body>
+   <% if logged_in? %>   
+      <p>Welcome, <%=current_user.username%>
+      <a href="/tweets/new"> Create Tweet </a>
+   <% else %>
+      <a href="/signup">Sign Up</a>
+      <a href="/login">Login</a>
+   <% end %>
+
+   <%= yield %>
+
+  </body>
+</html>
