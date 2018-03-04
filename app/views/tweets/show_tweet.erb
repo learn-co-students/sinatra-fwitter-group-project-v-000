@@ -1,23 +1,15 @@
-<!--
-1. Responds to a get '/tweets/:id'
-2. Displays single tweet on individual page
-3. Create an edit link on this page
-4. Contains form to delete a tweet
-  4a. Doesn't need to have any input fields
-  4b. Only needs a submit button
-  4c. Submitted via post '/tweets/:id/delete'
-
-
--->
-<h2>@<%=current_user.username%></h2>
+<h2>@<%=tweet.user.username%></h2>
 <br><br>
 <p><%=@tweet.created_at%>:  <%= @tweet.content %></p>
 <br><br>
 
-<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+<form method="post" action="/tweets/<%=@tweet.id%>">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete Tweet">
+  <input type="submit" name="delete" id="Delete Tweet" value="Delete Tweet">
 </form>
 
 <br>
-<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet </a>
+
+<form method="get" action="/tweets/<%=@tweet.id%>/edit">
+  <input type="submit" name="edit" id="Edit Tweet" value="Edit Tweet">
+</form>

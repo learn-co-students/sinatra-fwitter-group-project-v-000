@@ -10,15 +10,16 @@
 
     <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css">
 <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css"> -->
   </head>
   <body>
     <nav>
-      <% if logged_in? %>
+      <a href="/tweets">Home</a>
 
-      <a href="/tweets/new"> Create Tweet </a>
-      <a href="/logout"> Log Out</a>
+      <% if logged_in? %>
+      <a href="/tweets/new">Create Tweet</a>
+      <a href="/logout">Log Out</a>
       <p>Welcome, <%= current_user.username %></p>
 
       <% else %>
@@ -34,7 +35,7 @@
 
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
   </body>
 </html>

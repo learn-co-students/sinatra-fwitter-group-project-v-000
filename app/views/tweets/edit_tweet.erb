@@ -1,4 +1,8 @@
-<!--
-1. Responds to get '/tweets/:id/edit'
-2. Contains form to edit a tweet
-3. Submit form via post '/tweets/:id' -->
+<h3>Edit Tweet</h3>
+<br><br>
+
+<form method="post" action="/tweets/<%=@tweet.id%>">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <input type="text" name="content" value="<%= @tweet.content %>">
+  <input type="submit" value="submit">
+</form>
