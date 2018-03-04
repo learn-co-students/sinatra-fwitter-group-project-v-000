@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  extend Slugifiable::FindableBySlug
 
   has_secure_password
   validates_presence_of :username, :email, :password_digest
@@ -7,5 +6,11 @@ class User < ActiveRecord::Base
 
   def slug
     self.username.downcase.gsub(/ /, "-")
+  end
+
+  def self.find_by_slug(slug)
+    self.all.find do |object|
+      object.slug == slug
+    end
   end
 end
