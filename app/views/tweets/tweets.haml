@@ -1,0 +1,15 @@
+- if flash.has?(:message)
+  .alert.alert-primary
+    %h1= flash[:message]
+
+%h1.display-4.mb-3 Tweets
+
+%br
+
+- @tweets.each do |tweet|
+  .card.mb-3
+    .card-body
+      %a.font-weight-bold.mr-2(href="/users/#{tweet.user.slug}")
+        %i.fas.fa-user
+        = tweet.user.username
+      %a(href="/tweets/#{tweet.id}")= tweet.content

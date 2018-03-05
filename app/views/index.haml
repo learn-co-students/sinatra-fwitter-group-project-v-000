@@ -1,0 +1,10 @@
+%h1.display-4 Welcome to Fwitter!
+
+%br
+
+- unless logged_in?
+  %p.h3
+    %a(href="/signup") Sign up
+    or
+    %a(href="/login") log in
+    to continue.

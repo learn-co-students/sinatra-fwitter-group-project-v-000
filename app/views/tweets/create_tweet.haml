@@ -1,0 +1,10 @@
+%h1.display-4 Create New Tweet
+
+%br
+
+%form(action="/tweets/new" method="post")
+  .form-row
+    .col
+      %input#content.form-control(type="text" name="content" placeholder="Enter Tweet Here")
+    .col
+      %input#submit.btn.btn-danger(type="submit" name="submit" value="Create Tweet")

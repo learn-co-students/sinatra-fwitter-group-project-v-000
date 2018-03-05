@@ -1,0 +1,9 @@
+%h1.display-4= @user.username
+
+%br
+
+- @user.tweets.each do |tweet|
+  .card.mb-3
+    %a(href="/tweets/#{tweet.id}")
+      .card-body
+        = tweet.content
