@@ -15,4 +15,15 @@ class ApplicationController < Sinatra::Base
     erb :'/registrations/signup'
   end
 
+  post '/signup' do
+    @user = User.create(params)
+    # session[:id] = @user.id
+
+    redirect '/tweets'
+  end
+
+  get '/tweets' do
+    erb :'/users/home'
+  end
+
 end
