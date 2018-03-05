@@ -2,7 +2,7 @@ module Slugifiable
 
   module InstanceMethods
     def slug
-      self.name.parameterize if self.name
+      self.username.parameterize if self.username
     end
   end
 
