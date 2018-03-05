@@ -1,9 +1,8 @@
 class TweetsController < ApplicationController
 
-  get '/tweets' do
+   get '/tweets' do
   #  binding.pry
     if logged_in?
-      puts "This is process #{Process.pid}"
       @user = current_user
       @tweets = Tweet.all
       erb :'/tweets/index'
@@ -23,5 +22,14 @@ class TweetsController < ApplicationController
     end
   end
 
+  get '/tweets/new' do
+    @user = current_user
+    @tweets = Tweet.all
+    erb :'/tweets/create_tweet'
+  end
 
+  post '/tweets/new' do
+# binding.pry
+    @constant = params[:content]
+  end
 end
