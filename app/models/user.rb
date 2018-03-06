@@ -11,6 +11,11 @@ class User < ActiveRecord::Base
     self.all.find{|obj| obj.slug == slug}
   end
 
+  
+  def find_by_slug(slug)
+    self.all.find{|obj| obj.slug == slug}
+  end
+    
 
   def find_by_slug(slug)
     self.all.find{|obj| obj.slug == slug}
