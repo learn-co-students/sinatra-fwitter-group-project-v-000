@@ -8,4 +8,12 @@ class TweetsController < ApplicationController
     end
   end
 
+  get '/tweets/new' do
+    if logged_in?
+      erb :'/tweets/create_tweet'
+    else
+      redirect '/login'
+    end
+  end
+
 end
