@@ -21,9 +21,18 @@ end
     @user = current_user
     if params[:content] != ""
       @user.tweets << Tweet.create(content: params[:content])
-      redirect '/users/#{@user.slug}'
+      redirect "/users/#{@user.slug}"
     else
-      redirect '/tweets'
+      redirect '/tweets/new'
+    end
+  end
+
+  get '/tweets/:id' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/show_tweet'
+    else
+      redirect '/login'
     end
   end
 
