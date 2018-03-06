@@ -16,4 +16,10 @@ class TweetsController < ApplicationController
     end
   end
 
+  post '/tweets' do
+    if !params[:content].empty?
+      Tweet.create(content: params[:content], user_id: session[:user_id])
+    end
+  end
+
 end
