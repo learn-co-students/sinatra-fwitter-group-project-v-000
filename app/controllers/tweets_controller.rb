@@ -21,7 +21,7 @@ end
     @user = current_user
     if params[:content] != ""
       @user.tweets << Tweet.create(content: params[:content])
-      redirect '/#{@user.slug}/tweets'
+      redirect '/users/#{@user.slug}'
     else
       redirect '/tweets'
     end
