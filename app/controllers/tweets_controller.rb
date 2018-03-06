@@ -44,7 +44,7 @@ end
     if @tweet.user == current_user
       erb :'/tweets/edit_tweet'
     else
-      redirect '/login'
+      redirect '/tweets'
     end
   end
 
