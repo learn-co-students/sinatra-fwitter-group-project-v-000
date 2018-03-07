@@ -56,4 +56,14 @@ class TweetsController < ApplicationController
   end
 
 
+  delete '/tweets/:id/delete' do
+    tweet = Tweet.find_by(id: params[:id])
+    if tweet.user == current_user
+      tweet.destroy
+    else
+      # add flash error message
+    end
+  end
+
+
 end
