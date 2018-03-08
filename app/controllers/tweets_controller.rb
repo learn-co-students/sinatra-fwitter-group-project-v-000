@@ -60,8 +60,10 @@ class TweetsController < ApplicationController
     tweet = Tweet.find_by(id: params[:id])
     if tweet.user == current_user
       tweet.destroy
+      redirect to("/tweets")
     else
-      # add flash error message
+      flash[:notice] = "Cannot delete other Users Tweets"
+      redirect to("/tweets/#{tweet.id}")
     end
   end
 

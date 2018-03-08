@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect to('/tweets')
     else
-      flash[:notice] = "All fields required"
+      flash[:error] = @user.errors.full_messages
       redirect to('/signup')
     end
   end
@@ -38,6 +38,9 @@ class UsersController < ApplicationController
     if !!@user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect to('/tweets')
+    else
+      flash[:error] = @user.errors.full_messages
+      redirect to('/login')
     end
   end
 

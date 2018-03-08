@@ -1,7 +1,10 @@
 <h1>Sign Up For Fwitter</h1>
 
-<%if flash.has?(:notice)%>
-  <%=flash[:notice]%>
+<%if flash.has?(:error)%>
+  <%flash[:error].each do |f|%>
+    <%=f%>!
+    <br>
+  <% end %>
 <% end %>
 
 <form class="" action="/signup" method="post">
