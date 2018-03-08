@@ -1,8 +1,11 @@
+require 'rack-flash'
+
 class UsersController < ApplicationController
+
+  use Rack::Flash
 
 
   get '/signup' do
-    # @user = User.find_by(id: session[:id])
     if logged_in?
       redirect to('/tweets')
     else
@@ -16,6 +19,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect to('/tweets')
     else
+      flash[:notice] = "All fields required"
       redirect to('/signup')
     end
   end
