@@ -1,5 +1,9 @@
 <h1>Login</h1>
 
+  <%if flash.has?(:notice)%>
+    <%=flash[:notice]%>
+  <% end %>
+
 <form class="" action="/login" method="post">
   <input type="text" name="username" id="username" placeholder="username..">
   <br>

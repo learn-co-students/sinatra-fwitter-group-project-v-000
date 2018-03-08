@@ -4,6 +4,7 @@ class TweetsController < ApplicationController
     if logged_in?
       erb :'tweets/tweets'
     else
+      flash[:notice] = "Must log in to see content!"
       redirect to('/login')
     end
   end
@@ -31,14 +32,18 @@ class TweetsController < ApplicationController
       @tweet = Tweet.find_by(id: params[:id])
       erb :'tweets/show_tweet'
     else
+      flash[:notice] = "Must log in to see content!"
       redirect to('/login')
     end
   end
 
   get '/tweets/:id/edit' do
-    if logged_in?
-      @tweet = Tweet.find_by(id: params[:id])
+    @tweet = Tweet.find_by(id: params[:id])
+    if logged_in? && current_user.tweets.include?(@tweet)
       erb :'tweets/edit_tweet'
+    elsif logged_in?
+      flash[:notice] = "Can only edit tweets you made"
+      redirect to("/tweets/#{@tweet.id}")
     else
       redirect to('/login')
     end

@@ -1,7 +1,9 @@
 <h1>Welcome, <%=current_user.username%></h1>
 
 <%Tweet.all.each do |tweet|%>
-  <%=tweet.content%> --<a href="/tweets/<%=tweet.id%>"><%=tweet.user.username%></a>
+
+   <a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a> --<a href="/users/<%=tweet.user.slug%>"><%=tweet.user.username%></a>
+  <br>
 <% end %>
 <br><br>
 
@@ -9,3 +11,5 @@
 
 
 <a href="/logout"><button type="button" name="button">Logout</button></a>
+
+<a href="/users/<%=current_user.slug%>"><button type="button" name="button">My Tweets</button></a>

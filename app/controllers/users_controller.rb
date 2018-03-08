@@ -20,6 +20,7 @@ class UsersController < ApplicationController
       redirect to('/tweets')
     else
       flash[:error] = @user.errors.full_messages
+      flash[:notice] = @user.errors[:username].first
       redirect to('/signup')
     end
   end
@@ -39,7 +40,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect to('/tweets')
     else
-      flash[:error] = @user.errors.full_messages
+      !!@user ? flash[:notice] = "check password" : flash[:notice] = "check username"
       redirect to('/login')
     end
   end
@@ -50,8 +51,10 @@ class UsersController < ApplicationController
   end
 
   get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    erb :'users/show'
+    if logged_in?
+      @user = User.find_by_slug(params[:slug])
+      erb :'users/show'
+    end
   end
 
 end
