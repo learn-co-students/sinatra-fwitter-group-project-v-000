@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%=@user.username%>'s profile</title>
+  </head>
+  <body>
+    <h1>Tweets from: <%=@user.username%></h1>
+    <%@user.tweets.each do |tweet|%>
+    <div>
+      <%=tweet.content%>
+    </div> 
+    <%end%>
+
+  </body>
+</html>
