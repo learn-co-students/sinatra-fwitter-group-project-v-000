@@ -19,8 +19,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect to('/tweets')
     else
-      flash[:error] = @user.errors.full_messages
-      flash[:notice] = @user.errors[:username].first
+      flash[:notice] = @user.errors.full_messages
       redirect to('/signup')
     end
   end
@@ -51,8 +50,8 @@ class UsersController < ApplicationController
   end
 
   get '/users/:slug' do
-      @user = User.find_by_slug(params[:slug])
-      erb :'users/show'
+    @user = User.find_by_slug(params[:slug])
+    erb :'users/show'
   end
 
 end

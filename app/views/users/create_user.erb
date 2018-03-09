@@ -1,7 +1,7 @@
 <h1>Sign Up For Fwitter</h1>
 
-<%if flash.has?(:error)%>
-  <%flash[:error].each do |f|%>
+<%if flash.has?(:notice)%>
+  <%flash[:notice].each do |f|%>
     <%=f%>!
     <br>
   <% end %>

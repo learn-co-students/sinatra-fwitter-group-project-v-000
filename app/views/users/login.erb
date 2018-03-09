@@ -1,16 +1,19 @@
-<h1>Login</h1>
+<h2>Login</h2>
+<br><br>
 
-  <%if flash.has?(:notice)%>
-    <%=flash[:notice]%>
-  <% end %>
 
-<form class="" action="/login" method="post">
-  <input type="text" name="username" id="username" placeholder="username..">
-  <br>
-  <input type="password" name="password" id="password" placeholder="password">
-  <br><br>
-  <input type="submit" id="submit" value="Log In">
+<form class="form-inline" action="/login" method="post">
+
+  <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+  <div class="input-group mb-2 mr-sm-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">@</div>
+    </div>
+    <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+  </div>
+
+  <label class="sr-only" for="inlineFormInputName2">Name</label>
+  <input type="password" name="password" class="form-control mb-2 mr-sm-2" id="password">
+
+  <input type="submit" class="btn btn-primary mb-2" id="submit" value="Log In">
 </form>
-<br>
-
-<button type="button" class="btn btn-light"><a href="/">Home</a></button>
