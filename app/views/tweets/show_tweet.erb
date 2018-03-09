@@ -3,15 +3,38 @@
   <%=flash[:notice]%>
 <% end %>
 
-<h3><%=@tweet.content%></h3>
-<br><br>
 
 
-    <a href="/tweets/<%=@tweet.id%>/edit"><button type="button" name="button">Edit Tweet</button></a>
+
+<div class="card">
+<div class="card-header">
+  Tweet
+</div>
+<div class="card-body">
+  <h6 class="card-title"><%=@tweet.content%></h6>
+  <br>
+  <!-- <div class="form-inline"> -->
+  <div class="btn-group mr-2">
+    <a href="/tweets/<%=@tweet.id%>/edit" class="btn btn-sm btn-primary">Edit Tweet</a>
+  </div>
+  <div class="btn-group">
+    <form class="" action="/tweets/<%=@tweet.id%>/delete" method="post">
+      <input type="hidden" id="hidden" name="_method" value="delete">
+      <input type="submit" class="btn btn-sm btn-primary" value="Delete Tweet">
+    </form>
+
+  </div>
+  <!-- </div> -->
+
+
+</div>
+</div>
+
+
+    <!-- <a href="/tweets/<%=@tweet.id%>/edit"><button type="button" name="button">Edit Tweet</button></a>
     <br>
-    <a href="/tweets"><button type="button" name="button">Home</button></a>
 
     <form class="" action="/tweets/<%=@tweet.id%>/delete" method="post">
       <input type="hidden" id="hidden" name="_method" value="delete">
       <input type="submit" value="Delete Tweet">
-    </form>
+    </form> -->

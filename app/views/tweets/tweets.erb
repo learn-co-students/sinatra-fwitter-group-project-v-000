@@ -2,14 +2,17 @@
 
 <%Tweet.all.each do |tweet|%>
 
-   <a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a> --<a href="/users/<%=tweet.user.slug%>"><%=tweet.user.username%></a>
+  <div class="card">
+  <div class="card-header">
+    Tweet
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">User <%=tweet.user.username%></h5>
+    <p class="card-text"><%=tweet.content%></p>
+    <a href="/tweets/<%=tweet.id%>" class="btn btn-primary">View Tweet</a>
+    <a href="/users/<%=tweet.user.slug%>" class="btn btn-primary">View User</a>
+  </div>
+</div>
   <br>
 <% end %>
-<br><br>
-
-<a href="/tweets/new"><button type="button" name="button">New Tweet</button></a>
-
-
-<a href="/logout"><button type="button" name="button">Logout</button></a>
-
-<a href="/users/<%=current_user.slug%>"><button type="button" name="button">My Tweets</button></a>
+<br>

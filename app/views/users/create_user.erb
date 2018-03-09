@@ -1,4 +1,5 @@
 <h1>Sign Up For Fwitter</h1>
+<br>
 
 <%if flash.has?(:notice)%>
   <%flash[:notice].each do |f|%>
@@ -7,7 +8,7 @@
   <% end %>
 <% end %>
 
-<form class="" action="/signup" method="post">
+<!-- <form class="" action="/signup" method="post">
   <input type="text" name="username" id="username" placeholder="username..">
   <br>
   <input type="text" name="email" id="email" placeholder="email..">
@@ -16,4 +17,36 @@
   <br><br>
 
   <input type="submit" value="Signup">
+</form> -->
+
+
+
+
+
+
+
+<form class="" action="/signup" method="post">
+  <div class="form-group">
+    <div class="col-md-4 mb-3">
+      <label for="username">Username</label>
+      <input type="text" name="username" class="form-control" id="username" placeholder="Username" required>
+
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="email">Email</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend3">@</span>
+        </div>
+        <input type="text" name="email" class="form-control" id="email" placeholder="Email" aria-describedby="inputGroupPrepend3" required>
+
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="password">Password</label>
+      <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+    </div>
+  </div>
+
+  <input type="submit" class="btn btn-primary" value="Signup">
 </form>
