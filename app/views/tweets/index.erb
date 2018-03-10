@@ -1,0 +1,15 @@
+<h2>Welcome, <%= current_user.username %>!</h2>
+
+<a href="/users/<%=current_user.slug%>">Homepage</a>
+
+<% Tweet.all.each do |tweet| %>
+<div class="tweet-list">
+    <a class="tweet-edit" href="/users/<%=tweet.user.slug%>">@<%=tweet.user.slug%> : </a></p>
+    <p><%= tweet.content %></p>
+			<% if current_user.tweets.include?(tweet) %>
+				 <a class="tweet-edit" href="/tweets/<%=tweet.id%>/edit">Edit</a>
+      <% end %>
+<% end %>
+</div>
+
+<a class="edit-button" href="/logout">Logout</a>
