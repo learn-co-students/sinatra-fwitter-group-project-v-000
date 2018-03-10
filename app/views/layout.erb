@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Fwitter</title>
+    <style>
+
+    h1  {
+      color: #ffffff;
+    }
+    body {
+        font: 300 100%/2.0 "HelveticaNeue", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        background-color: #00aced;
+        text-align: center;
+        margin: 0;
+        font-size: 2.0em;
+        cursor: pointer;
+        font-weight: bold;
+        position: relative;
+        display:block;
+      }
+      a {
+        font-size: 0.5em;
+        color: #ffffff;
+        text-decoration: underline;
+        text-align: center;
+        line-height: 0em;
+      }
+    img {
+        width: 25%;
+        height: auto;
+        display: inline-table;
+        vertical-align: bottom;
+        padding-top: : 3.0em;
+        margin-top: 1.0em;
+      }
+    h2 {
+        color: #ffffff;
+        font-size: 1.25em;
+        line-height: 2em;
+      }
+    h3, p {
+      font-size: 0.5em;
+      line-height: 1em;
+    }
+    a.edit-button, a.tweet-edit {
+      font-size: 0.4em;
+      line-height: 1em;
+    }
+    a.homepage {
+      padding-top: 1.0em;
+    }
+
+    </style>
+  </head>
+  <body>
+
+    <%= yield %>
+
+  </body>
+</html>
