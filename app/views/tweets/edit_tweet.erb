@@ -1,0 +1,13 @@
+<h3>Edit Tweet</h3>
+  <br>
+
+<form class="" action="/tweets/<%=@tweet.id%>" method="post">
+
+  <input type="hidden" id="hidden" name="_method" value="patch">
+  <div class="input-group ml-2">
+    <div class="input-group-prepend">
+      <input type="submit" class="btn btn-primary" value="submit">
+    </div>
+  <input type="text" class="form-control form-group col-md-6" name="content" value="<%=@tweet.content%>" aria-label="Username" aria-describedby="basic-addon1">
+  </div>
+</form>

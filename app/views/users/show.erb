@@ -1,0 +1,16 @@
+
+<h3><%= @user.username%>'s Tweets</h3>
+
+<%@user.tweets.reverse.each do |tweet|%>
+  <div class="card">
+  <div class="card-header">
+    Tweet
+  </div>
+  <div class="card-body">
+    <h6 class="card-title"><%=tweet.content%></h6>
+    <br>
+    <a href="/tweets/<%=tweet.id%>" class="btn btn-sm btn-primary">View Tweet</a>
+  </div>
+</div>
+  <br>
+<% end %>
