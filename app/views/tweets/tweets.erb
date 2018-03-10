@@ -1,13 +1,13 @@
 <h1>Welcome, <%=current_user.username%></h1>
 
-<%Tweet.all.each do |tweet|%>
+<%Tweet.all.reverse.each do |tweet|%>
 
   <div class="card">
   <div class="card-header">
     Tweet
   </div>
   <div class="card-body">
-    <h5 class="card-title">User <%=tweet.user.username%></h5>
+    <h5 class="card-title"><%=tweet.user.username%> says-</h5>
     <p class="card-text"><%=tweet.content%></p>
     <a href="/tweets/<%=tweet.id%>" class="btn btn-primary">View Tweet</a>
     <a href="/users/<%=tweet.user.slug%>" class="btn btn-primary">View User</a>

@@ -131,7 +131,7 @@ describe ApplicationController do
 
     it 'does load /tweets if user is logged in' do
       user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-
+        # binding.pry
 
       visit '/login'
 
