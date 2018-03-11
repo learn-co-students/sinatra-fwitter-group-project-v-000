@@ -1,0 +1,12 @@
+<h1>Tweets</h1>
+<h3>Welcome, <%= @user.username %></h3>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+<% @tweets.each do |tweet| %>
+<div class="one_tweet">
+	<small><%= tweet.user.username %></small>
+	<p><%= tweet.content %></p>
+</div>
+	<br></br>
+<% end %>
