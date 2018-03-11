@@ -23,10 +23,10 @@ class ApplicationController < Sinatra::Base
     erb :'/tweets/tweets'
   end
 
-  post '/users' do
-    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+  post '/signup' do
+    @user = User.new(username: params[:username], email: params[:email], password: params[:password])
     if @user.save
-      redirect to '/tweets'
+      redirect '/tweets'
     else
       redirect to '/signup'
     end
