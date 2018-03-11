@@ -22,5 +22,4 @@ ActiveRecord::Schema.define(version: 20180225210620) do
     t.string "email"
     t.string "password_digest"
   end
-
 end
