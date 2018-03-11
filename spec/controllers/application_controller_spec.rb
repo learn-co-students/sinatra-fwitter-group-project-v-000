@@ -373,6 +373,7 @@ describe ApplicationController do
         expect(last_response.location).to include("/login")
       end
     end
+
   end
 
   describe 'delete action' do
