@@ -43,7 +43,6 @@ class ApplicationController < Sinatra::Base
     end
   end
   get "/users/:slug" do
-    # binding.pry
     @user = User.find_by_slug(params[:slug])
     erb :"/users/show"
   end
@@ -80,6 +79,7 @@ class ApplicationController < Sinatra::Base
     redirect to :"/tweets/#{@tweet.id}"
   end
   post '/signup' do
+    # binding.pry
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect to :'/signup'
     else
