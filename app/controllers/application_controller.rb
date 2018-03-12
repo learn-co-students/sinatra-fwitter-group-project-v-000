@@ -63,6 +63,10 @@ class ApplicationController < Sinatra::Base
       erb :"/tweets/show_tweet"
     end
   end
+  
+  get '/tweets/:id/edit' do
+    binding.pry
+  end
 
   post '/tweets/new' do
     @user = User.find_by(session[:user_id])
