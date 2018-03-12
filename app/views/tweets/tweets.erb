@@ -1,0 +1,12 @@
+<br>
+<h1 hidden>Welcome,</h1>
+
+<h1>TWEETS</h1>
+<% Tweet.all.each do |tweet| %>
+  <button class="btn tweets" type="button"><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></button><br>
+<% end %>
+
+<br><br><br><br>
+<button class="btn btn_light" type="button"><a href="/tweets/new">Tweet</a></button><br><br>
+<button class="btn btn_light" type="button"><a href="/logout">Logout</a></button><br>
+

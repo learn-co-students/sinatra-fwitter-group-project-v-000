@@ -1,0 +1,42 @@
+/*GLOBAL*******************************************/
+
+/*body*/
+body {margin: 0; text-align: center; background: url(https://c1.staticflickr.com/4/3564/3374620636_6bdf8fc82b_b.jpg) no-repeat center center fixed;background-size: cover;height: 100%;overflow: hidden;}
+
+/*nav*/
+nav {background-color: #0a1c1fc9; padding: 20px;}
+nav a {padding: 0 20px; font-size: 2em; color: white;}
+
+/*links*/
+a {text-decoration: none; color: #e2e2e2;}
+a:hover {color: #95e8e1;}
+input[type=submit]:hover {color: #95e8e1;}
+
+/*text*/
+h1 {color: white; text-shadow: 3px 3px #117a80; font-size: 3em;}
+h2 {color: white;text-shadow: 3px 3px #117a80;font-size: 2em;margin-top: -1%;}
+
+/*buttons*/
+.img_btn {margin-top: 5%; opacity: .90;}
+#submit, .btn {background: #152326d9; color: white; padding: .5% 1%; font-size: 1.50em;}
+#submit:hover {color: #95e8e1;}
+.btn_light {background: #07404cd6;}
+
+/*FORMS********************************************/
+
+/*textarea size for tweet content input*/
+#tweet_content {width:250px; height:150px;}
+
+/*validation icon*/
+:valid + .icon-validation::before {
+  content: url("/icons/success.png");
+  position: relative;
+  top: 7px;
+}
+
+.form {margin-top: 5%;}
+
+input, textarea {padding: 1%; font-size: 1em;}
+
+/*tweets*/
+.tweets {margin: 1%;padding: 1%;}
