@@ -92,7 +92,11 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/:id' do
     @tweet = Tweet.find_by_id(params[:id])
-    erb :'/tweets/show_tweet'
+    if session[:user_id] == @tweet.user_id
+      erb :'/tweets/show_tweet'
+    else
+      redirect :'/login'
+    end
   end
 
   post '/tweets' do
@@ -110,6 +114,26 @@ class ApplicationController < Sinatra::Base
     @tweet = Tweet.find_by_id(params[:id])
     @tweet.delete
     redirect to :'/tweets'
+  end
+
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if session[:user_id] == @tweet.user_id
+      erb :'/tweets/edit_tweet'
+    else
+      redirect to :'/tweets'
+    end
+  end
+
+  patch '/tweets/:id' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if params[:content] != ""
+      @tweet = Tweet.update(content: params[:content])
+      @tweet.save
+      redirect to :"/tweets/#{@tweet.id}"
+    # else
+    #   redirect to :'/tweets/new'
+    end
   end
 
 end
