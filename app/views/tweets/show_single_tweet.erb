@@ -1,0 +1,12 @@
+<%= @tweet.content %> <br><br>
+
+If you'd like to change this tweet, please click here. <br>
+<a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a><br><br>
+
+
+Or if you'd rather, you could just get rid of it altogether... <br>
+<form action="/tweets/<%= @tweet.id %>/delete" method="post">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Tweet">
+
+</form>
