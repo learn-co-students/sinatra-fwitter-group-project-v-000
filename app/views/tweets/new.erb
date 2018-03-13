@@ -1,0 +1,7 @@
+<h1>New Tweet</h1>
+
+<form method="post" action="/tweets">
+  <input id="user_id" type="hidden" value="<%= current_user.id %>" name="user_id">
+  <input id="content" type="text" maxlength="280" placeholder="Content" required name="content"><br><br>
+  <input id="submit" type="submit" value="Tweet now!">
+</form>

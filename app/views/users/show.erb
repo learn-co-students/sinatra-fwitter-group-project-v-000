@@ -1,0 +1,13 @@
+<h1>Tweets by <%= @user.username %></h1>
+
+<% @user.tweets.reverse.each do |tweet| %>
+  <div>
+    <p><%= tweet.content %></p>
+    <p>
+      –
+      <a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a>
+      &nbsp|&nbsp
+      <a href="/tweets/<%= tweet.id %>">View tweet</a>
+    </p>
+  <div>
+<% end %>
