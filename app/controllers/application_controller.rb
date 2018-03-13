@@ -25,7 +25,7 @@ class ApplicationController < Sinatra::Base
   post '/signup' do
 
     if valid_signup?(params)
-      user = User.create(params) #should user be an INSTANCE variable?
+      user = User.create(username: params[:username], password: params[:password])
       session[:user_id] = user.id
 
       redirect '/tweets'
@@ -44,6 +44,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
+
     if !current_user
       erb :'users/login'
     else
@@ -52,8 +53,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
+    binding.pry
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
+
       session[:user_id] = user.id
     end
     redirect "/tweets"
