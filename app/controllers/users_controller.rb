@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   use Rack::Flash
 
+
+
   get '/signup' do
     if logged_in?
       redirect '/tweets'
@@ -23,8 +25,6 @@ class UsersController < ApplicationController
   end
 
 
-
-
   get '/login' do
     if !logged_in?
     erb :'users/login'
@@ -44,6 +44,16 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+     erb :'/users/show'
+  end
+
+
+
+
+
+
   get '/logout' do
     if logged_in?
     session.destroy
@@ -52,6 +62,7 @@ class UsersController < ApplicationController
     redirect '/'
   end
   end
+
 
 
 

@@ -3,13 +3,13 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  def find_by_slug(slug)
-    self.all.detect{|user|user.slug == slug}
+  def self.find_by_slug(slug)
+    User.all.detect{|user|user.slug == slug}
   end
 
 
   def slug
-    name.downcase.gsub(" ","-")
+    username.downcase.gsub(" ","-")
   end
 
 
