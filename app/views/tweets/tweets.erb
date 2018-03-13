@@ -1,8 +1,11 @@
 Welcome, <%=current_user.username%>
 <br></br>
-Your tweets are:
+
 <%@tweets.each do |tweet|%>
 <ul>
+  look at this tweet
+  <br></br>
+
   <li><%=tweet.content%></li>
 
 </ul>
