@@ -35,12 +35,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-    "display tweets"
+    erb :'tweets/tweets'
   end
 
   get '/login' do
     erb :'users/login'
-
   end
 
   post '/login' do
