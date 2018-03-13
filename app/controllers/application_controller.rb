@@ -35,11 +35,19 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-    erb :'tweets/tweets'
+    if logged_in?
+      erb :'tweets/tweets'
+    else
+      redirect '/login'
+    end
   end
 
   get '/login' do
-    erb :'users/login'
+    if !session[:user_id]
+      erb :'users/login'
+    else
+      redirect '/tweets'
+    end
   end
 
   post '/login' do
@@ -47,18 +55,39 @@ class ApplicationController < Sinatra::Base
     if @user
       session[:user_id] = @user.id
     end
-    redirect "/users/#{@user.id}" # OR SESSION[:USER_ID]??
+    redirect "/tweets"
   end
 
   get '/users/:id' do
+
     @user = User.find(params[:id]) # OR SESSION[:USER_ID]??
     erb :'/users/show'
   end
 
-  helpers do
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect '/login'
+    else
+      redirect '/'
+    end
+
+  end
+
+  helpers do # A CONFIRMER: helpers methodes pour VIEW
 
     def valid_signup?(params)
       !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
+    end
+
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      if logged_in?
+        User.find(session[:user_id])
+      end
     end
 
   end
