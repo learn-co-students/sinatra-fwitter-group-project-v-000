@@ -59,10 +59,16 @@ class ApplicationController < Sinatra::Base
     redirect "/tweets"
   end
 
-  get '/users/:id' do
+  # get '/users/:id' do
+  #
+  #   @user = User.find(params[:id]) # OR SESSION[:USER_ID]??
+  #   erb :'/users/show'
+  # end
+  get "/users/:slug" do
+    @user = User.find_by_slug(params[:slug])
+    @tweets = @user.tweets
+    erb :'users/show'
 
-    @user = User.find(params[:id]) # OR SESSION[:USER_ID]??
-    erb :'/users/show'
   end
 
   get '/logout' do
