@@ -2,13 +2,14 @@ class UsersController < ApplicationController
   use Rack::Flash
 
 
-
   get '/signup' do
-    if logged_in?
-      redirect '/tweets'
-    end
-    erb :signup
+    if !logged_in?
+      flash[:message] = "Please Sign Up Before Log In"
+      erb :'/users/create_user'
+    else
+    redirect '/tweets'
   end
+end
 
 
   post '/signup' do
@@ -50,17 +51,13 @@ class UsersController < ApplicationController
   end
 
 
-
-
-
-
   get '/logout' do
     if logged_in?
     session.destroy
     redirect '/login'
-  else
+    else
     redirect '/'
-  end
+    end
   end
 
 

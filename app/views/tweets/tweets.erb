@@ -1,8 +1,13 @@
 <h2> Welcome, <%= current_user.username%> </h2>
 
+<% if flash.has?(:message) %>
+<%= flash[:message] %>
+<% end %>
 
-<label> My Collection of Tweets!</label>
+<label>Collection of Tweets!</label>
 </br></br>
 <% @tweets.each do |tweet|%>
 <li> <%= tweet.content %> </li>
 <%end%>
+
+<p> <a href = "/tweets/new" > Select For <%= current_user.username%> To Add a New Tweet </a> </p>

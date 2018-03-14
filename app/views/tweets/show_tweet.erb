@@ -1,5 +1,19 @@
-<h2> Hi! I'm user: <%=current_username%> </h2>
+<h2> Hi! I'm user: <%=current_user.username%> </h2>
 
 <label> Here is my Tweet: </label>
 
 <h3> <%= @tweet.content %> </h3>
+
+
+<form action= "/tweets/<%=@tweet.id%>/delete" method = "POST">
+  <input id+ "hidden" type = "hidden" name= "_method"
+  value = "delete">
+</br>
+
+<label> Select to Delete This Tweet:</label>
+<input type="submit" value = "Delete Tweet">
+
+<label> To Edit This Tweet Select: </label>
+<p> <a href= "/tweets/<%=@tweet.id%>/edit"> "Edit Tweet"</a> </p>
+
+</form>
