@@ -1,5 +1,5 @@
 
-<label> Here is my Tweet: </label>
+<label> Here is <%=current_user.username%>'s Tweet: </label>
 
 <h3> <%= @tweet.content %> </h3>
 
@@ -17,3 +17,7 @@
 
 <label> To Edit This Tweet Select: </label>
 <a href= "/tweets/<%=@tweet.id%>/edit"> "Edit Tweet"</a>
+
+</br> </br>
+<label> To See All Tweets: </label>
+<a href= "/tweets"> "All Tweets"</a>
