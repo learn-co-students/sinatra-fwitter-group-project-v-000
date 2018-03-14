@@ -1,4 +1,3 @@
-<h2> Hi! I'm user: <%=current_user.username%> </h2>
 
 <label> Here is my Tweet: </label>
 
@@ -11,9 +10,10 @@
 </br>
 
 <label> Select to Delete This Tweet:</label>
-<input type="submit" value = "Delete Tweet">
+<input type="submit" value = "Delete Tweet"></br></br>
 
-<label> To Edit This Tweet Select: </label>
-<p> <a href= "/tweets/<%=@tweet.id%>/edit"> "Edit Tweet"</a> </p>
 
 </form>
+
+<label> To Edit This Tweet Select: </label>
+<a href= "/tweets/<%=@tweet.id%>/edit"> "Edit Tweet"</a>
