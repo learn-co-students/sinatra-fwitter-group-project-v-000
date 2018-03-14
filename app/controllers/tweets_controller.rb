@@ -62,8 +62,7 @@ end
     patch '/tweets/:id' do
       if logged_in?
       if params[:content] == ""
-      # redirect '/tweets/#{params[:id]}/edit'
-      redirect "/tweets/#{@tweet.id}/edit"
+      redirect "/tweets/#{params[:id]}/edit"
       else
         @tweet = Tweet.find_by_id(params[:id])
           if @tweet.user_id == current_user.id
