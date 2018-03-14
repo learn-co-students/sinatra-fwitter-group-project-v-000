@@ -1,0 +1,4 @@
+<% @tweets.each_with_index do |tweet, index| %>
+  <h2> Tweet Number <%= index+1 %></h2>
+  <p><%= tweet.content%> </p>
+  <% end %>
