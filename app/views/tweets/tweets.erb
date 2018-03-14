@@ -1,8 +1,6 @@
 <h2> Welcome,</h2>
 
-<% if flash.has?(:message) %>
-<%= flash[:message] %>
-<% end %>
+
 
 <label>Collection of Tweets!</label>
 </br></br>
@@ -14,3 +12,5 @@
 
 
 <a href= "/logout"> Select To Logout</a>
+
+<p> <a href= "/users/<%= current_user.username %>">Select for <%=current_user.username%> </a> Tweets!</p>

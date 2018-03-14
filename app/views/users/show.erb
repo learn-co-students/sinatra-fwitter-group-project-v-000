@@ -1,10 +1,15 @@
-<h2> Hello, current_user.username </h2>
+<h2> Hello, <%=current_user.username%> </h2>
 
 <label> Your List of Tweets Follows </label>
 
-<% @user.tweets.each do |tweet|%>
+<% current_user.tweets.each do |tweet|%>
 <li> <%= tweet.content %> </li>
 <%end%>
 
+</br></br>
 
 <a href= "/logout"> Select To Logout</a>
+
+
+</br></br>
+<a href= "/tweets"> Select To View Tweets By All Users</a>

@@ -1,5 +1,11 @@
 <h3> A New Tweet From User:   <%= current_user.username%></h3>
 
+<% if flash.has?(:message) %>
+<%= flash[:message] %>
+<% end %>
+
+</br> </br>
+
 <form action = "/tweets" method = "POST" >
 
   <label> Tweet Content </label>

@@ -2,6 +2,11 @@ class UsersController < ApplicationController
   use Rack::Flash
 
 
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+     erb :'/users/show'
+  end
+
   get '/signup' do
     if !logged_in?
       flash[:message] = "Please Sign Up Before Log In"
@@ -46,11 +51,6 @@ end
     end
   end
 
-  get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-     erb :'/users/show'
-  end
-
 
   get '/logout' do
     if logged_in?
@@ -60,9 +60,5 @@ end
     redirect '/'
     end
   end
-
-
-
-
 
 end
