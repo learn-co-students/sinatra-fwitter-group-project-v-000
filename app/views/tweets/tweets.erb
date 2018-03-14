@@ -10,4 +10,7 @@
 <li> <%= tweet.content %> </li>
 <%end%>
 
-<p> <a href = "/tweets/new" > Select For <%= current_user.username%> To Add a New Tweet </a> </p>
+<p> <a href = "/tweets/new" > Select For Your Current User:  <%= current_user.username%>, To Add a New Tweet </a> </p>
+
+
+<a href= "/logout"> Select To Logout</a>
