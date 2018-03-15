@@ -1,16 +1,9 @@
-<h2> Welcome,</h2>
+<h2> Welcome, <%= current_user.username%> </h2>
 
 
 
-<label>Collection of Tweets!</label>
+<label>All Tweets!</label>
 </br></br>
 <% @tweets.each do |tweet|%>
 <li> <%= tweet.content %> </li>
 <%end%>
-
-<p> <a href = "/tweets/new" > Select For Your Current User:  <%= current_user.username%>, To Add a New Tweet </a> </p>
-
-
-<a href= "/logout"> Select To Logout</a>
-
-<p> <a href= "/users/<%= current_user.username %>">Select for <%=current_user.username%> </a> Tweets!</p>

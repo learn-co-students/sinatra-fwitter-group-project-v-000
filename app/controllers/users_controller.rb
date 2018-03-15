@@ -9,7 +9,6 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if !logged_in?
-      flash[:message] = "Please Sign Up Before Log In"
       erb :'/users/create_user'
     else
     redirect '/tweets'
@@ -18,9 +17,8 @@ end
 
 
   post '/signup' do
-
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
-      flash[:message] = "Missing Information- Please Try Sign Up Again"
+      flash[:message] = "Missing Information- Please Try Again"
       redirect '/signup'
     else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
@@ -46,8 +44,8 @@ end
       session[:user_id] = user.id
       redirect '/tweets'
     else
-      flash[:message] = "Login Failed, Please Try Again"
-      redirect '/signup'
+      flash[:message] = "Login Failed, Please Try Again (You May Need to Register)"
+      redirect '/login'
     end
   end
 
