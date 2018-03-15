@@ -1,9 +1,12 @@
+
 <h2> Hello, <%=current_user.username%> </h2>
 
 <p> Your List of Tweets Follows </p>
 
 <% current_user.tweets.each do |tweet|%>
-<li> <%= tweet.content %> </li>
+ <li> <a href="/tweets/<%=tweet.id%>/edit"> <%=tweet.content%> </a></li>
 <%end%>
+</br>
+<label> Select A Tweet To Edit </label>
 
 </br></br>
