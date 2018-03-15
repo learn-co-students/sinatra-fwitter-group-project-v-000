@@ -81,7 +81,8 @@ end
       @tweet = Tweet.find_by_id(params[:id])
       if @tweet.user_id == current_user.id
         @tweet.delete
-        redirect '/tweets'
+        flash[:message] = "Tweet Deleted"
+        redirect '/users/show'
       else
     redirect '/login'
     end
