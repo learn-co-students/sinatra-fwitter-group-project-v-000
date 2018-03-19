@@ -1,12 +1,16 @@
-<form action="/login" method="POST">
-	<label for="username">Username: </label>
-	<input type="text" name="username" id="username">
+<div class="container">
+	<div class="row">
+		<form action="/login" method="POST">
+			<label for="username">Username: </label>
+			<input type="text" name="username" class="form-control" id="username" placeholder="Enter your username">
 
-	<br><br>
+			<br>
 
-	<label for="password">Password: </label>
-	<input type="password" name="password" id="">
+			<label for="password">Password: </label>
+			<input type="password" name="password" class="form-control" id="" placeholder="Password">
 
-	<br><br>
-	<input type="submit" value ="Login" id="submit">
-</form>
+			<br>
+			<input type="submit" value ="Login" id="submit" class="btn btn-primary">
+		</form>
+	</div>
+</div>

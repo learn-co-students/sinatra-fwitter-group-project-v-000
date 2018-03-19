@@ -1,19 +1,24 @@
-<h1>Create a new user</h1>
+<h2>Create a new user</h2>
 
-<form action="/signup" method="POST">
-	<label for="username">Username: </label>
-	<input type="text" name="username" id="username">
+<div class="container">
+	<div class="row">
+		<form action="/signup" method="POST">
+			<label for="username">Username: </label>
+			<input type="text" name="username" class="form-control" id="username" placeholder="Enter a username">
+			
+			<br>
+			
+			<label for="email">Email: </label>
+			<input type="email" name="email" id="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+			<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+			
+			<br>
 
-	<br><br>
+			<label for="password">Password: </label>
+			<input type="password" name="password" class="form-control" id="password" placeholder="Password">
 
-	<label for="email">Email: </label>
-	<input type="text" name="email" id="email">
-
-	<br><br>
-
-	<label for="password">Password: </label>
-	<input type="password" name="password" id="">
-
-	<br><br>
-	<input type="submit" value ="Submit" id="submit">
-</form>
+			<br>
+			<input type="submit" value ="Submit" id="submit" class="btn btn-primary">
+		</form>
+	</div>
+</div>

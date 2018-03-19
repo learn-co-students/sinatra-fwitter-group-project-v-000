@@ -1,11 +1,13 @@
-<p><%= @tweet.content %></p>
+<input type="hidden" id="hidden" name="_method" value="PATCH">
+	<textarea rows="5" cols = "50" name="content" class="form-control" id="tweet" ><%= @tweet.content %></textarea>
+	<br>
 
 <form action='/tweets/<%= @tweet.id %>' method='POST'>
 	<input type="hidden" name="_method" id="hidden" value="EDIT">
-	<input type="submit" value="Edit Tweet" id="Edit Tweet">
+	<input type="submit" value="Edit Tweet" class="btn btn-primary" id="Edit Tweet">
 </form>
 
 <form action='/tweets/<%= @tweet.id %>' method='POST'>
 	<input type="hidden" name="_method" id="hidden" value="DELETE">
-	<input type="submit" value="Delete Tweet" id="Delete Tweet">
+	<input type="submit" value="Delete Tweet" class="btn btn-danger" id="Delete Tweet">
 </form>
