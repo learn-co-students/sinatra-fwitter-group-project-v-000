@@ -32,10 +32,7 @@ class ApplicationController < Sinatra::Base
       !params.any?{|i| i[1].empty?}
     end
 
-
-    # def current_user_tweet?
-    #   current_user.id == 
-    # end
+    # TODO: create tweet_exists?(tweet_id) function
 
   end
   #--------------------------------------------------------

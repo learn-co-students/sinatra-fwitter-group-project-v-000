@@ -1,5 +1,8 @@
 <h1>Welcome, <%= @user.username %></h1>
 
+<!-- TODO: If no tweets, display a custom message -->
+<!-- TODO: If there are tweets, add the tweet belongs to the current user, display an edit button next to the tweet -->
+<!-- TODO: Add a new "tweet" button to the header once the user is logged in -->
 Here are of the tweets:
 
 <% Tweet.all.each do |tweet| %>
