@@ -22,10 +22,11 @@ class TweetController < ApplicationController
 
 	#==================== SHOW ==============================
 	get '/tweets/:tweetid' do
-		# TODO: refacor to if/else/if.  if logged_in? && tweet_exists?, then create the tweet and erb to the show_tweet page.  elsif logged_in? && !tweet_exists?, then redirect to an error page.
-		if logged_in?
-			@tweet = Tweet.find_by(params[:tweet_id])
+		if logged_in? && tweet_exists?(params[:tweetid])
+			@tweet = Tweet.find_by(params[:tweetid])
 			erb :'/tweets/show_tweet'
+		elsif (logged_in? && !tweet_exists?(params[:tweetid]))
+			erb :'/tweets/error'
 		else
 			redirect to "/login"
 		end

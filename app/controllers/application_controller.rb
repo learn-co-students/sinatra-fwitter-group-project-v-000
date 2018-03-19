@@ -32,7 +32,9 @@ class ApplicationController < Sinatra::Base
       !params.any?{|i| i[1].empty?}
     end
 
-    # TODO: create tweet_exists?(tweet_id) function
+    def tweet_exists?(tweet_id)
+      Tweet.find_by_id(tweet_id) != nil
+    end
 
   end
   #--------------------------------------------------------
