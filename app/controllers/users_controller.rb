@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  extends
-
   get '/signup' do
     if !session[:user_id]
       erb :'users/create_user'
@@ -10,8 +8,9 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    new_user = User.create(username: params[:username], email: params[:email], password: params[:password])
-    if session[:user_id] = new_user[:id]
+    new_user = User.new(username: params[:username], email: params[:email], password: params[:password])
+    if new_user.save
+      session[:user_id] = new_user[:id]
       redirect to '/tweets'
     else
       redirect to '/signup'
@@ -41,7 +40,11 @@ class UsersController < ApplicationController
   end
 
   get '/users/:slug' do
-
-    erb :'users/show'
+    @user = user.find_by_slug(params[:slug])
+    if session[:user_id] == @user.id
+      erb :'users/show'
+    else
+      redirect to '/login'
+    end
   end
 end
