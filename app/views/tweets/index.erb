@@ -1,0 +1,14 @@
+<h1>All Tweets</h1>
+
+<p>Welcome, <%= @username %></p>
+
+<table>
+  <tr>
+    <th>Username</th>
+    <th>Tweet</th>
+  </tr>
+  <% @tweets.each do |tweet| %><tr>
+    <td><%= tweet.user.username %></td>
+    <td><%= tweet.content %></td>
+  </tr><% end %>
+</table>
