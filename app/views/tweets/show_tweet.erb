@@ -1,6 +1,5 @@
 <br>
-<h1>"<%= @tweet.content %>"</h1> 
-<h2>@<%= @tweet.user.username %></h2>
+<h1>"<%= @tweet.content %>"</h1> <br>
 
   <!--update-->
   <button class="btn" type="button"><a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a></button>
@@ -13,10 +12,5 @@
     <!--submit-->
     <input id="submit" type="submit" value="Delete Tweet"></input>
   </form>
-   
-
-<br><br><br>
-<button class="btn btn_light" type="button"><a href="/tweets/new">Tweet</a></button><br><br>
-<button class="btn btn_light" type="button"><a href="/logout">Logout</a></button><br>
 
 

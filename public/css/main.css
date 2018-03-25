@@ -14,7 +14,6 @@ input[type=submit]:hover {color: #95e8e1;}
 
 /*text*/
 h1 {color: white; text-shadow: 3px 3px #117a80; font-size: 3em;}
-h2 {color: white;text-shadow: 3px 3px #117a80;font-size: 2em;margin-top: -1%;}
 
 /*buttons*/
 .img_btn {margin-top: 5%; opacity: .90;}
@@ -40,3 +39,8 @@ input, textarea {padding: 1%; font-size: 1em;}
 
 /*tweets*/
 .tweets {margin: 1%;padding: 1%;}
+
+
+
+
+
