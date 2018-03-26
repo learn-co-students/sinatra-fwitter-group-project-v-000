@@ -17,8 +17,8 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    if !params[:username].empty? && !params[:email].empty? && !params[:password]
-      @user = User.create(params)
+    if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
+      @user = User.create(params) #create both creates a new user and persists it to the database (saves it)
     end
     redirect '/tweets/index'
   end
