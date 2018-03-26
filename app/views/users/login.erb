@@ -1,0 +1,16 @@
+<form class="form" action="/login" method="POST"> 
+  
+  <!--normal-->
+  <input type="text" name="username" placeholder="username" pattern="[a-zA-Z0-9_-]{5,12}" autofocus required title="must be alphanumeric in 5-12 characters">
+  <span class="icon-validation"></span> <br><br>
+  
+  <!--normal-->
+  <input type="password" name="password" placeholder="password" pattern="[a-zA-Z0-9_-]{5,12}" autofocus required title="must be alphanumeric in 5-12 characters">
+  <span class="icon-validation"></span> <br><br><br>
+  
+  <!--submit-->
+  <input id="submit" type="submit" value="Log In">
+</form>
+
+<br><br><br><br>
+<button class="btn btn_light" type="button"><a href="/signup">Sign Up</a></button><br><br>

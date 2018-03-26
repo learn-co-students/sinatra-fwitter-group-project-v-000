@@ -1,3 +1,4 @@
+require_relative './patches'
 ENV['SINATRA_ENV'] ||= "development"
 
 require 'bundler/setup'

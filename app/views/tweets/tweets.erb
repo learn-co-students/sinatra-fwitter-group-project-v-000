@@ -1,0 +1,36 @@
+<br>
+<h1 hidden>Welcome,</h1>
+
+<h1>TWEETS</h1>
+
+  <% Tweet.all.each do |tweet| %>
+      
+    <% if tweet.user_id == session[:user_id] %>
+    
+      <div>
+        <button class="btn tweets" onclick=<%= "popMessage()" if tweet.user_id == session[:user_id] %>>
+          <a href="/tweets/<%= tweet.id %>" >
+            <%= tweet.content %><br>
+            <span style="font-size: 65%; color: #1bbbbb;" id="user_tag">tweeted by you</span>
+          </a>
+        </button><br>
+      </div>
+      
+    
+    <% else %>
+      <!--testing onclick-->
+      <div>
+        <button class="btn tweets" onclick="popMessage()">
+          <%= tweet.content %><br>
+          <span style="font-size: 65%; color: #1bbbbb;">tweeted by @<%= tweet.user.username %></span><br>
+          <span style="font-size: 65%; color: red;" id="foreign_tweet"></span>
+        </button>
+      </div>
+    <% end %>
+    
+  <% end %>
+
+
+<br><br><br><br>
+<button class="btn btn_light" type="button"><a href="/tweets/new">Tweet</a></button><br><br>
+
