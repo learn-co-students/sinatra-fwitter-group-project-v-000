@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Fwitter</title>
+   </head>
+   <body>
+      <h2>Welcome, <%=@user.username%>!</h2>
+         <h3>Your tweets:</h3>
+         <ol>
+            <%@user.tweets.each do |tweet|%>
+            <li><%=tweet.content%></li>
+            <%end%>
+         </ol>
+
+   </body>
+</html>
