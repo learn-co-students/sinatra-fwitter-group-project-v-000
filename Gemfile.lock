@@ -111,6 +111,7 @@ DEPENDENCIES
   bcrypt
   capybara
   database_cleaner!
+  nokogiri
   pry
   rack-test
   rake
@@ -124,4 +125,4 @@ DEPENDENCIES
   tux
 
 BUNDLED WITH
-   1.10.6
+   1.16.1
