@@ -15,9 +15,9 @@ class ApplicationController < Sinatra::Base
 
   get '/signup' do
      if !session[:user_id]
-       erb :'users/signup'
+       erb :'users/create_user'
      else
-       redirect '/rooms'
+       redirect '/tweets' #change to users home page.. /users/:slug
      end
    end
 
@@ -71,13 +71,27 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+
   post '/signup' do
-    @user= User.create(username: params[:username], email: params[:email], password:params[:password])
-    session[:user_id]= @user.id
+  if user=User.find_by_email(params[:email]) #make error message
+      erb :'users/create_user' #or redirect to error page that explains
+    else
+    @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+    session[:user_id] = @user.id
+    #need to decide where to redirect to. either 'users/home' or '/rooms'
+    redirect "/tweets"
+  end
   end
 
-  post '/login' do
 
+  post '/login' do #check if a user with this email actuallyexists, if so, set the session
+    user = User.find_by(:email => params[:email], :username => [:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect "/rooms"
+    else
+      redirect to '/signup'
+    end
   end
 
   post '/tweets' do
