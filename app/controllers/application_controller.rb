@@ -5,38 +5,27 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions #you need this in order to access the sessions hash to validate user log in.
+    set :session_secret, 'password_security'
   end
-
 
   get '/' do
-    erb :index
-  end
-
-  get '/signup' do
-    erb :'users/create_user'
-  end
-
-  post '/signup' do
-    if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
-      @user = User.create(params) #create both creates a new user and persists it to the database (saves it)
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :index
     end
-    redirect '/tweets/index'
   end
 
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
 
-
-
-
-  #logging in is simply storing the user's ID in the session hash.
-  #logging out is simply clearing the session hash.
-
-
-
-
-
-
-
-
+    def current_user
+      User.find(session[:user_id])
+    end
+  end
 
 
 end
