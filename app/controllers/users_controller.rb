@@ -41,10 +41,10 @@ class UsersController < ApplicationController
 
   get '/logout' do
     if logged_in?
-      session.destroy
-      redirect '/login' #if user is logged out, redirect to /login
+      session.clear
+      redirect '/tweets' #if user is logged out, redirect to /login
     else
-      redirect '/tweets' #if use IS logged in, redirect to /tweets
+      redirect '/login' #if use IS logged in, redirect to /tweets
     end
   end
 end
