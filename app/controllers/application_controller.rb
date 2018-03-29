@@ -73,13 +73,14 @@ class ApplicationController < Sinatra::Base
 
 
   post '/signup' do
-  if user=User.find_by_email(params[:email]) #make error message
+  if user=User.find_by_email(params[:email]) || user=User.find_by_username(params[:username])#make error message
       erb :'users/create_user' #or redirect to error page that explains
     else
     @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
     session[:user_id] = @user.id
     #need to decide where to redirect to. either 'users/home' or '/rooms'
     redirect "/tweets"
+    binding.pry
   end
   end
 
