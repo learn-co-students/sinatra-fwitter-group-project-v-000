@@ -42,9 +42,14 @@ class UsersController < ApplicationController
   get '/logout' do
     if logged_in?
       session.clear
-      redirect '/tweets' #if user is logged out, redirect to /login
+      redirect '/login'
     else
-      redirect '/login' #if use IS logged in, redirect to /tweets
+      redirect '/login'
     end
+  end
+
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'/users/show'
   end
 end

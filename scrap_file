@@ -1,8 +1,9 @@
-@user = User.create(username: params[:username], email: params[:email], password: params[:password])
-
-
-
-
-if !params[:username].empty? && !params[:email].empty? && !params[:password]
-  @user = "go fuck yourself"
+get '/tweets' do
+  @user = current_user
+  if logged_in?
+    @tweets = Tweet.all
+    erb :'tweets/tweets'
+  else
+    redirect '/login'
+  end
 end

@@ -1,9 +1,9 @@
 class TweetsController < ApplicationController
 
 # Show tweets index
-  get '/tweets' do
-    @user = current_user
+  get '/tweets' do    
     if logged_in?
+      @user = current_user
       @tweets = Tweet.all
       erb :'tweets/tweets'
     else
