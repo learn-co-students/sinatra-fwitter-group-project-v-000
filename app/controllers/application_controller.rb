@@ -14,16 +14,19 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-     if !session[:user_id]
-       erb :'users/create_user'
+     if logged_in?
+       redirect to '/tweets'
      else
-       redirect '/tweets' #change to users home page.. /users/:slug
+       erb :'/users/create_user' #change to users home page.. /users/:slug
      end
    end
 
   get '/login' do
-
-    erb :'users/login'
+    if logged_in?
+      redirect to '/tweets'
+    else  
+      erb :'/users/login'
+    end  
   end
 
   get '/logout' do
@@ -33,7 +36,7 @@ class ApplicationController < Sinatra::Base
 
   get '/users/:slug' do
      @user = User.find_by_slug(params[:slug])
-     erb :'users/show'
+     erb :'/users/show'
    end
 
   get '/tweets' do
@@ -47,7 +50,6 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/new' do
     if logged_in?
-      #@user = User.find(session[:user_id])
       erb :'/tweets/create_tweet'
     else
       redirect to '/login'
@@ -74,24 +76,22 @@ class ApplicationController < Sinatra::Base
 
 
   post '/signup' do
-  if user=User.find_by_email(params[:email]) || user=User.find_by_username(params[:username])#make error message
-      erb :'users/create_user' #or redirect to error page that explains
+    if params[:username] == "" || params[:password] == "" || params[:email] == ""
+        redirect to '/signup'   
     else
-    @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
-    session[:user_id] = @user.id
-    #need to decide where to redirect to. either 'users/home' or '/rooms'
-    redirect "/tweets"
-    binding.pry
-  end
-  end
+      @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+      session[:user_id] = @user.id
+      #need to decide where to redirect to. either 'users/home' or '/rooms'
+      redirect "/tweets"
+      end
+    end
 
 
   post '/login' do #check if a user with this email actuallyexists, if so, set the session
-    binding.pry
-    user = User.find_by(:email => params[:email], :username => params[:username]) #passing this step
+    @user = User.find_by(:username => params[:username]) #passing this step
 
-    if user && user.authenticate(params[:password]) #not passing this step, returns nil.
-      session[:user_id] = user.id
+    if @user && @user.authenticate(params[:password]) #not passing this step, returns nil.
+      session[:user_id] = @user.id
       redirect "/tweets"
     else
       redirect to '/signup'
