@@ -1,10 +1,14 @@
 require './config/environment'
+require 'pry'
 
 class ApplicationController < Sinatra::Base
+  register Sinatra::ActiveRecordExtension
 
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "secret"
   end
 
   get '/' do
@@ -46,5 +50,29 @@ class ApplicationController < Sinatra::Base
   	@tweet = Tweet.find_by_id(params[:id])
   	@tweet.delete
   	redirect "/tweets"
+  end
+
+  get '/users/signup' do
+  	erb :'/users/create_user'
+  end
+
+  post '/users/signup' do
+  	@user = User.create(params)
+  	@user.save
+  	session[:id] = @user.id
+  	redirect "/tweets/tweets"
+  end
+
+  get '/users/login' do
+  	erb :'/users/login'
+  end
+
+  post '/users' do
+  	if @user = User.find_by(username: params['username'], password: params['password'])
+  		session[:id] = @user.id
+  		redirect '/tweets/tweets'
+  	else
+  		redirect '/users/login'
+  	end
   end
 end
