@@ -24,7 +24,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/tweets' do
-  	@tweet = Tweet.new(content: params[:content])
+  	@tweet = Tweet.new(content: params[:content], user_id: session[:id])
   	@tweet.save
   	redirect "/tweets/#{@tweet.id}"
   end
@@ -81,7 +81,7 @@ class ApplicationController < Sinatra::Base
   	erb :'/users/show'
   end
 
-  post '/logout' do
+  get '/logout' do
   	session.clear
   	redirect '/'
   end
