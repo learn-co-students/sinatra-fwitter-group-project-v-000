@@ -44,7 +44,7 @@ class UsersController < ApplicationController
       session.clear
       redirect '/login'
     else
-      redirect '/login'
+      redirect '/'
     end
   end
 
@@ -52,4 +52,6 @@ class UsersController < ApplicationController
     @user = User.find_by_slug(params[:slug])
     erb :'/users/show'
   end
+
+  
 end
