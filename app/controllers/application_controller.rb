@@ -87,8 +87,10 @@ class ApplicationController < Sinatra::Base
 
 
   post '/login' do #check if a user with this email actuallyexists, if so, set the session
-    user = User.find_by(:email => params[:email], :username => [:username])
-    if user && user.authenticate(params[:password])
+    binding.pry
+    user = User.find_by(:email => params[:email], :username => params[:username]) #passing this step
+
+    if user && user.authenticate(params[:password]) #not passing this step, returns nil.
       session[:user_id] = user.id
       redirect "/tweets"
     else
