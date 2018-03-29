@@ -1,4 +1,8 @@
-<h1>Welcome, <%= @user.username %>!</h1>
+<h1>Welcome, <%= current_user.username %>!</h1>
+<h2>Your Feed:</h2>
+<% Tweet.all.each do |tweet| %>
+	<% if tweet.id == current_user.id %>
+		<a href="/tweets/<%= tweet.id %>"><%= tweet.content %> </a><br>
+	<% end %>
+<% end %>
 
-<h3><a href="/tweets/new">New Tweet</a></h3>
-<h3><a href="/tweets/tweets">View Feed</a></h3>
