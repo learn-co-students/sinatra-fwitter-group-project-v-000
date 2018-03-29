@@ -32,8 +32,9 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/users/:slug' do
-
-  end
+     @user = User.find_by_slug(params[:slug])
+     erb :'users/show'
+   end
 
   get '/tweets' do
     if logged_in?
@@ -89,7 +90,7 @@ class ApplicationController < Sinatra::Base
     user = User.find_by(:email => params[:email], :username => [:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect "/rooms"
+      redirect "/tweets"
     else
       redirect to '/signup'
     end
