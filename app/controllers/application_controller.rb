@@ -60,7 +60,7 @@ class ApplicationController < Sinatra::Base
   	@user = User.create(params)
   	@user.save
   	session[:id] = @user.id
-  	redirect "/tweets/tweets"
+  	redirect "/tweets/new"
   end
 
   get '/users/login' do
@@ -70,7 +70,7 @@ class ApplicationController < Sinatra::Base
   post '/users' do
   	if @user = User.find_by(username: params['username'], password: params['password'])
   		session[:id] = @user.id
-  		redirect '/tweets/tweets'
+  		redirect '/tweets/new'
   	else
   		redirect '/users/login'
   	end
