@@ -28,6 +28,7 @@ class TweetsController < ApplicationController
       redirect to '/'
     else
       if current_user
+        current_tweet
         erb :'/tweets/show'
       else
         redirect to '/tweets'
@@ -40,6 +41,7 @@ class TweetsController < ApplicationController
       redirect to '/'
     else
       if current_user
+        current_tweet
         erb :'/tweets/edit'
       else
         redirect to '/tweets'
