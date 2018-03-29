@@ -7,8 +7,21 @@
   <body>
 
     <div class="container">
-      <h1>Fwitter</h1>
+      <ul class="nav navbar-nav navbar-left">
+        <h1>Fwitter</h1>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <br>
+        <% if logged_in? %>
+          <form action="/logout">
+            <input type="submit" value="Log Out">
+          </form>
+        <% end %>
+      </ul>
+
+      <br><br><br>
       <hr>
+
       <%= yield %>
     </div>
 

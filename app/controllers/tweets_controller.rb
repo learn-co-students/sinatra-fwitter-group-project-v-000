@@ -10,7 +10,11 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/new' do
-    erb :'/tweets/new'
+    if !logged_in?
+      redirect to '/'
+    else
+      erb :'/tweets/new'
+    end
   end
 
   post '/tweets' do
@@ -20,23 +24,45 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id' do
-    current_tweet
-    erb :'/tweets/show'
+    if !logged_in?
+      redirect to '/'
+    else
+      if current_user
+        erb :'/tweets/show'
+      else
+        redirect to '/tweets'
+      end
+    end
   end
 
   get '/tweets/:id/edit' do
-    current_tweet
-    erb :'/tweets/edit'
+    if !logged_in?
+      redirect to '/'
+    else
+      if current_user
+        erb :'/tweets/edit'
+      else
+        redirect to '/tweets'
+      end
+    end
   end
 
   patch '/tweets/:id' do
-    current_tweet.update(params)
-    redirect to "/tweets/#{current_tweet.id}"
+    if current_user
+      current_tweet.update(content: params[:content])
+      redirect to "/tweets/#{current_tweet.id}"
+    else
+      redirect to '/tweets'
+    end
   end
 
   delete '/tweets/:id/delete' do
-    current_tweet.delete
-    redirect to '/tweets'
+    if current_user
+      current_tweet.delete
+      redirect to '/tweets'
+    else
+      redirect to '/tweets'
+    end
   end
 
 end
