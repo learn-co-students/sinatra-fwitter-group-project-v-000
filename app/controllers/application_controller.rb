@@ -60,7 +60,7 @@ class ApplicationController < Sinatra::Base
   	@user = User.create(params)
   	@user.save
   	session[:id] = @user.id
-  	redirect "/tweets/new"
+  	redirect :"/users/show"
   end
 
   get '/users/login' do
@@ -70,9 +70,29 @@ class ApplicationController < Sinatra::Base
   post '/users' do
   	if @user = User.find_by(username: params['username'], password: params['password'])
   		session[:id] = @user.id
-  		redirect '/tweets/new'
+  		redirect :'/users/show'
   	else
   		redirect '/users/login'
   	end
   end
+
+  get '/users/show' do
+  	@user = User.find(session[:id])
+  	erb :'/users/show'
+  end
+
+  post '/logout' do
+  	session.clear
+  	redirect '/'
+  end
+
+  	helpers do
+		def logged_in?
+			!!session[:id]
+		end
+
+		def current_user
+			User.find(session[:id])
+		end
+	end
 end

@@ -4,6 +4,11 @@
     <title>Fwitter</title>
   </head>
   <body>
+    <% if logged_in? %>
+      <p><a href="/users/show">Home</a></p>
+      <p><a href="/tweets/new">New Tweet</a></p>
+      <p><a href="/tweets">View Feed</a></p>
+    <% end %>
     <%= yield %>
     <div class="container">
       <br><br><br>
