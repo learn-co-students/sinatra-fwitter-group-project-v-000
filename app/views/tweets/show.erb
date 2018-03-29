@@ -1,0 +1,14 @@
+<h3>Your Tweet</h3>
+<%= @tweet.content %>
+
+<br><br>
+
+<form action="/tweets/<%= #{@tweet.id} %>/edit">
+  <input type="submit" value="Edit">
+</form>
+
+<hr>
+
+<form action="/tweets">
+  <input type="submit" value="Return to Tweets">
+</form>
