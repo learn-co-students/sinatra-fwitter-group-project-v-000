@@ -1,1 +1,4 @@
-tweets.erb
+<h1>Your Feed:</h1>
+<% Tweet.all.each do |tweet| %>
+<p><%= tweet.content %> </p><br>
+<% end %>
