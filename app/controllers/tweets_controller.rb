@@ -27,8 +27,7 @@ class TweetsController < ApplicationController
     if !logged_in?
       redirect to '/'
     else
-      if current_user
-        current_tweet
+      if current_tweet
         erb :'/tweets/show'
       else
         redirect to '/tweets'
@@ -40,8 +39,7 @@ class TweetsController < ApplicationController
     if !logged_in?
       redirect to '/'
     else
-      if current_user
-        current_tweet
+      if current_tweet
         erb :'/tweets/edit'
       else
         redirect to '/tweets'
@@ -50,7 +48,7 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    if current_user
+    if current_tweet
       current_tweet.update(content: params[:content])
       redirect to "/tweets/#{current_tweet.id}"
     else
@@ -59,7 +57,7 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
-    if current_user
+    if current_tweet
       current_tweet.delete
       redirect to '/tweets'
     else
