@@ -4,17 +4,14 @@
     <title>Fwitter</title>
   </head>
   <body>
+    <h1>Flatiron Twitter</h1>
     <% if logged_in? %>
       <p><a href="/users/show">Home</a></p>
       <p><a href="/tweets/new">New Tweet</a></p>
-      <p><a href="/tweets">View Feed</a></p>
+      <p><a href="/tweets">Global Feed</a></p>
       <p><a href="/logout">Log Out</a></p>
     <% end %>
     <%= yield %>
-    <div class="container">
-      <br><br><br>
-      <p>Don't forget to <strong>yield</strong> your views!</p>
-    </div>
 
   </body>
 </html>
