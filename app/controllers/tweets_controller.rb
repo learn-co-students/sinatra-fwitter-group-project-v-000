@@ -47,6 +47,10 @@ class TweetsController < ApplicationController
     end
   end
 
+  patch '/tweets/:id' do
+    binding.pry
+  end
+
 
 
 end
