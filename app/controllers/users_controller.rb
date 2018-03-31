@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   post '/login' do
     user = User.find_by(username: params[:username])
-    if user && (user.password == params[:password])
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect '/tweets' #if user is found and password is authenticated, redirec to tweets index
     else
@@ -53,5 +53,5 @@ class UsersController < ApplicationController
     erb :'/users/show'
   end
 
-  
+
 end

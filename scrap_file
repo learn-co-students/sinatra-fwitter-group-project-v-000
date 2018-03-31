@@ -1,1 +1,9 @@
-<h1>Edit tweet #<%= @tweet.id %></h1>
+post '/login' do
+  user = User.find_by(username: params[:username])
+  if user && (user.password == params[:password])
+    session[:user_id] = user.id
+    redirect '/tweets' #if user is found and password is authenticated, redirec to tweets index
+  else
+    redirect '/signup' #if the username or password don't exist, redirect to the sign up page
+  end
+end
