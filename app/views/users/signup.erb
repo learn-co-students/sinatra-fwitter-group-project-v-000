@@ -1,0 +1,39 @@
+<h3>Sign Up</h3>
+
+<br>
+
+<% if @username_already_exists %>
+  <div class="alert alert-danger" role="alert">
+    Username already exists. Please try another.
+  </div>
+<% end %>
+<% if @email_already_exists %>
+  <div class="alert alert-danger" role="alert">
+    There is already an account with that email address. Please try again or <a href="/login">log in</a>.
+  </div>
+<% end %>
+
+<form method="post" action="/signup">
+  <label>Username: </label>
+  <input type="text" name="username" placeholder="Username" required>
+
+  <br><br>
+
+  <label>Email: </label>
+  <input type="text" name="email" placeholder="example@email.com" required>
+
+  <br><br>
+
+  <label>Password: </label>
+  <input type="password" name="password" placeholder="Password" required>
+
+  <br><br>
+
+  <input type="submit" value="Create Account">
+</form>
+
+<hr>
+
+<form action="/">
+  <input type="submit" value="Return to Homepage">
+</form>

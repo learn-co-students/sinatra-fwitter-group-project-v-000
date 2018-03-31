@@ -1,0 +1,12 @@
+<h3><%= current_user.username %>'s Tweets</h3>
+
+<br>
+
+<form action="/tweets/new">
+  <input type="submit" value="Create a New Tweet">
+</form>
+
+<% @user.tweets.sort_by{|tweet| tweet.id}.reverse.each do |tweet| %>
+  <hr>
+  <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
+<% end %>

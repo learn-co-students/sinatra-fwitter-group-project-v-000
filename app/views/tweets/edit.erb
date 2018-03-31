@@ -1,0 +1,19 @@
+<h3>Edit Your Tweet</h3>
+
+<br>
+
+<form method="post" action="/tweets/<%= @tweet.id %>">
+  <input type="hidden" id="hidden" name="_method" value="patch">
+
+  <textarea name="content" rows="4" cols="55" maxlength="280" required><%= @tweet.content %></textarea>
+
+  <br><br>
+
+  <input type="submit" id="submit" value="Submit">
+</form>
+
+<hr>
+
+<form action="/tweets">
+  <input type="submit" value="Return to Tweets">
+</form>

@@ -1,0 +1,25 @@
+<% if current_user == @tweet.user %>
+  <h3>Your Tweet</h3>
+<% else %>
+  <h3><%= @tweet.user.username %>'s Tweet</h3>
+<% end %>
+<%= @tweet.content %>
+
+  <hr>
+
+  <form action="/tweets/<%= @tweet.id %>/edit">
+    <input type="submit" value="Edit Tweet">
+  </form>
+
+  <br>
+
+  <form action="/tweets/<%= @tweet.id %>/delete" method="post">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <button type="submit" name="Delete Tweet">Delete Tweet</button>
+  </form>
+
+<hr>
+
+<form action="/tweets">
+  <input type="submit" value="Return to Tweets">
+</form>

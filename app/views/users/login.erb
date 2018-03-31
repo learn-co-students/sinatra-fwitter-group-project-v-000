@@ -1,0 +1,35 @@
+<h3>Log In</h3>
+
+<br>
+
+<% if @wrong_password %>
+  <div class="alert alert-danger" role="alert">
+    Incorrect password. Please try again.
+  </div>
+<% end %>
+
+<% if @wrong_username %>
+  <div class="alert alert-danger" role="alert">
+    Could not find account with that username. Please try again or <a href="/signup">sign up</a>.
+  </div>
+<% end %>
+
+<form method="post" action="/login">
+  <label>Username: </label>
+  <input type="text" name="username" placeholder="Username" required>
+
+  <br><br>
+
+  <label>Password: </label>
+  <input type="password" name="password" placeholder="Password" required>
+
+  <br><br>
+
+  <input type="submit" id="submit" value="Log In">
+</form>
+
+<hr>
+
+<form action="/">
+  <input type="submit" value="Return to Homepage">
+</form>
