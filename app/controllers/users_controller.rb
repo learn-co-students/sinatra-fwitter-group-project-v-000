@@ -10,8 +10,8 @@ class UsersController < ApplicationController
 
   post '/signup' do
     if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
-      @user = User.create(params) #creates a new user and persists it to the database (saves it)
-      session[:user_id] = @user.id #logs in the user
+      user = User.create(params) #creates a new user and persists it to the database (saves it)
+      session[:user_id] = user.id #logs in the user
       redirect '/tweets'
     else
       redirect '/signup'
