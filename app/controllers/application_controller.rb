@@ -9,6 +9,9 @@ class ApplicationController < Sinatra::Base
       set :session_secret, "supercalifragilisticexpialidoshis"
   end
 
+  get '/' do
+    erb :index
+  end
 
   helpers do
 
@@ -24,17 +27,17 @@ class ApplicationController < Sinatra::Base
       !!current_user
     end
 
-    def login(email, password)
-      @user = User.find_by(email: email)
+    def login(username, password)
+      @user = User.find_by(username: username)
       if @user && @user.authenticate(password)
         session[:user_id] = @user.id
         redirect to '/tweets'
       elsif @user && !@user.authenticate(params[:password])
         @wrong_password = true
-        erb :login
+        erb :'/users/login'
       else
         @wrong_email = true
-        erb :login
+        erb :'/users/login'
       end
     end
 
