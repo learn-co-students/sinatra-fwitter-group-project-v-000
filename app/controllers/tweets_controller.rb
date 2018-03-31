@@ -55,7 +55,7 @@ class TweetsController < ApplicationController
       @tweet.save
       redirect "/tweets/#{@tweet.id}"
     else
-      redirect "/tweets/#{@tweet.id}/edit"
+      redirect "/tweets/#{params[:id]}/edit" #note that we use params[:id] because @tweet doesn't exist if the first condition is false.
     end
   end
 
