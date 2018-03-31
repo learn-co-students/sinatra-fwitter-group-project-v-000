@@ -48,9 +48,13 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    @tweet = Tweet.find_by_id(params[:id])
-    @tweet.content = params[:content]
-    @tweet.save
+    if logged_in? && !params[:content].empty?
+      @tweet = Tweet.find_by_id(params[:id])
+      @tweet.content = params[:content]
+      @tweet.save
+    else
+      redirect '/login'
+    end
     # binding.pry
   end
 
