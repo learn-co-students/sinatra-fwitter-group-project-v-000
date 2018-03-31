@@ -53,6 +53,7 @@ class TweetsController < ApplicationController
       @tweet.content = params[:content]
       @tweet.save
     else
+      binding.pry
       redirect '/tweets/<%= @tweet.id %>/edit'
     end
     # binding.pry
