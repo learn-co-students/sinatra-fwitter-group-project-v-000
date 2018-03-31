@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
 
-  #logging in is simply storing the user's ID in the session hash.
-  #logging out is simply clearing the session hash.
-
   get '/signup' do
     if logged_in?
       redirect '/tweets'
