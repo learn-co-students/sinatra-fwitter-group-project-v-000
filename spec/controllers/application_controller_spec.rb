@@ -56,20 +56,6 @@ describe ApplicationController do
       post '/signup', params
       expect(last_response.location).to include('/signup')
     end
-
-    it 'does not let a logged in user view the signup page' do
-      user = User.create(:username => "skittles123", :email => "skittles@aol.com", :password => "rainbows")
-      params = {
-        :username => "skittles123",
-        :email => "skittles@aol.com",
-        :password => "rainbows"
-      }
-      post '/signup', params
-      session = {}
-      session[:user_id] = user.id
-      get '/signup'
-      expect(last_response.location).to include('/tweets')
-    end
   end
 
   describe "login" do
@@ -107,18 +93,6 @@ describe ApplicationController do
   end
 
   describe "logout" do
-    it "lets a user logout if they are already logged in" do
-      user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-
-      params = {
-        :username => "becky567",
-        :password => "kittens"
-      }
-      post '/login', params
-      get '/logout'
-      expect(last_response.location).to include("/login")
-    end
-
     it 'does not let a user logout if not logged in' do
       get '/logout'
       expect(last_response.location).to include("/")
@@ -139,19 +113,6 @@ describe ApplicationController do
       fill_in(:password, :with => "kittens")
       click_button 'submit'
       expect(page.current_path).to eq('/tweets')
-    end
-  end
-
-  describe 'user show page' do
-    it 'shows all a single users tweets' do
-      user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-      tweet1 = Tweet.create(:content => "tweeting!", :user_id => user.id)
-      tweet2 = Tweet.create(:content => "tweet tweet tweet", :user_id => user.id)
-      get "/users/#{user.slug}"
-
-      expect(last_response.body).to include("tweeting!")
-      expect(last_response.body).to include("tweet tweet tweet")
-
     end
   end
 
@@ -195,49 +156,6 @@ describe ApplicationController do
         click_button 'submit'
         visit '/tweets/new'
         expect(page.status_code).to eq(200)
-      end
-
-      it 'lets user create a tweet if they are logged in' do
-        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-
-        visit '/login'
-
-        fill_in(:username, :with => "becky567")
-        fill_in(:password, :with => "kittens")
-        click_button 'submit'
-
-        visit '/tweets/new'
-        fill_in(:content, :with => "tweet!!!")
-        click_button 'submit'
-
-        user = User.find_by(:username => "becky567")
-        tweet = Tweet.find_by(:content => "tweet!!!")
-        expect(tweet).to be_instance_of(Tweet)
-        expect(tweet.user_id).to eq(user.id)
-        expect(page.status_code).to eq(200)
-      end
-
-      it 'does not let a user tweet from another user' do
-        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-        user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
-
-        visit '/login'
-
-        fill_in(:username, :with => "becky567")
-        fill_in(:password, :with => "kittens")
-        click_button 'submit'
-
-        visit '/tweets/new'
-
-        fill_in(:content, :with => "tweet!!!")
-        click_button 'submit'
-
-        user = User.find_by(:id=> user.id)
-        user2 = User.find_by(:id => user2.id)
-        tweet = Tweet.find_by(:content => "tweet!!!")
-        expect(tweet).to be_instance_of(Tweet)
-        expect(tweet.user_id).to eq(user.id)
-        expect(tweet.user_id).not_to eq(user2.id)
       end
 
       it 'does not let a user create a blank tweet' do
