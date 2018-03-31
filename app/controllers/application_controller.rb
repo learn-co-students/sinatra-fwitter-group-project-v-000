@@ -14,7 +14,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb :"users/create_user"
+    if !logged_in?
+      erb :"users/create_user"
+    else
+      redirect to '/tweets'
+    end
   end
 
   post '/signup' do
@@ -28,7 +32,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    erb :"users/login"
+    if !logged_in?
+      erb :"users/login"
+    else
+      redirect to '/tweets'
+    end
   end
 
   post '/login' do
@@ -41,9 +49,32 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/logout' do
+    session.clear
+    redirect to '/'
+  end
+
+  get '/tweets/new' do
+    binding.pry
+    if logged_in?
+      erb :"tweets/create_tweet"
+    else
+      redirect to '/'
+    end
+  end
+
+  post '/tweets' do
+    @tweet = Tweet.create(content: params["content"], user_id: current_user.id)
+    redirect to '/tweets'
+  end
+
   get '/tweets' do
-    @user = User.find_by(id: session[:user_id])
-    erb :"/tweets/tweets"
+    if logged_in?
+      @user = current_user
+      erb :"/tweets/tweets"
+    else
+      redirect to '/'
+    end
   end
 
   helpers do
