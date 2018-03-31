@@ -48,6 +48,9 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
+    @tweet = Tweet.find_by_id(params[:id])
+    @tweet.content = params[:content]
+    @tweet.save
     # binding.pry
   end
 

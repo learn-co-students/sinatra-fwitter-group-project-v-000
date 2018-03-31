@@ -1,9 +1,1 @@
-get '/tweets' do
-  @user = current_user
-  if logged_in?
-    @tweets = Tweet.all
-    erb :'tweets/tweets'
-  else
-    redirect '/login'
-  end
-end
+<h1>Edit tweet #<%= @tweet.id %></h1>
