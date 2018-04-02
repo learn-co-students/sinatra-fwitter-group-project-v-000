@@ -1,2 +1,7 @@
 <a href="/logout">Log Out</a>
 <%=@tweet.content%>
+<a href="/tweet/:id/edit">Edit Tweet</a>
+<form action="/tweets/<%=@tweet.id%>" method="POST">
+<input type="hidden" name="_method" value="DELETE">
+<input type="submit" value="Delete Tweet" id="Delete Tweet">
+</form>
