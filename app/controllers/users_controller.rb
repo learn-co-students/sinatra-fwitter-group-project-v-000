@@ -1,3 +1,4 @@
+require './config/environment'
 class UsersController < ApplicationController
 
   get '/users/:slug' do
