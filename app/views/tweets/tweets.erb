@@ -1,10 +1,10 @@
-<h2> Tweets </h2>
+<h2> Latest Flation Tweets </h2>
 
-<h3>Welcome, <%=@user.username%></h3>
+<h3>Welcome, <%=@user.username.capitalize%></h3>
 
 <ul class ="tweets list">
-<%@tweets.each do |tweet|%>
-    <li> <%tweet.username%> fweeted: <br/>
-        <%=tweet.content%> </li>
-    <%end%>
-</ul>
+    <%@tweets.each do |tweet|%>
+        <li> <%tweet.username%> fweeted: <br/>
+          <%=tweet.content%> </li>
+     <% end %>
+    </ul>

@@ -1,0 +1,17 @@
+<h2> See Your Newest Tweet Below </h2>
+
+<%=@tweet.content%><br/><br/>
+
+<form method="post" action="/tweet/<%=@tweet.id%>">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <input type="submit" value="edit">
+</form>
+
+
+
+
+<form method="post" action="/tweet/<%=@tweet.id%>">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="delete">
+</form>
+
