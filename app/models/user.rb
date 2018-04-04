@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
         self.all.detect{|user| user.slug == slug}
     end 
 
+    #user helpers ----------------------------------------------
     def self.current_user(session_hash)
         @current_user = self.find_by(id: session_hash[:user_id])
     end 
