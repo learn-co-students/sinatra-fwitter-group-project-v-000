@@ -1,15 +1,21 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8"/>
     <title>Fwitter</title>
+    <style type="text/css">
+      .di{display: inline;}
+      .mboff{margin-bottom: 0px;}
+      .mtoff{margin-top: 0px;}
+    </style>
   </head>
   <body>
-
-    <div class="container">
-      <h1>Welcome to Fwitter!</h1>
-      <h2>This is located in layout.erb!</h2>
-      <h2>Don't forget to <strong>yield</strong> your views!</h2>
-    </div>
-
+    <% if logged_in? %>
+      <a href="/users/<%=current_user.slug%>">Account</a>&nbsp;
+      <a href="/tweets">Tweets</a>&nbsp;
+      <a href="/tweets/new">New</a>&nbsp;
+      <a href="/logout">Logout</a>
+    <% end %>
+    <%= yield %>
   </body>
 </html>
