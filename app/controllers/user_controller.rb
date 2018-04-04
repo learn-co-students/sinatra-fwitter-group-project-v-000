@@ -5,10 +5,10 @@ class UserController < ApplicationController
     if User.is_logged_in?(session)
       redirect '/tweets'
     else
-        if flash[:notice]
-            flash[:notice]
-        end
-      erb :'users/create_user'
+      if flash[:notice]
+        flash[:notice]
+      end
+        erb :'users/create_user'
     end
 
   end 
@@ -27,15 +27,30 @@ class UserController < ApplicationController
  
   get '/login' do
     if !User.current_user(session)
-        erb :'users/login'
+      erb :'users/login'
     else 
-        redirect to '/tweets'
+      redirect to '/tweets'
     end
   end 
 
   post '/login' do 
     @user = User.find_by(username: params[:username])
-    session[:user_id] = @user.id
-    redirect to '/tweets'
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect to '/tweets'
+    else
+      flash[:incorrectinfo] = "The username and password you entered did not match our records. Please double-check and try again."
+      erb :'users/login'
+    end
   end 
+
+  get '/logout' do
+    if User.is_logged_in?(session)
+     session.clear 
+     redirect to '/login'
+    else 
+      redirect to '/'
+    end
+  end 
+
 end 

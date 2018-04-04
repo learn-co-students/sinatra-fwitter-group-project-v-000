@@ -1,5 +1,9 @@
 <h2> Login to see the latest Fweets </h2>
 
+<% if flash.has?(:incorrectinfo) %>
+  <%= flash[:incorrectinfo] %>
+<% end %>
+
 <div class="login form">
     <form method="post" action="/login">
         <label for="user_username">Username: </label>
