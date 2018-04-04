@@ -36,11 +36,4 @@ class ApplicationController < Sinatra::Base
   end 
 
 
-  # tweet controllers --------------------------------------------
-  get '/tweets' do 
-    erb :'tweets/tweets'
-  end 
-
-
-
 end
