@@ -14,6 +14,6 @@ class ApplicationController < Sinatra::Base
 #home page and user registration routes ------------------------
   get '/' do 
     erb :index
-  end 
+  end
 
 end
