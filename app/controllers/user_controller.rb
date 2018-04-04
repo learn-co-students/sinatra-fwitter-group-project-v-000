@@ -5,12 +5,8 @@ class UserController < ApplicationController
     if User.is_logged_in?(session)
       redirect '/tweets'
     else
-      if flash[:notice]
-        flash[:notice]
-      end
-        erb :'users/create_user'
+      erb :'users/create_user'
     end
-
   end 
 
   post '/signup' do
