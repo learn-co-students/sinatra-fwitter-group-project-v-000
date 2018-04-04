@@ -11,7 +11,7 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "password_security"
   end
 
-#home page and user registration routes ------------------------
+# home page action controller  ------------------------
   get '/' do 
     erb :index
   end
