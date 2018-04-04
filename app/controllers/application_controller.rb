@@ -1,6 +1,8 @@
 require './config/environment'
+require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
+  use Rack::Flash
 
   configure do
     set :public_folder, 'public'
@@ -30,7 +32,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = @user.id
       redirect to '/tweets'
     else 
-      #flash messsage "Please provide a valid username, email and password"
+      flash[:notice] = "Please enter a valid username, email and password to Join Fwitter!"
       redirect '/signup'
     end 
   end 
