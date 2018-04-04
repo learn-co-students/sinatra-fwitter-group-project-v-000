@@ -25,6 +25,7 @@ class ApplicationController < Sinatra::Base
       session[:id] = @user.id
       redirect to '/tweets'
     else 
+      #flash messsage "Please provide a valid username, email and password"
       redirect '/signup'
     end 
   end 
