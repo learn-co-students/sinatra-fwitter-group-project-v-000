@@ -2,8 +2,8 @@ class UserController < ApplicationController
 
   # User Registration ----------------------------------------------------- 
   get '/signup' do
-    if User.is_logged_in?(session)
-      redirect '/tweets'
+    if logged_in?
+      redirect to '/tweets'
     else
       erb :'users/create_user'
     end
@@ -23,7 +23,7 @@ class UserController < ApplicationController
  
   # User Login / Logout --------------------------------------------------
   get '/login' do
-    if !User.current_user(session) || !User.is_logged_in?(session)
+    if !current_user || !logged_in?
       erb :'users/login'
     else 
       redirect to '/tweets'
@@ -42,7 +42,7 @@ class UserController < ApplicationController
   end 
 
   get '/logout' do
-    if User.is_logged_in?(session)
+    if logged_in?
      session.clear 
      redirect to '/login'
     else 

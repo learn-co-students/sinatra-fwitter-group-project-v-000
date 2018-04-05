@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
   
   get '/tweets' do
-    if User.is_logged_in?(session)
+    if logged_in?
       @user = User.find_by(id: session[:user_id])
       @tweets = Tweet.all 
       erb :'tweets/tweets'
@@ -11,7 +11,7 @@ class TweetsController < ApplicationController
   end 
 
   get '/tweets/new' do
-    if User.is_logged_in?(session)
+    if logged_in?
       erb :'tweets/create_tweet'
     else 
       redirect to '/login'
@@ -22,7 +22,7 @@ class TweetsController < ApplicationController
     if params[:content].empty?
       flash[:message] ="Provide some content to post a tweet!"
       redirect to '/tweets/new'
-    elsif User.is_logged_in?(session)
+    elsif logged_in?
       @user = User.find_by(id: session[:user_id])
       @tweet =Tweet.create(params)
       @user.tweets << @tweet 
@@ -34,7 +34,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id' do
-    if User.is_logged_in?(session) 
+    if logged_in? 
       @tweet = Tweet.find_by_id(params[:id])
       erb :'tweets/show_tweet'
     else 
@@ -43,7 +43,7 @@ class TweetsController < ApplicationController
   end 
 
   get '/tweets/:id/edit' do 
-    if User.is_logged_in?(session)
+    if logged_in?
       @tweet = Tweet.find(params[:id])
       erb :'tweets/edit_tweet'
     else 
@@ -53,11 +53,11 @@ class TweetsController < ApplicationController
 
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    if User.is_logged_in?(session)
+    if logged_in?
       if params[:content].empty?
         flash[:notice] = "Tweet field cannot be blank!"
         redirect "/tweets/#{@tweet.id}/edit"
-      elsif @tweet && @tweet.user == User.current_user(session)
+      elsif @tweet && @tweet.user == current_user
         @tweet.update(content: params[:content])
         redirect to "/tweets/#{@tweet.id}"
       end
@@ -69,7 +69,7 @@ class TweetsController < ApplicationController
 
   post '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
-    if User.is_logged_in?(session) && @tweet.user == User.current_user(session)
+    if logged_in? && @tweet.user == current_user
       @tweet.delete 
       redirect to "/tweets"
     else 
