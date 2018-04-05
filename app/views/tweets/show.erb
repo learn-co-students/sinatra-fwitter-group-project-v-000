@@ -1,0 +1,12 @@
+SHOW A SINGLE TWEET
+
+i am a boss at tweeting
+
+<form action="/tweets/<%=params[:id]%>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Tweet">
+</form>
+
+<form>
+  <input type="button" value="Edit Tweet" onclick="/tweets/:id/edit">
+</form>

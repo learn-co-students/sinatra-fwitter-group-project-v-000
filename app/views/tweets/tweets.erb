@@ -1,0 +1,7 @@
+<h1> Welcome,</h1>
+
+<%Tweet.all.each do |t|%>
+  <p><%= t.content %></p>
+<%end%>
+
+<p><a href="/logout">Logout</a></p>
