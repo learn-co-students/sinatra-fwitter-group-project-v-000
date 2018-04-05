@@ -5,10 +5,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-  end
-
-  get '/' do
-    erb :index
+    enable :sessions
+    set :session_secret, "fwitter_secret"
   end
 
 end
