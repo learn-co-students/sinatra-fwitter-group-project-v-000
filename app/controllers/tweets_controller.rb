@@ -1,4 +1,4 @@
-class TweetsController < Sinatra::Base
-  register Sinatra::ActiveRecordExtension
+class TweetsController < ApplicationController
+
 
 end
