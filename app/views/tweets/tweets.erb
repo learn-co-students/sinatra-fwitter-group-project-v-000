@@ -4,7 +4,7 @@
 
 <ul class ="tweets list">
     <%@tweets.each do |tweet|%>
-        <li> <%tweet.username%> fweeted: <br/>
-          <%=tweet.content%> </li>
+        <li> <%=tweet.user.username.capitalize%> tweeted: <br/>
+          <%=tweet.content%> </li><br/><br/>
      <% end %>
     </ul>

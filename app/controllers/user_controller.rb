@@ -1,7 +1,7 @@
 class UserController < ApplicationController
 
   # User Registration ----------------------------------------------------- 
-  get '/signup' do 
+  get '/signup' do
     if User.is_logged_in?(session)
       redirect '/tweets'
     else
@@ -23,7 +23,7 @@ class UserController < ApplicationController
  
   # User Login / Logout --------------------------------------------------
   get '/login' do
-    if !User.current_user(session)
+    if !User.current_user(session) || !User.is_logged_in?(session)
       erb :'users/login'
     else 
       redirect to '/tweets'
