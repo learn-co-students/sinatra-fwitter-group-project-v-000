@@ -45,6 +45,15 @@ class UsersController < ApplicationController
     else
       redirect to '/'
     end
+
+  get '/signup' do
+    erb :'users/create_user'
   end
 
+  post '/signup' do
+    @user = User.create(params)
+    session[:user_id] = @user.id
+    redirect to '/tweets/tweets'
+  end
+end
 end
