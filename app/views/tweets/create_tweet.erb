@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>New Tweet</title>
+  </head>
+  <body>
+    <h1>New Tweet</h1>
+    <form method = "POST" action="/tweets">
+  <h3>Username: <%=@user.username%></h3>
+  <textarea name="content" id= "content" cols="50" rows="5">
+Start Your Tweet Here...
+</textarea>
+<br />
+  <input type="submit" id="submit" name ="submit">
+</form>
+  </body>
+</html>
