@@ -1,0 +1,18 @@
+<h2> Latest Flation Tweets </h2>
+
+<h3>Welcome, <%=@user.username.capitalize%></h3>
+
+<% if flash.has?(:incorrectinfo) %>
+  <%= flash[:incorrectinfo] %>
+<% end %>
+
+<p>Something on your mind?</p>
+<a href="/tweets/new">Tweet!</a>
+<ul class ="tweets list">
+    <% Tweet.all.each do |tweet| %>
+        <li><a href="/tweets/<%=tweet.id%>"> <%= tweet.user.username.capitalize %> tweeted:</a><br/>
+          <%= tweet.content %> </li><br/><br/>
+     <% end %>
+</ul>
+
+

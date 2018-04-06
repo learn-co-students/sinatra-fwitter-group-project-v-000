@@ -1,0 +1,18 @@
+<h2> Login to see the latest Fweets </h2>
+
+<% if flash.has?(:incorrectinfo) %>
+  <%= flash[:incorrectinfo] %>
+<% end %>
+
+<div class="login form">
+    <form method="post" action="/login">
+        <label for="user_username">Username: </label>
+        <input type="text" name="username" id="username"><br/>
+
+        <label for="password">Password: </label>
+        <input type="text" name="password"><br/>
+
+        <input type="submit" id="submit" value="Log In">
+    </form>
+    <p>Don't have an account?<br><a href="/signup">Signup</a></p>
+</div>
