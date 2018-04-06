@@ -7,14 +7,13 @@ class UsersController < ApplicationController
   
   end 
 
-  post '/signup' do
+  post '/signup' do 
     if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
       @user = User.create(params)
       @user.save 
       session[:user_id] = @user.id
       redirect to '/tweets'
     else 
-      flash[:notice] = "Please enter a valid username, email and password to join Fwitter!"
       redirect to '/signup'
     end 
   end

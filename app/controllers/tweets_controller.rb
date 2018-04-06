@@ -1,13 +1,15 @@
 class TweetsController < ApplicationController
-  
+
   get '/tweets' do
     if logged_in?
-      @user = User.find_by(id: session[:user_id])
+      @user = current_user
       erb :'tweets/tweets'
     else
       redirect to '/login'
     end
   end 
+
+  # Create ----------------------------------------------------------------
 
   get '/tweets/new' do
     logged_in? ? (erb :'tweets/create_tweet') : (redirect to '/login')
@@ -18,49 +20,49 @@ class TweetsController < ApplicationController
       flash[:message] ="Provide some content to post a tweet!"
       redirect to '/tweets/new'
     elsif logged_in?
-      @user = User.find_by(id: session[:user_id])
+      @user = current_user
       @tweet =Tweet.create(params)
-      @user.tweets << @tweet 
-      @user.save 
+      @user.tweets << @tweet
       redirect to "tweets/#{@tweet.id}"
     else
       redirect to '/login'
     end 
   end
 
+  # Read ----------------------------------------------------------------------
+
   get '/tweets/:id' do
-    if logged_in? 
-      @tweet = Tweet.find_by_id(params[:id])
-      erb :'tweets/show_tweet'
-    else 
-      redirect '/login'
-    end 
+    redirect to '/login' if !logged_in?
+    @tweet = Tweet.find_by_id(params[:id])
+    erb :'tweets/show_tweet'
+    # if logged_in? 
+    #   @tweet = Tweet.find_by_id(params[:id])
+    #   erb :'tweets/show_tweet'
+    # else 
+    #   redirect '/login'
+    # end 
   end 
 
+  # Update ---------------------------------------------------------------------
+
   get '/tweets/:id/edit' do 
-    if logged_in?
-      @tweet = Tweet.find(params[:id])
-      erb :'tweets/edit_tweet'
-    else 
-      redirect '/login'
+    redirect to '/login' if !logged_in?
+    @tweet = Tweet.find(params[:id])
+    if logged_in? && @tweet.user != current_user
+      flash[:notice] = "You cannot change another user's content, silly"
+      redirect to "/tweets/#{@tweet.id}"
     end
+      erb :'tweets/edit_tweet'
   end 
 
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    if logged_in? && current_user.id == session[:id]
-      if params[:content].empty?
-        flash[:notice] = "Tweet field cannot be blank!"
-        redirect "/tweets/#{@tweet.id}/edit"
-      elsif @tweet && @tweet.user == current_user
-        @tweet.update(content: params[:content])
-        redirect to "/tweets/#{@tweet.id}"
-      end
-    else 
-      flash[:notice] = "you cannot edit another user's content, silly."
-      redirect to '/tweets'
-    end
+    redirect to "/tweets/#{@tweet.id}/edit" if params[:content].empty?
+    @tweet.update(content: params[:content])
+    redirect to "/tweets/#{@tweet.id}"
   end 
+
+  # Delete -----------------------------------------------------------------------
 
   post '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
@@ -68,10 +70,9 @@ class TweetsController < ApplicationController
       @tweet.delete 
       redirect to "/tweets"
     else 
+      flash[:notice] = "You cannot change another user's content, silly."
       redirect to "/tweets/#{@tweet.id}"
     end 
   end 
-
-
 
 end

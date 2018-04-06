@@ -1,19 +1,15 @@
 <h2> Join Fwitter Today </h2>
 
-<% if flash.has?(:notice) %>
-  <%= flash[:notice] %>
-<% end %>
-
 <div class="signup form">
     <form method="post" action="/signup">
         <label>Username:</label>
-        <input type"text" name="username">
+        <input type"text" name="username" placeholder="username" required/>
 
         <label>Email:</label>
-        <input type"text" name="email">
+        <input type"text" name="email" placeholder="email" required/>
 
         <label>Password:</label>
-        <input type"text" name="password">
+        <input type"text" name="password" placeholder="password" required/>
 
         <input type="submit" id="submit" value="Sign Up">
     </form>
