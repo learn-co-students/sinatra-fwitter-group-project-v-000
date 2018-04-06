@@ -48,7 +48,7 @@ class TweetsController < ApplicationController
 
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    if logged_in?
+    if logged_in? && current_user.id == session[:id]
       if params[:content].empty?
         flash[:notice] = "Tweet field cannot be blank!"
         redirect "/tweets/#{@tweet.id}/edit"
@@ -57,7 +57,7 @@ class TweetsController < ApplicationController
         redirect to "/tweets/#{@tweet.id}"
       end
     else 
-      flash[:notice] = "you cannot edit #{@tweet.user}'s content"
+      flash[:notice] = "you cannot edit another user's content, silly."
       redirect to '/tweets'
     end
   end 
