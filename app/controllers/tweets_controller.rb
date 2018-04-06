@@ -3,7 +3,6 @@ class TweetsController < ApplicationController
   get '/tweets' do
     if logged_in?
       @user = User.find_by(id: session[:user_id])
-      @tweets = Tweet.all 
       erb :'tweets/tweets'
     else
       redirect to '/login'
@@ -11,11 +10,7 @@ class TweetsController < ApplicationController
   end 
 
   get '/tweets/new' do
-    if logged_in?
-      erb :'tweets/create_tweet'
-    else 
-      redirect to '/login'
-    end 
+    logged_in? ? (erb :'tweets/create_tweet') : (redirect to '/login')
   end 
 
   post '/tweets' do
@@ -63,7 +58,7 @@ class TweetsController < ApplicationController
       end
     else 
       flash[:notice] = "you cannot edit #{@tweet.user}'s content"
-      redirect to '/login'
+      redirect to '/tweets'
     end
   end 
 

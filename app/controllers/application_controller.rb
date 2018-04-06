@@ -14,6 +14,7 @@ class ApplicationController < Sinatra::Base
   get '/' do 
     erb :index
   end
+  
  # helpers -------------------------------------------
 
  def current_user
