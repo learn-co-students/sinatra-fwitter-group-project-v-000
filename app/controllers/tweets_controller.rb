@@ -9,7 +9,7 @@ class TweetsController < ApplicationController
     end
   end 
 
-  # Create ----------------------------------------------------------------
+  # Create --------------------------------------------------------------------
 
   get '/tweets/new' do
     logged_in? ? (erb :'tweets/create_tweet') : (redirect to '/login')
@@ -35,15 +35,9 @@ class TweetsController < ApplicationController
     redirect to '/login' if !logged_in?
     @tweet = Tweet.find_by_id(params[:id])
     erb :'tweets/show_tweet'
-    # if logged_in? 
-    #   @tweet = Tweet.find_by_id(params[:id])
-    #   erb :'tweets/show_tweet'
-    # else 
-    #   redirect '/login'
-    # end 
   end 
 
-  # Update ---------------------------------------------------------------------
+  # Update --------------------------------------------------------------------
 
   get '/tweets/:id/edit' do 
     redirect to '/login' if !logged_in?
@@ -52,7 +46,7 @@ class TweetsController < ApplicationController
       flash[:notice] = "You cannot change another user's content, silly"
       redirect to "/tweets/#{@tweet.id}"
     end
-      erb :'tweets/edit_tweet'
+    erb :'tweets/edit_tweet'
   end 
 
   patch '/tweets/:id' do
@@ -62,7 +56,7 @@ class TweetsController < ApplicationController
     redirect to "/tweets/#{@tweet.id}"
   end 
 
-  # Delete -----------------------------------------------------------------------
+  # Delete --------------------------------------------------------------------
 
   post '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
