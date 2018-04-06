@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
-    if session[:user_id].to_s.empty?
+    if !Helpers.is_logged_in?(session)
       erb :'users/create_user'
     else
       redirect to '/tweets'
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   post '/login' do
   @user = User.find_by(:username => params[:username])
-    if @user != nil && @user.password == params[:password]
+    if @user != nil && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect to '/tweets'
     else
@@ -49,7 +49,6 @@ class UsersController < ApplicationController
   get '/signup' do
     erb :'users/create_user'
   end
-
   post '/signup' do
     @user = User.create(params)
     session[:user_id] = @user.id
