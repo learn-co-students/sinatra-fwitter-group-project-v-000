@@ -1,0 +1,17 @@
+<br><br><br><br>
+
+<div align="middle">
+<h1>Welcome, <a href="/users/<%=current_user.username%>"><%=current_user.username%></a></h1>
+</div>
+
+<nav>
+ <a href="/logout">Logout</a>
+</nav>
+
+<div align="middle">
+ <%@tweets.all.each do |tweet|%>
+ <p><%=tweet.content%></p>
+ <%end%>
+  
+ 
+</div>
