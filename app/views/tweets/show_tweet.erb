@@ -2,8 +2,13 @@
 
   <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet </a>
 
-<form method="post" action="/tweets/<%=@tweet.id%>/delete">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <br><br>
-  <input type="button" id="submit" value="Delete Tweet">
-</form>
+  <form method="post" action="/tweets/<%=@tweet.id%>/delete">
+    <input type="hidden" id="hidden" name="_method" value="DELETE">
+    <br><br>
+    <input type="submit" id="submit" value="Delete Tweet">
+  </form>
+
+  <!-- <form method="GET" action="/tweets/<%=@tweet.id%>/edit">
+    <input id="hidden" type="hidden" name="_method" value="GET">
+    <input type="button" id="submit" value="Edit Tweet">
+  </form> -->

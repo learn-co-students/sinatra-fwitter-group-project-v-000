@@ -1,6 +1,6 @@
 class TweetController < ApplicationController
 
-  get "/tweets" do
+  get '/tweets' do
     if logged_in?
       @user = User.find_by(id: session[:user_id])
       @tweets = Tweet.all
@@ -20,7 +20,7 @@ class TweetController < ApplicationController
   end
 
   post '/tweets' do
-    if params[:content] == ""
+    if params[:content] == " " #does not allow creation of new tweet if contents are blank
       redirect to 'tweets/new'
     @tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
     else
@@ -52,7 +52,7 @@ class TweetController < ApplicationController
 
   patch '/tweets/:id' do
     if params[:content] == ""
-      redirect to 'tweets/#{params[:id]}/edit'
+      redirect to "tweets/#{params[:id]}/edit"
     else
       @tweet = Tweet.find_by(id: params[:id])
       @tweet.content = params[:content]
@@ -60,6 +60,14 @@ class TweetController < ApplicationController
       redirect to "tweets/#{@tweet.id}"
   end
 end
+
+delete'/tweets/:id/delete' do
+  @tweet = Tweet.find_by(id: params[:id])
+    if logged_in? && @tweet.user_id == current_user.id
+      @tweet.delete
+    end
+      redirect to '/tweets'
+    end
 
 
 end

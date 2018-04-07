@@ -3,8 +3,8 @@
   <head>
     <title>Tweets</title>
   </head>
-<h1>Welcome, <%=@user.username%></h1>
+<h2>Welcome, <%=@user.username%>.</h2>
   <% @tweets.each do |tweet| %>
-    <li> <a href="/tweets/<%= tweet.id %>"> <%= tweet.content %> </a></li>
+    <li><b>Username: </b><%=tweet.user.username%> <b> Content: </b><a href="/tweets/<%= tweet.id %>"><%= tweet.content %> </a></li>
   <% end %>
 </html>

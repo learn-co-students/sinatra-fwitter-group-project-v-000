@@ -20,25 +20,29 @@ class UserController < ApplicationController
     end
 
   get '/login' do
+    if logged_in? == false
     erb :'users/login'
+    else
+      redirect '/tweets'
+    end
   end
 
-  post "/users/login" do #where do we want this to go??
+  post "/users/login" do
      @user = User.find_by(username: params[:username])
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
-        redirect "/tweets"
+        redirect to '/tweets'
       else
-        redirect "/signup"
+        redirect to '/signup'
       end
   end
 
   get "/logout" do
     if logged_in?
       session.clear
-      redirect "/"
+      redirect to '/'
     else
-      redirect "/users/login"
+      redirect to '/login'
     end
   end
 

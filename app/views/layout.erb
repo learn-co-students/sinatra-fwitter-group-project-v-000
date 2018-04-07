@@ -7,6 +7,12 @@
 
     <div class="container">
       <h1>Welcome to Fwitter!</h1>
+      <%if logged_in?%>
+      <h2><a href="/tweets/new">Create Tweet</a>
+        <a href= "/logout">Log Out</a>
+      </h2>
+      <%end%>
       <%= yield %>
   </body>
-</html>
+
+  </html>
