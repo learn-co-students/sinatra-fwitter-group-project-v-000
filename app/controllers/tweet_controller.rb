@@ -20,11 +20,15 @@ class TweetController < ApplicationController
   end
 
   post '/tweets' do
-    if params[:content] == " " #does not allow creation of new tweet if contents are blank
-      redirect to 'tweets/new'
-    @tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
+    if logged_in?
+      if params[:content] == " " #does not allow creation of new tweet if contents are blank
+        redirect to 'tweets/new'
+      else
+        @tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
+        redirect to  '/tweets/#{@tweet.id}'
+      end
     else
-    redirect to  '/tweets/#{@tweet.id}'
+      redirect to '/login'
     end
   end
 
@@ -51,23 +55,30 @@ class TweetController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    if params[:content] == ""
-      redirect to "tweets/#{params[:id]}/edit"
+    if logged_in?
+        if params[:content] == ""
+          redirect to "tweets/#{params[:id]}/edit"
+        else
+          @tweet = Tweet.find_by(id: params[:id])
+          @tweet.content = params[:content]
+          @tweet.save
+          redirect to "tweets/#{@tweet.id}"
+      end
     else
-      @tweet = Tweet.find_by(id: params[:id])
-      @tweet.content = params[:content]
-      @tweet.save
-      redirect to "tweets/#{@tweet.id}"
-  end
+      redirect to '/login'
+    end
 end
 
 delete'/tweets/:id/delete' do
+  if logged_in?
   @tweet = Tweet.find_by(id: params[:id])
-    if logged_in? && @tweet.user_id == current_user.id
-      @tweet.delete
-    end
-      redirect to '/tweets'
-    end
-
-
+        if @tweet.user_id == current_user.id
+          @tweet.delete
+        else
+          redirect to '/tweets'
+        end
+  else
+    redirect to '/tweets'
+  end
+end
 end
