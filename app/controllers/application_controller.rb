@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
         if logged_in? == false
     		erb :'/users/create_user'
       else
-        redirect '/tweets'
+        redirect to '/tweets'
       end
     	end
 
@@ -28,9 +28,9 @@ class ApplicationController < Sinatra::Base
             if user.valid? && logged_in? == false
     					user.save
               session[:user_id] = user.id
-    					redirect "/tweets"
+    					redirect to '/tweets'
     			else
-    					redirect '/signup'
+    					redirect to '/signup'
     			end
     		end
 
