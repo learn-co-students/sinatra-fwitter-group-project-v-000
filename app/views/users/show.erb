@@ -1,4 +1,5 @@
+
 <h2> Your tweets: </h2>
-<% @current_user.tweets.all do |x| %>
+<% @current_user.tweets.each do |x| %>
 <h5> <%= x.content %> </h5>
 <% end %>
