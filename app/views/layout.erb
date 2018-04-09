@@ -1,15 +1,21 @@
 <!doctype html>
-<html>
-  <head>
-    <title>Fwitter</title>
-  </head>
-  <body>
 
-    <div class="container">
-      <h1>Welcome to Fwitter!</h1>
-      <h2>This is located in layout.erb!</h2>
-      <h2>Don't forget to <strong>yield</strong> your views!</h2>
-    </div>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
 
-  </body>
+  <title>The Flatiron Twitter "Fwitter"</title>
+  <meta name="Flatiorn school's pre-sinatra portfolio project" content="My sinatra powered Fwitter App">
+
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <%= yield %>
+  <script src="js/scripts.js"></script>
+</body>
 </html>
