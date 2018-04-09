@@ -1,0 +1,5 @@
+<h1>Fwitter</h1>
+<button><a href="/tweets/new">New Tweet</a></button>
+<%@tweets.each do |tweet| %>
+  <p><a href="/users/<%=tweet.user.slug%>"><%=tweet.user.username%></a>: <a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></p>
+<% end %>
