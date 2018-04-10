@@ -1,0 +1,10 @@
+<h1> Create a Tweet <%=@user.username%>.</h1>
+<form action="/tweets/new" method="POST">
+
+  <lable>Content</label>
+    <input type="text" id="content" name="tweet[content]"><br></br>
+
+    <input type="submit" id="submit" value="Create Tweet">
+</form>
+
+<h3><a href="/logout">Log Out</a>

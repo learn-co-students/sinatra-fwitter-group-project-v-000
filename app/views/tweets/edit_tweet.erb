@@ -1,0 +1,16 @@
+<h1> <%= @user.username %>, edit your tweet.</h1>
+
+<div>
+  <%=@tweet.content%>
+</div>
+
+<h3>Enter New Content Here</h3>
+
+<form action="/tweets/<%= @tweet.id %>/edit" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <input type="text" name="tweet[content]" id="content">
+
+  <input type="submit" id="submit" value="Edit Tweet">
+</form>
+
+<h3><a href="/logout">Log Out</a>
