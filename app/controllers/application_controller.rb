@@ -13,19 +13,26 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets/new' do
     #load create tweet form
+    # if logged_in?
+    #   erb :'/tweets/create_tweet'
+    # else
+    #   redirect "/"
+    # end
     erb :'/tweets/create_tweet'
   end
 
   get '/tweets/:id' do
     #individual show tweet page
-    #
+    @tweet = Tweet.find_by_id(params[:id])
     erb :'/tweets/show_tweet'
   end
 
   post '/tweets' do
-    #submit and catch the data and create new tweet objects
+    #submit and catch the data and create new tweet object
     #redirect to individual tweet page
-    redirect '/tweets/:id'
+    @tweet = Tweet.create(content: params[:content])
+    @tweet.save
+    redirect "/tweets/#{@tweet.id}"
   end
 
   get '/tweets/:id/edit' do
@@ -58,11 +65,13 @@ class ApplicationController < Sinatra::Base
 
   get '/login' do
     #render login form
+
     erb :'/users/login'
   end
 
   post '/login' do
     #add user_id to session hash to login
+
     erb :'/users/show'
   end
 
@@ -70,4 +79,16 @@ class ApplicationController < Sinatra::Base
     session.clear
     erb :'/index'
   end
+
+
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
+    end
+  end
+
 end
