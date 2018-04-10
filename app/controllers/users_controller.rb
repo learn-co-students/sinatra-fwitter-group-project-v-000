@@ -43,8 +43,9 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
+    #binding.pry
     session.clear
-    erb :'/index'
+    redirect "/login"
   end
 
 end
