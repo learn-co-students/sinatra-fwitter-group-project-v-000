@@ -43,9 +43,6 @@ class TweetController < ApplicationController
     binding.pry
     @tweet = Tweet.find_by_id(params[:id])
     @tweet.update = params[:content]
-
-    #redirect to tweet show page
-    #update
     redirect :'/tweets/show_tweet'
   end
 
