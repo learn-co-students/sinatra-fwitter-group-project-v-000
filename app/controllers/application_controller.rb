@@ -1,5 +1,7 @@
 require './config/environment'
 
+require 'pry'
+
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -12,12 +14,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/new' do
-    #load create tweet form
-    # if logged_in?
-    #   erb :'/tweets/create_tweet'
-    # else
-    #   redirect "/"
-    # end
+    load create tweet form
+    if logged_in?
+      erb :'/tweets/create_tweet'
+    else
+      redirect "/"
+    end
     erb :'/tweets/create_tweet'
   end
 
@@ -38,14 +40,17 @@ class ApplicationController < Sinatra::Base
   get '/tweets/:id/edit' do
     #load form to edit tweet
     #find specific tweet from params[:id] to preload form
+    @tweet = Tweet.find_by_id(params[:id])
     erb :'/tweets/edit_tweet'
   end
 
   post '/tweets/:id' do
-    #catch the data for an edited tweet
+    @tweet = Tweet.find_by_id(params[:id])
+    @tweet.update = params[:content]
+    binding.pry
     #redirect to tweet show page
     #update
-    redirect '/tweets/show_tweets'
+    redirect :'/tweets/show_tweet'
   end
 
   post '/tweets/:id/delete' do
@@ -54,24 +59,22 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb '/users/create_user'
+    erb :'/users/create_user'
   end
 
   post '/signup' do
-    #needs to create new user object
-    #log user in with sessions hash
-    redirect '/login'
+    @user = User.create(params[:user])
+    @user.save
+    session[:id] = @user.id
+    redirect :'/login'
   end
 
   get '/login' do
-    #render login form
-
     erb :'/users/login'
   end
 
   post '/login' do
-    #add user_id to session hash to login
-
+    session[:id] = @user.id
     erb :'/users/show'
   end
 
@@ -79,7 +82,6 @@ class ApplicationController < Sinatra::Base
     session.clear
     erb :'/index'
   end
-
 
   helpers do
     def logged_in?
