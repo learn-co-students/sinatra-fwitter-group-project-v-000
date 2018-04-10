@@ -1,9 +1,9 @@
-class TweetController < ApplicationController
+class TweetsController < ApplicationController
 
-  get '/tweets' do
+  get '/tweets' do  
     if logged_in?
         @tweets = Tweet.all
-        erb :'/tweets/index'
+        erb :'/tweets/tweets'
     else
         redirect '/login'
     end
@@ -24,6 +24,13 @@ class TweetController < ApplicationController
     erb :'/tweets/show_tweet'
   end
 
+  get '/tweets/:id/edit' do
+    #load form to edit tweet
+    #find specific tweet from params[:id] to preload form
+    @tweet = Tweet.find_by_id(params[:id])
+    erb :'/tweets/edit_tweet'
+  end
+
   post '/tweets' do
     #submit and catch the data and create new tweet object
     #redirect to individual tweet page
@@ -32,15 +39,7 @@ class TweetController < ApplicationController
     redirect "/tweets/#{@tweet.id}"
   end
 
-  get '/tweets/:id/edit' do
-    #load form to edit tweet
-    #find specific tweet from params[:id] to preload form
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :'/tweets/edit_tweet'
-  end
-
   post '/tweets/:id' do
-    binding.pry
     @tweet = Tweet.find_by_id(params[:id])
     @tweet.update = params[:content]
     redirect :'/tweets/show_tweet'

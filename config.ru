@@ -5,6 +5,6 @@ require './config/environment'
 # end
 
 use Rack::MethodOverride
-use UserController
-use TweetController
+use UsersController
+use TweetsController
 run ApplicationController
