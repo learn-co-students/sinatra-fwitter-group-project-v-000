@@ -8,18 +8,18 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb "/index"
+    erb :'/index'
   end
 
   get '/tweets/new' do
     #load create tweet form
-    erb '/tweets/create_tweet'
+    erb :'/tweets/create_tweet'
   end
 
   get '/tweets/:id' do
     #individual show tweet page
     #
-    erb '/tweets/show_tweet'
+    erb :'/tweets/show_tweet'
   end
 
   post '/tweets' do
@@ -31,7 +31,7 @@ class ApplicationController < Sinatra::Base
   get '/tweets/:id/edit' do
     #load form to edit tweet
     #find specific tweet from params[:id] to preload form
-    erb '/tweets/edit_tweet'
+    erb :'/tweets/edit_tweet'
   end
 
   post '/tweets/:id' do
@@ -43,7 +43,7 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets/:id/delete' do
     #delete tweet by :id
-    erb '/index'
+    erb :'/index'
   end
 
   get '/signup' do
@@ -58,11 +58,16 @@ class ApplicationController < Sinatra::Base
 
   get '/login' do
     #render login form
-    erb '/users/login'
+    erb :'/users/login'
   end
 
   post '/login' do
     #add user_id to session hash to login
-    erb '/users/show'
+    erb :'/users/show'
+  end
+
+  get '/logout' do
+    session.clear
+    erb :'/index'
   end
 end
