@@ -1,8 +1,8 @@
 <h1>Edit Tweet #<%=@tweet.id%>:</h1>
 
 <form action="/tweets/<%=@tweet.id%>" method="post">
-	<label>What's on your mind?</label>
-<input type="text" name="tweet[content]" value="<%=@tweet.content%>">
+	<label>Edit Tweet: <%=@tweet.content%></label>
+<input type="text" name="content" required>
 
-<input type="submit" name="Update Tweet" value="Update Tweet">
+<input type="submit" id="submit" name="Update Tweet" value="Update Tweet">
 </form>
