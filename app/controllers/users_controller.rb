@@ -1,5 +1,12 @@
 class UsersController < ApplicationController
 
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    @tweets = Tweet.all.find_by(user_id: @user.id)
+    binding.pry
+    erb :"/users/show"
+  end
+
   get '/signup' do
     # binding.pry
     if logged_in?
@@ -30,7 +37,7 @@ class UsersController < ApplicationController
       erb :'/users/login'
     end
   end
-
+  
   post '/login' do
     @user = User.find_by(username: params[:username])
     # binding.pry
