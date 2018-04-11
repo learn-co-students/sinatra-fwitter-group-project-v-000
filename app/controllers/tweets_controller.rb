@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
 
-  get '/tweets' do  
+  get '/tweets' do
     if logged_in?
         @tweets = Tweet.all
         erb :'/tweets/tweets'
@@ -11,7 +11,7 @@ class TweetsController < ApplicationController
 
   get '/tweets/new' do
     #load create tweet form
-    if User.current_user.logged_in?
+    if logged_in?
       erb :'/tweets/create_tweet'
     else
       redirect "/"
@@ -34,7 +34,7 @@ class TweetsController < ApplicationController
   post '/tweets' do
     #submit and catch the data and create new tweet object
     #redirect to individual tweet page
-    @tweet = Tweet.create(content: params[:content])
+    @tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
     @tweet.save
     redirect "/tweets/#{@tweet.id}"
   end
