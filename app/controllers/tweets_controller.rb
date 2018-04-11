@@ -14,34 +14,48 @@ class TweetsController < ApplicationController
     if logged_in?
       erb :'/tweets/create_tweet'
     else
-      redirect "/"
+      redirect "/login"
     end
   end
 
   get '/tweets/:id' do
     #individual show tweet page
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :'/tweets/show_tweet'
+    if logged_in?
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :'/tweets/show_tweet'
+    else 
+      redirect to '/login'
+    end
   end
 
   get '/tweets/:id/edit' do
     #load form to edit tweet
     #find specific tweet from params[:id] to preload form
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :'/tweets/edit_tweet'
+    if logged_in?
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :'/tweets/edit_tweet'
+    else 
+      redirect to '/login'
+    end
   end
 
   post '/tweets' do
     #submit and catch the data and create new tweet object
     #redirect to individual tweet page
-    @tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
+    if params[:content] == ""
+      redirect to "/tweets/new"
+    else 
+    @tweet = Tweet.create(content: params[:content], user_id: session[:user_id]) 
     @tweet.save
     redirect "/tweets/#{@tweet.id}"
+    end
   end
 
   post '/tweets/:id' do
     @tweet = Tweet.find_by_id(params[:id])
-    @tweet.update = params[:content]
+    @tweet.update(params[:content])
+    # binding.pry
+    @tweet.save
     redirect :'/tweets/show_tweet'
   end
 
