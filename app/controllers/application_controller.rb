@@ -23,3 +23,4 @@ helpers do
     User.find(session[:id])
   end
 end
+end
