@@ -1,6 +1,6 @@
 class UserController < ApplicationController
 
-    get '/signupnow' do
+    get '/signup' do
       erb :'users/create_user'
     end
 
