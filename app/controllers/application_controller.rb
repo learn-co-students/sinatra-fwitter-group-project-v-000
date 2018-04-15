@@ -10,15 +10,4 @@ class ApplicationController < Sinatra::Base
   get '/' do
     erb :'layout'
   end
-
-  get '/signup' do
-    erb :'users/create_user'
-  end
-
-  post '/signup' do
-    #TO DO in this route:
-    #Instantiate User info by going into pry and working with params!
-    redirect to "tweets/tweets"
-  end
-
 end
