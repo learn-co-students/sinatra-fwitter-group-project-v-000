@@ -60,9 +60,11 @@ class TweetController < ApplicationController
     end
   end
 
-  post '/tweets/:id/edit' do
-    binding.pry
-    redirect to "/tweets/:id/edit"
+  patch '/tweets/:id' do
+    @tweet = Tweet.find_by(id: params["id"])
+    @tweet.content = params["content"]
+    @tweet.save
+    redirect to "/tweets/:id"
   end
 
 
