@@ -1,0 +1,6 @@
+<% if @user == current_user %>
+  <h2><%=@user.username%>, here are your list of tweets:</h2>
+  <% @user.tweets.each do |tweet| %>
+    <%=tweet.content%>
+  <% end %>
+<% end %>
