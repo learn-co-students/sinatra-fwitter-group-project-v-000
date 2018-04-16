@@ -3,6 +3,7 @@ class TweetController < ApplicationController
   get '/tweets' do
 
     @user = User.find_by(id: session["user_id"])
+    @all_tweets = Tweet.all
 
     if logged_in
       erb :'tweets/tweets'
@@ -38,7 +39,7 @@ class TweetController < ApplicationController
     @tweet = Tweet.find_by(id: params["id"])
     @user = User.find_by(session["user_id"])
 
-    if @user
+    if logged_in
       erb :'tweets/show_tweet'
     else
       redirect to "/login"
@@ -52,7 +53,7 @@ class TweetController < ApplicationController
     @user = User.find_by(session["user_id"])
     @tweet = Tweet.find_by(id: params["id"])
 
-    if @user
+    if logged_in && @tweet.user_id == @user.id
       erb :'tweets/edit_tweet'
     else
       redirect to "/login"
@@ -60,6 +61,8 @@ class TweetController < ApplicationController
   end
 
   post '/tweets/:id/edit' do
+    binding.pry
+    redirect to "/tweets/:id/edit"
   end
 
 
