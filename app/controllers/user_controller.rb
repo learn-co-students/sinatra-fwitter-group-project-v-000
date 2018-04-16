@@ -61,6 +61,8 @@ class UserController < ApplicationController
       @user = User.find_by_slug(params["slug"])
       if @user
         erb :'tweets'
+      else
+        redirect to "/"
       end
     end
 
