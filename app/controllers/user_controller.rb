@@ -29,18 +29,44 @@ class UserController < ApplicationController
     end #POST route
 
     get '/login' do
-      erb :'users/login'
+      if logged_in
+        redirect to "/tweets"
+      else
+        erb :'users/login'
+      end
     end
 
     post '/login' do
       @user = User.find_by(username: params["username"])
-      session[:user_id] = @user.id
-      redirect to "/tweets"  #goes to GET route '/tweets'
+
+      if @user
+          session[:user_id] = @user.id
+          redirect to "/tweets"  #goes to GET route '/tweets'
+      else
+          redirect to "/login"
+      end
     end
 
+
     get '/tweets' do
+
       @user = User.find_by(id: session["user_id"])
-      erb :'tweets/tweets'
+
+      if logged_in
+        redirect to "tweets/tweets" #FIX
+      else
+        redirect to "users/login"
+      end
+    end
+
+    get '/logout' do
+      @user = User.find_by(id: session["user_id"])
+      if @user
+        session.clear
+        redirect to "users/login"
+      else
+        redirect to "/"
+      end
     end
 
 end
