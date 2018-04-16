@@ -5,10 +5,17 @@ class UserController < ApplicationController
     end
 
     post '/signup' do
-      #TO DO in this route:
-      #Instantiate User info by going into pry and working with params!
 
-      # raise params.inspect
+      if params["username"] == nil || params["username"] == ""
+        redirect to "/signup"
+      else
+        @user = User.new
+        @user.email = params["email"]
+        @user.username = params["username"]
+        @user.password_digest = params["password"]
+        @user.save
+      end
+
       redirect to "tweets/tweets"
     end
 
