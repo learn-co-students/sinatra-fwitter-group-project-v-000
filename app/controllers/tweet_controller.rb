@@ -11,16 +11,6 @@ class TweetController < ApplicationController
     end
   end
 
-  get '/tweets/new' do
-    @user = User.find_by(session["user_id"])
-
-    if @user
-      erb :'tweets/create_tweet'
-    else
-      redirect to "/"
-    end
-  end
-
   post '/tweets/new' do
     @user = User.find_by(session["user_id"])
 
@@ -32,6 +22,36 @@ class TweetController < ApplicationController
     else
       redirect to "tweets/new"
     end
+  end
+
+  get '/tweets/new' do
+    @user = User.find_by(session["user_id"])
+
+    if @user
+      erb :'tweets/create_tweet'
+    else
+      redirect to "users/login"
+    end
+  end
+
+  get '/tweets/:id' do
+    @tweet = Tweet.find_by(id: params["id"])
+
+    erb :'tweets/show_tweet'
+  end
+
+  get '/tweets/:id/delete' do
+    binding.pry
+  end
+
+  get '/tweets/:id/edit' do
+
+    @tweet = Tweet.find_by(id: params["id"])
+
+    erb :'tweets/edit_tweet'
+  end
+
+  post '/tweets/:id/edit' do
   end
 
 
