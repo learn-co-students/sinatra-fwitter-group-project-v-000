@@ -41,21 +41,9 @@ class UserController < ApplicationController
 
       if @user
           session[:user_id] = @user.id
-          redirect to "/tweets"  #goes to GET route '/tweets'
+          redirect to "/tweets"
       else
           redirect to "/login"
-      end
-    end
-
-
-    get '/tweets' do
-
-      @user = User.find_by(id: session["user_id"])
-
-      if logged_in
-        redirect to "tweets/tweets" #FIX
-      else
-        redirect to "users/login"
       end
     end
 
@@ -67,6 +55,9 @@ class UserController < ApplicationController
       else
         redirect to "/"
       end
+    end
+
+    get '/users/:slug' do
     end
 
 end
