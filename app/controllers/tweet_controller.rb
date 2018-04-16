@@ -14,12 +14,14 @@ class TweetController < ApplicationController
 
   post '/tweets/new' do
     @user = User.find_by(session["user_id"])
+    content = params["content"]
 
-    if params["content"] != ""
+    if content.chars.any? { |char| ('a'..'z').include? char.downcase}
       @tweet = Tweet.new
       @tweet.content = params["content"]
       @tweet.user_id = @user.id
       @tweet.save
+      erb :'tweets/show_tweet'
     else
       redirect to "tweets/new"
     end

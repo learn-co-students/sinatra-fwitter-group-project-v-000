@@ -5,6 +5,8 @@
 <h3>Your Tweets:</h3>
 <%@all_tweets.each do |tweet|%>
     <%=tweet.content%>
+    <br></br>
 <%end%>
 
 <p>Click <a href="/logout">here</a> to log out.</p>
+<p>Click <a href="/tweets/new">here</a> to publish a new tweet.</p>
