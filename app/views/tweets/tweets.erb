@@ -4,7 +4,7 @@
 
 <h3>Your Tweets:</h3>
 <%@user.tweets.each do |tweet|%>
-    <%=tweet%>
+    <%=tweet.content%>
 <%end%>
 
 <p>Click <a href="/logout">here</a> to log out.</p>
