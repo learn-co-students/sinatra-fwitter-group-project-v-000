@@ -64,7 +64,15 @@ class TweetController < ApplicationController
     @tweet = Tweet.find_by(id: params["id"])
     @tweet.content = params["content"]
     @tweet.save
-    redirect to "/tweets/:id"
+    redirect to "/tweets/#{@tweet.id}/edit"
+  end
+
+  delete '/tweets/:id' do
+    @user = User.find_by(session["user_id"])
+    @tweet = Tweet.find_by(id: params["id"])
+    if logged_in && @user.id == @tweet.user_id
+      @tweet.delete
+    end
   end
 
 
