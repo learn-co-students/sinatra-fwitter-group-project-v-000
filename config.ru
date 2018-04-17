@@ -5,4 +5,6 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
-run ApplicationController
+use UserController
+use TweetController #you can initialize multiple controllers using 'use'
+run ApplicationController #you can run 1 controller
