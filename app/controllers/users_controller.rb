@@ -28,8 +28,13 @@ class UsersController < ApplicationController
 
   post '/login' do
     @user = User.find_by(:username => params["username"])
-    session[:user_id] = @user.id
-    redirect to "/tweets"
+    #binding.pry
+    if @user == nil
+      redirect to "/signup"
+    else
+      session[:user_id] = @user.id
+      redirect to "/tweets"
+    end
   end
 
   get '/logout' do
