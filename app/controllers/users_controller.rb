@@ -1,20 +1,41 @@
 class UsersController < ApplicationController
 
   get '/' do
-    erb :'/users/home'
+    erb :'/home'
   end
 
   get '/signup' do
-    erb :'/users/signup'
+    if logged_in?
+      redirect to '/tweets'
+    else
+      erb :'/users/signup'
+    end
   end
 
   post '/signup' do
     if params[:username] == ""|| params[:email] == ""|| params[:password] == ""
-      erb :'/users/signup'
+      redirect '/signup'
     else
-      @user = User.create(username:params["username"], email: params["email"], password: params["password"])
+      @user = User.create(params)
       @user.save
+      session[:user_id] = @user.id
       redirect '/tweets'
     end
   end
+
+  get '/login' do
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :'/users/login'
+    end
+  end
+
+  post '/login' do
+      @user = User.find_by(username: params["username"], password: params["password"])
+      if @user
+        session[:user_id] = @user.id
+        redirect '/account'
+      end
+    end
 end
