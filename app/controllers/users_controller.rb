@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  # User Registration ------------------------------------------------------- 
+  # --------------------------------- User Registration ------------------------------------------------------- 
 
   get '/signup' do
     redirect to '/tweets' if logged_in?
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     end 
   end
  
-  # User Login / Logout -----------------------------------------------------
+  # ---------------------------------  User Login / Logout -----------------------------------------------------
   
   get '/login' do
     if !logged_in? then erb :'users/login' else redirect to '/tweets' end
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     if logged_in? then session.clear and redirect to '/login' else redirect to '/' end
   end 
 
-  # User Show Page  ---------------------------------------------------------
+  # ---------------------------------  User Show Page  ---------------------------------------------------------
 
   get '/users/:slug' do 
     @user = User.find_by_slug(params[:slug])

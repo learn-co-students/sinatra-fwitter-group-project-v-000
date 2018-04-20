@@ -20,9 +20,7 @@ class TweetsController < ApplicationController
       flash[:message] ="Provide some content to post a tweet!"
       redirect to '/tweets/new'
     elsif logged_in?
-      @user = current_user
-      @tweet =Tweet.create(params)
-      @user.tweets << @tweet
+      @tweet = current_user.tweets.create(params)
       redirect to "tweets/#{@tweet.id}"
     else
       redirect to '/login'
