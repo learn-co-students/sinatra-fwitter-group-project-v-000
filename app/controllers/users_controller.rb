@@ -7,4 +7,14 @@ class UsersController < ApplicationController
   get '/signup' do
     erb :'/users/signup'
   end
+
+  post '/signup' do
+    if params[:username] == ""|| params[:email] == ""|| params[:password] == ""
+      erb :'/users/signup'
+    else
+      @user = User.create(username:params["username"], email: params["email"], password: params["password"])
+      @user.save
+      redirect '/tweets'
+    end
+  end
 end
