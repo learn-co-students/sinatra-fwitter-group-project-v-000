@@ -57,13 +57,13 @@ class TweetsController < ApplicationController
   # Delete --------------------------------------------------------------------
 
   post '/tweets/:id/delete' do
-    @tweet = Tweet.find(params[:id])
-    if logged_in? && @tweet.user == current_user
-      @tweet.delete 
+    @tweet = current_user.tweets.find_by(id: params[:id])
+    binding.pry
+    if @tweet && @tweet.destroy 
       redirect to "/tweets"
     else 
       flash[:notice] = "You cannot change another user's content, silly."
-      redirect to "/tweets/#{@tweet.id}"
+      redirect to '/tweets'
     end 
   end 
 
