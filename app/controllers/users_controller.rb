@@ -9,4 +9,15 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/tweets/:username' do
+    if logged_in?
+      # binding.pry
+      @user = User.find_by(params[:user])
+      erb :"/tweets/show"
+    else
+      redirect "/login"
+    end
+  end
+
+
 end
