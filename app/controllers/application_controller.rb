@@ -9,11 +9,11 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
-  get '/' do 
-    erb :index
+  helpers do
+
+    def logged_in?
+       !!session[:username]
+    end
+
   end
-
- 
-
-
 end
