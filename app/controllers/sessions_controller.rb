@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class UsersController < ApplicationController
 
   get '/' do
     erb :index
@@ -23,6 +23,11 @@ class SessionsController < ApplicationController
     get '/logout' do
       session.clear
       redirect '/login'
+    end
+
+    get '/users/:username' do
+      @user = User.find_by(params[:user])
+      erb :"/tweets/show"
     end
 
   post '/signup' do
