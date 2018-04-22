@@ -53,7 +53,7 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
-  binding.pry
+  # binding.pry
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       @tweet.delete
