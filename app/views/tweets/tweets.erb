@@ -1,9 +1,9 @@
 <% if @user == current_user %>
-<h2><%= @user.username%></h2>
-<br>
-<% Tweet.all.each do |tweet|
+<h2>Welcome, <%= @user.username%></h2>
+<br></br>
+<% Tweet.all.each do |tweet| %>
   <%= tweet.content %>
   <% end %>
-  <br>
+  <br></br>
   <a href="/logout">Log Out</a>
 <% end %>
