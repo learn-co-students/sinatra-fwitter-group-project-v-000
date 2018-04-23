@@ -1,0 +1,12 @@
+<div class="col-md-6 col-md-offset-3 main-content">
+<h1>Welcome, <%=current_user.username %>!</h1>
+<% @tweets.each do |tweet| %>
+  <h3><a href="tweets/<%= tweet.id%>"><%= tweet.content %></a>
+<% end %>
+<br><br>
+
+<a class="btn btn-sm btn-primary" href="/tweets/new">Create Tweet</a>
+
+<a class="btn btn-sm btn-primary"href="/logout">Log Out</a>
+</div>
+</div>
