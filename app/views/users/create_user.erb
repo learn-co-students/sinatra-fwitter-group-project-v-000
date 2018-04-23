@@ -1,0 +1,24 @@
+<h2>Create a new user</h2>
+
+<div class="container">
+	<div class="row">
+		<form action="/signup" method="POST">
+			<label for="username">Username: </label>
+			<input type="text" name="username" class="form-control" id="username" placeholder="Enter a username">
+			
+			<br>
+			
+			<label for="email">Email: </label>
+			<input type="email" name="email" id="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+			<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+			
+			<br>
+
+			<label for="password">Password: </label>
+			<input type="password" name="password" class="form-control" id="password" placeholder="Password">
+
+			<br>
+			<input type="submit" value ="Submit" id="submit" class="btn btn-primary">
+		</form>
+	</div>
+</div>
