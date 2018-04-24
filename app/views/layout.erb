@@ -1,15 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
 <html>
   <head>
     <title>Fwitter</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
 
     <div class="container">
       <h1>Welcome to Fwitter!</h1>
-      <h2>This is located in layout.erb!</h2>
-      <h2>Don't forget to <strong>yield</strong> your views!</h2>
+      <%if logged_in?%>
+          <a href="/tweets/new">Create Tweet </a>
+          <a href= "/logout">Log Out</a>
+      <%end%>
+      <%= yield %>
     </div>
 
-  </body>
-</html>
+      </body>
+  </html>

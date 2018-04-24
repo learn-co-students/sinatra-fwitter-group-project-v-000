@@ -1,0 +1,9 @@
+<html>
+<body>
+<h1>All tweets for <%= @user.name %>.</h1>
+<%@user.tweets.each do |tweet|%>
+<%=tweet.content%>
+<%end%>
+<h2>Thanks for tweeting!</h2>
+</body>
+</html>
