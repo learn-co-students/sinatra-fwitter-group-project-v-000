@@ -1,11 +1,14 @@
-<% @user=User.find(session[:user_id]) %>
-<h3>Welcome, <%= @user.username %></h3>
 
-<%binding.pry%>
+<h3>Welcome, <%= @user.username %></h3>
+<h3>All Tweets</h3>
 
 <% Tweet.all.each do |tweet| %>
 <%= tweet.content %>
 <% end %>
+</br>
+
+<a href="/users/show">See your tweets</a>
+</br>
 
 <form action="/logout">
   <input type="submit" value="Log Out">
