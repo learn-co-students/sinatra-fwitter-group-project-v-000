@@ -116,14 +116,16 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    post '/tweets/:id' do
+    patch '/tweets/:id' do
       #binding.pry
-      if logged_in? && current_user.id==session[:user_id] && params[:content] != ""
-        @tweet = Tweet.update(content: params[:content])
+      @tweet = Tweet.find(params[:id])
+      if params[:content] != ""
+        @tweet = Tweet.update(params[:id], content: params[:content])
         @tweet.save
+        @user=current_user
         erb :'/tweets/tweets'
       else
-        redirect :'/tweets/#{params[:id]}/edit'
+        erb :'/tweets/edit_tweet'
       end
 
     end
@@ -131,7 +133,7 @@ class ApplicationController < Sinatra::Base
     get '/users/:slug' do
       #binding.pry
       if logged_in?
-        @user = current_user
+        @user = User.find_by_slug(params[:slug])
         erb :'/users/show'
       else
         redirect to "/login"

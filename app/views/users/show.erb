@@ -2,6 +2,6 @@
 
 <% Tweet.all.each do |tweet| %>
   <% if tweet.user_id == @user.id %></a>
-    <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a>
+    <p><a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a></p>
   <% end %>
 <% end %>
