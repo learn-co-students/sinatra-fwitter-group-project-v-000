@@ -2,13 +2,11 @@
 <h3>Welcome, <%= @user.username %></h3>
 <h3>All Tweets</h3>
 
+<ul>
 <% Tweet.all.each do |tweet| %>
-<%= tweet.content %>
+<li><%= tweet.content %></li>
 <% end %>
-</br>
-
-<a href="/users/show">See your tweets</a>
-</br>
+</ul>
 
 <form action="/logout">
   <input type="submit" value="Log Out">
