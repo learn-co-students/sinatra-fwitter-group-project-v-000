@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       @user = User.create(username: params["username"], email: params["email"], password: params["password"])
       @user.save
       session[:user_id] = @user.id
-      erb :'tweets/tweets'
+      redirect '/tweets'
     end
   end
 
@@ -28,5 +28,27 @@ class UsersController < ApplicationController
     else
       redirect '/tweets'
     end
+  end
+
+  post '/login' do
+
+    @user = User.find_by(username: params["username"])
+    #binding.pry
+    if @user && @user.authenticate(params["password"])
+      session[:user_id] = @user.id
+      redirect '/tweets'
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/logout' do
+    session.clear
+    redirect to '/login'
+  end
+
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'/users/show'
   end
 end
