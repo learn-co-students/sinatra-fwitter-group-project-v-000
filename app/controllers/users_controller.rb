@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
 
   get '/signup' do
-    if !session[:user_id]
+    if !logged_in?
       erb :'/users/create_user'
     else
       redirect '/tweets'
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    if !session[:user_id]
+    if !logged_in?
       erb :'/users/login'
     else
       redirect '/tweets'
@@ -31,7 +31,6 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-
     @user = User.find_by(username: params["username"])
     #binding.pry
     if @user && @user.authenticate(params["password"])

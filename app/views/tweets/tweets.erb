@@ -1,6 +1,13 @@
 <h1>Tweets Index</h1>
-<h1>Welcome,</h1>
+<h1>Welcome, Tweeter</h1>
+
 
 <% Tweet.all.each do |tweet| %>
 <li><%= tweet.content %><li>
   <% end %>
+
+
+
+<h4><a href="/tweets/new">Create a Tweet</a></h4>
+
+<h4><a href="/logout">Log Out</a></h4>
