@@ -31,6 +31,7 @@ get '/tweets' do
 end
 
  get '/tweets/new' do
+  #  raise session.inspect
    if session[:username].empty?
      redirect '/login'
    else
@@ -43,6 +44,10 @@ get '/logout' do
   redirect '/login'
 end
 
+post '/show' do
+  @user=User.find(parama[:user_id])
+  erb :show
+end
 post '/signup' do
 
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
@@ -52,6 +57,8 @@ post '/signup' do
        @user.save
       #  binding.pry
        session[:user_id] = @user.id
+       session[:email] = params[:email]
+       session[:username] = params[:username]
        redirect '/tweets'
     end
 end
@@ -61,6 +68,8 @@ post "/login" do
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
           session[:user_id] = user.id
+          session[:email] = params[:email]
+          session[:username] = params[:username]
         redirect "/tweets"
     else
         redirect "/login"
