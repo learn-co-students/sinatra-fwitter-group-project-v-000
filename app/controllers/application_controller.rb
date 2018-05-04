@@ -15,69 +15,159 @@ erb :homepage
 end
 
 get '/signup' do
-  erb :signup
-  #signup page
+   if logged_in?
+     redirect '/tweets'
+   else
+  erb :"/users/signup"
+end
 end
 
 get '/login' do
-  erb :login
+  if logged_in?
+    redirect '/tweets'
+  else
+  erb :"/users/login"
+end
 end
 
 get '/tweets' do
+  if logged_in?
   @user = User.find(session[:user_id])
-  # binding.pry
  session[:user_id] = @user.id
-  erb :tweets
+  erb :"/tweets/tweets"
+else
+  redirect '/users/login'
+end
 end
 
  get '/tweets/new' do
   #  raise session.inspect
-   if session[:username].empty?
-     redirect '/login'
+  # @user = User.find(session[:user_id])
+   if   logged_in?
+     erb :"/tweets/new"
    else
-     erb :new
+     redirect '/login'
    end
  end
 
+ get '/tweets/:id' do
+
+    @tweet = Tweet.find(params[:id])
+    # if logged_in?
+   if session[:user_id] == @tweet.user_id
+
+     @user = User.find(session[:user_id])
+   erb :"tweets/show"
+ elsif logged_in? && session[:user_id] != @tweet.user_id
+   @user = User.find(session[:user_id])
+   erb :"tweets/show"
+
+ else
+
+   redirect '/login'
+ end
+ end
+
+ get '/tweets/:id/edit' do
+   if logged_in?
+     @user = User.find(session[:user_id])
+     @tweet = Tweet.find(params[:id])
+     if @user.id == @tweet.user_id
+
+     erb :"/tweets/edit"
+   else
+     redirect '/tweets'
+   end
+ else
+   redirect '/login'
+ end
+ end
+
+ get "/users/:slug" do
+   @user = User.find_by_slug(params[:slug])
+     erb :'/users/show'
+ end
+
 get '/logout' do
-  session.clear
+    session.clear
   redirect '/login'
+ end
+
+patch '/tweets/:id' do
+  # binding.pry
+  if logged_in?
+   @tweet=Tweet.find(params[:id])
+     if !params[:content].empty?
+       @tweet.update(content: params[:content])
+
+      session[:tweet] = params[:content]
+      @user = User.find(session[:user_id])
+      @user.id = @tweet.user_id
+      @tweet.save
+      redirect "/tweets/#{@tweet.id}"
+    else
+      redirect "/tweets/#{@tweet.id}/edit"
+    end
+
+  end
 end
 
 post '/show' do
-  @user=User.find(parama[:user_id])
-  erb :show
+  @user=User.find(session[:user_id])
+  @tweet = Tweet.new(content: params[:content])
+  if params[:content].empty?
+    redirect '/tweets/new'
+  else
+  @tweet.save
+  session[:tweet] = params[:content]
+
+  @user.tweets << @tweet
+
+  erb :"/users/show"
 end
+end
+
 post '/signup' do
 
-    if params[:username].empty? || params[:email].empty? || params[:password].empty?
-       redirect "/signup"
+    if params[:username].empty? || params[:email].empty? || params[:password].empty?  #&& !logged_in?
+         redirect "/signup"
      else
        @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
        @user.save
-      #  binding.pry
+       if  logged_in? || @user.save
        session[:user_id] = @user.id
-       session[:email] = params[:email]
-       session[:username] = params[:username]
+       session[:email] = @user.email
+       session[:username] = @user.username
+
        redirect '/tweets'
+     end
     end
 end
 
 
 post "/login" do
-    user = User.find_by(username: params[:username])
-    if user && user.authenticate(params[:password])
+     user = User.find_by(username: params[:username])
+    # if user
+    if user && user.authenticate(params[:password]) #|| logged_in?
+      # User.find_by(username: params[:username])
           session[:user_id] = user.id
-          session[:email] = params[:email]
-          session[:username] = params[:username]
+          session[:email] = user.email
+          session[:username] = user.username
         redirect "/tweets"
     else
         redirect "/login"
     end
 end
 
-post '/tweets' do
+delete '/tweets/:id/delete' do
 
+    @tweet =Tweet.find_by_id(params[:id])
+   if  @tweet.user_id == session[:user_id] && logged_in?
+     @tweet.delete
+    redirect '/tweets'
+  else
+   redirect '/tweets'
+end
 end
 
 helpers do

@@ -1,2 +1,0 @@
-
-  Tweets For <%= @user.username %>
