@@ -11,7 +11,8 @@ class UsersController < ApplicationController
   post '/signup' do 
     @user = User.new(params)
     if @user.save
-        session[:user_id] = @user.id
+				# session[:user_id] = @user.id
+				login(@user.id)
         redirect to '/tweets'
     else
         redirect to '/signup'
