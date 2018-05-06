@@ -55,7 +55,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  patch '/tweets/:id' do
+  post '/tweets/:id' do
     if logged_in?
       if params[:content] == ""
         redirect to "/tweets/#{params[:id]}/edit"
@@ -76,7 +76,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  delete '/tweets/:id/delete' do
+  post '/tweets/:id/delete' do
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       if @tweet && @tweet.user == current_user
