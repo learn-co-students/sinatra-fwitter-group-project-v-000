@@ -3,6 +3,7 @@ class TweetController < ApplicationController
 
   get '/tweets' do
     if logged_in?
+      @user = current_user
       @tweets = Tweet.all
       erb :"/tweets/tweets"
     else
@@ -56,7 +57,7 @@ class TweetController < ApplicationController
       if params[:content] == ""
         redirect "/tweets/#{@tweet.id}/edit"
       else
-  
+
         @tweet.update(content: params[:content])
         redirect "/tweets/#{@tweet.id}/edit"
       end

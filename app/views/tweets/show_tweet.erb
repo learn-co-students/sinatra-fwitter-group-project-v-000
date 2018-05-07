@@ -1,4 +1,4 @@
-<h1>Tweet by <%=@tweet.user%></h1>
+<h1>Tweet by @<%=@tweet.user.username%></h1>
 <p><%=@tweet.content%></p>
 <br>
 <form action="/tweets/<%=@tweet.id%>/delete" method="get">
