@@ -1,0 +1,8 @@
+<h1>Edit a Tweet</h1>
+<p>Old Content: <%=@tweet.content%></p>
+<br>
+<form action="/tweets/<%=@tweet.id%>" method="post">
+  <p>Enter Content Here:<input type="text" id="content" name="content" required></p>
+  <br>
+  <input type="submit" id="submit" value="submit">
+</form>
