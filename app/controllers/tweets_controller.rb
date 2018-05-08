@@ -38,7 +38,7 @@ end
   elsif logged_in? && !@tweet.users_tweet?(@user)
     redirect '/tweets'
   else
-    redirect '/'
+    redirect '/login'
   end
 end
 
@@ -58,6 +58,6 @@ helpers do
   def users_tweet?(user)
     user.id == self.user_id
   end
-end 
+end
 
 end
