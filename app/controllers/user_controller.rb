@@ -9,9 +9,12 @@ class UserController < ApplicationController
   end
 
   post '/login' do
-    binding.pry
-    @user = User.find_by(username: params[:username], password: params[:password])
-    erb :"users/show"
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect "/tweets"
+    else
+      redirect "/"
   end
 
   # get '/logout' do
