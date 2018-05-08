@@ -8,10 +8,12 @@ class UserController < ApplicationController
     erb :"users/login"
   end
 
-  post '/show' do
-
+  post '/login' do
+    binding.pry
+    @user = User.find_by(username: params[:username], password: params[:password])
+    erb :"users/show"
   end
-  
+
   # get '/logout' do
   #   erb :"users/"
   # end
