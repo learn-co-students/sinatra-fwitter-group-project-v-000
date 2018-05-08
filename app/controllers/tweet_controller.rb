@@ -5,12 +5,13 @@ class TweetController < ApplicationController
     erb :"tweets/tweets"
   end
 
-  post '/tweets' do
-    # @tweet = Tweet.find_by(params)
-    # redirect "/tweets/#{@tweet.id}" 
-  end
-
   get '/tweets/new' do
     erb :"tweets/create_tweet"
   end
+
+  # post '/tweets' do
+  #   binding.pry
+  #   @tweet = Tweet.find_by(params)
+  #   redirect "/tweets/#{@tweet.id}" 
+  # end
 end
