@@ -61,11 +61,24 @@ post '/signup' do
 end
 
 get '/logout' do
-  if session[:user_id]
+  if is_logged_in?
   session.clear
   redirect '/login'
 else
-  redirect '/login'
+  redirect '/'
 end
 end
+
+helpers do
+  def current_user
+    if session[:user_id]
+    @current_user ||= User.find(session[:user_id])
+  end
+end
+
+  def is_logged_in?
+    !!current_user
+  end
+end
+
 end
