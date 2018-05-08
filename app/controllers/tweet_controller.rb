@@ -1,9 +1,13 @@
 class TweetController < ApplicationController
 
-  get '/tweets' do
-    # binding.pry
+  get "/tweets" do
     @tweets = Tweet.all
     erb :"tweets/tweets"
+  end
+
+  post '/tweets' do
+    # @tweet = Tweet.find_by(params)
+    # redirect "/tweets/#{@tweet.id}" 
   end
 
   get '/tweets/new' do
