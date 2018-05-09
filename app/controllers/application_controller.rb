@@ -10,16 +10,13 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    if logged_in?
-      erb :"/tweets/tweets"
-    else
-      erb :index
-    end
+    erb :index
   end
-
+  
   helpers do
     def logged_in?
       !!session[:user_id]
+      # binding.pry
     end
   end
 end
