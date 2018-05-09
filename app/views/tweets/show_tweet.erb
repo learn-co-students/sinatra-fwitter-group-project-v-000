@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>Tweet show landing page</h1>
+	<h2><%=@tweet.content%></h2>
+	<label>Edit Tweet</label>
+	<h3><a href="/tweets/<%=@tweet.id%>/edit">Click here to edit this tweet!</a></h3>
+	
+	<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+		<input type="hidden" name="_method" id="hidden" value="delete">
+		<label>Delete Tweet</label>
+		<input type="submit" value="delete" id="Delete Tweet">
+		
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<h1>Welcome, <%=current_user.username%></h1>
+	<%@tweets.each do |tweet| %>
+		<h2><%=tweet.content%> by: <%=tweet.user.username%></h2>
+	<%end%>
+
+</body>
+</html>
