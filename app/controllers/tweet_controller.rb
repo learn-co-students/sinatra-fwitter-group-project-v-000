@@ -2,7 +2,6 @@ class TweetsController < ApplicationController
 
   get "/tweets" do
     if logged_in?
-      @user = current_user
       @tweets = Tweet.all
       erb :"/tweets/tweets"
     else
@@ -34,7 +33,6 @@ class TweetsController < ApplicationController
   get "/tweets/:id" do
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
-      @user = User.find_by_id(session[:user_id])
       erb :"/tweets/show_tweet"
     else
       redirect "/login"
@@ -72,15 +70,5 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find_by_id(params[:id])
     @user = User.find_by_id(session[:user_id])
     erb :"/tweets/show_tweet"
-  end
-
-  helpers do
-    def current_user
-      User.find(session[:user_id])
-    end
-
-    def users_tweet?
-      current_user.id == session[:user_id]
-    end
   end
 end
