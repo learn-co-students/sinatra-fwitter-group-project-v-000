@@ -64,6 +64,35 @@ get '/tweets/:id' do
   end
 end
 
+get '/tweets/:id/edit' do
+  if  !is_logged_in?
+    redirect '/login'
+  else
+    @tweet = Tweet.find_by_id(params[:id])
+    erb :'/tweets/edit_tweet'
+  end
+end
+
+patch '/tweets/:id' do
+if  !is_logged_in?
+    redirect '/login'
+elsif
+  @tweet = Tweet.find(params[:id])
+  @tweet.update(content: params[:content])
+  @tweet.save
+  redirect "/tweets/#{@tweet.id}"
+else
+  params[:content].empty?
+  redirect "/tweets/:id"
+
+end
+end
+
+
+
+
+
+
 post '/tweets/new' do
   is_logged_in?
 
