@@ -26,10 +26,11 @@ end
 get '/login' do
   if session[:user_id]
      redirect '/tweets'
-
    end
   erb :'users/login'
 end
+
+
 
 post '/login' do
   if @current_user = User.find_by(params)
@@ -39,6 +40,7 @@ else
   redirect '/login'
 end
 end
+
 
 get '/users/:id' do
   @current_user = User.find_by(:username => params[:captures])
@@ -53,6 +55,15 @@ else
 end
 end
 
+get '/tweets/:id' do
+  if  !is_logged_in?
+    redirect '/login'
+  else
+    @tweet = Tweet.find_by_id(params[:id])
+    erb :'/tweets/show_tweet'
+  end
+end
+
 post '/tweets/new' do
   is_logged_in?
 
@@ -64,6 +75,7 @@ post '/tweets/new' do
 
   redirect '/tweets'
 end
+
 
 post '/signup' do
 
@@ -92,6 +104,9 @@ else
 end
 end
 
+
+
+#<----------helpers-------->
 helpers do
   def current_user
     if session[:user_id]
