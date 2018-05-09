@@ -33,8 +33,9 @@ end
 
 
 post '/login' do
-  if @current_user = User.find_by(params)
-  session[:user_id]= @current_user.id
+  @user = User.find_by(:username => params[:username])
+  if @user && @user.authenticate(params[:password])
+  session[:user_id]= @user.id
   redirect '/tweets'
 else
   redirect '/login'
@@ -152,11 +153,7 @@ end
 
 helpers do
 
-  # def empty_tweet?
-  #   !params[:content].empty?
-  #   redirect "/tweets/#{@tweet.id}/edit"
-  #
-  # end
+
 
   def current_user
     if session[:user_id]
