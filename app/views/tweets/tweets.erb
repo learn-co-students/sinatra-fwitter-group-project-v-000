@@ -1,0 +1,16 @@
+<h1>Welcome, <%= @user.username %> </h1> 
+
+<h2>Create a new tweet?</h2>
+
+<a href="/tweets/new">Click here!</a>
+
+
+  <% @tweets.each do |tweet| %>
+    <%= tweet.content %>
+    <% end %>
+
+    <% if logged_in? %>
+
+    <h4> <a href="/logout">Log Out</a></h4>
+
+    <% end %>
