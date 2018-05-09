@@ -46,7 +46,11 @@ get '/users/:id' do
 end
 
 get '/tweets/new' do
+if  !is_logged_in?
+  redirect '/login'
+else
   erb :'tweets/create_tweet'
+end
 end
 
 post '/tweets/new' do
