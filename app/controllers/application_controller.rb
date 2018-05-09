@@ -136,15 +136,13 @@ else
 end
 end
 
-delete '/tweets/:id' do
-  binding.pry
-  if
+delete '/tweets/:id/delete' do
+if
     !is_logged_in?
     redirect '/login'
-  else
-    binding.pry
+else
   @tweet = Tweet.find_by_id(params[:id])
-  @tweet.destroy
+  @tweet.destroy if @tweet.user == current_user
   redirect '/tweets'
 end
 end
