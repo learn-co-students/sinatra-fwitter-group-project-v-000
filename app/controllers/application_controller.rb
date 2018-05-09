@@ -73,17 +73,20 @@ get '/tweets/:id/edit' do
   end
 end
 
+
 patch '/tweets/:id' do
-if  !is_logged_in?
+if
+  !is_logged_in?
     redirect '/login'
-elsif
+
+else
   @tweet = Tweet.find(params[:id])
+    if @tweet.content.empty?
+    redirect "/tweets/#{@tweet.id}/edit"
+  end
   @tweet.update(content: params[:content])
   @tweet.save
-  redirect "/tweets/#{@tweet.id}"
-else
-  params[:content].empty?
-  redirect "/tweets/:id"
+  redirect "/tweets/#{@tweet.id}/edit"
 
 end
 end
@@ -133,10 +136,30 @@ else
 end
 end
 
-
+delete '/tweets/:id' do
+  binding.pry
+  if
+    !is_logged_in?
+    redirect '/login'
+  else
+    binding.pry
+  @tweet = Tweet.find_by_id(params[:id])
+  @tweet.destroy
+  redirect '/tweets'
+end
+end
 
 #<----------helpers-------->
+
+
 helpers do
+
+  # def empty_tweet?
+  #   !params[:content].empty?
+  #   redirect "/tweets/#{@tweet.id}/edit"
+  #
+  # end
+
   def current_user
     if session[:user_id]
     @current_user ||= User.find(session[:user_id])

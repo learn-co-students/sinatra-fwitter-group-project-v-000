@@ -1,3 +1,7 @@
 <%= @tweet.content %>
-<p><a href="/delete_tweet">Delete Tweet</a></p>
-<p><a href="/edit_tweet">Edit Tweet</a></p>
+<p><a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a></p>
+<form action="/tweets/<%= @tweet.id %/delete>" method="POST">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="button" value="Delete Tweet">
+</form>
+<!-- onclick="alert('Your Tweet has been deleted!')" -->
