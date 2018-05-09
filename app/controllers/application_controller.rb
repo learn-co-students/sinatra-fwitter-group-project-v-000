@@ -9,7 +9,9 @@ class ApplicationController < Sinatra::Base
   end
 
 get '/' do
-
+  if session[:user_id]
+     redirect '/tweets'
+   end
   erb :index
 
 end
@@ -18,9 +20,7 @@ get '/signup' do
 if session[:user_id]
    redirect '/tweets'
  end
-
   erb :'users/create_user'
-
 end
 
 get '/login' do
@@ -37,9 +37,28 @@ post '/login' do
   redirect '/tweets'
 else
   redirect '/login'
-
-
 end
+end
+
+get '/users/:id' do
+  @current_user = User.find_by(:username => params[:captures])
+  erb :'/users/show'
+end
+
+get '/tweets/new' do
+  erb :'tweets/create_tweet'
+end
+
+post '/tweets/new' do
+  is_logged_in?
+
+  if params[:content].empty?
+    redirect '/tweets/new'
+  else @tweet = Tweet.create(params)
+  end
+  @current_user.tweets << @tweet
+
+  redirect '/tweets'
 end
 
 post '/signup' do
