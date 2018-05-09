@@ -40,14 +40,9 @@ end
 end
 
   get '/tweets/:id/edit' do
-    #@user = current_user
-
-    #if logged_in? && @tweet.users_tweet?(@user)
     if logged_in?
       @tweet = Tweet.find_by(params[:id])
     erb :'/tweets/edit_tweet'
-  #elsif logged_in? && !@tweet.users_tweet?(@user)
-    #redirect '/tweets'
   else
     redirect '/login'
   end
@@ -56,8 +51,8 @@ end
   patch '/tweets/:id' do
     @user = current_user
     @tweet = Tweet.find_by(params[:id])
-    if logged_in? && users_tweet?(@user, @tweet) && !params[:content] == ""
-      @tweet.update(params[:content])
+    if logged_in? && users_tweet?(@user, @tweet) && !params[:content].empty?
+      @tweet.update(:content => params[:content])
       @tweet.save
     redirect to "/tweets/#{@tweet.id}"
   elsif params[:content] == ""
