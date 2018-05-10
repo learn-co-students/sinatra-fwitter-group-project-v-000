@@ -1,0 +1,24 @@
+<!-- tweets/show -->
+<h1>Tweet</h1>
+  <% if flash.has?(:message) %>
+    <%=flash[:message]%>
+  <% end %>
+  <h3><%=@tweet.user.username%>:</h3>
+  <p><%=@tweet.content%></p>
+  <br>
+  <form action="/tweets/<%=@tweet.id%>/edit" method="get">
+    <input type="submit" value="Edit Tweet">
+  </form>
+  <br>
+  <form action="/tweets/<%=@tweet.id%>/delete" method="post">
+    <input type="hidden" name="_method" value="DELETE" id="hidden">
+    <input type="submit" value="Delete Tweet">
+  </form>
+  <br>
+  <form action="/tweets" method="get">
+    <input type="submit" value="View All Tweets">
+  </form>
+  <br>
+  <form action="/logout" method="get">
+    <input type="submit" value="Log Out">
+  </form>

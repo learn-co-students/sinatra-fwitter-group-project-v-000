@@ -1,0 +1,19 @@
+<!-- tweets/index -->
+<h1>Welcome, <%=Helper.current_user(session).username%></h1>
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
+  <ul>
+    <% @tweets.each do |tweet| %>
+      <li><%=tweet.user.username%>: "<%=tweet.content%>" <a href="/tweets/<%=tweet.id%>">View</a></li>
+    <% end %>
+  </ul>
+
+  <br>
+  <form action="/tweets/new" method="get">
+    <input type="submit" value="New Tweet">
+  </form>
+  <br>
+  <form action="/logout" method="get">
+    <input type="submit" value="Log Out">
+  </form>

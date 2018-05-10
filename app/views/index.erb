@@ -1,0 +1,28 @@
+<!-- index '/' -->
+
+<h1>Welcome to Fwitter!</h1>
+
+  <% if Helper.logged_in?(session) %>
+    <form action="/tweets" method="get">
+      <input type="submit" value="View Tweets">
+    </form>
+    <br>
+    <form action="/tweets/new" method="get">
+      <input type="submit" value="New Tweet">
+    </form>
+    <br>
+    <form action="logout" method="get">
+      <input type="submit" value="Log Out">
+    </form>
+
+  <% else %>
+    <h2>Please Log In or Sign Up</h2>
+      <br>
+      <form action="/login" method="get">
+        <input type="submit" value="Log In">
+      </form>
+      <br>
+      <form action="/signup" method="get">
+        <input type="submit" value="Sign Up">
+      </form>
+  <% end %>
