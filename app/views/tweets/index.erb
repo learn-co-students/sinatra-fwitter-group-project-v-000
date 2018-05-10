@@ -1,0 +1,9 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+<%User.all.each do |user|%>
+  <%user.tweets.each do |tweet|%>
+    <%=tweet.content%>
+    <br></br>
+  <%end%>
+<%end%>
