@@ -1,0 +1,30 @@
+
+<!doctype html>
+<html>
+  <head>
+    <title>Fwitter</title>
+  </head>
+  <body>
+    <%if logged_in?%>
+      <h1>Welcome, <%=current_user.username%></h1><br></br>
+      <a href="/tweets/new">New Tweet</a><br></br>
+      <%Tweet.all.each do |tweet|%></br>
+        <%=tweet[:content]%>
+      <%end%>
+
+      <br></br>
+
+      <a href="/logout">Logout<a/>
+
+    <%else%>
+
+    <p><a href="/signup">Signup</a> / <a href="/login">Login</a></p>
+
+    <%end%>
+      
+      <h1>Fwitter</h1>
+    <%=yield%>
+
+    </body>
+
+</html>
