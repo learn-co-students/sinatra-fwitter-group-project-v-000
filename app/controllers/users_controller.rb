@@ -1,9 +1,14 @@
 class UsersController < ApplicationController
+  get '/users/:slug' do
+   @user = User.find_by_slug(params[:slug])
+   erb :'users/show'
+ end
+ 
   get "/signup" do
-    if !logged_in?
-      erb :"/users/create_user"
+    if logged_in?
+      redirect '/tweets'
     else
-      redirect to '/tweets'
+      erb :"/users/create_user"
     end
   end
 
@@ -14,7 +19,7 @@ class UsersController < ApplicationController
       @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
       @user.save
       session[:user_id] = @user.id
-      redirect 'tweets'
+      redirect '/tweets'
     end
   end
 
@@ -22,7 +27,7 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :"/users/login"
     else
-      redirect to "/tweets"
+      redirect "/tweets"
     end
   end
 
@@ -36,4 +41,15 @@ class UsersController < ApplicationController
       redirect '/login'
     end
   end
+
+  get "/logout" do
+    if logged_in?
+      session.clear
+      redirect to '/users/login'
+    else
+      redirect "/"
+    end
+  end
+
+
 end
