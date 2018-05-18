@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   validates_presence_of :username, :email, :password_digest
+  
   has_many :tweets
 
   #TODO: Consider special characters and validating usernames, emails, and passwords
