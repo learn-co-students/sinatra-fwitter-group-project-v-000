@@ -273,7 +273,6 @@ describe ApplicationController do
 
         user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet = Tweet.create(:content => "i am a boss at tweeting", :user_id => user.id)
-
         visit '/login'
 
         fill_in(:username, :with => "becky567")
