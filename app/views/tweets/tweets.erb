@@ -1,0 +1,5 @@
+<h1>Welcome, </h1>
+<h3>All Tweets:</h3>
+<% Tweet.all.each do |t| %>
+  <li>  "<%= t.content %>" </li>
+<% end %>
