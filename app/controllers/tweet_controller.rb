@@ -16,4 +16,9 @@ class TweetController < ApplicationController
       redirect "/login"
     end
   end
+
+  post '/tweets' do
+    @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
+    redirect "/tweets"
+  end
 end
