@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Tweets</title>
+    <h1>My Tweets</h1>
+  </head>
+  <body>
+    <ul>
+      <% @user.tweets.each do |tweet| %>
+        <li><%=tweet.content%></li>
+     <% end %>
+    </ul>
+  </body>
+</html>
