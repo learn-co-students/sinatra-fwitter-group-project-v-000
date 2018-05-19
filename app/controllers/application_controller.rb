@@ -18,7 +18,12 @@ class ApplicationController < Sinatra::Base
   post '/signup' do
     #sign in user using params
     #add user_id to sessions hash
+    #does not allow signup without username/email/password -> redirect again to signup
     redirect to '/tweets/tweets'
+  end
+
+  get '/tweets/tweets' do
+    erb :'/tweets/tweets'
   end
 
 end
