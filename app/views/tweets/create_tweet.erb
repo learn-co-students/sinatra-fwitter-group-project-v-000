@@ -1,0 +1,8 @@
+<h2>Create a tweet!</h2>
+<p><a href="/tweets">Back to main tweets page</a></p>
+<p><a href = "<%= "/users/#{@user.slug}" %>">Your tweets</a></p>
+<p><a href="/logout">Log out</a></p>
+<form action = '/tweets/new' method = 'post'>
+  <textarea class="text" cols="45" rows="5" name="content" id="content"></textarea><br>
+  <input type='submit' id='submit' name='submit' value='Create Tweet!'>
+</form>
