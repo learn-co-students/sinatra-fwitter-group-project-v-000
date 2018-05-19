@@ -1,0 +1,9 @@
+<h2>Edit this tweet, <%= @user.username %>!</h2>
+<p><a href="/tweets">Back to main tweets page</a></p>
+<p><a href = "<%= "/users/#{@user.slug}" %>">Your tweets</a></p>
+<p><a href="/logout">Log out</a></p>
+<form action="<%= "/tweets/#{@tweet.id}/edit"%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <textarea id="content" name = "content" cols="45" rows="5" class="text"><%= @tweet.content %></textarea><br>
+  <input type="submit" name="submit" id="submit" value="Edit tweet!">
+</form>
