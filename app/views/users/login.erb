@@ -1,0 +1,18 @@
+<h2>LOGIN</h2>
+
+<!-- style flash message with CSS -->
+<p>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+</p>
+
+<form action="/login" method="POST">
+  <label>Username</label>
+  <input type="text" name="username"></br>
+
+  <label>Password</label>
+  <input type="password" name="password"></br>
+
+  <input type="submit" value="Log In">
+</form>

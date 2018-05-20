@@ -16,17 +16,17 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    #how to incorporate flash message if there was an error signing up?
-    erb :'/users/create_user'
+    if logged_in? #doesn't load signup page if user is logged in
+      redirect to '/tweets/tweets'
+    else
+      erb :'/users/create_user'
+    end
   end
 
   post '/signup' do
-    #sign in user using params
-    #add user_id to sessions hash
-    #does not allow signup without username/email/password -> redirect again to signup
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       #add || to check if email includes @ + .com?
-      flash[:message] = "Please enter all fields with required information."
+      flash[:message] = "Please enter all fields with required information"
       redirect '/signup'
     else
       @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
@@ -36,7 +36,38 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/tweets' do
+    @user = User.find(session[:user_id])
     erb :'/tweets/tweets'
   end
+
+  get '/login' do
+    if logged_in? #doesn't load signup page if user is logged in
+      redirect to '/tweets/tweets'
+    else
+      erb :'users/login'
+    end
+  end
+
+  post '/login' do
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect to '/tweets/tweets'
+    else
+      flash[:message] = "Login information incorrect"
+      redirect to '/login'
+    end
+  end
+
+
+  helpers do
+  def logged_in?
+    !!session[:user_id]
+  end
+
+  def current_user
+    User.find(session[:user_id])
+  end
+end
 
 end
