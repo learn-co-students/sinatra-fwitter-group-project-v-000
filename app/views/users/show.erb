@@ -1,0 +1,14 @@
+<h1><p><%=@user.username%>'s Fweets</p></h1>
+<br></br>
+
+<%@user.tweets.each do |tweet|%>
+  <p><strong><%=tweet.user.username%></strong> <%=tweet.content%>
+  <a href="/tweets/<%=tweet.id%>">See More</a>
+  <p>
+<%end%>
+<br></br>
+
+<li><a href="/tweets">See all Fweets</a></li>
+<li><a href="/tweets/new">New Fweet</a></li>
+<li><a href="/users/<%=current_user.slug%>">Your homepage</a></li>
+<li><a href="/logout">Logout</a></li>

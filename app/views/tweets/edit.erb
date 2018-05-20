@@ -1,0 +1,12 @@
+<h1>Edit tweet</h1>
+
+<form class="login" action="/tweets/<%=@tweet.id%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <br><textarea name="content" rows="8" cols="80"><%=@tweet.content%></textarea>
+  <!-- <input type="text" name="content" value="<%=@tweet.content%>"> -->
+  <br><input type="submit" id="submit" value="Edit Tweet">
+</form>
+<br></br>
+<li><a href="/tweets">See all Fweets</a></li>
+<li><a href="/users/<%=current_user.slug%>">Your homepage</a></li>
+<li><a href="/logout">Logout</a></li>
