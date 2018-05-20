@@ -36,6 +36,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/tweets' do
+    binding.pry
     @user = User.find(session[:user_id])
     erb :'/tweets/tweets'
   end
@@ -63,7 +64,7 @@ class ApplicationController < Sinatra::Base
     session.clear
     redirect "/"
   end
-  
+
 
   helpers do
   def logged_in?
