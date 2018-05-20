@@ -1,0 +1,10 @@
+<h1>Welcome to your homepage, <%= @user.username %>!</h1>
+<h4>Here are all of your current Tweets (click to visit Tweet's site):</h4>
+<% @user.tweets.each do |tweet| %>
+  <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a><br>
+<% end %><br>
+
+<h4>What would you like to do next?</h4>
+<a href="/tweets">See All Tweets</a><br>
+<a href="/tweets/new">Create a New Tweet</a><br>
+<a href="/logout">Logout</a><br>

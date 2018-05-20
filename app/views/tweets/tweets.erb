@@ -1,0 +1,13 @@
+<h2>Welcome, <a href="/users/<%= @user.slug %>"><%= @user.username %></a>!</h2>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<h4>Here's What's Trending: </h4>
+<% Tweet.all.each do |tweet| %>
+  <%= User.find(tweet.user_id).username %> Tweets:<br>
+  <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a><br>
+<% end %>
+<br>
+<a href="/tweets/new">Create A New Tweet Here</a><br>
