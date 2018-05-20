@@ -5,5 +5,15 @@
   <%= flash[:message] %>
 <% end %>
 
+<form action="/signup" method="POST">
+  <label>Username</label>
+  <input type="text" name="username"> </br>
 
-Insert signup form 
+  <label>Email</label>
+  <input type="text" name="email"> </br>
+
+  <label>Password</label>
+  <input type="text" name="password" type="password"> </br>
+
+  <input type="submit" value="Sign Up">
+</form>

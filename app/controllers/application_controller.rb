@@ -1,4 +1,5 @@
 require './config/environment'
+require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
   use Rack::Flash
@@ -23,7 +24,8 @@ class ApplicationController < Sinatra::Base
     #sign in user using params
     #add user_id to sessions hash
     #does not allow signup without username/email/password -> redirect again to signup
-    if params[:username] == "" || params[:email] || params[:password] == ""
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      #add || to check if email includes @ + .com?
       flash[:message] = "Please enter all fields with required information."
       redirect '/signup'
     else
