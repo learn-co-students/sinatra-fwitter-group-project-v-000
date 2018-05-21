@@ -13,4 +13,18 @@ class TweetsController < ApplicationController
     erb :'tweets/create_tweet'
   end
 
+  post '/tweets' do
+    @tweet = Tweet.create(:content => params[:content])
+    @tweet.user_id = session[:user_id]
+    @tweet.save
+    # redirect to "/tweets/#{@tweet.id}/show"
+    redirect to "/tweets"
+
+  end
+
+  get '/tweets/:id/show' do
+    @tweet = Tweet.find(:id)
+    erb :'/tweets/show_tweet'
+  end
+
 end
