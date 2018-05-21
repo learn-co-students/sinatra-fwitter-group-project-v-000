@@ -1,0 +1,9 @@
+<center>
+  <h2>YOUR TWEETS</h2>
+
+  <%Tweet.all.each do |t|%>
+  <%binding.pry%>
+    <p><%=@user.username%> tweeted: "<%=t.content%>"</p>
+  <%end%>
+
+</center>
