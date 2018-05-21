@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :tweets
+<<<<<<< HEAD
 
   has_secure_password
 
@@ -18,4 +19,6 @@ class User < ActiveRecord::Base
     self.save
   end
 
+=======
+>>>>>>> 76a5b44317ee248bf824ba9f06ea7a7e0f1ec883
 end
