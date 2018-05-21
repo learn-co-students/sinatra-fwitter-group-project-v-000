@@ -20,6 +20,11 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'songs/show'
+  end
+
   get '/login' do
     if logged_in? #doesn't load signup page if user is logged in
       redirect to '/tweets'
