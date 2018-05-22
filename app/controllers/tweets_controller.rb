@@ -64,14 +64,22 @@ class TweetsController < ApplicationController
   post '/tweets/:id' do
     puts "Edit Tweet Params = #{params}"
     tweet = Tweet.find(params[:id])
-    tweet.update(content: params[:content])
-    redirect to "/tweets/#{tweet.id}"
+    if !params[:content].empty?
+      puts "Allow Edit of Tweet"
+      tweet.update(content: params[:content])
+      redirect to "/tweets/#{tweet.id}"
+    else
+      puts "Tweet Edit Error"
+      redirect to "/tweets/#{tweet.id}/edit"
+    end
   end
 
   delete '/tweets/:id/delete' do
     puts "Delete Tweet Route"
-    tweet = tweet.find(params[:id])
-    tweet.delete
+    if logged_in?
+      tweet = tweet.find(params[:id])
+      tweet.delete
+    end
     redirect to '/tweets'
   end
 
