@@ -96,7 +96,7 @@ describe ApplicationController do
 
       params = {
         :username => "becky567",
-        :password => "kittens"
+        :password => "kittens" 
       }
       post '/login', params
       session = {}
