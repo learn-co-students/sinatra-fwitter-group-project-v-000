@@ -5,6 +5,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "password_security"
   end
 
   ## Main Views ##
@@ -17,41 +19,49 @@ class ApplicationController < Sinatra::Base
   ## User Views ##
 
   get '/signup' do
-    erb :'/users/create_user'
+    if logged_in?
+      # puts "User Already Logged In"
+      redirect to "/tweets"
+    else
+      # puts "Allow Sign Up"
+      erb :'/users/create_user'
+    end
   end
 
   post '/signup' do
-    user = User.new(name: params["name"], email: params["email"], password: params["password"])
+    # puts "Sign Up Params = #{params}"
+    user = User.new(username: params[:username], email: params[:email], password: params[:password])
 		if user.save
+      # puts "saved user -> load tweets page"
       session[:user_id] = user.id
-      redirect to "/users/#{user.id}"
+      redirect to "/tweets"
 		else
-      "FAILURE TO SAVE USER"
-			# redirect to "/failure"
+      # puts "FAILURE TO SAVE USER"
+			redirect to "/signup"
 		end
   end
 
 
   get '/login' do
-    erb :'/users/login'
+    if logged_in?
+      # puts "User Already Logged In"
+      redirect to "/tweets"
+    else
+      # puts "Allow Log In"
+      erb :'/users/login'
+    end
   end
 
   post '/login' do
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
-        session[:user_id] = user.id
-        redirect to "/users/#{user.id}"
+      puts "User Successfully logged in"
+      session[:user_id] = user.id
+      redirect to "/tweets"
     else
-      "FAILURE TO FIND USER"
+      puts "FAILURE TO FIND USER"
     end
   end
-
-
-  get '/users/:id' do
-    @user = User.find(params[:id])
-    erb :'/users/show'
-  end
-
 
   get '/logout' do
     session.clear
@@ -62,7 +72,8 @@ class ApplicationController < Sinatra::Base
   ## Tweet Views ##
 
   get '/tweets' do
-    @tweets = Tweet.all
+    puts "Session user = #{session[:user_id]}"
+    @user = User.find(session[:user_id])
     erb :'/tweets/tweets'
   end
 
@@ -114,7 +125,7 @@ class ApplicationController < Sinatra::Base
 end
 
 # Referenced Labs
-# playlister-sinatra-v-000 || sinatra-complex-forms-associations-v-000
+# nyc-sinatra-v-000 || playlister-sinatra-v-000 || sinatra-complex-forms-associations-v-000
 # sinatra-secure-password-lab-v-000 || sinatra-user-auth-v-000
 
 # rspec spec/controllers/application_controller_spec.rb
