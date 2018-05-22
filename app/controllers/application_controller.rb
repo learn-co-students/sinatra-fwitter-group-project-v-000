@@ -12,6 +12,7 @@ class ApplicationController < Sinatra::Base
   ## Main Views ##
 
   get '/' do
+    puts "Main Index Page"
     erb :index
   end
 
@@ -60,12 +61,19 @@ class ApplicationController < Sinatra::Base
       redirect to "/tweets"
     else
       puts "FAILURE TO FIND USER"
+      redirect to "/login"
     end
   end
 
   get '/logout' do
-    session.clear
-    redirect to "/"
+    if logged_in?
+      puts "Allow Log Out"
+      session.clear
+      redirect to "/"
+    else
+      puts "User Not Logged In"
+      redirect to "/login"
+    end
   end
 
 
@@ -114,10 +122,12 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def logged_in?
+      puts "Check if Logged in"
       !!session[:user_id]
     end
 
     def current_user
+      puts "Find Current User"
       User.find(session[:user_id])
     end
   end
