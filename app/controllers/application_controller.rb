@@ -116,3 +116,8 @@ end
 # Referenced Labs
 # playlister-sinatra-v-000 || sinatra-complex-forms-associations-v-000
 # sinatra-secure-password-lab-v-000 || sinatra-user-auth-v-000
+
+# rspec spec/controllers/application_controller_spec.rb
+# rspec spec/models/user_spec.rb
+
+# learn --f-f << -- only reports the first spec failure
