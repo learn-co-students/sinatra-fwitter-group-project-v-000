@@ -1,0 +1,9 @@
+<h2>Welcome, <%= @user.username %></h2>
+<h3>Your Fwitter History</h3>
+<% @tweets.each do |tweet| %>
+<%= tweet.content %>
+<% end %>
+
+<form action="/logout" method="get">
+  <input type="submit" value="Log Out">
+</form>
