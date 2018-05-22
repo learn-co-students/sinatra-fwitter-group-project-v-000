@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     if logged_in? #doesn't load signup page if user is logged in
       redirect to '/tweets'
     else
-      erb :'users/login'
+      erb :'/users/login'
     end
   end
 

@@ -1,6 +1,14 @@
 <center>
 <h2>Create a Tweet</h2>
 
+<!-- style flash message with CSS -->
+<p>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+</p>
+
+
 <form action='/tweets' method='POST'>
   <label>Tweet Content:</label></br>
   <input type="text" name="content"> </br>
