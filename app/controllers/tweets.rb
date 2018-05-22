@@ -13,7 +13,7 @@ class TweetsController < ApplicationController
     if logged_in? #doesn't load signup page if user is logged in
       erb :'tweets/create_tweet'
     else
-      redirect to '/users/login'
+      redirect to '/login'
     end
   end
 
@@ -33,7 +33,7 @@ class TweetsController < ApplicationController
       @tweet = Tweet.find(params[:id])
       erb :'/tweets/show_tweet'
     else
-      redirect to '/users/login'
+      redirect to '/login'
     end
   end
 
@@ -42,7 +42,7 @@ class TweetsController < ApplicationController
       @tweet = Tweet.find(params[:id])
       erb :"/tweets/edit_tweet"
     else
-      redirect to '/users/login'
+      redirect to '/login'
     end
   end
 
@@ -60,11 +60,12 @@ class TweetsController < ApplicationController
 
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
-    if @tweet.user_id = session[:user_id]
+    if @tweet.user_id == session[:user_id]
       @tweet = Tweet.delete(params[:id])
       redirect to '/tweets'
     else
       redirect to '/tweets'
     end
   end
+
 end
