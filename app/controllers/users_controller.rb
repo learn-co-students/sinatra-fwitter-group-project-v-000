@@ -63,14 +63,16 @@ class UsersController < ApplicationController
 
   get '/users/:slug' do
     puts "User Show Route"
-    if logged_in?
-      puts "Show User Tweets"
-      @user = current_user
-      erb :'/users/show'
-    else
-      puts "User Not Logged In"
-      redirect to "/login"
-    end
+    @user = User.find_by_slug(params[:slug])
+    erb :'/users/show'
+    # if logged_in?
+    #   puts "User = #{session[:user_id]}"
+    #   @user = User.find(session[:user_id])
+    #   erb :'/users/show'
+    # else
+    #   puts "User Not Logged In"
+    #   redirect to "/login"
+    # end
   end
 
 end
