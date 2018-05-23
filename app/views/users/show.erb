@@ -1,0 +1,7 @@
+<h3>Welcome to your tweets, <%= @user.username %></h3>
+
+<% Tweet.all.each do |tweet| %>
+  <% if tweet.user_id == @user.id %></a>
+    <p><a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a></p>
+  <% end %>
+<% end %>
