@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>Edit tweet landing page</h1>
+	<h2><%=@tweet.content%></h2>
+	<form action="/tweets/<%=@tweet.id%>" method="post">
+		<input type="hidden" name="_method" value="patch" id="patch">
+		<input type="text" name="tweet" id="content">
+
+
+
+		<input type="submit" value="edit tweet" id="submit">
+	</form>
+
+</body>
+</html>
