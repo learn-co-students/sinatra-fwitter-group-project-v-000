@@ -1,0 +1,12 @@
+<h1>Welcome, <%= @user.username %></h1>
+<a href="/tweets/new">Post new tweet</a>
+
+<ul>
+  <% @user.tweets.reverse.each do |tweet| %>
+    <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></li>
+  <% end %>
+</ul>
+
+<a href="/tweets">Back to all tweets</a>
+<br></br>
+<a href="/logout">Log out</a>

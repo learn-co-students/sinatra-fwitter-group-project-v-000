@@ -1,0 +1,15 @@
+<h1>Edit tweet:</h1>
+
+<%= @user.username %>: <%= @tweet.content %>
+
+<form action="/tweets/<%= @tweet.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <input type="text" name="content" id="content" value="<%=@tweet.content%>">
+  <br></br>
+  <input type="submit" value="submit">
+</form>
+
+<br></br>
+<a href="/tweets">Back to all tweets</a>
+<br></br>
+<a href="/logout">Log out</a>
