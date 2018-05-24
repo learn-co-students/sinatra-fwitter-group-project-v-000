@@ -36,10 +36,10 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    if Helpers.logged_in?(session)
-      redirect to "/tweets"
-    else
+    if !Helpers.logged_in?(session)
       erb :'users/login'
+    else
+      redirect to "/tweets"
     end
   end
 
