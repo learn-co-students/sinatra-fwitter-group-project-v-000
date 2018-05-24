@@ -1,0 +1,17 @@
+<h3> Welcome, <%= current_user.username %>!</h3>
+
+<br><br>
+
+<h2> Your Tweets: </h2>
+
+<% @tweets.each do |tweet| %>
+  <li><a href='/tweets/<%= tweet.id %>'><%= tweet.content %></li>
+<% end %>
+
+<% if @tweets.length == 0 %>
+    <p>Doesn't look like you have any tweets yet, create one <a href="/tweets/new">here!</a></p>
+<% end %>
+
+<br><br>
+
+<p><a href="/logout">Log Out</a></p>
