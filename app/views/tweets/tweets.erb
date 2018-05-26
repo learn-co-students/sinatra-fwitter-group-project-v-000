@@ -1,0 +1,17 @@
+<h1>Welcome, <%=Helpers.current_user(session).id%></h1>
+
+<h1>Your Tweets</h1>
+
+
+<% Helpers.current_user(session).tweets.each do |tweet| %>
+  <li><%= tweet.content %></li>
+<% end %>
+
+<% User.all.each do |user| %>
+      <% user.tweets.each do |tweet|%>
+        <li><%= tweet.content %></li>
+    <% end%>
+
+    <h4><a href="logout">Log Out</a></h4>
+
+<% end%>
