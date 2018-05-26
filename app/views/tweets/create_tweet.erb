@@ -1,0 +1,7 @@
+<h2>Hello <%= @current_user.username %> let's create a tweet</h2>
+<form method='post' action='/tweets'>
+    <label for='content'>Tweet:</label>
+    <input type='text' name='content' id='content'/>
+    <input type='submit' value='submit'/>
+    
+</form>
