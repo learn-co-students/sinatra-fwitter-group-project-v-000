@@ -87,9 +87,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/:id' do
-
-    @tweet = Tweet.find(params[:id])
-    erb :'/tweets/show_tweet'
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/show_tweet'
+    else
+      redirect '/login'
+    end
   end
 
   post '/tweets' do
@@ -105,8 +108,19 @@ class ApplicationController < Sinatra::Base
 
   end
 
-  patch '/tweets/:id' do
+
+  get '/tweets/:id/edit' do
+    @tweet = Tweet.find(params[:id])
+    erb :'tweets/edit_tweet'
+  end
+
+  patch '/tweets/:id/edit' do
+    @tweet = Tweet.find(params[:id])
     binding.pry
+  end
+
+  delete '/tweets/:id/delete' do
+
   end
 
 
