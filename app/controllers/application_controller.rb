@@ -43,6 +43,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/tweets/new' do
+    redirect "/" if !logged_in?
+    erb :"/tweets/create_tweet"
+  end
+  post '/tweets' do
+    redirect "/failure" if !logged_in?
+    @user = User.find(session[:id])
+    @tweet = Tweet.new(params[:content])
+  end
   get '/:id/tweets' do
     redirect "/failure" if !logged_in?
     @user = current_user()
