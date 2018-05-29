@@ -17,12 +17,12 @@ class ApplicationController < Sinatra::Base
     erb :"users/login"
   end
   post '/login' do
-    user = User.find_by(:username => params[:username])
+    user = User.find_by(:user_name => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect "/#{user.id}/tweets"
     else
-      redirect "/failure"
+      puts "*** Login Failed ***"
     end
   end
 
@@ -30,7 +30,7 @@ class ApplicationController < Sinatra::Base
     erb :"users/create_user"
   end
   post '/signup' do
-    user = User.new(:username => params[:username], :password => params[:password])
+    user = User.new(:user_name => params[:username], :email => params[:email], :password => params[:password])
     if user.save
       redirect "/login"
     else
@@ -41,8 +41,8 @@ class ApplicationController < Sinatra::Base
   get '/:id/tweets' do
     redirect "/failure" if !logged_in?
     @user = current_user()
-    erb "/tweets/tweets" if @user
-    redirect "/failure"
+    redirect "/failure" if !@user
+    erb :"/tweets/tweets"
   end
 
   get '/failure' do
