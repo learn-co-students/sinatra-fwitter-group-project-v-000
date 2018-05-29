@@ -1,13 +1,15 @@
 body {
   margin: 20px;
+  font-family: aria, sans-serif;
+  text-align: center;
 }
 
 .heading {
+  text-align: left;
   padding: 0 10px;
   border-radius: 10px;
-  background: #00e6e6;
+  background: #1DA1F2;
   color: white;
-  font-family: aria, sans-serif;
 }
 
 .user_form {
@@ -17,12 +19,20 @@ body {
   width: 50%;
   border-radius: 10px;
 }
-
-.user_button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-
-    text-decoration: none;
-    color: initial;
+.button_panel {
+  background: #e6e6e6;
+  display: inline-block;
+  margin: auto;
+  border-radius: 10px;
+  text-align: center;
+}
+.button_panel a {
+  background-color: black;  /* 0b7bc0, bdffb5 */
+  color: white;
+  padding: .5em;
+  margin: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
 }
