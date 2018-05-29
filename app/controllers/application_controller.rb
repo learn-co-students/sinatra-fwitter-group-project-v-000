@@ -78,6 +78,37 @@ class ApplicationController < Sinatra::Base
     erb :'users/show'
   end
 
+  get '/tweets/new' do
+    if logged_in?
+      erb :'tweets/create_tweet'
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/tweets/:id' do
+
+    @tweet = Tweet.find(params[:id])
+    erb :'/tweets/show_tweet'
+  end
+
+  post '/tweets' do
+
+      if params[:content].empty?
+        redirect '/tweets/new'
+      else
+        tweet = Tweet.new(params)
+        tweet.user = current_user
+        tweet.save
+        redirect '/tweets'
+      end
+
+  end
+
+  patch '/tweets/:id' do
+    binding.pry
+  end
+
 
 
   helpers do
