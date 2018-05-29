@@ -1,3 +1,7 @@
 <h3>Tweet</h3>
 <h4>Author: <%=@user.user_name%></h4>
 <p><%= @tweet.content %></p>
+<div class="button_panel">
+  <a href="/<%=@tweet.id%>/delete">Delete Tweet</a>
+  <a href="/<%=@tweet.id%/edit>">Edit Tweet</a>
+</div>

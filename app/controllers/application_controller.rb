@@ -31,7 +31,7 @@ class ApplicationController < Sinatra::Base
 
   get '/logout' do
     session.clear
-    redirect "/"
+    redirect "/login"
   end
 
   get '/signup' do
@@ -67,22 +67,27 @@ class ApplicationController < Sinatra::Base
     tweet = Tweet.create(:content => params[:content])
     user.tweets << tweet
     user.save
-    redirect "/#{user.slug}/tweets"
+    redirect "/tweets"
   end
 
   get '/tweets/:id' do
     redirect "/failure" if !logged_in?
     @tweet = Tweet.find(params[:id])
     @user = User.find(@tweet.user_id)
+    redirect "/failure" if current_user.id != @tweet.user_id
     erb :"/tweets/show_tweet"
   end
 
   get '/tweets' do
-    redirect "/failure" if !logged_in?
+    redirect "/login" if !logged_in?
     @user = current_user()
     erb :"/tweets/tweets"
   end
-
+  get '/users/:slug' do
+#    redirect "/login" if !logged_in?
+    @user = User.find_by_slug(params[:slug])
+    erb :"/users/show"
+  end
   get '/failure' do
     erb :failure
   end
