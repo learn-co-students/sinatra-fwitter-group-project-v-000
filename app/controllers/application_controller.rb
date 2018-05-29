@@ -33,14 +33,18 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    erb :'users/login'
+
+    if logged_in?
+
+      redirect '/tweets'
+    else
+      erb :index
+    end
+
   end
 
   post '/login' do
-    if logged_in?
-      redirect '/tweets'
-    end
-
+    binding.pry
     user = User.find_by(:username => params[:username])
 
     if user && user.authenticate(params[:password])
