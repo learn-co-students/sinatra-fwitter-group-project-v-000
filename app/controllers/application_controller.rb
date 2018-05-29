@@ -22,7 +22,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = user.id
       redirect "/#{user.id}/tweets"
     else
-      puts "*** Login Failed ***"
+      redirect "/failure"
     end
   end
 
@@ -48,6 +48,7 @@ class ApplicationController < Sinatra::Base
   get '/failure' do
     erb :failure
   end
+
   helpers do
     def logged_in?
       !!session[:user_id]
