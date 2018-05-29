@@ -3,7 +3,7 @@ class User <ActiveRecord::Base
   has_many :tweets
 
   def slug ()
-    name = self.read_attribute(:user_name)
+    name = self.read_attribute(:username)
     name.downcase.gsub(" ","-")
   end
 
