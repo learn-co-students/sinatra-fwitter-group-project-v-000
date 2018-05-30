@@ -18,6 +18,7 @@ class TweetController < ApplicationController
 
   post '/tweets' do
     if logged_in?
+<<<<<<< HEAD
       if params[:content] == ""
         redirect '/tweets/new'
       else
@@ -27,12 +28,20 @@ class TweetController < ApplicationController
         else
           redirect '/tweets/new'
         end
+=======
+      if params[:content]
+        @tweet = Tweet.create(content: params[:content])
+        redirect "/tweets/#{@tweet.id}"
+      else
+        redirect '/tweets/new'
+>>>>>>> 36e95948dd71620eafc163333d4ad3d98c4c88a7
       end
     else
       redirect '/login'
     end
   end
 
+<<<<<<< HEAD
   get '/tweets/:id' do
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
@@ -84,4 +93,7 @@ class TweetController < ApplicationController
       redirect '/login'
     end
   end
+=======
+
+>>>>>>> 36e95948dd71620eafc163333d4ad3d98c4c88a7
 end

@@ -8,20 +8,36 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
+<<<<<<< HEAD
     if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
       @user = User.create(params)
       session[:user_id] = @user.id
       redirect '/tweets'
     else
       redirect '/signup'
+=======
+    if params[:username].empty? || params[:email].empty? || params[:password].empty?
+      redirect '/signup'
+    else
+      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      session[:user_id] = @user.id
+      redirect '/tweets'
+>>>>>>> 36e95948dd71620eafc163333d4ad3d98c4c88a7
     end
   end
 
   get '/login' do
+<<<<<<< HEAD
     if logged_in?
       redirect '/tweets'
     else
       erb :'/users/login'
+=======
+    if !logged_in?
+      erb :'/users/login'
+    else
+      redirect '/tweets'
+>>>>>>> 36e95948dd71620eafc163333d4ad3d98c4c88a7
     end
   end
 
