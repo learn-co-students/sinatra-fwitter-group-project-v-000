@@ -41,6 +41,7 @@ class ApplicationController < Sinatra::Base
     erb :"users/create_user"
   end
   post '/signup' do
+    # fields required in erb but additional check for test (or if someone bypasses the form)
     if params[:username].length == 0 || params[:email].length == 0 || params[:password].length == 0
       redirect '/signup'
     end
@@ -58,11 +59,13 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/new' do
-    redirect "/" if !logged_in?
+    redirect "/login" if !logged_in?
     erb :"/tweets/create_tweet"
   end
   post '/tweets' do
-    redirect "/failure" if !logged_in?
+    redirect "/login" if !logged_in?
+    # content required in form but just in case someone bypasses form
+    redirect '/tweets/new' if params[:content].length == 0
     user = User.find(session[:user_id])
     tweet = Tweet.create(:content => params[:content])
     user.tweets << tweet
@@ -80,7 +83,8 @@ class ApplicationController < Sinatra::Base
 
   get '/tweets' do
     redirect "/login" if !logged_in?
-    @user = current_user()
+    @user = current_user
+    @tweets = Tweet.all
     erb :"/tweets/tweets"
   end
   get '/users/:slug' do
