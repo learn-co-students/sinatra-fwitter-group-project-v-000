@@ -121,11 +121,12 @@ class ApplicationController < Sinatra::Base
   patch '/tweets/:id/edit' do
     @tweet = Tweet.find(params[:id])
     @tweet.update(:content => params[:content])
+    redirect 'tweets/tweets'
   end
 
   delete '/tweets/:id/delete' do
     Tweet.delete(params[:id])
-    redirect 'users'
+    redirect 'tweets/tweets'
   end
 
 
