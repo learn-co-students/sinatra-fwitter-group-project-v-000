@@ -8,14 +8,14 @@
       <% if logged_in? %>
         <a href="/tweets/new">Create Tweet</a>
         <a href="/logout">Log Out</a>
-        <p>Welcome, <%= current_user.username %>!</p>
+        <h1>Fwitter</h1>
+        <h3>Welcome, <%= current_user.username %>!</h3>
       <% else %>
         <a href="/signup">Sign Up</a>
         <a href="/login">Log In</a>
-      <% end %> 
+      <% end %>
     </nav>
-    <div class="container"> 
-      <h1>Fwitter</h1>
+    <div class="container">
       <%= yield %>
     </div>
 
