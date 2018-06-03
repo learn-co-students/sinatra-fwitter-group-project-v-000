@@ -1,0 +1,9 @@
+<h1>Create a Tweet</h1>
+
+<h3>Posting as <%=@user.username%></h3>
+<form action="/tweets" method='POST'>
+  <input type="text" id="content" name="content" size="140" required/>
+  <input type="hidden" id="user_id" name="user_id" value="<%=@user.id%>" />
+  <br><br>
+  <button type="submit" id="submit">Tweet</button>
+</form>

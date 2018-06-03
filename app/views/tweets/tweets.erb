@@ -1,0 +1,9 @@
+<h1>Welcome, <%=@user.username%> </h1>
+
+<h4>Happy Tweeting</h4>
+
+<ul>
+  <% Tweet.all.each do |tweet| %>
+    <li><a href='/tweets/<%=tweet.id%>'>"<%= tweet.content %>"</a>- <em><%= tweet.user.username %></em></li><br>
+  <% end %>
+</ul>
