@@ -1,0 +1,9 @@
+<h1><%= @tweet.content %></h1>
+<p>posted by <%= @user ? "You" : @tweet.user.username %></p>
+<br>
+<a href="/tweets/<%=@tweet.id%>/edit"><button>Edit Tweet</button></a>
+<br><br>
+<form action ="/tweets/<%= @tweet.id %>/delete" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="DELETE" />
+  <button>Delete Tweet</button>
+</form>
