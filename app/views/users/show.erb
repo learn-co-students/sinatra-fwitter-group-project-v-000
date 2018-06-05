@@ -1,0 +1,5 @@
+<% @current_user.tweet.all.each do |tweet| %>
+<ul>
+  <li> <%= tweet.content %></li>
+  <% end %>
+</ul>
