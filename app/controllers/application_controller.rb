@@ -2,6 +2,7 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
+
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -13,5 +14,10 @@ class ApplicationController < Sinatra::Base
     # model name followed by a method
     erb :'/index'
   end
+
+
+    #  get '/signup' do  # render sign up page
+    #  erb :'signup'
+    #  end
 
 end
