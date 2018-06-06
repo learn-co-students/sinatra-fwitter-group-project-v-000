@@ -3,12 +3,13 @@ class TweetsController < ApplicationController
 
   get '/tweet/new' do
     #form to create a new tweet and post to post '/tweets'
-    erb :new
+    erb :'tweets/new'
   end
 
   post '/tweets' do
     #creates new tweet and redirects to '/tweets/#{@tweet.id}'
-    # redirect to "/tweets/#{@tweet.id}"
+    @tweet = Tweet.create(content: params[:content])
+    redirect to "/tweets/#{@tweet.id}"
   end
 
   #---------------SHOW TWEET ---------------
@@ -20,13 +21,12 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets' do
-    if logged_in?
-      @user = current_user
+    if Helpers.current_user(session)
+      erb :'tweets/index'
     else
       redirect to '/'
     end
 
-    erb :'tweets/index'
   end
 
   #---------------EDIT A TWEET -------------
@@ -35,7 +35,7 @@ class TweetsController < ApplicationController
     #finds a tweet by id
     #directs to a form for inputs
     #sends params from form to the patch path
-    erb :edit
+    erb :'tweets/edit'
   end
 
   patch '/tweets/:id' do
@@ -55,10 +55,8 @@ class TweetsController < ApplicationController
 
   delete '/tweets/:id' do
     #finds the tweet and deletes it
-    @tweet = Tweet.find(params[:id])
-    @tweet.destroy
-
-    #redirects to user's full list of tweets?
+    Tweet.find(params[:id]).destroy
+    redirects to '/tweets'
   end
 
 end
