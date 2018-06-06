@@ -1,1 +1,8 @@
-tweets
+<body style="background-color:powderblue;">
+<h1><font color="blue">Welcome <%=@user.username%></font></h1>
+
+<%@user.tweets.each.with_index(1) do |tweet,i|%>
+  <p><%="#{i}"%>. <%=tweet.name%></p>
+<%end%>
+
+<p><a href="/logout">Logout</a></p>
