@@ -14,4 +14,17 @@ class ApplicationController < Sinatra::Base
     erb :'application/root'
   end
 
+  helpers do
+
+    def logged_in?
+      #the '!!' double bang converts object into a truthy value statement
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find_by_id(session[:user_id])
+    end
+
+  end
+
 end
