@@ -79,11 +79,10 @@ class TweetsController < ApplicationController
     #finds and updates the tweets
     #redirects to the show page
     @tweet = Tweet.find(params[:id])
-
     if !!params[:content].empty?
       redirect to "/tweets/#{@tweet.id}/edit"
     else
-      @tweet.update(params[:content])
+      @tweet.update(content: params[:content])
       redirect to "/tweets/#{@tweet.id}"
     end
   end
