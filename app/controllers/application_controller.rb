@@ -15,9 +15,4 @@ class ApplicationController < Sinatra::Base
     erb :'/index'
   end
 
-
-    #  get '/signup' do  # render sign up page
-    #  erb :'signup'
-    #  end
-
 end
