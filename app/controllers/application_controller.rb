@@ -33,7 +33,6 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-
     if is_logged_in?
       redirect '/tweets'
     else
@@ -56,16 +55,12 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    if is_logged_in?
-      redirect '/tweets'
-    end
-
     if !!@user = User.find_by(params)
       redirect to '../login'
     end
-    @user = User.create(params)
+    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
     if @user.id == nil
-      erb :'/errors/signup_missing_error'
+      erb :'/errors/signup'
     else
       session[:id] = @user.id
       redirect '/tweets'
