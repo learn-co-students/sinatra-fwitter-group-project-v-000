@@ -1,5 +1,5 @@
 <% if flash.has?(:message) %>
-  <h4><%= flash[:message] %></h4>
+  <h4><font color = 'blue'><%= flash[:message] %></font></h4>
 <% end %>
 <form method='POST' action='/tweets'>
   <input type= "textarea" name="content">
