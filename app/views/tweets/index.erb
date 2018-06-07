@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <h4><%= flash[:message] %></h4>
+<% end %>
+
 <h1><font color="teal"><em>Welcome, <%=@user.username%>!</em></font></h1>
 <h2><font color="gray"><u>TweetFeed</u></font></h2>
 <br>

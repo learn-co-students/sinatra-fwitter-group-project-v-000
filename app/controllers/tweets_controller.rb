@@ -59,10 +59,18 @@ class TweetsController < ApplicationController
     if !Helpers.logged_in?(session)
       redirect to '/login'
     elsif Helpers.logged_in?(session)
-      @tweet = Tweet.find(params[:id])
-        erb :'tweets/edit'
-    else
-      redirect to '/tweets'
+      @user = Helpers.current_user(session)
+      if !Tweet.find(params[:id])
+        flash[:message] = "That tweet does not exist."
+        redirect '/tweets'
+      elsif @tweet = Tweet.find(params[:id])
+        if @tweet.user == @user
+          erb :'tweets/edit'
+        else
+          flash[:message] = "You don't have permission to edit this tweet because it's not yours."
+          redirect '/tweets'
+        end
+      end
     end
   end
 
@@ -76,7 +84,6 @@ class TweetsController < ApplicationController
       redirect to "/tweets/#{@tweet.id}/edit"
     else
       @tweet.update(params[:content])
-      binding.pry
       redirect to "/tweets/#{@tweet.id}"
     end
   end
