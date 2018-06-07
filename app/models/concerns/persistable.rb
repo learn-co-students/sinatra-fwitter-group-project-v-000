@@ -4,9 +4,7 @@ module Persistable
   module ClassMethods
 
     def find_by_slug(slug)
-      self.all.find do |subject|
-        subject.slug == slug
-      end
+      self.all.find {|subject| subject.slug == slug}
     end
 
   end
@@ -14,7 +12,7 @@ module Persistable
   module InstanceMethods
 
     def slug
-      self.name.downcase.gsub!(/\W|( )/, "-")
+      self.username.downcase.gsub(/\W|( )/, "-")
     end
 
   end

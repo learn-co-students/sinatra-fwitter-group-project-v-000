@@ -1,5 +1,4 @@
 <h1>Welcome, <%= @user.username %></h1>
-<!-- current_username comes from the helper method in controller -->
 
 <% @tweets.each do |tweet| %>
     <a href="/tweets/<%= tweet.id %>"><%= twitter_user(tweet) %></a><br>
