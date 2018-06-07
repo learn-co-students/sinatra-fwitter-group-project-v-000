@@ -56,12 +56,11 @@ class TweetsController < ApplicationController
     #finds a tweet by id
     #directs to a form for inputs
     #sends params from form to the patch path
-    @tweet = Tweet.find(params[:id])
-
     if !Helpers.logged_in?(session)
       redirect to '/login'
-    elsif Helpers.logged_in?(session) && @tweet.user == Helpers.current_user(session)
-      erb :'tweets/edit'
+    elsif Helpers.logged_in?(session)
+      @tweet = Tweet.find(params[:id])
+        erb :'tweets/edit'
     else
       redirect to '/tweets'
     end

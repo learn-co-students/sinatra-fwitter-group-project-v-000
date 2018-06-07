@@ -18,12 +18,14 @@ class UsersController < ApplicationController
       #creates the user
       #log the user in
       #add user_id to session hash
-      if params[:username].empty? || params[:email].empty? || params[:password].empty?
-        redirect to '/signup'
-      else
-        @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-        session[:id] = @user.id
+      user = User.new(username: params[:username], email: params[:email], password: params[:password])
+      user.save
+
+      if user.save
+        session[:id] = user.id
         redirect to '/tweets'
+      else
+        redirect to '/signup'
       end
     end
 
@@ -41,12 +43,12 @@ class UsersController < ApplicationController
 
     post '/login' do
       #finds the user by params and redirects to the newsfeed aka index
-      if params[:username].empty? || params[:password].empty?
-        flash[:message] = "ATTENTION: Please make sure all fields are filled out correctly!"
-        redirect to '/login'
-      elsif @user = User.find_by(username: params[:username], password: params[:password])
-        session[:id] = @user.id
+      user = User.find_by(username: params[:username])
+      if user && user.authenticate(params[:password])
+        session[:id] = user.id
         redirect to '/tweets'
+      else
+        redirect to '/login'
       end
     end
 
