@@ -1,62 +1,99 @@
+require 'rack-flash'
+
 class TweetsController < ApplicationController
+  use Rack::Flash, :sweep => true
+
   #-------------CREATE A TWEET -------------
 
-  get '/tweet/new' do
+  get '/tweets/new' do
     #form to create a new tweet and post to post '/tweets'
-    erb :'tweets/new'
+    if !Helpers.logged_in?(session)
+      redirect to '/login'
+    else
+      erb :'tweets/new'
+    end
   end
 
   post '/tweets' do
     #creates new tweet and redirects to '/tweets/#{@tweet.id}'
-    @tweet = Tweet.create(content: params[:content])
-    redirect to "/tweets/#{@tweet.id}"
+    @user = Helpers.current_user(session)
+    if !!params[:content].empty?
+      flash[:message] = "ATTENTION: Tweet can not be blank."
+      redirect to '/tweets/new'
+    else
+      @tweet = Tweet.new(content: params[:content])
+      @tweet.user = @user
+      @tweet.save
+      redirect to "/tweets/#{@tweet.id}"
+    end
   end
 
   #---------------SHOW TWEET ---------------
 
   get '/tweets/:id' do
     #finds a tweet by id and shows
-    @tweet = Tweet.find(params[:id])
-    erb :'tweets/show'
+    if !Helpers.logged_in?(session)
+      redirect to '/login'
+    else
+      @tweet = Tweet.find(params[:id])
+      erb :'tweets/show'
+    end
   end
 
   get '/tweets' do
-    if Helpers.current_user(session)
-      erb :'tweets/index'
+    if !Helpers.logged_in?(session)
+      redirect to '/login'
     else
-      redirect to '/'
+      @user = Helpers.current_user(session)
+      erb :'tweets/index'
     end
-
   end
 
   #---------------EDIT A TWEET -------------
+
 
   get '/tweets/:id/edit' do
     #finds a tweet by id
     #directs to a form for inputs
     #sends params from form to the patch path
-    erb :'tweets/edit'
+    @tweet = Tweet.find(params[:id])
+
+    if !Helpers.logged_in?(session)
+      redirect to '/login'
+    elsif Helpers.logged_in?(session) && @tweet.user == Helpers.current_user(session)
+      erb :'tweets/edit'
+    else
+      redirect to '/tweets'
+    end
   end
 
   patch '/tweets/:id' do
     #gets params from the form
-    #updates the tweets
+    #finds and updates the tweets
     #redirects to the show page
-    redirect to "/tweets/#{@tweet.id}"
+    @tweet = Tweet.find(params[:id])
+
+    if !!params[:content].empty?
+      redirect to "/tweets/#{@tweet.id}/edit"
+    else
+      @tweet.update(params[:content])
+      redirect to "/tweets/#{@tweet.id}"
+    end
   end
 
   #---------------DELETE A TWEET----------------
 
-  get '/tweets/:id/delete' do
+  delete '/tweets/:id/delete' do
     #link present alongside each tweet
     #hits the delete path
-
-  end
-
-  delete '/tweets/:id' do
-    #finds the tweet and deletes it
-    Tweet.find(params[:id]).destroy
-    redirects to '/tweets'
+    @tweet = Tweet.find(params[:id])
+    if !Helpers.logged_in?(session)
+      flash[:message] = "ATTENTION: You must be logged in to perform this action."
+      redirect to '/login'
+    elsif @tweet.user == Helpers.current_user(session)
+      @tweet.destroy
+      redirect to '/tweets'
+    end
   end
 
 end

@@ -9,4 +9,19 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
+  #-----------------HOMEPAGE---------------
+
+  get '/' do
+    #welcomes the user
+    #sign up link
+    #login link
+    if Helpers.logged_in?(session)
+      redirect to '/tweets'
+    else
+      erb :index
+    end
+
+  end
+
+
 end

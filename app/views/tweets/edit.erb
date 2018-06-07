@@ -1,1 +1,12 @@
-Edit a Tweet
+<form method='POST' action='/tweets/<%=@tweet.id%>'>
+  <input type="hidden" name="_method" value="PATCH">
+  <p><%=@tweet.content%></p>
+  <font color='blue'>Edit Tweet: <input type= "text" name="content"></font>
+  <input type="submit" value="submit">
+</form>
+<br>
+<br>
+<form method='POST' action='/tweets/<%=@tweet.id%>/delete'>
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Tweet">
+</form>
