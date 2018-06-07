@@ -1,11 +1,13 @@
-<h1><font color="teal">Welcome, <%=@user.username%>!</font></h1>
-<h3><font color="gray"><u>Here is your TweetFeed</u></font></h3>
+<h1><font color="teal"><em>Welcome, <%=@user.username%>!</em></font></h1>
+<h2><font color="gray"><u>TweetFeed</u></font></h2>
+<br>
 <div>
 <%Tweet.all.each.with_index(1) do |tweet,i|%>
-  <p><font color="gray"><%="#{i}"%>. <%=tweet.content%></font></p>
+  <p><font color="gray"><%="#{i}"%>. <%=tweet.content%> - <em><%=tweet.user.username%></em></font></p>
 <%end%>
 </div>
-
+<br>
+<br>
 <div>
-<a href='/tweets/new'>Tweet</a> | <a href="/logout">Logout</a>
+<a href='/tweets/new'>Create</a> | <a href="/users/<%=@user.slug%>">My Tweets</a> | <a href="/logout">Logout</a>
 </div>
