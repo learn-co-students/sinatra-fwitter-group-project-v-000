@@ -5,4 +5,12 @@ class TweetsController < ApplicationController
 
     erb :'/tweets/index'
   end
+
+  get '/errors/login' do
+    erb :'/errors/login'
+  end
+
+  get '/errors/signup' do
+    erb :'/errors/signup'
+  end
 end
