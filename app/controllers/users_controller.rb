@@ -11,7 +11,6 @@ class UsersController < ApplicationController
           redirect :'/users/tweets'
         else
 
-
          erb :'/users/signup'
        end
 
@@ -19,18 +18,19 @@ class UsersController < ApplicationController
 
 
    post '/signup' do
-     @user = User.new(:name => params[:username], :email => params[:email], :password => params[:password])
+     @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
 
 
             if @user.save
 
               session[:id] = @user.id
-              redirect "/users/tweets"
+              redirect "/tweets"
             else
               redirect "/users/signup"
             end
                  #then it saved and giving an ID.
      end
+
 
      get '/users/login' do
 		    erb :'/users/login'
@@ -39,18 +39,17 @@ class UsersController < ApplicationController
       #session goes here.
 
       post '/users/login' do
+
                 #handles logged in input of user from the params / Match that infor
                 # with existing entries in the user database.
+         @user = User.find_by(:username => params[:username], :password => params[:password])
 
-         @user = User.find_by(email: params["email"], password: params["password"])
+             if session[:id] = @user.id
 
-         if session[:id] = @user.id
-
-          redirect '/users/tweets'
-        else
-          redirect '/users/'
-
-        end
+              redirect '/users/tweets'
+            else
+              redirect '/'
+            end
 
      end
 

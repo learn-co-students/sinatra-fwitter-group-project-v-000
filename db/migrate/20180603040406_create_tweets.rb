@@ -1,9 +1,8 @@
 class CreateTweets < ActiveRecord::Migration
   def change
       create_table :tweets do |t|
-        t.string   :name
+        t.string   :user_id
         t.string   :content
-        t.string   :password_digest
 
     end
   end
