@@ -15,25 +15,12 @@ class ApplicationController < Sinatra::Base
   set :views, Proc.new { File.join(root, "../views/") }
   # register Sinatra::Twitter::Bootstrap::Assets
 
-  helpers do
-
-    def current_user
-      @user = User.find_by(id: session[:user_id])
-    end
-
-
-    def is_logged_in?
-      !!session[:user_id]
-    end
-
-  end
-
   get '/' do
     erb :'../index'
   end
 
   get '/signup' do
-    if is_logged_in?
+    if Helpers.is_logged_in?(session)
       redirect '/tweets'
     else
       erb :'../signup'
@@ -41,28 +28,37 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    erb :'../login'
+    if Helpers.is_logged_in?(session)
+      redirect '/tweets'
+    else
+      erb :'../login'
+    end
   end
 
   post '/login' do
-    if @user = User.find_by(params)
+    @user = User.find_by(username: params[:username])
+
+    if @user & @user.authenticate(params[:password])
       session[:user_id] = @user.id
 
       redirect '/tweets'
     else
-      erb :'/errors/login_error'
+      redirect '/errors/login'
     end
   end
 
   post '/signup' do
+    if Helpers.is_logged_in?(session)
+      redirect '/tweets'
+    end
     if !!@user = User.find_by(params)
-      redirect to '../login'
+      redirect '../login'
     end
     @user = User.create(username: params[:username], email: params[:email], password: params[:password])
     if @user.id == nil
-      erb :'/errors/signup'
+      redirect '/errors/signup'
     else
-      session[:id] = @user.id
+      session[:user_id] = @user.id
       redirect '/tweets'
     end
   end
