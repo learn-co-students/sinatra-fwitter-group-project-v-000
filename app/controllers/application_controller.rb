@@ -25,6 +25,10 @@ class ApplicationController < Sinatra::Base
       User.find_by_id(session[:user_id])
     end
 
+    def twitter_user(tweet)
+      user = User.find_by_id(tweet.user_id)
+      user.username
+    end
   end
 
 end

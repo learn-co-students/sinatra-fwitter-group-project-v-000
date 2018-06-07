@@ -5,7 +5,6 @@ class UserController < ApplicationController
   use Rack::Flash
 
   get '/signup' do
-
     if !logged_in?
       flash[:message] = "Please create an account"
       erb :'/users/new'
@@ -38,7 +37,9 @@ class UserController < ApplicationController
       session[:user_id] = @user.id
       redirect to '/tweets'
     else
-      redirect to '/signup'
+      flash[:message] = "Please check?"
+
+      erb :'/users/new'
     end
   end
 

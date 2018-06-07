@@ -1,11 +1,11 @@
-<h1>Welcome, <%= current_user.username %></h1>
+<h1>Welcome, <%= @user.username %></h1>
 <!-- current_username comes from the helper method in controller -->
 
 <% @tweets.each do |tweet| %>
-    <a href="/tweets/<%= tweet.id %>"><%= current_user.username %></a><br>
+    <a href="/tweets/<%= tweet.id %>"><%= twitter_user(tweet) %></a><br>
     <strong><%= tweet.time %></strong><br>
     <p><%= tweet.content %></p><br>
 <% end %>
 
-<a href="/tweets/new">Create a fweet</a><br>
+<a href="/tweets/new">Create a tweet</a><br>
 <a href="/logout">Log out</a>

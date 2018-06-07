@@ -1,0 +1,19 @@
+<% if current_user.username == twitter_user(@tweet)%>
+
+    <h1>Edit tweet</h1>
+
+    <form action="/tweets" method="post">
+      <textarea rows="4" cols="50" id="content" name="content" required><%=@tweet.content%>"</textarea><br>
+      <input type="hidden" id="user_id" name="user_id">
+      <input type="submit" value="submit">
+    </form>
+
+<% else %>
+
+    <h2><%= twitter_user(@tweet) %></h2>
+    <strong><%= @tweet.time %></strong><br>
+    <p><%= @tweet.content %></p><br>
+
+    <em>To tweet back just <a href="/">login/signup</a></em>
+
+<% end %>
