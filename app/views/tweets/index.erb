@@ -1,9 +1,10 @@
 <% if flash.has?(:message) %>
-  <h4><font color = 'blue'><%= flash[:message] %></font></h4>
+  <h4><font color = 'red'><%= flash[:message] %></font></h4>
 <% end %>
 
-<h1><font color="teal"><em>Welcome, <%=@user.username%>!</em></font></h1>
-<h2><font color="gray"><u>TweetFeed</u></font></h2>
+<h1><font color="maroon">Welcome, <%=@user.username%>!</font></h1>
+<br>
+<h4><font color="gray"><u>TweetFeed</u></font></h4>
 <br>
 <div>
 <%Tweet.all.each.with_index(1) do |tweet,i|%>

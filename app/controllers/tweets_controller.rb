@@ -3,20 +3,20 @@ require 'rack-flash'
 class TweetsController < ApplicationController
   use Rack::Flash, :sweep => true
 
-  #-------------CREATE A TWEET -------------
+  #-------------CREATE-------------
 
   get '/tweets/new' do
-    #form to create a new tweet and post to post '/tweets'
     if !Helpers.logged_in?(session)
       redirect to '/login'
     else
+      @user = Helpers.current_user(session)
       erb :'tweets/new'
     end
   end
 
   post '/tweets' do
-    #creates new tweet and redirects to '/tweets/#{@tweet.id}'
     @user = Helpers.current_user(session)
+
     if !!params[:content].empty?
       flash[:message] = "ATTENTION: Tweet can not be blank."
       redirect to '/tweets/new'
@@ -31,7 +31,6 @@ class TweetsController < ApplicationController
   #---------------SHOW TWEET ---------------
 
   get '/tweets/:id' do
-    #finds a tweet by id and shows
     if !Helpers.logged_in?(session)
       redirect to '/login'
     else
@@ -51,11 +50,7 @@ class TweetsController < ApplicationController
 
   #---------------EDIT A TWEET -------------
 
-
   get '/tweets/:id/edit' do
-    #finds a tweet by id
-    #directs to a form for inputs
-    #sends params from form to the patch path
     if !Helpers.logged_in?(session)
       redirect to '/login'
     elsif Helpers.logged_in?(session)
@@ -67,7 +62,7 @@ class TweetsController < ApplicationController
         if @tweet.user == @user
           erb :'tweets/edit'
         else
-          flash[:message] = "You don't have permission to edit this tweet because it's not yours."
+          flash[:message] = "You don't have the permission to edit this tweet because it's not yours."
           redirect '/tweets'
         end
       end
@@ -75,11 +70,10 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    #gets params from the form
-    #finds and updates the tweets
-    #redirects to the show page
     @tweet = Tweet.find(params[:id])
+
     if !!params[:content].empty?
+      flash[:message] = "A tweet can't be empty."
       redirect to "/tweets/#{@tweet.id}/edit"
     else
       @tweet.update(content: params[:content])
@@ -90,14 +84,16 @@ class TweetsController < ApplicationController
   #---------------DELETE A TWEET----------------
 
   delete '/tweets/:id/delete' do
-    #link present alongside each tweet
-    #hits the delete path
     @tweet = Tweet.find(params[:id])
+
     if !Helpers.logged_in?(session)
       flash[:message] = "ATTENTION: You must be logged in to perform this action."
       redirect to '/login'
     elsif @tweet.user == Helpers.current_user(session)
       @tweet.destroy
+      redirect to '/tweets'
+    else
+      flash[:message]= "You don't have the permission to delete this tweet because it's not yours."
       redirect to '/tweets'
     end
   end
