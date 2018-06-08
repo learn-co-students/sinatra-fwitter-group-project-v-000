@@ -7,7 +7,7 @@ class TweetsController < ApplicationController
 
      get '/tweets' do
        @tweets = Tweet.all
-       erb :'/tweets'
+       erb :'/tweets/tweets'   #No such file or directory @ rb_sysopen - app/views/tweets.erb 
 
      end
 

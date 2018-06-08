@@ -5,30 +5,17 @@ class UsersController < ApplicationController
   set :session_secret, "secret"
    end
 
-   get '/users/signup' do
+   get '/signup' do
       erb :'users/signup'
     end
 
 
-  #  get '/users/signup' do  # render sign up page
-  #      if session[:id]
-   #
-  #         redirect :'/users/tweets'
-  #       else
-   #
-  #        erb :'/users/signup'
-  #      end
-   #
-  #  end
-
 
    post '/signup' do
      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-
-
             if @user.save
-
               session[:id] = @user.id
+
               redirect '/tweets'
             else
               redirect '/users/signup'
@@ -38,8 +25,14 @@ class UsersController < ApplicationController
 
     # >>>>>Log in part<<<
      get '/users/login' do
-		    erb :'/users/login'
+
+       if session[:id] = @user.id
+
+        redirect '/tweets'
+
+		   erb :'/users/login'
 	    end
+    end
 
       #session goes here.
 
