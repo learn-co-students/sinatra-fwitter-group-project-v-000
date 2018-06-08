@@ -5,12 +5,13 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "my_application_secret"
   end
 
   register Sinatra::ActiveRecordExtension
 
-  enable :sessions
-  set :session_secret, "my_application_secret"
+
 
   set :views, Proc.new { File.join(root, "../views/") }
   # register Sinatra::Twitter::Bootstrap::Assets
@@ -19,54 +20,65 @@ class ApplicationController < Sinatra::Base
     erb :'../index'
   end
 
-  get '/signup' do
-    if Helpers.is_logged_in?(session)
-      redirect '/tweets'
-    else
-      erb :'../signup'
+  helpers do
+    def is_logged_in?
+      !!session[:id]
+    end
+
+    def current_user
+      User.find(session[:id])
     end
   end
 
-  get '/login' do
-    binding.pry
-    if Helpers.is_logged_in?(session)
-      redirect '/tweets'
-    else
-      erb :'../login'
-    end
-  end
+  # get '/users/signup' do
+  #   if is_logged_in?
+  #     redirect '/tweets'
+  #   else
+  #     erb :'users/signup'
+  #   end
+  # end
+  #
+  # get '/login' do
+  #   if is_logged_in?
+  #     redirect '/tweets'
+  #   else
+  #     erb :'/users/login'
+  #   end
+  # end
+  #
+  # post '/login' do
+  #   @user = User.find_by(username: params[:username], password: params[:password])
+  #   if @user && @user.authenticate(params[:password])
+  #     binding.pry
+  #     session[:id] = @user.id
+  #     redirect '/tweets'
+  #   else
+  #     redirect '/errors/login'
+  #   end
+  # end
 
-  post '/login' do
-    @user = User.find_by(username: params[:username])
-
-    if @user
-      session[:user_id] = @user.id
-
-      redirect '/tweets'
-    else
-      redirect '/errors/login'
-    end
-  end
-
-  post '/signup' do
-    if Helpers.is_logged_in?(session)
-      redirect '/tweets'
-    end
-    if !!@user = User.find_by(params)
-      redirect '../login'
-    end
-    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-    if @user.id == nil
-      redirect '/errors/signup'
-    else
-      session[:user_id] = @user.id
-      redirect '/tweets'
-    end
-  end
-
-  get '/logout' do
-    session.clear
-
-    redirect to '/'
-  end
+  # post '/signup' do
+  #   if !params.values.all?{|param| !param.empty?}
+  #     redirect '/errors/signup'
+  #   end
+  #
+  #   if is_logged_in?
+  #     redirect '/tweets'
+  #   end
+  #
+  #   if !!@user = User.find_by(email: params[:email])
+  #     redirect '/users/login'
+  #   end
+  #   binding.pry
+  #   @user = User.new(username: params[:username], email: params[:email], password: params[:password])
+  #   @user.save
+  #   session[:id] = @user.id
+  #   redirect '/tweets'
+  # end
+  # 
+  # get '/logout' do
+  #   session.clear
+  #
+  #   redirect to '/'
+  # end
 end
