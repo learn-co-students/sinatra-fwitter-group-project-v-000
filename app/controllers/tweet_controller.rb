@@ -21,8 +21,12 @@ class TweetController < ApplicationController
   end
 
   get '/tweets/:id' do
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :'/tweets/show'
+    if logged_in?
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :'/tweets/show'
+    else
+      redirect to '/login'
+    end
   end
 
   get '/tweets/:id/edit' do
@@ -31,18 +35,39 @@ class TweetController < ApplicationController
   end
 
   post '/tweets' do
-    @user = User.find_by_id(session[:user_id])
-    @tweet = Tweet.create(content: params[:content], user_id: @user.id, time: Time.new.strftime("%Y-%m-%d %H:%M:%S"))
+    if params[:content] == ""
+      redirect to "/tweets/new"
+    else
+      @user = User.find_by_id(session[:user_id])
+      @tweet = Tweet.create(content: params[:content], user_id: @user.id, time: Time.new.strftime("%Y-%m-%d %H:%M:%S"))
 
-    redirect to '/tweets'
+      redirect to '/tweets'
+    end
   end
 
   patch '/tweets/:id' do
-    @tweet = Tweet.find_by_id(params[:id])
-    @tweet.update(content: params[:content], time: "Updated on #{Time.new.strftime("%Y-%m-%d %H:%M:%S")}")
+    if params[:content] == ""
+      redirect to "/tweets/#{params[:id]}/edit"
+    else
+      @tweet = Tweet.find_by_id(params[:id])
+      @tweet.update(content: params[:content], time: "Updated on #{Time.new.strftime("%Y-%m-%d %H:%M:%S")}")
 
-    flash[:message] = "Tweet has been updated"
-    erb :'tweets/show'
+      flash[:message] = "Tweet has been updated"
+      erb :'tweets/show'
+    end
   end
 
+  delete '/tweets/:id/delete' do
+    if logged_in?
+      @tweet = Tweet.find_by_id(params[:id])
+
+      if current_user == @tweet.user
+        @tweet.destroy
+      else
+        redirect to '/tweets'
+      end
+    end
+
+    redirect to '/login'
+  end
 end

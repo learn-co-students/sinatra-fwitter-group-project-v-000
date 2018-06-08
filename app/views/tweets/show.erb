@@ -8,8 +8,14 @@
     <strong><%= @tweet.time %></strong><br>
     <p><%= @tweet.content %></p><br>
 
-    <em><a href="/tweets/<%= @tweet.id %>/edit">Edit tweet</a></em><br>
-    <strong><a href="/tweets">Return to all tweets</a></strong>
+    <em><a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet"</a></em><br>
+
+    <strong><a href="/tweets">Return to all tweets</a></strong><br>
+
+    <form action ="/tweets/<%= @tweet.id %>/delete" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button>Delete Tweet</button>
+    </form>
 
 <% else %>
 
