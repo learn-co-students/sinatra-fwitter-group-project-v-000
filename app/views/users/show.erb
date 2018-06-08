@@ -2,6 +2,8 @@
 <%if @tweets.empty?%>
   <h4><font color="grey">D'oh! You don't have any tweets :-(</font></h4>
 <%else%>
+  <h2><font color="salmon">Your Tweets</font></h2>
+  <br>
   <%@tweets.each.with_index(1) do |tweet,i|%>
     <h4><font color="grey"><%="#{i}"%>. <a href ='/tweets/<%=tweet.id%>'><%=tweet.content%></a></font></h4>
   <%end%>
