@@ -43,7 +43,7 @@ class UserController < ApplicationController
     else
 
       flash[:message] = "The account doesn't exist, please sign up"
-      erb :'/users/new'
+      redirect to '/signup'
     end
   end
 
@@ -54,7 +54,6 @@ class UserController < ApplicationController
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    # @tweets = @user.tweets
     erb :'users/show'
   end
 

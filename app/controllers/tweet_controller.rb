@@ -31,11 +31,15 @@ class TweetController < ApplicationController
 
   get '/tweets/:id/edit' do
     @tweet = Tweet.find_by_id(params[:id])
-    if logged_in? && current_user.username == twitter_user(@tweet)
-      erb :'/tweets/edit'
+    if logged_in?
+      if current_user.username == twitter_user(@tweet)
+        erb :'/tweets/edit'
+      else
+        flash[:message] = "You are not logged in as that user"
+        redirect to '/tweets'
+      end
     else
-      flash[:message] = "You are not logged in as that user"
-      redirect to '/tweets'
+      redirect to '/login'
     end
   end
 
