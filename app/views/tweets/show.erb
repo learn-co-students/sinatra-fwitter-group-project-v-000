@@ -1,1 +1,11 @@
 <h1>Show Individual Tweets Here</h1>
+
+<form action="/tweets" method="destroy">
+
+<%= @tweet.content %>
+
+
+<input type="submit" value="Edit Tweet" id="edit">
+<input type="submit" value="Delete Tweet" id="delete">
+
+</form>
