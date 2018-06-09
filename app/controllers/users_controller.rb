@@ -24,7 +24,7 @@ class UsersController < ApplicationController
              if @user.save
 
            session[:id] = @user.id
-            redirect '/tweets'
+            redirect to '/tweets'
           end
 
      end
@@ -39,29 +39,24 @@ class UsersController < ApplicationController
 
 
     # >>>>>Log in part<<<
-     get '/users/login' do
-
-       if session[:id] = @user.id
-
-        redirect '/tweets'
+     get '/login' do
 
 		   erb :'/users/login'
-	    end
     end
 
       #session goes here.
 
       post '/users/login' do
-
                 #handles logged in input of user from the params / Match that infor
                 # with existing entries in the user database.
-         @user = User.find_by(:username => params[:username], :password => params[:password])
+           @user = User.find_by(:username => params[:username], :password => params[:password])
 
              if session[:id] = @user.id
 
-              redirect '/tweets'   #redirect to tweets controller
+               redirect to '/tweets'   #redirect to tweets controller
+
             else
-              redirect '/'
+              redirect '/login'
             end
 
      end
