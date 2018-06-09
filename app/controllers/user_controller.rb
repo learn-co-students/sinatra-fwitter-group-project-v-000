@@ -14,7 +14,6 @@ class UserController < ApplicationController
     end
   end
 
-
   post '/signup' do
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect to '/signup'
@@ -55,12 +54,8 @@ class UserController < ApplicationController
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-
-    if @user == current_user
-      erb :'/users/show'
-    else
-      redirect to '/login'
-    end
+    # @tweets = @user.tweets
+    erb :'users/show'
   end
 
 end

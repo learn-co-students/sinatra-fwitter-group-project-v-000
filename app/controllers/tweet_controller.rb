@@ -16,7 +16,7 @@ class TweetController < ApplicationController
     if logged_in?
       erb :'tweets/new'
     else
-      redirect to '/signup'
+      redirect to '/login'
     end
   end
 
@@ -31,7 +31,12 @@ class TweetController < ApplicationController
 
   get '/tweets/:id/edit' do
     @tweet = Tweet.find_by_id(params[:id])
-    erb :'/tweets/edit'
+    if logged_in? && current_user.username == twitter_user(@tweet)
+      erb :'/tweets/edit'
+    else
+      flash[:message] = "You are not logged in as that user"
+      redirect to '/tweets'
+    end
   end
 
   post '/tweets' do
@@ -63,7 +68,9 @@ class TweetController < ApplicationController
 
       if current_user == @tweet.user
         @tweet.destroy
+        flash[:message] = "Tweet has been deleted"
       else
+        flash[:message] = "You are not logged in as that user"
         redirect to '/tweets'
       end
     end
