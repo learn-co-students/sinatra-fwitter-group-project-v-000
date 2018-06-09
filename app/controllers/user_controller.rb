@@ -28,7 +28,6 @@ class UserController < ApplicationController
   end
 
   get '/users/:slug' do
-    binding.pry
     @user = User.find_by_slug(params[:slug])
     erb :'/users/show'
   end
@@ -48,14 +47,14 @@ class UserController < ApplicationController
     # binding.pry
     @user = User.new(username: params[:username], email: params[:email], password: params[:password])
     @user.save
-    session[:id] = @user.id
+    session[:user_id] = @user.id
     redirect '/tweets'
   end
 
   post '/login' do
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
-      session[:id] = @user.id
+      session[:user_id] = @user.id
       redirect '/tweets'
     else
       redirect '/errors/login'

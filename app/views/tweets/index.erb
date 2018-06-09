@@ -1,7 +1,9 @@
 <h1>Welcome, To Your Tweets!</h1>
-<%# binding.pry %>
 <p>
-  <%= @tweets %>
+  <% @tweets.each do |tweet| %>
+  <%# binding.pry %>
+    <%= tweet.content %>
+  <% end %>
 </p>
 
 
