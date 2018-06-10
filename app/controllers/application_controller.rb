@@ -68,6 +68,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get "/tweets/:id/edit" do
+    if session.has_key?(:id)
+      @tweet = Tweet.find(params[:id])
+      erb :"/tweets/edit_tweet"
+    else
+      redirect "/login"
+    end
+  end
+
   post "/signup" do
     if params.values.any?(&:empty?)
       redirect "/signup"
@@ -96,6 +105,29 @@ class ApplicationController < Sinatra::Base
       @tweet = Tweet.create(params)
       @tweet.update(user_id: session[:id])
       redirect "/tweets/#{@tweet.id}"
+    end
+  end
+
+  patch "/tweets/:id/edit" do
+    if !session.has_key?(:id)
+      redirect "/login"
+    elsif params[:content].empty?
+      redirect "/tweets/#{params[:id]}/edit"
+    else
+      @tweet = Tweet.find(params[:id])
+      @tweet.update(content: params[:content])
+      redirect "/tweets/#{@tweet.id}"
+    end
+  end
+
+
+  delete "/tweets/:id/delete" do
+    if session.has_key?(:id)
+      @tweet = Tweet.find(params[:id])
+      @user = User.find(session[:id])
+      @tweet.delete if @user.tweets.include?(@tweet)
+    else
+      redirect "/login"
     end
   end
 
