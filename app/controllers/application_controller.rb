@@ -47,8 +47,15 @@ class ApplicationController < Sinatra::Base
 
   get "/users/:slug" do
     @user = User.find_by_slug(params[:slug])
-    binding.pry
     erb :"/users/show"
+  end
+
+  get "/tweets/new" do
+    if session.has_key?(:id)
+      erb :"/tweets/create_tweet"
+    else
+      redirect "/login"
+    end
   end
 
   post "/signup" do
@@ -69,6 +76,16 @@ class ApplicationController < Sinatra::Base
       redirect "/tweets"
     else
       redirect "/login"
+    end
+  end
+
+  post "/tweets/new" do
+    if params[:content].empty?
+      redirect "/tweets/new"
+    else
+      @tweet = Tweet.create(params)
+      @tweet.update(user_id: session[:id])
+      redirect "/tweets/#{@tweet.id}"
     end
   end
 
