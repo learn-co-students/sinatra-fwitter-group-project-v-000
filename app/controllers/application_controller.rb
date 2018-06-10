@@ -59,7 +59,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/tweets/:id" do
-    if params.has_value?(:id)
+    if session.has_key?(:id)
+      @user = User.find(session[:id])
       @tweet = Tweet.find(params[:id])
       erb :"/tweets/show_tweet"
     else
