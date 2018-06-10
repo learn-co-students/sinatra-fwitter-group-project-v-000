@@ -1,11 +1,15 @@
 <h1>Welcome, To Your Tweets!</h1>
 <p>
   <% @tweets.each do |tweet| %>
-  <%# binding.pry %>
-    <%= tweet.content %>
+  <li>
+    <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
+  </li>
   <% end %>
 </p>
 
+<form action="/tweets/new" method="get">
+  <input type="submit" id="new_tweet" value="Create a New Tweet">
+</form>
 
 <form action="/logout" method="get">
   <input type="submit" id="Log Out" value="Log Out">
