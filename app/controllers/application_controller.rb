@@ -58,6 +58,15 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get "/tweets/:id" do
+    if params.has_value?(:id)
+      @tweet = Tweet.find(params[:id])
+      erb :"/tweets/show_tweet"
+    else
+      redirect "/login"
+    end
+  end
+
   post "/signup" do
     if params.values.any?(&:empty?)
       redirect "/signup"
