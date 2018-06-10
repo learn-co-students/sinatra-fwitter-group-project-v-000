@@ -28,8 +28,5 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
-
-    def valid_user?
-      is_logged_in? && (@user = User.find_by(email: params[:email]))
   end
 end
