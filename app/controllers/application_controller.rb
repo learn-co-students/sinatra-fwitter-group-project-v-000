@@ -45,6 +45,12 @@ class ApplicationController < Sinatra::Base
     redirect "/login"
   end
 
+  get "/users/:slug" do
+    @user = User.find_by_slug(params[:slug])
+    binding.pry
+    erb :"/users/show"
+  end
+
   post "/signup" do
     if params.values.any?(&:empty?)
       redirect "/signup"
@@ -65,4 +71,5 @@ class ApplicationController < Sinatra::Base
       redirect "/login"
     end
   end
+
 end
