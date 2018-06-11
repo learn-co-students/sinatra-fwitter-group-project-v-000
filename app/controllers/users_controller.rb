@@ -46,11 +46,11 @@ class UsersController < ApplicationController
 
       #session goes here.
 
-      post '/users/login' do
+      post '/login' do
                 #handles logged in input of user from the params / Match that infor
                 # with existing entries in the user database.
            @user = User.find_by(:username => params[:username], :password => params[:password])
-
+             @user.save
              if session[:id] = @user.id
 
                redirect to '/tweets'   #redirect to tweets controller
@@ -59,9 +59,16 @@ class UsersController < ApplicationController
               redirect '/login'
             end
 
-     end
+         end
 
-       get '/users/logout' do
+         get '/users[:id]' do   #[This is just a testing data. ]
+
+         end
+
+
+
+   # DELETS.
+       get '/logout' do
           # log user out by clearing the session
         session.clear
         redirect '/'
