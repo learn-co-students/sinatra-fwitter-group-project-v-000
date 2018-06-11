@@ -1,8 +1,11 @@
-<%binding.pry%>
-<h3> this is the tweet</h3>
-    <!-- <%@tweets.each do |tweet|%>
-     <a href="/tweet/<%=tweet.name%>"><li> Tweet: <%=tweets%></li></a>
 
+ <h2>Welcome,<%= current_user.username %></h2>
+  <!-- # we use our current_user method here. -->
+  <!-- notes:  iterate to show all tweets -->
+  <!-- <%Tweet.all.each do |tweet| %> -->
 
-    <%end%> -->
 <a href="/login">Log Out</a>
+
+
+
+<%

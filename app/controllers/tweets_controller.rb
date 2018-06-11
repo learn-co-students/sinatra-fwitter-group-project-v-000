@@ -17,6 +17,7 @@ class TweetsController < ApplicationController
 
           @tweets = Tweet.all
           @users = User.all
+          
       erb :'/tweets/create_tweet'
       end
 
