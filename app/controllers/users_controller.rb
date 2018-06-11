@@ -1,78 +1,46 @@
 class UsersController < ApplicationController
-
   configure do
   enable :sessions
   set :session_secret, "secret"
    end
-
    get '/signup' do
-      erb :'users/signup'
+    if !logged_in?
+      erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
+    else
+      redirect to '/tweets'
     end
-
-
-
-   post '/signup' do
-
-
-
-     if (params[:username] == "" || params[:email] == "" || params[:password] == "")
-
-       redirect '/signup'
-
-     else   @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-
-             if @user.save
-
-           session[:id] = @user.id
-            redirect to '/tweets'
-          end
-
-     end
-            # if @user.save
-            #   session[:id] = @user.id
-            #   redirect '/tweets'
-            # else
-            #   redirect '/signup'
-            # end
-                 #then it saved and giving an ID.
-     end
-
-
+  end
+    post '/signup' do
+      if params[:username] == "" || params[:email] == "" || params[:password] == ""
+        redirect to '/signup'
+      else
+        @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+        @user.save
+        session[:user_id] = @user.id
+        redirect to '/tweets'
+      end
+    end
     # >>>>>Log in part<<<
-     get '/login' do
-
-		   erb :'/users/login'
+     get '/users/login' do
+       if session[:id] = @user.id
+        redirect '/tweets'
+           erb :'/users/login'
+        end
     end
-
       #session goes here.
-
-      post '/login' do
+      post '/users/login' do
                 #handles logged in input of user from the params / Match that infor
                 # with existing entries in the user database.
-           @user = User.find_by(:username => params[:username], :password => params[:password])
-             @user.save
+         @user = User.find_by(:username => params[:username], :password => params[:password])
              if session[:id] = @user.id
-
-               redirect to '/tweets'   #redirect to tweets controller
-
+              redirect '/tweets'   #redirect to tweets controller
             else
-              redirect '/login'
+              redirect '/'
             end
-
-         end
-
-         get '/users[:id]' do   #[This is just a testing data. ]
-
-         end
-
-
-
-   # DELETS.
-       get '/logout' do
+     end
+       get '/users/logout' do
           # log user out by clearing the session
         session.clear
         redirect '/'
         end
-
-
 end
