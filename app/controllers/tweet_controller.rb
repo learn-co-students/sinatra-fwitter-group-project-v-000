@@ -51,9 +51,9 @@ class TweetController < ApplicationController
             redirect to '/tweets'
         end
 
-        if !user.tweets.include?(@tweet)
-            redirect to '/tweets'
-        end
+        #if !user.tweets.include?(@tweet)
+        #    redirect to '/tweets'
+        #end
 
         erb :'/tweets/show'
     end
@@ -74,7 +74,7 @@ class TweetController < ApplicationController
         if !tweet
             redirect to '/tweets'
         end
-        
+
         if !user.tweets.include?(tweet)
             redirect to '/tweets'
         end
@@ -84,6 +84,26 @@ class TweetController < ApplicationController
         tweet.save
 
         redirect to "/tweets"
+    end
+
+    delete '/tweets/:id/delete' do
+        unless logged_in?
+            redirect to '/login'
+        end
+
+        tweet = Tweet.find(params[:id])
+
+        unless tweet
+            redirect to '/tweets'
+        end
+
+        unless user.tweets.include?(tweet)
+            redirect to '/tweets'
+        end
+
+        tweet.delete
+
+        redirect to '/tweets'
     end
 
     get '/tweets/:id/edit' do
