@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params[:user].any? {|a| a == [] || a == "" || a == nil}
+    if params[:user].values.any? {|a| a == [] || a == "" || a == nil}
       flash[:message] = "Your username/password/email is invalid. Please try again."
       redirect "/signup"
     else
@@ -42,9 +42,13 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    session.clear
-    flash[:message] = "You are logged out."
-    redirect "/login"
+    if session[:user_id] != nil || session[:user_id] != ""
+      session.clear
+      flash[:message] = "You are logged out."
+      redirect "/login"
+    else
+      redirect "/"
+    end
   end
 
 end
