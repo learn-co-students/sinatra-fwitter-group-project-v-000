@@ -1,0 +1,16 @@
+<h3>Sign up here and join Fwitter!</h3>
+
+<p><%= @signup_error_message %></p>
+<form action='/signup' method="POST">
+    <% fields = [["username", "text"], ["password", "password"], ["email", "text"]] %>
+    <% fields.each do |field| %>
+        <% field_name = field[0] %>
+        <% field_type = field[1] %>
+        <div>
+            <label for="<%= field_name %>"><%= field_name.capitalize %>: </label>
+            <input type="<%= field_type %>" id="<%= field_name %>" name="<%= field_name %>">
+        </div>
+    <% end %>
+
+    <input type="submit" value="Sign Up">
+</form>
