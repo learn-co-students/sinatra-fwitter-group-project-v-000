@@ -1,4 +1,5 @@
 require './config/environment'
+require '/sinatra/flash'
 
 class ApplicationController < Sinatra::Base
 
@@ -15,7 +16,24 @@ class ApplicationController < Sinatra::Base
 
   get '/signup' do
     erb :signup
-    redirect "/tweets"
+  end
+
+  post '/signup' do
+    if params[:user].any? {|a| a == [] || a == "" || a == nil}
+      redirect "/error"
+    else
+      User.create(params[:user])
+      redirect "/tweets"
+    end
+  end
+
+  get '/tweets' do
+    erb :show
+  end
+
+  get '/error' do
+    erb :error
+    redirect "/signup"
   end
 
 end
