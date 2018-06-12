@@ -13,7 +13,9 @@ class ApplicationController < Sinatra::Base
   end
 
  #help to check if there are logged in
+ 
   helpers do
+
     def logged_in?
       !!current_user    #wel always yeild false
     end

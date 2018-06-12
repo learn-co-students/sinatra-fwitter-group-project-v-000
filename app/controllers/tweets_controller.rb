@@ -9,8 +9,7 @@ class TweetsController < ApplicationController
          @users = User.all
          @tweets = Tweet.all
 
-        #  erb  :'/tweets/tweets'
-         erb :'index'
+    erb :'/tweets/show_tweet'
 
      end
 

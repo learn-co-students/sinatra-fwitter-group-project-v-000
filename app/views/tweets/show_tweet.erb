@@ -1,0 +1,8 @@
+
+  <%if Helpers.logged_in?(session)%>
+
+   <h3>Welcome <%= @current_user.username%></h3>
+     <!-- @ current_user is from our Helper method -->
+
+  <a href="/login">Log Out</a>
+  <%end%>
