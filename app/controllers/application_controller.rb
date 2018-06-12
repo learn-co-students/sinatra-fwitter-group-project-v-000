@@ -8,6 +8,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "secret"
+    register Sinatra::Flash
   end
 
   get '/' do
@@ -20,20 +21,17 @@ class ApplicationController < Sinatra::Base
 
   post '/signup' do
     if params[:user].any? {|a| a == [] || a == "" || a == nil}
-      redirect "/error"
+      flash[:message] = "Your username/password/email is invalid. Please try again."
+      redirect "/signup"
     else
       User.create(params[:user])
       redirect "/tweets"
     end
   end
 
-  get '/tweets' do
-    erb :show
+  get '/login' do
+    erb :login
   end
 
-  get '/error' do
-    erb :error
-    redirect "/signup"
-  end
 
 end
