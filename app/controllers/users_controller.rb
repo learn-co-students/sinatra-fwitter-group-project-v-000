@@ -1,9 +1,12 @@
 require './config/environment'
 require '/sinatra/flash'
+
 class UsersController < ApplicationController
-  enable :sessions
-  set :session_secret, "secret"
-  register Sinatra::Flash
+  configure do
+    enable :sessions
+    set :session_secret, "secret"
+    register Sinatra::Flash
+  end
 
   get '/signup' do
     erb :'/users/signup'
@@ -26,12 +29,22 @@ class UsersController < ApplicationController
   post '/login' do
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect "/tweets"
+      if session[:user_id] == user.id
+        redirect "/logout"
+      else
+        session[:user_id] = user.id
+        redirect "/tweets"
+      end
     else
       flash[:message] = "Your username/password is invalid. Please try again."
       redirect "/login"
     end
+  end
+
+  get '/logout' do
+    session.clear
+    flash[:message] = "You are logged out."
+    redirect "/login"
   end
 
 end
