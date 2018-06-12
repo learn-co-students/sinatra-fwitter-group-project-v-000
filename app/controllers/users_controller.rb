@@ -35,10 +35,12 @@ class UsersController < ApplicationController
 
      get '/login' do
 
-      if logged_in?
-        redirect '/tweets'  #tweets control
+      if !logged_in?
+        erb :'/users/login'
+
       else
-           erb :'/users/login'
+        redirect '/tweets'  #tweets control
+
       end
     end
 
@@ -46,18 +48,18 @@ class UsersController < ApplicationController
   post '/login' do
                 #handles logged in input of user from the params / Match that infor
                 # with existing entries in the user database.
-       user = User.find_by(:username => params[:username])
+       user = User.find_by(:username => params[:username])  # Take name to get users  name
 
         if user && user.authenticate(params[:password])
           session[:user_id] = user.id
-          redirect '/tweets'
+          redirect to '/tweets'
        else
-          redirect '/login'
+          redirect to '/create_user'
         end
     end
 
 
-       get '/users/logout' do
+       get '/logout' do
           # log user out by clearing the session
         session.clear
         redirect '/'

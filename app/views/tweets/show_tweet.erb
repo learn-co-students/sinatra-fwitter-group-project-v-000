@@ -1,10 +1,11 @@
 
-<h4>on the show_tweet </h4>
+<%if logged_in?%>
 
-  <%if logged_in?%>
-  <!-- used current_user because it is already iterated over...  -->
-   <h3> Welcome,<%= @current_user.username%> </h3>
+<h3> Welcome,  <%= @current_user.username%> </h3>
+    <a href="/logout">logout</a>
+<%else%>
+    <a href="/login">Login</a>
 
-   <%end%>
+ <%=@tweet.content%>
 
-  <a href="/login">Log Out</a>
+<%end%>

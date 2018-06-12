@@ -8,6 +8,7 @@ class TweetsController < ApplicationController
      get '/tweets' do
          @users = User.all
          @tweets = Tweet.all
+
     erb :'/tweets/show_tweet'
 
      end
