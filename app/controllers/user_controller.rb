@@ -33,6 +33,16 @@ class UserController < ApplicationController
         redirect to '/tweets'
     end
 
+    get '/logout' do
+        if logged_in?
+            session.delete(:user_id)
+            redirect to '/login'
+        
+        else
+            redirect to '/'
+        end
+    end
+
     get '/signup' do
         if logged_in?
             redirect to '/tweets'
