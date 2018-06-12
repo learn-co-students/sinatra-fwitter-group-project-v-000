@@ -35,18 +35,19 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/login' do
-    user = User.find_by(username: params[:username])
-    if user && user.authenticate(params[:password])
-      if session[:user_id] == user.id
-        redirect "/logout"
+    if session[:user_id] != nil && session[:user_id] != ""
+      binding.pry
+      user = User.find_by(username: params[:user][:username])
+      if user && user.authenticate(params[:user][:password])
+          session[:user_id] = user.id
+          "Welcome, #{user.username}!"
+          redirect "/tweets"
       else
-        session[:user_id] = user.id
-        "Welcome, #{user.username}!"
-        redirect "/tweets"
+        flash[:message] = "Your username/password is invalid. Please try again."
+        redirect "/login"
       end
     else
-      flash[:message] = "Your username/password is invalid. Please try again."
-      redirect "/login"
+      redirect "/tweets"
     end
   end
 
@@ -108,9 +109,38 @@ class ApplicationController < Sinatra::Base
     @tweet = Tweet.find_by(id: params[:id])
     if User.find_by(id: session[:user_id]) == @tweet.user
       erb :edit
+    elsif session[:id] != nil && session[:id] != ""
+      redirect "/tweets"
     else
       redirect "/login"
     end
+  end
+
+  patch '/tweets/:id' do
+    @tweet = Tweet.find_by(id: params[:id])
+    if params[:tweet][:content] != ""
+      @tweet.update(params[:tweet])
+      redirect "/tweets/#{@tweet.id}"
+    else
+      redirect "/tweets/#{@tweet.id}/edit"
+    end
+  end
+
+  get '/tweets/:id/delete' do
+    @tweet = Tweet.find_by(id: params[:id])
+    if User.find_by(id: session[:user_id]) == @tweet.user
+      erb :delete
+    elsif session[:user_id] != nil
+      redirect "/tweets"
+    else
+      redirect "/login"
+    end
+  end
+
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find_by(id: params[:id])
+    @tweet.delete
+    redirect "/tweets"
   end
 
 end
