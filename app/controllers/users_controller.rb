@@ -6,13 +6,12 @@ class UsersController < ApplicationController
 
    get '/signup' do
 
-    if !logged_in?
-
-      erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
-    else
-      redirect to '/tweets'
-    end
-  end
+      if !logged_in?
+        erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
+      else
+        redirect to '/tweets'
+      end
+      end
 
     post '/signup' do
 
@@ -35,33 +34,41 @@ class UsersController < ApplicationController
 
      get '/login' do
 
-      if !logged_in?
+       if !logged_in?
         erb :'/users/login'
 
-      else
+        else
         redirect '/tweets'  #tweets control
 
-      end
-    end
+        end
+     end
 
       #session goes here.
-  post '/login' do
+    post '/login' do
                 #handles logged in input of user from the params / Match that infor
                 # with existing entries in the user database.
        user = User.find_by(:username => params[:username])  # Take name to get users  name
 
-        if user && user.authenticate(params[:password])
+      if user && user.authenticate(params[:password])
           session[:user_id] = user.id
           redirect to '/tweets'
-       else
+      else
           redirect to '/create_user'
-        end
+      end
     end
 
 
-       get '/logout' do
+      get '/logout' do
+             if !logged_in?
           # log user out by clearing the session
-        session.clear
-        redirect '/'
-        end
-end
+              redirect '/'
+             else
+
+               session.clear
+               redirect to "/login"
+            end
+
+       end
+
+
+end  #End for class method.

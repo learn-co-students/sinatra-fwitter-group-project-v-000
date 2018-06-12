@@ -5,19 +5,22 @@ class TweetsController < ApplicationController
   set :session_secret, "secret"
  end
 
-     get '/tweets' do
-         @users = User.all
-         @tweets = Tweet.all
+      get '/tweets' do
 
-    erb :'/tweets/show_tweet'
+        if logged_in?
 
-     end
+           @users = User.all
+           @tweets = Tweet.all
+           erb :'/tweets/show_tweet'
+         else
+           redirect to "/login"
+         end
+
+      end
 
       get '/tweets/new' do
-
           @tweets = Tweet.all
           @users = User.all
-
       erb :'/tweets/create_tweet'
 
       end

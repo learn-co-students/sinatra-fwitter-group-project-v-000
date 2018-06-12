@@ -2,11 +2,17 @@
 
  Cheers.
 
+  NOTE:   MUST CHECK POINT IN MULTIPLY PLACES>>>>> 
 
  <%if logged_in?%>
- <!-- used current_user because it is already iterated over...  -->
-   <h3> Welcome,  <%= @current_user.username%> </h3>
-       <a href="/logout">logout</a>
-   <%else%>
-       <a href="/login">Login</a>
-  <%end%>
+
+ <h3> Welcome,  <%= @current_user.username%> </h3>
+
+     <a href="/logout">logout</a>
+     <%=@tweet.content%>
+
+
+ <%else%>
+     <a href="/login">Login</a>
+
+ <%end%>
