@@ -6,13 +6,15 @@ class TweetsController < ApplicationController
  end
 
      get '/tweets' do
-       @users = User.all
-       @tweets = Tweet.all
-       erb :'/tweets/tweets'   #No such file or directory @ rb_sysopen - app/views/tweets.erb
+         @users = User.all
+         @tweets = Tweet.all
+
+        #  erb  :'/tweets/tweets'
+         erb :'index'
 
      end
 
-      get '/tweets/new'do
+      get '/tweets/new' do
 
           @tweets = Tweet.all
           @users = User.all

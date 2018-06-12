@@ -15,8 +15,11 @@ class UsersController < ApplicationController
   end
 
     post '/signup' do
+
       if params[:username] == "" || params[:email] == "" || params[:password] == ""
+
         redirect to '/signup'
+        
       else
         @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
         @user.save
@@ -31,7 +34,7 @@ class UsersController < ApplicationController
      get '/login' do
 
       if logged_in?
-        redirect '/tweets'
+        redirect '/tweets'  #tweets control
       else
            erb :'/users/login'
       end
