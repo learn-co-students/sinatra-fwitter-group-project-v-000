@@ -22,10 +22,11 @@ class UserController < ApplicationController
         end
 
         user = User.find_by(username: params[:username])
-        
+
         if !user || !user.authenticate(params[:password])
             session[:login_error] = true
             session[:login_error_message] = "Check the username and password and try again"
+            redirect to '/login'
         end
 
         session[:user_id] = user.id
@@ -61,12 +62,12 @@ class UserController < ApplicationController
             redirect to '/signup'
 
         else 
-            user = User.create(
+            new_user = User.create(
                 username: params[:username],
                 password: params[:password],
                 email: params[:email]
             )
-            session[:user_id] = user.id
+            session[:user_id] = new_user.id
 
             redirect to '/tweets'
         end
