@@ -36,7 +36,6 @@ class ApplicationController < Sinatra::Base
 
   post '/login' do
     if session[:user_id] != nil && session[:user_id] != ""
-      binding.pry
       user = User.find_by(username: params[:user][:username])
       if user && user.authenticate(params[:user][:password])
           session[:user_id] = user.id
@@ -84,12 +83,12 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets' do
     if params[:tweet][:content] != ""
-      @user = User.find_by(id: session[:user_id])
+      user = User.find_by(id: session[:user_id])
       tweet = Tweet.create(params[:tweet])
-      tweet.user_id = @user.id
+      tweet.user_id = user.id
       tweet.save
-      @user.tweets << tweet
-      @user.save
+      user.tweets << tweet
+      user.save
       redirect "/tweets"
     else
       redirect "/tweets/new"
