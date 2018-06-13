@@ -1,85 +1,84 @@
 class UsersController < ApplicationController
   configure do
-  enable :sessions
-  set :session_secret, "secret"
-   end
+    enable :sessions
+    set :session_secret, "secret"
+  end
 
-   get '/signup' do
+  get '/signup' do
 
-      if !logged_in?
-        erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
-      else
-        redirect to '/tweets'
-      end
-      end
-
-    post '/signup' do
-
-      if params[:username] == "" || params[:email] == "" || params[:password] == ""
-
-        redirect to '/signup'
-
-      else
-        @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-        @user.save
-        session[:user_id] = @user.id
-        redirect to '/tweets'
-      end
+    if !logged_in?
+      erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
+    else
+      redirect to '/tweets'
     end
+  end
 
+  post '/signup' do
 
-    # >>>>>Log in part<<<
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
 
- # Dummy log in data   "username"=>"becky567", "password"=>"kittens"
+      redirect to '/signup'
 
-     get '/login' do
-
-       if !logged_in?
-        erb :'/users/login'
-
-        else
-        redirect '/tweets'  #tweets control
-
-        end
-     end
-
-      #session goes here.
-    post '/login' do
-                #handles logged in input of user from the params / Match that infor
-                # with existing entries in the user database.
-       user = User.find_by(:username => params[:username])  # Take name to get users  name
-
-      if user && user.authenticate(params[:password])
-          session[:user_id] = user.id
-          redirect to '/tweets'
-      else
-          redirect to '/create_user'
-      end
+    else
+      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+      @user.save
+      session[:user_id] = @user.id
+      redirect to '/tweets'
     end
+  end
 
 
-      get '/logout' do
-             if !logged_in?
-          # log user out by clearing the session
-              redirect '/'
-             else
+  # >>>>>Log in part<<<
 
-               session.clear
-               redirect to "/login"
-            end
+  # Dummy log in data   "username"=>"becky567", "password"=>"kittens"
 
-       end
+  get '/login' do
 
-      get "/users/:slug" do
+    if !logged_in?
+      erb :'/users/login'
 
-           @user = User.find_by_slug(params[:slug])
+    else
+      redirect '/tweets'  #tweets control
 
-           erb :'/users/show'
-
-      end
+    end
+  end
 
 
+  #session goes here.
 
+  post '/login' do
+    #handles logged in input of user from the params / Match that infor
+    # with existing entries in the user database.
+    user = User.find_by(:username => params[:username])  # Take name to get users  name
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect to '/tweets'
+    else
+      redirect to '/create_user'
+    end
+  end
+
+
+  get '/logout' do
+
+    if !logged_in?
+      # log user out by clearing the session
+      redirect '/'
+    else
+
+      session.clear
+      redirect to "/login"
+    end
+  end
+
+
+  get "/users/:slug" do
+
+    @user = User.find_by_slug(params[:slug])
+
+    erb :'/users/show'
+
+  end
 
 
 

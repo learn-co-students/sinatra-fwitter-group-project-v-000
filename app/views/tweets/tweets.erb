@@ -1,11 +1,14 @@
-<%binding.pry%>
+<%if logged_in?%>
 
- <h2>Welcome,<%= current_user.username %></h2>
-  <!-- # we use our current_user method here. -->
-  <!-- notes:  iterate to show all tweets -->
-  <%Tweet.all.each do |tweet| %>
-      <h3> <%=tweet.content%></h3>
+     <h2>Welcome,<%= current_user.username %></h2>
+      <!-- # we use our current_user method here. -->
+      <!-- notes:  iterate to show all tweets -->
+      <%@tweets.each do |tweet| %>
+        <h3> <%=tweet.content%></h3>
+      <%end%>
 
-<a href="/login">Log Out</a>
+  <%else%>
 
+       <a href="/login">Log Out</a>
+      <!-- closes the if statament -->
   <%end%>
