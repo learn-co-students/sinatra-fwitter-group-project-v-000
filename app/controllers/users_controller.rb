@@ -54,7 +54,7 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect to '/tweets'
     else
-      redirect to '/create_user'
+      redirect to '/users/create_user'
     end
   end
 
@@ -79,6 +79,8 @@ class UsersController < ApplicationController
     erb :'/users/show'
 
   end
+
+
 
 
 

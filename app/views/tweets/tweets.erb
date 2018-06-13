@@ -1,14 +1,14 @@
 <%if logged_in?%>
 
-     <h2>Welcome,<%= current_user.username %></h2>
+     <h2>Welcome, User: <%= current_user.username %></h2>
       <!-- # we use our current_user method here. -->
       <!-- notes:  iterate to show all tweets -->
       <%@tweets.each do |tweet| %>
-        <h3> <%=tweet.content%></h3>
+        <h3> Dummy Tweets:  <%=tweet.content%></h3>
       <%end%>
-
-  <%else%>
-
-       <a href="/login">Log Out</a>
+    <%else%>
+     <%'/login'%>
       <!-- closes the if statament -->
   <%end%>
+
+  <a href="/logout">Log Out</a>

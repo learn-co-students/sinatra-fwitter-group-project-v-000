@@ -1,7 +1,7 @@
  NOTES: all my files are created... But there are not showing in my directory.
 
  Cheers.
-
+   NOTES : Understand the flow of your app. 
   NOTE:   MUST CHECK POINT IN MULTIPLY PLACES>>>>>
 
  <
