@@ -1,0 +1,5 @@
+User.create(username: "abcd123", email: "abcd123@gmail.com", password: "1234")
+User.create(username: "snowwhite", email: "snowwhite@gmail.com", password: "sleeping")
+User.create(username: "mulan", email: "mulan@gmail.com", password: "fighting")
+Tweet.create(user_id: 3, content: "I like Li Shuang")
+Tweet.create(user_id: 1, content: "ABCDEFG")
