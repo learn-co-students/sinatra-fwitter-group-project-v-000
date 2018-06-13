@@ -18,18 +18,15 @@ class TweetsController < ApplicationController
 
       end
 
+
+
+
       get '/tweets/new' do
           @tweets = Tweet.all
           @users = User.all
       erb :'/tweets/create_tweet'
 
       end
-
-
-      # post '/tweets' do
-      #
-      #   erb : '/tweets'
-      # end
 
 
 end
