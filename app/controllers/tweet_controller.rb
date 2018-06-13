@@ -44,25 +44,28 @@ class TweetController < ApplicationController
   end
 
   post '/tweets' do
-    if params[:content] == ""
-      redirect to "/tweets/new"
-    else
-      @user = User.find_by_id(session[:user_id])
-      @tweet = Tweet.create(content: params[:content], user_id: @user.id, time: Time.new.strftime("%Y-%m-%d %H:%M:%S"))
+    @tweet = current_user.tweets.new(content: params[:content], time: Time.new.strftime("%Y-%m-%d %H:%M:%S"))
 
+    if @tweet.valid? # http://guides.rubyonrails.org/active_record_validations.html
+      @tweet.save
       redirect to '/tweets'
+    else
+      redirect to '/tweets/new'
     end
   end
 
   patch '/tweets/:id' do
-    if params[:content] == ""
-      redirect to "/tweets/#{params[:id]}/edit"
-    else
-      @tweet = Tweet.find_by_id(params[:id])
+    @tweet = Tweet.find_by_id(params[:id])
+    #present? is an RoR method
+    if params[:content].present? && current_user.username == twitter_user(@tweet)
+      #I'm asking it for params instead of instance since it's a new value, not from called data of already stored @twitter
       @tweet.update(content: params[:content], time: "Updated on #{Time.new.strftime("%Y-%m-%d %H:%M:%S")}")
 
       flash[:message] = "Tweet has been updated"
       erb :'tweets/show'
+
+    else
+      redirect to "/tweets/#{params[:id]}/edit"
     end
   end
 

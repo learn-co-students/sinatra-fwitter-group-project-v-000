@@ -18,11 +18,12 @@ class ApplicationController < Sinatra::Base
 
     def logged_in?
       #the '!!' double bang converts object into a truthy value statement
-      !!session[:user_id]
+      !!current_user
     end
 
     def current_user
-      User.find_by_id(session[:user_id])
+      #hit the database once and then 'cache' the user through instance, reducing query redundancy
+      @current_user ||= User.find_by_id(session[:user_id])
     end
 
     def twitter_user(tweet)
