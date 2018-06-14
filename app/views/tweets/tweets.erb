@@ -1,0 +1,16 @@
+This is the tweets page!
+
+<h2>Welcome, <%=@user.username%></h2>
+
+
+These are all the tweets!
+<%if @tweets%>
+  <%@tweets.each do |tweet| %>
+    <a href ='/tweets/<%=tweet.id%>'><%=tweet.content%></a></br>
+  <%end%>
+<%end%>
+
+
+<form action="/users/logout" method="get">
+  <input type="submit"  value="Logout">
+</form>
