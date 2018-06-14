@@ -1,0 +1,11 @@
+<h3>Write a new tweet, <%= user.username %>!</h3>
+
+<p><%= @new_tweet_error_message %></p>
+<form action='/tweets' method="POST">
+    <label for="tweet">Tweet: </label>
+    <input type="textarea" id="tweet" name="content">
+
+    <input type="submit" value="Tweet!" id="submit">
+</form>
+
+<p><a href='/logout'>Log out</a></p>

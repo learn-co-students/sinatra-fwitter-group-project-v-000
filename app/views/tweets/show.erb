@@ -1,0 +1,16 @@
+<p>Your tweet, <%= user.username %>: </p>
+
+<p><strong><%= @tweet.content %></strong></p>
+
+<br>
+
+<p><a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a></p>
+
+<br>
+
+<form action='/tweets/<%= @tweet.id %>/delete' method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit" name="Delete Tweet" id="Delete Tweet">Delete Tweet</button>
+</form>
+
+<p><a href='/logout'>Log out</a></p>

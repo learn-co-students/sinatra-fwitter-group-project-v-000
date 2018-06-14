@@ -1,0 +1,9 @@
+<h3>Here are all your tweets, <%= @user.name %></h3>
+
+<% @user.tweets.each do |t| %>
+    <div class="tweetContainer">
+        <span><%= t.content %></span><br>
+    </div>
+<% end %>
+
+<p><a href='/logout'>Log out</a></p>
