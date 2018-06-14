@@ -1,0 +1,8 @@
+<h1>Show Individual User Here</h1>
+
+<% @user = User.find_by_slug(params[:slug])%>
+<h2>Welcome, <%= @user.username %></h2>
+<h3>Tweets:</h3>
+<% @user.tweets.each do |tweet|
+  <a href="/users/<%=tweet.content %>">
+end
