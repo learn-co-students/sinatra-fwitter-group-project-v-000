@@ -1,0 +1,20 @@
+<html>
+  <body>
+    <div class="container">
+      <h1><%= @user.username %></h1>
+      </br>
+      <div class="span6" style="text-align: left">
+        <h4>Profile</h4>
+        <br>
+      </div>
+     <div class="span4">
+        <h4>Tweets</h4>
+        <% @user.tweets.each do |x| %>
+          <p><%= x.content %></p>
+          <a href="/tweets/<%= x.id %>">View</a>
+        <%end%>
+      </div>
+    <a href="users/logout">Logout</a>
+    </div>
+  </body>
+</html>

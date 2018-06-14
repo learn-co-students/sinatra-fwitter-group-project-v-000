@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Tweditor</h1>
+  </br>
+  <div class="span6" style="text-align: left">
+    <form action="/tweets/<%= @tweet.id %>" method="POST">
+      <input id="hidden" type="hidden" name="_method" value="patch">
+      <h3>Edit Tweet</h3>
+  	  <textarea name="content" maxlength="200" class="content_input"><%= @tweet.content %></textarea>  
+    <br>
+      <input type="submit" value="Tweet" id="submit">
+    </form>
+  </div>
+</div>
