@@ -1,7 +1,7 @@
  NOTES: all my files are created... But there are not showing in my directory.
 
  Cheers.
-   NOTES : Understand the flow of your app. 
+   NOTES : Understand the flow of your app.
   NOTE:   MUST CHECK POINT IN MULTIPLY PLACES>>>>>
 
  <
@@ -33,3 +33,18 @@
           instance.slug == slug
      end
     end
+
+
+ show page
+
+    <%if logged_in?%>
+    <h3> Welcome,  <%= @current_user.username%> </h3>
+
+        <a href="/logout">logout</a>
+
+    <%else%>
+
+        <a href="/login">Login</a>
+
+
+    <%end%>

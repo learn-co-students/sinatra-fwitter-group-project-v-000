@@ -20,6 +20,7 @@ class TweetsController < ApplicationController
   get '/tweets/new' do
 
     if logged_in?
+      @users = User.all
     erb :'/tweets/create_tweet'
     else
       redirect to "/tweets"
@@ -29,15 +30,25 @@ class TweetsController < ApplicationController
 
     post '/tweets' do
 
-      @tweets= Tweet.create(params[:tweet])   # This is where we set the name for song/ it want us to pass in an hash.
-
-      if logged_in?
-        @tweets.content = Tweet.create(params[:tweet])  # shovel in Title into figure.titles to be used in the views folder
-      end
-
+       # This is where we set the name for song/ it want us to pass in an hash.
+          if logged_in?
+            @tweets = Tweet.create(params[:tweet])  # shovel in Title into figure.titles to be used in the views folder
+            @tweets.user =  User.find(session[:user_id])  #need to pass in a user_id in here..
+          end
       @tweets.save
-      redirect to "/tweets/#{@tweets.id}"  # "/tweet/[name of newly created figure]
+      redirect  "/tweets/#{@tweets.id}"  # "/tweet/[name of newly created figure]
     end
+
+
+
+
+
+      get "/tweets/:id" do
+
+
+        erb :'/tweets/show_tweet'
+
+      end
 
     # <this connect here
 
