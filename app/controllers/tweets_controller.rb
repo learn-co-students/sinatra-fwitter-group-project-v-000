@@ -29,15 +29,17 @@ class TweetsController < ApplicationController
     end
 
     post '/tweets' do
-    @user = current_user
+      @tweet = Tweet.new(params)
+       @user = current_user
        # This is where we set the name for song/ it want us to pass in an hash.
-          if logged_in? && !params[:content].empty?
+binding.pry
+          if logged_in? && @tweet.save 
 
-            @tweets = Tweet.create(:content => params[:content])  # shovel in Title into figure.titles to be used in the views folder
-            @user.tweets << @tweets
+            @tweet = Tweet.create(:content => params[:content])  # shovel in Title into figure.titles to be used in the views folder
+            @user.tweets << @tweet
             redirect "tweets/show_tweet"
            else
-             erb :'tweets/create_tweet'
+             erb :'/tweets/new'
           end
     end
 
