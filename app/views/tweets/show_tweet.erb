@@ -1,0 +1,7 @@
+ <h3>We are here the show tweets</h3>
+
+ <h3>UserName: <%= @user.username%></h3>
+
+ <%@user.tweets.each do |tweet| %>
+     <h3>Latest_Tweets:<%=tweet.content%></h3>
+     <%end%>

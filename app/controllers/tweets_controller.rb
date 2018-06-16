@@ -35,7 +35,7 @@ class TweetsController < ApplicationController
 
             @tweets = Tweet.create(:content => params[:content])  # shovel in Title into figure.titles to be used in the views folder
             @user.tweets << @tweets
-            redirect "tweets/tweets"
+            redirect "tweets/show_tweet"
            else
              erb :'tweets/create_tweet'
           end
