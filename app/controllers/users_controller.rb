@@ -80,8 +80,4 @@ class UsersController < ApplicationController
 
   end
 
-
-
-
-
 end  #End for class method.

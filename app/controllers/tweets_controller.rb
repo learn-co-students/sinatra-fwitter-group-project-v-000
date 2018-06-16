@@ -7,7 +7,7 @@ class TweetsController < ApplicationController
 
   get '/tweets' do
     if logged_in?
-      @users = User.all
+      @users = current_user
       @tweets = Tweet.all
       erb :'/tweets/tweets'
      else
@@ -19,34 +19,37 @@ class TweetsController < ApplicationController
 
   get '/tweets/new' do
 
-    if logged_in?
-      @users = User.all
-    erb :'/tweets/create_tweet'
-    else
-      redirect to "/tweets"
-    end
-
+    @tweet = Tweet.find_by_id(params[:id])
+        if logged_in?
+              @user = current_user
+        erb :'tweets/create_tweet'
+       else
+        redirect "/login"
+        end
     end
 
     post '/tweets' do
-
+    @user = current_user
        # This is where we set the name for song/ it want us to pass in an hash.
-          if logged_in?
-            @tweets = Tweet.create(params[:tweet])  # shovel in Title into figure.titles to be used in the views folder
-            @tweets.user =  User.find(session[:user_id])  #need to pass in a user_id in here..
+          if logged_in? && !params[:content].empty?
+
+            @tweets = Tweet.create(:content => params[:content])  # shovel in Title into figure.titles to be used in the views folder
+            @user.tweets << @tweets
+            redirect "tweets/tweets"
+           else
+             erb :'tweets/create_tweet'
           end
-      @tweets.save
-      redirect  "/tweets/#{@tweets.id}"  # "/tweet/[name of newly created figure]
     end
 
 
-
-
-
       get "/tweets/:id" do
-
-
+        @tweet = Tweet.find_by_id(params[:id])
+        if logged_in?
+              @user = current_user
         erb :'/tweets/show_tweet'
+       else
+        redirect to "/login"
+        end
 
       end
 

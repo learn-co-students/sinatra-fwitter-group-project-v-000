@@ -2,15 +2,11 @@
     <form action="/tweets" method="post">
       <h3>Create a New Tweets</h3>
 
-      <%@users.each do |user| %>
 
-      <h3>User: <input type="text" name="user.username" id="user.id"></h3>
-
-      <h3>New_tweet: <input type="text" name="tweet[content]" id="content"></h3>
+      <h3>New_tweet: <input type="text" name="content" id="content"></h3>
 <br>
-      <input type="submit"  value="submit">
+      <input type="submit"  name="submit" value="submit">
 
-      <%end%>
 
   <!-- This page is set -->
 </form>
