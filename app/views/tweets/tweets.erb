@@ -3,7 +3,7 @@
 <% #if !@user.tweets.empty? %>
   <% @user.tweets.each do |tweet| %>
 
-    <hr> <%= tweet.content %> <hr>
+    <hr style="float:left;"> <%= tweet.content %><hr>
 
   <% end %>
 <% #else %>

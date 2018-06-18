@@ -70,6 +70,12 @@ class ApplicationController < Sinatra::Base
     redirect to :'/tweets'
   end
 
+  post '/tweets/delete' do
+    binding.pry
+    Tweet.delete(params[:delete])
+    redirect to :'/tweets'
+  end
+
   get '/logout' do
     session.clear
     redirect to :'/login'
