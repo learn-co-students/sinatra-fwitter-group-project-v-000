@@ -1,0 +1,5 @@
+<h1>Welcome, <%=current_user%></h1>
+<% Tweet.all.each do |t| %>
+<h2><%= t.content %></h2>
+<p><%= t.user %></p>
+<% end %>
