@@ -1,0 +1,16 @@
+<h1 style="float:left;">Welcome, <%= @user.username %></h1>
+
+<form action="/logout" method="get">
+  <input type="submit" value="Logout" style="float:right;">
+
+</form>
+
+<% if !@user.tweets.empty? %>
+  <% @tweets.all.each do |tweet| %>
+
+    <hr> <%= tweet.content %> <hr>
+
+  <% end %>
+<% else %>
+  <h3 style="clear:both"> This fwitter feed is empty. </h3>
+<% end %>
