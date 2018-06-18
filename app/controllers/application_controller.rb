@@ -98,29 +98,35 @@ class ApplicationController < Sinatra::Base
     end
 
     get '/tweets/:id/edit' do
-      @tweet = Tweet.all.find(params[:id])
-      if logged_in? && session[:user_id] == @tweet.user_id
+      if logged_in?
+        @tweet = Tweet.all.find(params[:id])
+        if @tweet && session[:user_id] == @tweet.user_id
         erb :'tweets/edit_tweet'
+        else
+          redirect "/tweets"
+        end
       else
         redirect "/login"
       end
     end
 
     patch '/tweets/:id' do
-      @tweet = Tweet.all.find(params[:id])
-      if session[:user_id] == @tweet.user_id && params[:content] != ""
-        @tweet.update(content: params[:content])
-        @tweet.save
+      if logged_in?
+        @tweet = Tweet.all.find(params[:id])
+        if session[:user_id] == @tweet.user_id && params[:content] != ""
+          @tweet.update(content: params[:content])
           redirect "/tweets/#{@tweet.id}"
+        else
+          redirect "/tweets/#{@tweet.id}/edit"
+        end
       else
-        redirect "/tweets/#{@tweet.id}/edit"
+        redirect "/login"
       end
     end
 
     get '/tweets/:id' do
       @tweet = Tweet.all.find(params[:id])
       if logged_in?
-
         erb :'tweets/show_tweet'
       else
         redirect "/login"
@@ -130,7 +136,7 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets/:id/delete' do
     @tweet = Tweet.all.find(params[:id])
-    if session[:user_id] == @tweet.user_id
+    if logged_in? && session[:user_id] == @tweet.user_id
       @tweet.delete
       redirect "/tweets"
     else
