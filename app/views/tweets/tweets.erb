@@ -1,0 +1,15 @@
+<html>
+  <body>
+    <div class="container">
+      <h1>Welcome, <%= @user.username %>!</h1>
+      </br>
+      <div class="span6" style="text-align: left">
+        <% @tweets.all.each do |x| %>
+          <p><%= x.content %></p>
+          <p>- <%= x.user.username %></p>
+        <% end %>
+        <br>
+      </div>
+    </div>
+  </body>
+</html>
