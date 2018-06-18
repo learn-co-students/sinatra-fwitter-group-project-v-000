@@ -61,19 +61,56 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/new' do
-    erb :'/tweets/create_tweet'
+    if logged_in?
+      erb :'/tweets/create_tweet'
+    else
+      redirect to '/login'
+    end
   end
 
   post '/tweets' do
-    @tweet = Tweet.create(params)
-    @tweet.update(user_id: current_user.id)
-    redirect to :'/tweets'
+    if !params[:content].empty?
+      @tweet = Tweet.create(params)
+      @tweet.update(user_id: current_user.id)
+      redirect to :'/tweets'
+    else
+      redirect to :'/tweets/new'
+    end
   end
 
-  post '/tweets/delete' do
-    binding.pry
-    Tweet.delete(params[:delete])
-    redirect to :'/tweets'
+  get '/tweets/:id' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/show_tweet'
+    else
+      redirect to :'/login'
+    end
+  end
+
+  get '/tweets/:id/edit' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/edit_tweet'
+    else
+      redirect to:'/login'
+    end
+  end
+
+  post '/tweets/:id' do
+    @tweet = Tweet.find(params[:id])
+    if !params[:content].empty?
+      @tweet.update(params)
+      redirect to :"/tweets/#{@tweet.id}"
+    else
+      redirect to :"/tweets/#{@tweet.id}/edit"
+    end
+  end
+
+  delete '/tweets/:id/delete' do
+    if session[:user_id] == params[:id].to_i
+      Tweet.delete(params[:id])
+      redirect to :'/tweets'
+    end
   end
 
   get '/logout' do

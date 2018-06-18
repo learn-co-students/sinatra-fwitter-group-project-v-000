@@ -1,14 +1,22 @@
 <h1>Welcome, <%= @user.username %></h1>
 
-<% #if !@user.tweets.empty? %>
-  <% @user.tweets.each do |tweet| %>
+<h3>Recent tweets:</h3>
 
-    <hr style="float:left;"> <%= tweet.content %><hr>
+<% if !Tweet.all.empty? %>
+  <% Tweet.all.each do |tweet| %>
+    <% user = User.find(tweet.user_id) %>
 
+    <%= user.username %> tweeted: <%= tweet.content %>
+      <form class="" action="/tweets/<%= tweet.id %>/edit" method="get">
+        <input type="submit" name="" value="Edit">    
+      </form>
+    <hr>
+        
   <% end %>
-<% #else %>
-<!--  <h3 style="clear:both"> This fwitter feed is empty. </h3> -->
-<% #end %>
+  
+<% else %>
+  <h3 style="clear:both"> This fwitter feed is empty. </h3>
+<% end %>
 
 <form action="/tweets/new" method="get">
   <p><input type="submit" value="Create a New Post"></p>
