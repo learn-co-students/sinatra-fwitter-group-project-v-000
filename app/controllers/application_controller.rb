@@ -2,7 +2,6 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
-
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -11,14 +10,18 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    if logged_in?
+      redirect :'/tweets'
+    else
+      erb :index
+    end
   end
 
   get '/signup' do
     if !logged_in?
       erb :'/users/create_user'
     else
-      redirect to '/tweets'
+      redirect '/tweets'
     end
   end
 
@@ -26,9 +29,9 @@ class ApplicationController < Sinatra::Base
     if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
       @user = User.create(params)
       session[:user_id] = @user.id
-      redirect to :'/tweets'
+      redirect :'/tweets'
     else
-      redirect to :'/signup'
+      redirect :'/signup'
     end
   end
 
@@ -36,14 +39,14 @@ class ApplicationController < Sinatra::Base
     if !logged_in?
       erb :'/users/login'
     else
-      redirect to :'/tweets'
+      redirect :'/tweets'
     end
   end
 
   post '/login' do
     @user = User.find_by(username: params[:username])
     session[:user_id] = @user.id
-    redirect to :'/tweets'
+    redirect :'/tweets'
   end
 
   get '/users/:id' do
@@ -56,7 +59,7 @@ class ApplicationController < Sinatra::Base
       @user = current_user
       erb :'/tweets/tweets'
     else
-      redirect to :'/login'
+      redirect :'/login'
     end
   end
 
@@ -64,7 +67,7 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       erb :'/tweets/create_tweet'
     else
-      redirect to '/login'
+      redirect '/login'
     end
   end
 
@@ -72,9 +75,9 @@ class ApplicationController < Sinatra::Base
     if !params[:content].empty?
       @tweet = Tweet.create(params)
       @tweet.update(user_id: current_user.id)
-      redirect to :'/tweets'
+      redirect :'/tweets'
     else
-      redirect to :'/tweets/new'
+      redirect :'/tweets/new'
     end
   end
 
@@ -83,7 +86,7 @@ class ApplicationController < Sinatra::Base
       @tweet = Tweet.find(params[:id])
       erb :'/tweets/show_tweet'
     else
-      redirect to :'/login'
+      redirect :'/login'
     end
   end
 
@@ -98,24 +101,26 @@ class ApplicationController < Sinatra::Base
 
   post '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    if !params[:content].empty?
+    if session[:user_id] == params[:id].to_i && !params[:content].empty? 
       @tweet.update(params)
-      redirect to :"/tweets/#{@tweet.id}"
+      redirect :"/tweets/#{@tweet.id}"
     else
-      redirect to :"/tweets/#{@tweet.id}/edit"
+      redirect :"/tweets/#{@tweet.id}/edit"
     end
   end
 
   delete '/tweets/:id/delete' do
     if session[:user_id] == params[:id].to_i
       Tweet.delete(params[:id])
-      redirect to :'/tweets'
+      redirect :'/tweets'
+    else
+      redirect :"/tweets/#{params[:id]}"
     end
   end
 
   get '/logout' do
     session.clear
-    redirect to :'/login'
+    redirect :'/login'
   end
 
   helpers do

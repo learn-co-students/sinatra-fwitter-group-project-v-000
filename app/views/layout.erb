@@ -5,8 +5,12 @@
   </head>
   <body>
 
+    <% if logged_in? %>
+    <p style="font-size:10px">Currently logged in as: <%= current_user.username %></p>
+    <% end %>
+
     <div class="container">
-      <%= yield %> 
+      <%= yield %>
     </div>
 
   </body>
