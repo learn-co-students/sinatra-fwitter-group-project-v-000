@@ -23,4 +23,16 @@ class UsersController < Sinatra::Base
     erb :'/users/login'
   end
 
-end #Users Class end tag
+#Login Page- Form Submit
+  post '/login' do
+    #log in user here
+    redirect to "/tweets"
+  end
+
+#User's Show page
+  get '/users/:slug' do
+    @user = User.find_by_slug(:slug)
+    erb :'users/show'
+  end
+
+end #UsersController Class end tag
