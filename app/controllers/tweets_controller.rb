@@ -33,7 +33,7 @@ class TweetsController < ApplicationController
        # This is where we set the name for song/ it want us to pass in an hash.
           if logged_in? && !@tweet.content.blank? && @tweet.save
                @user.tweets << @tweet
-            redirect to "/tweets/#{@tweet.id}"
+            redirect to "/tweets/#{@tweet.id}"  # target Id of each tweets.
 
            else
              redirect "/tweets/new"
