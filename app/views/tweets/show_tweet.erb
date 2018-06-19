@@ -1,7 +1,11 @@
  <h3>We are here the show tweets</h3>
 
- <h3>UserName: <%= @user.username%></h3>
+     <h3>LatestTweets:<%= @tweet.content%></h3>
 
- <%@user.tweets.each do |tweet| %>
-     <h3>Latest_Tweets:<%=tweet.content%></h3>
-     <%end%>
+<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+       <input type="hidden" name="_method" value="delete">
+
+   <h4>Delete Tweet</h4>
+      <input type="submit" value="Delete Tweet">
+
+   </form>

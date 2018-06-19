@@ -18,8 +18,6 @@ class TweetsController < ApplicationController
 
 
   get '/tweets/new' do
-
-    @tweet = Tweet.find_by_id(params[:id])
         if logged_in?
               @user = current_user
         erb :'tweets/create_tweet'
@@ -30,24 +28,22 @@ class TweetsController < ApplicationController
 
     post '/tweets' do
       @tweet = Tweet.new(params)
-       @user = current_user
+      @user = current_user
+       #check if tweet is empty.
        # This is where we set the name for song/ it want us to pass in an hash.
-binding.pry
-          if logged_in? && @tweet.save 
+          if logged_in? && !@tweet.content.blank? && @tweet.save
+               @user.tweets << @tweet
+            redirect to "/tweets/#{@tweets.id}"
 
-            @tweet = Tweet.create(:content => params[:content])  # shovel in Title into figure.titles to be used in the views folder
-            @user.tweets << @tweet
-            redirect "tweets/show_tweet"
            else
-             erb :'/tweets/new'
+             redirect "/tweets/new"
           end
     end
 
 
       get "/tweets/:id" do
-        @tweet = Tweet.find_by_id(params[:id])
         if logged_in?
-              @user = current_user
+          @tweet = Tweet.find_by_id(params[:id])
         erb :'/tweets/show_tweet'
        else
         redirect to "/login"
@@ -72,5 +68,14 @@ binding.pry
     redirect to "/tweets/#{@tweets.id}"
 
   end
+
+
+    delete "/tweets/:id/delete" do       # the issue is here.
+      @tweet = Tweet.find_by_id(params[:id])
+
+      @tweet.delete
+      redirect to '/tweets'
+    end
+
 
 end
