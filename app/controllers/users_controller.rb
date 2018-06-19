@@ -32,7 +32,7 @@ class UsersController < Sinatra::Base
 #User's Show page
   get '/users/:slug' do
     @user = User.find_by_slug(:slug)
-    erb :'users/show'
+    erb :'/users/show'
   end
 
 end #UsersController Class end tag
