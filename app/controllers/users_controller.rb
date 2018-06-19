@@ -62,9 +62,9 @@ class UsersController < ApplicationController
   get '/logout' do
 
     if !logged_in?
-      # log user out by clearing the session
       redirect '/'
     else
+      # log user out by clearing the session
 
       session.clear
       redirect to "/login"
