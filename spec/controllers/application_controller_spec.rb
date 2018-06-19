@@ -1,3 +1,4 @@
+=begin
 require 'spec_helper'
 
 describe ApplicationController do
@@ -412,3 +413,4 @@ describe ApplicationController do
     end
   end
 end
+=end
