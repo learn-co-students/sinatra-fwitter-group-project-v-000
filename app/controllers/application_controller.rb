@@ -1,7 +1,5 @@
 require './config/environment'
 
-#I wonder if this will upload to github automatically?!
-
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -16,13 +14,13 @@ class ApplicationController < Sinatra::Base
     erb :'/index'
   end
 
-  get "/failure" do
-    erb :'/failure'
-  end
-
   get "/logout" do
-    session.clear
-    redirect "/"
+    if logged_in?
+      session.clear
+      redirect "/login"
+    else
+      redirect "/"
+    end
   end
 
   helpers do
