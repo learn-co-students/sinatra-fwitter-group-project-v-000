@@ -4,18 +4,23 @@ class UsersController < Sinatra::Base
 
 #Signup Page
   get '/signup' do
+    #does not let a logged in user view the signup page
     erb :'/users/create_user'
   end
 
 #Signup Page- Form Submit
   post '/signup' do
-    @user = User.create(
-      :username => params["user"]["username"],
-      :email => params["user"]["email"],
-      :password => params["user"]["password"]
-    )
-    @user.save
-    redirect to "/tweets"
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      redirect '/failure'
+    else
+      @user = User.create(
+        :username => params["user"]["username"],
+        :email => params["user"]["email"],
+        :password => params["user"]["password"]
+      )
+      @user.save
+      redirect to "/tweets"
+    end
   end
 
 #Login Page
