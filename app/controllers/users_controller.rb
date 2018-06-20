@@ -3,12 +3,12 @@ require './config/environment'
 class UsersController < ApplicationController
 
 #Signup Page
+#does not let a logged in user view the signup page
   get '/signup' do
-    #does not let a logged in user view the signup page
     if logged_in?
       redirect to '/tweets'
     else
-      erb :'users/create_user'
+      erb :'/users/create_user'
     end
   end
 
@@ -23,6 +23,7 @@ class UsersController < ApplicationController
         :password => params["password"]
       )
       @user.save
+      session[:user_id] = @user.id
       redirect to '/tweets'
     end
   end

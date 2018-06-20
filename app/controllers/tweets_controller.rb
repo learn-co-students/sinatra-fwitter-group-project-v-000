@@ -8,7 +8,7 @@ class TweetsController < ApplicationController
       @user = current_user
       erb :'/tweets/tweets'
     else
-      redirect "/login"
+      redirect to "/login"
     end
   end
 
@@ -17,7 +17,7 @@ class TweetsController < ApplicationController
     if logged_in?
       erb :'/tweets/create_tweet'
     else
-      redirect "/login"
+      redirect to "/login"
     end
   end
 
@@ -27,31 +27,52 @@ class TweetsController < ApplicationController
       redirect '/tweets/new'
     else
       @tweet = Tweet.create(:content => params["content"])
-        #how do I incorporate the user_id for each new tweet?
-        #should be able to pull from the current_user I think?
+      @tweet.user_id = current_user.id
       @tweet.save
-      redirect to "tweet/#{@tweet.id}"
+      redirect to "/tweets/#{@tweet.id}"
     end
   end
 
 #Show Tweet
-  get '/tweet/:id' do
-    @tweet = Tweet.find(params[:id])
-    erb :'/tweets/show_tweet'
+  get '/tweets/:id' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/show_tweet'
+    else
+      redirect to "/login"
+    end
   end
 
 #Edit Tweet
   get '/tweets/:id/edit' do
-    @tweet = Tweet.find(params[:id])
-    erb :'/tweets/edit_tweet'
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/edit_tweet'
+    else
+      redirect to "/login"
+    end
   end
 
 #Edit Tweet- Form Submit
   post '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    @tweet.content = params["content"]
-    @tweet.save
-    redirect to "tweet/#{@tweet.id}"
+    if params[:content] == ""
+      redirect to "/tweets/#{@tweet.id}/edit"
+    else
+      @tweet.content = params["content"]
+      @tweet.save
+      redirect to "/tweets/#{@tweet.id}"
+    end
   end
+
+#Delete Tweet Action
+  delete '/tweets/:id' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if @tweet.user_id == current_user.id
+      @tweet.delete
+    end
+      redirect to "/tweets"
+  end
+
 
 end
