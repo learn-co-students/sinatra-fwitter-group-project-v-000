@@ -3,13 +3,26 @@
   <head>
     <title>Fwitter</title>
   </head>
-  <body>
+  <body><center>
+    
+    <% if logged_in? %>
+      <a href="/tweets/new"> Create Tweet </a>
+      <a href="/logout"> Log Out </a>
+      <p>Welcome, <%=current_user.username %></p>
 
+    <% else %>
+  
+      <a href="/signup">Signup</a><br>
+      <a href="/login">Login</a>
+
+    <% end %>
+    
+    </nav>
     <div class="container">
-      <h1>Welcome to Fwitter!</h1>
-      <h2>This is located in layout.erb!</h2>
-      <h2>Don't forget to <strong>yield</strong> your views!</h2>
-    </div>
-
+      <h1>Fwitter</h1>
+      <%= yield %> 
+      
+      
+    </div>  </center>
   </body>
 </html>
