@@ -14,17 +14,24 @@ class TweetsController < ApplicationController
 
 #New Tweet
   get '/tweets/new' do
-  #  @tweet =
-    erb :'/tweets/create_tweet'
+    if logged_in?
+      erb :'/tweets/create_tweet'
+    else
+      redirect "/login"
+    end
   end
 
 #New Tweet- Form Submit
   post '/tweets' do
-    @tweet = Tweet.create(:content => params["content"])
-      #how do I incorporate the user_id for each new tweet?
-      #should be able to pull from the current_user I think?
-    @tweet.save
-    redirect to "tweet/#{@tweet.id}"
+    if params[:content] == ""
+      redirect '/tweets/new'
+    else
+      @tweet = Tweet.create(:content => params["content"])
+        #how do I incorporate the user_id for each new tweet?
+        #should be able to pull from the current_user I think?
+      @tweet.save
+      redirect to "tweet/#{@tweet.id}"
+    end
   end
 
 #Show Tweet
