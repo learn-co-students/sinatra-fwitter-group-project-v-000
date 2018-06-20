@@ -34,9 +34,8 @@ class TweetsController < ApplicationController
     if logged_in? #if logged in...
       if !params[:content].empty? #and if tweet_content isn't empty...
         @tweet = current_user.tweets.build(params) #create new tweet instance via #build
-        if @tweet.save #save new tweet instance to database
+        @tweet.save #save new tweet instance to database
           redirect "/tweets/#{@tweet.id}" #get taken to the tweet's page
-        end
       else
         redirect '/tweets/new' #if tweet content is empty, go back to new tweet form page
       end
