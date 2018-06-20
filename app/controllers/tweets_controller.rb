@@ -1,6 +1,6 @@
 require './config/environment'
 
-class TweetsController < Sinatra::Base
+class TweetsController < ApplicationController
 
 #All Tweets
   get '/tweets' do
@@ -9,13 +9,13 @@ class TweetsController < Sinatra::Base
 
 #New Tweet
   get '/tweets/new' do
-    @tweet = 
+  #  @tweet =
     erb :'/tweets/create_tweet'
   end
 
 #New Tweet- Form Submit
   post '/tweets' do
-    @tweet = Tweet.create(:content => params["tweet"]["content"])
+    @tweet = Tweet.create(:content => params["content"])
       #how do I incorporate the user_id for each new tweet?
       #should be able to pull from the current_user I think?
     @tweet.save
@@ -37,7 +37,7 @@ class TweetsController < Sinatra::Base
 #Edit Tweet- Form Submit
   post '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    @tweet.content = params["tweet"]["content"]
+    @tweet.content = params["content"]
     @tweet.save
     redirect to "tweet/#{@tweet.id}"
   end

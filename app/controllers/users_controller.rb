@@ -1,11 +1,11 @@
 require './config/environment'
 
-class UsersController < Sinatra::Base
+class UsersController < ApplicationController
 
 #Signup Page
   get '/signup' do
     #does not let a logged in user view the signup page
-    erb :'/users/create_user'
+    erb :'users/create_user'
   end
 
 #Signup Page- Form Submit
@@ -14,9 +14,9 @@ class UsersController < Sinatra::Base
       redirect '/failure'
     else
       @user = User.create(
-        :username => params["user"]["username"],
-        :email => params["user"]["email"],
-        :password => params["user"]["password"]
+        :username => params["username"],
+        :email => params["email"],
+        :password => params["password"]
       )
       @user.save
       redirect to "/tweets"
