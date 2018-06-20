@@ -1,5 +1,7 @@
 require './config/environment'
 
+#I wonder if this will upload to github automatically?!
+
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -32,5 +34,5 @@ class ApplicationController < Sinatra::Base
       User.find(session[:user_id])
     end
   end
-  
+
 end
