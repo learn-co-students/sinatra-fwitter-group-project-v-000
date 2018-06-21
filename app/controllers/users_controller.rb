@@ -7,8 +7,12 @@ class UsersController < ApplicationController
 
   post '/signup' do
     @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-
-    redirect '/tweets'
+    @user.save
+    if @user.save
+      redirect '/tweets'
+    else
+      redirect '/signup'
+    end
   end
 
 
