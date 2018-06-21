@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 
   post '/signup' do
     if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
-      user = User.create(params)
-      session[:user_id] = user.id
+      @user = User.create(params)
+      session[:user_id] = @user.id
       redirect to '/tweets'
     else
       redirect to '/signup'
@@ -21,9 +21,9 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    user = User.find_by_username(params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+    @user = User.find_by_username(params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
     end
     redirect to '/tweets'
     # not recognizing redirect

@@ -1,9 +1,8 @@
-<h1>Welcome, <%= current_user.username %></h1>
+<h1>Welcome, <%= @user.username %></h1>
+<a href="/tweets/new">Create a Fweet</a>
+<a href="/users/<%= @user.slug %>">View your Fweets</a>
 <a href="/logout">Logout</a>
 <h2>Check out these Fweets</h2>
-<% @tweets.each do |tweet| %>
-  <p>
-  <%= tweet.user.username %> tweeted: <%= tweet.content %><br />
-  <a href="/users/#{tweet.user.slug}">See more of their Fweets</a>
-  </p>
-<% end %>
+<%@tweets.each do |tweet|%>
+  <p><a href="/tweets/<%= tweet.id %>"><%=tweet.content%></a><p>
+<%end%>
