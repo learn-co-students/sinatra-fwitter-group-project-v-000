@@ -4,6 +4,6 @@ class User < ActiveRecord::Base
 
   has_many :tweets
 
-  validates :username, :password, presence: true
+  validates :username, :email, :password, presence: true
 
 end
