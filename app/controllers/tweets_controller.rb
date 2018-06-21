@@ -55,12 +55,9 @@ class TweetsController < ApplicationController
     end
 
     patch '/tweets/:id/edit' do
-      @tweet = Tweet.find_by(content: params[:content])
+      @tweet = Tweet.find_by(params[:id])
       if !params[:content].empty?
-        tweet = Tweet.update(content: params[:content])
-        @user = current_user
-        tweet.user_id = @user.id
-        current_user.tweets << tweet
+        @tweet = @tweet.update(content: params[:content])
         current_user.save
         redirect '/tweets'
       else
@@ -69,8 +66,8 @@ class TweetsController < ApplicationController
     end
 
 
-  delete '/tweets/:id/delete' do #delete action
-    @tweet = Tweet.find_by_id(params[:id])
+  delete '/tweets/:id' do #delete action
+    @tweet = Tweet.find_by(params[:content])
     @tweet.delete
   end
 
