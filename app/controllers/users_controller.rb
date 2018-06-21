@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    if !!logged_in?
+    if logged_in?
       redirect "/tweets"
     else
       erb :'/users/create_user'
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    if !!logged_in?
+    if logged_in?
       redirect "/tweets"
     else
       erb :'/users/login'
@@ -45,7 +45,10 @@ class UsersController < ApplicationController
     end
   end
 
-
-
+  get '/users/:id' do
+    @user = User.find(params[:id])
+    @user.tweets
+    erb :'/users/show'
+  end
 
 end
