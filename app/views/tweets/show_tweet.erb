@@ -1,0 +1,19 @@
+
+<h1>Welcome, <%= @user.username %></h1>
+
+<p>Your name: <%= @user.username %></p>
+<p>Your email: <%= @user.email %></p>
+<p>Session[:id]: <%= session[:id] %></p>
+<p><a href='/tweets/new'>New Tweet</a></p>
+<p><a href='/logout'>Log me out!</a></p>
+
+<h2>A Particular Tweet</h2>
+
+<h3><%= @tweet.content %></h3>
+    <a href='/tweets/<%= @tweet.id %>/edit'>Edit Tweet</a><br />
+
+    <form action='/tweets/<%= @tweet.id %>/delete' method='post'>
+      <input type="submit" id="delete" value="Delete Tweet">
+    </form>
+
+<p>Thank you for using Fwitter!</p>

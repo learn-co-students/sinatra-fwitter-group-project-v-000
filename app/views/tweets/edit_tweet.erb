@@ -1,0 +1,18 @@
+<h1>Welcome, <%= @user.username %></h1>
+
+<p>Your name: <%= @user.username %></p>
+<p>Your email: <%= @user.email %></p>
+<p><a href='/logout'>Log me out!</a></p>
+
+<h2>Edit a Tweet</h2>
+<form action="/tweets/<%= @tweet.id %>" method="post">
+  <label>Content: </label><br />
+  <textarea name="content" id="content">
+<%= @tweet.content %>
+  </textarea>
+  <input type="hidden" id="hidden" name="_method" value="patch">
+  <input type="submit" id="submit" value="Edit Tweet">
+</form>
+
+
+<p>Thank you for using Fwitter!</p>

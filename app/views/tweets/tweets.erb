@@ -1,0 +1,23 @@
+<h1>Welcome, <%= @user.username %></h1>
+
+<p>Your name: <%= @user.username %></p>
+<p>Your email: <%= @user.email %></p>
+<p>Session[:id]: <%= session[:id] %></p>
+<p><a href='/tweets/new'>New Tweet</a></p>
+<p><a href='/logout'>Log me out!</a></p>
+
+<h2>Your Tweets</h2>
+<ul>
+  <% @user_tweets.each do |tweet| %>
+    <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></li>
+  <% end %>
+</ul>
+<h2>All Tweets</h2>
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></li>
+  <% end %>
+</ul>
+
+
+<p>Thank you for using Fwitter!</p>
