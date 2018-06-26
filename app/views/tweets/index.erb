@@ -1,0 +1,6 @@
+<h2>Here are the most recent tweets:</h2>
+
+<% @tweets.each do |tweet| %>
+  <h3><%= tweet.user.username %> tweeted</h3>
+  <p><%= tweet.content %></p>
+<% end %>
