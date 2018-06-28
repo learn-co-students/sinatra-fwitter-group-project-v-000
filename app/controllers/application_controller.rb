@@ -25,7 +25,7 @@ class ApplicationController < Sinatra::Base
     email = params[:email]
     password = params[:password]
 
-    if username && email && password
+    if username != "" && email != "" && password != ""
       @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
       @user.save
     end
