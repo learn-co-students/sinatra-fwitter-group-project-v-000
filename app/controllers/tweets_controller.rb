@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    binding.pry
+    #binding.pry
     if logged_in?
       @user = current_user
       erb :'tweets/tweets'
@@ -11,7 +11,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/new' do
-    binding.pry
+    #binding.pry
     if !logged_in?
       redirect to("/login")
     else
@@ -21,7 +21,7 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    binding.pry
+    #binding.pry
     if params[:content] == ""
       redirect to("/tweets/new")
     else
@@ -30,7 +30,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:tweet_id' do
-    binding.pry
+    #binding.pry
     if !logged_in?
       redirect to("/login")
     else
@@ -40,7 +40,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:tweet_id/edit' do
-    binding.pry
+    #binding.pry
     if !logged_in?
       redirect to("/login")
     else
@@ -54,7 +54,7 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:tweet_id' do
-    binding.pry
+    #binding.pry
     @tweet = Tweet.find_by(id: params[:tweet_id])
     if params[:content] == ""
       redirect to("tweets/#{@tweet.id}/edit")
@@ -66,10 +66,10 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:tweet_id/delete' do #delete action
-    binding.pry
+    #binding.pry
     @tweet = Tweet.find_by(id: params[:tweet_id])
     if @tweet.user_id == current_user.id
-      binding.pry
+      #binding.pry
       @tweet.delete
     end
     redirect to("/tweets")
