@@ -20,35 +20,40 @@ class TweetsController < ApplicationController
   end
   
   get '/tweets/:id/edit' do 
+    tweet = Tweet.find(params[:id])
     if Helpers.is_logged_in?(session)
-    @tweet = Tweet.find(params[:id])
-    @user = Helpers.current_user(session)
-    erb :'/tweets/edit'
-   else 
-     flash[:message] = "You may not edit another user's tweet."
+      @user = Helpers.current_user(session)
     end
+    if @user.tweets.include?(tweet)
+        @tweet = tweet
+     erb :'/tweets/edit'
+    else 
+      flash[:message] = "You may not edit another user's tweet."
+     redirect to '/tweets'
+    end
+    
   end
   
   patch '/tweets/:id' do 
     @tweet = Tweet.find(params[:id])
-    if @tweet.user_id == session[:id]
       @tweet.content = params[:content]
       @tweet.save
       redirect to "/tweets/#{@tweet.id}"
-    else 
-      redirect '/login'
-    end
   end
   
   delete '/tweets/:id/delete' do 
-	   if Helpers.is_logged_in?(session)
-	     @tweet = Tweet.find(params[:id])
+	   tweet = Tweet.find(params[:id])
+    if Helpers.is_logged_in?(session)
       @user = Helpers.current_user(session)
-	    @tweet.delete
-	  redirect to '/tweets'
-  	else 
-  	  flash[:message] = "You may not edit another user's tweet."
-	  end
+    end
+    if @user.tweets.include?(tweet)
+        @tweet = tweet
+        @tweet.delete
+     redirect to '/tweets'
+    else 
+      flash[:message] = "You may not edit another user's tweet."
+     redirect to '/tweets'
+    end
 	end
 
   
