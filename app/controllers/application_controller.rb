@@ -28,8 +28,11 @@ class ApplicationController < Sinatra::Base
     if username != "" && email != "" && password != ""
       @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
       @user.save
+      redirect to '/tweets'
+    else
+      redirect to '/signup'
     end
-    erb :'/tweets/tweets'
+
   end
 
   post '/login' do
@@ -40,6 +43,10 @@ class ApplicationController < Sinatra::Base
     else
         redirect "/failure"
     end
+  end
+
+  get '/tweets' do
+      erb :'/tweets/tweets'
   end
 
 end
