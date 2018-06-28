@@ -24,7 +24,9 @@ class TweetsController < ApplicationController
     if @tweet.user_id == session[:id]
       @tweet.update(params[:content])
       @tweet.save
-    redirect to "/tweets/#{@tweet.id}"
+      redirect to "/tweets/#{@tweet.id}"
+    else 
+      redirect '/login'
     end
   end
   
