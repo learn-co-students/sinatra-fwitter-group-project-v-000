@@ -13,7 +13,7 @@ class UsersController < ApplicationController
    if !User.find_by(username: params[:username]) 
    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
    session[:id] = @user.id 
-   redirect to "/#{@user.username}"
+   redirect to "/tweets/new"
   else 
   flash[:message] = "That username is already taken."
   redirect to "/signup"
@@ -26,18 +26,15 @@ class UsersController < ApplicationController
   end
   
   post '/login' do 
-    @user = User.find_by(username: params[:username], password: params[:password])
-    if @user && @user.authenticate(params["password"])
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
 		  session[:user_id] = @user.id 
+		  redirect to '/tweets'
     else 
       erb :error
     end
   end
   
-  get '/:username' do 
-    @user = User.find(session[:id])
-    @tweets = @user.tweets.all
-    erb :'/users/show'
-  end
+ 
 
 end
