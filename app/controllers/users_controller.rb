@@ -1,4 +1,9 @@
+require 'sinatra/base'
+require 'rack-flash'
+
 class UsersController < ApplicationController
+  
+  use Rack::Flash
 
  get '/signup' do 
    erb :'/users/signup'
@@ -11,7 +16,7 @@ class UsersController < ApplicationController
    redirect to "/#{@user.username}"
   else 
   flash[:message] = "That username is already taken."
-  redirect to "/users/signup"
+  redirect to "/signup"
      
   end
  end
