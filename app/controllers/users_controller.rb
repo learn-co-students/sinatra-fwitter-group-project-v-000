@@ -5,9 +5,15 @@ class UsersController < ApplicationController
  end
  
  post '/signup' do 
+   if !User.find_by(username: params[:username]) 
    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
    session[:id] = @user.id 
-   redirect to "/#{@user.id}"
+   redirect to "/#{@user.username}"
+  else 
+  flash[:message] = "That username is already taken."
+  redirect to "/users/signup"
+     
+  end
  end
  
   get '/login' do 
@@ -23,8 +29,7 @@ class UsersController < ApplicationController
     end
   end
   
-  get '/:id' do 
-    @session = session
+  get '/:username' do 
     @user = User.find(session[:id])
     @tweets = @user.tweets.all
     erb :'/users/show'
