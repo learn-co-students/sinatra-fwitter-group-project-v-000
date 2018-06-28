@@ -22,7 +22,6 @@ class UsersController < ApplicationController
   get '/login' do
     binding.pry
     if logged_in?
-      binding.pry
       redirect to("/tweets")
     end
 
@@ -34,7 +33,6 @@ class UsersController < ApplicationController
     binding.pry
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
-    binding.pry
       session[:user_id] = @user.id
       redirect to("/tweets")
     else
