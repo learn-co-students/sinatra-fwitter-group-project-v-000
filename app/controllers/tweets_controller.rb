@@ -10,19 +10,19 @@ class TweetsController < ApplicationController
   end
   
   get '/tweets/:id' do 
-    @tweet = Tweet.find_by(user_id: session[:id])
+    @tweet = Tweet.find(params[:id])
     erb :'/tweets/show'
   end
   
   get '/tweets/:id/edit' do 
-    
+    @tweet = Tweet.find(params[:id])
     erb :'/tweets/edit'
   end
   
   patch '/tweets/:id' do 
     @tweet = Tweet.find(params[:id])
     if @tweet.user_id == session[:id]
-      @tweet.update(params[:content])
+      @tweet.content = params[:content]
       @tweet.save
       redirect to "/tweets/#{@tweet.id}"
     else 
