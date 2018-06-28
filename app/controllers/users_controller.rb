@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
 
  get '/signup' do 
-   
    erb :'/users/signup'
+ end
+ 
+ post '/signup' do 
+   @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+   session[:id] = @user.id 
+   redirect to "#{@user.username}"
  end
  
  
