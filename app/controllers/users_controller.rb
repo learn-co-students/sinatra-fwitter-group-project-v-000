@@ -31,10 +31,13 @@ class UsersController < ApplicationController
 		  session[:user_id] = @user.id 
 		  redirect to '/tweets'
     else 
-      erb :error
+       flash[:message] = "The username or password is incorrect."
     end
   end
   
- 
+  get '/logout' do 
+    session.clear
+    redirect '/login'
+  end
 
 end

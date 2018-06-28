@@ -25,7 +25,7 @@ class TweetsController < ApplicationController
     @user = Helpers.current_user(session)
     erb :'/tweets/edit'
    else 
-     erb :error
+     flash[:message] = "You may not edit another user's tweet."
     end
   end
   
@@ -41,12 +41,13 @@ class TweetsController < ApplicationController
   end
   
   delete '/tweets/:id/delete' do 
-	  @tweet = Tweet.find_by_id(params[:id])
-	  if @tweet.user_id == session[:id]
+	   if Helpers.is_logged_in?(session)
+	     @tweet = Tweet.find(params[:id])
+      @user = Helpers.current_user(session)
 	    @tweet.delete
 	  redirect to '/tweets'
   	else 
-  	  redirect '/login'
+  	  flash[:message] = "You may not edit another user's tweet."
 	  end
 	end
 

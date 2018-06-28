@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <%=@tweet.content%>
 
 <br></br>
@@ -9,3 +13,7 @@
   <input type="submit" value="Delete Tweet">
   
 </form>
+
+<br></br><br></br><br></br>
+
+<a href="/logout">Log Out</a>
