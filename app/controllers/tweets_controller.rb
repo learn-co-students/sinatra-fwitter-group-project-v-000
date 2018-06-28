@@ -65,5 +65,19 @@ class TweetsController < ApplicationController
     end
   end
 
+  delete '/tweets/:tweet_id/delete' do #delete action
+    binding.pry
+    @tweet = Tweet.find_by(id: params[:tweet_id])
+    if @tweet.user_id == current_user.id
+      binding.pry
+      @tweet.delete
+    end
+    redirect to("/tweets")
+
+
+    #erb :'tweets/tweets'
+    #erb :deleted
+  end
+
 
 end
