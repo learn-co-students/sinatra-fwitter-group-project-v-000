@@ -1,12 +1,22 @@
 class TweetsController < ApplicationController
 
   get '/tweets/new' do 
+    if Helpers.is_logged_in?(session)
+    @user = Helpers.current_user(session)
     erb :'/tweets/new'
+   else 
+     redirect to '/'
+   end
   end
   
   get '/tweets' do 
+    if Helpers.is_logged_in?(session)
+    @user = Helpers.current_user(session)
     @tweets = Tweet.all
     erb :'/tweets/index'
+    else 
+     redirect to '/'
+   end
   end
   
   post '/tweets' do 
@@ -15,8 +25,13 @@ class TweetsController < ApplicationController
   end
   
   get '/tweets/:id' do 
+    if Helpers.is_logged_in?(session)
+    @user = Helpers.current_user(session)
     @tweet = Tweet.find(params[:id])
     erb :'/tweets/show'
+    else 
+     redirect to '/'
+   end
   end
   
   get '/tweets/:id/edit' do 
