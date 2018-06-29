@@ -16,22 +16,23 @@
     .tweet_box {
       border-style: solid;
       margin: 10px;
+      max-width: 600px;
     }
     
   </style>
   
 </head>
 
-<% if flash.has?(:message) %>
+<p class="flash"><% if flash.has?(:message) %>
   <%= flash[:message] %>
-<% end %>
+<% end %></p>
 
 <h3>All Tweets</h3>
 
 <%@tweets.each do |tweet|%>
 <div class="tweet_box"><h4 class="user"><%=tweet.user.username%></h4>
-<p><a class="tweet" href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></p>
-<%end%></div>
+<p><a class="tweet" href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></p></div>
+<%end%>
 
 
 <br></br><br></br><br></br>

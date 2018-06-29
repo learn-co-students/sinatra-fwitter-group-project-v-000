@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 		  redirect to '/tweets'
     else 
        flash[:message] = "The username or password is incorrect."
+       redirect to '/login'
     end
   end
   

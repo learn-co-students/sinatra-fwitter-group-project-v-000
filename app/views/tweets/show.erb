@@ -1,10 +1,23 @@
-<% if flash.has?(:message) %>
+<head></head>
+  <style>
+    
+    .show_tweet {
+      margin-left:15px;
+      margin-bottom:40px;
+    }
+  </style>
+</head>
+
+<p class="flash"><% if flash.has?(:message) %>
   <%= flash[:message] %>
-<% end %>
+<% end %></p>
 
-<%=@tweet.content%>
 
-<br></br>
+<h2 class="username"><%=@tweet.user.username%></h2>
+
+<p class="show_tweet"><%=@tweet.content%></p>
+
+
 
 <form method="POST" action="/tweets/<%=@tweet.id%>/delete">
   
