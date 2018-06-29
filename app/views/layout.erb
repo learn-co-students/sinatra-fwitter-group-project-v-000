@@ -2,9 +2,35 @@
 <html>
   <head>
     <title>Fwitter</title>
+    <style>
+      
+      #fwitter {
+        color: darkblue;
+        display: inline;
+      }
+      
+      body {
+        background-color: lightblue;
+        margin: 20px;
+      }
+      
+      .logout {
+        float: right;
+         display: inline;
+      }
+      .tweets {
+        float: right;
+         display: inline;
+         padding-right: 10px;
+      }
+      
+    </style>
+    
   </head>
   <body>
-    <h1>Fwitter</h1>
+    <h1 id="fwitter">Fwitter</h1>
+    <a href="/logout" class="logout">Log Out</a>
+    <a href="/tweets" class="tweets">All Tweets</a>
     <div class="container">
       
     </div>
