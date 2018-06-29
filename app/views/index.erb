@@ -9,6 +9,10 @@
 </head>
 
 <body>
+  <p class="flash"><% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %></p>
+  
   <h3>Welcome to Fwitter!</h3>
   <h4>Please sign up or log in.</h4>
   <a href="/signup" class="links">Sign Up</a>
