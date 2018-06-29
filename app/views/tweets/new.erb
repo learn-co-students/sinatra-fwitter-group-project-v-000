@@ -1,4 +1,6 @@
-
+<p class="flash"><% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %></p>
 
 <form method="POST" action="/tweets">
   

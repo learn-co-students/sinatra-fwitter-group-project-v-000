@@ -5,6 +5,7 @@ class TweetsController < ApplicationController
     @user = Helpers.current_user(session)
     erb :'/tweets/new'
    else 
+     flash[:message] = "You must login to view that page."
      redirect to '/'
    end
   end
@@ -15,6 +16,7 @@ class TweetsController < ApplicationController
     @tweets = Tweet.all
     erb :'/tweets/index'
     else 
+      flash[:message] = "You must login to view that page."
      redirect to '/'
    end
   end
@@ -30,6 +32,7 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find(params[:id])
     erb :'/tweets/show'
     else 
+    flash[:message] = "You must login to view that page."
      redirect to '/'
    end
   end
@@ -66,7 +69,7 @@ class TweetsController < ApplicationController
         redirect to '/tweets'
       end
     else 
-      flash[:message] = "You may not edit another user's tweet."
+      flash[:message] = "You may not delete another user's tweet."
      redirect to '/tweets'
     end
 	end
