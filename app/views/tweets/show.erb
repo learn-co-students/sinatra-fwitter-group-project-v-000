@@ -1,0 +1,17 @@
+<h1>Tweet #<%= @tweet.id %></h1>
+<h3>By: <a href="/users/<%= @tweet.user.slug %>"><%= @tweet.user.username %></a></h3>
+<h3><%= @tweet.content %></h3>
+<p>Click here to edit your tweet.</p>
+<br>
+<form action="/tweets/<%= @tweet.id %>/edit" method="GET">
+  <input type="submit" value="Edit Tweet">
+</form>
+<br>
+<p>Or <a href="/tweets">Click here</a> to return to your newsfeed.</p>
+<br>
+<p>Or click here to delete your tweet.</p>
+<br>
+<form action="/tweets/<%= @tweet.id %>/delete" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Tweet">
+</form>

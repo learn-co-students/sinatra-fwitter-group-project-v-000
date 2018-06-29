@@ -1,0 +1,6 @@
+<h1>Profile Page for <%= @user.username %></h1>
+<h2>Tweets</h2>
+<% @user.tweets.each do |tweet| %>
+  <h3><%= tweet.content %><br><a href="/tweets/<%= tweet.id %>">Click here to view this tweet</a></h3>
+<% end %>
+<h5><a href="/tweets">Click here</a> to return to your newsfeed.</h5>
