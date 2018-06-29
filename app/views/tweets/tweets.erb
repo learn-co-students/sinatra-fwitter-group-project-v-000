@@ -1,0 +1,10 @@
+ <a href="/tweets/new"> Create Tweet</a>
+ <br>
+ <a href="/logout">Log Out</a>
+
+<% Tweet.all.each do |t|%>
+  <br>
+  <p><%= t.content %></p>
+  <br>
+<% end %>
+<!-- lets user view tweets index if logged in -->
