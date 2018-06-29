@@ -45,11 +45,11 @@ class TweetsController < ApplicationController
 	   tweet = Tweet.find(params[:id])
     if Helpers.is_logged_in?(session)
       @user = Helpers.current_user(session)
-    end
     if @user.tweets.include?(tweet)
         @tweet = tweet
         @tweet.delete
      redirect to '/tweets'
+    end
     else 
       flash[:message] = "You may not edit another user's tweet."
      redirect to '/tweets'
