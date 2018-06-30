@@ -1,1 +1,7 @@
-<h1>Show Page</h1>
+<h1>Show User Page</h1>
+<p> List of your tweets, <%= @user.username %>
+<% @user.tweets.each do |tweet| %>
+  <div>
+    <%= tweet.content %>
+  </div>
+<% end %>

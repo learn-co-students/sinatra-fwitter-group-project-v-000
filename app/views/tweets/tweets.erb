@@ -1,7 +1,9 @@
 <h1>Welcome, List all tweets</h1>
 
 <% Tweet.all.each do |tweet|%>
-  <%= tweet.content %>
+  <%= tweet.content %><br></br>
 <% end %>
 
 <a href="/tweets/new">Create a New Tweet here !</a>
+
+<a href="/logout">Logout</a>
