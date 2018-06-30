@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    if Helper.new.is_logged_in?(session)
+    if session.has_key?(:user_id)
       redirect '/tweets'
     else
       erb :'users/new'
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    if Helper.new.is_logged_in?(session)
+    if session.has_key?(:user_id)
       redirect '/tweets'
     else
       erb :'users/login'
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    if Helper.new.is_logged_in?(session)
+    if session.has_key?(:user_id)
       session.clear
       redirect '/login'
     else

@@ -1,9 +1,13 @@
-<h1>Welcome, <%= @user.username %></h1>
+<h2>Welcome, <%= @user.username %></h2>
+
+<h4><a href="/tweets/new">Post a Tweet</a></h4>
+
+<h3>Newsfeed:</h3>
 
 <% Tweet.all.each do |tweet| %>
   <div class="tweet">
     <ul>
-      <li><%= tweet.content %></li>
+      <li><%= tweet.content %> -<%= User.find(tweet.user_id).username %> <a href="/tweets/<%= tweet.id %>">View Tweet</a></li>
     </ul>
   </div>
 <% end %>

@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    if Helper.new.is_logged_in?(session)
+    if session.has_key?(:user_id)
       @user = User.find(session[:user_id])
       erb :'tweets/index'
     else
@@ -10,7 +10,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/new' do
-    if Helper.new.is_logged_in?(session)
+    if session.has_key?(:user_id)
       @user = User.find(session[:user_id])
       erb :'tweets/new'
     else
@@ -24,13 +24,14 @@ class TweetsController < ApplicationController
       user = User.find(session[:user_id])
       user.tweets << tweet
       user.save
+      redirect "/tweets/#{tweet.id}"
     else
       redirect '/tweets/new'
     end
   end
 
   get '/tweets/:tweet_id' do
-    if Helper.new.is_logged_in?(session)
+    if session.has_key?(:user_id)
       @tweet = Tweet.find(params[:tweet_id])
       erb :'tweets/show'
     else
@@ -49,8 +50,8 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:tweet_id/edit' do
-    if Helper.new.is_logged_in?(session)
-      @tweet = Tweet.find(params[:tweet_id])
+    @tweet = Tweet.find(params[:tweet_id]) if session.has_key?(:user_id) && params.has_key?(:tweet_id)
+    if session.has_key?(:user_id) && @tweet.user_id == session[:user_id]
       erb :'/tweets/edit'
     else
       redirect '/login'

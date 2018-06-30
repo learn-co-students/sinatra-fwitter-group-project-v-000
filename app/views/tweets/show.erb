@@ -3,8 +3,10 @@
 <h3><%= @tweet.content %></h3>
 <h4>By: <%= User.find(@tweet.user_id).username %></h4>
 
-<form action="/tweets/<%= @tweet.id %>/delete" method="post">
-  <input type="submit" name="Delete Tweet" id="Delete Tweet">
+<form action="/tweets/<%= @tweet.id %>/edit" method="get">
+  <input type="submit" value="Edit Tweet" id="Edit Tweet">
 </form>
 
-<a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+<form action="/tweets/<%= @tweet.id %>/delete" method="post">
+  <input type="submit" value="Delete Tweet" id="Delete Tweet">
+</form>
