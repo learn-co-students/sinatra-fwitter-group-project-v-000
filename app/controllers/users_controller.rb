@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
-      #raise params.inspect
+
       username = params[:username]
       email = params[:email]
       password = params[:password]
@@ -26,6 +26,7 @@ class UsersController < ApplicationController
         user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
         user.save
         session[:user_id] = user.id
+        binding.pry
         redirect to '/tweets'
       else
         redirect to '/signup'
