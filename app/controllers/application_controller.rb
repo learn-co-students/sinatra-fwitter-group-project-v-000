@@ -3,8 +3,11 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
+
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "password_security"
   end
 
   get '/' do
@@ -14,9 +17,9 @@ class ApplicationController < Sinatra::Base
   get "/logout" do
     if logged_in?
       session.clear
-      redirect "/"
+      redirect "/login"
     else
-        redirect "/login"
+        redirect "/"
     end
 
   end
