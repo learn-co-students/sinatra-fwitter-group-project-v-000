@@ -1,10 +1,11 @@
 <h1>Welcome, List all tweets</h1>
+
 <% @tweets.each do |tweet|%>
   <%= tweet.content %>
 
 <a href="/tweets/<%=tweet.id%>/edit">Edit</a>
 
-<a href="/tweets/<%=tweet.id%>/delete">Delete</a>
+<a href="/tweets/<%=tweet.id%>/delete">Delete Tweet</a>
 
 
 <% end %>
