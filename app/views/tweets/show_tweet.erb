@@ -1,16 +1,9 @@
 <h1>Show single tweet</h1>
 
+<label><%= @tweeet.content %></label>
 
 
-<form action="/tweets/<%=@tweet.id%>/edit" method="POST">
-<input name="_method" type="hidden" value="patch" />
-<br></br>
-
-<label><%= @tweet.content %></label>
-
-  <input type="submit" value="Edit Tweet">
-
-</form>
+<a href="/tweets/<%=@tweet.id%>/edit">Edit</a>
 
 <form action="/tweets/<%=@tweet.id%>/delete" method="POST">
 <input name="_method" type="hidden" value="delete" />
