@@ -1,0 +1,22 @@
+
+<br></br>
+
+<h1>This is what was wrote!</h1>
+
+<div class="tweet_content">
+
+  <h3><%= @tweet.content %></h3>
+  <p>Tweeted by: <%= @tweet.user.username %></p>
+  <br></br>
+
+
+    <p><a href='/tweets/<%= @tweet.id %>/edit'>Edit Tweet</a></p>
+    
+
+    <form method="post" action='/tweets/<%= @tweet.id %>/delete'>
+      <input type="submit" id='Delete Tweet' value='Delete Tweet'>
+    </form>
+
+
+
+</div>

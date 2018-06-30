@@ -1,0 +1,23 @@
+<div class="edit_tweet">
+
+<h2>Edit your Tweet</h2>
+<br></br>
+<!-- Displays current tweet -->
+  <div class="tweet">
+    <h3>This is what you previously said:</h3>
+    <p><%= @tweet.content %></p>
+  </div>
+  <br></br>
+
+  <!--Allows user to edit current tweet -->
+  <div class="new_tweet">
+    <h3>What would you like it to say?</h3>
+
+    <form method="post" action='/tweets/<%= @tweet.id %>'>
+      <textarea name="tweet[content]" id="content" maxlength="250" rows="7" cols="50"><%= @tweet.content %></textarea><br>
+      <input type="submit" id="submit" value="Edit Tweet">
+    </form>
+  </div>
+
+
+</div>
