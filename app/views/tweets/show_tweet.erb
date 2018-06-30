@@ -3,6 +3,7 @@
      <p>LatestTweets: <%= @tweet.content%></p>
 
 <form action="/tweets/<%=@tweet.id%>/delete" method="post">
+<!-- we had the delete buttom in here -->
 
        <input type="hidden" name="_method" value="delete">
 

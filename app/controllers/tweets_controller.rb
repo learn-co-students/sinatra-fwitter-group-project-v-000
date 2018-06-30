@@ -97,6 +97,4 @@ class TweetsController < ApplicationController
   end
 
 
-
-
 end   #end of twitter controller method
