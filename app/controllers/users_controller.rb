@@ -33,7 +33,7 @@ class UsersController < ApplicationController
           session[:user_id] = user.id
           redirect "/tweets"
       else
-            redirect '/login'
+            redirect '/signup'
       end
     end
 
@@ -41,8 +41,6 @@ class UsersController < ApplicationController
         @user = User.find_by_slug(:slug)
         if @user.logged_in?
           erb :'/users/show'
-        else
-          redirect to '/tweets'
         end
       end
 
