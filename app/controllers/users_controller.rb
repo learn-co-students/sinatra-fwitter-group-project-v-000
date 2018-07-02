@@ -32,4 +32,11 @@ class UsersController < ApplicationController
 		erb :'/users/show'
 	end
 
+	get '/index' do
+		if logged_in?
+			redirect '/tweets/tweets'
+		end
+	end
+
+
 end
