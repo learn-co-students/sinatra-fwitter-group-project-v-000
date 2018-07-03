@@ -23,7 +23,6 @@ class ApplicationController < Sinatra::Base
 
   	end
 
-
   	get '/' do
     	erb :'index'
   	end
@@ -38,7 +37,7 @@ class ApplicationController < Sinatra::Base
 
   	post '/signup' do	
   		if params["username"].empty? || params["password"].empty? || params["email"].empty?
-  			redirect '/signup'
+  			redirect to '/signup'
   		else
   			user = User.create(username: params["username"], password: params["password"], email: params["email"])
   			session[:user_id] = user.id

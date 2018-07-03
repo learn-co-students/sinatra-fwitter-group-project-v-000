@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 2) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
-    t.string "tweets"
   end
 
 end
