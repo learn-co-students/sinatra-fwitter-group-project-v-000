@@ -17,9 +17,10 @@ class TweetsController < ApplicationController
 		end
 	end
 
-	post '/tweets' do
+	post '/tweets/new' do
 		if logged_in?
-			tweet = Tweet.create(content: params["content"])
+			Tweet.create(content: params["content"])
+			redirect to '/tweets'
 		end
 	end
 
