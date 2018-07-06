@@ -1,5 +1,5 @@
 require './config/environment'
-
+require 'pry'
 class TweetsController < ApplicationController
 
   get '/tweets/:id/edit' do
@@ -42,10 +42,14 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets' do
+  puts "*** Tweets GET"
     redirect "/login" if !logged_in?
     @user = current_user
     @tweets = Tweet.all
-    @user_tweets = Tweet.all.find{|tweet| tweet.user_id = current_user.user_id}
+    puts "*** Tweets current user id #{current_user.id}"
+    @user_tweets = Tweet.all.find{|tweet| tweet.user_id == current_user.id}
+      puts "*** Tweets GET erb ready"
+      binding.pry
     erb :"/tweets/tweets"
   end
 
