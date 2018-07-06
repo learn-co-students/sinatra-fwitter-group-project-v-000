@@ -2,7 +2,7 @@
 <h3>Your Tweets....</h3>
 <ul>
   <% @user_tweets.each do |tweet| %>
-    <li><%=tweet.content%></li>
+    <li><%=tweet.content%><a class="user_button" href="/tweets/<%=tweet.id%>/edit">Edit</a><a class="user_button" href="/tweets/<%=tweet.id%>/edit">Delete</a></li></li>
   <% end %>
 </ul>
 <h3>All Tweets....</h3>

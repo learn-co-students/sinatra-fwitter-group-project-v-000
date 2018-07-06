@@ -3,6 +3,7 @@ require 'pry'
 class TweetsController < ApplicationController
 
   get '/tweets/:id/edit' do
+    puts "Tweets edit id #{params[:id]}"
     redirect '/login' if !logged_in?
     @tweet = Tweet.find(params[:id])
     redirect '/tweets' if @tweet.user_id != session[:user_id]
