@@ -42,14 +42,10 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets' do
-  puts "*** Tweets GET"
     redirect "/login" if !logged_in?
     @user = current_user
     @tweets = Tweet.all
-    puts "*** Tweets current user id #{current_user.id}"
-    @user_tweets = Tweet.all.find{|tweet| tweet.user_id == current_user.id}
-      puts "*** Tweets GET erb ready"
-      binding.pry
+    @user_tweets = Tweet.all.find_all {|tweet| tweet.user_id == current_user.id}
     erb :"/tweets/tweets"
   end
 
