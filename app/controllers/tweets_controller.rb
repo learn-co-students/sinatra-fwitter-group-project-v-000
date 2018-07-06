@@ -45,8 +45,10 @@ class TweetsController < ApplicationController
     redirect "/login" if !logged_in?
     @user = current_user
     @tweets = Tweet.all
+    @user_tweets = Tweet.all.find{|tweet| tweet.user_id = current_user.user_id}
     erb :"/tweets/tweets"
   end
+
   delete '/tweets/:id/delete' do
     redirect "/login" if !logged_in?
     redirect "/tweets/#{params[:id]}" if current_user.id != @tweet.user_id
