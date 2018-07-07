@@ -1,7 +1,7 @@
 <h3>Sign Up</h3>
-<form class="user_form" action="/signup" method="POST">
-	<input type="text" name="username" placeholder="Username:" required >
-  <input type="email" name="email" placeholder="Email:" required >
-	<input type="password" name="password" placeholder="Password:" required >
-	<input type="submit" value="Sign Up">
+<form class="user_form" action="/signup" method="POST" id="new_user_form">
+	<label for="username">User Name:</label><input type="text" id="username" name="username" required ><br>
+  <label for="email">Email:</label><input type="email" id="email" name="email" required ><br>
+	<label for="password">Password:</label><input type="password" id="password" name="password"required ><br>
+	<div class="button_panel"><button type="submit"form="new_user_form" value="Submit">Sign Up</button></div>
 </form>

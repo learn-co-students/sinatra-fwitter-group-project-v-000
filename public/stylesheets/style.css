@@ -16,7 +16,7 @@ body {
   padding: 10px;
   background:#e6e6e6;
   margin: auto;
-  width: 50%;
+  width: 30%;
   border-radius: 10px;
 }
 .button_panel {
@@ -26,7 +26,7 @@ body {
   border-radius: 10px;
   text-align: center;
 }
-.button_panel a {
+.button_panel a, button {
   background-color: black;  /* 0b7bc0, bdffb5 */
   color: white;
   padding: .5em;
