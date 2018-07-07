@@ -14,9 +14,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    if logged_in?
-      redirect '/tweets'
-    end
+    redirect '/tweets' if logged_in?
     erb :"users/login"
   end
   post '/login' do
@@ -35,13 +33,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    if logged_in?
-      redirect '/tweets'
-    end
+    redirect '/tweets' if logged_in?
     erb :"users/create_user"
   end
   post '/signup' do
-    # fields required in erb but additional check for test (or if someone bypasses the form)
+    # fields required in erb but additional check for rspec (or if someone bypasses the form)
     if params[:username].length == 0 || params[:email].length == 0 || params[:password].length == 0
       redirect '/signup'
     end
@@ -52,7 +48,6 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/users/:slug' do
-#    redirect "/login" if !logged_in?
     @user = User.find_by_slug(params[:slug])
     erb :"/users/show"
   end

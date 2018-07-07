@@ -39,3 +39,14 @@ body {
 ul {
   list-style-type: none;
 }
+.grid-container {
+  display: grid;
+  grid-column-gap: 50px;
+  grid-template-columns: auto auto;
+  /* background-color: #1DA1F2;*/
+  padding: 10px;
+}
+.grid-item {
+  border: 1px solid #1DA1F2;
+  padding: 20px;
+}

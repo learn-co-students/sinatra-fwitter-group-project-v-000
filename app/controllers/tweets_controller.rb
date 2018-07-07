@@ -1,5 +1,5 @@
 require './config/environment'
-require 'pry'
+
 class TweetsController < ApplicationController
 
   get '/tweets/:id/edit' do
@@ -43,8 +43,10 @@ class TweetsController < ApplicationController
   get '/tweets' do
     redirect "/login" if !logged_in?
     @user = current_user
-    @tweets = Tweet.all
+    # sort tweets so oldest is displayed first
+    @tweets = Tweet.all.sort {|t1,t2| t2.created_at <=> t1.created_at }
     @user_tweets = Tweet.all.find_all {|tweet| tweet.user_id == current_user.id}
+    @user_tweets.sort {|t1,t2| t2.created_at <=> t1.created_at }
     erb :"/tweets/tweets"
   end
 
