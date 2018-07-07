@@ -2,6 +2,7 @@
 <h4>Author: <%=@user.username%></h4>
 <p><%= @tweet.content %></p>
 <div class="button_panel">
-  <a href="/<%=@tweet.id%>/delete">Delete Tweet</a>
-  <a href="/<%=@tweet.id%/edit>">Edit Tweet</a>
+
+<form method="post" action="/tweets/<%=@tweet.id%>/delete"><input id="hidden" type="hidden" name="_method" value="delete"><input type="submit" id="Delete Tweet" value="Delete Tweet"></form>
+<a href="/<%=@tweet.id%/edit>">Edit Tweet</a>
 </div>

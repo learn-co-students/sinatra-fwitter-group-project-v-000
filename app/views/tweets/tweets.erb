@@ -2,7 +2,11 @@
 <h3>Your Tweets....</h3>
 <ul>
   <% @user_tweets.each do |tweet| %>
-    <li><%=tweet.content%><a class="user_button" href="/tweets/<%=tweet.id%>/edit">Edit</a><a class="user_button" href="/tweets/<%=tweet.id%>/edit">Delete</a></li></li>
+    <li>
+      <%=tweet.content%>
+      <a class="user_button" href="/tweets/<%=tweet.id%>/edit">Edit</a>
+      <form method="post" action="/tweets/<%=tweet.id%>/delete"><input id="hidden" type="hidden" name="_method" value="delete"><input type="submit" title="Delete Tweet" id="Delete Tweet" value="Delete Tweet"></form>
+    </li>
   <% end %>
 </ul>
 <h3>All Tweets....</h3>

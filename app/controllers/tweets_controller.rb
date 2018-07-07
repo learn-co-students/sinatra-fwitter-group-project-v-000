@@ -3,7 +3,6 @@ require 'pry'
 class TweetsController < ApplicationController
 
   get '/tweets/:id/edit' do
-    puts "Tweets edit id #{params[:id]}"
     redirect '/login' if !logged_in?
     @tweet = Tweet.find(params[:id])
     redirect '/tweets' if @tweet.user_id != session[:user_id]
@@ -51,7 +50,9 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
+    puts "Tweets delete id= #{params[:id]}"
     redirect "/login" if !logged_in?
+    @tweet = Tweet.find(params[:id])
     redirect "/tweets/#{params[:id]}" if current_user.id != @tweet.user_id
     Tweet.delete(params[:id])
     redirect '/tweets'
