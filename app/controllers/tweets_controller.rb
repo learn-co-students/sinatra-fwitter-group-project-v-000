@@ -37,7 +37,6 @@ class TweetsController < ApplicationController
     redirect "/login" if !logged_in?
     @tweet = Tweet.find(params[:id])
     @user = User.find(@tweet.user_id)
-    redirect "/failure" if current_user.id != @tweet.user_id
     erb :"/tweets/show_tweet"
   end
 
