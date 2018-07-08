@@ -3,5 +3,5 @@
 	<input id="hidden" type="hidden" name="_method" value="patch">
 	<input type="text" maxlength="140" name="content" value="<%=@tweet.content%>" required>
 	<input type="submit" id="submit" value="Update Tweet">
-	<form method="post" action="/tweets/<%=@tweet.id%>/delete"><input id="hidden" type="hidden" name="_method" value="delete"><input type="submit" id="Delete Tweet" value="Delete Tweet"></form>
 </form>
+	<form method="post" action="/tweets/<%=@tweet.id%>/delete"><input id="hidden" type="hidden" name="_method" value="delete"><input type="submit" id="Delete Tweet" value="Delete Tweet"></form>

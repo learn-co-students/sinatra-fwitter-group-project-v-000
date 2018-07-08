@@ -2,9 +2,17 @@ require './config/environment'
 
 class TweetsController < ApplicationController
 
+  configure do
+    set :public_folder, 'public'
+    set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "ftweet"
+  end
+
   get '/tweets/:id/edit' do
     redirect '/login' if !logged_in?
     @tweet = Tweet.find(params[:id])
+    # note: failure message might make more sense but test is expecting tweets page
     redirect '/tweets' if @tweet.user_id != session[:user_id]
     erb :"/tweets/edit_tweet"
   end
@@ -46,7 +54,7 @@ class TweetsController < ApplicationController
     # sort tweets so oldest is displayed first
     @tweets = Tweet.all.sort {|t1,t2| t2.created_at <=> t1.created_at }
     @user_tweets = Tweet.all.find_all {|tweet| tweet.user_id == current_user.id}
-    @user_tweets.sort {|t1,t2| t2.created_at <=> t1.created_at }
+    @user_tweets.sort! {|t1,t2| t2.created_at <=> t1.created_at }
     erb :"/tweets/tweets"
   end
 
@@ -54,7 +62,8 @@ class TweetsController < ApplicationController
     puts "Tweets delete id= #{params[:id]}"
     redirect "/login" if !logged_in?
     @tweet = Tweet.find(params[:id])
-    redirect "/tweets/#{params[:id]}" if current_user.id != @tweet.user_id
+    # note- failure message might make more sense but test is expecting tweets page
+    redirect "/tweets" if current_user.id != @tweet.user_id
     Tweet.delete(params[:id])
     redirect '/tweets'
   end
