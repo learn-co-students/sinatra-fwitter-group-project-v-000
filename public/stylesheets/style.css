@@ -4,6 +4,20 @@ body {
   text-align: center;
 }
 
+h2 {
+  text-align: left;
+}
+
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}
+.clear-fix {
+  clear: both;
+}
+
 .heading {
   text-align: left;
   padding: 0 10px;
@@ -14,39 +28,42 @@ body {
 
 .user_form {
   padding: 10px;
-  background:#e6e6e6;
+  background: #eff3f7;
   margin: auto;
   width: 30%;
   border-radius: 10px;
 }
 .button_panel {
-  background: #e6e6e6;
+  background: #eff3f7;
   display: inline-block;
   margin: auto;
   border-radius: 10px;
-  text-align: center;
 }
-.button_panel a, button {
-  background-color: black;  /* 0b7bc0, bdffb5 */
+a, button {
+  background-color: black;
   color: white;
   padding: .5em;
   margin: 20px;
-  text-align: center;
   text-decoration: none;
   display: inline-block;
   border-radius: 5px;
+}
+.user-actions {
+  float: left;
 }
 ul {
   list-style-type: none;
 }
 .grid-container {
+  border-radius: 10px;
   display: grid;
   grid-column-gap: 50px;
   grid-template-columns: auto auto;
-  /* background-color: #1DA1F2;*/
   padding: 10px;
 }
 .grid-item {
-  border: 1px solid #1DA1F2;
   padding: 20px;
+  border-radius: 10px;
+  background: #eff3f7; /* #e6e6e6;*/
+  text-align: left;
 }

@@ -1,13 +1,20 @@
-<h2>Welcome, <%=@user.username%></h2>
-<div class="grid-container">
+<div class="section-align">
+  <span class="alignleft"><h2 >Welcome, <%=@user.username%></h2></span>
+  <span class="alignright"><a href="/logout">Logout</a></span>
+</div>
+
+<div class="clear-fix grid-container">
   <div class="grid-item">
-    <h3>Your Tweets....</h3>
-    <ul>
+    <div class="section-align">
+      <h3 class="alignleft">Your Tweets....</h3>
+      <a class="alignright" href="/tweets/new">Create Tweet</a>
+    </div>
+
+    <ul class="clear-fix">
       <% @user_tweets.each do |tweet| %>
-        <li>
-          <%=tweet.content%>
-          <a class="user_button" href="/tweets/<%=tweet.id%>/edit">Modify</a>
-          <form method="post" action="/tweets/<%=tweet.id%>/delete"><input id="hidden" type="hidden" name="_method" value="delete"><input type="submit" id="Delete Tweet" value="Delete Tweet"></form>
+        <li class="section-align">
+          <h5 class="alignleft"><%=tweet.content%></h4>
+          <a class="alignright" href="/tweets/<%=tweet.id%>/edit">Modify</a>
         </li>
       <% end %>
     </ul>
@@ -20,10 +27,4 @@
       <% end %>
     </ul>
   </div>
-</div>
-
-
-<div class="button_panel">
-  <a class="user_button" href="/logout">Logout</a><br/>
-  <a class="user_button" href="/tweets/new">Create Tweet</a>
 </div>
