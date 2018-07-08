@@ -20,9 +20,14 @@
     </ul>
   </div>
   <div class="grid-item">
-    <h3>All Tweets....</h3>
+    <form method="post" action="/users/search" class="user-form" id="search_form">
+      <h3>Search for Tweets By User</h3>
+      <input type="text" id="search_user" name="search_user" placeholder="User Name" required>
+      <button class="user-button" type="submit" form="search_form" value="Search"></button>
+    </form>
+    <h3>Latest Tweets From All Users....</h3>
     <ul>
-      <% @tweets.each do |tweet| %>
+      <% @latest_tweets.each do |tweet| %>
         <li><a class="tweet-link" href="/tweets/<%=tweet.id%>"><%=tweet.content%> : <%=tweet.user.username%></a></li>
       <% end %>
     </ul>

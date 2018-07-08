@@ -1,5 +1,5 @@
 require './config/environment'
-
+require 'pry'
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -45,6 +45,11 @@ class ApplicationController < Sinatra::Base
     redirect "/failure" if !user.save
     session[:user_id] = user.id
     redirect '/tweets'
+  end
+
+  post '/users/search' do
+    user = User.new(:username => params[:search_user])
+    redirect "/users/#{user.slug}"
   end
 
   get '/users/:slug' do
