@@ -3,7 +3,7 @@
 		<h2>Modify Tweet</h3>
 		<input id="hidden" type="hidden" name="_method" value="patch">
 		<input type="text" maxlength="140" name="content" value="<%=@tweet.content%>" required>
-		<br/><input class="user-button" type="submit" id="edit" value="Update Tweet">
+		<br/><input class="user-button" type="submit" id="submit" value="Update Tweet">
 	</form>
 	<form method="post" action="/tweets/<%=@tweet.id%>/delete"><input id="hidden" type="hidden" name="_method" value="delete"><input class="user-button" type="submit" id="Delete Tweet" value="Delete Tweet"></form>
 </div>
