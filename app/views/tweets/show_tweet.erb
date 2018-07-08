@@ -1,7 +1,7 @@
-<h3>Tweet</h3>
-<h4>Author: <%=@user.username%></h4>
-<p><%= @tweet.content %></p>
-<div class="button_panel">
-<form method="post" action="/tweets/<%=@tweet.id%>/delete"><input id="hidden" type="hidden" name="_method" value="delete"><input type="submit" id="Delete Tweet" value="Delete Tweet"></form>
-<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
+<div class="user-form">
+  <h4><%= @tweet.content %> - <%=@user.username%></h4>
+  <div class="button_panel">
+    <a class="user-button" href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
+    <form method="post" action="/tweets/<%=@tweet.id%>/delete"><input id="hidden" type="hidden" name="_method" value="delete"><input class="user-button" type="submit" id="Delete Tweet" value="Delete Tweet"></form>
+  </div>
 </div>
