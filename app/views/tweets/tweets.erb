@@ -1,20 +1,20 @@
 <div class="section-align">
   <span class="alignleft"><h2 >Welcome, <%=@user.username%></h2></span>
-  <span class="alignright"><a href="/logout">Logout</a></span>
+  <span class="alignright"><a class="user-button"href="/logout">Logout</a></span>
 </div>
 
 <div class="clear-fix grid-container">
   <div class="grid-item">
     <div class="section-align">
       <h3 class="alignleft">Your Tweets....</h3>
-      <a class="alignright" href="/tweets/new">Create Tweet</a>
+      <a class="alignright user-button" href="/tweets/new">Create Tweet</a>
     </div>
 
     <ul class="clear-fix">
       <% @user_tweets.each do |tweet| %>
-        <li class="section-align">
-          <h5 class="alignleft"><%=tweet.content%></h4>
-          <a class="alignright" href="/tweets/<%=tweet.id%>/edit">Modify</a>
+        <li class="clear-fix">
+          <p class="alignleft"><%=tweet.content%></p>
+          <a class="alignright user-button" href="/tweets/<%=tweet.id%>/edit">Modify</a>
         </li>
       <% end %>
     </ul>
@@ -23,7 +23,7 @@
     <h3>All Tweets....</h3>
     <ul>
       <% @tweets.each do |tweet| %>
-        <li><%=tweet.content%> : <%=tweet.user.username%></li>
+        <li><a class="tweet-link" href="/tweets/<%=tweet.id%>"><%=tweet.content%> : <%=tweet.user.username%></a></li>
       <% end %>
     </ul>
   </div>
