@@ -13,10 +13,10 @@ get '/' do
 end
 
 post '/login' do
-  if User.find_by(username: params[:username], password: params[:password])
-    @user = User.find_by(username: params[:username], password: params[:password])
+  @user = User.find_by(:username => params[:username])
+  if @user && @user.authenticate(params[:password])
     session[:user_id] = @user.id
-    redirect '/account'
+    redirect '/tweets'
   else
     erb :error
   end
@@ -42,8 +42,12 @@ end
   end
 
   get '/logout' do
-    session.clear
-    redirect '/'
-  end
+    if logged_in?
+      session.clear
+        redirect "/login"
+      else
+        redirect '/'
+      end
+    end
 
 end
