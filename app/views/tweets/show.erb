@@ -1,0 +1,35 @@
+<head></head>
+  <style>
+    
+    .show_tweet {
+      margin-left:15px;
+      margin-bottom:40px;
+    }
+  </style>
+</head>
+
+<p class="flash"><% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %></p>
+
+
+<h2 class="username"><%=@tweet.user.username%></h2>
+
+<p class="show_tweet"><%=@tweet.content%></p>
+
+
+
+<form method="POST" action="/tweets/<%=@tweet.id%>/delete">
+  
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  
+  <input type="submit" name="submit" id="submit" value="Delete Tweet">
+
+</form>
+
+<br></br>
+
+  <p><a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a></p>
+
+
+

@@ -2,14 +2,56 @@
 <html>
   <head>
     <title>Fwitter</title>
+    <style>
+      
+      #fwitter {
+        color: darkblue;
+        display: inline;
+      }
+      
+      body {
+        background-color: lightblue;
+        margin: 20px;
+        max-width: 850px;
+      }
+      
+      .logout {
+        float: right;
+         display: inline;
+      }
+      .tweets {
+        float: right;
+         display: inline;
+         padding-right: 10px;
+      }
+      .new_tweet {
+        float: right;
+         display: inline;
+         padding-right: 10px;
+      }
+      
+      div {
+        border-bottom:solid;
+        border-width: 1px;
+      }
+      
+      .flash {
+        color: red;
+      }
+      
+    </style>
+    
   </head>
   <body>
-
+    <div><h1 id="fwitter">Fwitter</h1>
+    <a href="/logout" class="logout">Log Out</a>
+    <a href="/tweets" class="tweets">All Tweets</a>
+    <a href="/tweets/new" class="new_tweet">New Tweet</a></div>
     <div class="container">
-      <h1>Welcome to Fwitter!</h1>
-      <h2>This is located in layout.erb!</h2>
-      <h2>Don't forget to <strong>yield</strong> your views!</h2>
+      
     </div>
-
+    <%= yield%> 
+    
+     
   </body>
 </html>

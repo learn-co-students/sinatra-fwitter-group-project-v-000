@@ -1,0 +1,42 @@
+<head>
+  
+  <style>
+    
+    .user {
+      font-weight: bold;
+      margin-left: 15px;
+    }
+    
+    .tweet {
+      font-weight: bold;
+      margin-left: 30px;
+      
+    }
+    
+    .tweet_box {
+      border-style: solid;
+      margin: 10px;
+      max-width: 600px;
+    }
+    
+  </style>
+  
+</head>
+
+<p class="flash"><% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %></p>
+
+
+<h1>Welcome, <%=@user.username%></h1>
+
+<h3>All Tweets</h3>
+
+<%@tweets.each do |tweet|%>
+<div class="tweet_box"><h4 class="user"><%=tweet.user.username%></h4>
+<p><a class="tweet" href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></p></div>
+<%end%>
+
+
+
+
