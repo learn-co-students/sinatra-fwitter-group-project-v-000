@@ -42,10 +42,10 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
 		  session[:user_id] = @user.id 
 		   @tweets = Tweet.all
-		  redirect to '/tweets'
+		  redirect '/tweets'
     else 
        flash[:message] = "The username or password is incorrect."
-       redirect to '/login'
+       redirect '/login'
     end
   end
   
@@ -55,21 +55,10 @@ class UsersController < ApplicationController
   end
  
   
-  post '/login' do 
-    @user = User.find_by(username: params[:username], password: params[:password])
-    if @user 
-      session[:user_id] = @user.id
-       @tweets = Tweet.all
-      redirect "/tweets"
-    else 
-      erb :error
-    end
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :"users/show"
   end
-  
-  # get '/:slug' do
-  #   @user = User.find_by_slug(params[:slug])
-  #   erb :"users/show"
-  # end
 
 
 end
