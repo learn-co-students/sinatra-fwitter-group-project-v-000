@@ -27,9 +27,10 @@ class TweetsController < ApplicationController
       if params[:content] != ""
         @tweet = Tweet.create(content: params[:content], user_id: @user[:id])
       redirect to "/tweets/#{@tweet.id}"
+       else 
+        flash[:message] = "You may not post a blank tweet."
+        redirect to "/tweets/new"
       end
-    else 
-      flash[:message] = "You may not post a blank tweet."
     end
   end
   
@@ -67,6 +68,7 @@ class TweetsController < ApplicationController
       redirect to "/tweets/#{@tweet.id}"
     else 
       flash[:message] = "You may not post a blank tweet."
+      redirect to "/tweets/#{@tweet.id}/edit"
     end
   end
   
