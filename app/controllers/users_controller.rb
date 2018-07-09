@@ -1,4 +1,65 @@
+require "./app/models/user"
 class UsersController < ApplicationController
 
 
+
+  get "/signup" do
+    erb :create_user
+  end
+
+  post "/signup" do
+    if params[:username].empty? || params[:password].empty?
+      redirect to '/failure'
+    end
+
+    user = User.new(:username => params[:username], :password_digest => params[:password])
+    if user
+      redirect '/login'
+    else
+      redirect '/failure'
+    end
+
+  end
+
+  get '/account' do
+    @user = User.find(session[:user_id])
+    erb :account
+  end
+
+
+  get "/login" do
+    erb :login
+  end
+
+  post "/login" do
+    ##your code here
+    user = User.find_by(username: params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect to '/account'
+    else
+      redirect '/failure' 
+    end
+  end
+
+  get "/failure" do
+    erb :failure
+  end
+
+  get "/logout" do
+    session.clear
+    redirect "/"
+  end
+
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
+    end
+  end
+
 end
+
