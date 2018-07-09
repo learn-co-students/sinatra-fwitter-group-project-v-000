@@ -22,9 +22,12 @@ class TweetsController < ApplicationController
   end
   
   post '/tweets' do 
-    if params[:content] != "nil"
-      @tweet = Tweet.create(content: params[:content], user_id: session[:id])
+    if Helpers.is_logged_in?(session)
+      @user = Helpers.current_user(session)
+      if params[:content] != ""
+        @tweet = Tweet.create(content: params[:content], user_id: @user[:id])
       redirect to "/tweets/#{@tweet.id}"
+      end
     else 
       flash[:message] = "You may not post a blank tweet."
     end
@@ -32,7 +35,6 @@ class TweetsController < ApplicationController
   
   get '/tweets/:id' do 
     if Helpers.is_logged_in?(session)
-    # @user = Helpers.current_user(session)
     @tweet = Tweet.find(params[:id])
     erb :'/tweets/show'
     else 
@@ -59,9 +61,13 @@ class TweetsController < ApplicationController
   
   patch '/tweets/:id' do 
     @tweet = Tweet.find(params[:id])
+    if params[:content] != ""
       @tweet.content = params[:content]
       @tweet.save
       redirect to "/tweets/#{@tweet.id}"
+    else 
+      flash[:message] = "You may not post a blank tweet."
+    end
   end
   
   delete '/tweets/:id/delete' do 
