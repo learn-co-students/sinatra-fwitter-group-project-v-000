@@ -22,8 +22,12 @@ class TweetsController < ApplicationController
   end
   
   post '/tweets' do 
-    @tweet = Tweet.create(content: params[:content], user_id: session[:id])
-    redirect to "/tweets/#{@tweet.id}"
+    if params[:content] != "nil"
+      @tweet = Tweet.create(content: params[:content], user_id: session[:id])
+      redirect to "/tweets/#{@tweet.id}"
+    else 
+      flash[:message] = "You may not post a blank tweet."
+    end
   end
   
   get '/tweets/:id' do 
