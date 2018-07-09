@@ -16,8 +16,8 @@ class TweetsController < ApplicationController
     @tweets = Tweet.all
     erb :'/tweets/index'
     else 
-      flash[:message] = "You must login to view that page."
-     redirect to '/'
+      @tweets = Tweet.all
+     redirect to '/tweets'
    end
   end
   
@@ -32,8 +32,8 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find(params[:id])
     erb :'/tweets/show'
     else 
-    flash[:message] = "You must login to view that page."
-     redirect to '/'
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/show'
    end
   end
   

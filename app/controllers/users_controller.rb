@@ -11,12 +11,14 @@ class UsersController < ApplicationController
  
  post '/signup' do 
    if !User.find_by(username: params[:username]) 
+     unless params[:username] || params[:password] || params[:email] == ""
    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
    session[:id] = @user.id 
-   redirect to "/tweets/new"
+   redirect to "/tweets"
+    end
   else 
   flash[:message] = "That username is already taken."
-  redirect to "/signup"
+  redirect to "/tweets"
      
   end
  end
