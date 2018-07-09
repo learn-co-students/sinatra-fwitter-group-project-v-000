@@ -10,16 +10,13 @@ class UsersController < ApplicationController
  end
  
  post '/signup' do 
-   if !User.find_by(username: params[:username]) 
-     unless params[:username] || params[:password] || params[:email] == ""
+   if !User.find_by(username: params[:username]) && params[:password] != "" && params[:email] != "" && params[:username] != ""
    @user = User.create(username: params[:username], email: params[:email], password: params[:password])
    session[:id] = @user.id 
-   redirect to "/tweets"
-    end
+   redirect '/tweets'
   else 
-  flash[:message] = "That username is already taken."
-  redirect to "/tweets"
-     
+  flash[:message] = "Please create an account."
+    redirect '/tweets'
   end
  end
  

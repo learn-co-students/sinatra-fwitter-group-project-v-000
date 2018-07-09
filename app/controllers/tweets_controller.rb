@@ -17,7 +17,7 @@ class TweetsController < ApplicationController
     erb :'/tweets/index'
     else 
       @tweets = Tweet.all
-     redirect to '/tweets'
+     erb :'/tweets/index'
    end
   end
   
