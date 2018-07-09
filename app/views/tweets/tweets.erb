@@ -20,10 +20,10 @@
     </ul>
   </div>
   <div class="grid-item">
-    <form method="post" action="/users/search" class="user-form" id="search_form">
-      <h3>Search for Tweets By User</h3>
+    <form style="display:inline" method="post" action="/users/search" class="search_form" id="search_form">
+      <label for="search_user">Search for Tweets By User</label>
       <input type="text" id="search_user" name="search_user" placeholder="User Name" required>
-      <button class="user-button" type="submit" form="search_form" value="Search"></button>
+      <button class="user-button search-button" type="submit" form="search_form" value="Search"><i class="fa fa-search"></i></button>
     </form>
     <h3>Latest Tweets From All Users....</h3>
     <ul>

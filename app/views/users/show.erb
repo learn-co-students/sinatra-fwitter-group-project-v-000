@@ -1,6 +1,6 @@
 <h2>Tweets from <%=@user.username%></h2>
 <ul>
   <% @user.tweets.each do |tweet| %>
-    <li><a class="tweet-link" href="/tweets/<%=tweet.id%>"><%=tweet.content%>></a></li>
+    <li><a class="tweet-link" href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></li>
   <% end %>
 </ul>

@@ -33,6 +33,15 @@ h2 {
   width: 30%;
   border-radius: 10px;
 }
+.search_form {
+  padding: 10px;
+  background: #eff3f7;
+  margin: auto;
+  width: 30%;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
 .button_panel {
   background: #eff3f7;
   display: inline-block;
@@ -47,6 +56,9 @@ h2 {
   text-decoration: none;
   display: inline-block;
   border-radius: 5px;
+}
+.search-button {
+  color: white;
 }
 .tweet-link {
   color: #1486c9;
