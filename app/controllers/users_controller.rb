@@ -16,7 +16,7 @@ class UsersController < ApplicationController
    redirect '/tweets'
   else 
   flash[:message] = "Please create an account."
-    redirect '/tweets'
+    redirect '/signup'
   end
  end
  
@@ -48,10 +48,15 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:username], password: params[:password])
     if @user 
       session[:user_id] = @user.id
-      redirect "/#{@user.username}"
+      redirect "/#{@user.slug}"
     else 
       erb :error
     end
+  end
+  
+  get '/:slug'
+    @user = User.find_by_slug(params[:slug])
+    erb :"users/show"
   end
 
 
