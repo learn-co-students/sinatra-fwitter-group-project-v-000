@@ -80,10 +80,12 @@ class TweetsController < ApplicationController
         @tweet = tweet
         @tweet.delete
         redirect to '/tweets'
+        else 
+          flash[:message] = "You may not delete another user's tweet."
+          redirect to '/login'
       end
     else 
-      flash[:message] = "You may not delete another user's tweet."
-     redirect to '/login'
+      redirect to '/login'
     end
 	end
 
