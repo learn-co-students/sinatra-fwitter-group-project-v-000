@@ -3,7 +3,11 @@ class UsersController < ApplicationController
 
 
   get "/signup" do
-    erb :"/users/create_user"
+    if session[:user_id]
+      redirect '/tweets'
+    else
+      erb :"/users/create_user"
+    end
   end
 
 
@@ -12,10 +16,11 @@ class UsersController < ApplicationController
       redirect '/signup'
     end
 
-    user = User.new(:username => params[:username], :password => params[:password], :email => params[:email])
+    user = User.create(:username => params[:username], :password_digest => params[:password], :email => params[:email])
     session[:user_id] = user.id
-    if user
-      redirect '/tweets/tweets'
+    if logged_in?
+      
+      redirect '/tweets'
     else
       redirect '/signup'
     end
@@ -24,7 +29,11 @@ class UsersController < ApplicationController
 
 
   get "/login" do
-    erb :"/users/login"
+    if session[:user_id]
+      redirect '/tweets'
+    else
+      erb :"/users/login"
+    end
   end
 
 
@@ -32,9 +41,9 @@ class UsersController < ApplicationController
     user = User.find_by(username: params[:username], email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect '/tweets/tweets'
+      redirect '/tweets'
     else
-      redirect '/users/signup' 
+      redirect '/signup' 
     end
   end
 
