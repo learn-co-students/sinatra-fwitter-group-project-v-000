@@ -2,9 +2,8 @@ require "./app/models/user"
 class UsersController < ApplicationController
 
 
-
   get "/signup" do
-    erb :create_user
+    erb :"/users/create_user"
   end
 
   post "/signup" do
@@ -28,11 +27,10 @@ class UsersController < ApplicationController
 
 
   get "/login" do
-    erb :login
+    erb :"/users/login"
   end
 
   post "/login" do
-    ##your code here
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
@@ -43,13 +41,14 @@ class UsersController < ApplicationController
   end
 
   get "/failure" do
-    erb :failure
+    erb :"/users/failure"
   end
 
   get "/logout" do
     session.clear
     redirect "/"
   end
+
 
   helpers do
     def logged_in?
