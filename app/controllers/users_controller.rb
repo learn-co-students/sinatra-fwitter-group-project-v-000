@@ -7,15 +7,15 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-    if params[:username].empty? || params[:password].empty?
-      redirect to '/failure'
+    if params[:username].empty? || params[:password].empty? || params[:email].empty?
+      redirect to '/signup'
     end
 
     user = User.new(:username => params[:username], :password_digest => params[:password])
     if user
-      redirect '/login'
+      redirect '/tweets/tweets'
     else
-      redirect '/failure'
+      redirect '/signup'
     end
 
   end
