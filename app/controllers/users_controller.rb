@@ -12,9 +12,9 @@ class UsersController < ApplicationController
       redirect '/signup'
     end
 
-    user = User.new(:username => params[:username], :password_digest => params[:password], :email => params[:email])
+    user = User.new(:username => params[:username], :password => params[:password], :email => params[:email])
+    session[:user_id] = user.id
     if user
-      session[:user_id] = user.id
       redirect '/tweets/tweets'
     else
       redirect '/signup'
@@ -32,11 +32,13 @@ class UsersController < ApplicationController
     user = User.find_by(username: params[:username], email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to '/tweets/tweets'
+      redirect '/tweets/tweets'
     else
       redirect '/users/signup' 
     end
   end
+
+
 
 
   get "/logout" do
@@ -45,15 +47,26 @@ class UsersController < ApplicationController
   end
 
 
-  helpers do
-    def logged_in?
-      !!session[:user_id]
+
+
+
+  def logged_in?
+    !!session[:user_id]
+  end
+
+  def current_user
+    User.find(session[:user_id])
+  end
+  
+    
+    def slug
+      self.name.gsub(" ", "-").gsub(/[^\w-]/, '').downcase
     end
 
-    def current_user
-      User.find(session[:user_id])
+
+    def find_by_slug(value)
+      self.all.detect{ |a| a.slug == value}
     end
-  end
 
 end
 

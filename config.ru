@@ -10,4 +10,3 @@ run ApplicationController
 use UsersController
 use TweetsController
 
-run ApplicationController
