@@ -25,8 +25,7 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-
-
+    erb :'users/show'
   end
 
 
