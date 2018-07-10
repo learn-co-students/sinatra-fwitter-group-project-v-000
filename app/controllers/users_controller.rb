@@ -6,43 +6,38 @@ class UsersController < ApplicationController
     erb :"/users/create_user"
   end
 
+
   post "/signup" do
     if params[:username].empty? || params[:password].empty? || params[:email].empty?
-      redirect to '/signup'
+      redirect '/signup'
     end
 
-    user = User.new(:username => params[:username], :password_digest => params[:password])
+    user = User.new(:username => params[:username], :password_digest => params[:password], :email => params[:email])
     if user
+      session[:user_id] = user.id
       redirect '/tweets/tweets'
     else
       redirect '/signup'
     end
-
   end
 
-  get '/account' do
-    @user = User.find(session[:user_id])
-    erb :account
-  end
 
 
   get "/login" do
     erb :"/users/login"
   end
 
+
   post "/login" do
-    user = User.find_by(username: params[:username])
+    user = User.find_by(username: params[:username], email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to '/account'
+      redirect to '/tweets/tweets'
     else
-      redirect '/failure' 
+      redirect '/users/signup' 
     end
   end
 
-  get "/failure" do
-    erb :"/users/failure"
-  end
 
   get "/logout" do
     session.clear
