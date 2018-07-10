@@ -1,25 +1,28 @@
 class TweetsController < ApplicationController
 
   get "/tweets" do 
-    @user = current_user
     erb :'/tweets/tweets'
   end
   
   get "/tweets/new" do 
-    erb :'/tweets/new'
+    erb :'/tweets/create_tweet'
   end
   
   
-  post "/tweets/new" do 
+  post "/tweets" do 
+    user = current_user
+    tweet = Tweet.create(:content => params[:content], :user_id => current_user)
+    redirect "/tweets"
   end
   
   
   get "tweets/:id" do
-    erb :'/tweets/show_tweet.erb'
+    @tweet = Tweet.find(params[:id])
+    erb :'/tweets/show_tweet'
   end
   
   get "tweets/:id/edit" do
-    erb :'/tweets/edit_tweet.erb'
+    erb :'/tweets/edit_tweet'
   end
   
   post "tweets/:id" do
