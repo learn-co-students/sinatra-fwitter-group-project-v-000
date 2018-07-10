@@ -1,6 +1,7 @@
 class TweetsController < ApplicationController
 
   get "/tweets" do 
+    @user = current_user
     erb :'/tweets/tweets'
   end
   
@@ -35,7 +36,13 @@ class TweetsController < ApplicationController
   # The form to delete a tweet should be submitted via a POST request to tweets/:id/delete.
   end
   
-  
+   def logged_in?
+    !!session[:user_id]
+  end
+
+  def current_user
+    User.find(session[:user_id])
+  end
 
 
 end
