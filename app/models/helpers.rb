@@ -1,4 +1,3 @@
-
 class Helpers
 
   def logged_in?

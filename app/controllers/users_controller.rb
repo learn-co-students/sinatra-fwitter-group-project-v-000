@@ -1,6 +1,4 @@
-
 class UsersController < ApplicationController
-
 
   get "/signup" do
     if session[:user_id]
@@ -10,17 +8,14 @@ class UsersController < ApplicationController
     end
   end
 
-
   post "/signup" do
-    if params[:username].empty? || params[:password].empty? || params[:email].empty?
+    if params.values.any? &:empty?
       redirect '/signup'
     end
-
     user = User.create(:username => params[:username], :password_digest => params[:password], :email => params[:email])
     session[:user_id] = user.id
     redirect '/tweets'
   end
-
 
   get "/login" do
     if logged_in?
@@ -29,7 +24,6 @@ class UsersController < ApplicationController
       erb :"/users/login"
     end
   end
-
 
   post "/login" do
     @user = User.find_by(username: params[:username])
@@ -43,30 +37,15 @@ class UsersController < ApplicationController
     end
   end
   
-  
   get "/users/:slug" do 
       @user = User.find_by_slug(params[:slug])
       erb :"/users/show"
   end
   
-  
-
   get "/logout" do
     logged_in?
     session.destroy
     redirect "/login"
   end
-
-
-
-  def logged_in?
-    !!session[:user_id]
-  end
-
-  def current_user
-    User.find(session[:user_id])
-  end
-  
-
 
 end
