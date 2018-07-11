@@ -38,12 +38,9 @@ class TweetsController < ApplicationController
     end
   end
   
-  post "tweets/:id" do
-    # Youll want to create an edit link on the tweet show page.
-  end
-  
+
   get "/tweets/:id/edit" do
-    raise params.inspect
+    # raise params.inspect
     if logged_in?
       @tweet = Tweet.find(params[:id])
       erb :'/tweets/edit_tweet'
@@ -52,25 +49,36 @@ class TweetsController < ApplicationController
     end
   end
   
-
-  
-  
-  
-  post "tweets/:id/delete" do
-  # The form to delete a tweet should be found on the tweet show page.
-  
-  # The delete form doesnt need to have any input fields, just a submit button.
-  
-  # The form to delete a tweet should be submitted via a POST request to tweets/:id/delete.
+  patch '/tweets/:id' do
+    if !params[:content].empty?
+      tweet = Tweet.find(params[:id])
+      tweet.update(params)
+    else
+      redirect "/tweets/#{params[:id]}/edit"
+    end
   end
   
-   def logged_in?
+  
+  
+  post "/tweets/:id" do
+
+    tweet = Tweet.find(params[:id])
+    if logged_in? && tweet.user_id != session[:id]
+      tweet.destroy
+      redirect '/tweets'
+    else 
+      redirect '/login'
+    end
+  end
+
+  
+  def logged_in?
     !!session[:user_id]
   end
 
   def current_user
     User.find(session[:user_id])
   end
-
+  
 
 end

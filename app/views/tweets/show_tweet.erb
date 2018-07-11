@@ -2,10 +2,20 @@
 
 <%= @tweet.content %>
 
-<a href="tweets/<%= @tweet.id %>/edit">Edit</a>
-
-<form method="POST" action="/tweets/<%= @tweet.id %>/delete">
-
-<input type="submit" name="delete" value="Delete">
-
+<form method="POST" action="/tweets/<%= @tweet.id %>">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Tweet">
 </form>
+
+<form  method="POST" action="/tweets/<%= @tweet.id %>/edit">
+  <input type="submit" value="Edit Tweet">
+</form>
+
+
+# Youll want to create an edit link on the tweet show page.
+
+# The form to delete a tweet should be found on the tweet show page.
+  # The delete form doesnt need to have any input fields, just a submit button.
+  
+  # The form to delete a tweet should be submitted via a POST request to tweets/:id/delete.
+  
