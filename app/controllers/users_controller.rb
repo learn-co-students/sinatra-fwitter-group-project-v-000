@@ -1,4 +1,5 @@
-# require "./app/models/user"
+# require 'rack-flash'
+
 class UsersController < ApplicationController
 
 

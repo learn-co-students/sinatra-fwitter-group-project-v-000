@@ -1,3 +1,5 @@
+# require 'rack-flash'
+
 class TweetsController < ApplicationController
 
   get "/tweets" do 
@@ -61,18 +63,15 @@ class TweetsController < ApplicationController
   
   
   
-  post "/tweets/:id" do
-
-    tweet = Tweet.find(params[:id])
-    if logged_in? && tweet.user_id != session[:id]
-      tweet.delete
-      redirect '/tweets'
-    else 
-      redirect '/login'
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find(params[:id])
+    if logged_in && current_user(session).id != @tweet.user_id
+      @tweet.delete
+      redirect to '/tweets'
+    else
+      redirect to '/login'
     end
   end
-  
-  
 
   
   def logged_in?

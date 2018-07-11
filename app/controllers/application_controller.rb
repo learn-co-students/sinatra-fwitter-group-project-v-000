@@ -1,4 +1,5 @@
 require './config/environment'
+# require 'rack-flash'
 # require "./app/models/user"
 
 class ApplicationController < Sinatra::Base
