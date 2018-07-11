@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   end
   
   
-  get "/user/:slug" do 
+  get "/users/:slug" do 
     raise params.inspect
     if logged_in?
       slug = params[:slug]
