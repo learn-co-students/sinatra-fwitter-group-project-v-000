@@ -1,4 +1,3 @@
-# require 'rack-flash'
 
 class TweetsController < ApplicationController
 
@@ -41,8 +40,6 @@ class TweetsController < ApplicationController
   
 
 
-
-
   get "/tweets/:id/edit" do
     if logged_in? 
       @tweet = Tweet.find(params[:id])
@@ -66,7 +63,6 @@ class TweetsController < ApplicationController
   
   
   delete '/tweets/:id/delete' do
-    # binding.pry
     @tweet = Tweet.find(params[:id])
     if !logged_in?
       redirect 'login'
@@ -79,11 +75,10 @@ class TweetsController < ApplicationController
 
 
   
-
-  
   def logged_in?
     !!session[:user_id]
   end
+
 
   def current_user
     User.find(session[:user_id])
