@@ -52,11 +52,7 @@ class TweetsController < ApplicationController
     end
   end
   
-  
-  
-  
-  
-  
+
   patch '/tweets/:id' do
     if !params[:content].empty? 
       tweet = Tweet.find(params[:id])
@@ -71,7 +67,7 @@ class TweetsController < ApplicationController
   
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
-    if logged_in && current_user(session).id != @tweet.user_id
+    if logged_in && current_user.id != @tweet.user_id
       @tweet.delete
       redirect to '/tweets'
     else
