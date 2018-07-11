@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
     user = User.create(:username => params[:username], :password_digest => params[:password], :email => params[:email])
     session[:user_id] = user.id
-    redirect to '/tweets'
+    redirect '/tweets'
   end
 
 
@@ -45,7 +45,6 @@ class UsersController < ApplicationController
   
   
   get "/users/:slug" do 
-    raise params.inspect
     if logged_in?
       slug = params[:slug]
       @user = User.find_by_slug(slug)
