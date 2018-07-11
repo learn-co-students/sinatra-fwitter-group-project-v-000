@@ -1,33 +1,58 @@
 class TweetsController < ApplicationController
 
   get "/tweets" do 
-    erb :'/tweets/tweets'
+    if logged_in?
+      erb :'/tweets/tweets'
+    else 
+      redirect '/login'
+    end
   end
   
   get "/tweets/new" do 
-    erb :'/tweets/create_tweet'
+    if logged_in?
+      @user = User.find(session[:id])
+      erb :'/tweets/create_tweet'
+    else 
+      redirect '/login'
+    end
   end
   
   
   post "/tweets" do 
     user = current_user
+    if !params[:content].empty?
+      redirect '/tweets/create_tweet'
+    else
     tweet = Tweet.create(:content => params[:content], :user_id => current_user)
     redirect "/tweets"
+    end
   end
   
   
-  get "tweets/:id" do
-    @tweet = Tweet.find(params[:id])
-    erb :'/tweets/show_tweet'
-  end
-  
-  get "tweets/:id/edit" do
-    erb :'/tweets/edit_tweet'
+  get "/tweets/:id" do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/show_tweet'
+    else 
+      redirect '/login'
+    end
   end
   
   post "tweets/:id" do
     # Youll want to create an edit link on the tweet show page.
   end
+  
+  get "/tweets/:id/edit" do
+    raise params.inspect
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'/tweets/edit_tweet'
+    else 
+      redirect '/login'
+    end
+  end
+  
+
   
   
   

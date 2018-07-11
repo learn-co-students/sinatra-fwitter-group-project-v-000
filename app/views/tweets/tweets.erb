@@ -1,11 +1,13 @@
 tweets here
 
-<h2>Welcome,</h2>
+<% user = User.find(session[:user_id]) %>
+<h2>Welcome, <%= user.username %></h2>
 
-<%= session[:user_id] %>
 
 <% Tweet.all.each do |tweet| %>
   <p><a href="tweets/<%= tweet.id %>"</a><%= tweet.content %></p>
 <% end %>
+
+
 
 
