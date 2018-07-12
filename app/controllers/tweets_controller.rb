@@ -18,10 +18,10 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets/' do
+  post '/tweets' do
     if logged_in?
       if params[:content] !=""
-        user = current.user
+        user = current_user
         tweet = user.tweets.build(content: params[:content])
         user.save
         redirect  "/tweets/#{tweet.id}"

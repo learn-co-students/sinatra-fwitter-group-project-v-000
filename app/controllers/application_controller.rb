@@ -6,21 +6,22 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
+    set :session_secret, "fwitter_secret"
   end
 
 get '/' do
   erb :index
 end
 
-post '/login' do
-  @user = User.find_by(:username => params[:username])
-  if @user && @user.authenticate(params[:password])
-    session[:user_id] = @user.id
-    redirect '/tweets'
-  else
-    erb :error
-  end
-end
+# post '/login' do
+#   @user = User.find_by(:username => params[:username])
+#   if @user && @user.authenticate(params[:password])
+#     session[:user_id] = @user.id
+#     redirect '/tweets'
+#   else
+#     erb :error
+#   end
+# end
 
   get '/account' do
     @current_user = User.find_by_id[session[:user_id]]
@@ -33,7 +34,7 @@ end
 
   helpers do
     def current_user
-      User.find_by(id: session[:user_id])
+      User.find_by(id: session[:user_id]) if session[:user_id]
     end
 
     def logged_in?
