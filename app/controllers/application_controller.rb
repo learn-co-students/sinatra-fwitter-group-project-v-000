@@ -16,15 +16,20 @@ class ApplicationController < Sinatra::Base
 
   helpers do
 
-    def loggin_in?
-      !!session[:id]
+    def logged_in?
+      !!current_user
+    end
+
+    def current_user
+      @current_user ||= User.find_by(:username => session[:username]) if session[:username]
     end
 
     def login(username, password)
       user = User.find_by(:username => username)
       if user && user.authenticate(password)
         session[:id] = user.id
-        redirect '/users/show'
+        session[:username] = username
+        redirect '/tweets'
       else
         redirect '/login'
       end
