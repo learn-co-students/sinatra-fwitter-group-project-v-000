@@ -1,0 +1,9 @@
+<% if !logged_in? %>
+  <p> New here? <a href="/signup">Sign up</a> </p>
+  <p> Been here before? <a href="/login">Log in</a> </p>
+<% end %>
+
+<% if logged_in? %>
+  <p> Welcome back, <%= current_user.username %>! </p>
+  <a href="/tweets">View all tweets here</a> </p>
+<% end %>

@@ -1,0 +1,11 @@
+Posts by <%= @user.username %>:
+
+<% @tweets.each do |tweet| %>
+
+  <ol>
+    <% if tweet.user == @user %>
+      <li> <%= tweet.content %> </li>
+    <% end %>
+  </ol>
+
+<% end %>

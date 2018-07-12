@@ -1,0 +1,9 @@
+Welcome, <%= current_user.username %>
+
+<h3> All Tweets </h3>
+
+<ol>
+<% Tweet.all.each do |tweet| %>
+    <li> <p> <a href="/tweets/<%= tweet.id %>"> <%= tweet.content %> </a> (posted by <%= tweet.user.username %> )</p> </li>
+<% end %>
+</ol>
