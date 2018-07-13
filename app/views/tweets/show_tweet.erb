@@ -7,8 +7,15 @@
 <p><%= @tweet.content %></p>
 <% if @tweet.user.id == current_user.id %>
   <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+
 <% end %>
 <form action="/tweets/<%= @tweet.id %>" method="post">
 <input type="hidden" name="_method" value="delete">
 <input type="submit" value="Delete Tweet" id="Delete Tweet">
 </form>
+
+  <form action="/tweets/<% @tweet.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Tweet" id="Delete Tweet">
+  </form>
+<% end %>
