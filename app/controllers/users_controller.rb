@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 class UsersController < ApplicationController
 
   get '/users/:slug' do
@@ -51,3 +52,9 @@ class UsersController < ApplicationController
     end
   end
 end
+=======
+class UsersController < ApplicationController
+
+ 
+end
+>>>>>>> a9d9ee18c034bd09627d977e5ca5125f0563a5cf
