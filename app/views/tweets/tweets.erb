@@ -1,0 +1,10 @@
+<% user = User.find(session[:user_id]) %>
+<h2>Welcome, <%= user.username %></h2>
+
+<% Tweet.all.each do |tweet| %>
+  <p><a href="tweets/<%= tweet.id %>"</a><%= tweet.content %></p>
+<% end %>
+<br>
+<a href="/users/<%= user.slug %>"><button>My Tweets</button></a>
+<a href="/tweets/new"><button>New Tweet</button></a>
+<a href="/logout"><button>Log Out</button></a>
