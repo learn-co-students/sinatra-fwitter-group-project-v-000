@@ -4,19 +4,38 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    @tweet = Tweet.create(params[:tweet])
-    @tweet.save
-    redirect "/tweets/#{@tweet.id}"
+    if logged_in?
+      if params[:content] == ""
+        redirect '/tweets/new'
+      else
+        @tweet = crrent_user.tweets.build(content: params[:content])
+        if @tweet.save
+          redirect "/tweets/#{@tweet.id}"
+        else
+          redirect '/tweets/new'
+        end
+      end
+    else
+      redirect '/users/login'
+    end
   end
 
+
   get '/tweets/:id' do
-    @tweet = Tweet.find_by_id(params[:id])
-    @tweet.save
-    erb :'/tweets/show_tweets'
+    if logged_in?
+      @tweet = Tweet.find_by_id(params[:id])
+      @tweet.save
+      erb :'/tweets/show_tweets'
+    else
+      redirect '/users/login'
   end
 
   get '/tweets' do
-    erb :'/tweets/tweets'
+    if logged_in?
+      @tweets = Tweet.all
+      erb :'/tweets/tweets'
+    else
+      redirect '/users/login'
   end
 
   get '/tweets/:id/edit' do
