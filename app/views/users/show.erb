@@ -1,0 +1,14 @@
+<h1>Tweets from <%= @current_user.username %>!<h1>
+
+<ul>
+  <% @current_user.tweets.each do |tweet| %>
+    <label>Tweet <%= tweet.id %></label><br>
+    <ul>
+      <li>
+        <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
+      </li>
+    </ul>
+
+    <br></br>
+  <% end %>
+</ul>
