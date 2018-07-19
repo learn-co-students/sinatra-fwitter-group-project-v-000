@@ -1,0 +1,18 @@
+<% if Helpers.logged_in?(session) %>
+  <% @user = Helpers.current_user(session) %>
+
+  <p>Welcome, <%= @user.username %>!</p>
+  <a href="/tweets">View All Tweets</a>
+  <br>
+  <a href="/users/<%= @user.slug %>">View Your Tweets</a>
+  <br>
+  <a href="/tweets/new">Create a New Tweet</a>
+  <br><br>
+  <form class="" action="/logout" method="get">
+    <input type="submit" name="" value="Logout">
+  </form>
+<% else %>
+   <a href="/signup">Sign Up</a>
+   <br>
+   <a href="/login">Log In</a>
+<% end %>

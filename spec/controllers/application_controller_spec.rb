@@ -66,6 +66,7 @@ describe ApplicationController do
       }
       post '/signup', params
       get '/signup'
+      
       expect(last_response.location).to include('/tweets')
     end
   end
