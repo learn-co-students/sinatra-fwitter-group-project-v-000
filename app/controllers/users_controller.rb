@@ -10,17 +10,18 @@ class UsersController < ApplicationController
 
     post '/signup' do
 
-        if logged_in?
-            redirect "/tweets"
-        end
+        # if logged_in?
+        #     redirect "/tweets"
+        # end
 
-        user = User.new(username: params["username"], email: params["email"], password: params["password"])
+        @user = User.new(username: params["username"], email: params["email"], password: params["password"])
 
-        if user.save
+        if @user.save
             login(params["username"], params["email"], params["password"])
             redirect "/tweets"
         else
-            redirect '/'
+            @user.errors.full_messages
+            erb :'users/signup'
         end
     end
 
