@@ -14,10 +14,10 @@ class UsersController < ApplicationController
             redirect "/tweets"
         end
 
-        user = User.new(username: params["user"]["name"], password: params["user"]["password"])
+        user = User.new(username: params["username"], email: params["email"], password: params["password"])
 
         if user.save
-            login(params["user"]["name"], params["user"]["password"])
+            login(params["username"], params["email"], params["password"])
             redirect "/tweets"
         else
             redirect '/'
