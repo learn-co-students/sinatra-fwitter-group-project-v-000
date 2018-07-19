@@ -20,8 +20,7 @@ class UsersController < ApplicationController
             login(params["username"], params["email"], params["password"])
             redirect "/tweets"
         else
-            @user.errors.full_messages
-            erb :'users/signup'
+            redirect "/users/signup"
         end
     end
 

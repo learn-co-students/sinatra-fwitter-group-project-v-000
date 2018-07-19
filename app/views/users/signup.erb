@@ -1,9 +1,3 @@
-<% if @user && @user.errors %>
-    <% @user.errors.full_messages.each do |message| %>
-        <p> <%= message %> </p>
-    <% end %>
-<% end %>
-
 <form method="POST" action="/signup">
     <p> Username: <input type="text" id="username" name="username"></p>
     <p> Email: <input type="text" id="email" name="email"></p>
