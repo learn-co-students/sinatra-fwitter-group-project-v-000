@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
 
-<<<<<<< HEAD
+
   get '/tweets' do
     if logged_in?
       @tweets = Tweet.all
@@ -8,7 +8,7 @@ class TweetsController < ApplicationController
     else
       redirect '/login'
     end
-    
+
   end
 
   get '/tweets/new' do
@@ -91,13 +91,3 @@ class TweetsController < ApplicationController
     end
   end
 end
-=======
-  get '/tweets/new' do 
-    if logged_in?
-      erb :'tweets/create_tweet'
-    else 
-      redirect 'login'
-    end 
-  end 
-end
->>>>>>> a9d9ee18c034bd09627d977e5ca5125f0563a5cf
