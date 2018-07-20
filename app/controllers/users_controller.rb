@@ -1,20 +1,48 @@
 class UsersController < ApplicationController
 
   get "/signup" do
-    erb :"/users/create_user"
+    if session.include?("id")
+      redirect "/tweets"
+    else
+      erb :"/users/create_user"
+    end
   end
 
   post "/signup" do
     @user = User.create(params)
+    @user.save
+    if !User.all.include?(@user)
+      redirect "/signup"
+    else
+      session[:id] = @user.id
+      redirect "/tweets"
+    end
+  end
+
+  get "/tweets" do
+    if !!session[:id]
+      erb :index
+    else
+      redirect "/login"
+    end
   end
 
   get "/login" do
-    erb :"/users/login"
+    if !!session[:id]
+      redirect "/tweets"
+    else
+      erb :"/users/login"
+    end
   end
 
   post "/login" do
-    params #save in session hash
-    #session << params
+    @user = User.find_by(username: params[:username])
+    if @user
+      session[:id] = @user.id
+      redirect "/tweets"
+    else
+      redirect "/login"
+    end
   end
 
   get "/logout" do
