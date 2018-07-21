@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
+    binding.pry
     @user = User.create(params)
     @user.save
     if !User.all.include?(@user)
