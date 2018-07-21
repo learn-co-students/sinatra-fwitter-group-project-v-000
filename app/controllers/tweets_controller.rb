@@ -15,30 +15,48 @@ class TweetsController < ApplicationController
       @tweet = Tweet.create(params)
       @tweet.user_id = User.find(session[:id]).id
       @tweet.save
-      erb :"/tweets/tweets"
+      redirect "/tweets"
     end
   end
 
   get "/tweets/:id/edit" do
-    @tweet = Tweet.find_by(id: params[:id])
-    erb :"/tweets/edit_tweet"
+    if self.is_logged_in?(session)
+      @tweet = Tweet.find_by(id: params[:id])
+      erb :"/tweets/edit_tweet"
+    else
+      redirect "/login"
+    end
   end
 
   get "/tweets/:id" do
-    @tweet = Tweet.find_by(id: params[:id])
-    erb :"/tweets/show_tweet"
+    if self.is_logged_in?(session)
+      @tweet = Tweet.find_by(id: params[:id])
+      erb :"/tweets/show_tweet"
+    else
+      redirect "/login"
+    end
   end
+
 
   patch "/tweets/:id" do
     @tweet = Tweet.find_by(id: params[:id])
-      # change name/whatever according to params
-    @tweet.save
-    redirect "/tweets/#{@tweet.id}"
+    if !params[:content].empty?
+      @tweet.content = params[:content]   # change name/whatever according to params
+      @tweet.save
+      redirect "/tweets/#{@tweet.id}"
+    else
+      redirect "tweets/#{@tweet.id}/edit"
+    end
   end
 
-  delete "/tweets/:id/delete" do
+  post "/tweets/:id/delete" do
     @tweet = Tweet.find_by(id: params[:id])
-    @tweet.clear
+    if self.is_logged_in?(session) && self.current_user(session).id == @tweet.user_id
+      @tweet.destroy
+      redirect "/tweets"
+    else
+      redirect "tweets"
+    end
   end
 
 

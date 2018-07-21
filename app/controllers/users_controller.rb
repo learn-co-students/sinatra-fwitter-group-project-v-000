@@ -9,7 +9,6 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-    binding.pry
     @user = User.create(params)
     @user.save
     if !User.all.include?(@user)
@@ -54,17 +53,6 @@ class UsersController < ApplicationController
   get "/users/:slug" do
     @user = User.find_by_slug(params[:slug])
     erb :"users/show"
-  end
-
-  helpers do
-    def current_user(arg)
-      @user = User.find_by(id: arg[:id])
-      @user
-    end
-
-    def is_logged_in?(arg)
-      !!arg[:id]
-    end
   end
 
 end

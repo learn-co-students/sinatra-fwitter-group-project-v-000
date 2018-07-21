@@ -1,10 +1,8 @@
-<%if !!session[:id]%>
+<%if self.is_logged_in?(session)%>
   <%=@tweet.content%>
   <form action="/tweets/<%=@tweet.id%>/delete" method="post">
-    <input type="hidden" id="hidden" name="_method" value="delete">
     <input type="submit" value="Delete Tweet">
   </form>
   <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
 <%else%>
-  <a href="/login">Login</a>
 <%end%>
