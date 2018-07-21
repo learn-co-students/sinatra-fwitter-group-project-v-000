@@ -1,5 +1,7 @@
 All of a single users tweets
 
+
+<%@user = self.current_user(session)%>
 <%@user.tweets.each do |tweet|%>
 <%=tweet.content%><br>
 <%end%>
