@@ -50,14 +50,20 @@ class UsersController < ApplicationController
     redirect "/login"
   end
 
-  #helper_methods
-
-  def current_user
-
+  get "/users/:slug" do
+    @user = User.find_by_slug(params[:slug])
+    erb :"users/show"
   end
 
-  def logged_in?
+  helpers do
+    def current_user(arg)
+      @user = User.find_by(id: arg[:id])
+      @user
+    end
 
+    def is_logged_in?(arg)
+      !!arg[:id]
+    end
   end
 
 end

@@ -1,1 +1,5 @@
-<%bindind.pry%>
+All of a single users tweets
+
+<%@user.tweets.each do |tweet|%>
+<%=tweet.content%><br>
+<%end%>
