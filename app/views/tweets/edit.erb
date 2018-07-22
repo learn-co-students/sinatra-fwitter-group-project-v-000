@@ -4,10 +4,10 @@
 <p><%= @tweet.content %></p>
 
 <h3>New Content</h3>
-<form method="POST" action="/tweets/<%= @tweets.id %>">
+<form method="POST" action="/tweets/<%= @tweet.id %>">
   <input type="hidden" id="hidden" name="_method" value="PATCH">
 
-  <input type="text" name="tweet[content]" id="content" value="New Content">
+  <input type="text" name="content" id="content" value="New Content">
 
-  <input type="submit" name="edit" value="Edit Tweet">
+  <input type="submit" name="submit" id="submit" value="Edit Tweet">
 </form>

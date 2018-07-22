@@ -43,19 +43,35 @@ class TweetsController < ApplicationController
 
   get "/tweets/:id/edit" do #edit tweet page request
     @tweet = Tweet.find_by_id(params[:id])
-    erb :"/tweets/edit"
+    if is_logged_in? && @tweet.user_id == current_user.id
+      erb :"/tweets/edit"
+    else
+      redirect :login
+    end
   end
 
   patch '/tweets/:id' do #update tweet
     @tweet = Tweet.find_by_id(params[:id])
-    @tweet.update(params["content"])
-    redirect :"/tweets/#{@tweet.id}"
+    if @tweet.user_id == current_user.id
+      if params[:content] == ""
+        redirect :"/tweets/#{@tweet.id}/edit"
+      else
+        @tweet.update(content: params[:content])
+        redirect :"/tweets/#{@tweet.id}"
+      end
+    else
+      redirect :login
+    end
   end
 
   delete "/tweets/:id/delete" do #delete
     @tweet = Tweet.find_by_id(params[:id])
-    @tweet.delete
-    erb :"tweets/deleted"
+    if current_user.id == @tweet.id && is_logged_in?
+      @tweet.delete
+      erb :"tweets/deleted"
+    else
+      redirect :login
+    end
   end
 
 
