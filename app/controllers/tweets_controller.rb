@@ -1,27 +1,44 @@
 class TweetsController < ApplicationController
 
-
   get '/tweets' do #tweets page request
-    @current_user = User.find_by_id(session[:user_id])
-    if @current_user
-      erb :"/tweets"
+    @user = User.find_by_id(session[:user_id])
+    if is_logged_in?
+      @tweets = Tweet.all
+      erb :"/tweets/tweets"
     else
-      erb :"/sessions/failure"
+      redirect :"/login"
     end
   end
 
   get '/tweets/new' do #new tweets page request
-    erb :"tweets/new"
+    if is_logged_in?
+      erb :"tweets/new"
+    else
+      redirect :login
+    end
   end
 
   post '/tweets' do #create tweet and redirect
-    @tweet = Tweet.create(params[:tweet])
-    redirect :"/tweets/#{@tweet.id}"
+    if !is_logged_in?
+      redirect "/login"
+    else
+      if params[:content] != ""
+        @tweet = Tweet.create(content: params[:content])
+        current_user.tweets << @tweet
+        redirect :"/tweets/#{@tweet.id}"
+      else
+        redirect :'/tweets/new'
+      end
+    end
   end
 
   get "/tweets/:id" do #single tweet page request
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :"/tweets/show"
+    if is_logged_in?
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :"/tweets/show"
+    else
+      redirect :login
+    end
   end
 
   get "/tweets/:id/edit" do #edit tweet page request
