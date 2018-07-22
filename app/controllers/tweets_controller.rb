@@ -46,7 +46,7 @@ class TweetsController < ApplicationController
     erb :"/tweets/edit"
   end
 
-  patch '/tweets' do #update tweet
+  patch '/tweets/:id' do #update tweet
     @tweet = Tweet.find_by_id(params[:id])
     @tweet.update(params["content"])
     redirect :"/tweets/#{@tweet.id}"
