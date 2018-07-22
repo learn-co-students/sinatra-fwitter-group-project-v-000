@@ -1,0 +1,9 @@
+<% if Helpers.is_logged_in?(session) %>
+  <h2>Welcome, <%= Helpers.current_user(session).username %></h2>
+
+  <% @current_user.tweets.all do |tweet| %>
+  <h3>Tweet Content:</h3>
+  <p><%= tweet.content %></p>
+  <% end %>
+
+<% end %>
