@@ -1,0 +1,7 @@
+<p> <a href="/tweets/new"> Create a new tweet! </a> </p>
+
+Welcome, to your tweets!
+
+<% @tweets.each do |tweet| %>
+    <li> <%= tweet.content %> </li>
+<% end %>

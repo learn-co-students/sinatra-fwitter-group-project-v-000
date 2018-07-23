@@ -1,0 +1,7 @@
+<p> <%="You must enter some tweet content!" if @tweet && @tweet.errors.any? %> </p>
+
+Create a new tweet here:
+<form action="/tweets" method="POST">
+    <input type="text" id="content" name="tweet[content]">
+    <input type="submit" value="Submit" id="submit">
+</form>
