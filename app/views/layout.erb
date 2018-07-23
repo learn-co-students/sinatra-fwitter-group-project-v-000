@@ -1,15 +1,18 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>Fwitter</title>
+  </head>
 
+  <header>
     <% if logged_in? %>
       <a href="/logout">Logout </a>
     <% else %>
       <a href="/login">Log In </a>
     <% end %>
+  </header>
 
-  </head>
   <body>
 
     <div class="container">
