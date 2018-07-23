@@ -15,8 +15,8 @@ class ApplicationController < Sinatra::Base
 
   helpers do 
 
-    def login(username, email, password)
-      user = User.find_by(username: username, email: email)
+    def login(username, password)
+      user = User.find_by(username: username)
 
       if user && user.authenticate(password)
         session[:user_id] = user.id
@@ -27,6 +27,10 @@ class ApplicationController < Sinatra::Base
 
     def logged_in?
       !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
     end
 
   end
