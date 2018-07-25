@@ -1,0 +1,7 @@
+<%# <%if @user.tweets.blank?%>
+    <%# <p>You don't have any tweet to see it.<p> %>
+<%# <%else%>
+    <% @user.tweets.each do |tweet|%>
+        <%= tweet.content%>
+    <%end%>
+<%# <%end%>
