@@ -47,11 +47,13 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    @user = User.find_by(params[:id])
-    if @user.logged_in?
-      erb :login
-    end
+      session.clear
+      redirect '/login'
   end
+
+get '/users/:slug' do
+  erb :show
+end
 
 def logged_in?
 !!current_user
@@ -59,6 +61,10 @@ end
 
 def current_user
   @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+end
+
+def logout
+  session[:user_id].clear
 end
 
 end
