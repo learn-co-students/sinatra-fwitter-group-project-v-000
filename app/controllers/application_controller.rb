@@ -47,7 +47,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-      session.clear
+      session.destroy
       redirect '/login'
   end
 
@@ -60,8 +60,5 @@ def current_user
   @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
 end
 
-def logout
-  session[:user_id].clear
-end
 
 end
