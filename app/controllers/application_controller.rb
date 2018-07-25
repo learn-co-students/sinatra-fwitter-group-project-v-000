@@ -51,9 +51,6 @@ class ApplicationController < Sinatra::Base
       redirect '/login'
   end
 
-get '/users/:slug' do
-  erb :show
-end
 
 def logged_in?
 !!current_user
