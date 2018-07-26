@@ -1,19 +1,20 @@
 <h2>Tweet by: <%= @tweeter.username %> </h2>
 <h3><%= @tweet.content %></h3>
 
-<form class="" action="index.html" method="post">
-  <input id="hidden" type="hidden" name="_method" value="patch">
+<form class="" action="/tweets/<%= @tweet.id %>/edit" method="get">
   <input type="submit" name="" value="Edit Tweet" id="edit_tweet">
 </form>
 
 <br>
-<form class="" action="/delete/<%= @tweet.id %>" method="post">
+<form class="" action="/tweets/<%= @tweet.id %>/delete" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" name="" value="Delete Tweet" id="delete_tweet">
 </form>
 <br><br>
 
 <a href="/tweets">View All Tweets</a>
+<br>
+<a href="/users/<%= @user.slug %> ">View Your Tweets</a>
 <br>
 <a href="/">Return Home</a>
 <br><br>

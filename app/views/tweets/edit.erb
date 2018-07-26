@@ -1,0 +1,8 @@
+<h2>Editing tweet</h2>
+
+<form class="" action="/tweets/<%= @tweet.id %>/edit" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <textarea name="content" rows="8" cols="80" ><%= @tweet.content %></textarea>
+  <br>
+  <input type="submit" name="" value="Save Tweet" id="submit">
+</form>
