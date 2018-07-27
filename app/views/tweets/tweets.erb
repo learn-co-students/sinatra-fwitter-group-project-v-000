@@ -1,0 +1,11 @@
+<h1>Welcome, <%= @user.username %> </h1>
+
+<h2>Tweet Index Test</h2>
+
+<% @tweets.each do |tweet| %>
+    <p> <%= tweet.content %> </p>
+<% end %>
+
+<p>Click <a href="/tweets/new">here</a> to tweet!</p>
+
+<a href="/logout">Log Out</a>
