@@ -1,0 +1,6 @@
+Welcome, <%=@user.username%>
+<%Tweet.all.each do |t|%>
+  <%=@user.username%> tweeted: "<%=t.content%>"
+<%end%>
+<a href="/tweets/new">Create a New Tweet</a>
+<a href="/logout">Log Out</a>
