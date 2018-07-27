@@ -24,7 +24,7 @@ end
       else
         @tweet = current_user.tweets.build(content: params[:content])
         if @tweet.save
-          redirect '/tweets/#{@tweet.id}'
+          redirect "/tweets/#{@tweet.id}"
         else
           redirect "tweets/new"
         end
@@ -64,7 +64,7 @@ end
         @tweet = Tweet.find_by_id(params[:id])
         if @tweet && @tweet.user == current_user
           if @tweet.update(content: params[:content])
-            redirect '/tweets/#{@tweet.id}'
+            redirect "/tweets/#{@tweet.id}"
           else
             redirect "/tweets/#{@tweet.id}/edit"
           end
