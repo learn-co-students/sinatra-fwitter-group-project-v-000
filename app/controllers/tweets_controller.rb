@@ -1,3 +1,4 @@
+require "pry"
 class TweetsController < ApplicationController
     get '/tweets/new' do #create view
         if session[:user_id]
@@ -8,10 +9,13 @@ class TweetsController < ApplicationController
     end
 
     post '/tweets' do #create action
-        @user = User.find_by(session[:user_id])
-        @tweet = Tweet.create(:content => params[:content], :user_id => @user.id)
-
-        redirect to "/tweets/#{@tweet.id}"
+        if params[:content] == ""
+          redirect to '/tweets/new'
+        else
+          @user = User.find_by(session[:user_id])
+          @tweet = Tweet.create(:content => params[:content], :user_id => @user.id)
+          redirect to "/tweets/#{@tweet.id}"
+        end
     end
 
     get '/tweets/:id' do
@@ -33,11 +37,16 @@ class TweetsController < ApplicationController
     end
 
     patch '/tweets/:id' do
-        @tweet = Tweet.find_by_id(params[:id])
-        @tweet.content = params[:content]
-        @tweet.save
 
-        redirect to "/tweets/#{@tweet.id}"
+        if params[:content] == ""
+          redirect to "/tweets/#{@tweet.id}/edit"
+        else
+          @tweet = Tweet.find_by_id(params[:id])
+          @tweet.content = params[:content]
+          @tweet.save
+          redirect to "/tweets/#{@tweet.id}/edit"
+        end
+
     end
 
     delete '/tweets/:id/delete' do

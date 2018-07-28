@@ -1,3 +1,4 @@
+require 'pry'
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
@@ -14,16 +15,21 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
+    if session[:user_id]
+      redirect '/tweets'
+    else
       erb :'users/create_user'
+    end
   end
 
   post '/signup' do
 
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
+
       redirect to '/signup'
     else
-      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-      @user.save
+      @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+
       session[:user_id] = @user.id
 
       redirect to '/tweets'
@@ -32,7 +38,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
+    if session[:user_id]
+      redirect '/tweets'
+    else
       erb :'users/login'
+    end
   end
 
   post '/login' do
@@ -51,6 +61,15 @@ class ApplicationController < Sinatra::Base
       erb :'tweets/tweets'
     else
       redirect to '/login'
+    end
+  end
+
+  get '/logout' do
+    if session[:user_id]
+      session.clear
+      redirect to '/login'
+    else
+      redirect to '/'
     end
   end
 
