@@ -1,12 +1,19 @@
 class UsersController < ApplicationController
 
-  get '/users/signup' do
-    erb :'/signup'
+  get '/signup' do
+    erb :'/users/signup'
   end
 
   post '/signup' do
-    user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-    binding.pry
+    if params[:username].empty? || params[:email].empty?  || params[:password].empty?
+      redirect '/signup'
+    else
+      @user = User.new(:username => params[:username], :email => params[:email])
+      @user.save
+      session[:user_id] = @user.id
+      binding.pry
+      redirect '/tweets/index'
+    end
   end
 
 end
