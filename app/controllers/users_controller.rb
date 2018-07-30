@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   get "/signup" do
     if logged_in?
-      # works if you use redirect instead of erb
       redirect '/tweets'
     else
       erb :"/users/create_user"
@@ -16,8 +15,6 @@ class UsersController < ApplicationController
     unique_username = User.all.all? do |user|
        @new_user.username != user.username
     end
-
-    # binding.pry
 
     if unique_username && @new_user.save
       session[:user_id] = @new_user.id
