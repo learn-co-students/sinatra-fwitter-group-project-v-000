@@ -1,6 +1,10 @@
 <h1>Welcome, <%= current_user.username %></h1>
 
+<h2>Tweet Log:</h2>
+<% @tweets.each do |t| %>
+  <%= t.content %>
+<% end %>
 
-<form action="/logout" method="POST">
+<form action="/logout" method="get">
   <input type="submit" value="Log Out">
 </form>
