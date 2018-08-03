@@ -1,6 +1,9 @@
+require_relative '../models/concerns/slugifiable.rb'
+
 class UsersController < ApplicationController
 
-  get '/signup' do
+
+ get '/signup' do
     if logged_in?
       redirect '/tweets'
     else
@@ -27,7 +30,9 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    if @user = User.find_by(username: params["username"], password: params["password"])
+    @user = User.find_by(username: params["username"])
+    binding.pry
+    if @user && @user.authenticate(password: params["password"])
       session["user_id"] = @user.id
       redirect '/tweets'
     else
@@ -38,10 +43,19 @@ class UsersController < ApplicationController
   get '/logout' do
     if logged_in?
       session.clear
-      redirect to '/'
+      redirect to '/login'
     else
-      redirect to '/tweets'
+      redirect to '/'
     end
+  end
+
+  get '/users/:slug' do
+     @user = User.find_by_slug(params[:slug])
+     if !@user.empty?
+       redirect to '/tweets'
+     else
+       redirect to '/'
+     end
   end
 
 end
