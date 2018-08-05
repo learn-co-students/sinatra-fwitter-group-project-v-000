@@ -10,6 +10,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets' do
+    binding.pry
     erb :'/tweets/index'
   end
 
