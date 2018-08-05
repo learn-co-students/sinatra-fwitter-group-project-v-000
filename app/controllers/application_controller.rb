@@ -25,4 +25,8 @@ class ApplicationController < Sinatra::Base
 
   end
 
+  get '/' do
+    erb :'/applications/root'
+  end
+
 end
