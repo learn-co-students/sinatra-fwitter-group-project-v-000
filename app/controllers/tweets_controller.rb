@@ -1,7 +1,20 @@
 class TweetsController < ApplicationController
 
-  get '/tweets/new' do
-      erb :create_tweet
-    end
+  get '/tweets' do
+     if logged_in?
+       @tweets = Tweet.all
+       erb :'tweets/tweets'
+     else
+       redirect to '/login'
+     end
+   end
+
+   get '/tweets/new' do
+       if logged_in?
+         erb :'tweets/create_tweet'
+       else
+         redirect to '/login'
+       end
+     end
 
 end
