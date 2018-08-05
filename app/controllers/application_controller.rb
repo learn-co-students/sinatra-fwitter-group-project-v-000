@@ -10,6 +10,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    @tweets = Tweet.all
     erb :index
   end
 
