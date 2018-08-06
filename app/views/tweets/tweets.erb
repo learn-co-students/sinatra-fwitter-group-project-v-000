@@ -1,8 +1,11 @@
-<p> <%= current_user.username %> </p>
+<p> Welcome, <%= current_user.username %> </p>
 <h2> Tweets </h2>
 
 <% @tweets.each do |tweet| %>
   <div>
     <%= tweet.content %>
+    <p> <a href= '/tweets/<%= tweet.id %>/edit' > Edit Tweet </a> </p>
+    <p> <a href= '/tweets/<%= tweet.id %>/delete' > Delete Tweet </a> </p>
+    </form>
   </div>
 <% end %>

@@ -3,9 +3,10 @@ class TweetsController < ApplicationController
 require 'pry'
 
   get '/tweets' do
+
      if logged_in?
        @tweets = Tweet.all
-       redirect to '/tweets'
+       erb :'tweets/tweets'
      else
        redirect to '/login'
      end
@@ -13,7 +14,7 @@ require 'pry'
 
    get '/tweets/new' do
        if logged_in?
-         erb :'tweets/create_tweet'
+         erb :'tweets/new'
        else
          redirect to '/login'
        end
@@ -22,7 +23,7 @@ require 'pry'
     post '/tweets' do
       if logged_in?
         if params[:content] == ""
-          redirect to 'tweets/create_tweet'
+          redirect to 'tweets/new'
         else
           @tweet = current_user.tweets.build(content: params[:content])
           if @tweet.save
@@ -39,22 +40,44 @@ require 'pry'
   get "/tweets/:id" do
       if logged_in?
         @tweet = Tweet.find_by_id(params[:id])
-        redirect to "/tweets/#{@tweet.id}"
+        erb :'/tweets/show_tweet'
       else
         redirect to "/login"
     end
   end
 
-  get '/tweet/:id/edit' do
+  get '/tweets/:id/edit' do
+    if logged_in?
        @tweet = Tweet.find(params[:id])
-       erb :'tweet/edit'
+        if @tweet && @tweet.user == current_user
+       erb :'tweets/edit'
+     else
+     redirect to '/tweets'
+   end
+     else
+       redirect to "/login"
      end
+    end
 
-     patch '/tweet/:id' do
+     patch '/tweets/:id' do
         @tweet = Tweet.find_by_id(params[:id])
-        @tweet.update(params[:content])
+        @tweet.update(content: params[:content])
         @tweet.save
-        redirect("/tweet/#{@tweet.id}")
+        redirect("/tweets/#{@tweet.id}/edit")
       end
+
+      delete '/tweets/:id/delete' do
+         if logged_in?
+           @tweet = Tweet.find_by_id(params[:id])
+           if @tweet && @tweet.user == current_user
+             @tweet.delete
+           redirect to '/tweets'
+          else
+            redirect to '/login'
+          end
+         else
+           redirect to '/login'
+         end
+       end
 
 end
