@@ -44,4 +44,16 @@ require 'pry'
     end
   end
 
+  get '/tweet/:id/edit' do
+       @tweet = Tweet.find(params[:id])
+       erb :'tweet/edit'
+     end
+
+     patch '/tweet/:id' do
+        @tweet = Tweet.find_by_id(params[:id])
+        @tweet.update(params[:content])
+        @tweet.save
+        redirect("/tweet/#{@tweet.id}")
+      end
+
 end
