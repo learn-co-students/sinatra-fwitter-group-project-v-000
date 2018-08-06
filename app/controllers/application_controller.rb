@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    @tweets = Tweet.all
+    @user = User.find_by_id(current_user)
     erb :index
   end
 
