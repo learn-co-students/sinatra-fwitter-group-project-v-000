@@ -1,19 +1,32 @@
+require 'pry'
 class UsersController < ApplicationController
 
-  get '/registrations/signup' do
+  get '/signup' do
     erb :'users/signup'
   end
 
-  get '/users/home' do
-    binding.pry
-    @user = User.find_by_id(params[:id])
-    erb :'users/home'
-  end
 
-  post '/registrations' do
-    @user = User.create(params[:user])
-    session["session_id"] = @user.id
-    redirect '/users/home'
+
+  post '/signup' do
+
+if !params["username"].empty? && !params["email"].empty? && !params["password"].empty?
+  @user = User.create(params)
+  session[:user_id] = @user.id
+
+  redirect '/tweets'
+else
+  redirect '/signup'
+end
+end
+
+  get '/users/home' do
+    @user = User.find(session[:user_id])
+
+    if @user
+    erb :'users/home'
+  else
+    redirect '/'
+  end
   end
 
 end

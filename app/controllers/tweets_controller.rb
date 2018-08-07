@@ -20,7 +20,7 @@ get '/tweets/:id/edit' do
 end
 
 post '/tweets' do
-  binding.pry
+  #binding.pry
   @tweet = Tweet.create(params[:tweet])
   redirect "/tweets"
 end
