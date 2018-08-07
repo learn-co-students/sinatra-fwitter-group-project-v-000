@@ -1,0 +1,13 @@
+<h2>Welcome,<%=@user.username %> </h2>
+<a href="/logout"><button type="button" class="btn btn-danger" id="submit">Logout</button></a>
+<% if !!@user && @tweets.size > 0
+    @tweets.each do |tweet| %>
+      <a href="/tweets/<%=tweet.id%>/edit">
+        <div class="tweet_box">
+          <p id="tweet_content"><%=tweet.id%>. <%= tweet.content %></p>
+        </div>
+      </a>
+    <% end %>
+  <% else
+    "Must Login to view Tweets" %>
+<% end %>

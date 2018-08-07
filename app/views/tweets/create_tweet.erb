@@ -1,0 +1,11 @@
+<div class="container" align='center' id='signup'>
+<h1 id="create_tweet">New Tweet From</h1>
+  <form action='/tweets' method="POST">
+
+    <label for='content'><h4>@<%=@user.username%></h4></label>
+    <br>
+    <input type="text" name='content'>
+
+    <input type="submit" id="submit" value="Tweet!"><br>
+  </form>
+</div>
