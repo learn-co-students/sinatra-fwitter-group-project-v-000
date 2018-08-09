@@ -24,7 +24,11 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    erb :'/users/login'
+    if Helpers.logged_in?(session)
+      redirect '/tweets/index'
+    else
+      erb :'/users/login'
+    end
   end
 
   post '/login' do
