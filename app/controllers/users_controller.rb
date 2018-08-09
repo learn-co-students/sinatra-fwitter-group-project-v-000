@@ -44,11 +44,10 @@ class UsersController < ApplicationController
 
   get '/tweets' do
     @user = User.find_by_id(session[:user_id])
-
     if @user
       erb :'/tweets/index'
     else
-      redirect '/error'
+      redirect '/user/login'
     end
   end
 
@@ -58,6 +57,6 @@ class UsersController < ApplicationController
 
   get '/logout' do
     session.clear
-    redirect :'/users/home'
+    redirect :'/users/login'
   end
 end
