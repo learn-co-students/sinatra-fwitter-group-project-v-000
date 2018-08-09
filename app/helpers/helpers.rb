@@ -9,4 +9,12 @@ class Helpers
   def self.is_logged_in?(session)
     !!session[:user_id]
   end
+
+  def logged_in?
+    !!session[:user_id]
+  end
+
+  def current_user
+    User.find(session[:user_id])
+  end
 end
