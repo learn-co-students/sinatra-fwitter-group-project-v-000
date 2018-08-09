@@ -1,1 +1,4 @@
-<h1>Tweets Index</h1>
+<h1>Welcome, This Is the Tweets Index</h1>
+<% Tweet.all.each do |tweet| %>
+	<label>User Name: </label><label><%= tweet.user.username %></label><label>    </label><label>Content: </label><label><%= tweet.content %></label>
+<% end %>
