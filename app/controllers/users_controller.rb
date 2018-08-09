@@ -1,39 +1,47 @@
 class UsersController < ApplicationController
 
 
-  get '/users/signup' do
-    erb :'users/signup'
-  end
-
-  get '/users/login' do
-    erb :'/users/login'
-  end
-
-  post '/users/signup' do
-    @user = User.create(params[:user])
-
-    redirect '/users/login'
-  end
-
-  post '/users/login' do
-    @user = User.find_by(email: params[:user][:email])
-
-    if @user && @user.authenticate(params[:user][:password])
-      session[:id] = @user.id
+  get '/signup' do
+    if logged_in?
       redirect '/tweets'
     else
-      redirect '/users/failure'
+      erb :'users/signup'
     end
   end
 
-  get '/users/failure' do
-    erb :'users/failure'
+  post '/signup' do
+    if params[:user].find{|requirement, value| value == ""}
+      redirect '/signup'
+    end
+
+    @user = User.create(params[:user])
+    session[:user_id] = @user.id
+    redirect '/tweets'
+
+  end
+
+  get '/login' do
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :'/login'
+    end
+  end
+
+  post '/login' do
+    @user = User.find_by(email: params[:user][:email])
+
+    if @user && @user.authenticate(params[:user][:password])
+      session[:user_id] = @user.id
+      redirect '/tweets'
+    else
+      redirect '/login'
+    end
   end
 
 
-  get '/users/logout' do
+  get '/logout' do
     session.clear
-
     redirect '/'
   end
 
