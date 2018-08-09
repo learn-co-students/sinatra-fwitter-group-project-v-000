@@ -1,5 +1,10 @@
 
 <h1>Tweets</h1>
+
+<% if logged_in? %>
+  <a href="users/logout">Log Out</a>
+<% end %>
+
 <ol>
 <% @tweets.each do |tweet| %>
   <a href="/tweets/<%= tweet.id %>"><li><h2><%= tweet.content %></h2></li></a>
