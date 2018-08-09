@@ -2,6 +2,7 @@
 <h1>Fwitter</h1>
 
 <% if logged_in? %>
+  <p>You are logged in as <%= current_user.username %></p>
   <a href="/logout">Log Out</a>
 <% end %>
 

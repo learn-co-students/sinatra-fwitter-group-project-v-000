@@ -25,7 +25,7 @@ class TweetsController < ApplicationController
     erb :'tweets/edit'
   end
 
-  post '/tweets/:id' do
+  patch '/tweets/:id' do
     @tweet= Tweet.find_by_id(params[:id])
     @tweet.update(params[:tweet])
     @tweet.save
@@ -36,7 +36,7 @@ class TweetsController < ApplicationController
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id])
     @tweet.delete
-    
+
     erb :'tweets/delete'
   end
 end
