@@ -2,9 +2,8 @@
 <h1>Fwitter</h1>
 
 <% if logged_in? %>
-  <p>You are logged in as <%= current_user.username %></p>
+  <p>Welcome, <%= current_user.username %></p>
   <a href="/logout">Log Out</a>
-<% end %>
 
 <h4><a href="/tweets/new">Make a new tweet</a></h4>
 <ol>
@@ -12,3 +11,5 @@
   <a href="/tweets/<%= tweet.id %>"><li><h2><%= tweet.content %></h2></li></a>
 <% end %>
 </ol>
+
+<% end %>
