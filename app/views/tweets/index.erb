@@ -1,9 +1,4 @@
-show all tweets
-Show all tweets
-new tweet
-edit tweet
-delete tweet
-see single tweet
+<h1>Welcome, <%= User.find_by_id(session[:user_id]) %>
 <% @tweets.each do |tweet|%>
 <h2>Tweet: <%= tweet.content %> User: <%= tweet.user_id %></h2>
 <br>
