@@ -42,8 +42,6 @@ class UsersController < ApplicationController
     erb :'/users/show'
   end
 
-
-
   get "/logout" do
     if Helpers.is_logged_in?(session)
       session.clear

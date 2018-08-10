@@ -1,5 +1,7 @@
-<h1>Welcome, <%= User.find_by_id(session[:user_id]) %>
+<h1>Welcome, <%= User.find_by_id(session[:user_id]).username %>
 <% @tweets.each do |tweet|%>
 <h2>Tweet: <%= tweet.content %> User: <%= tweet.user_id %></h2>
 <br>
 <% end %>
+<br>
+<a href='/tweets/new'>Create New Tweet</a>
