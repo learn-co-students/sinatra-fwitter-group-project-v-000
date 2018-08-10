@@ -1,0 +1,10 @@
+<h1>Your Tweets </h1>
+
+<% if !@user.tweets.empty? %>
+  <% @user.tweets.each do |tweet| %>
+    <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a>
+    <br></br>
+  <% end %>
+<% else %>
+  <h2>You have no tweets!</h2>
+<% end %>

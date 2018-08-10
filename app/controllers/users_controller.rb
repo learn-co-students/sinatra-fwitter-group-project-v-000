@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if Helpers.logged_in?(session)
-      redirect '/tweets/index'
+      redirect '/tweets'
     else
       erb :'/users/signup'
     end
@@ -17,15 +17,15 @@ class UsersController < ApplicationController
 
     if user.save
       session[:user_id] = user.id
-      redirect '/tweets/index'
+      redirect '/tweets'
     else
-      redirect '/users/signup'
+      redirect '/signup'
     end
   end
 
   get '/login' do
     if Helpers.logged_in?(session)
-      redirect '/tweets/index'
+      redirect '/tweets'
     else
       erb :'/users/login'
     end
@@ -38,25 +38,17 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect "/tweets"
     else
-      redirect "/users/error"
+      redirect "/"
     end
   end
 
-  get '/tweets' do
-    @user = User.find_by_id(session[:user_id])
-    if @user
-      erb :'/tweets/index'
-    else
-      redirect '/user/login'
-    end
-  end
-
-  get '/error' do
-    erb :'/users/error'
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :"/user/index"
   end
 
   get '/logout' do
     session.clear
-    redirect :'/users/login'
+    redirect :'/login'
   end
 end
