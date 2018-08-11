@@ -1,5 +1,7 @@
 <h1>Welcome, <%= @user.username%>!</h1>
 
+<a href="/tweets/new">Make a New Tweet</a>
+<a href="/users/<%= @user.slug%>">View Your Tweets</a>
 <h2> Tweets </h2>
 
 <%if !Tweet.all.empty? %>
