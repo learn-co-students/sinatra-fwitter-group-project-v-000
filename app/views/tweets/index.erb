@@ -1,0 +1,14 @@
+<h1>Welcome, <%= @user.username%>!</h1>
+
+<a href="/tweets/new">Make a New Tweet</a>
+<a href="/users/<%= @user.slug%>">View Your Tweets</a>
+<h2> Tweets </h2>
+
+<%if !Tweet.all.empty? %>
+  <% Tweet.all.each do |tweet|%>
+    <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a>
+    <br></br>
+  <% end %>
+<% else %>
+  There are no tweets!
+<% end %>
