@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Tweets</title>
-  </head>
-  <body>
+
     <h1>Welcome, <%=current_user.username%></h1>
     <h2>Tweets:</h2>
     <ul>
@@ -12,5 +6,8 @@
       <li><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></li>
     <%end%>
     </ul>
-  </body>
-</html>
+    <br>
+    <h2>All Tweets on Fwitter:</h2>
+    <%Tweet.all.each do |tweet|%>
+    <p><%=tweet.content%></p>
+    <%end%>

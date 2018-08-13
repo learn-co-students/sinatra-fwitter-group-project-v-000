@@ -5,7 +5,7 @@ describe ApplicationController do
 
   describe "Homepage" do
     it 'loads the homepage' do
-      get '/' 
+      get '/'
       expect(last_response.status).to eq(200)
       expect(last_response.body).to include("Welcome to Fwitter")
     end
@@ -151,7 +151,7 @@ describe ApplicationController do
   end
 
   describe 'index action' do
-    context 'logged in' do
+    context 'logged in' do 
       it 'lets a user view the tweets index if logged in' do
         user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet1 = Tweet.create(:content => "tweeting!", :user_id => user1.id)
