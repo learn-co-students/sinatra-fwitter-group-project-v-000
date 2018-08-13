@@ -166,7 +166,7 @@ It's especially important that a user should not be able to edit or delete the t
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/sinatra-fwitter-group-project'>Fwitter</a> on Learn.co and start learning to code for free.</p>
 
-### Using the Callgraph Inspector
+### Using the Profiler to Create a Call Graph
 I checked in the call graph just in case we run into setup snags with the below,
 the call graph is a good jumping off point for the ActiveRecord source code 
 
