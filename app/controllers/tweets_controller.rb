@@ -1,8 +1,9 @@
+require 'pry'
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    @tweets = Tweet.all
     if logged_in?
+      @user = current_user
       erb :'tweets/tweets'
     else
       redirect to '/login'
@@ -11,6 +12,7 @@ class TweetsController < ApplicationController
 
   get '/tweets/new' do
     if logged_in?
+      @user = current_user
       erb :'tweets/create_tweet'
     else
       redirect to '/login'
@@ -18,20 +20,17 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    if logged_in?
-      if params[:content] == ""
-        redirect to '/tweets/new'
-      else
-        @tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
-        redirect to "/tweets/#{@tweet.id}"
-      end
+    @tweet = Tweet.new(params)
+    if logged_in? && @tweet.save
+      current_user.tweets << @tweet
+      redirect to "/tweets/#{@tweet.id}"
     else
-      redirect to '/login'
+      redirect to '/tweets/new'
     end
   end
 
   get '/tweets/:id' do
-    if logged_in?
+    if logged_in? && current_user
       @tweet = Tweet.find_by_id(params[:id])
       erb :'tweets/show_tweet'
     else
@@ -40,7 +39,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id/edit' do
-    if logged_in?
+    if logged_in? && current_user
       @tweet = Tweet.find_by_id(params[:id])
       erb :'tweets/edit_tweet'
     else
@@ -49,11 +48,23 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    @tweet = Tweet.find(params[:id])
-    if @tweet.user == current_user
-      redirect to (@tweet.update(content: params[:content]) ? "/tweets/#{@tweet.id}" : "/tweets/#{@tweet.id}/edit")
+    if logged_in?
+      if params[:content] == ""
+        redirect to "/tweets/#{params[:id]}/edit"
+      else
+        @tweet = Tweet.find_by_id(params[:id])
+        if @tweet && @tweet.user == current_user
+          if @tweet.update(content: params[:content])
+            redirect to "/tweets/#{@tweet.id}"
+          else
+            redirect to "/tweets/#{@tweet.id}/edit"
+          end
+        else
+          redirect to '/tweets'
+        end
+      end
     else
-      redirect to '/tweets'
+      redirect to '/login'
     end
   end
 
