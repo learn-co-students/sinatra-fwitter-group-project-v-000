@@ -5,7 +5,7 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 use Rack::MethodOverride
-use TweetsController::ApplicationController
-use UsersController::ApplicationController
+use TweetsController
+use UsersController
 
 run ApplicationController

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tweets</title>
+  </head>
+  <body>
+    <h1>Tweets:</h1>
+    <% @tweets.each do |tweet| %>
+    <ul>
+      <li><%=tweet.name%></li>
+    </ul>
+    <%end%>
+  </body>
+</html>
