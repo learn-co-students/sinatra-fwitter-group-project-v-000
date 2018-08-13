@@ -1,7 +1,6 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    raise inspect.params
     if logged_in?
       @user = current_user
       erb :'tweets/tweets'
