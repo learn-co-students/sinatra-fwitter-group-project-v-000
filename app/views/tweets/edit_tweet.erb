@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit Tweet</title>
+  </head>
+  <body>
+    <h1>To edit your tweet, please fill out the below information:</h1>
+    <form action="/tweets/<%=@tweet.id%>" method="post">
+      <p>Current Content: <%=@tweet.content%></p>
+      <p>Content: </p>
+      <textarea name="content" rows="8" cols="80"></textarea>
+      <input type="submit" value="Edit" id="submit">
+    </form>
+  </body>
+</html>

@@ -5,11 +5,11 @@
     <title>Tweets</title>
   </head>
   <body>
-    <h1>Tweets:</h1>
+    <h1>Welcome, <%=current_user.username%></h1>
+    <h2>Tweets:</h2>
     <ul>
     <% @tweets.each do |tweet| %>
-    <% user = tweet.user_id %>
-      <li><%=User.find(user).username%> - <%=tweet.content%></li>
+      <li><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></li>
     <%end%>
     </ul>
   </body>
