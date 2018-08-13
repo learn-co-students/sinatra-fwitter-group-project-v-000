@@ -7,6 +7,14 @@
 
     <div class="container">
 
+      <% if !!flash[:error] %>
+        <alert style="color:red;"><%= flash[:error] %></alert>
+      <% end %>
+
+      <% if !!flash[:message] %>
+        <alert style="color:green;"><%= flash[:message] %></alert>
+      <% end %>
+
       <%= yield %>
       
     </div>

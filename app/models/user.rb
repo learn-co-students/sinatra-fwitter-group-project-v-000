@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true
   validates :email, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "please enter a valid email address" }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be valid" }
   validates :password, presence: true
   
   def slug
