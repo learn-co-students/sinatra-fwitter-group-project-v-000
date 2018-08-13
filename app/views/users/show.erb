@@ -1,10 +1,10 @@
 "Here are your tweets, <%= @user.username%>!"
 
-<%@user.tweets.each do |tweet|%>
-  <div>
-    <%= tweet.content%>
-  </div>
-<%end%>
+<%Tweet.all.each do |tweet|%>
+  <ul>
+    <li><%= tweet.content%></li>
+  </ul>
+    <%end%>
 
 <br></br>
 <a href="/logout">Log Out</a>
