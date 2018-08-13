@@ -1,4 +1,8 @@
+require 'rack-flash'
+
 class UsersController < ApplicationController
+
+  use Rack::Flash
 
   get '/login' do
     erb :'/users/login'
@@ -8,9 +12,10 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:username], password: params[:password])
     if @user
       session[:user_id] = @user.id
-      redirect "/users/show/#{@user.id}"
+      redirect "/show/#{@user.id}"
     else
-      redirect "/users/login"
+      flash[:message] = "Sorry, username and password do not match."
+      redirect "/login"
     end
   end
 
@@ -21,17 +26,21 @@ class UsersController < ApplicationController
   post '/signup' do
     @user = User.new(params)
     @user.save
-    redirect "/users/login"
+    redirect "/login"
   end
 
   get '/show/:id' do
-    @user = User.find(params[:id])
     if logged_in?
       @current_user = current_user
-      erb '/users/show'
+      erb :'/users/show'
     else
-      redirect "/users/login"
+      redirect "/login"
     end
+  end
+
+  get '/logout' do
+    session.clear
+    redirect "/"
   end
 
 end

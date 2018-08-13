@@ -6,10 +6,11 @@
   </head>
   <body>
     <h1>Tweets:</h1>
-    <% @tweets.each do |tweet| %>
     <ul>
-      <li><%=tweet.name%></li>
-    </ul>
+    <% @tweets.each do |tweet| %>
+    <% user = tweet.user_id %>
+      <li><%=User.find(user).username%> - <%=tweet.content%></li>
     <%end%>
+    </ul>
   </body>
 </html>
