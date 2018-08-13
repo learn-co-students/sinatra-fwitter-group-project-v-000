@@ -10,7 +10,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/new' do
-    if logged_in
+    if logged_in?
       @current_user = current_user
       erb :'/tweets/create_tweet'
     else
@@ -30,20 +30,20 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id' do
-    if logged_in
+    if logged_in?
       @tweet = Tweet.find(params[:id])
       erb :'/tweets/show_tweet'
     else
       redirect "/login"
-    end 
+    end
   end
 
   get '/tweets/:id/edit' do
     @tweet = Tweet.find(params[:id])
-    if session[:user_id] == @tweet.user_id
+    if !!logged_in? && session[:user_id] == @tweet.user_id
       erb :'/tweets/edit_tweet'
     else
-      erb :'/users/error'
+      redirect "/login"
     end
   end
 
@@ -54,7 +54,7 @@ class TweetsController < ApplicationController
       @tweet.save
       redirect "/tweets/#{@tweet.id}"
     else
-      erb :'/users/error'
+      redirect "/tweets/#{@tweet.id}/edit"
     end
   end
 
@@ -64,7 +64,7 @@ class TweetsController < ApplicationController
       @tweet.delete
       redirect "/show/#{current_user.id}"
     else
-      erb :'/users/error'
+      redirect "/login"
     end
   end
 

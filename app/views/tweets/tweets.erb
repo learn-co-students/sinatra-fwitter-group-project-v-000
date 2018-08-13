@@ -6,6 +6,9 @@
       <li><a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a></li>
     <%end%>
     </ul>
+    <p><a href="/tweets/new">Create New Tweet</a></p>
+    <br>
+    <a href="/logout">Log Out</a>
     <br>
     <h2>All Tweets on Fwitter:</h2>
     <%Tweet.all.each do |tweet|%>
