@@ -1,6 +1,6 @@
 "Here are your tweets, <%= @user.username%>!"
 
-<%Tweet.all.each do |tweet|%>
+<% @user.tweets.each do |tweet|%>
   <ul>
     <li><%= tweet.content%></li>
   </ul>
