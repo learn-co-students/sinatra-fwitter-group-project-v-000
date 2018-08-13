@@ -38,13 +38,13 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect to '/tweets'
     else
-      erb :'users/create_user'
+      erb :'users/login'
     end
  end
 
   get '/logout' do
     if logged_in?
-      session.destroy
+      session.clear
       redirect to '/login'
    else
       redirect to '/'
