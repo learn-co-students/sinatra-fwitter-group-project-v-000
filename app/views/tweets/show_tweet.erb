@@ -1,0 +1,8 @@
+<h1>Welcome,<%= @user.username %></h1>
+
+<h3>Tweet</h3>
+
+  <h3>Content: <%= @tweet.content %> </h3>
+
+  <h4><a href="/tweet/<%= @tweet.id %>/edit">Edit Tweet</a> </h4> <br></br>
+  <h4><a href="/tweet/<%= @tweet.id %>/delete">Delete Tweet</a> </h4> <br></br>
