@@ -79,6 +79,11 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/users/:slug' do
+    binding.pry
+    erb :'/users/show'
+  end
+
   helpers do
     def logged_in?
       !!session[:user_id]
