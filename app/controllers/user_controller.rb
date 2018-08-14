@@ -44,10 +44,10 @@ class UserController < ApplicationController
       redirect "/login"
   end
 
-  get '/show' do
+  get '/:id' do
     binding.pry
-    #  @user = User.find_by(id: session[:user_id])
-    #  tweets =Tweet.find by(user_id: @user.id)
+      @user = User.find_by(id: session[:user_id])
+      @tweets =Tweet.find_by(user_id: @user.id)
       erb :'/show'
     end
 
