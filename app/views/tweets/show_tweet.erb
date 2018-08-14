@@ -1,3 +1,4 @@
+<p>Logged in as: <%= current_user.username %></p>
 <h2><label> Tweet Tweet</label></h2>
 
 <h2><a href="/users/<%=@tweet.user.slug%>"><%= @tweet.user.username %></a>: <%= @tweet.content %> </h2>
@@ -8,8 +9,6 @@
         <input id="hidden" type="hidden" name="_method" value="DELETE">
         <input type="submit" value="Delete Tweet">
       </form>
-
     <% end %>
-<br></br>
-
+<br>
 <p><label><a href="/logout">Log Out</a></label></p>

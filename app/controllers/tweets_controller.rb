@@ -1,7 +1,7 @@
 require 'pry'
 class TweetsController < ApplicationController
 
-  get '/tweets' do
+  get '/tweets' do #index of all tweets
     if logged_in?
       @user = current_user
       erb :'tweets/tweets'
@@ -10,7 +10,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  get '/tweets/new' do
+  get '/tweets/new' do #loads form to create new tweet
     if logged_in?
       @user = current_user
       erb :'tweets/create_tweet'
@@ -19,7 +19,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets' do
+  post '/tweets' do #creates a new tweet
     if params[:content] == ""
       redirect to '/tweets/create_tweet'
     else
@@ -36,7 +36,7 @@ class TweetsController < ApplicationController
     # end
   end
 
-  get '/tweets/:id' do
+  get '/tweets/:id' do #tweets show page
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       erb :'tweets/show_tweet'
@@ -45,8 +45,8 @@ class TweetsController < ApplicationController
     end
   end
 
-  get '/tweets/:id/edit' do #load edit form
-    if logged_in? && current_user
+  get '/tweets/:id/edit' do #load tweet edit form
+    if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       if @tweet.user_id == session[:user_id]
         erb :'tweets/edit_tweet'
@@ -94,28 +94,12 @@ class TweetsController < ApplicationController
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       if @tweet && @tweet.user == current_user
-        @tweet.destroy
+        @tweet.delete
       end
         redirect to '/tweets'
     else
       redirect to '/login'
     end
   end
-
-#   post '/tweets/:id/delete' do
-#   @tweet = Tweet.find_by_id(params[:id])
-#   if session[:user_id]
-#     @tweet = Tweet.find_by_id(params[:id])
-#     binding
-#     if @tweet.user_id == session[:user_id]
-#       @tweet.delete
-#       redirect to '/tweets'
-#     else
-#       redirect to '/tweets'
-#     end
-#   else
-#     redirect to '/login'
-#   end
-# end
 
 end
