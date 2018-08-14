@@ -1,18 +1,20 @@
 class TweetsController < ApplicationController
 
   get '/tweets/new' do #creates the create tweet page
-    #binding.pry
+    if logged_in?
     erb :'/tweets/create_tweet'
+  end
   end
 
   post '/tweets' do  #post tweet
+    @user = User.find_by( session[:user_id])
+    @tweet = Tweet.create(content: params[:content], username: @user.username)
+   redirect to "/tweets/#{@tweet.id}"
+end
 
-    redirect to "/tweets/#{@tweet.id}"
-  end
-
-  post 'tweets/:id/delete' do
+  get '/tweets/:id' do
     @tweet = Tweet.find_by(id: params[:id])
-    @tweet.clear
+    erb :'/tweets/show'
   end
 
   get '/tweets' do
@@ -23,5 +25,4 @@ class TweetsController < ApplicationController
     redirect '/login'
     end
   end
-
 end
