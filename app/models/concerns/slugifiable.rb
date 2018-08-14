@@ -1,3 +1,5 @@
+# We might consider renaming this module -
+# it's hard to tell from the name what it does
 module Slugifiable
   module InstanceMethods
     def slug
