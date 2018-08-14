@@ -121,7 +121,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets/:id/edit' do
-    #binding.pry    
+    #binding.pry
     if logged_in?
       @tweet = Tweet.find(params[:id])
        if @tweet.user_id == current_user.id
@@ -144,6 +144,21 @@ class ApplicationController < Sinatra::Base
       redirect to "/tweets/#{@tweet.id}"
     else
       redirect to "/tweets/#{@tweet.id}/edit"
+    end
+  end
+
+  delete '/tweets/:id/delete' do
+    #binding.pry
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      if current_user.tweets.include?(@tweet)
+        @tweet = Tweet.find(params[:id])
+        @tweet.delete
+      else
+        redirect to "/tweets/#{@tweet.id}"
+      end
+    else
+      redirect to "/login"
     end
   end
 
