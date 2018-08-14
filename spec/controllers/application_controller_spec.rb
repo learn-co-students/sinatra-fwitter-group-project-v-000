@@ -151,7 +151,7 @@ describe ApplicationController do
   end
 
   describe 'index action' do
-    context 'logged in' do 
+    context 'logged in' do
       it 'lets a user view the tweets index if logged in' do
         user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet1 = Tweet.create(:content => "tweeting!", :user_id => user1.id)
@@ -364,7 +364,7 @@ describe ApplicationController do
       it 'does not load -- instead redirects to login' do
         get '/tweets/1/edit'
         expect(last_response.location).to include("/login")
-      end
+      end 
     end
   end
 

@@ -2,6 +2,7 @@
     <h1><%=@current_user.username%></h1>
     <h2>Create a new tweet below:</h1>
     <form action="/tweets" method="post">
-      <p>Content: <textarea name="content" rows="8" cols="80" id="content"></textarea></p>
+      <p>Content: </p>
+      <textarea name="content" rows="8" cols="80" id="content"></textarea><br>
       <input type="submit" value="Create Tweet" id="submit">
     </form>

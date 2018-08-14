@@ -12,5 +12,5 @@
     <br>
     <h2>All Tweets on Fwitter:</h2>
     <%Tweet.all.each do |tweet|%>
-    <p><%=tweet.content%></p>
+    <p><%=User.find(tweet.user_id).username%> - <%=tweet.content%></p>
     <%end%>
