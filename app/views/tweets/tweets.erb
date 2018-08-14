@@ -1,0 +1,8 @@
+<h1>Welcome <%=@user.username %> </h1>
+<%Tweets.all.each do |tweet| %>
+
+<h3>Tweets</h3>
+<ul>
+  <li> <%=tweet.content%> </li>
+  <%end%>
+</ul>
