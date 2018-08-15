@@ -46,14 +46,11 @@ class UserController < ApplicationController
   end
 
   get '/users/:id' do
-    if logged_in?
+
       @user = User.find_by(username: params[:id])
       @user_tweets = @user.tweets.all
       erb :'/users/show'
-    else
-      redirect "/login"
-    end
-    end
+  end
 
 
 end
