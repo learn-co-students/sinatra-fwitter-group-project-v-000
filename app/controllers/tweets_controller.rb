@@ -62,7 +62,7 @@ end
 
   post '/tweets/:id/delete' do
 
-    binding.pry
+  #  binding.pry
   #  @tweet = Tweet.find(params[:id])
     if current_user.id == params[:id] && logged_in?
       @tweet = Tweet.find(params[:id])
