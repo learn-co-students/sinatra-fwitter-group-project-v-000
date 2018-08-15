@@ -21,7 +21,7 @@ class UserController < ApplicationController
 
   get '/login' do #loads login page
     if logged_in?
-      redirect "/tweets"
+      redirect "/tweets/new"
     else
     erb :'/users/login'
     end

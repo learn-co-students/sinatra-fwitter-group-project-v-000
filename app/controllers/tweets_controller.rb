@@ -33,6 +33,7 @@ end
   get '/tweets/:id/edit' do #loads edit page
     if logged_in?
     @tweet = Tweet.find_by(id: params[:id])
+
     erb :'/tweets/edit_tweet'
   else
     redirect '/login'
@@ -40,7 +41,7 @@ end
   end
 
   post 'tweets/:id' do
-    if !params[:content].empty?
+    if !params[:content].empty? && logged_in?
     tweet = Tweet.update(content: params[:content])
     redirect '/tweets/:id'
     end
