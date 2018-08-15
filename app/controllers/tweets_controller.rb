@@ -20,6 +20,7 @@ class TweetsController < ApplicationController
   post '/tweets' do
     @user=User.find_by_id(params[:user_id])
     @tweet = Tweet.new(content: params[:content])
+    #  @tweet = current_user.tweets.build(content: params[:content])
     if @tweet.valid?
       @tweet.user=@user
       @tweet.save
