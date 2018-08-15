@@ -40,10 +40,15 @@ end
     end
   end
 
-  post 'tweets/:id' do
-    if !params[:content].empty? && logged_in?
-    tweet = Tweet.update(content: params[:content])
-    redirect '/tweets/:id'
+  post '/tweets/:id' do
+
+  @tweet = Tweet.find(params[:id])
+
+    if !params[:content].empty? && logged_in? && current_user.id == @tweet.user_id
+    @tweet.update(content: params[:content])
+    redirect "/tweets/#{@tweet.id}"
+  else
+    redirect "/tweets/#{@tweet.id}/edit"
     end
   end
 
