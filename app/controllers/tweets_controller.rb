@@ -60,16 +60,12 @@ end
     end
   end
 
-  post '/tweets/:id/delete' do
-
-  #  binding.pry
-  #  @tweet = Tweet.find(params[:id])
-    if current_user.id == params[:id] && logged_in?
-      @tweet = Tweet.find(params[:id])
-    @tweet.delete
-    redirect '/login'
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find_by(id: params[:id])
+    if current_user.id == @tweet.user_id && logged_in?
+        @tweet.delete
+        redirect '/login'
     end
-
   end
 
 end
