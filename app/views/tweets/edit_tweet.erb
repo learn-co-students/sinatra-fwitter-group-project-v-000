@@ -1,6 +1,6 @@
 <h1>Edit Tweet</h1>
-<form method="POST" action="/tweets/<%=@tweet.id">
+<form method="POST" action="/tweets/<%= @tweet.id %>/edit">
   <h3>Edit Tweet Below</h3>
   <input type="text" name="content" id="tweet" value="@tweet.content">
-  <input type="submit" id="submit" value="Submit">
+  <input type="submit"  id= "Edit Tweet" value="Edit Tweet">
 </form>

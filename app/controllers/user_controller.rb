@@ -32,11 +32,12 @@ class UserController < ApplicationController
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
-      #  binding.pry
+
         redirect "/tweets"
     else
         redirect "/login"
     end
+
   end
 
   get '/logout' do
@@ -44,11 +45,11 @@ class UserController < ApplicationController
       redirect "/login"
   end
 
-  get '/:id' do
-    binding.pry
-      @user = User.find_by(id: session[:user_id])
-      @tweets =Tweet.find_by(user_id: @user.id)
-      erb :'/show'
+  get '/users/:id' do
+      @user = User.find_by(username: params[:id])
+      @user_tweets = @user.tweets.all
+      erb :'/users/show'
     end
+
 
 end
