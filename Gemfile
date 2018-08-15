@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'thin'
 gem 'shotgun'
 gem 'pry'
+gem 'rb-readline'
 gem 'bcrypt'
 gem "tux"
 
@@ -17,4 +18,5 @@ group :test do
   gem 'capybara'
   gem 'rack-test'
   gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
+  gem 'stackprof' # https://github.com/tmm1/stackprof
 end

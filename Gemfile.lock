@@ -58,6 +58,7 @@ GEM
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rake (12.3.1)
+    rb-readline (0.5.5)
     require_all (2.0.0)
     ripl (0.7.1)
       bond (~> 0.5.1)
@@ -91,6 +92,7 @@ GEM
       activerecord (>= 3.2)
       sinatra (>= 1.0)
     sqlite3 (1.3.13)
+    stackprof (0.2.12)
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -118,14 +120,16 @@ DEPENDENCIES
   pry
   rack-test
   rake
+  rb-readline
   require_all
   rspec
   shotgun
   sinatra
   sinatra-activerecord
   sqlite3
+  stackprof
   thin
   tux
 
 BUNDLED WITH
-   1.16.0
+   1.16.1

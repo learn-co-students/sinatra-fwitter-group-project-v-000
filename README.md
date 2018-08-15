@@ -165,3 +165,17 @@ It's especially important that a user should not be able to edit or delete the t
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/sinatra-fwitter-group-project' title='Fwitter Group Project'>Fwitter Group Project</a> on Learn.co and start learning to code for free.</p>
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/sinatra-fwitter-group-project'>Fwitter</a> on Learn.co and start learning to code for free.</p>
+
+### Using the Profiler to Create a Call Graph
+I checked in the call graph just in case we run into setup snags with the below,
+the call graph is a good jumping off point for the ActiveRecord source code 
+
+Setup for digging under the hood of ActiveRecord:
+
+1. Install stackprof gem via `bundle install`
+2. Install graphvis software (requires python/homebrew): `brew install graphviz`
+3. Run the spec used to generate the callgraph: `rspec spec/models/user_spec.rb:19`
+4. Copy and paste printed output to the callgraph.gv file 
+5. Run `python python render_callgraph.py` to render the callgraph vizualization
+
+We can use the callgraph to guide our naviation through the ActiveRecord source code.
