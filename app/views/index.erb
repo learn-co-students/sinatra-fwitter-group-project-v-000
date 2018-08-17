@@ -1,0 +1,10 @@
+<h3> Get tweeting on Fwitter now!</h3><br>
+<%if logged_in?%>
+<h4>Welcome, <%=current_user.username%></h4>
+  <h5>Would you like to?</h5>
+    <h5><a href="/tweets/new"> Create Tweet </a></h5><br>
+    <h5><a href="/logout"> Log Out </a></h5>
+  <% else %>
+  <h4><a href='/login'>Login</a><br></h4>
+  <h4><a href='/signup'>Sign Up</a></h4>
+  <%end %>

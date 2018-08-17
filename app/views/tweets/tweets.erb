@@ -1,0 +1,6 @@
+
+<h4>Welcome, <%=current_user.username%></h4>
+
+  <%@tweets.each do |tweet|%>
+  <h3><%=tweet.content%></h3>
+  <%end%>
