@@ -1,0 +1,10 @@
+<h1>Welcome, <%=current_user.username%></h1>
+
+<%Tweet.all.each_with_index do |tweet| %>
+<%=tweet.content %>
+<%end %>
+
+
+<!-- <form  action="/logout" method="post">
+<input type="submit" name="submit" value="logout">
+</form> -->
