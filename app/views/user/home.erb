@@ -1,0 +1,15 @@
+<h1><%=current_user.nil? ? "You must log in to view this page" : "Good #{time_of_day}, #{current_user.name}."%></h1>
+<h5><%=current_user.username%></h5>
+
+<section id="homepage-tweets">
+    <%@tweets.each do |t|%>
+        <div class="tweet_container">
+            <a href="/users/:user/tweets"><p class="username"><%=t.user.username%></p></a>
+            <p class="content"><%=t.content%></p>
+            <p>Likes: <%=t.likes.length%></p>
+            <form action="/tweets/<%=t.id%>/like" method="post">
+                <input type="submit" name="submit" value="like">
+            </form>
+        </div>
+    <%end%>
+</section>

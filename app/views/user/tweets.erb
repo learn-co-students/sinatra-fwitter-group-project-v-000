@@ -1,0 +1,13 @@
+<h2><%=@user.username%>'s Tweets</h2>
+<section id="homepage-tweets">
+    <%@user.tweets.each do |t|%>
+        <div class="tweet_container">
+            <a href="/users/:user/tweets"><p class="username"><%=t.user.username%></p></a>
+            <p class="content"><%=t.content%></p>
+            <p>Likes: <%=t.likes.length%></p>
+            <form action="/tweets/<%=t.id%>/like" method="post">
+                <input type="submit" name="submit" value="like">
+            </form>
+        </div>
+    <%end%>
+</section>

@@ -10,3 +10,8 @@
 p.error {
     color: red;
 }
+
+div.tweet_container{
+    background: whitesmoke;
+    margin: 0.5em;
+}

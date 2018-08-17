@@ -6,4 +6,10 @@ class User < ActiveRecord::Base
   has_many :tweets
   has_many :likes
   has_many :liked_tweets, :through => :likes, :source => :tweet
+
+  include Slugify::InstanceMethods
+  extend Slugify::ClassMethods
+
+
+
 end
