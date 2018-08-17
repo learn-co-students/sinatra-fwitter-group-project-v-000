@@ -1,0 +1,15 @@
+<h1>Tweet Show Page</h1>
+
+<h2>Content</h2>
+
+<p><%=@tweet.content%></p>
+
+<p>make sure to include edit link on show page</p>
+<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
+
+
+<p>add a form to delete the tweet here as well - submit via post</p>
+<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" name="Delete" value="Delete Tweet">
+</form>
