@@ -1,0 +1,6 @@
+<p> Welcome,  </p>
+<p><li>Name : <%=@user.username%></a> </li>
+<% @user.tweets.each do |tweet| %>
+               <%= tweet.content %>
+               <% end %></li>
+<form action="/users/<%=slug %>"> <input type="submit" name="submit" value="submit" id="submit"></a></form>

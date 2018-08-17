@@ -1,0 +1,6 @@
+<p> Welcome, tweeting ! </p>
+<p><li>Name : <%=@user.username%></a> </li>
+<% Tweet.all.each do |tweet| %>
+               <%= tweet.content %>
+               <% end %></li>
+<form action="/logout"> <input type="submit" name="submit" value="Log Out" id="submit"></a></form>
