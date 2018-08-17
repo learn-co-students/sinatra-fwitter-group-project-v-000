@@ -1,0 +1,11 @@
+<h1>Welcome,</h1>
+<% @tweets.each do |tweet| %>
+    <ul>
+        <li><%=tweet.content%></li>
+    </ul>
+<% end %>
+
+<a href="/tweets/new"><p>Create Tweet</p></a>
+<form method="post" action="/logout">
+<input type="submit" id="sumbit" name="Submit">
+</form>
