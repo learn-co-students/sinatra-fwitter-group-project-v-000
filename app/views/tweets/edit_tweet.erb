@@ -1,0 +1,8 @@
+
+    <h1>To edit your tweet, please fill out the below information:</h1>
+    <form action="/tweets/<%=@tweet.id%>" method="post">
+      <p>Current Content: <%=@tweet.content%></p>
+      <p>Content: </p>
+      <textarea name="content" rows="8" cols="80"></textarea><br>
+      <input type="submit" value="Edit Tweet" id="submit">
+    </form>
