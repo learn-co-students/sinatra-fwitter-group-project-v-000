@@ -1,0 +1,12 @@
+.authenticate input{
+    display: block;
+    margin: 10px;
+}
+
+.authenticate p{
+    color: red;
+}
+
+p.error {
+    color: red;
+}
