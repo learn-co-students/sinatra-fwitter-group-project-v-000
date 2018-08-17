@@ -1,0 +1,10 @@
+<p>this is th index page</p>
+Welcome,<br>
+
+  <%if self.is_logged_in?(session) && session[:id] == self.current_user(session).id%>
+    <%@user = self.current_user(session)%>
+    <%Tweet.all.each do |tweet|%>
+    <%=tweet.content%><br>
+    <%end%>
+  <%else%>
+  <%end%>
