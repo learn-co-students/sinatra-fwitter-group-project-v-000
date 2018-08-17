@@ -1,0 +1,21 @@
+<h3>Hey <%= @current_user.username %>,</h3>
+<% if @tweet.user.id == current_user.id %>
+<h3>You tweeted</h3>
+<% else %>
+<h3><%= @tweet.user.username %> tweeted</h3>
+<% end %>
+<p><%= @tweet.content %></p>
+<% if @tweet.user.id == current_user.id %>
+  <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+
+<% end %>
+<form action="/tweets/<%= @tweet.id %>" method="post">
+<input type="hidden" name="_method" value="delete">
+<input type="submit" value="Delete Tweet" id="Delete Tweet">
+</form>
+
+  <form action="/tweets/<% @tweet.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Tweet" id="Delete Tweet">
+  </form>
+<% end %>
