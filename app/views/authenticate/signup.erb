@@ -1,0 +1,13 @@
+<h3>Sign Up</h3>
+
+<form class="authenticate" action="/signup" method="post">
+    <input type="text" name="user[name]" id="name" placeholder="Name">
+    <p><%= @errors[:email].first.capitalize if (!!@errors && @errors[:name])%></p>
+    <input type="text" name="user[username]" id="username" placeholder = "Username">
+    <p><%= @errors[:username].first.capitalize if (!!@errors && @errors[:username])%></p>
+    <input type="password" name="user[password]" id="password" placeholder = "Password">
+    <p><%= @errors[:password].first.capitalize if (!!@errors && @errors[:password])%></p>
+    <input type="password" name= "user[password_confirmation]" id="password_confirmation" placeholder="Re-enter Password">
+    <p><%= @errors[:password_confirmation].first.capitalize if (!!@errors && @errors[:password_confirmation])%></p>
+    <input type="submit" id="signup" value="Signup">
+</form>

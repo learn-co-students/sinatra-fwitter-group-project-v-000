@@ -1,0 +1,25 @@
+<h2><%=@user.username%>'s Tweets</h2>
+<section id="homepage-tweets">
+    <%@user.tweets.reverse.each do |t|%>
+        <div class="tweet_container">
+            <a href="/users/:user/tweets"><p class="username"><%=t.user.username%></p></a>
+            <p class="content"><%=t.content%></p>
+            <p>Likes: <%=t.likes.length%></p>
+            <form action="/tweets/<%=t.id%>/like" method="post">
+                <input type="submit" name="submit" value="like">
+            </form>
+            <form action="/tweets/<%=t.id%>/edit" method="get">
+                <input type="submit" name="submit" value="edit">
+            </form>
+            <form action="/tweets/<%=t.id%>" method="get">
+                <input type="submit" name="show" value="show">
+            </form>
+            <form action="/tweets/<%=t.id%>/delete" method="post">
+                <input type="hidden" id="hidden" name="_method" value="delete">
+                <input type="submit" name="delete" value="delete">
+            </form>
+            <p id="create-timestamp">Posted: <%=time_from_now(t.created_at)%></p>
+            <p id="edit-timestamp"><%= "Edited: #{time_from_now(t.updated_at)}" if (t.updated_at != t.created_at)%></p>
+        </div>
+    <%end%>
+</section>

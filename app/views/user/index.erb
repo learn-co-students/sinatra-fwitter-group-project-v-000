@@ -1,0 +1,21 @@
+<h1><%="Good #{time_of_day}, #{current_user.name.split(" ").first}."%></h1>
+<h3><%=current_user.username%></h3>
+<a href="/tweets/new" class="home-options">New tweet</a>
+<!-- <a href="/users/<%=current_user.slug%>/tweets" class="home-options">Your Tweets</a>> -->
+<section id="homepage-tweets">
+    <%@tweets.each do |t|%>
+        <div class="tweet_container">
+            <a href="/users/:user/tweets"><p class="username"><%="@#{t.user.username}"%></p></a>
+            <p class="content"><%=t.content%></p>
+            <p>Likes: <%=t.likes.length%></p>
+            <form action="/tweets/<%=t.id%>/like" method="post">
+                <input type="submit" name="submit" value="like">
+            </form>
+            <form action="/tweets/<%=t.id%>" method="get">
+                <input type="submit" name="show" value="show">
+            </form>
+            <p id="create-timestamp">Posted: <%=time_from_now(t.created_at)%></p>
+            <p id="edit-timestamp"><%= "Edited: #{time_from_now(t.updated_at)}" if (t.updated_at != t.created_at)%></p>
+        </div>
+    <%end%>
+</section>
