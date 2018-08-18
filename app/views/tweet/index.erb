@@ -1,5 +1,4 @@
-<h1><%=current_user.nil? ? "You must log in to view this page" : "Good #{time_of_day}, #{current_user.name}."%></h1>
-<h5><%=current_user.username%></h5>
+<h1>Tweets</h1>
 
 <section id="homepage-tweets">
     <%@tweets.each do |t|%>
@@ -10,6 +9,8 @@
             <form action="/tweets/<%=t.id%>/like" method="post">
                 <input type="submit" name="submit" value="like">
             </form>
+            <p id="create-timestamp">Posted: <%=time_from_now(t.created_at)%></p>
+            <p id="edit-timestamp"><%= "Edited: #{time_from_now(t.updated_at)}" if (t.updated_at != t.created_at)%></p>
         </div>
     <%end%>
 </section>

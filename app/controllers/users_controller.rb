@@ -8,13 +8,14 @@ class UsersController < ApplicationController
         else
             @tweets = tweet[tweets.length - 10, tweets.length].reverse
         end
-        erb :"user/home"
+        erb :"user/index"
     end 
 
     get '/users/:user/tweets' do
         @user = User.find_by_slug(params[:user])
         erb :"user/tweets"
     end
+
 
     get '/logout' do
         session.clear
