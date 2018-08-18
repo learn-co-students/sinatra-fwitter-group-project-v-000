@@ -1,6 +1,7 @@
 class TweetsController < ApplicationController
 
     get '/tweets' do
+        authorize #added for tests
         @tweets = Tweet.all.reverse
         erb :"tweet/index"
     end
@@ -12,6 +13,7 @@ class TweetsController < ApplicationController
 
 
     get '/tweets/:id' do
+      authorize #added for tests
       if (@tweet = Tweet.find_by(id: params[:id]))
         erb :"tweet/show"
       else
@@ -35,7 +37,8 @@ class TweetsController < ApplicationController
             if @tweet.update(params[:tweet])
                 redirect "/tweets/#{@tweet.id}"
             else
-                erb :failure
+              redirect "/tweets/#{@tweet.id}/edit" #added for tests
+                # erb :failure
             end
         else
             erb :failure
@@ -49,7 +52,8 @@ class TweetsController < ApplicationController
         if tweet.save
             redirect '/'
         else
-            erb :failure
+          redirect '/tweets/new' #added for test
+            # erb :failure
         end
     end
 

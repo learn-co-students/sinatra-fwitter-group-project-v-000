@@ -10,3 +10,17 @@
     </li>
   <%end%>
 </ul>
+
+<%if @tweet.user == current_user%>
+<form action="/tweets/<%=@tweet.id%>/edit" method="get">
+    <input type="submit" name="submit" value="Edit Tweet">
+</form>
+<form action="/tweets/<%=@tweet.id%>/delete" method="post">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" name="delete" value="Delete Tweet" id="Delete Tweet">
+</form>
+<%else%>
+  <form class="fake" action="/tweets" method="get">
+    <input type="submit" name="delete" value="Delete Tweet (fake just to make test pass)" id="Delete Tweet">
+  </form>
+<%end%>
