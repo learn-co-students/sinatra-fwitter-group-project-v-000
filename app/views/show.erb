@@ -1,0 +1,8 @@
+<h1>Welcome, <%=@user.username %></h1>
+
+<%@user.tweets.each_with_index do |tweet, i|%>
+  Tweet <%="#{i+1}"%>
+  <%=tweet.content%>
+<%end%>
+
+<p><a href="/logout">Log Out</a></p>
