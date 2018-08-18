@@ -1,0 +1,12 @@
+<h2><%=@tweet.user.username%></h2>
+<p><%=@tweet.content%></p>
+<p id="create-timestamp">Posted: <%=time_from_now(@tweet.created_at)%></p>
+<p id="edit-timestamp"><%= "Edited: #{time_from_now(@tweet.updated_at)}" if (@tweet.updated_at != @tweet.created_at)%></p>
+<h4>Likes:</h4>
+<ul>
+  <%@tweet.likes.each do |l|%>
+    <li>
+      <%="#{l.user.username}, #{time_from_now(l.created_at)}"%>
+    </li>
+  <%end%>
+</ul>

@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
     get '/' do
-        authorize
+        if authorize_home
+          return erb :home_loggedout
+        end
         tweets = Tweet.order("created_at")
         if tweets.length <= 10
             @tweets= tweets.reverse
@@ -9,7 +11,7 @@ class UsersController < ApplicationController
             @tweets = tweet[tweets.length - 10, tweets.length].reverse
         end
         erb :"user/index"
-    end 
+    end
 
     get '/users/:user/tweets' do
         @user = User.find_by_slug(params[:user])

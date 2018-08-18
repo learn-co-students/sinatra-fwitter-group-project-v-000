@@ -12,7 +12,7 @@ class LoginController < ApplicationController
     post '/login' do
         if ((user = User.find_by(username: params[:username])) && user.authenticate(params[:password]))
             session[:user_id] = user.id
-            redirect '/'
+            redirect '/tweets'
         else
             @error = "Improper credentials entered"
             erb :"/authenticate/login"
@@ -23,7 +23,7 @@ class LoginController < ApplicationController
         new_user = User.new(params[:user])
         if new_user.save
             session[:user_id] = new_user.id
-            redirect '/'
+            redirect '/tweets'
         else
             @errors = new_user.errors.messages
             erb :"/authenticate/signup"

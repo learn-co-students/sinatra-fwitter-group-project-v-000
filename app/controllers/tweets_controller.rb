@@ -11,11 +11,15 @@ class TweetsController < ApplicationController
     end
 
 
-    get '/tweets/:id' do    
-
+    get '/tweets/:id' do
+      if (@tweet = Tweet.find_by(id: params[:id]))
+        erb :"tweet/show"
+      else
+        erb :failure
+      end
     end
 
-    get '/tweets/:id/edit' do   
+    get '/tweets/:id/edit' do
         authorize
         if ((@tweet = Tweet.find_by(id: params[:id])) && current_user.tweets.include?(@tweet))
             erb :"tweet/edit"
@@ -27,7 +31,7 @@ class TweetsController < ApplicationController
     patch '/tweets/:id' do
         authorize
         if ((@tweet = Tweet.find_by(id: params[:id])) && current_user.tweets.include?(@tweet))
-            
+
             if @tweet.update(params[:tweet])
                 redirect "/tweets/#{@tweet.id}"
             else
@@ -58,6 +62,11 @@ class TweetsController < ApplicationController
 
 
     delete '/tweets/:id/delete' do
-
+      if ((@tweet = Tweet.find_by(id: params[:id])) && current_user.tweets.include?(@tweet))
+        @tweet.delete
+        redirect '/tweets'
+      else
+        erb :failure
+      end
     end
 end

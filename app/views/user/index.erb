@@ -11,6 +11,9 @@
             <form action="/tweets/<%=t.id%>/like" method="post">
                 <input type="submit" name="submit" value="like">
             </form>
+            <form action="/tweets/<%=t.id%>" method="get">
+                <input type="submit" name="show" value="show">
+            </form>
             <p id="create-timestamp">Posted: <%=time_from_now(t.created_at)%></p>
             <p id="edit-timestamp"><%= "Edited: #{time_from_now(t.updated_at)}" if (t.updated_at != t.created_at)%></p>
         </div>

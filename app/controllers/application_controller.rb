@@ -1,7 +1,7 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
-  
+
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
 
 
 
-  helpers do  
+  helpers do
 
     def logged_in?
       !!session[:user_id]
@@ -39,6 +39,10 @@ class ApplicationController < Sinatra::Base
       if !logged_in? || current_user.nil?
         redirect '/login'
       end
+    end
+
+    def authorize_home
+      !logged_in? || current_user.nil?
     end
 
     def time_from_now(time)
