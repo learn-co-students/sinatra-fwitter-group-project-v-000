@@ -12,39 +12,18 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :home
+    erb :index
   end
 
-  get '/registrations/signup' do
-    erb :'/registrations/signup'
-  end
+  helpers do
 
-  post '/registrations' do
-    @user = User.find_by(email: params[:email])
-    session[:user_id] = @user.id
-    redirect '/users/home'
-  end
-
-  get '/sessions/login' do
-    erb :'sessions/login'
-  end
-
-  post '/sessions' do
-    @user = User.find_by(email: params[:email], password: params[:password])
-    if @user
-      session[:user_id] = @user.id
-      redirect '/users/home'
+    def logged_in?
+      !!current_user
     end
-    redirect '/sessions/login'
-  end
 
-  get '/sessions/logout' do
-    redirect '/'
-  end
+    def current_user
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    end
 
-  get '/users/home' do
-    @user = User.find(session[:user_id])
-    erb :'/users/home'
   end
-
 end
