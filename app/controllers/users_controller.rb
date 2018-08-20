@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   get '/logout' do
     if Helpers.is_logged_in?(session)
-      session = {}
+      session.destroy
       redirect '/login'
     else
       redirect '/'
