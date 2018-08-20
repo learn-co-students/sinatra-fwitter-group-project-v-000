@@ -1,0 +1,17 @@
+<p> Welcome, <%= @user.username %></p>
+<br>
+
+<p> <a href="/logout"> Log out </p>
+
+<h2> Tweets </h2>
+
+<div>
+  <% if @tweets.empty? %>
+      <p>There are no tweets at this time.</p>
+  <% else %>
+
+    <% @tweets.each do |tweet| %>
+      <%= tweet.content %>
+      <% end %>
+  <% end %>
+</div>
