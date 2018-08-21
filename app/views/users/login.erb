@@ -1,14 +1,10 @@
 <h3>Log In</h3>
 
-<!-- # <% unless locals.empty? %>
-#   <%= message %>
-# <% end %><br></br> -->
-
 <form action='/login' method="POST">
   <label>Username:</label>
-  <input type="text" name="email">
+  <input type="text" name="email" placeholder="Username">
   <br>
   <label>Password:</label>
-  <input type="password" name="password">
+  <input type="password" name="password" placeholder="Password">
   <input type="submit" value="Log In">
 </form>

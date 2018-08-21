@@ -1,0 +1,9 @@
+<h3>Edit Tweet</h3>
+
+<form method="POST" action="/tweets/<%=@tweet.id%>">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <label for="content">Content: <input type="text" name="content" value="<%= @tweet.content %>"></label>
+  <input type="hidden" name="tweet[user_id]" value="<%= @tweet.user.id %>">
+  <br/>
+  <input type="submit" value="Edit Tweet">
+</form>
