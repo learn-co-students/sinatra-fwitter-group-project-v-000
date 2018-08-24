@@ -52,4 +52,14 @@ class UsersController < ApplicationController
         end
     end
 
+    # lets a user log out if they are already logged in
+    get '/logout' do
+        if logged_in?
+            session.clear
+            redirect '/login'
+        else
+            redirect '/'
+        end
+    end
+
 end

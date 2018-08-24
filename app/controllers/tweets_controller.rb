@@ -11,4 +11,14 @@ class TweetsController < ApplicationController
         end
     end
 
+    # show tweet creation page if logged in
+    # if logged out, redirect to the login page
+    get '/tweets/new' do
+        if logged_in?
+            erb :'/tweets/create_tweet'
+        else
+            redirect '/login'
+        end
+    end
+
 end
