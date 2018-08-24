@@ -1,0 +1,21 @@
+<p> Welcome, <%= @user.username %></p>
+<br>
+
+<button> <a href="/tweets/new">Tweet </a></button>
+
+<% #binding.pry%>
+<button> <a href="/users/<%=@user.slug%>">My Tweets </a></button>
+
+<button> <a href="/logout"> Log out </a></button>
+
+<h2> All Tweets </h2>
+
+<div>
+  <% if @tweets.empty? %>
+      <p>There are no tweets at this time.</p>
+  <% else %>
+    <% @tweets.each do |tweet| %>
+        <p><%= tweet.content %></p>
+      <% end %>
+  <% end %>
+</div>
