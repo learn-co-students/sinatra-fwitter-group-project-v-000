@@ -36,4 +36,20 @@ class UsersController < ApplicationController
         end
     end
 
+    # submits the login form
+    # find the user in db based on their username
+    # if the user is found AND the user is authenticated,
+    # set their session to their user_id
+    # and redirect to twitter index page
+    # otherwise, redirect to the sign up page
+    post '/login' do
+        user = User.find_by(username: params[:username])
+        if user && user.authenticate(params[:password])
+            session[:user_id] = user.id
+            redirect '/tweets'
+        else
+            redirect '/signup'
+        end
+    end
+
 end
