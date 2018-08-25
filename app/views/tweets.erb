@@ -1,0 +1,6 @@
+Welcome,
+<%User.all.each do |user|%>
+<%user.tweets.each do |tweet|%>
+<%=tweet.content%>
+<%end%>
+<%end%>
