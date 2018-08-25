@@ -56,4 +56,44 @@ class TweetsController < ApplicationController
         end
     end
 
+    # lets user view tweet edit form if they are logged in
+    get '/tweets/:id/edit' do
+        if logged_in?
+            @tweet = Tweet.find_by_id(params[:id])
+            if @tweet && @tweet.user == current_user
+                erb :'tweets/edit_tweet'
+            else
+                redirect '/tweets'
+            end
+        else
+            redirect '/login'
+        end
+    end
+
+    # updates the tweet
+    # if the update text is empty, redirect to the edit page
+    # if the tweet updates successfully, redirect to that tweet page
+    # if the update fails, redirect to the tweet edit page
+    # otherwise, redirect to the tweed index page
+    # if not logged in, redirect to the login page
+    patch '/tweets/:id' do
+        if logged_in?
+            if params[:content] == ""
+                redirect "/tweets/#{params[:id]}/edit"
+            elsif
+                @tweet = Tweet.find_by_id(params[:id])
+                if @tweet.update(content: params[:content])
+                    redirect "/tweets/#{@tweet.id}"
+                else
+                    redirect "/tweets/#{@tweet.id}/edit"
+                end
+            else
+                redirect '/tweets'
+            end
+        else
+            redirect '/login'
+        end
+    end
+
+
 end
