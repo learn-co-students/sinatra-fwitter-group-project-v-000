@@ -95,5 +95,18 @@ class TweetsController < ApplicationController
         end
     end
 
+    # user can delete their own tweet if they are logged in
+    # after deletion, redirect to tweet index page
+    delete '/tweets/:id/delete' do
+        if logged_in?
+            @tweet = Tweet.find_by_id(params[:id])
+            if @tweet && @tweet.user == current_user
+                @tweet.delete
+            end
+            redirect '/tweets'
+        else
+            redirect '/login'
+        end
+    end
 
 end
