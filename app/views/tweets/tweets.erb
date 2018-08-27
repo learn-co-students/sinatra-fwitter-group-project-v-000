@@ -1,1 +1,8 @@
-<h1>ALL TWEETS HERE:</h1>
+
+<h1>WELCOME: <%=@user.username%> </h1>
+
+
+<%@tweets.each do |tweet|%>
+  <a href="/tweets/<%=tweet.id%>"><%=tweet.content%></a><br>
+
+<%end%>
