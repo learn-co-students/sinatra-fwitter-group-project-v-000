@@ -1,0 +1,15 @@
+
+<% if @tweets.empty? %>
+  <h2><%=current_user.username%>, you have no tweets...</h2>
+<% else %>
+  <h2>Here are your Tweets, <%= current_user.username%>:</h2>
+<% end %>
+
+<a href="/tweets/new">Create Tweet</a> <br>
+
+
+<% @tweets.each do |tweet| %>
+  <p><%= tweet.content %></p>
+<% end %>
+
+<a href="/logout">Logout</a>
