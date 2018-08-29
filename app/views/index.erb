@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Fwitter</title>
+  </head>
+  <body>
+
+    <div class="container">
+      <h1>Welcome to Fwitter!</h1>
+      <% if logged_in? %>
+        <a href="/tweets/new">Create Tweet</a>
+        <a href="/logout">Log Out</a>
+      <% else %>
+        <a href="/signup">Sign Up</a>
+        <a href="/login">Login</a>
+      <% end %>
+    </div>
+
+  </body>
+</html>
