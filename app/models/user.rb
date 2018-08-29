@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
     username.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   end
 
-  def find_by_slug
+  def find_by_slug(slug)
     self.all.detect do |v|
       v.slug == slug
     end
