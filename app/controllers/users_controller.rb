@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   post '/signup' do
     if params[:username] == '' || params[:password] == '' || params[:email] == ''
-      redirect to 'signup'
+      redirect to '/signup'
     else
       @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
       @user.save
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     end
   end
 
-  get 'users/:slug' do
+  get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     erb :'users/show'
   end
