@@ -1,0 +1,12 @@
+<h1>Sign up for a Fwitter account</h1>
+
+<% if @message %>
+  <h3><%= @message %></h3>
+<% end %>
+
+<form action="/signup" method="post">
+  Username: <input type="text" name="username" id="username"><br>
+  Email: <input type="text" name="email" id="email"><br>
+  Password: <input type="password" name="password"><br>
+  <input type="submit" value="Create Account">
+</form>
