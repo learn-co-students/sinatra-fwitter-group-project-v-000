@@ -1,4 +1,3 @@
-# require_relative '../config/environment'
 
 class UsersController < ApplicationController
 
@@ -13,12 +12,12 @@ class UsersController < ApplicationController
 
     post '/signup' do
         # binding.pry
-        @user = User.create(:username => params[:username], :password => params[:password], :email => params[:email])
         if params[:username].empty? || params[:password].empty? || params[:email].empty?
             redirect '/signup'
         else
+            @user = User.create(:username => params[:username], :password => params[:password], :email => params[:email])
             session[:user_id] = @user.id
-            redirect '/tweets'
+            redirect to '/tweets'
         end
     end
 
@@ -32,14 +31,23 @@ class UsersController < ApplicationController
     end
 
     post '/login' do
-        @user = User.find_by(username: params[:username], password: params[:password], email: params[:email])
-        redirect '/tweets'
+        @user = User.find_by(username: params[:username])
+        if @user && @user.authenticate(params[:password])
+            session[:user_id] = @user.id
+            redirect '/tweets'
+        else
+            redirect '/login'
+        end
     end
 
+    get '/logout' do
+        session.clear
+        redirect '/login'
+    end
 
-    get '/tweets' do
-        @tweets = Tweet.all
-        erb :'tweets/tweet'
+    get '/user/:slug' do
+        @user = User.find_by_slug(params[:slug])
+        erb :'users/show'
     end
 
 end
