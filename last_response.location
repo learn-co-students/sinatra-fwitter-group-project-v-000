@@ -1,0 +1,21 @@
+=> [32m#<Rack::MockResponse:0x00000004984cd0[0m
+ @block[32m=[0m[1;36mnil[0m,
+ @body[32m=[0m
+  [[31m[1;31m"[0m[31m<!doctype html>[1;35m\n[0m[31m<html>[1;35m\n[0m[31m  <head>[1;35m\n[0m[31m    <title>Fwitter</title>[1;35m\n[0m[31m  </head>[1;35m\n[0m[31m  <body>[1;35m\n[0m[31m[1;35m\n[0m[31m    <div class=[1;35m\"[0m[31mcontainer[1;35m\"[0m[31m>[1;35m\n[0m[31m      <h1>Welcome to Fwitter!</h1>[1;35m\n[0m[31m      <h1> Sign Up</h1>[1;35m\n[0m[31m[1;35m\n[0m[31m<form action=[1;35m\"[0m[31m/signup[1;35m\"[0m[31m method=[1;35m\"[0m[31mPOST[1;35m\"[0m[31m>[1;35m\n[0m[31m[1;35m\n[0m[31m  <input type=[1;35m\"[0m[31mtext[1;35m\"[0m[31m name=[1;35m\"[0m[31musername[1;35m\"[0m[31m placeholder=[1;35m\"[0m[31mUsername:[1;35m\"[0m[31m>[1;35m\n[0m[31m  <input type=[1;35m\"[0m[31mpassword[1;35m\"[0m[31m name=[1;35m\"[0m[31mpassword[1;35m\"[0m[31m placeholder=[1;35m\"[0m[31mPassword:[1;35m\"[0m[31m>[1;35m\n[0m[31m  <input type=[1;35m\"[0m[31memail[1;35m\"[0m[31m name=[1;35m\"[0m[31memail[1;35m\"[0m[31m placeholder=[1;35m\"[0m[31mEmail:[1;35m\"[0m[31m>[1;35m\n[0m[31m[1;35m\n[0m[31m  <input type=[1;35m\"[0m[31msubmit[1;35m\"[0m[31m value=[1;35m\"[0m[31mSign Up[1;35m\"[0m[31m>[1;35m\n[0m[31m[1;35m\n[0m[31m</form>[1;35m\n[0m[31m[1;35m\n[0m[31m      <!-- <h2>This is located in layout.erb!</h2>[1;35m\n[0m[31m      <h2>Don't forget to <strong>yield</strong> your views!</h2> -->[1;35m\n[0m[31m    </div>[1;35m\n[0m[31m[1;35m\n[0m[31m  </body>[1;35m\n[0m[31m</html>[1;35m\n[0m[31m[1;31m"[0m[31m[0m],
+ @errors[32m=[0m[31m[1;31m"[0m[31m[1;31m"[0m[31m[0m,
+ @header[32m=[0m
+  {[31m[1;31m"[0m[31mContent-Type[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mtext/html;charset=utf-8[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mContent-Length[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31m593[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mX-XSS-Protection[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31m1; mode=block[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mX-Content-Type-Options[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mnosniff[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mX-Frame-Options[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mSAMEORIGIN[1;31m"[0m[31m[0m},
+ @length[32m=[0m[1;34m593[0m,
+ @original_headers[32m=[0m
+  {[31m[1;31m"[0m[31mContent-Type[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mtext/html;charset=utf-8[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mContent-Length[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31m593[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mX-XSS-Protection[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31m1; mode=block[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mX-Content-Type-Options[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mnosniff[1;31m"[0m[31m[0m,
+   [31m[1;31m"[0m[31mX-Frame-Options[1;31m"[0m[31m[0m=>[31m[1;31m"[0m[31mSAMEORIGIN[1;31m"[0m[31m[0m},
+ @status[32m=[0m[1;34m200[0m,
+ @writer[32m=[0m
+  [32m#<Proc:0x00000004973e30@/usr/local/rvm/gems/ruby-2.3.1/gems/rack-2.0.5/lib/rack/response.rb:32 (lambda)>[0m[32m>[0m
