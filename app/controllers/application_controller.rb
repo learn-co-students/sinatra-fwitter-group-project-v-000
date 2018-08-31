@@ -50,11 +50,6 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/tweets' do
-    @user = Helpers.current_user(session)
-    @tweets = Tweet.all
-    erb :'/tweets/tweets'
-  end
 
   get '/logout' do
     session.clear
