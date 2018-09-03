@@ -1,0 +1,13 @@
+<h1>Welcome, <%=@user.username%></h1>
+
+<% if !!@user && @tweets.size > 0 
+	@tweets.each do |tweet| %>
+	<a href="/users/<%=tweet.user.slug%><%=tweet.user.username%></a>: 
+		<a href="/tweets/<%=tweet.id%><%=tweet.content%></a>
+	
+	<%end%>
+	<% else
+	"Must Login to view Tweets" %>
+<% end %>
+
+<a href='/logout'>Logout<a/>
