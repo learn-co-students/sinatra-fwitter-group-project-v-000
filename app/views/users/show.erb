@@ -1,0 +1,4 @@
+<h1><%= User.find_by(:id=>params[:id]).username%>'s Tweets</h1>
+<% @tweets.each do |tweet| %>
+  <%= tweet.content %>
+<%end%>
