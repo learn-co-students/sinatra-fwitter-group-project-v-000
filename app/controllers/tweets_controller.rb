@@ -22,6 +22,7 @@ class TweetsController < ApplicationController
   post '/tweets' do
     if !params[:content].empty?
       tweet = Tweet.create(:content=>params[:content], :user_id=>session[:user_id])
+      redirect to "/tweets"
     else
       redirect to "/tweets/new"
     end
