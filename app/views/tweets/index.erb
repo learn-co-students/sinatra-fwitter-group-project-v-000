@@ -1,0 +1,6 @@
+<h1>Welcome, to the simplified tweet page</h1>
+<%@tweets.each do |tweet|%>
+<div class="tweet_container">
+<p><%=tweet.user%>: <%=tweet.content%></p>
+</div>
+<% end %>
