@@ -7,9 +7,17 @@
 
     <div class="container">
       <h1>Welcome to Fwitter!</h1>
-      <h2>This is located in layout.erb!</h2>
-      <h2>Don't forget to <strong>yield</strong> your views!</h2>
+      <%= yield %>
     </div>
 
+
+    <!--
+    <p>
+      <form action="/logout" method="post">
+        <input id="hidden" type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete Tweet">
+      </form>
+    </p>
+  -->
   </body>
 </html>

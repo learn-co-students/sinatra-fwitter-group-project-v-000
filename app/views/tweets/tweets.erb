@@ -1,0 +1,8 @@
+<h2>Welcome, to all of the Tweets</h2>
+    <% if Tweet.count > 0 %>
+      <% Tweet.all.each do |tweet| %>
+        <div class="tweet">
+          <h4><a href="/tweets/<%= tweet.id %>"> <%= tweet.content %></a></h4>
+        </div>
+      <% end %>
+    <% end %>

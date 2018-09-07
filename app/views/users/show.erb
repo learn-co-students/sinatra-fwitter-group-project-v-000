@@ -1,0 +1,8 @@
+<h2>Welcome, these are YOUR Tweets</h2>
+    <% if @tweets.count > 0 %>
+      <% @tweets.all.each do |tweet| %>
+        <div class="tweet">
+          <h4><a href="/tweets/<%= tweet.id %>"> <%= tweet.content %></a></h4>
+        </div>
+      <% end %>
+    <% end %>
