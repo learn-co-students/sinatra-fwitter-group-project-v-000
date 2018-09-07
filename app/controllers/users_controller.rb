@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 
   get "/signup" do
-    erb :'users/create_user'
+    if !logged_in?
+      erb :'/users/create_user'
+    else
+     redirect '/tweets'
+    end
   end
 
   post "/signup" do
@@ -10,39 +14,38 @@ class UsersController < ApplicationController
     elsif logged_in?
       redirect to '/tweets'
     else
-      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      @user = User.create(params[:user])
       session[:user_id] = @user 
       redirect to '/tweets'
     end
   end
 
   get "/login" do
-    erb :'users/login'
-  end
-
-  post "/login" do
-    @user = User.find_by(username: params[:username])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect to "/tweets"
+    if !logged_in?
+      erb :'/users/login'
     else
-      redirect to "/login"
+     redirect to '/tweets'
     end
   end
+
+  # post "/login" do
+  #   @user = User.find_by(username: params[:username])
+  #   if @user && @user.authenticate(params[:password])
+  #     session[:user_id] = @user.id
+  #     redirect to "/tweets"
+  #   else
+  #     redirect to "/signup"
+  #   end
+  # end
   
   get "/logout" do
-    session.clear
-    redirect "/login"
+    if logged_in?
+      session.clear
+      redirect "/login"
+    else
+      redirect "/"
+    end
   end
 
-  helpers do
-    
-    def logged_in?
-      !!session[:user_id]
-    end
-    
-    def current_user
-      User.find(session[:user_id])
-    end
-  end
+  
 end
