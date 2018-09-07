@@ -2,11 +2,11 @@ class TweetsController < ApplicationController
   
   get '/tweets' do
     @tweet = Tweet.all 
-    erb :index
+    erb :tweets
   end
   
   get '/tweets/new' do
-    erb: :'tweets/create_tweet'
+    erb :'tweets/create_tweet'
   end
   
   get '/tweets/:id' do
@@ -20,8 +20,8 @@ class TweetsController < ApplicationController
   end
   
   post '/tweets' do
-    Tweet.create(content: params[:tweet][:content])
-    redirect to '/tweets/tweets'
+    Tweet.create(content: params[:tweet][:content]) if !params[:tweet][:content] == ""
+    redirect to '/tweets'
   end
   
   post '/tweets/:id' do
@@ -34,7 +34,7 @@ class TweetsController < ApplicationController
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id])
     @tweet.delete
-    redirect to '/tweets/tweets'
+    redirect to '/tweets'
   end
   
 end

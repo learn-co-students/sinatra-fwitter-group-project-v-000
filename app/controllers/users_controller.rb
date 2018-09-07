@@ -5,14 +5,15 @@ class UsersController < ApplicationController
   end
 
   post "/signup" do
-    if params[:username] == "" || params[:password] == ""
-      redirect to '/users/create_user'
+    if params[:username] =="" || params[:email] =="" || params[:password] == ""
+      redirect '/signup'
+    elsif logged_in?
+      redirect to '/tweets'
     else
-      @user = User.create(username: params[:username], password: params[:password])
-      session[:user_id] << @user 
-      redirect to '/index'
+      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      session[:user_id] = @user 
+      redirect to '/tweets'
     end
-
   end
 
   get "/login" do
@@ -23,15 +24,15 @@ class UsersController < ApplicationController
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect to "/users/show"
+      redirect to "/tweets"
     else
-      redirect to "/users/login"
+      redirect to "/login"
     end
   end
   
   get "/logout" do
     session.clear
-    redirect "/"
+    redirect "/login"
   end
 
   helpers do

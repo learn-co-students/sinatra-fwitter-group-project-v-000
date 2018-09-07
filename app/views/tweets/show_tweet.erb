@@ -1,9 +1,9 @@
-<h1><%=@user.username%></h1>
-
-<p><%=@tweet.content%></p>
 
 
-<form method="post" action="/tweets/<%=@tweet.id%>/delete">
+<!--<p><%=@tweet.id%></p>-->
+
+
+<form method="post" action="/tweets/<%=@tweet.content%>/delete">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" value="Delete Tweet">
 <form> 
