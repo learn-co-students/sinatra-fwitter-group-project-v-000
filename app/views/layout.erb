@@ -5,13 +5,10 @@
   </head>
   <body>
 
-    
-    <% if logged_in? %>
-      <a href='/tweets'>View Tweets</a>
-      <a href='/logout'>Log Out</a>
-    <%end%>
-    
-    <%=yield%>
+   <div class="container">
+      <h1>Welcome to Fwitter!</h1>
+      <%=yield%>
+    </div>
 
   </body>
 </html>
