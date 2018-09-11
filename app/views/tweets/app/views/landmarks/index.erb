@@ -1,0 +1,4 @@
+<h1> Landmarks Index </h1>
+<%@landmarks.each do |landmark|%>
+	<p><a href='/landmarks/<%=landmark.id%>'> <%=landmark.name%></a>  Year Completed:   <%= landmark.year_completed%><p>
+<%end%>

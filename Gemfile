@@ -13,6 +13,8 @@ gem 'bcrypt'
 gem "tux"
 
 group :test do
+  gem 'pry'
+  gem 'tux'
   gem 'rspec'
   gem 'capybara'
   gem 'rack-test'
