@@ -1,0 +1,15 @@
+<div class="container">
+
+        <p><%= @tweet.content %></p>
+
+        <button type="submit" name="edit">
+        <a style="text-decoration:none" href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+        </button>
+
+        <form action="/tweets/<%=@tweet.id%>/delete" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete Tweet">
+        </form>
+
+        <a href="/tweets">back to tweets</a></p>
+</div>
