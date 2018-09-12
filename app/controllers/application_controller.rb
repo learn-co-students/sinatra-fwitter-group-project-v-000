@@ -3,12 +3,12 @@ require 'pry'
 
 class ApplicationController < Sinatra::Base
 
-  configure do
+   configure do
     enable :sessions
     set :public_folder, 'public'
     set :views, 'app/views'
     set :session_secret, "password_security"
-  end
+   end
   
   
    get '/' do
@@ -17,18 +17,18 @@ class ApplicationController < Sinatra::Base
     # else
       erb :index
     # end
-  end
+   end
 
-  get '/signup' do
-    if logged_in?
+   get '/signup' do
+     if logged_in?
       redirect to '/tweets'
     else
       erb :'users/create_user'
     end
-  end
+   end
 
-  post "/signup" do
-	   if params[:username].empty? || params[:password].empty? || params[:email].empty?
+   post "/signup" do
+	    if params[:username].empty? || params[:password].empty? || params[:email].empty?
        redirect  '/signup'
      end
      
@@ -45,7 +45,7 @@ class ApplicationController < Sinatra::Base
     else
       erb :'users/login'
     end
-  end
+   end
 
    post "/login" do
      user = User.find_by(username: params[:username])
@@ -56,27 +56,27 @@ class ApplicationController < Sinatra::Base
      else
       redirect "/login"
     end
-  end
+   end
   
-  get "/logout" do
-   if logged_in?
-    session.clear
+   get "/logout" do
+    if logged_in?
+     session.clear
       redirect to '/login'
     else
       redirect to '/login'
     end
-  end
+   end
   
-  get '/tweets' do
+   get '/tweets' do
     if logged_in?
-      binding.pry
+      # binding.pry
       @user = current_user
       @tweets = Tweet.all 
       erb :'tweets/tweets'
     else
       redirect 'users/login'
     end
-  end
+   end
   
    get '/tweets/new' do
      if !logged_in?
@@ -84,7 +84,7 @@ class ApplicationController < Sinatra::Base
      else
       erb :"tweets/create_tweet"
     end
-  end
+   end
   
    post '/tweets' do
     if logged_in?
@@ -94,19 +94,19 @@ class ApplicationController < Sinatra::Base
     else
       redirect  '/tweets/new'
     end
+   end
   end
-end
 
-get '/tweets/:id' do
+   get '/tweets/:id' do
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       erb :'tweets/show_tweet'
     else
       redirect  '/login'
     end
-  end
+   end
 
-  get '/tweets/:id/edit' do
+   get '/tweets/:id/edit' do
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       @user = current_user
