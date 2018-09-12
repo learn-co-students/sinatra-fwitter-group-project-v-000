@@ -8,4 +8,6 @@ ActiveRecord::Base.establish_connection(
   :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
 )
 
+SESSION_SECRET = SecureRandom.hex(64)
+
 require_all 'app'

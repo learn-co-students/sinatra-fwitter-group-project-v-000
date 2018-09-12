@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="tweet_box_container new_tweet">
+    EDIT TWEET
+    <form action="/<%= @user.username %>/<%= @tweet.id %>" method="post" id="tweet_box">
+      <input id="hidden" type="hidden" name="_method" value="patch">
+      <textarea name="content" class="tweet_box textarea"><%= @tweet.content %></textarea>
+      <input type="submit" name="Submit" class="button_sm_yellow" value="Save">
+    </form>
+  </div>
+</div>
