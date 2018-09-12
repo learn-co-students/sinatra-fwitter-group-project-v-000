@@ -1,0 +1,31 @@
+<div class="container">
+  <% if current_user.id == @user.id %>
+    <a href="/tweets/new"><div class="button_sm_yellow">New</div></a>
+  <% end %>
+  <% @tweets.each do |tweet| %>
+    <div class="tweet_box_container">
+      <a href="/<%= @user.username %>/<%= tweet.id %>">
+        <div class="tweet_box list_tweet">
+          <div class="label_username">
+            @<%= @user.username %>
+          </div>
+          <div class="time_ago">
+            <%= time_ago_in_words(Time.now, tweet.created_at) %> ago
+          </div>
+          <div class="content">
+            <%= tweet.content %>
+          </div>
+        </div>
+      </a>
+      <% if current_user.id == @user.id %>
+        <div>
+          <a href="/<%= @user.username %>/<%= tweet.id %>/edit">
+            <div class="button_sm_skinny_blue">
+              Edit
+            </div>
+          </a>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

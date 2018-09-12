@@ -1,3 +1,7 @@
+User has many tweets
+Tweets belong to a user
+
+
 # Fwitter Group Project
 
 ## Objectives
