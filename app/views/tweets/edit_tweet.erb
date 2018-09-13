@@ -1,12 +1,13 @@
 
 
 <div class="container">
-  <h1>Edit Tweet by <%= @tweet.user.username %></h1>
-  <nav class="clearfix">
-    <a href="/tweets">Tweets</a>
-    <a href="/tweets/new">New Tweet</a>
+  <h1>Edit Tweet <%@user.username %></h1>
+  <!--<nav class="clearfix">-->
+    <a href="/tweets">Tweets</a> 
+    <b></b>
+    <a href="/tweets/new">New Tweet</a> 
     <a href="/logout">Logout</a>
-  </nav>
+  <!--</nav>-->
   <div id="single_tweet">
     <%= @tweet.content %>
   </div>

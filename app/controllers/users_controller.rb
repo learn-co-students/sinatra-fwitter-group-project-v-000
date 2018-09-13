@@ -19,11 +19,13 @@ class UsersController < ApplicationController
   # end
   # end
   
+ 
   
-  get '/users/:slug' do 
-    @user = User.find_by_slug(params[:slug])
-    redirect "/users/show"
-  end
+  
+  # get '/users/:slug' do 
+  #   @user = User.find_by_slug(params[:slug])
+  #   redirect "/users/show"
+  # end
   
   
 end
