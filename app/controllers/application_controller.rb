@@ -12,19 +12,4 @@ class ApplicationController < Sinatra::Base
     erb :'/index'
   end
 
-get '/users/' do
-  erb :'users/'
-end
-
-  post '/users' do
-    @user = User.create(params[:params])
-    @user.username = params[:username]
-    @user.email = params [:email]
-    @user.password = params[:password]
-
-
-    redirect "users/#{@user.id}"
-  end
-
-
 end
