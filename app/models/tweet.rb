@@ -1,3 +1,4 @@
 class Tweet < ActiveRecord::Base
-  belongs_to :user 
+  # binding.pry 
+  belongs_to :user
 end
