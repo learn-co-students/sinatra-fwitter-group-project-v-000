@@ -5,13 +5,13 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
-      if params[:username] == "" || params[:password] == "" || params[:email] == ""
+      if params[:username] == "" || params[:password] == "" || params[:email] == "" && !helpers.logged_in?
         redirect to '/signup'
       else
-        @user = User.create(username: params[:username], password: params[:password], email: params[:email])
+        @user = User.create(username: params[:username], password_digest: params[:password], email: params[:email])
         @user.save
-        helper.login(params[:email])
-        sessions[:user_id] = params[:id]
+        session[:user_id] = params[:id]
+        redirect to '/tweets'
       end
     end
 
