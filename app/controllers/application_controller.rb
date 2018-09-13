@@ -156,33 +156,6 @@ class ApplicationController < Sinatra::Base
     end
   end
   
-  # post '/login' do
-  #   #if User.username = User.find_by
-  #     user = User.find_by(username: params[:username], password: params[:password])
-  #     if user
-  #     session[:user_id] = user.id
-  #     redirect '/tweets/index'
-  #   else 
-  #     redirect '/failure'
-  #   end
-  # end
-
-  # get '/tweets' do
-  #   if Helpers.is_logged_in?(session)
-  #     @user = Helpers.current_user(session)
-  #     erb :'tweets/index'
-  #   else
-  #     erb :failure
-  #   end
-  # end
-
-  # get "/failure" do
-  #   erb :failure
-  # end
-
-  
-
-
   helpers do
     def logged_in?
       !!session[:user_id]
