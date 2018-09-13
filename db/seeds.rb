@@ -1,9 +1,6 @@
-# first_user = User.new
-# first_user.name = "Grant"
-#
-# first_tweet = Tweet.new
-# first_tweet.content = "my first tweet"
-
+tweet = Tweet.new(content: "tweet")
+tweet.build_user(name: "tom")
+tweet.save 
 
 
 
