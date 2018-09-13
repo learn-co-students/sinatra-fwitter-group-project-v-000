@@ -59,6 +59,7 @@ describe ApplicationController do
     end
 
     it 'creates a new user and logs them in on valid submission and does not let a logged in user view the signup page' do
+         
       params = {
         :username => "skittles123",
         :email => "skittles@aol.com",
