@@ -10,11 +10,11 @@ class UsersController < ApplicationController
 
     post '/signup' do
       @user = User.find_or_create_by(email: params[:email])
-      @user.username = params[:username]
-      @user.password = params[:password]
       if params[:username] == "" || params[:password] == "" || params[:email] == ""
         redirect to '/signup'
       else
+        @user.username = params[:username]
+        @user.password = params[:password]
         @user.save
         session[:id] = @user.id
         redirect to '/tweets'
@@ -40,10 +40,6 @@ class UsersController < ApplicationController
     end
 
     get '/logout' do
-      erb :'/users/logout'
-    end
-
-    post '/logout' do
       session.clear
       redirect to '/login'
     end
