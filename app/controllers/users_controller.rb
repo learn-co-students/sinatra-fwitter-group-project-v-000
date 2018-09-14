@@ -2,15 +2,15 @@ require 'pry'
 
 class UsersController < ApplicationController
 
-  get '/singnup' do
-    erb :'users/signup'
+  get '/signup' do
+    erb :'/users/signup'
   end
 
-  post '/users' do
-    @user = User.new
-    @user = User.find_by(:username =>params[:username], :emamil =>params[:email], :password =>params[:password])
-    if user.save
-      redirect "/tweets"
+  post '/signup' do
+    @user = User.create(:username =>params[:username], :emamil =>params[:email], :password =>params[:password])
+
+    if @user.save
+      redirect "/tweets/tweets"
     else
       redirect "/users/singnup"
     end
@@ -27,7 +27,7 @@ post "login" do
 end
 
   get '/users/:id' do
-    @user = User.find(params[:id])
+  #  @user = User.find(params[:id])
     erb :'users/show'
   end
 
