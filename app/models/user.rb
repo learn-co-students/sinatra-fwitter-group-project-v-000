@@ -10,8 +10,4 @@ class User < ActiveRecord::Base
     User.all.find{|user| user.slug == slug}
   end
 
-  def logged_in?
-    !!session[:email]
-  end
-
 end

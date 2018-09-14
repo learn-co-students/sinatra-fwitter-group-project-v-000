@@ -1,9 +1,12 @@
-<form action="/signup" method="post">
-  <label>Email:</label>
-  <input type="text" name="email">
-  <label>Username:</label>
-  <input type="text" name="username">
-  <label>Password:</label>
-  <input type="text" name="password">
-  <input type="submit" value="Sign Up">
-</form>
+<% if ApplicationController.logged_in?(session) %>
+  <form action="/signup" method="post">
+    <label>Email:</label>
+    <input type="text" name="email">
+    <label>Username:</label>
+    <input type="text" name="username">
+    <label>Password:</label>
+    <input type="text" name="password">
+    <input type="submit" value="Sign Up">
+  </form>
+  <% end %>
+<a href='/login'>Login Here</a>
