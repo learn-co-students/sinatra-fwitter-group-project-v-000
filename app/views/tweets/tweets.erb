@@ -1,5 +1,9 @@
 <h1>Welcome,</h1>
-<% Tweet.all.each do |chirp| %>
-  <%= chirp.content %>
-  <br>
-  <% end %>
+<% logged_in? %>
+  <% Tweet.all.each do |chirp| %>
+    <%= chirp.content %>
+    <br>
+    <% end %>
+<% else %>
+  <p><a href='/login'>Login Please</a>
+<% end %>

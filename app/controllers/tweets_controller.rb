@@ -1,7 +1,11 @@
 class TweetsController < ApplicationController
 
   get '/tweet/new' do
-    erb :'/tweets/new'
+    if logged_in?
+      erb :'/tweets/new'
+    else
+      redirect to '/login'
+    end
   end
 
   post '/tweets' do
@@ -11,17 +15,25 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets' do
-    erb :'/tweets/tweets'
+    if logged_in?
+      erb :'/tweets/tweets'
+    else
+      redirect to '/login'
+    end
   end
 
-  get '/tweets/:id' do
-    @tweet = Tweet.find_by(id: params[:id])
-    erb :'/tweets/show_tweet'
+  get '/tweet/:id' do
+      @tweet = Tweet.find_by(id: params[:id])
+      erb :'/tweets/show_tweet'
   end
 
   get '/tweets/:id/edit' do
     @tweet = Tweet.find_by(id: params[:id])
-    erb :'/tweets/edit_tweet'
+    if logged_in? && current_user == @tweet.user.id
+      erb :'/tweets/edit_tweet'
+    else
+      redirect to '/login'
+    end
   end
 
   patch '/tweets/:id' do
@@ -33,7 +45,11 @@ class TweetsController < ApplicationController
 
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id])
-    @tweet.delete
+    if logged_in? && current_user == @tweet.user.id
+      @tweet.delete
+    else
+      redirect to '/login'
+    end
   end
 
 

@@ -1,12 +1,7 @@
 class UsersController < ApplicationController
 
-  configure do
-    enable :sessions
-    set :session_secret, "secret"
-  end
-
     get '/signup' do
-      if !!session[:id]
+      if logged_in?
         redirect to '/tweets'
       else
         erb :'/users/create_user'
@@ -27,12 +22,16 @@ class UsersController < ApplicationController
     end
 
     get '/login' do
-      erb :'/users/login'
+      if logged_in?
+        redirect to '/tweets'
+      else
+        erb :'/users/login'
+      end
     end
 
     post '/login' do
       @user = User.find_by(username: params[:username])
-      if @user && @user.authenticate(params[:password])
+      if @user && (@user.authenticate(params[:password]))
         session[:user_id] = @user.id
         redirect to '/tweets'
       else
@@ -40,5 +39,19 @@ class UsersController < ApplicationController
       end
     end
 
+    get '/logout' do
+      erb :'/users/logout'
+    end
+
+    post '/logout' do
+      session.clear
+      redirect to '/login'
+    end
+
+    get '/tweets/:user' do
+      @user = params[:user]
+      @tweets = Tweet.all.collect { |tweet| tweet.user = @user}
+      erb :'/users/show'
+    end
 
 end
