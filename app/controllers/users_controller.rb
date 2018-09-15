@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         @user.username = params[:username]
         @user.password = params[:password]
         @user.save
-        session[:id] = @user.id
+        session[:user_id] = @user.id
         redirect to '/tweets'
       end
     end
@@ -44,9 +44,14 @@ class UsersController < ApplicationController
       redirect to '/login'
     end
 
-    get '/tweets/:user' do
-      @user = params[:user]
-      @tweets = Tweet.all.collect { |tweet| tweet.user = @user}
+    get '/tweets/:slug' do
+      @user = User.find_by_slug(params[:slug])
+      @tweets = []
+      Tweet.all.collect do |tweet|
+        if tweet.user_id == @user.id
+          @tweets << tweet
+        end
+      end
       erb :'/users/show'
     end
 
