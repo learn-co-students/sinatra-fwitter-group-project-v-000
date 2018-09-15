@@ -10,13 +10,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-  erb :'/layout'
+  erb :'/index'
   end
 
   get '/index' do
-    render :layout => false
-
-  erb :'/index'
+    erb :'/index'
   end
+
 
 end
