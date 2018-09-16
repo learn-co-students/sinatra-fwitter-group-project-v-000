@@ -1,5 +1,13 @@
 
-<form>
-<h3> <label> <%= @tweets %> </label> </h3>
+<form action ="/tweets" method="post">
+
+
+<h3> <label> Username: </label> <input type="text" name="username" id="username" value="username"> </input>
+<h3> <label> Password: </label> <input type="password" name="password" id="password" value="password"> </input>
+  <
+<%= @tweets %> </label> </h3>
+
+  <% @tweets.each do |tweet| %>
   <label> <%= @tweet.content %> </label>
+  <% end %>
 </form>
