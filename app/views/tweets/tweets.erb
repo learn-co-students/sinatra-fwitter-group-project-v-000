@@ -1,7 +1,8 @@
-<%if @tweets %>
+<p> Welcome, <%= current_user.username %>
+<h2> Tweets </h2>
+
 <% @tweets.each do |tweet| %>
-<h3><%= tweet.content %></h3>
-  <%end%>
-<%end%>
-<h3>Create a New Tweet </h3>
-<a href="/tweets/new">Click here </a>
+  <div>
+    <%= tweet.content %>
+  </div>
+<% end %>

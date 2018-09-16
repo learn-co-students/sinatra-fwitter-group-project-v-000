@@ -49,7 +49,6 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id' do
-    binding.pry
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       erb :'tweets/show_tweet'
@@ -80,7 +79,6 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
-    binding.pry
     if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       if @tweet && @tweet.user == current_user
