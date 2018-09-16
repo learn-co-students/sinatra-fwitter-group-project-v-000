@@ -7,11 +7,9 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do   #signup / POST request / Create action
-    @user = User.new(:username =>params[:username],
-    :email =>params[:email],
-    :password =>params[:password])
+    user = User.new(:username =>params[:username], :email =>params[:email], :password =>params[:password])
 
-      if  @user.save
+      if user.save && user.username!="" && user.email!=""
         redirect "/tweets"
       else
         redirect "/signup"
@@ -24,6 +22,7 @@ class UsersController < ApplicationController
 
   post "/login" do   #login - POST action
     @user = User.find_by(:username => params[:username], :password => params[:password])
+
     if @user && @user.authenticate(password: params[:password], username: params[:username])
       session[:user_id] = @user.id
       redirect "/tweets"
@@ -37,9 +36,19 @@ class UsersController < ApplicationController
     erb :'/users/show'
   end
 
-  get '/sesion/logout' do
+  get '/logout' do
     session.clear
-    redirect '/index'
+    redirect '/login'
   end
 
+#helpers do
+
+#    def logged_in?
+#      !!session[:user_id]
+#    end
+
+#    def current_user
+#      User.find(session[:user_id])
+#    end
+#  end
 end

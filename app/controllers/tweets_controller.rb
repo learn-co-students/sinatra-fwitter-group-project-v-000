@@ -10,7 +10,7 @@ class TweetsController < ApplicationController
     end
 
   post '/tweets' do     #CREAT action - POST request
-      @tweet = Tweet.create(:content =>params[:content])
+      @tweet = Tweet.create(:content =>params[:content], :user_id =>params[:user_id])
       @tweet.save
       redirect to "/tweets/#{@tweet.id}"
     end
@@ -30,7 +30,7 @@ class TweetsController < ApplicationController
 
   post '/tweets/:id/delete' do   # Delete action / Delete request
     @tweet = Tweet.destory
-    redirect "/tweets"
+    redirect "/login"
   end
 
 end
