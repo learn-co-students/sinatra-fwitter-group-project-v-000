@@ -6,7 +6,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/new' do    #CREATE action - GET request
-    erb :new
+    erb :'/new'
     end
 
   post '/tweets' do     #CREAT action - POST request
@@ -29,8 +29,12 @@ class TweetsController < ApplicationController
 
 
   post '/tweets/:id/delete' do   # Delete action / Delete request
-    @tweet = Tweet.destory
+    @tweet = find_by(params[:id])
+    if @user.logged_in? && session[:user_id] = @user.id
+      @tweet = Tweet.destory
+  else
     redirect "/login"
   end
 
+  end
 end

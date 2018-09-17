@@ -1,7 +1,16 @@
-<h1> Editing Twreet <h1>
-  <form action="/tweets/<%=@tweet.id%>" method="post">
+<form action="/tweets/<%= @tweet.id %>" method="post">
+    <h1> Editing Tweet <h1>
     <input type="hidden" name="_method" value="patch">
     <label><h3> Tweet:  </h3> </label> <input type="text" name="tweet" value="<%=@tweet.id%>"> </input>
     <label> <h3> Content: </h3> </label> <textarea name="content"><%=@tweet.content%> </textarea>
-    <input type="submit" id="submit">
-  </form>
+    <input type="submit" name="submit" id="submit">
+</form>
+
+<form action="/post>" method="tweets/<%= @users.id %>">
+    <h1> Delete Tweet <h1>
+    <input type="hidden" name="_method" id= "hidden" value="delete">
+    <label><h3> Tweet:  </h3> </label> <input type="text" name="tweet" value="<%=@tweet.id%>"> </input>
+    <label> <h3> Content: </h3> </label> <textarea name="content"><%=@tweet.content%> </textarea>
+    <input type="submit" name - "submit" id="submit">
+</form>
+
