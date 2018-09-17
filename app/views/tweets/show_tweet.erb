@@ -1,1 +1,13 @@
-<h1>Show Tweet</h1>
+<h1>My Tweet</h1>
+<%unless Tweet.all.empty? %>
+	<h4><%= @tweet.content %></h4>
+<%end%>
+
+<form action="/tweets/<%=@tweet.id%>/edit" method="GET">
+	<input id="hidden" type="hidden" name="_method" value="edit">
+	<input type="submit" id= "delete" value="Edit Tweet">
+</form>
+<form action="/tweets/<%=@tweet.id%>/delete" method="POST">
+	<input id="hidden" type="hidden" name="_method" value="delete">
+	<input type="submit" id= "delete" value="Delete Tweet">
+</form>
