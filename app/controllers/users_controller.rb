@@ -11,12 +11,15 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do   #signup / POST request / Create action
-    @user = User.create(:username =>params[:username], :email =>params[:email], :password =>params[:password])
-    if @user.password!="" && @user.username!="" && @user.email!="" && @user.save && session[:user_id] = @user.id
-       redirect "/tweets"
+  #binding.pry
+    @user = User.new(:username =>params[:username], :email =>params[:email], :password =>params[:password])
+    if @user.save
+      session[:user_id] = @user.id
+        redirect "/tweets"
     else
       redirect "/signup"
       end
+    end
 
   get "/login" do   #login = Get action
     erb :'/users/login'
