@@ -11,4 +11,19 @@ class ApplicationController < Sinatra::Base
     erb :"index"
   end
 
+  helpers do
+
+    def current_user
+
+    end
+
+    def logged_in?
+      !!sessions[:email]
+    end
+
+    def login(email)
+      session[:email] = email
+    end
+
 end
+end 

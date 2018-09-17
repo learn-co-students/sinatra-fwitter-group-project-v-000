@@ -1,0 +1,9 @@
+<h1><%= @tweets.content %></h1>
+<br>
+<ul>
+  <% @tweets.content.each do |content| %>
+  <li><%= content %></li>
+  <% end %>
+</ul>
+<br>
+<a href="/tweets/<%= @tweets.id %>/edit"><input type="button" value="Edit"></a>
