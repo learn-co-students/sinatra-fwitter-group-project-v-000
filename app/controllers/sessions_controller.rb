@@ -9,9 +9,9 @@ class SessionsController < ApplicationController
     redirect '/posts'
   end
 
-  # get '/logout' do
-  #   logout!!
-  #   redirect '/login'
-  # end
+  get '/logout' do
+    logout!!
+    redirect '/login'
+  end
 
 end
