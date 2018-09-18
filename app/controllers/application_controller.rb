@@ -9,31 +9,31 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "auth_demo_lv"
   end
 
-  get '/' do
-    erb :"index"
-  end
+  # get '/' do
+  #   erb :"index"
+  # end
 
   helpers do
 
     def current_user
-
+      @current_user ||= User.find_by(email: "session[:email]") if session[:email]
     end
 
     def logged_in?
-      !!session[:email]
+      !!current_user
     end
 
-    def login(email)
-      if user = User.find_by(email: "email")
+    def login(email, password)
+      user = User.find_by(email: "email")
+      if user && user.authentication(password)
         session[:email] = user.email
       else
         redirect '/login'
       end
-      session[:email] = email
     end
 
     def logout!
       session.clear
     end
-end
+  end
 end
