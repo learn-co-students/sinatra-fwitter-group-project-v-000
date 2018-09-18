@@ -7,3 +7,8 @@
 </ul>
 <br>
 <a href="/tweets/<%= @tweets.id %>/edit"><input type="button" value="Edit"></a>
+
+<form method="POST" action="/tweets/<%= @tweets.id %>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="delete">
+</form>
