@@ -9,9 +9,8 @@ class SessionsController < ApplicationController
     redirect '/tweets'
   end
 
-  # get '/logout' do
-  #   logout!!
-  #   redirect '/login'
-  # end
+  get '/logout' do
+    session.clear
+  end
 
 end

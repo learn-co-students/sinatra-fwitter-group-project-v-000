@@ -4,20 +4,26 @@ class TweetsController < ApplicationController
     "You are logged in as #{session[:email]}"
   end
 
-
   get '/tweets' do
     @tweets = Tweet.all
     erb :"/tweets/index"
   end
 
   get '/tweets/new' do
-    @tweets = Tweet.all
-    erb :"/tweets/new"
+    if !session[:email]
+      redirect "/login"
+    else
+      "A new tweet form"
   end
+end
 
-  post '/tweets'do
-
+  get '/tweets/:id/edit' do
+    if !session[:email]
+      redirect "/login"
+    else
+      "An edit tweet form"
   end
+end 
 
   get '/tweets/:id' do
     raise params.inspect
