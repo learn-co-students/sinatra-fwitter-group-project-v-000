@@ -10,7 +10,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/new' do
-    if !session[:email]
+    if !logged_in?
       redirect "/login"
     else
       "A new tweet form"
@@ -18,16 +18,15 @@ class TweetsController < ApplicationController
 end
 
   get '/tweets/:id/edit' do
-    if !session[:email]
+    if !logged_in?
       redirect "/login"
     else
       "An edit tweet form"
   end
-end 
+end
 
   get '/tweets/:id' do
-    raise params.inspect
-    @tweets = Tweet.find(params[:id])
+    @tweets = Tweet.find_by(params[:id])
     erb :"/tweets/show"
   end
 

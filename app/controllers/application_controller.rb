@@ -20,27 +20,27 @@ class ApplicationController < Sinatra::Base
   #   erb :"/delete"
   # end
 
-#   helpers do
-#
-#     def current_user
-#
-#     end
-#
-#     def logged_in?
-#       !!sessions[:email]
-#     end
-#
-#     def login(email)
-#       if user = User.find_by(email: "email")
-#         session[:email] = user.email
-#       else
-#         redirect '/login'
-#       end
-#       session[:email] = email
-#     end
-#
-#     def logout!
-#       session.clear
-#     end
-# end
+  helpers do
+
+    def current_user
+
+    end
+
+    def logged_in?
+      !!session[:email]
+    end
+
+    def login(email)
+      if user = User.find_by(email: "email")
+        session[:email] = user.email
+      else
+        redirect '/login'
+      end
+      session[:email] = email
+    end
+
+    def logout!
+      session.clear
+    end
+end
 end
