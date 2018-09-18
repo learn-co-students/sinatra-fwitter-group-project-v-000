@@ -13,13 +13,6 @@ class ApplicationController < Sinatra::Base
     erb :"index"
   end
 
-
-  # delete '/tweets/:id/delete' do
-  #   @tweets = Tweet.find(params[:id])
-  #   @tweets.delete
-  #   erb :"/delete"
-  # end
-
   helpers do
 
     def current_user
