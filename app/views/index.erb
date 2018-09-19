@@ -1,7 +1,7 @@
 <h1>Welcome to Fwitter!</h1>
 
 <% if logged_in? %>
-	<p><a href="/logout">Log Out</a></p>
+	<p><a href="/tweets">My Tweets</a> <a href="/logout">Log Out</a></p>
 <% else %>
 	<p><a href="/login">Log In</a> or <a href="/signup">Sign Up</a></p>
 <% end %>
