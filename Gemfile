@@ -11,6 +11,7 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem "tux"
+gem 'learn-co', '3.8.13'
 
 group :test do
   gem 'rspec'
