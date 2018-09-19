@@ -5,7 +5,7 @@ class TweetsController < ApplicationController
   # end
 
   get '/tweets' do
-    # binding.pry 
+    binding.pry 
     @tweets = Tweet.all
     erb :"/tweets/index"
   end
