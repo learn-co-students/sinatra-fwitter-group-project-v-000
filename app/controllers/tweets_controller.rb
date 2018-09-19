@@ -1,9 +1,13 @@
 require 'pry'
 class TweetsController < ApplicationController
 
-  get '/' do  # tweet / GET request / read action
-    @tweets = Tweet.all
-    erb :'/tweets/tweets'
+  get '/tweets' do  # tweet / GET request / read action
+    if logged_in?
+      @tweets = Tweet.all
+      erb :'/tweets/tweets'
+    else
+      redirect "/login"
+    end
   end
 
   get '/tweets/new' do    #CREATE action - GET request
@@ -16,12 +20,11 @@ class TweetsController < ApplicationController
     redirect to "/tweets/#{@tweet.id}"
   end
 
-
   get '/tweets/:id' do   # Get action / Update request
     if logged_in? && @user = current_user
-      @tweet = Tweet.find(params[:tweet_id])
-  #  @tweet.id = params[:id]
-    erb :'/tweets/edit_tweet'
+      @tweet = Tweet.find(params)
+      @tweet.update(params)
+      erb :'/tweets/edit_tweet'
     end
   end
 
@@ -34,21 +37,21 @@ class TweetsController < ApplicationController
 
   post '/tweets/:id/delete' do   # Delete action / Delete request
     if logged_in? && current_user
-        @tweet = find_by(params[:id])
-        @tweet.clear
+      @tweet = find_by(params[:id])
+      @tweet.clear
     else
       redirect "/login"
     end
   end
 
-  get '/tweets' do     # Get request / check if user login
-    if logged_in?
-      user = current_user
-      erb :'/tweets'
-    else
-      redirect to '/login'
-    end
-  end
+#  get '/tweets' do     # Get request / check if user login
+#    if logged_in?
+#      user = current_user
+#      erb :'/tweets/'
+#    else
+#      redirect to '/login'
+#    end
+#  end
 
   helpers do
 
@@ -61,4 +64,5 @@ class TweetsController < ApplicationController
     end
 
   end
+
 end

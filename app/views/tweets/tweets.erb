@@ -1,9 +1,12 @@
 tweets.erb
-<form >
-<h1> Welcome,<%= @user %> </h1>
-<label> <h3> <%= @tweets %> </label> </h3>
+<form>
+<h1> Welcome, <%=@user %> </h1>
 
-  <% @user.@tweets each do |tweet| %>
-  <label> <%= @tweet %> </label>
-  <% end %>
+    <% @tweets. each do|tweet| %>
+    <p> <label>  Tweet: <%= tweet.to_s %> </label> </p> <a href="/tweets/show_tweet>"> </a>
+    <p> <label>  Content:<%= tweet.content %> </label>
+    <% end %>
+
+    <p> <label>  <a href="/tweets/new"> New Tweet:  </a> </lable> </p>
+    <p><label>  <a href ="/users/logout"> Logout: </a> </label> </p>
 </form>
