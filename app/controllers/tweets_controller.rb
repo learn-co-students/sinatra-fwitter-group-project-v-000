@@ -1,13 +1,13 @@
 class TweetsController < ApplicationController
 
-  get '/tweets' do
-    "You are logged in as #{session[:email]}"
-  end
-
   # get '/tweets' do
-  #   @tweets = Tweet.all
-  #   erb :"/tweets/index"
+  #   "You are logged in as #{session[:email]}"
   # end
+
+  get '/tweets' do
+    @tweets = Tweet.all
+    erb :"/tweets/index"
+  end
 
   get '/tweets/new' do
     if !logged_in?
