@@ -6,74 +6,78 @@ class UsersController < ApplicationController
     erb :'/index'
   end
 
-  get '/index' do
-    if "login"
-      redirect "login"
-        if "signup"
-          redirect "signup"
-        end
-     end
-  end
-
   get '/signup' do  # signup / GET request / Create action
-    if !logged_in?
-      erb :'/users/signup'
+    if logged_in? && @user = current_user
+      redirect "/tweets"
     else
-      redirect to '/tweets'
+      erb :'/users/signup'
     end
   end
-
 
   post '/signup' do   #signup / POST request / Create action
-    if params[:username] !="" && params[:email]!="" && params[:password]!=""
-      @user = User.new(params)   #  @user = User.new(:username =>params[:username], :email =>params[:email], :password =>params[:password])
-      @user.save
-      session[:id] = @user.id
-  		redirect to "/tweets"
-   	else
-    		redirect "/signup"
-  	end
-	end
+    @user = User.new(params)   #  @user = User.new(:username =>params[:us@rname], :email =>params[:email], :password =>params[:password])
+      if @user.save
+        session[:user_id] = @user.id
+				redirect "/tweets"
+			else
+				redirect "/signup"
+			end
+		end
 
-    get "/login" do   #login = Get action
+    #   login
+    #       loads the login page
+    #       loads the tweets index after login
+    #       does not let user view login page if already logged in (FAILED - 2)
+
+  get "/login" do   #login = Get action
+    if logged_in?     # @user = current_user
+      redirect "/tweets"
+    else
       erb :'/users/login'
     end
+  end
 
-    post "/login" do   #login - POST action
-      @user = User.find_by(params)   #@user = User.find_by(:username => params[:username], :password => params[:password])
-      if @user && @user.authenticate(password: params[:password], username: params[:username])
+  post "/login" do   #login - POST action
+    @user = User.find_by(:username => params[:username])   #@user = User.find_by(:username => params[:username], :password => params[:password])
+      if @user && @user.authenticate(:password => params[:password])
+        session[:user_id] = @user.id
         redirect "/tweets"
       else
-        redirect "/login"
+        redirect "/signup"
       end
-    end
+  end
 
-    get '/users/:slug' do    # Get request / show action
-      @user = User.find_by_slug(params[:slug])
-      erb :'/users/show'
-    end
+  get '/users/:id' do    # Get request / show action
+    @user = User.find_by(params)
+    erb :'/users/show'
+  end
 
-#  get '/users/:id' do  # Get request / show action
-#    @user = User.find_by(params)   #@user = User.find_by(:username => params[:username], :password => params[:password])
+#  get '/users/:slug' do    # Get request / show action
+#    @user = User.find_by_slug(params[:slug])
 #    erb :'/users/show'
 #  end
+
+  get '/users/show' do
+    @user = User.find_by(params)   #@user = User.find_by(:username => params[:username], :password => params[:password])
+    erb :'/users/show'
+  end
 
   patch '/users/show' do
     @user = User.find_by(params[:slug])
     @user.username = User.find_by(username: params[:username])
     @user.username = update.(params[:slug])
     slug = @user.slug
+     @user.save
     erb :'/users/#{user.slug}'
-   end
-
-  get '/logout' do   # Get request / logout action
-    if logged_in? && @user = current_user
-      session.clear
-    else
-      redirect "/login"
-    end
   end
 
+  get '/logout' do   # Get request / logout action
+    if logged_in?
+        session.destory
+      else
+        redirect "/login"
+      end
+    end
 
 helpers do
 
@@ -99,4 +103,3 @@ helpers do
 
   end
 end
-#

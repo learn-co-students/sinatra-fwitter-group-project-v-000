@@ -35,12 +35,13 @@ class TweetsController < ApplicationController
     redirect "/tweets/#{@tweet.id}"
   end
 
-  post '/tweets/:id/delete' do   # Delete action / Delete request
-    if logged_in? && current_user
-      @tweet = find_by(params[:id])
-      @tweet.clear
-    else
+  delete '/tweets/:id/delete' do   # Delete action / Delete request
+    if logged_in? @user = current_user
+      session[:user_id] = @user.id
+        @tweet.clear
+        if !logged_in?
       redirect "/login"
+      end
     end
   end
 
@@ -62,7 +63,6 @@ class TweetsController < ApplicationController
     def current_user
       User.find(session[:user_id])
     end
-
   end
 
 end
