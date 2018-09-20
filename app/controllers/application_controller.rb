@@ -9,7 +9,7 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "auth_demo_lv"
   end
 
-  get '/' do
+  get '/index' do
     erb :"index"
   end
 

@@ -1,20 +1,11 @@
 class TweetsController < ApplicationController
 
-  # get '/tweets' do
-  #   "You are logged in as #{session[:email]}"
-  # end
-
   get '/tweets' do
-    # binding.pry 
-    @tweets = Tweet.all
-    erb :"/tweets/index"
-  end
-
-  get '/tweets/new' do
-    if !logged_in?
-      redirect "/login"
+    if logged_in?
+      @tweets = Tweet.all
+      erb :'tweets/tweets'
     else
-      "A new tweet form"
+      redirect to '/login'
   end
 end
 
@@ -30,15 +21,22 @@ end
     end
   end
 
-  # get '/tweets/:id' do
-  #   @tweets = Tweet.find_by(params[:id])
-  #   erb :"/tweets/show"
-  # end
-  #
-  # delete '/tweets/:id/delete' do
-  #   @tweets = Tweet.find(params[:id])
-  #   @tweets.delete
-  #   erb :"/delete"
-  # end
+  get '/tweets/:id' do
+    @tweets = Tweet.find_by(params[:id])
+    erb :"/tweets/show"
+  ends
+
+  delete '/tweets/:id/delete' do
+    if logged_in?
+      @tweets = Tweet.find_by_id(params[:id])
+      if @tweets && @tweets.user == current_user
+        @tweets.delete
+      end
+      redirect to '/tweets'
+    else
+      redirect to '/login'
+    end
+  end
+end
 
 end
