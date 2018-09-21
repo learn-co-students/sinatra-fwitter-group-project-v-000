@@ -44,7 +44,7 @@ end
     @tweets.content = params[:content]
     @tweets.save
 
-    redirect "/tweets/#{@tweet.id}"
+    redirect "/tweets/#{@tweets.id}"
   end
 
   delete '/tweets/:id/delete' do
@@ -59,4 +59,4 @@ end
     end
   end
 end
-end 
+end
