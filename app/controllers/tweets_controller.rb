@@ -3,6 +3,7 @@ class TweetsController < ApplicationController
 
   get '/tweets' do  # tweet / GET request / read action
     if logged_in?
+      @user = User.find(session[:user_id])
       @tweets = Tweet.all
       erb :'/tweets/tweets'
     else

@@ -6,6 +6,14 @@ class UsersController < ApplicationController
     erb :'/index'
   end
 
+#  Signup Page
+#     loads the signup page
+#     signup directs user to twitter index
+#     does not let a user sign up without a username
+#     does not let a user sign up without an email
+#     does not let a user sign up without a password
+#     creates a new user and logs them in on valid submission and does not let a logged in user view the signup page
+
   get '/signup' do  # signup / GET request / Create action
     if logged_in? && @user = current_user
       redirect "/tweets"
@@ -39,7 +47,7 @@ class UsersController < ApplicationController
 
   post "/login" do   #login - POST action
     @user = User.find_by(:username => params[:username])   #@user = User.find_by(:username => params[:username], :password => params[:password])
-      if @user && @user.authenticate(:password => params[:password])
+      if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
         redirect "/tweets"
       else
@@ -47,18 +55,13 @@ class UsersController < ApplicationController
       end
   end
 
-  get '/users/:id' do    # Get request / show action
-    @user = User.find_by(params)
-    erb :'/users/show'
-  end
-
-#  get '/users/:slug' do    # Get request / show action
-#    @user = User.find_by_slug(params[:slug])
+#  get '/users/:id' do    # Get request / show action
+#    @user = User.find_by(params)  #@user = User.find_by(:username => params[:username], :password => params[:password])
 #    erb :'/users/show'
 #  end
 
-  get '/users/show' do
-    @user = User.find_by(params)   #@user = User.find_by(:username => params[:username], :password => params[:password])
+  get '/users/:slug' do    # Get request / show action
+    @user = User.find_by_slug(params[:slug])
     erb :'/users/show'
   end
 
@@ -71,13 +74,20 @@ class UsersController < ApplicationController
     erb :'/users/#{user.slug}'
   end
 
+#  logout
+#    lets a user logout if they are already logged in
+#    does not let a user logout if not logged in
+#    does not load /tweets if user not logged in
+#    does load /tweets if user is logged in
+
   get '/logout' do   # Get request / logout action
     if logged_in?
-        session.destory
-      else
-        redirect "/login"
-      end
+      session.destroy
+      redirect to '/login'
+    else
+      redirect to '/tweets'
     end
+  end
 
 helpers do
 
