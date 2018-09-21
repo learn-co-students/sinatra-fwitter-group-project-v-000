@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
 
+  get '/users/show' do
+    @user = User.find_by(params[:id])
+    erb :'users/show'
+  end
+
+
   get '/signup' do
      if !logged_in?
        erb :'users/create_user'
@@ -10,7 +16,7 @@ class UsersController < ApplicationController
 
   post '/signup' do
     @user = User.new
-    @user.user_name = params[:user_name]
+    @user.username = params[:username]
     @user.email = params[:email]
     @user.password_digest = params[:password]
     if @user.save

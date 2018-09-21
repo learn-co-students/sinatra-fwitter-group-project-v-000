@@ -11,7 +11,7 @@ end
 
   get '/tweets/new' do
     if logged_in?
-    erb :'/tweets/new'
+    erb :'tweets/new'
   else
     redirect "/login"
   end
@@ -56,7 +56,7 @@ end
       redirect to '/tweets'
     else
       redirect to '/login'
+      end
     end
   end
-end
 end
