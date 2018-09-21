@@ -21,10 +21,13 @@ end
     end
   end
 
-  get '/tweets/:id' do
+  patch '/tweets/:id' do
     @tweets = Tweet.find_by(params[:id])
-    erb :"/tweets/show"
-  ends
+    @tweets.content = params[:content]
+    @tweets.save
+
+    reddirect "/tweets/#{@tweet.id}"
+  end
 
   delete '/tweets/:id/delete' do
     if logged_in?
@@ -37,6 +40,4 @@ end
       redirect to '/login'
     end
   end
-end
-
 end
