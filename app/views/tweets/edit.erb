@@ -1,0 +1,10 @@
+<h3>Edit your tweet!</h3>
+<p>current tweet:</p>
+<textarea name="current_tweet" rows="5" cols="51">
+  <%=@tweet.content%>
+</textarea>
+<form class="edit_tweet" action="/tweets/<%=@tweet.id%>/edit" method="post">
+  <label for="content">new tweet:</label>
+  <input type="text" name="content" maxlength="255">
+  <input type="submit" value="Edit Tweet" id="submit">
+</form>
