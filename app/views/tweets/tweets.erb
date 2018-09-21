@@ -1,0 +1,13 @@
+<h2>Welcome, <%= current_user.username%></h2>
+
+<h2>Here is Your Tweet History</h2>
+<h4>Hope it's not too embarrassing</h4>
+
+<% Tweet.all.each do |tweet| %>
+  <ul>
+    <li><%= tweet.content %></li>
+  </ul>
+<% end %>
+
+<a href="/tweets/new">Create a New Tweet </a><br>
+<a href="/logout">Log Out </a><br>
