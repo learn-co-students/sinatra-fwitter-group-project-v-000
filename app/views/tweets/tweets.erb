@@ -1,0 +1,4 @@
+<h1>All tweets</h1>
+<% Tweet.all.each do |tweet| %>
+  <a href="/tweets/<% tweet.id %>"><% tweet.content %></a>
+<% end %>

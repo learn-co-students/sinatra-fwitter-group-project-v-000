@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb :'tweets/tweets'
+    erb :'users/create_user'
   end
 
   get 'login' do
