@@ -6,10 +6,10 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "auth_demo_lv"
+    set :session_secret, "shushy_shush"
   end
 
-  get '/index' do
+  get '/' do
     erb :"index"
   end
 

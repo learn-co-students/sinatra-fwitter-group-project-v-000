@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     erb :"sessions/login"
   end
 
-  post '/sessions' do
+  post '/login' do
     login(params[:email], params[:password])
     redirect '/tweets'
   end

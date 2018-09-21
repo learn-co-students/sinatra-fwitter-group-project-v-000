@@ -9,6 +9,24 @@ class TweetsController < ApplicationController
   end
 end
 
+  get '/tweets/new' do
+    if logged_in?
+    erb :'/tweets/new'
+  else
+    redirect "/login"
+  end
+
+  post '/tweets' do
+    if logged_in?
+    @tweets = Tweet.new(params[:content])
+    @tweets.save
+    redirect "/tweets/#{@tweets.id}"
+  else
+    erb '/login'
+  end
+end
+
+
   get '/tweets/:id/edit' do
     if !logged_in?
       redirect "/login"
@@ -26,7 +44,7 @@ end
     @tweets.content = params[:content]
     @tweets.save
 
-    reddirect "/tweets/#{@tweet.id}"
+    redirect "/tweets/#{@tweet.id}"
   end
 
   delete '/tweets/:id/delete' do
@@ -41,3 +59,4 @@ end
     end
   end
 end
+end 
