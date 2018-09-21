@@ -51,7 +51,7 @@ end
     if logged_in?
       @tweets = Tweet.find_by_id(params[:id])
       if @tweets && @tweets.user == current_user
-        @tweets.delete
+        @tweets.destroy 
       end
       redirect to '/tweets'
     else
