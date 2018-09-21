@@ -3,6 +3,6 @@
 
 <% Tweet.all.each do |tweet| %>
   <a href="/tweets/<%= tweet.id %>"><%= tweet.id %></a>
-  <a href="/users/<%= tweet.user.id %>"><%= tweet.user.name %></a>
-  <p>"<%= tweet.content %>"</p>
+  <a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a>
+  <%= tweet.content %>
 <% end %>

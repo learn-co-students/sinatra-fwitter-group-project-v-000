@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug)
-    User.all.select do |user|
-      user.slug == slug
-    end[0]
+    User.all.find {|user| user.slug == slug }
   end
 end
