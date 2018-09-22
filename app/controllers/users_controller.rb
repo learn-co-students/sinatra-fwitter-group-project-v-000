@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   end
 
 #  get '/users/:id' do    # Get request / show action
-#    @user = User.find_by(params)  #@user = User.find_by(:username => params[:username], :password => params[:password])
+#    @ser = User.find_by(params)  #@user = User.find_by(:username => params[:username], :password => params[:password])
 #    erb :'/users/show'
 #  end
 
@@ -66,13 +66,13 @@ class UsersController < ApplicationController
   end
 
   patch '/users/show' do
-    @user = User.find_by(params[:slug])
-    @user.username = User.find_by(username: params[:username])
-    @user.username = update.(params[:slug])
-    slug = @user.slug
+     @user = User.find_by(params[:slug])
+     @user.username = User.find_by(username: params[:username])
+     @user.username = update.(params[:slug])
+     slug = @user.slug
      @user.save
-    erb :'/users/#{user.slug}'
-  end
+     erb :'/users/show'
+   end
 
 #  logout
 #    lets a user logout if they are already logged in
@@ -99,17 +99,18 @@ helpers do
       User.find(session[:user_id])
     end
 
-    def self.find_by_slug(slug)
+    def slug
+       @slug = slugify(self.username)
+    end
+     def slugify(name)
+        split_on_apostrophes = name.split(/[']/)
+        name_without_apost = split_on_apostrophes.join
+        name_array = name_without_apost.downcase.split(/[\W]/)
+        name_array.delete_if{|x|x==""}
+        new_name = name_array.join("-")
+    end
+     def self.find_by_slug(slug)
       self.all.detect{|x|x.slug == slug}
     end
-
-    def slugify
-      split_on_apostophes = username.split(/[']/)
-      username_without_apost = split_on_apostophes.join
-      username_array = name_without_apost.downcase.split(/[\W]/)
-      username_array.delete_if{|x|x==""}
-      new_username = username_array.join("-")
-    end
-
   end
 end

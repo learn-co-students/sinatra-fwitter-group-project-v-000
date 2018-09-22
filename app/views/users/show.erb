@@ -1,14 +1,9 @@
 show.erb
-<form>
-        <label> <h3> User Name:<%=@username%> </h3> </label>
 
-        <%@users.tweet.each do |user| %>
-        Tweet:<%=user.tweet%>
+p> Here are your tweets, <%= @user %>
+<% @user.tweets.each do |tweet| %>
 
-        <p><label> Create a Tweet: </label> <input type="submit" value= "New Tweet"> </input></p>
-        <p><label> Edit a Tweet: </label> <input type="submit" value= "Editing Tweet"> </input></p>
-        <p><label> Read a Tweet: </label> <input type="submit" value= "Show Tweet"> </input> </p>
+    <%= tweet.cosntent %>
+<% end %>
 
-        <input type="submit" name ="submit" value="Submit">
 
-      </form>

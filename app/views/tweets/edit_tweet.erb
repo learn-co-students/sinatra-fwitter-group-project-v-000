@@ -1,17 +1,10 @@
 edit_tweet.erb
-<form action="/tweets/<%= @tweet.id %>" method="post">
-    <h1> Editing Tweet <h1>
-    <input type="hidden" name="_method" value="patch">
-    <label><h3> Tweet:  </h3> </label> <input type="text" name="tweet" value="<%=@tweet%>"> </input>
-    <label> <h3> Content: </h3> </label> <textarea name="content"><%=@tweet.content%> </textarea>
-    <input type="submit" name="submit" id="submit" value="submit">
-</form>
 
-<form action="/post>" method="tweets/<%= @users.id %>">
-    <h1> Delete Tweet <h1>
-    <input type="hidden" name="_method" id= "hidden" value="delete">
-    <label><h3> Tweet:  </h3> </label> <input type="text" name="tweet" value="<%=@tweet.id%>"> </input>
-    <label> <h3> Username: </h3> </label> <input type="text" name="username"><%=@username%> </input>
-    <label> <h3> Content: </h3> </label> <textarea name="content"><%=@tweet.content%> </textarea>
-    <input type="submit" name - "submit" id="submit">
-</form>
+<form method="post" action="/tweets/<%=@tweet.id%>">
+  <input type="hidden" name="_method" id="hidden" value="patch">
+  
+  <label> Content </label>
+   <input type="text" name="content" value="content">
+   
+   <input type="submit" value="submit">
+</form> 

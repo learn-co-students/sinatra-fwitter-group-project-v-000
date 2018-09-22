@@ -1,6 +1,8 @@
 login.erb
-<form>
+
 <h2> Welcome </h2>
+
+<form  method="post" action="/login">
 
 <p><label> <h3> Please login </h3> <label></p>
 <p><label><h4> Username: <label> <input type="text" name="username" id="username"> </h4> </label></p>
@@ -8,5 +10,6 @@ login.erb
 
 <input type="submit" name="submit" value="Submit">
 
-<p><label><h4> Logout <label> <input type="submit" name="submit" value="submit"> </h4> </label></P>
+<p><label><h4> Logout <label> 
+  <input type="submit" name="submit" value="submit"> </h4> </label></P>
 </form>
