@@ -1,0 +1,8 @@
+<h1>Welcome,
+	Tweets Index</h1>
+<%#binding.pry%>
+<% unless Tweet.all.empty? %>
+	<% Tweet.all.each do |tweet|%>
+		<h4><%=tweet.id%>. <%=tweet.content %></h4>
+	<%end%>
+<%end%>
