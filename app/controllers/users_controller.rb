@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'users/show'
+  end
+  
   get '/signup' do
-    if !session[:id]
+    if !logged_in?
       erb :"users/create_user"
     else
       redirect to '/tweets' 
@@ -9,21 +14,18 @@ class UsersController < ApplicationController
 
   post '/signup' do
     #Create a new user and save to DB
-    @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-    
-    if @user.username == "" || @user.email == ""
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect to '/signup'
-    elsif @user.save
-      session[:id] = @user.id
-
-      redirect to '/tweets'
     else
-      redirect to "/signup"
+      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+      @user.save
+      session[:user_id] = @user.id
+      redirect to '/tweets'
     end    
   end
 
   get '/login' do
-    if !session[:id]
+    if !logged_in?
       erb :"users/login"
     else
       redirect to '/tweets' 
@@ -32,21 +34,20 @@ class UsersController < ApplicationController
 
   post '/login' do
     @user = User.find_by(:username => params[:username])
-
     if @user && @user.authenticate(params[:password])
-      session[:id] = @user.id
+      session[:user_id] = @user.id
       redirect to "/tweets"
     else
-      redirect "/login"
+      redirect "/signup"
     end
   end
 
   get '/logout' do
-    if !session
-      redirect to '/'
-    else
-    session.clear
+    if logged_in?
+      session.destroy
       redirect to '/login'
+    else
+      redirect to '/'
     end
   end
 end

@@ -1,8 +1,8 @@
 <h1>Edit Tweet</h1>
-<br>
-<form action="/tweets/<%=@tweet.id%>/edit_tweet" method="POST">
+<form action="/tweets/<%=@tweet.id%>" method="POST">
   <input type="hidden" name="_method" value="patch">
   <label for="content">Edit your Tweet below:</label>
   <textarea name="content" required><%= @tweet.content %></textarea><br>
   <input type="submit" value="Update my Tweet" id="submit">
 </form>
+<a href="/logout">Log Out</a>
