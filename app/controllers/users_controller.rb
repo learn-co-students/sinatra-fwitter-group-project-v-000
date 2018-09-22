@@ -52,7 +52,6 @@ class UsersController < ApplicationController
 		erb :'/tweets/edit'
 	end
 
-
 	delete '/tweets/:id/delete' do
 		tweet = Tweet.find_by_id(params[:id])
 		if logged_in? && session[:id] == tweet.id
