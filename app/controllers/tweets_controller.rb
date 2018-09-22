@@ -21,10 +21,22 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do     #CREAT action - POST request
-    @tweet = Tweet.new(params)   #@tweet = Tweet.create(:content =>params[:content], :user_id =>params[:user_id])
-    @tweet.save
-    redirect to "/tweets/#{@tweet.id}"
+    if !params[:content].empty?
+      @tweet = Tweet.create(:content => params[:content])
+      @user = current_user
+      @user.tweets << tweet
+      @user.save
+      redirect "/tweets"
+    else
+      redirect "/new"
+    end
   end
+
+  #  if logged_in?
+  #  @tweet = Tweet.new(params)   #@tweet = Tweet.create(:content =>params[:content], :user_id =>params[:user_id])
+  #  @tweet.save
+  #  redirect to "/tweets/#{@tweet.id}"
+  #end
 
   get '/tweets/:id' do   # Get action / Update request
     if logged_in?
