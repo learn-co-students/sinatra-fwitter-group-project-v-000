@@ -1,9 +1,9 @@
 show.erb
 
-p> Here are your tweets, <%= @user %>
+<p> Here are your tweets, <%= @user %></p>
 <% @user.tweets.each do |tweet| %>
+<h3> <a href="/users/<%=tweet.user.slug%>"><%=tweet.user.username%></a></h3>
 
-    <%= tweet.cosntent %>
-<% end %>
-
-
+  <p>  <%= tweet.cosntent %></p>
+  <a href="users/<%=tweet.id%>"> view tweet content></a>
+  <% end %>
