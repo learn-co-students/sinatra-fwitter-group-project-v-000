@@ -20,15 +20,15 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets' do     #CREAT action - POST request
-    if params[:content].empty?
-      @tweet = Tweet.create(:content => params[:content])
+  post '/tweet' do     #CREAT action - POST request
+    if !params[:content].empty?
+      tweet = Tweet.create(:content => params[:content])
       @user = current_user
       @user.tweets << tweet
       @user.save
       redirect "/tweets"
     else
-      redirect "/new"
+      redirect "/tweets/new"
     end
   end
 
