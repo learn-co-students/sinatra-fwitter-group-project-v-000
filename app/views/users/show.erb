@@ -1,9 +1,11 @@
 show.erb
 
-<p> Here are your tweets, <%= @user %></p>
+<form action ="/tweet" method="post">
+<p> Here are your tweets, <%= @username %></p>
 <% @user.tweets.each do |tweet| %>
 <h3> <a href="/users/<%=tweet.user.slug%>"><%=tweet.user.username%></a></h3>
 
   <p>  <%= tweet.cosntent %></p>
   <a href="users/<%=tweet.id%>"> view tweet content></a>
   <% end %>
+</form>

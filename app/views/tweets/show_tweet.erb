@@ -1,16 +1,9 @@
-
-<form>
-<label> <%= @user.username %> </label>
-
-<% @user.tweets.each do|tweet| %>
-<label> <%= tweet.content %> </label>
-<a href="/tweets/<%=user.id %/edit"> Edit </a>
-<% end %>
-</form>
+tweets.show.erb
+<label> <%= @tweet.username %> </label>
+<label> <%= @tweet.content %> </label>
 
 <form method='post' action="/tweets/<%=tweet.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete Tweet">
-</form>
+  <input type="submit" value="Delete Tweet"> Delete Tweet
 
-<a href="/logout"> Log Out </a>
+</form>
