@@ -5,3 +5,6 @@
 
 <p>User: <a href="/users/<%= @tweet.user.slug %>"><%= @tweet.user.username %></a>
 </p>
+
+<a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+<a href="/tweets/<%= @tweet.id %>/delete">Delete Tweet</a>
