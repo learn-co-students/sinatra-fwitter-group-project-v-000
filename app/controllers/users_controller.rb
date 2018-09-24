@@ -55,10 +55,10 @@ class UsersController < ApplicationController
       end
   end
 
-  # get '/users/:id' do    # Get request / show action
-  #   @user = User.find_by(params)  #@user = User.find_by(:username => params[:username], :password => params[:password])
-  #   erb :'/users/show'
-  # end
+   get '/users/show' do    # Get request / show action
+     @user = User.find_by(params[:id])  #@user = User.find_by(:username => params[:username], :password => params[:password])
+     erb :'/users/show'
+   end
 
    post '/users/:slug/edit' do    # Get request / show action
      @user = User.find_by_slug(params[:slug])
