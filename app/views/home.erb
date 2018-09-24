@@ -9,35 +9,7 @@
     <title>Fwitter</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="/">Fwitter</a>
-
-      <% if logged_in? %>
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <p>Welcome <%= current_user.username %></p>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/tweets/new">Create Tweet</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/users/logout">Log out</a>
-          </li>
-        </ul>
-      <% else %>
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/users/singup">Sign Up</a>
-          </li>
-          <li class="nav-item pull-right">
-            <a class="nav-link" href="/users/login">Sign In</a>
-          </li>
-        </ul>
-      <% end %>
-    </nav>
-    <header>
-      <h1>Welcome to Fwitter</h1>
-    </header>
+    <h2> Welcome to Fwitter </h2>
 
   </body>
 </html>
