@@ -15,6 +15,7 @@ end
   else
     redirect "/login"
   end
+end
 
   post '/tweets' do
     if logged_in?
@@ -58,5 +59,5 @@ end
       redirect to '/login'
       end
     end
-  end
+  
 end
