@@ -1,0 +1,7 @@
+
+<h4>Tweet</h4>
+<p>Id: <%= @tweet.id %></p>
+<p>Content: <%= @tweet.content %></p>
+
+<p>User: <a href="/users/<%= @tweet.user.slug %>"><%= @tweet.user.username %></a>
+</p>
