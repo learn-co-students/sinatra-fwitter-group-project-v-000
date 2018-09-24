@@ -1,16 +1,15 @@
 class UsersController < ApplicationController
 
-  get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    erb :'users/show'
-  end
-
+  # get '/users/:slug' do
+  #   @user = User.find_by_slug(params[:id])
+  #   erb :'users/show'
+  # end
 
   get '/signup' do
-     if !logged_in?
-       erb :'users/create_user'
+     if logged_in?
+        redirect to "/tweets"
      else
-       redirect to '/tweets'
+       erb :'users/create_user'
      end
    end
 
@@ -37,19 +36,20 @@ class UsersController < ApplicationController
 end
 
   post '/login' do
+    binding.pry
     if login(params[:email], params[:password])
     redirect '/tweets'
   else
     redirect to '/signup'
   end
-end 
+end
 
   get '/logout' do
     if logged_in?
       session.destroy
       redirect to '/login'
     else
-    redirect to '/'
+      redirect to '/'
     end
   end
 end
