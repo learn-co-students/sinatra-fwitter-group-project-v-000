@@ -55,16 +55,15 @@ class UsersController < ApplicationController
       end
   end
 
-#  get '/users/:id' do    # Get request / show action
-#    @ser = User.find_by(params)  #@user = User.find_by(:username => params[:username], :password => params[:password])
-#    erb :'/users/show'
-#  end
+  # get '/users/:id' do    # Get request / show action
+  #   @user = User.find_by(params)  #@user = User.find_by(:username => params[:username], :password => params[:password])
+  #   erb :'/users/show'
+  # end
 
-  get '/users/:slug/edit' do    # Get request / show action
-    @user = User.find_by_slug(params[:slug])
-    erb :'/users/show'     #show
-  end
-
+   post '/users/:slug/edit' do    # Get request / show action
+     @user = User.find_by_slug(params[:slug])
+     erb :'/users/show'     #show
+   end
 
 #  logout
 #    lets a user logout if they are already logged in
@@ -92,16 +91,18 @@ helpers do
     end
 
     def slug
-      username.downcase.gsub(" ","-")
-    #   @slug = slugify(self.username)
+      #username.downcase.gsub(" ","-")
+     @slug = slugify(self.username)
     end
-    # def slugify(name)
-    #    split_on_apostrophes = name.split(/[']/)
-    #    name_without_apost = split_on_apostrophes.join
-    #    name_array = name_without_apost.downcase.split(/[\W]/)
-    #    name_array.delete_if{|x|x==""}
-    #    new_name = name_array.join("-")
-    #end
+
+    def slugify(name)
+      split_on_apostrophes = name.split(/[']/)
+      name_without_apost = split_on_apostrophes.join
+      name_array = name_without_apost.downcase.split(/[\W]/)
+      name_array.delete_if{|x|x==""}
+      new_name = name_array.join("-")
+    end
+
      def self.find_by_slug(slug)
       self.all.find{|user|user.slug == slug}
     end

@@ -1,9 +1,12 @@
 tweets.show.erb
-<label> <%= @tweet.username %> </label>
-<label> <%= @tweet.content %> </label>
+<label> <%= @user %> </label>
+<label> <%= @tweet %> </label>
 
-<form method='post' action="/tweets/<%=tweet.id%>/delete">
+<form method='post' action="/tweets/<%=@tweet.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete Tweet"> Delete Tweet
+  <%= @tweet.content %>
 
+  <p><input type="submit" name="delete tweet" value="Delete Tweet"> </p>
 </form>
+
+<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>

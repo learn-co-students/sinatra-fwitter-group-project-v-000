@@ -65,7 +65,7 @@ class TweetsController < ApplicationController
 
   post '/tweets/:id/delete' do   # Delete action / Delete request
     if logged_in?
-       @tweet = current_user.tweets.find_by(params[:id])
+       @tweet = tweets.find_by(params[:id])
         if tweet && tweet.destroy
         redirect '/tweets'
      else
