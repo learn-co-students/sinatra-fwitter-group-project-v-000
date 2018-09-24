@@ -41,6 +41,7 @@ end
   end
 
   patch '/tweets/:id' do
+    binding.pry 
     @tweets = Tweet.find_by(params[:id])
     @tweets.content = params[:content]
     @tweets.save
@@ -59,5 +60,5 @@ end
       redirect to '/login'
       end
     end
-  
+
 end
