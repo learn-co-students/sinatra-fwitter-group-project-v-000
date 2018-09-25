@@ -28,20 +28,22 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    if !logged_in?
+    if logged_in?
       erb :'users/login'
     else
       redirect to '/tweets'
   end
 end
 
-  post '/login' do
-    if login(params[:email], params[:password])
-    redirect '/tweets'
-  else
-    redirect to '/signup'
+post '/login' do
+    user = User.find_by(params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect to "/tweets"
+    else
+      redirect to '/signup'
+    end
   end
-end
 
   get '/logout' do
     if logged_in?
