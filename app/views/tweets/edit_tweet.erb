@@ -1,12 +1,12 @@
 edit_tweet.erb
 
-<form method="post" action="/tweets/<%=@tweet.id%>/edit">
+<form method="post" action="/tweets/<%=@tweet.id%>">
   <input type="hidden" name="_method" id="hidden" value="patch">
 
   <label> tweeting! </label>
 
     <label> Content </label>
-   <input type="text" name="content" value="content">
+   <input type="text" name="content" value="<%=@tweet.content%>">
 
-   <input type="submit" name="submit" value="submit">
+   <input type="submit"  value="submit">
 </form>

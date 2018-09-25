@@ -43,9 +43,8 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id/edit' do   # Get action / edit request
-    if logged_in?
-      @tweet = Tweet.find_by(params[:id])
-       @tweet.user == current_user
+    @tweet = Tweet.find_by(params[:id])
+    if logged_in? && @tweet.user == current_user
       erb :"/tweets/edit_tweet"
     else
       redirect "/login"
@@ -63,17 +62,16 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets/:id/delete' do   # Delete action / Delete request
-    @user = current_user
-    @tweet = current_user.tweets.find_by(params[:id])
-    if logged_in?
-        if @tweet && @tweet.destroy
-        redirect '/tweets'
-     else
-      redirect "/tweets/login"
+  delete '/tweets/:id/delete' do   # Delete action / Delete request
+    if logged_in? && @user==current_user
+      @tweet = current_user.tweets.find_by(id: params[:id])
+       @tweet && @tweet.destroy
+      redirect "/tweets"
+    else
+      redirect "/login"
     end
   end
-end
+
 
   helpers do
 
@@ -84,20 +82,6 @@ end
     def current_user
       User.find(session[:user_id])
     end
-
-    def slug
-     @slug = slugify(self.username)
-  end
-   def slugify(name)
-      split_on_apostrophes = name.split(/[']/)
-      name_without_apost = split_on_apostrophes.join
-      name_array = name_without_apost.downcase.split(/[\W]/)
-      name_array.delete_if{|x|x==""}
-      new_name = name_array.join("-")
-  end
-   def self.find_by_slug(slug)
-    self.all.detect{|x|x.slug == slug}
-  end
   end
 
 end

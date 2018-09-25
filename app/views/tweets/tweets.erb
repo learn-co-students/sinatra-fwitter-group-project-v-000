@@ -1,18 +1,15 @@
 tweets.erb
 <h1> Welcome, <%=@user.username %> </h1>
 
-<h2> Tweets </h2>
+<h2> @tweet </h2>
 
 <% @tweets.each do |tweet| %>
 <%= tweet.content %>
 <% end %>
-  <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="submit" name="delete tweet" value="Delete Tweet"> Delete Tweet
-
-
 
 <p> <a href="/tweets/edit_tweet">Edit Tweet</a>
 <p> <a href="/tweets/new">New Tweet</a>
 <p> <a href="/tweets/show_tweet">Show Tweet</a>
 <p> <a href="/users/show">Show User</a>
+<p> <a href="/tweets/delete">Delete Tweet</a>
 <p> <a href="/logout">Log Out</a>
