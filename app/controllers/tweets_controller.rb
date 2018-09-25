@@ -17,16 +17,22 @@ end
   end
 end
 
-  post '/tweets' do
+post '/tweets' do
     if logged_in?
-    @tweets = Tweet.new(params[:content])
-    @tweets.save
-    redirect "/tweets/#{@tweets.id}"
-  else
-    erb '/login'
+      if params[:content] == ""
+        redirect to "/tweets/new"
+      else
+        @tweet = current_user.tweets.build(content: params[:content])
+        if @tweet.save
+          redirect to "/tweets/#{@tweet.id}"
+        else
+          redirect to "/tweets/new"
+        end
+      end
+    else
+      redirect to '/login'
+    end
   end
-end
-
 
   get '/tweets/:id/edit' do
     if !logged_in?
@@ -41,7 +47,6 @@ end
   end
 
   patch '/tweets/:id' do
-    binding.pry
     @tweets = Tweet.find_by(params[:id])
     @tweets.content = params[:content]
     @tweets.save
@@ -58,7 +63,6 @@ end
       redirect to '/tweets'
     else
       redirect to '/login'
-      end
     end
-
+  end
 end
