@@ -41,7 +41,7 @@ end
   end
 
   patch '/tweets/:id' do
-    binding.pry 
+    binding.pry
     @tweets = Tweet.find_by(params[:id])
     @tweets.content = params[:content]
     @tweets.save
