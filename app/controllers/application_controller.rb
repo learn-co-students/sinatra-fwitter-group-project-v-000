@@ -23,18 +23,19 @@ class ApplicationController < Sinatra::Base
       @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
 
-    def login(username, password)
-      user = User.find_by(params[:username])
-      if user && user.authenticate(params[:password])
-        session[:user_id] = user.id
-        redirect to '/tweets'
-      else
-        redirect to '/signup'
-      end
-    end
+    # def login(username, password)
+    #   user = User.find_by(params[:username])
+    #   binding.pry
+    #   if user && user.authenticate(params[:password])
+    #     session[:user_id] = user.id
+    #     redirect to '/tweets'
+    #   else
+    #     redirect to '/signup'
+    #   end
+    # end
 
-    def logout!
-      session.clear
-    end
+    # def logout!
+    #   session.clear
+    # end
   end
 end
