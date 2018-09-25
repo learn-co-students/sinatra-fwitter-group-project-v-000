@@ -1,31 +1,51 @@
 class UsersController < ApplicationController
 
-  # get '/users/:slug' do
-  #   @user = User.find_by_slug(params[:id])
-  #   erb :'users/show'
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:id])
+    erb :'users/show'
+  end
+
+  # get '/signup' do
+  #    if logged_in?
+  #       redirect to "/tweets"
+  #    else
+  #      erb :'users/create_user'
+  #    end
+  #  end
+  #
+  # post '/signup' do
+  #   if params[:username] == "" || params[:email] == "" || params[:password] == ""
+  #    redirect to '/signup'
+  #   else
+  #     @user = User.new
+  #     @user.username = params[:username]
+  #     @user.email = params[:email]
+  #     @user.password = params[:password]
+  #     @user.save
+  #       session[:user_id] = @user.id
+  #       redirect to "/tweets"
+  #   end
   # end
 
   get '/signup' do
-     if logged_in?
-        redirect to "/tweets"
-     else
-       erb :'users/create_user'
-     end
-   end
+    if !logged_in?
+      erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
+    else
+      redirect to '/tweets'
+    end
+  end
 
   post '/signup' do
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
-     redirect to '/signup'
+      redirect to '/signup'
     else
-      @user = User.new
-      @user.username = params[:username]
-      @user.email = params[:email]
-      @user.password = params[:password]
+      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
       @user.save
-        session[:user_id] = @user.id
-        redirect to "/tweets"
+      session[:user_id] = @user.id
+      redirect to '/tweets'
     end
   end
+
 
   get '/login' do
     if !logged_in?
@@ -36,7 +56,6 @@ class UsersController < ApplicationController
 end
 
   post '/login' do
-    binding.pry
     if login(params[:email], params[:password])
     redirect '/tweets'
   else

@@ -1,5 +1,15 @@
-<h1>Welcome to the Tweets Page <%= current_user.username %></h1>
+<!-- <h1>Welcome to the Tweets Page <%= current_user.username %></h1>
 <% @tweets.each do |tweet| %>
   <li><%=tweet.content%></li>
   <br>
-<%end%>
+<%end%> -->
+
+
+<p> Welcome, <%= current_user.username %>
+<h2> Tweets </h2>
+
+<% @tweets.each do |tweet| %>
+  <div>
+    <%= tweet.content %>
+  </div>
+<% end %>
