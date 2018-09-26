@@ -4,9 +4,11 @@
   <%= message %>
 <% end %>
 
-<form method="POST" action='/signup'>
-  <label>Name:</label><input type="text" name="name"></input>
-  <label>Email:</label><input type="text" name="email"></input>
-  <label>Password:</label><input type="text" name="password"></input>
-  <input class="btn btn-primary" type="submit" value="Sign Up"></input>
+
+<h3>Sign Up</h3>
+<form action="/signup" method="POST">
+  <p>Name: <input type="text" name="username"></p>
+  <p>Email: <input type="text" name="email"></p>
+  <p>Password: <input type="text" name="password"></p>
+  <input class="btn btn-primary" type="submit">
 </form>
