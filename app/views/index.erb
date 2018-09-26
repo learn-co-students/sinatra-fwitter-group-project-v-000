@@ -1,14 +1,41 @@
 <h1>Welcome to Fwitter</h1>
 
-
 <% if logged_in? %>
-<a href='/tweets/new'> Create Tweet </a>
-<br>
-<a href='/logout'> Log Out </a>
+     <a href="/tweets/<%= current_user.id %>">Home</a>
+     <br>
+     <a href="/logout">Log Out</a>
+   <% else %>
 
-<% else %>
-<a class="button" href="/signup">Signup</a>
-<br>
-<br>
-<a class="button" href="/login">Login</a>
-<%end%>
+     <a href="/login">Log In</a>
+     <br>
+     <a href="/signup">No Account? Sign Up!</a>
+
+   <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- # <% if logged_in? %>
+# <a href='/tweets/new'> Create Tweet </a>
+# <br>
+# <a href='/logout'> Log Out </a>
+#
+# <% else %>
+# <a class="button" href="/signup">Signup</a>
+# <br>
+# <br>
+# <a class="button" href="/login">Login</a>
+# <%end%> -->
