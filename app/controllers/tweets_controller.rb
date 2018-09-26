@@ -18,4 +18,12 @@ class TweetsController < ApplicationController
     erb :'tweets/show_tweet'
   end
 
+  get '/tweets/:id/edit' do
+    erb :'/tweets/edit_tweet'
+  end
+
+  post '/tweets/id' do
+    redirect ''
+  end
+
 end
