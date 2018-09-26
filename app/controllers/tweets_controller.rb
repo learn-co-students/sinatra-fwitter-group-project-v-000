@@ -14,16 +14,22 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id' do
-    @tweet = Tweets.find_by(params[:id])
+    @tweet = Tweets.find_by_id(params[:id])
+    @tweet.content = params[:content]
+    @tweet.save
     erb :'tweets/show_tweet'
   end
 
-  get '/tweets/:id/edit' do
+  patch '/tweets/:id/edit' do
     erb :'/tweets/edit_tweet'
   end
 
   post '/tweets/id' do
-    redirect ''
+    redirect '/tweets/show_tweet'
+  end
+
+  post '/tweets/:id/delete' do
+    redirect '/tweets/show_tweet'
   end
 
 end

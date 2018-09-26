@@ -1,5 +1,7 @@
-<h1>All Tweets</h1>
+<h1><%= current_user.username %> - All Tweets</h1>
 
-<% tweets.all.each do |tweet| %>
-  <li><%= tweet.content %></li>
+<% @tweets.each do |tweet| %>
+  <div>
+    <p><%= tweet.content %></p>
+  </div>
 <% end %>
