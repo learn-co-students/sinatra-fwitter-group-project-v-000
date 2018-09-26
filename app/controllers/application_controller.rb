@@ -9,7 +9,9 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "fwitter_secret"
   end
 
+  # home page
   get '/' do
+    # to base index
     erb :index
   end
 

@@ -1,5 +1,3 @@
-require 'pry'
-
 class UsersController < ApplicationController
 
   get '/users/:slug' do
@@ -30,7 +28,7 @@ class UsersController < ApplicationController
     if !logged_in?
       erb :'users/login'
     else
-      redirect to '/tweets'
+      redirect to '/tweets/tweets'
     end
   end
 

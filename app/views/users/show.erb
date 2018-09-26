@@ -2,6 +2,10 @@
 
 <% @user.tweets.each do |tweet| %>
   <div>
-    <%= @tweet.content %>
+    <%= tweet.content %>
   </div>
 <% end %>
+
+<a href='/tweets'>See All Tweets</a><br>
+<a href='/tweets/new'>Create New Tweet</a><br>
+<a href='/logout'>Log Out</a>
