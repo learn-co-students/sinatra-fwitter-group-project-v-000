@@ -1,0 +1,10 @@
+<h1>All of <%= current_user.username %>'s Tweets</h1>
+
+<% @tweets.each do |tweet| %>
+  <div>
+    <%= tweet.content %>
+  </div>
+<% end %>
+<br>
+<a href='/tweets/new'>Create New Tweet</a><br>
+<a href='/logout'>Log Out</a>
