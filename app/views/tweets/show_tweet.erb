@@ -1,0 +1,13 @@
+<h1>Show Tweet:</h1>
+
+<h2>Content</h2>
+
+<p><%=@tweet.content%></p>
+
+<a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet </a> 
+
+<form method="POST" action="/tweets/<%= @tweet.id %>/delete">
+    <input id="hidden" type="hidden" name="_method" value="Delete">
+    <input type="submit" value="Delete Tweet">
+</form>
+ 
