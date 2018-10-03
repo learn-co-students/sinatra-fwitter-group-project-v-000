@@ -77,9 +77,7 @@ Remember! The goal at The Flatiron School is not to do, it is to *learn*. Make s
 │   └── test.sqlite
 └── spec
     ├── controllers
-    │   └── application_controller_spec.rb
-    ├── models
-    │   └── user_spec.rb
+    │   └── application_controller_spec.rb
     └── spec_helper.rb
 ```
 
@@ -101,7 +99,7 @@ You'll need to create two migrations to create the users and the tweets table.
 
 Users should have a username, email, and password, and have many tweets.
 
-Tweets should have content and belong to a user.
+Tweets should have content, belong to a user.
 
 ### Associations
 
