@@ -1,21 +1,25 @@
-class UsersController < ApplicationContr
-    get '/users/signup' do 
-
+class UsersController < ApplicationController
+    get '/signup' do 
+        erb :'users/signup'
     end
 
-    post '/users/signup' do 
-
+    post '/signup' do 
+        params
+        redirect to :tweets
     end
 
     get '/users/login' do 
 
     end
 
-    post '/users/login' do 
-
+    post '/login' do 
+        params
+        session[:user_id]
+        redirect to :tweets
     end
 
     get '/users/logout' do
-
+        session.clear
+        redirect to '/'
     end
 end
