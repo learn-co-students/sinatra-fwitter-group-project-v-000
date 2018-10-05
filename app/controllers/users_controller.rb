@@ -14,4 +14,8 @@ class UsersController < ApplicationContr
     post '/users/login' do 
 
     end
+
+    get '/users/logout' do
+
+    end
 end
