@@ -9,14 +9,18 @@ class UsersController < ApplicationController
         redirect to :tweets
     end
 
-    get '/users/login' do 
-
+    get '/login' do 
+        erb :'users/login'
     end
 
     post '/login' do 
-        params
-        session[:user_id]
-        redirect to :tweets
+        user = User.find_by(username: params[:username])
+        if user && user.authenticate(params[:password])
+            session[:user_id] = user.id
+            redirect to '/tweets'
+        else
+            redirect to '/'
+        end
     end
 
     get '/users/logout' do
