@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    erb :signup
+      erb :signup
   end
 
   post '/signup' do
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    
+    erb :index
   end
 
   post '/login' do
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     # if @user != nil && @user.password == params[:password]
     if logged_in?
       session[:user_id] = @user.id
-      redirect to '/account'
+      redirect to '/tweets'
     else
       redirect '/signup'
     end

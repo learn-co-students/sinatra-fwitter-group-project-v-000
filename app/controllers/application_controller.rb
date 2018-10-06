@@ -13,10 +13,6 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  get '/tweets' do
-    erb :index
-  end
-
 
   helpers do
     def logged_in?
@@ -26,10 +22,6 @@ class ApplicationController < Sinatra::Base
     def current_user
       User.find(session[:user_id])
     end
-  end
-
-  get '/' do
-    erb :index
   end
 
 end
