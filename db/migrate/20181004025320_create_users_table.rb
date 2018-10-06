@@ -8,4 +8,8 @@ class CreateUsersTable < ActiveRecord::Migration
       t.timestamps null: false
     end
   end
+<<<<<<< HEAD
 end
+=======
+end
+>>>>>>> 035be2bdac21e180ce5a046687ab27bdbfde090c
