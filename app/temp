@@ -1,0 +1,5 @@
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :signup
+    end
