@@ -12,7 +12,6 @@ gem 'pry'
 gem 'bcrypt'
 gem "tux"
 gem 'corneal'
-gem 'bcrypt'
 
 group :test do
   gem 'rspec'
