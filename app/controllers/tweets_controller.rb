@@ -33,6 +33,7 @@ class TweetsController < ApplicationController
     end
     
     @tweet = Tweet.find(params[:id])
+    erb :"/tweets/edit_tweet"
   end
   
   post '/tweets/new' do
@@ -42,6 +43,31 @@ class TweetsController < ApplicationController
     else
       redirect "/tweets/new"
     end
+  end
+  
+  post '/tweets/:id/edit' do
+    if !Helpers.is_logged_in?(session) 
+      redirect "/login"
+    end
+    
+    if params[:content] == ""
+      redirect "/tweets/#{params[:id]}/edit"
+    end
+    
+    @tweet = Tweet.find(params[:id])
+    @tweet.content = params[:content]
+    @tweet.save
+    redirect "/tweets/#{@tweet.id}"
+  end
+  
+  post '/tweets/:id/delete' do
+    if !Helpers.is_logged_in?(session) 
+      redirect "/login"
+    end
+    
+    @tweet = Tweet.find(params[:id])
+    @tweet.delete
+    redirect "/tweets"
   end
 
 end
