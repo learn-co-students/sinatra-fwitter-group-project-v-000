@@ -5,11 +5,13 @@
   </head>
   <body>
 
-    <div class="container">
-      <h1>Welcome to Fwitter!</h1>
-      <h2>This is located in layout.erb!</h2>
-      <h2>Don't forget to <strong>yield</strong> your views!</h2>
-    </div>
+    <%=yield%>
+
+    <% if Helpers.logged_in?(session) %>
+      <a href='/users/logout'>Log out</a>
+    <% else %>
+     <a href='/users/signin'>Log In</a> or <a href='/users/signup'>Sign Up</a>
+    <% end %>
 
   </body>
 </html>
