@@ -1,11 +1,18 @@
 <h1>Welcome, <%=current_user.username%></h1>
 
+
 <%@tweets.each do |tweet|%>
-  <%=tweet.content%>
-<%end%>
+  <% if !tweet.content.empty? %>
+    <%=tweet.content%>
+  <% else %> No Content!
+  <% end %>
+<%end%> <br>
 
-<form method="post" action="/logout">
-  <button type="button" name="submit" id="submit" value="submit"></button>
-</form>
+<br>
 
-<a href="/logout">Logout</a>
+<!-- <form method="post" action="/logout"> -->
+  <!-- <button type="submit" name="submit" id="submit" value="submit"></button> -->
+<!-- </form> -->
+
+<a href="/tweets/new">Create Tweet</a><br>
+<br>
