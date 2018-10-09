@@ -17,6 +17,7 @@ class TweetsController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
   post '/tweets' do
     if logged_in?
       if params[:content] == ""
@@ -44,6 +45,16 @@ class TweetsController < ApplicationController
       @tweet = Tweet.find(id: params[:id])
       erb :'tweets/show'
     end
+=======
+  post '/tweets/new' do
+    #binding.pry
+    #if !params[:content] == ""
+      @tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
+    #else
+    #  redirect :'tweets/new'
+    #end
+      erb :'tweets/tweets'
+>>>>>>> 61152cd895aa4151334e7491e6e50d8c4b1761cc
   end
 
 end
