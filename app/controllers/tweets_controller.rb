@@ -17,7 +17,14 @@ class TweetsController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
+  get '/tweets/:id' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'tweets/show'
+    end
+  end
+
+
   post '/tweets' do
     if logged_in?
       if params[:content] == ""
@@ -40,12 +47,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  get '/tweets/:id' do
-    if logged_in?
-      @tweet = Tweet.find(id: params[:id])
-      erb :'tweets/show'
-    end
-  end
+
 
   post '/tweets/new' do
     #binding.pry
@@ -55,7 +57,6 @@ class TweetsController < ApplicationController
     #  redirect :'tweets/new'
     #end
       erb :'tweets/tweets'
-
   end
 
 end
