@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true
 
-  #binding.pry
-
   def slug
     self.username.downcase.gsub(" ","-")
   end
