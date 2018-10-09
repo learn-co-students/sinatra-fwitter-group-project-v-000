@@ -45,7 +45,8 @@ class TweetsController < ApplicationController
       @tweet = Tweet.find(id: params[:id])
       erb :'tweets/show'
     end
-=======
+  end
+
   post '/tweets/new' do
     #binding.pry
     #if !params[:content] == ""
@@ -54,7 +55,7 @@ class TweetsController < ApplicationController
     #  redirect :'tweets/new'
     #end
       erb :'tweets/tweets'
->>>>>>> 61152cd895aa4151334e7491e6e50d8c4b1761cc
+
   end
 
 end
