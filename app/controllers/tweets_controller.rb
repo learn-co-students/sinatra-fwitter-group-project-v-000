@@ -26,8 +26,15 @@ class TweetsController < ApplicationController
         erb :'tweets/show'
     end
 
-    patch '/tweets/:id' do 
+    get '/tweets/:id/edit' do
+        @tweet = Tweet.find(params[:id])
+        erb :'tweets/edit'
+    end
 
+    patch '/tweets/:id' do 
+        tweet = Tweet.find(params[:id])
+        tweet.update(content: params[:content])
+        redirect to "/tweets/#{params[:id]}"
     end
 
     delete '/tweets/:id' do
