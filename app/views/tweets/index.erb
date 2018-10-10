@@ -1,7 +1,7 @@
 All your tweet, <%= current_user.username %>!
 <br>
 <% @tweets.each do |tweet| %>
-    <p><%= tweet.content %></p>
+    <p><a href='/tweets/<%=tweet.id%>'><%= tweet.content %></a></p>
 <%end%>
 <br>
 <a href='/'>Home</a>
