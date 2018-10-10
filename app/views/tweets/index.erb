@@ -1,0 +1,9 @@
+All your tweet, <%= current_user.username %>!
+<br>
+<% @tweets.each do |tweet| %>
+    <p><%= tweet.content %></p>
+<%end%>
+<br>
+<a href='/'>Home</a>
+<br>
+<a href='/tweets/new'>New Tweet</a>
