@@ -4,4 +4,9 @@ Tweet '#<%= @tweet.id %>'
 <br>
 <a href='/tweets/<%= @tweet.id %>/edit'>Edit</a>
 <br>
+<form method='post' action='/tweets/<%= @tweet.id %>'>
+    <input name='_method' value='delete' type='hidden' >
+    <input type='submit' value='Delete'>
+</form>
+<br>
 <a href='/tweets'>All Tweets</a>
