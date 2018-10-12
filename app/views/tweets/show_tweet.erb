@@ -1,0 +1,27 @@
+<div class="container tweet mx-auto">
+    <div class="row align-items-center">
+        <div class="col-sm-2 image-container">
+            <figure>
+                <img src="../images/no-photo.png" alt="generic head silhouette" class="img-fluid">
+            </figure>
+        </div>
+
+        <div class="col-sm-auto">
+            <h5>@<%=User.find(@tweet.user_id.to_i).username%>:</h5>
+            <h6><%=@tweet.content%></h6>
+        </div>
+
+        <form action="/tweets/<%=@tweet.id%>/edit" method="get">
+            <div class="col-sm-auto">
+                <input type="submit" id="submit" value="Edit Tweet">
+            </div>
+        </form>
+
+        <form action="/tweets/<%=@tweet.id%>/delete" method="post">
+            <input id="hidden" type="hidden" name="_method" value="delete">
+            <div class="col-sm-auto">
+                <input type="submit" id="submit" value="Delete Tweet">
+            </div>
+        </form>
+    </div>
+</div> 
