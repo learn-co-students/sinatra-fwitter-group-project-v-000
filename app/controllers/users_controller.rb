@@ -1,10 +1,15 @@
+require 'pry'
 class UsersController < ApplicationController
 
-    get '/users/signup' do
-      erb :'/users/create_user'
+    get '/signup' do
+      if !Helpers.logged_in?(session)
+        erb :'/users/create_user'
+      else
+        redirect '/tweets'
+      end
     end
 
-    post '/users/signup' do
+    post '/signup' do
       if params[:email] != "" && params[:email].include?("@") && params[:email].include?(".") && params[:username] != "" && params[:password] != ""
         #use method to validate email?
           user = User.new(:email => params[:email], :username => params[:username], :password => params[:password])
@@ -12,39 +17,39 @@ class UsersController < ApplicationController
           session[:user_id] = user.id
           redirect "/tweets"
         else
-         	 redirect "/users/signup" #create failure page?...show doesn't work if not logged in
+         	 redirect "/signup" 
         end
     end
 
-    get "/users/login" do
+    get "/login" do
       if Helpers.logged_in?(session)
         redirect '/tweets'
       else
-        erb :'users/login'
+        erb :'/users/login'
       end
     end
 
-    post "/users/login" do
+    post "/login" do
       user = User.find_by(:username => params[:username])
       if user && user.authenticate(params[:password])
           session[:user_id] = user.id
           redirect "/tweets"
       else
-          redirect "/users/signup"
+          redirect "/signup"
       end
     end
 
-    get "/users/show" do
-      @user = Helpers.current_user(session)
+    get "/users/:slug" do
+      @user = Helpers.current_user(session) #or find by slug? what if they want to see other user
       erb :'/users/show'
     end
 
-    get "/users/logout" do
+    get "/logout" do
       if Helpers.logged_in?(session)
         session.clear
-        redirect "/tweets"
+        redirect "/login"
       else
-        redirect "/users/login"
+        redirect "/login"
       end
     end
 

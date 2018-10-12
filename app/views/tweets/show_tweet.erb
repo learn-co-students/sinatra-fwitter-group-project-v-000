@@ -1,11 +1,13 @@
+
 <h2> <%= @tweet.content %> </h2>
 <h3> by <%= @user.username %> </h3>
 
+
 <% if !Helpers.logged_in?(session) %>
   <a href='/users/login'>Log In</a> to Edit
-<% elsif @user.id == Helpers.current_user(session).id %>
-  <a href='/tweets/<%= @tweet.id %>/edit'>Edit</a>
-  <a href='/tweets/<%= @tweet.id %>/delete'>Delete</a>
 <% else %>
-  This isn't yours! You can't edit this!
+  <a href='/tweets/<%= @tweet.id %>/edit'>Edit Tweet</a>
+  <form action='/tweets/<%=@tweet.id%>/delete' method="POST">
+    <input type="submit" id="Delete Tweet" value="Delete Tweet">
+  </form>
 <% end %>
