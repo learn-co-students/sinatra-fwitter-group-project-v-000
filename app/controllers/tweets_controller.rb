@@ -61,7 +61,7 @@ class TweetsController < ApplicationController
       @user = User.find_by_id(@tweet.user_id)
       erb :'tweets/show_tweet'
     else
-      redirect redirect "/tweets/#{@tweet.id}/edit"
+      redirect "/tweets/#{@tweet.id}/edit"
     end
   end
 
