@@ -1,4 +1,5 @@
-<form action="/tweets" method="post">
+<form action="/tweets/<%=@tweet.id%>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch" 
     <div class="container tweet mx-auto">
         <div class="row align-items-center">
             <div class="col-sm-3 image-container">
@@ -9,7 +10,7 @@
 
             <div class="col-sm-6 tweet-container">
                 <h5></h5>
-                <h6><textarea id="content" name="tweet[content]" placeholder="What's going on?"></textarea></h6>
+                <h6><textarea id="content" name="tweet[content]" placeholder="<%=@tweet.content%>"></textarea></h6>
                 
             </div>
             <div class="col-sm-auto">

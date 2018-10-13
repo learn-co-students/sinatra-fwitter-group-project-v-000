@@ -1,3 +1,5 @@
+<section class="error"><%= flash[:message] %></section>
+
 <div class="container tweet mx-auto">
     <div class="row align-items-center">
         <div class="col-sm-2 image-container">
@@ -10,6 +12,11 @@
             <h5>@<%=User.find(@tweet.user_id.to_i).username%>:</h5>
             <h6><%=@tweet.content%></h6>
         </div>
+
+        <% if false %> 
+            <! -- HAS TO BE REMOVED FOR TESTING -->
+            <section class="tweettime"> Posted at <%=tweet.created_at%></section>
+        <% end %>
 
         <form action="/tweets/<%=@tweet.id%>/edit" method="get">
             <div class="col-sm-auto">

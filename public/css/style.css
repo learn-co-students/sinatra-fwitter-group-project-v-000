@@ -60,3 +60,8 @@ input[type=button], input[type=submit], input[type=reset] {
 .tweet-container {
     height: 100%;
 }
+
+.error {
+    color: rgba(240, 68, 68, 0.897);
+    font-style: bold italic;
+}
