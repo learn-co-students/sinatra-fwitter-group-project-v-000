@@ -1,0 +1,67 @@
+/*/////// MEDIA ////////*/
+
+img, video, audio, iframe, table, form {
+    width: 100%; /* IE */
+    max-width: 100%; /* FF, Safari, Chrome */
+}
+
+/*/////// LAYOUT STYLES ////////*/
+
+.row {
+    margin-bottom: 20px;
+}
+
+div.container.tweet {
+    padding-top:25px;
+    border: 2px solid lightgray);
+    border-radius: 15px;
+    border-style: none outset outset none;
+    background-color: rgba(155,25,25,.3);
+    width: 70%;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+div.container.tweet img {
+    border-radius: 10px;
+    align-self: center;
+}
+
+.tweettime{
+    font-size: 10px;
+    font-style: italic;
+    color: grey;
+}
+
+#new-tweet {
+    width: 100%;
+    height: 7em;
+    background: lightgrey;
+    border-radius: 5px;
+    align-self: center;
+    box-sizing: border-box;
+    float:left;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+    background-color: lightgrey;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    float: left;
+}
+
+.tweet-container {
+    height: 100%;
+}
+
+.error {
+    color: rgba(240, 68, 68, 0.897);
+    font-style: bold italic;
+}

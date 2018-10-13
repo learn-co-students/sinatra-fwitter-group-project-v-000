@@ -275,6 +275,7 @@ describe ApplicationController do
         fill_in(:password, :with => "kittens")
         click_button 'submit'
 
+        
         visit "/tweets/#{tweet.id}"
         expect(page.status_code).to eq(200)
         expect(page.body).to include("Delete Tweet")
