@@ -1,5 +1,4 @@
 class TweetsController < ApplicationController
-
     post '/tweets' do
         if params["tweet"]["content"] != ""
             @tweet = Tweet.create(params["tweet"])
@@ -14,9 +13,7 @@ class TweetsController < ApplicationController
     end
 
     get '/tweets/mytweets' do
-        @status = Helpers.is_logged_in?(session)
-
-        if @status
+        if logged_in
             @tweets = Tweet.all.select {|tweet| tweet.user_id == session[:user_id]}
             erb :'/tweets/tweets'
         else 
@@ -26,10 +23,8 @@ class TweetsController < ApplicationController
     end
 
     get '/tweets/new' do
-        @status = Helpers.is_logged_in?(session)
-
-        if @status
-            @user = Helpers.current_user(session)
+        if logged_in
+            @user = current_user
             erb :'/tweets/new'
         else 
             flash[:message] = "You must be logged in to see this page." 
@@ -38,13 +33,11 @@ class TweetsController < ApplicationController
     end
 
     delete '/tweets/:id/delete' do
-        @status = Helpers.is_logged_in?(session)
-
-        if @status && session[:user_id] == Tweet.find(params[:id].to_i).user_id
+        if logged_in && session[:user_id] == Tweet.find(params[:id].to_i).user_id
             @tweet = Tweet.find(params[:id])
             @tweet.destroy
             redirect '/tweets'
-        elsif @status && session[:user_id] != Tweet.find(params[:id].to_i).user_id
+        elsif logged_in && session[:user_id] != Tweet.find(params[:id].to_i).user_id
             flash[:message] = "You cannot delete another's tweet." 
             redirect '/tweets'
         else
@@ -53,9 +46,7 @@ class TweetsController < ApplicationController
     end
 
     get '/tweets/:id/edit' do
-        @status = Helpers.is_logged_in?(session)
-
-        if @status && session[:user_id] == Tweet.find(params[:id].to_i).user_id
+        if logged_in && session[:user_id] == Tweet.find(params[:id].to_i).user_id
             @tweet = Tweet.find(params[:id])
             erb :'/tweets/edit_tweet'
         elsif @status && session[:user_id] != Tweet.find(params[:id].to_i).user_id
@@ -67,9 +58,7 @@ class TweetsController < ApplicationController
     end
 
     get '/tweets/:id' do
-        @status = Helpers.is_logged_in?(session)
-
-        if @status
+        if logged_in
             @tweet = Tweet.find(params[:id])
             erb :'/tweets/show_tweet'
         else 
@@ -78,11 +67,9 @@ class TweetsController < ApplicationController
     end
     
     get '/tweets' do
-        # binding.pry
-        @status = Helpers.is_logged_in?(session)
         @tweets = Tweet.all
         
-        if @status
+        if logged_in
             erb :'/tweets/tweets'
         else 
             flash[:message] = "You must be logged in to see this page." 

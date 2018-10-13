@@ -38,9 +38,7 @@ class UsersController < ApplicationController
     end
 
     get '/signup' do
-        @status = Helpers.is_logged_in?(session)
-
-        if @status == true
+        if logged_in
             flash[:message] = "You have already created an account." 
             redirect '/tweets'
         else
@@ -49,9 +47,7 @@ class UsersController < ApplicationController
     end
 
     get '/login' do
-        @status = Helpers.is_logged_in?(session)
-
-        if @status == true
+        if logged_in
             flash[:message] = "You are already logged in" 
             redirect '/tweets'
         else
@@ -59,10 +55,12 @@ class UsersController < ApplicationController
         end
     end
 
+    get '/signup' do
+        erb :'/users/create_user'
+    end
+      
     get '/logout' do
-        @status = Helpers.is_logged_in?(session)
-        
-        if @status == true
+        if logged_in
             session.clear
             redirect '/login'
         else 
@@ -71,5 +69,13 @@ class UsersController < ApplicationController
         end
     end
 
-
+    get '/logout' do
+        if logged_in
+            session.clear
+            redirect '/login'
+        else 
+            flash[:message] = "You cannot log out if you weren't ever logged in!" 
+            redirect '/'
+        end
+    end
 end
