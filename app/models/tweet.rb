@@ -1,7 +1,6 @@
 class Tweet < ActiveRecord::Base
 	belongs_to :user
 
-=begin
 	def slug
       self.username.gsub(" ", "-").downcase
     end
@@ -9,5 +8,4 @@ class Tweet < ActiveRecord::Base
     def find_by_slug(slug)
       self.all.find{ |instance| instance.slug == slug }
     end
-=end
 end
