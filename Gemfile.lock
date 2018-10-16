@@ -57,6 +57,9 @@ GEM
       rack
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
+    rack_session_access (0.2.0)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rake (12.3.1)
     require_all (2.0.0)
     ripl (0.7.1)
@@ -117,6 +120,7 @@ DEPENDENCIES
   database_cleaner!
   pry
   rack-test
+  rack_session_access
   rake
   require_all
   rspec
@@ -128,4 +132,4 @@ DEPENDENCIES
   tux
 
 BUNDLED WITH
-   1.16.0
+   1.16.5
