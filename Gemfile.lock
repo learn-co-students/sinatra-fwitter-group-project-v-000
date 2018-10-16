@@ -53,10 +53,15 @@ GEM
       method_source (~> 0.9.0)
     public_suffix (3.0.2)
     rack (2.0.5)
+    rack-flash3 (1.0.5)
+      rack
     rack-protection (2.0.1)
       rack
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
+    rack_session_access (0.2.0)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rake (12.3.1)
     require_all (2.0.0)
     ripl (0.7.1)
@@ -116,7 +121,9 @@ DEPENDENCIES
   capybara
   database_cleaner!
   pry
+  rack-flash3
   rack-test
+  rack_session_access
   rake
   require_all
   rspec
@@ -128,4 +135,4 @@ DEPENDENCIES
   tux
 
 BUNDLED WITH
-   1.16.0
+   1.16.5
