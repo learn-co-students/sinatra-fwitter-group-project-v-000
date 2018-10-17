@@ -1,12 +1,21 @@
 class UsersController < ApplicationController
     get '/signup' do 
-        erb :'users/new'
+        if logged_in?
+          redirect "/tweets"
+        else
+         erb :"users/new"
+        end
     end
 
     post '/signup' do 
-        user = User.create(params)
-        session[:user_id] = user.id
-        redirect to :tweets
+        user = User.new(params)
+
+        if user.save
+            session[:user_id] = user.id
+            redirect "/tweets"
+        else
+            redirect "/signup"
+        end
     end
 
     get '/login' do 
