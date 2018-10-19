@@ -1,0 +1,14 @@
+<h2><% @user.username %> Tweets </h2>
+
+<body>
+  <form action="/login" method="POST">
+    <label for="tweet_name">Content:</label><br>
+    <input id="tweet_name" type="text" name="tweet[name]" /><br>
+    
+    
+    <input type="submit" value="Post New Tweet">
+  </form>
+</body>
+
+<a class="button" href="/logout">Logout</a>
+<a class="button" href="/">Home</a
