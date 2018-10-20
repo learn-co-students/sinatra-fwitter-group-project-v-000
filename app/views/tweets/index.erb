@@ -1,4 +1,4 @@
-All your tweet, <%= current_user.username %>!
+Welcome, All your tweet, <%= current_user.username %>!
 <br>
 <% @tweets.each do |tweet| %>
     <p><a href='/tweets/<%=tweet.id%>'><%= tweet.content %></a></p>
