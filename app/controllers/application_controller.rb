@@ -13,6 +13,12 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  
+  def logged_in?
+    !!@current_user #this is an object and need to make it a boolean for false/true
+  end
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id] #if this is true
+  end
 
 end
