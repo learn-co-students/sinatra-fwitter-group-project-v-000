@@ -1,7 +1,6 @@
 class Tweet <ActiveRecord::Base
-  has_secure_password
   belongs_to :user
- 
+
   def slug
     username.downcase.gsub(" ","-")
   end
