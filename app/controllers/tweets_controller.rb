@@ -1,8 +1,10 @@
 class TweetsController < ApplicationController
 
 
-  get '/tweets' do
-    
+  get '/tweets/tweets' do
+    "Hello World"
+    erb :tweets
+
   end
 
 end
