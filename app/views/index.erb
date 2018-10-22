@@ -1,0 +1,17 @@
+<h3>Please sign in or sign up:</h3>
+
+<nav>
+  
+  <% if logged_in? %>
+  
+    <a href="/tweets/new">Create Tweet</a>
+    <a href="/logout">Log Out</a>
+    
+  <% else %>
+  
+    <a href="/signup">Sign Up</a>
+    <a href="/login">Sign In</a>
+    
+  <% end %>
+  
+</nav>
