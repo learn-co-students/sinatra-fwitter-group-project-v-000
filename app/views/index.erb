@@ -1,14 +1,17 @@
-<h3>Please sign in or sign up:</h3>
+<h1>Fwitter</h1>
 
 <nav>
   
   <% if logged_in? %>
-  
+    
+    <p>Welcome, <%= @current_user.username %></p>
     <a href="/tweets/new">Create Tweet</a>
     <a href="/logout">Log Out</a>
-    <p>Welcome, <%= current_user.usrename %></p>
+    
     
   <% else %>
+  <h1>Welcome to Fwitter!</h1>
+  <h3>Please sign in or sign up:</h3>
   
     <a href="/signup">Sign Up</a>
     <a href="/login">Sign In</a>
