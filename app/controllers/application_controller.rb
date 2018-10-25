@@ -13,5 +13,13 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  def loggedin?
+
+  end
+
+  def current_user
+
+  end
+
 
 end
