@@ -1,1 +1,8 @@
 <h2>Fweet: </h2>
+<br>
+<p><%= @tweet.content %></p>
+<br><br><br>
+<form action="/tweets/delete" method="post">
+  <label for="delete">Delete Tweet</label>
+  <input type="submit" name="delete">
+</form>

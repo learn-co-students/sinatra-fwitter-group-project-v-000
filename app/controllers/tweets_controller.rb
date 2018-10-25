@@ -19,9 +19,9 @@ class TweetsController < ApplicationController
     end
   end
 
-  get '/tweets/:slug' do
+  get '/tweets/:id' do
     if logged_in?
-      @tweet = Tweet.find_by_slug(params[:slug])
+      @tweet = Tweet.find_by(params[:id])
       erb :'twitter/show'
     else
       redirect "/login"
