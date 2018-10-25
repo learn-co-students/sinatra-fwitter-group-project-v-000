@@ -1,8 +1,10 @@
+require 'slugify'
+
 module Slugifiable
   module InstanceMethods
 
     def slug
-      self.name.slugify
+      self.username.slugify
     end
   end
 end
