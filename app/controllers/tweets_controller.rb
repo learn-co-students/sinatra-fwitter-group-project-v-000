@@ -19,6 +19,15 @@ class TweetsController < ApplicationController
     end
   end
 
+  get '/tweets/:slug' do
+    if logged_in?
+      @tweet = Tweet.find_by_slug(params[:slug])
+      erb :'twitter/show'
+    else
+      redirect "/login"
+    end
+  end
+
   post '/tweets/new' do
     unless params[:content] == ""
       @tweet = Tweet.create(params)
