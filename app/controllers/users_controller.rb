@@ -5,7 +5,11 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
-    erb :signup
+    if session[:id] = "" || session[:id] = nil
+      erb :signup
+    else
+      redirect to "/tweets"
+    end
   end
 
   get '/failure' do
@@ -13,14 +17,12 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    unless session[:id] = ""
-      redirect to "/tweets"
-    end
       if params[:username] == "" || params[:email] == "" || params[:password] == ""
           redirect to "/signup"
       else
           @user = User.create(params)
           session[:id] = @user.id
+          binding.pry
           redirect to "/tweets"
         end
   end
