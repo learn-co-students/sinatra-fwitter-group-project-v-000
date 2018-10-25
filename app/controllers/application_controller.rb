@@ -23,13 +23,6 @@ class ApplicationController < Sinatra::Base
       User.find(session[:user_id])
     end
 
-    # def slug
-    #   self.slugify
-    # end
-    #
-    # def find_by_slug(slug)
-    #    self.all.find{ |instance| instance.slug == slug }
-    # end
 
   end
 
