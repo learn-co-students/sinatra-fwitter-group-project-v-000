@@ -5,10 +5,10 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
-    if session[:id] = "" || session[:id] = nil
-      erb :signup
-    else
+    if session[:user_id]
       redirect to "/tweets"
+    else
+      erb :signup
     end
   end
 
@@ -22,7 +22,6 @@ class UsersController < ApplicationController
       else
           @user = User.create(params)
           session[:id] = @user.id
-          binding.pry
           redirect to "/tweets"
         end
   end
