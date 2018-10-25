@@ -10,4 +10,22 @@ class TweetsController < ApplicationController
     end
   end
 
+  get '/tweets/new' do
+    if logged_in?
+      @user = current_user
+      erb :'twitter/new'
+    else
+      redirect "/login"
+    end
+  end
+
+  post '/tweets/new' do
+    unless params[:content] == ""
+      @tweet = Tweet.create(params)
+
+      redirect '/tweets'
+    end
+    redirect "/tweets/new"
+  end
+
 end
