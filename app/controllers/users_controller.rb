@@ -1,21 +1,28 @@
 class UsersController < ApplicationController
 
-  get '/' do
-    erb :index
+  get '/users/login' do
+    erb :'/users/login'
   end
 
   get '/signup' do
     erb :signup
   end
 
-  get '/users/login' do
-    erb :'/users/login'
+  get '/failure' do
+    erb :failure
   end
 
   post '/signup' do
-    @user = User.create(params)
-
-    redirect to "/tweets"
+    unless session[:id] = ""
+      redirect to "/tweets"
+    end
+      if params[:username] == "" || params[:email] == "" || params[:password] == ""
+          redirect to "/signup"
+      else
+          @user = User.create(params)
+          session[:id] = @user.id
+          redirect to "/tweets"
+        end
   end
 
 end
