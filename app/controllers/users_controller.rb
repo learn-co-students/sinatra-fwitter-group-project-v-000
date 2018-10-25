@@ -14,9 +14,8 @@ class UsersController < ApplicationController
 
   post '/signup' do
     @user = User.create(params)
-    session[:id] = @user.id
 
-    redirect to "/users/login"
+    redirect to "/tweets"
   end
 
 end
