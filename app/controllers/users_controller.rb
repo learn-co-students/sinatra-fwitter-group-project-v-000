@@ -4,8 +4,8 @@ class UsersController < ApplicationController
     erb :index
   end
 
-  get '/users/signup' do
-    erb :'/users/signup'
+  get '/signup' do
+    erb :signup
   end
 
 end
