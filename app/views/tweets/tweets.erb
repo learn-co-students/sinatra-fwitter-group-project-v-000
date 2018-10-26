@@ -1,0 +1,13 @@
+<h1>Welcome, <%= @current_user.username %></h1>
+<h3>Fwitter Tweets</h3>
+
+<% @tweets.each do |tweet| %>
+  <div>
+    <%= tweet.content %>
+  </div>
+<% end %>
+
+<a href="/tweets/new">Create Tweet</a>
+<a href='/users/<%= @current_user.slug %>'>Profile</a>
+<a href="/">Home</a>
+<a href="/logout">Log Out</a>
