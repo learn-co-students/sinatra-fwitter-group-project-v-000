@@ -1,0 +1,16 @@
+<h2>twitter index</h2>
+<h2>Welcome, <%= @user.username %></h2>
+<h3>Fweets: </h3>
+<%@tweets.each do |tweet|%>
+<p><%=tweet.content%></p>
+<% end %>
+<br><br><br><br>
+
+
+<h4><a href="/tweets/new">New Fweet</a></h4>
+<h4><a href="/twitter/index">Home</a></h4>
+<h4><a href="/logout">Log Out</a></h4>
+
+<!-- <form action="/logout" method="post">
+<input type="submit" name="logout" value="Log Out">
+</form> -->

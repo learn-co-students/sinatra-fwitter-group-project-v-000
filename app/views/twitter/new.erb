@@ -1,0 +1,9 @@
+<h2>New Fweet: </h2>
+<br><br><br>
+  <form method="post" action="/tweets">
+    <input id="hidden" type="hidden" name="user_id" value="<%=@user.id%>">
+    <label for="content">What do you want to say?</label>
+    <input type="text" name="content" id="new_tweet" required>
+    <br><br>
+    <input type="submit" value="submit">
+  </form>
