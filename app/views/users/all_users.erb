@@ -1,0 +1,7 @@
+<h2>Fwitter Users</h2>
+
+<ul>
+<% User.all.each do |user| %>
+  <li><a href="/users/<%= user.slug %>"><%= user.username %></a></li>
+<% end %>
+</ul>
