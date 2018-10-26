@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
 
 
-  get '/users/signup' do
+  get '/signup' do
 
-    erb :'/users/signup'
-
+    erb :'/signup'
   end
 
   post '/users/signup' do
@@ -14,5 +13,14 @@ class UsersController < ApplicationController
 
     redirect to :'/tweets'
   end
+
+  get '/login' do
+    if !logged_in?
+      erb: :'/users/login'
+    else
+    redirect to '/tweets'
+  end
+end
+
 
 end
