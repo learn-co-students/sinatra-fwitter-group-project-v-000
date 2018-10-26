@@ -39,7 +39,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets/new' do
+  post '/tweets' do
     unless params[:content] == ""
       @tweet = Tweet.create(params)
       redirect '/tweets'
@@ -48,7 +48,7 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
-    if logged_in
+    if logged_in?
       @tweet = Tweet.find(params[:id])
       if @tweet && @tweet.user == current_user
          @tweet.delete
