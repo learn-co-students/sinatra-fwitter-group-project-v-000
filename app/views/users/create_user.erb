@@ -1,0 +1,11 @@
+<h4>Existing Users:</h4>
+<% User.all.each do |user| %>
+  <a href="/users/<%= user.id %>"><%= user.username %></a>
+<% end %>
+<h4>Create An Account:</h4>
+<form method="post" action="/signup">
+  <input type="text" name="username" placeholder="username">
+  <input type="text" name="email" placeholder="email">
+  <input type="text" name="password" placeholder="password">
+  <input type="submit" value="submit">
+</form>

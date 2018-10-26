@@ -1,0 +1,15 @@
+<h4>Name: <%= @user.username %></h4>
+<h4>Email: <%= @user.email %></h4>
+ <h4>Your tweets:</h4>
+<table>
+  <tr>
+    <th>Id:</th>
+    <th>Content:</th>
+  </tr>
+  <tr>
+    <% @user.tweets.each do |tweet| %>
+      <th><%= tweet.content %></th>
+      <td><%= tweet.id %></td>
+    <% end %>
+  </tr>
+</table>
