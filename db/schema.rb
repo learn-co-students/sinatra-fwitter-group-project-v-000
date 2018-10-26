@@ -13,12 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20181025180229) do
 
-  create_table "tweet", force: :cascade do |t|
+  create_table "tweets", force: :cascade do |t|
     t.string  "content"
     t.integer "user_id"
   end
 
-  create_table "user", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string  "username"
     t.string  "email"
     t.string  "password_digest"
