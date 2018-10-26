@@ -1,10 +1,16 @@
 class UsersController < ApplicationController
 
-post '/users' do
-  @user = User.create(username: params[:username], email: params[:email], password: params[:password_digest])
-  @user.save
 
-  redirect to :"/user/#{@user.id}"
-end
+  get 'users/signup' do
+
+    erb :'/users/signup'
+  end
+
+  post '/users/signup' do
+    @user = User.create(username: params[:username], email: params[:email], password: params[:password_digest])
+    @user.save
+
+    redirect to :"/tweets"
+  end
 
 end
