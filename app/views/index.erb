@@ -1,8 +1,8 @@
-<h1>Fwitter</h1>
-
 <nav>
   
   <% if logged_in? %>
+    
+    <h1>Fwitter</h1>
     
     <p>Welcome, <%= @current_user.username %></p>
     <a href="/tweets/new">Create Tweet</a>
