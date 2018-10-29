@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   validates_presence_of :username, :password, :email
 
   def slug
-    self.name.downcase.tr(" ", "-")
+    self.username.downcase.tr(" ", "-")
   end
 
   def self.find_by_slug(slug)
