@@ -1,17 +1,15 @@
 class User < ActiveRecord::Base
   has_many :tweets
   has_secure_password
-  validates_presence_of :username, :password, :email
+
 
   def slug
-    self.username.downcase.tr(" ", "-")
+    self.username.downcase.gsub(" ", "-")
   end
 
   def self.find_by_slug(slug)
-    User.all.each do |user|
-      if user.slug == slug
-        return user
+      self.all.find do |user|
+        user.slug == slug
       end
     end
-  end
 end
