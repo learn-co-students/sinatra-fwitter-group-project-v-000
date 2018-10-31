@@ -87,7 +87,6 @@ describe ApplicationController do
       follow_redirect!
       expect(last_response.status).to eq(200)
       expect(last_response.body).to include("Welcome,")
-
     end
 
     xit 'does not let user view login page if already logged in' do

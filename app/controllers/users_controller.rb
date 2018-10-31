@@ -23,7 +23,6 @@ class UsersController < ApplicationController
       erb :'users/login'
     else
       redirect to '/tweets'
-
     end
   end
 
