@@ -1,15 +1,35 @@
 <!doctype html>
 <html>
   <head>
+    <h1>Welcome,</h1>
+    <nav class="navbar">
+      <span class="navbar-span">
+
+        <%if Helpers.is_logged_in?(session)%>
+          Current User:
+          <% @user = Helpers.current_user(session) %>
+          <%=" #{@user.username}"%>
+          <br> |
+          <a href="/users/<%="#{@user.id}"%>">Your Profile</a> |
+          <a href="/tweets/new">Post New Tweet</a> |
+          <a href="/">Home</a> |
+          <br>
+          <a href="/logout">Logout</a>
+        <%else%>
+          <h3><a href="/login"><button class="button-green">Login</button></a></h3>
+          <h3><a href="/signup"><button class="button-green">Sign Up</button></a></h3>
+        <%end%>
+        </span>
+    </nav>
     <title>Fwitter</title>
   </head>
   <body>
-
+<!--
     <div class="container">
       <h1>Welcome to Fwitter!</h1>
       <h2>This is located in layout.erb!</h2>
       <h2>Don't forget to <strong>yield</strong> your views!</h2>
-    </div>
-
+    </div> -->
+    <%= yield %>
   </body>
 </html>
