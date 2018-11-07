@@ -35,6 +35,7 @@ class TweetsController < ApplicationController
          @user = User.find_by(params[:id])
          @tweet.user_id = @user.id
          @tweet.save
+         binding.pry
     end
     redirect to "/tweets/#{@tweet.id}"
   end
