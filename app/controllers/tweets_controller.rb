@@ -27,7 +27,7 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    @user = User.find_by(session[:user_id])
+    @user = Helpers.current_user(session)
     if (params.has_value?(""))
       redirect to '/tweets/new'
     elsif !params.empty?
