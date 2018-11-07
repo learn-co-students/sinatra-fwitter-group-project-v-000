@@ -1,6 +1,6 @@
 <h2><%=@user.username%>'s Tweets!</h2>
-<%@user.tweets.each do |tweets|%>
-<ul><%=tweets.content%><br>
+<%@user.tweets.each do |tweet|%>
+<ul><%=tweet.content%><br>
 <a href="/tweets/<%=tweet.id%>/edit">Edit Tweet</a></ul>
 <%end%>
 <br>
