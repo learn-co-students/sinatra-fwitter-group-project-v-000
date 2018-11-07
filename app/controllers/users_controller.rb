@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if !(params.has_value?(""))
+    if !(params.has_value?("")) && (params[:email].includes?("@"))
      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
      session["user_id"] = @user.id
      redirect to '/tweets'
