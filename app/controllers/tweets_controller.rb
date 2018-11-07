@@ -28,7 +28,6 @@ class TweetsController < ApplicationController
 
   post '/tweets' do
     @user = Helpers.current_user(session)
-    binding.pry
     if (params.has_value?(""))
       redirect to '/tweets/new'
     elsif !params.empty?
@@ -37,6 +36,8 @@ class TweetsController < ApplicationController
       @tweet.save
       @user.tweets << @tweet
       @user.save
+      binding.pry
+
     end
     redirect to "/tweets/#{@tweet.id}"
   end
