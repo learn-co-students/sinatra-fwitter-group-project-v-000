@@ -33,7 +33,7 @@ class TweetsController < ApplicationController
       redirect to '/tweets/new'
     elsif !params.empty?
       @tweet = Tweet.new(content: params["content"])
-      @tweet.user = @user
+      @tweet.username = @user
       @tweet.user_id = @user.id
       @tweet.save
       @user.tweets << @tweet
