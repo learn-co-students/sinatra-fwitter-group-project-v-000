@@ -10,8 +10,6 @@
 <h3>All Tweets:</h3>
 
 <%@tweets.each do |tweet|%>
-<%binding.pry%>
 <ul><a href="/tweets/<%= tweet.id %>"><%= tweet.id %></a>
-		<%= tweet.user_id.username %>
    <%= tweet.content %></ul>
   <%end%>
