@@ -3,11 +3,11 @@
 <ul><%=tweet.content%><br></ul>
   <ul><form action="/tweets/<%= tweet.id %>/edit" method="get">
   		<input type="submit" value="Edit Tweet" />
-  	</form>
+  	</form></ul>
 <form action="/tweets/<%= tweet.id %>/delete" method="post">
 		<input id="hidden" type="hidden" name="_method" value="delete"/>
 		<input type="submit" value="Delete Tweet" />
-    <%end%></ul>
+    <%end%>
 
 <br>
 <br>
