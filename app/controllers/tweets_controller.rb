@@ -63,7 +63,7 @@ class TweetsController < ApplicationController
 
   patch '/tweets/:id' do
     @tweet = Tweet.find_by_id(params[:id])
-    if @tweet.user != Helpers.current_user(sessions)
+    if @tweet.user != Helpers.current_user(session)
       redirect to '/tweets'
     end
     if Helpers.is_logged_in?(session) && !params["content"].empty?
