@@ -9,7 +9,7 @@
 
 <h3>All Tweets:</h3>
 
-<%@tweets.each do |tweet|%>
+<%Tweet.all.each do |tweet|%>
 <ul><a href="/tweets/<%= tweet.id %>"><%= tweet.id %></a>
    <%= tweet.content %></ul>
   <%end%>
