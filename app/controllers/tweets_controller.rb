@@ -69,7 +69,6 @@ class TweetsController < ApplicationController
       redirect to '/tweets'
     elsif !params["content"].empty?
       redirect to "/tweets/#{@tweet.id}/edit"
-
     end
     if Helpers.is_logged_in?(session) && !params["content"].empty?
         @tweet.update(content: params[:content])
