@@ -1,0 +1,6 @@
+<h2>Here are Yo Tweets! </h2>
+  <% @user.tweets.each |tweet| %>
+  <div class="tweet_box">
+    <%= tweet.content %>
+  </div>
+  <% end %>
