@@ -69,7 +69,7 @@ class TweetsController < ApplicationController
     if @tweet.user != Helpers.current_user(session)
       redirect to '/tweets'
     end
-    if Helpers.is_logged_in?(session) && !params["content"].empty?
+    if Helpers.is_logged_in?(session) && params["content"] != ""
         @tweet.update(content: params["content"])
         @tweet.save
       else
