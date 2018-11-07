@@ -3,6 +3,7 @@ class TweetsController < ApplicationController
   get '/tweets' do
     @user = Helpers.current_user(session)
     @username = @user.username
+    binding.pry
     if Helpers.is_logged_in?(session)
       @tweets = Tweet.all
       erb :'tweets/tweets'
