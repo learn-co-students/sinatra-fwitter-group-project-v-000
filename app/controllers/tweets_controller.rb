@@ -4,7 +4,6 @@ class TweetsController < ApplicationController
     @user = Helpers.current_user(session)
     if Helpers.is_logged_in?(session)
       @tweets = Tweet.all
-      binding.pry
       erb :'tweets/tweets'
     else
       redirect to '/login'
@@ -34,6 +33,7 @@ class TweetsController < ApplicationController
       redirect to '/tweets/new'
     elsif !params.empty?
       @tweet = Tweet.new(content: params["content"])
+      @tweet.user = @user
       @tweet.user_id = @user.id
       @tweet.save
       @user.tweets << @tweet
