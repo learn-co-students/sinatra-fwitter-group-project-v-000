@@ -1,0 +1,16 @@
+<h1>Welcome, <%= Helpers.current_user(session).username %></h1>
+
+<form action="/tweets/new" method="get">
+		<input type="submit" value="New Tweet" />
+	</form>
+<form action="/users/<%=Helpers.current_user(session).slug%>" method="get">
+		<input type="submit" value="Your Tweets" />
+	</form>
+
+<h3>All Tweets:</h3>
+
+<%@tweets.each do |tweet|%>
+<ul><a href="/tweets/<%= tweet.id %>"><%= tweet.id %></a>
+
+   <%= tweet.content %></ul>
+  <%end%>
