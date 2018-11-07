@@ -10,9 +10,9 @@
 <h3>All Tweets:</h3>
 
 <%@tweets.all.each do |tweet|%>
-<ul><a href="/tweets/<%= tweet.id %>">View Tweet!</a>
-
+<ul>
 	<%@user = User.find_by_id(tweet.user_id)%>
 	<a href="/users/<%=@user.slug%>"><%=@user.username%></a>:
-   <%= tweet.content %></ul>
+   <%= tweet.content %><br>
+ <a href="/tweets/<%= tweet.id %>">View Tweet!</a></ul>
   <%end%>
