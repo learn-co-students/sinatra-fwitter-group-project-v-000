@@ -38,6 +38,7 @@ class TweetsController < ApplicationController
       @tweet.save
       @user.tweets << @tweet
       @user.save
+      binding.pry
     end
     redirect to "/tweets/#{@tweet.id}"
   end
