@@ -14,5 +14,7 @@
 	<%@user = User.find_by_id(tweet.user_id)%>
 	<h4><a href="/users/<%=@user.slug%>"><%=@user.username%></a>:
    <%= tweet.content %></h4>
- <p><a href="/tweets/<%= tweet.id %>">View Tweet!</a></p></ul>
+ <p><form action="/tweets/<%= tweet.id %>" method='get'>
+	 <inout type ='submit' value='View Tweet!'>
+ </form></p></ul>
   <%end%>
