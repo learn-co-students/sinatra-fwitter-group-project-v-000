@@ -14,5 +14,5 @@
 	<%@user = User.find_by_id(tweet.user_id)%>
 	<h4><a href="/users/<%=@user.slug%>"><%=@user.username%></a>:
    <%= tweet.content %></h4>
- <a href="/tweets/<%= tweet.id %>">View Tweet!</a></ul>
+ <p><a href="/tweets/<%= tweet.id %>">View Tweet!</a></p></ul>
   <%end%>
