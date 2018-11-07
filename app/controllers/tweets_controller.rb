@@ -36,7 +36,6 @@ class TweetsController < ApplicationController
          @tweet.user_id = @user.id
          @tweet.save
          @user.tweets << @tweet
-         binding.pry
     end
     redirect to "/tweets/#{@tweet.id}"
   end
@@ -56,7 +55,6 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id/edit' do
-    @tweet = Tweet.find_by_id(params[:id])
       if Helpers.is_logged_in?(session)
         @tweet = Tweet.find_by_id(params[:id])
       else
