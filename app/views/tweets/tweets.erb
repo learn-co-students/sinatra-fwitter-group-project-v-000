@@ -1,0 +1,20 @@
+<h1>Welcome, <%= Helpers.current_user(session).username %></h1>
+
+<form action="/tweets/new" method="get">
+		<input type="submit" value="New Tweet">
+	</form>
+<form action="/users/<%=Helpers.current_user(session).slug%>" method="get">
+		<input type="submit" value="Your Tweets">
+	</form>
+
+<h3>All Tweets:</h3>
+
+<%@tweets.all.each do |tweet|%>
+<ul>
+	<%@user = User.find_by_id(tweet.user_id)%>
+	<h4><a href="/users/<%=@user.slug%>"><%=@user.username%></a>:
+   <%= tweet.content %></h4></ul>
+	 <ul><form action="/tweets/<%= tweet.id %>" method="get">
+	 		<input type="submit" value="View Tweet">
+	 	</form></ul>
+  <%end%>
