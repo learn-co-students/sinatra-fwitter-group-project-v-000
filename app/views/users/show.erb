@@ -2,11 +2,11 @@
 <%@user.tweets.each do |tweet|%>
 <ul><%=tweet.content%><br></ul>
   <ul><form action="/tweets/<%= tweet.id %>/edit" method="get">
-  		<input type="submit" value="Edit Tweet" />
+  		<input type="submit" value="Edit Tweet" >
   	</form></ul>
 <ul><form action="/tweets/<%= tweet.id %>/delete" method="post">
 		<input id="hidden" type="hidden" name="_method" value="delete"/>
-		<input type="submit" value="Delete Tweet" />
+		<input type="submit" value="Delete Tweet" >
     <%end%></ul>
 
 <br>
