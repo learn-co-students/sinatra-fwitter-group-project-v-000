@@ -13,11 +13,8 @@
 <ul>
 	<%@user = User.find_by_id(tweet.user_id)%>
 	<h4><a href="/users/<%=@user.slug%>"><%=@user.username%></a>:
-   <%= tweet.content %></h4>
+   <%= tweet.content %></h4></ul>
 	 <form action="/tweets/<%= tweet.id %>" method="get">
 	 		<input type="submit" value="View Tweets">
 	 	</form>
- <form action= method="get">
-	 <inout type ="submit" value="View Tweet!">
- </form></ul>
   <%end%>
