@@ -36,7 +36,6 @@ class TweetsController < ApplicationController
          @user = User.find_by(params[:id])
          @tweet.user_id = @user.id
          @tweet.save
-      binding.pry
     end
     redirect to "/tweets/#{@tweet.id}"
   end
@@ -68,12 +67,15 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find_by_id(params[:id])
     if @tweet.user != Helpers.current_user(session)
       redirect to '/tweets'
+    elsif !params["content"].empty?
+      redirect to "/tweets/#{@tweet.id}/edit"
+
     end
     if Helpers.is_logged_in?(session) && !params["content"].empty?
         @tweet.update(content: params[:content])
         @tweet.save
       else
-        redirect to "/tweets"
+        redirect to "/tweets/"
     end
     redirect to "/tweets/#{@tweet.id}"
   end
