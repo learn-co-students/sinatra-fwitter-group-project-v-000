@@ -11,6 +11,5 @@
 
 <%@tweets.each do |tweet|%>
 <ul><a href="/tweets/<%= tweet.id %>"><%= tweet.id %></a>
-		<%= @username %>
    <%= tweet.content %></ul>
   <%end%>
