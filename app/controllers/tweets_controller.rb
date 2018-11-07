@@ -65,7 +65,6 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    @tweet = Tweet.find_by_id(params[:id])
     if @tweet.user != Helpers.current_user(session)
       redirect to '/tweets'
     end
