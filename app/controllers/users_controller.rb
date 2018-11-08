@@ -13,6 +13,7 @@ class UsersController < ApplicationController
       if params[:username].empty? || params[:email].empty? || params[:password].empty?
         redirect to '/signup'
       else
+
         @user = User.new
         @user.username = params[:username]
         @user.email = params[:email]
@@ -24,10 +25,13 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    erb :'/login'
+    erb :'users/login'
   end
 
   post '/login' do
+    # raise params.inspect
+    @user = User.find_by(params[:user_id])
+    redirect to '/tweets'
 
   end
 

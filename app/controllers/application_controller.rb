@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
   end
 
   def logged_in?
-    !!@current_user #this is an object and need to make it a boolean for false/true
+    !!current_user #this is an object and need to make it a boolean for false/true
   end
 
   def current_user
