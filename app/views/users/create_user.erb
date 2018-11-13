@@ -1,0 +1,12 @@
+<h2>Users</h2>
+
+<% unless locals.empty? %>
+  <%= message %>
+<% end %>
+
+<form action="/signup" method="POST">
+  Name: <input type="text" name="username">
+  Email: <input type="text" name="email">
+  Password: <input type="text" name="password">
+  <input type="submit" value="Sign Up" id="submit">
+</form>
