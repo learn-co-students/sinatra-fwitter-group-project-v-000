@@ -6,7 +6,7 @@ tags:
   X restful routes
   X MVC
 languages:
-  - ruby
+  X ruby
 project:
   review_criteria:
     X Users can create an account
