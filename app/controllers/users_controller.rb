@@ -25,10 +25,11 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
+    
     if !logged_in?
       erb :'users/login'
     else
-      erb :'tweets/tweets'
+      redirect_to '/tweets'
 
     end
 
@@ -41,7 +42,7 @@ class UsersController < ApplicationController
     if @user.authenticate(params[:password])
       session[:user_id] = @user.id
       current_user
-      
+
       redirect to '/tweets'
     else
       erb :'users/login'
