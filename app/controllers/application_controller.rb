@@ -1,7 +1,7 @@
 require './config/environment'
 use Rack::MethodOverride
 class ApplicationController < Sinatra::Base
-  
+
 
   configure do
     set :public_folder, 'public'
