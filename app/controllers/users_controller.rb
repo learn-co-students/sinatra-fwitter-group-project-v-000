@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if params[:username] != "" && params[:email] != "" && params[:password] != ""
       @user = User.create(params)
       session[:user_id] = @user.id 
-      redirect '/tweets/index'
+      redirect '/tweets'
     else 
       redirect '/signup'
     end
