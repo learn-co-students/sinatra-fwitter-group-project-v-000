@@ -11,17 +11,16 @@ class ApplicationController < Sinatra::Base
     erb :homepage
   end 
 
-  get '/signup' do
-    erb :signup
+  helpers do
+
+    def logged_in?
+      # true if user is logged in, otherwise false
+      !!current_user
+    end
+
+    def current_user
+      @current_user ||= User.find_by(id: session[:user_id])
+    end
+
   end
-
-  post '/users' do 
-    @user = User.create(params)
-    redirect '/tweets/index'
-  end
-
-  get '/tweets/index' do 
-    erb :'/tweets/index'
-  end 
-
 end
