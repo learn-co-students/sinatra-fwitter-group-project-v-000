@@ -1,7 +1,8 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do 
-    erb :'/tweets'
+    @user = User.find_by(params[:id])
+    erb :'/tweets/tweets'
   end 
 
 end
