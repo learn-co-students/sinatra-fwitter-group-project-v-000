@@ -1,0 +1,13 @@
+<h5>THIS IS THE USER SHOW PAGE</h5>
+ 
+<% if @user.tweets.empty?%>
+  <p>You have not tweeted yet!</p>
+<% else %>
+  <% @user.tweets.each do |tweet| %>
+    <%= tweet.content %>
+  <% end %>
+<% end %>
+
+</br>
+<a href="/logout">Log Out</a>
+
