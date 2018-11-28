@@ -1,0 +1,13 @@
+<h2>Tweet Index</h3>
+
+<h4>Here are all of the tweets:</h4>
+<% @tweets.each do |tweet| %>
+  Tweet: <a href="/tweets/<%= tweet.id %>"> <%= tweet.content %></a>
+  Author: <%= tweet.user.username %><br><br>
+<% end %>
+
+<br><br>
+<a href="/tweets/new">Click here to create a new tweet.</a>
+<br></br>
+<a href="/">Click here to go back to the homepage.</a>
+<br><br>
