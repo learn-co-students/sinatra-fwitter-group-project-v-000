@@ -24,16 +24,14 @@
 
         <%= yield %>
 
-      <footer>
+      <footer><small>
         <div class="nav">
-          <strong>
           <% if logged_in? %>
-            <a href="/logout">Logout  </a>
-            <a href="/tweets">All Tweets  </a>
-            <a href="/tweets/new">New Tweets  </a>
+            <a href="/logout">Logout  </a><br></br>
+            <a href="/tweets">All Tweets  </a><br></br>
+            <a href="/tweets/new">New Tweets  </a><br></br>
           <% end %>
-        </strong>
-        </div>
+        </div></small>
       </footer>
     </div>
 

@@ -1,10 +1,17 @@
-<h1> Here is the tweet:</h1>
-<p><%= @tweet.content %></p>
+<h2>Here is the Tweet:</h2>
 
+<p><strong>Tweet's Author: </strong><%= @tweet.user.username %></p>
+<p><strong>Tweet Content: </strong><%= @tweet.content %></p>
+
+
+<% if authorized_to_edit?(@journal_entry) %>
 <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
 <br><br>
 <form class=" " action="/tweets/<%= @tweet.id %>" method="post">
     <input type="Hidden" name="_method" value="DELETE">
     <input type="submit" name="Delete Tweet" value="Delete Tweet">
 </form>
-<a href="/">Click here to go back to the homepage</a>
+<% end %>
+
+<br></br>
+<small><p><a href="/tweets">Tweet Index</a></p></small>

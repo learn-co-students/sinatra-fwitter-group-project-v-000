@@ -7,6 +7,13 @@ class UsersController < ApplicationController
       redirect :"/tweets"
     end
   end
+  
+  get '/users/:slug' do
+    redirect_if_not_logged_in
+    @user = User.find(params[:slug])
+      erb :'/users/show'
+  end
+
 
   post '/login' do
     @user = User.find_by(:username => params[:username])
@@ -38,27 +45,8 @@ class UsersController < ApplicationController
       redirect '/tweets'
     end
   end
-    #should be able to do tese two lines but cannot get AR to work in models...
-    #@user = User.new(params)
-    #if @user.save
-      #session[:user_id] = @user.id
-      #flash[:message] = "You have successfully created an account, #{@user.username}! Welcome!"
-      #redirect "/login"
-    #else
-      #flash[:errors] = "Account creation failure: #{@user.errors.full_messages.to_sentence}"
-      #redirect '/signup'
-    #end
-  #end
 
-  get '/users/:id' do
-    #if !logged_in?
-    #  redirect '/tweets'
-    #end
-    @user = User.find(params[:id])
-    redirect_if_not_logged_in
-    #if !@user.nil? && @user == current_user
-      erb :'/users/show'
-  end
+
 
   get '/logout' do
     if session[:user_id] != nil
