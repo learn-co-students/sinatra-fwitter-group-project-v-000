@@ -13,7 +13,7 @@ class TweetsController < ApplicationController
 
    post "/tweets" do
      redirect_if_not_logged_in
-      if params[:content] != "" # I only want to save the entry if it has some content. then  create a new entry
+      if params[:content] != "" 
         @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
         flash[:message] = "Tweet successfully created."
         redirect "/tweets/#{@tweet.id}"
