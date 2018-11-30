@@ -19,8 +19,7 @@ class UsersController < ApplicationController
       redirect to '/signup'
    else
       @user = User.create_from_form(params)
-    
-      session[:user_id] = @user.id
+      @user.set_session_id
       redirect to '/tweets'
     end
   end
@@ -34,9 +33,9 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    user = User.find_by(:username => params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
       redirect to "/tweets"
     else
       redirect to '/signup'
