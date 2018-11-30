@@ -9,9 +9,6 @@ class User < ActiveRecord::Base
   end
 
 
-  def set_session_id
-    session[:user_id] = @user.id
-  end
 
   def slug
     username.downcase.gsub(" ","-")
