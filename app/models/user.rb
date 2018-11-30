@@ -1,7 +1,7 @@
 
 class User < ActiveRecord::Base
   has_many :tweets
-
+  validates :username, :email, :password, presence: true 
   has_secure_password
 
   def self.create_from_form(params)
