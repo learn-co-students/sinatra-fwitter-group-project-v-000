@@ -1,0 +1,15 @@
+<h3>Tweet Index</h3>
+<ol> <% @user.tweets.each do |tweet| %>
+  <li>
+    <a href="/users/<%= @user.id%>">
+      <%= tweet.content %>
+    </a>
+  </li>
+<% end %>
+</ol>
+<h3>User Show Page</h3>
+<h5>Here are all of your Tweets:</h5>
+
+
+
+<a href="/">Click here to go back to the homepage</a>
