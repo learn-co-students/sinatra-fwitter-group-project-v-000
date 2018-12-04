@@ -17,12 +17,12 @@ class TweetsController < ApplicationController
 
   get '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    erb :"tweets/show_tweets"
+    erb :"tweets/show_tweet"
   end
 
   get '/tweets/:id/edit' do
     @tweet = Tweet.find(params[:id])
-    erb :"tweets/edit_tweets"
+    erb :"tweets/edit_tweet"
   end
 
   patch '/tweets/:id' do
@@ -30,6 +30,12 @@ class TweetsController < ApplicationController
     @tweet.update(params[:tweet])
     #user logic
     redirect "/tweets/#{@tweet.id}"
+  end
+
+  delete '/tweets/:id' do
+    @tweet = Tweet.find(params[:id])
+    @tweet.delete
+    redirect "/tweets"
   end
 
 end

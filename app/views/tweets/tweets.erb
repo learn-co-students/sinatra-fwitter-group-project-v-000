@@ -1,0 +1,5 @@
+<h2>List of Tweets</h2>
+  <% @tweets.each do |tweet| %>
+    <h4><li><a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a> <a href="/tweets/<%=tweet.id%>/edit">(edit)</a></li></h4>
+  <%end%>
+<a href="/tweets/new">Tweet Something!</a>
