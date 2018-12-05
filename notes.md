@@ -5,3 +5,8 @@ okay so I CAN'T edit other peoples tweets, and you can't edit your own tweets! h
 
 SO I have some things to do tomorrow! Lol.
 But! Got a LOT done with my tweetscontroller with added in conditional logic for logged_in?, which I wasn't sure about before so that's awesome.
+
+some helpful labs to have open while working:
+-secure password lab
+-nyc sinatra
+-playlister sinatra
