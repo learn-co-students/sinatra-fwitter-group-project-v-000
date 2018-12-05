@@ -10,3 +10,9 @@ some helpful labs to have open while working:
 -secure password lab
 -nyc sinatra
 -playlister sinatra
+
+
+unrelated but helpful!: BASH COMMAND SHORTCUTS 
+- cd (start typing the child directory you want) and hit |tab| and it'll autocomplete the subdirectory for you
+- "cd -" will go back to whatever directory you were in before (unlike "cd .." which just move "up" one directory)
+-rm sandbox will delete the sandbox (or whatever file you want deleted within the directory you're in)
