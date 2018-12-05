@@ -16,8 +16,8 @@
     <% if flash[:message] %>
       <h3 style="color: blue;"><%= flash[:message] %></h3>
     <% end %>
-    <% if flash[:errors] %>
-    <h3 style="color: red;"><%= flash[:errors] %></h3>
+    <% if flash[:error] %>
+    <h3 style="color: red;"><%= flash[:error] %></h3>
     <% end %>
 
     <div class="wrapper">
@@ -29,7 +29,7 @@
           <% if logged_in? %>
             <a href="/logout">Logout  </a><br></br>
             <a href="/tweets">All Tweets  </a><br></br>
-            <a href="/tweets/new">New Tweets  </a><br></br>
+            <a href="/tweets/new">New Tweet  </a><br></br>
           <% end %>
         </div></small>
       </footer>

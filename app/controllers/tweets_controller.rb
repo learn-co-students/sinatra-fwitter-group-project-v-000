@@ -12,14 +12,15 @@ class TweetsController < ApplicationController
    end
 
    post "/tweets" do
+     #binding.pry
      redirect_if_not_logged_in
-      if params[:content] != ""
+      if params[:content].empty?
+        flash[:message] = "Something went wrong. You cannot post an empty tweet"
+        redirect '/tweets/new'
+      else
         @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
         flash[:message] = "Tweet successfully created."
         redirect "/tweets/#{@tweet.id}"
-      else
-        flash[:message] = "Something went wrong."
-        redirect '/tweets/new'
       end
     end
 
@@ -39,21 +40,19 @@ class TweetsController < ApplicationController
   get "/tweets/:id/edit" do
     redirect_if_not_logged_in
     @tweet = Tweet.find(params[:id])
-    if authorized_to_edit?(@tweet)
-      erb :'tweets/edit_tweet'
-    else
-      redirect '/tweets'
-    end
+        erb :'tweets/edit_tweet'
   end
 
   patch '/tweets/:id' do
+   #binding.pry
     redirect_if_not_logged_in
-    if params[:content] == " " && authorized_to_edit?(@tweet)
-      flash[:error] = "You cannot edit someone else's tweet. Please go back to the homepage to edit your own tweet. Also, you cannot post an empty tweet. Please try again with content inside of the textarea before pressing submit."
+    @tweet = Tweet.find(params[:id])
+    if params[:content].empty?
+      flash[:error] = "You cannot post a tweet void of content. Please try again with content inside of the textarea before pressing submit."
       redirect "/tweets/#{@tweet.id}/edit"
     else
-      @tweet = Tweet.find(params[:id])
       @tweet.update(content: params[:content])
+      flash[:message] = "Successfully edited that Tweet."
       redirect "/tweets/#{@tweet.id}"
     end
   end

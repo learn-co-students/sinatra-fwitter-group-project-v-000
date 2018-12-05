@@ -1,17 +1,22 @@
 <h2>Here is the Tweet:</h2>
 
-<p><strong>Tweet's Author: </strong><%= @tweet.user.username %></p>
 <p><strong>Tweet Content: </strong><%= @tweet.content %></p>
+<p><strong>Tweet User ID: </strong><%= @tweet.user_id %></p>
+<p><strong>Tweet's Author: </strong><a href="/users/<%= @tweet.user.slug %>"><%= @tweet.user.username %></a></p>
+<p><strong>Tweet's Author's Email: </strong><%= @tweet.user.email %></p>
+<p><strong>Tweet's Author's Slug: </strong><%= @tweet.user.slug %></p>
 
-
-<% if authorized_to_edit?(@journal_entry) %>
+<% if authorized_to_edit?(@tweet) %>
 <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
-<br><br>
+<% end %>
+
+<br></br>
+
 <form class=" " action="/tweets/<%= @tweet.id %>" method="post">
     <input type="Hidden" name="_method" value="DELETE">
-    <input type="submit" name="Delete Tweet" value="Delete Tweet">
+    <input type="submit" name="Delete Tweet" value="Delete Tweet" id="Delete Tweet">
 </form>
-<% end %>
+
 
 <br></br>
 <small><p><a href="/tweets">Tweet Index</a></p></small>

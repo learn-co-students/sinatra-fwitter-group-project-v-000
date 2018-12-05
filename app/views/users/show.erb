@@ -1,13 +1,15 @@
 <h3>User Name: <%= @user.username %></h3>
+<p><strong>Tweet's Author's Email: </strong><%= @user.email %></p>
+<p><strong>Tweet's Author's Slug: </strong><%= @user.slug %></p>
+
+
+
 <h3>Your Tweets: </h3>
 <ol> <% @user.tweets.each do |tweet| %>
   <li>
-      <%= tweet.content %>
+    <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
   </li>
 <% end %>
 </ol>
 
-
-
-
-<small><a href="/tweets">Tweet Index</a></small><br></br>
+<small><a href="/tweets">Return to the main Tweet Index</a></small><br></br>

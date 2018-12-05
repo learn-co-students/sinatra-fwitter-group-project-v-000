@@ -4,9 +4,11 @@
   <ul style="list-style-type:square">
     <% @tweets.each do |tweet| %>
       <li>
-        <a href="/tweets/<%= tweet.id %>"> <%= tweet.content %></a>
-        Author: <a href="/users/<%= tweet.user_id %>"><%= tweet.user.username %></a>
+        <a href="/tweets/<%= tweet.id %>"> <%= tweet.content %></a></br>
+        Author: <a href="/users/<%= tweet.user.slug %>"><%= tweet.user.username %></a></br>
       </li>
+
+
     <% end %>
   </ul>
 
