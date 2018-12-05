@@ -1,4 +1,10 @@
 <form action="/tweets" method="POST">
   <label>What would you like to spew out into the world?</label>
   <input type="text" name="content">
-  <input type="submit" value="submit"
+  <input type="submit" value="submit">
+
+<div>
+<p><a href="/tweets">Tweets Page</a> |
+<a href="/users/<%=current_user.slug%>">Your tweets</a> |
+<a href="/logout">Logout</a></p>
+</div>

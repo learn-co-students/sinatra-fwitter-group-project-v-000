@@ -1,9 +1,13 @@
 <h2><%= @tweet.content %></h2>
+<p><%= @tweet.created_at %></p>
 
 <form action="/tweets/<%=@tweet.id%>/delete" method="post">
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input id="Delete Tweet" type="submit" value="Delete Tweet">
 </form>
-<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
-<br>
-<a href="/tweets">Tweets Page</a>
+
+<p><a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a> |
+<a href="/tweets/new">New Tweet</a> |
+<a href="/tweets">Tweets Page</a> |
+<a href="/users/<%=current_user.slug%>">Your tweets</a> |
+<a href="/logout">Logout</a></p>

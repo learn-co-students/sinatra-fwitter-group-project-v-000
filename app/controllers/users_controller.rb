@@ -43,7 +43,7 @@ class UsersController < ApplicationController
       redirect '/tweets'
     else
   #    flash[:message] = "Incorrect username or passord. Please try again." <-- not working, figure out flash messages later
-      redirect '/signup'
+      redirect '/login'
     end
   end
 
