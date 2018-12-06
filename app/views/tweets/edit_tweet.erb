@@ -1,0 +1,7 @@
+<h1>Edit Tweet</h1>
+<p>Current tweet: <%= @tweet.content %></p>
+
+<form method="POST" action="/tweets/<%= @tweet.id %>/edit">
+  <p>New content: <input type="text" name="content" id="content"></p>
+  <input type="submit" id="submit" value="Edit Tweet">
+</form>
