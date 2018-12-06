@@ -1,4 +1,3 @@
-require 'rack-flash'
 
 class UsersController < ApplicationController
 
@@ -26,7 +25,7 @@ class UsersController < ApplicationController
 
   post '/signup' do
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
-      #   flash[:message] = "Please don't leave any field blank. Try again.
+      flash[:errors] = "Please don't leave any field blank. Try again."
       redirect '/signup'
     else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
@@ -42,7 +41,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect '/tweets'
     else
-  #    flash[:message] = "Incorrect username or passord. Please try again." <-- not working, figure out flash messages later
+      flash[:errors] = "Incorrect username or passord. Please try again."
       redirect '/login'
     end
   end
@@ -50,6 +49,7 @@ class UsersController < ApplicationController
   get '/logout' do
     if logged_in?
       session.destroy
+      flash[:message] = "You have been successfully logged out. See you soon!"
       redirect "/login"
     else
       redirect '/'

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
   <head>
@@ -7,6 +8,12 @@
 
     <div class="container">
       <h1>Fwitter</h1>
+  <% if flash[:message] %>
+        <h3><%= flash[:message] %></h3>
+      <% end %>
+      <% if flash[:errors] %>
+        <h3 style="color: #a00"><%= flash[:errors] %></h3>
+        <% end %>
       <%= yield %>
     </div>
 
