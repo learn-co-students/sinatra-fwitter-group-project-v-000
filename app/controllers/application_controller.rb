@@ -18,6 +18,7 @@ class ApplicationController < Sinatra::Base
   		erb :'/users/create_user'
   	else
   		redirect to '/tweets'
-  end
+ 	 end
+ 	end
 
 end
