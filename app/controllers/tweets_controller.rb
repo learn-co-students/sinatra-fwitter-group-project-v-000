@@ -63,7 +63,7 @@ class TweetsController < ApplicationController
 
   patch '/tweets/:id' do
     if logged_in?
-      if params[:content] == ""
+      if params[:content] == "" || params[:content] = " "
         flash[:errors] = "You can't tweet an empty tweet."
         redirect "/tweets/#{params[:id]}/edit"
       else
