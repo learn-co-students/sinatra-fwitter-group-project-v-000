@@ -32,7 +32,7 @@ class TweetsController < ApplicationController
         end
       end
     else
-      flash[:errors] = "You have to be logged in to tweet. Please log in."
+      flash[:errors] = "You have to be logged in to tweet. Please log in." #not showing up
       redirect "/login"
     end
   end
@@ -56,6 +56,7 @@ class TweetsController < ApplicationController
         redirect "/tweets"
       end
     else
+      flash[:errors] = "You have to be logged in to edit a tweet. Please log in."
       redirect "/login"
     end
   end
@@ -76,7 +77,7 @@ class TweetsController < ApplicationController
             redirect "/tweets/#{@tweet.id}/edit"
           end
         else
-          flash[:errors] = "You can only edit your own tweets."
+          flash[:errors] = "You can only edit your own tweets." #not showing up
           redirect "/tweets"
         end
       end

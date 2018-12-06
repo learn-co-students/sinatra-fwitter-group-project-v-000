@@ -2,7 +2,7 @@
   <% @tweets.each do |tweet|%>
     <h4><li>
       <a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a></h4>
-      <p><%= tweet.created_at %>
+      <p><%= tweet.formatted_created_at %>
   <%end%>
 
 

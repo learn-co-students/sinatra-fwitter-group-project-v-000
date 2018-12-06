@@ -39,3 +39,15 @@ I can't figure out how to get the tweets page to display the user who wrote each
 .uniq in the iteration works for not repeating the same tweet on the page, but I need a ruby method that eliminates empty tweets, although I have functionality in my tweets post controller that doesn't let someone write a empty tweet, so this is less important now.
 
 I'd say finish with flash messages and strftime solutions and this is ready to ship
+
+
+flash: I had to use the gem "sinatra-flash" not "rack-flash3" idk where I got that from. Then in appcontroller you have to put
+register Sinatra::Flash
+no requires needed. In yield you throw in the erb if statement
+
+<% if flash[:message] %>
+<h5><%= flash[:message] %></h5>
+<% end %>
+
+and you can style different ones like errors.
+Some messages are working while others aren't. Slightly upsetting that the editing someone else's post isn't working but whatever.
