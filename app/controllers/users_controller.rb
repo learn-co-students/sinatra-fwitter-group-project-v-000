@@ -5,19 +5,20 @@ class UsersController < ApplicationController
       if !logged_in?
         erb :'/users/create_user'
       else
-        redirect to '/tweets'
+        binding.pry
+        redirect to '/tweets/index'
       end
     end
 
     post '/signup' do
-      binding.pry
       if params[:username]=="" || params[:password]=="" || params[:email]==""
         redirect to "/signup"
       else
-        @user = User.create(:name => params[:username], :password => params[:password], :email => params[:email])
+        @user = User.create(:username => params[:username], :password => params[:password], :email => params[:email])
         @user.save
+        session[:user_id] = @user.id
       end
-      session[:user_id] = @user.id
+
       redirect to "/tweets/index"
     end
 
