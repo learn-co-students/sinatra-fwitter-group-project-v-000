@@ -3,6 +3,7 @@ require 'pry'
 class UsersController < ApplicationController
 
   get '/signup' do
+    #raise params.inspect
     if logged_in?
       redirect :'/tweets'
     else
@@ -16,7 +17,7 @@ post '/signup' do
     redirect :'/signup'
   else
     @user = User.create(params)
-    session[:id] = @user.id
+    session[:user_id] = @user.id
     redirect :'/tweets'
   end
 end
