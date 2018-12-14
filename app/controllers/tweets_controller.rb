@@ -5,6 +5,11 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets' do
-    erb :'/tweets/index'
+    if !logged_in?
+      redirect to '/login'
+    else
+      @user = User.find(session[:user_id])
+      erb :'/tweets/index'
+    end
   end
 end

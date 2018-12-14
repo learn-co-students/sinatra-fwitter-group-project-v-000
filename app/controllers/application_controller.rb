@@ -5,6 +5,31 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, 'password'
+  end
+
+  get '/signup' do
+    if !logged_in?
+      erb :'/users/create_user'
+    else
+      redirect to '/tweets'
+    end
+  end
+
+  post '/signup' do
+    if params[:username]=="" || params[:password]=="" || params[:email]==""
+      redirect to "/signup"
+    else
+      @user = User.create(params)
+      @user.save
+      session[:user_id] = @user.id
+      redirect to "/tweets"
+    end
+  end
+
+  get '/login' do
+    erb :'/users/login'
   end
 
   get '/' do
@@ -18,7 +43,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      @current_user ||= User.find_by(id => session[:user_id]) if session[:user_id]
+      @current_user ||= User.find_by(:id => session[:user_id]) if session[:user_id]
     end
   end
 
