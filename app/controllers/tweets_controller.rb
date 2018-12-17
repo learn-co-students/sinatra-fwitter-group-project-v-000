@@ -8,7 +8,7 @@ class TweetsController < ApplicationController
     end
   end
 
-  get '/tweets/:id/delete' do
+  delete '/tweets/:id/delete' do
     if logged_in?
       @tweet = Tweet.find_by(params[:id])
       if @tweet.user_id == session[:user_id]
@@ -17,6 +17,7 @@ class TweetsController < ApplicationController
       else
         redirect '/tweets'
       end
+    end
   end
 
   get '/tweets/:id/edit' do
