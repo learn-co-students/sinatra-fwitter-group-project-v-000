@@ -32,7 +32,7 @@ RSpec.configure do |config|
   # Capybara.current_driver = :selenium
 
 end
-
+ 
 def app
   Rack::Builder.parse_file('config.ru').first
 end

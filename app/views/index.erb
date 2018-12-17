@@ -1,0 +1,13 @@
+
+<% if logged_in? %>
+<h2>Welcome, <%= current_user.username %>!</h2>
+<% @tweets = Tweet.all %>
+<h2>Look at all those TWEETS!</h2>
+<% @tweets.each.with_index(1) do |tweet, index| %>
+<p>
+ <%=index%>. <%=tweet.user.username%> said: <%=tweet.content%>
+ </p>
+ <% end %>
+<% else %>
+<p>Welcome to Fwitter! Please <a href="/login">Login</a> or <a href="/signup">Signup</a> and enjoy all those TWEETS!</p>
+<% end %>

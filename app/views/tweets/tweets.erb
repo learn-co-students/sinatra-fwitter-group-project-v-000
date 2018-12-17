@@ -1,0 +1,7 @@
+<h2>Welcome, <%= current_user.username %>! Look at all those TWEETS!</h2>
+
+<p>
+  <% @tweets.each.with_index(1) do |tweet, index| %>
+    <%= index %>. <b><%= tweet.user.username %> said:</b> <%= tweet.content %><br>
+  <% end %>
+</p>
