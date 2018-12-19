@@ -1,0 +1,11 @@
+<h1>Welcome, To Twitter INDEX</h1>
+
+<h3>ALL Tweets go here!</h3>
+
+<br>
+
+<% @tweets.each do |tweet| %>
+<br>
+<a href="/tweets/<%= tweet.id %>"><%= "#{tweet.id}" %></a>
+<%= "#{tweet.content}" %>
+<% end %>
