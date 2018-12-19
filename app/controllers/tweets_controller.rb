@@ -18,16 +18,15 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    if !!logged_in?
-      @user = current_user
-        if !params[:content].blank?
-          @user.tweets << Tweet.create(content: params[:content])
-          redirect '/tweets'
-        else
-          redirect '/tweets/new'
-        end
+    if !!logged_in? && !params[:content].blank?
+        @user = current_user
+        @user.tweets << Tweet.create(content: params[:content])
+        redirect '/tweets'
+      else
+        redirect '/tweets/new'
+      end
     end
-  end
+
 
   get '/tweets/:id' do
     if !!logged_in?
@@ -63,10 +62,10 @@ class TweetsController < ApplicationController
         @tweet = Tweet.find_by_id(params[:id])
           if @tweet.user == current_user
             @tweet.destroy
+          end
             redirect '/tweets'
           else
           redirect '/login'
-       end
       end
     end
 
