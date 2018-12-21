@@ -10,11 +10,6 @@ class UsersController < ApplicationController
     redirect to '/users/show'
   end
 
-  get '/users/show' do
-
-    erb :'/users/show'
-  end
-
   get '/login' do
 
     erb :'/users/login'
@@ -22,8 +17,15 @@ class UsersController < ApplicationController
 
   post '/login' do
 
-
+    redirect to '/users/:slug'
   end
+
+  get '/users/:slug' do
+
+    erb :'/tweets'
+  end
+
+
 
 
 end
