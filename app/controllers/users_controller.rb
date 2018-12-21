@@ -2,17 +2,12 @@ class UsersController < ApplicationController
 
   get '/signup' do
 
-    erb :create_user
+    erb :'/users/create_user'
   end
 
   post '/signup' do
 
     redirect to '/users/show'
-  end
-
-  get '/users/show' do
-
-    erb :'/users/show'
   end
 
   get '/login' do
@@ -22,8 +17,15 @@ class UsersController < ApplicationController
 
   post '/login' do
 
-
+    redirect to '/users/:slug'
   end
+
+  get '/users/:slug' do
+
+    erb :'/tweets'
+  end
+
+
 
 
 end
