@@ -1,0 +1,13 @@
+<h1>Tweet Show</h1>
+
+<p><%= @tweet.content%></p>
+
+<br><br>
+
+<a class="button" href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
+<br><br>
+<form action="/tweets/<%= @tweet.id %>" method="post">
+  <!-- How do I turn this form submission into a DELETE request??? -->
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Tweet">
+</form>
