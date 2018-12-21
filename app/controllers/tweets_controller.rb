@@ -2,6 +2,8 @@ class TweetsController < ApplicationController
 
   get '/tweets' do
     @tweets = Tweet.all
+
+    erb :'/tweets/tweets'
   end
 
   get '/tweets/new' do
@@ -27,7 +29,7 @@ class TweetsController < ApplicationController
   patch '/tweets/:id' do
     @tweet = Tweet.find_by(id: params[:id])
     @tweet.update(content: params[:content])
-    redirect to ''
+    redirect to '/tweets'
   end
 
   delete '/tweets/:id' do
