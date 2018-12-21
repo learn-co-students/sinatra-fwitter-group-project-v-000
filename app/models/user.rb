@@ -9,5 +9,4 @@ class User < ActiveRecord::Base
   def self.find_by_slug(slug)
     User.all.select {|user| user.slug == slug}.first
   end
-VERY SMALL CHANGE
 end
