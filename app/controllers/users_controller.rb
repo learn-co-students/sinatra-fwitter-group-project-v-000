@@ -6,9 +6,12 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    @user = User.find_by(username: params[:username]) || @user = User.find_by(email: params[:email]) || @user = User.create(params)
-    
-    binding.pry
+    if params[:username].empty? || params[:email].empty?
+      raise "All fields need to be filled out."
+      redirect "/signup"
+    else
+      @user = User.find_by(username: params[:username]) || @user = User.find_by(email: params[:email]) || @user = User.create(params)
+    end
     redirect to '/users/show'
   end
 
