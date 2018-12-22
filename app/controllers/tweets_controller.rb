@@ -3,7 +3,7 @@ class TweetsController < ApplicationController
   get '/tweets' do
 
     @tweets = Tweet.all
-
+    @user = Helpers.current_user(session)
     erb :'/tweets/tweets'
   end
 
