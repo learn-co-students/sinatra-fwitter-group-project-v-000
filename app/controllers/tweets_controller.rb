@@ -55,5 +55,18 @@ class TweetsController < ApplicationController
     redirect '/tweets'
   end
 
+  get 'edit/:id' do
+    if User.find_by_id(session[:user_id]) == nil
+      redirect '/login'
+    end
+    erb :'/tweets/edit'
+  end
+
+
+
+
+
+  end
+
 
 end
