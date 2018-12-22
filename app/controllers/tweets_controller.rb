@@ -12,7 +12,7 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    user = User.find_by(id: session[:id])
+    user = User.find_by(id: session[:user_id])
     tweet = Tweet.create(content: params[:content])
     user.tweets << tweet
 
