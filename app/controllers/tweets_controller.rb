@@ -12,9 +12,11 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets' do
-    @tweet = Tweet.create(content: params[:content], user_id: session[:id])
+    user = User.find_by(id: session[:user_id])
+    tweet = Tweet.create(content: params[:content])
+    user.tweets << tweet
 
-    redirect to '/tweets/#{@tweet.id}'
+    redirect to '/tweets/#{tweet.id}'
   end
 
   get '/tweets/:id' do

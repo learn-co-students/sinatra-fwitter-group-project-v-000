@@ -9,13 +9,13 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params[:username].empty? || params[:email].empty? || params[:password].empty?
+    if params.each {|k,v| v.empty?}
       redirect "/signup"
     else
-      @user = User.find_by(username: params[:username]) || @user = User.find_by(email: params[:email]) || @user = User.create(params)
+      @user = User.find_or_create_by(username: params[:username], email: params[:email], password: params[:password])
       session[:user_id] = @user.id
+      redirect "/tweets"
     end
-    redirect "/tweets"
   end
 
   get '/login' do
