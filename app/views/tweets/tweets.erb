@@ -1,7 +1,8 @@
-<div class="container">
-  <div class="row-centered">
+
+
+  <div class="row mx-auto">
     <% @tweets.each do |tweet| %>
-        <div class="card" style="width: 18rem;">
+        <div class="card text-center">
           <div class="card-body">
             <h5 class="card-title">@<%= tweet.user.username %></h5>
             <p class="card-text"><%= tweet.content %></p>
@@ -10,4 +11,3 @@
         </div>
     <% end %>
   </div>
-</div>
