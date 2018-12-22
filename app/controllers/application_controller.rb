@@ -11,11 +11,9 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    if Helpers.logged_in?(session)
-      redirect "/:slug"
-    else
-      erb :index
-    end
+
+    erb :index
+
   end
 
 end

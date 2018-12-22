@@ -1,4 +1,7 @@
 <div class="container">
+  <% if Helpers.logged_in?(session)%>
+    <h1>Welcome, <%= @user.username %>!</h1>
+  <%end%>
   <div class="row-centered">
     <% @tweets.each do |tweet| %>
         <div class="card" style="width: 18rem;">
