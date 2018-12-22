@@ -1,1 +1,3 @@
-<h1>Welcome,</h1>
+<% if logged_in?(session) %>
+    <%#@user = Helpers.current_user(session)%>
+      <h1>Welcome <%= current_user(session).username %></h1><br>
