@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    erb :"/users/create_user"
+    if Helpers.logged_in?(session)
+      redirect "/tweets"
+    else
+      erb :"/users/create_user"
+    end
   end
 
   post '/signup' do
@@ -29,7 +33,7 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/:slug' do
+  get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     @tweets = @user.tweets
     erb :"/users/show"
