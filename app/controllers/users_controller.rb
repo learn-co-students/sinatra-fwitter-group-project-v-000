@@ -12,13 +12,12 @@ class UsersController < ApplicationController
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    erb :'users/show'
-  
+    erb :'/users/show'
   end
 
   get '/login' do
     if User.find_by_id(session[:user_id]) != nil
-      redirect "/tweets/index"
+      redirect "/tweets"
     else
       erb :'/users/login'
     end

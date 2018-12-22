@@ -48,7 +48,6 @@ class TweetsController < ApplicationController
     @user = User.find_by_id(session[:user_id])
 
     if @user.tweets.include?(Tweet.find_by_id(params[:id]))
-
       Tweet.find_by_id(params[:id]).delete
       redirect '/tweets'
     end
