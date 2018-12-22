@@ -26,6 +26,12 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/:slug' do
+    @user = User.find_by(session[:id])
+  end
+
+
+
 
 
 end
