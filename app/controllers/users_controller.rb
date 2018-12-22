@@ -6,7 +6,9 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-
+    @user = User.find_by(username: params[:username]) || @user = User.find_by(email: params[:email]) || @user = User.create(params)
+    
+    binding.pry
     redirect to '/users/show'
   end
 
