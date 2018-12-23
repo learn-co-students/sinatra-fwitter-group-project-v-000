@@ -1,10 +1,13 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-
-    @tweets = Tweet.all
-    @user = Helpers.current_user(session)
-    erb :'/tweets/tweets'
+    if Helpers.logged_in?(session)
+      @tweets = Tweet.all
+      @user = Helpers.current_user(session)
+      erb :'/tweets/tweets'
+    else
+      redirect "/login"
+    end
   end
 
   get '/tweets/new' do
