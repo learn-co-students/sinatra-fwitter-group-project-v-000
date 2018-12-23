@@ -1,0 +1,12 @@
+<div class="row mx-auto">
+  <h1>Welcome, <%= @user.username %></h1> 
+  <% @tweets.each do |tweet| %>
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">@<%= tweet.user.username %></h5>
+          <p class="card-text"><%= tweet.content %></h4></p>
+          <a href="/tweets/<%= tweet.id %>" class="btn btn-primary">View</a>
+        </div>
+      </div>
+  <% end %>
+</div>
