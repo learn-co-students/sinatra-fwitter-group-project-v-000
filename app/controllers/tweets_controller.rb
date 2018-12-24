@@ -10,5 +10,22 @@ class TweetsController < ApplicationController
 
   end
 
+  get '/tweets/new' do
+    @user = User.find_by_slug(params[:slug])
+    if logged_in?
+      erb :'/tweets/new'
+    else
+      redirect '/login'
+    end
+
+  end
+
+  post '/tweets' do
+    tweet = Tweet.new(params[:tweet])
+    tweet.save
+
+end
+
+
 
 end
