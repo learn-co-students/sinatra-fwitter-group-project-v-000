@@ -26,7 +26,10 @@ end
       else
         @tweet = Tweet.new(params[:tweet])
         @tweet.save
+        #binding.pry
         current_user.tweets << @tweet
+        binding.pry
+        redirect "/tweets/#{@tweet.id}"
       end
     end
   end
