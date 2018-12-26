@@ -12,27 +12,25 @@ class ApplicationController < Sinatra::Base
     "Welcome to Fwitter"
   end
 
-  get "/signup" do
-    if Helpers.current_user.is_logged_in?(session)
-      redirect to "/tweets"
-    else 
-    erb :'/users/create_user'
-    end 
-  end
+  helpers do
 
-  post "/signup" do
-    if params[:username] == "" || params[:username] == nil
-      redirect to "/signup"
-    elsif params[:email] == "" || params[:email] == nil
-      redirect to "/signup"
-    elsif params[:password] == "" || params[:password] == nil
-      redirect to "/signup"
-    else 
-      @user = User.create(username: params["username"], password: params["password"], email: params["email"])
-      @user.save
-      session[:id] = @user.id
-      redirect to "/tweets"
+    def current_user
+      @user = User.find_by_id(session[:user_id])
     end
-  end 
 
-end
+    def is_logged_in?
+      !!session.include?(:user_id)
+    end
+    
+    def login(user_id)
+      session[:user_id] = user_id
+    end 
+    
+    def logout 
+      session.clear
+    end 
+ 
+  end 
+ 
+end 
+
