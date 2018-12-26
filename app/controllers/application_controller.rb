@@ -29,7 +29,8 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = user_id
     end
 
-    def logout
+		def logout
+			binding.pry
       session.clear
     end
   end

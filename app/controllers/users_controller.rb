@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   post '/signup' do 
     @user = User.new(params)
     if @user.save
-				# session[:user_id] = @user.id
+				session[:user_id] = @user.id				
 				login(@user.id)
         redirect to '/tweets'
     else
@@ -20,14 +20,14 @@ class UsersController < ApplicationController
   end
  
   get '/login' do
-    if logged_in?
+		if logged_in?
       redirect to '/tweets'
     else
       erb :'users/login'  
     end
   end
 
-  post "/login" do
+	post "/login" do
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id

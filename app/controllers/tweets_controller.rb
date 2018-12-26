@@ -18,10 +18,12 @@ class TweetsController < ApplicationController
     end
   end
 
-  post '/tweets' do
-    @tweet = Tweet.new(params)
+	post '/tweets' do
+		@tweet = Tweet.new(params)
+		@tweet.user_id = session[:user_id]
     if logged_in? && @tweet.save
-      current_user.tweets << @tweet
+			# current_user.tweets << @tweet
+			# binding.pry
       redirect to "/tweets/#{@tweet.id}"
     else
       redirect to '/tweets/new'
