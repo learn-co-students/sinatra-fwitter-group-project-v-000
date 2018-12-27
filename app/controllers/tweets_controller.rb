@@ -1,7 +1,12 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    "Hello there, here is where you will have some tweets."
-  end 
+    if is_logged_in?
+      @user = User.find_by_id(session[:user_id])
+      erb :'/tweets/index'
+    else
+      redirect to "/login"
+    end
+  end
 
 end
