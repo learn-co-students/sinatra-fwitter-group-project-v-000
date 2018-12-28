@@ -36,9 +36,10 @@ class TweetsController < ApplicationController
     end 
   end 
   
-  get "/tweets/:id/delete" do 
+  delete "/tweets/:id/delete" do 
+    @tweet = Tweet.find_by_id(params["id"])
     if is_logged_in? 
-      erb: '/tweets/delete_tweet'
+      @tweet.delete
     else 
       redirect to '/login'
     end 
