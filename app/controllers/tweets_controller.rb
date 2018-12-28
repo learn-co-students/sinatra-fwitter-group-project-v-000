@@ -26,6 +26,33 @@ class TweetsController < ApplicationController
       redirect to "/login"
     end 
   end 
+  
+  get "/tweets/:id/edit" do 
+    if is_logged_in? 
+      @tweet = Tweet.find_by_id(params["id"])
+      erb :'/tweets/edit_tweet'
+    else 
+      redirect to "/login"
+    end 
+  end 
+  
+  get "/tweets/:id/delete" do 
+    if is_logged_in? 
+      erb: '/tweets/delete_tweet'
+    else 
+      redirect to '/login'
+    end 
+  end 
+  
+  patch '/tweets/:id' do 
+    @tweet = Tweet.find_by_id(params["id"])
+    if !params["content"].empty?
+      @tweet.content = params["content"]
+      @tweet.save
+    else 
+      redirect to "/tweets/#{@tweet.id}/edit"
+    end 
+  end 
  
   post '/tweets' do
     if !params["content"].empty? 
