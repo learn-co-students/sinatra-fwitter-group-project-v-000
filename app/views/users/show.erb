@@ -1,0 +1,17 @@
+
+<a href="/tweets">Go back to tweets page</a>
+<br>
+<a href="/tweets/new">Create a new tweet</a>
+<br>
+<h2> Here are your tweets, <%= @user.username %>: </h2>
+<% if @user.tweets.length ==0 %>
+  <p>(You have no tweets yet)</p>
+
+<% else %>
+  <% @user.tweets.each do |tweet| %>
+    <div>
+      <%= tweet.content %>
+    </div>
+  <% end %>
+
+<% end %>

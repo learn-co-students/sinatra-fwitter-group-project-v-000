@@ -1,0 +1,24 @@
+<p> Welcome, <%= current_user.username %>
+
+<br>
+<br>
+<a href="/tweets/new"> Create a new tweet</a>
+<br>
+<a href="/users/<%=current_user.slug %>">View only your tweets</a>
+<br>
+<a href="/logout">Log out</a>
+
+<h2> Here are all the tweets: </h2>
+
+<% if @tweets.length==0 %>
+  <p>
+    (There are no tweets yet)
+  </p>
+<% else %>
+  <% @tweets.each do |tweet| %>
+    <div>
+      <p><%= User.find_name_by_id(tweet.user_id) %> tweeted: <%= tweet.content %></p>
+    </div>
+  <% end %>
+
+<% end %>

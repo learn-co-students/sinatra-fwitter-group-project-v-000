@@ -1,0 +1,19 @@
+<p> Here is a particular tweet by <%= @tweet.user.username %>: <p>
+<form action="/tweets/<%=@tweet.id%>/delete" method="POST">
+  <input type="text" name="content" value="<%= @tweet.content %>">
+  <br>
+  <br>
+
+  <a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
+  <br>
+  <a href="/tweets">Go back to tweets page</a>
+  <br>
+  <button type="submit" value="submit">Delete Tweet</button>
+  <br>
+
+</form>
+<!-- -->
+<!--<% if @tweet.user == current_user %> -->
+<!-- was going to hide Edit, and Delete options is user wasn't author, but test failed
+because Delete button was in an if statement -->
+<!--< <% end %> -->
