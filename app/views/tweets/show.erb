@@ -1,0 +1,6 @@
+<%=@tweet.content%>
+<form method = 'POST' action = '/tweets/<%=@tweet.id%>/delete'>
+  <input type="hidden" name="_method" value="delete" />
+  <input type='submit' value='Delete Tweet' id='delete'>
+</form>
+<a href='/tweets/<%=@tweet.id/edit'>Edit Tweet</a>
