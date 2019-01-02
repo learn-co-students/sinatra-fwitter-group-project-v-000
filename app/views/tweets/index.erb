@@ -1,0 +1,8 @@
+<h1>Welcome, <%= @user.username %></h1>
+
+<ul>
+<% @tweets.each do |tweet| %>
+    <% @current_user = @all_users.find_by_id(tweet.user_id) %>
+    <li><%= @current_user.username %> wrote: <%= tweet.content %>
+<% end %>
+</ul>
