@@ -1,0 +1,21 @@
+<p>app/views/tweets/tweets.erb</p>
+<a href="/tweets/new">Create a New Tweet</a>
+<br>
+<hr>
+<h1>Welcome, <%= Helpers.current_user(session).username %>!</h1>
+<h3>All your tweets:</h3>
+<br>
+<hr>
+<ol style="list-style:none">
+<% @tweets.each do | tweet | %>
+  <li>
+    <%= tweet.content %>
+    <br>
+    <a href="/tweets/<%= tweet.id %>">Show Tweet</a>
+    <br>
+    <hr>
+  </li>
+  <% end %>
+</ol>
+  <br>
+  <hr>

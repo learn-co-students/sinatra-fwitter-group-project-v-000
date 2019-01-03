@@ -4,12 +4,20 @@
     <title>Fwitter</title>
   </head>
   <body>
-
-    <div class="container">
-      <h1>Welcome to Fwitter!</h1>
-      <h2>This is located in layout.erb!</h2>
-      <h2>Don't forget to <strong>yield</strong> your views!</h2>
-    </div>
-
+    <h1>Welcome to Fwitter</h1>
+    <h3>Flatiron Twitter</h3>
+    <a href="/">Home</a>
+    <br>
+    <% if Helpers.is_logged_in?(session) %>
+      <a href="/users/<%= Helpers.current_user(session).username %>">My Page</a>
+      <br>
+      <a href="/logout">Log Out</a>
+    <% else %>
+      <a href="/signup">Sign Up</a>
+      <br>
+      <a href="/login">Log In</a>
+    <% end %>
+    <hr>
+    <%= yield %>
   </body>
 </html>

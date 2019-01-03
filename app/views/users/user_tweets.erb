@@ -1,0 +1,16 @@
+<p>app/views/users/user_tweets.erb</p>
+<br>
+<a href="/tweets/new">Create Tweet</a>
+<hr>
+<h1>Tweets from <%= @user.username %></h1>
+<ol style="list-style:none">
+<% @user.tweets.each do | tweet | %>
+  <li>
+    <%= tweet.content %>
+    <br>
+    <a href="/tweets/<%= tweet.id %>">Show Tweet</a>
+  </li>
+  <hr>
+<% end %>
+</ol>
+<hr>
