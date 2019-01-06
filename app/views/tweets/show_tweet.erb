@@ -1,15 +1,10 @@
-<h1>show tweets</h1>
+<h1>Show Tweets</h1>
 
+<p><%= @tweet.content %></p>
 
-<% Tweet.all.each do |tweet| %>
-	<% if tweet.user_id == @user.id %>
-		<p><%= tweet.content %></p>
-		<p><input type="submit" name="edit" id="Edit Tweet"></p>
-		<form method="POST" action="/tweets/<%= tweet.id %>/delete">
-		  <input id="hidden" type="hidden" name="_method" value="delete">
-		  <input type="submit" value="delete" id="Delete Tweet">
-		</form>
-	<% end %>
-<% end %>
-
-
+<p><a href="/tweets">View All Tweets</a></p>
+<p><a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a></p>
+<form method="POST" action="/tweets/<%= @tweet.id %>/delete">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete Tweet">
+</form>
