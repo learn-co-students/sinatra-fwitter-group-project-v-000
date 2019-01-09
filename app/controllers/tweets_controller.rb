@@ -25,22 +25,27 @@ end
         redirect '/tweets/new'
       else
         @tweet = Tweet.new(params[:tweet])
-        @tweet.save
+        #binding.pry
+
         #binding.pry
         current_user.tweets << @tweet
-        binding.pry
+        #binding.pry
+        @tweet.save
+        #binding.pry
         redirect "/tweets/#{@tweet.id}"
+        #binding.pry
       end
     end
   end
 
-  get 'tweets/:id' do
-    if logged_in?
-      @tweet = Tweet.find_by_id(params[:id])
+  get "tweets/:id" do
+    binding.pry
+  #  if logged_in?
+      @tweet = Tweet.find_by_id(:id)
       erb :'/tweets/show_tweet'
-    else
-      redirect '/login'
-    end
+  #  else
+  #    redirect '/login'
+  #  end
   end
 
 
