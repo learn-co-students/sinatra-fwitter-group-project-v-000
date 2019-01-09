@@ -1,0 +1,9 @@
+<h2>Create a New Tweet!</h2>
+<h3><%=Helpers.current_user(session).username%>
+<form action="/tweets" method="POST">
+  <textarea type="content" name="content" placeholder="Your Tweet Here"></textarea>
+	<input type="submit" value="submit">
+</form>
+<form action="/tweets" method="get">
+		<input type="submit" value="All Tweets" />
+	</form>
