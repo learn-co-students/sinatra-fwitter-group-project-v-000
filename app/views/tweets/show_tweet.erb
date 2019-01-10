@@ -1,6 +1,6 @@
 <p><%=@tweet.content%></p>
 <%#binding.pry%>
-<form action="/tweets/<%=@tweet.id%>" method="POST"
+<form action="/tweets/<%=@tweet.id%>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" id="delete" value="Delete Tweet">
 </form>
