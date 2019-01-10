@@ -52,4 +52,28 @@ class TweetsController < ApplicationController
     end
   end
 
+  patch '/tweets/:id' do
+    @tweet = Tweet.find_by_id(params[:id])
+    if params[:tweet]["content"] == ""
+      redirect "/tweets/#{@tweet.id}/edit"
+    else
+
+      @tweet.update(params[:tweet])
+      redirect "/tweets/#{@tweet.id}"
+    end
+  end
+
+  delete '/tweets/:id' do
+    binding.pry
+    if logged_in?
+      @tweet = Tweet.find_by_id(params[:id])
+      binding.pry
+      if @tweet.user_id == current_user
+        @tweet.delete
+      end
+    else
+      redirect '/login'
+    end
+  end
+
 end
