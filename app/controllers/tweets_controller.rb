@@ -63,18 +63,17 @@ class TweetsController < ApplicationController
     if logged_in?
       if params[:tweet]["content"] == ""
         redirect "/tweets/#{@tweet.id}/edit"
-      else
-        #@tweet = Tweet.find_by_id(params[:id])
-        if @tweet && current_user.id == @tweet.user_id
-
-          @tweet.update(params[:tweet])
+      end
+      if @tweet && current_user.id == @tweet.user_id
+        if @tweet.update(params[:tweet])
           redirect "/tweets/#{@tweet.id}"
         else
           redirect "/tweets/#{@tweet.id}/edit"
+
         end
+      else
+        redirect '/login'
       end
-    else
-      redirect '/login'
     end
   end
 
@@ -85,6 +84,7 @@ class TweetsController < ApplicationController
       if current_user.id == @tweet.user_id
 
         @tweet.delete
+        redirect '/tweets'
       end
 
     else
