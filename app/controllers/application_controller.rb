@@ -1,5 +1,5 @@
 require './config/environment'
-
+#This ApplicationController will contain routes for homepage, login and signup pages.
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -22,8 +22,4 @@ class ApplicationController < Sinatra::Base
 
   end
 
-  post '/signup' do
-
-  end
 end
-
