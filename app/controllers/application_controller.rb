@@ -18,7 +18,7 @@ class ApplicationController < Sinatra::Base
     erb :'/users/signup'
   end
 
-  post /'signup' do
+  post '/signup' do
 
   end
 
