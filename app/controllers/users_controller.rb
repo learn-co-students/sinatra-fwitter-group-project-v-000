@@ -1,10 +1,18 @@
 class UsersController < ApplicationController
 
-  get "/users" do
+  get "/users/:slug" do
 
   end
 
-  post "/users/login" do
+  get "/login" do
+    if logged_in?
+      redirect "/tweets"
+    else
+      erb :"/users/login"
+    end
+  end
+
+  post "/login" do
     user = User.find_by(username: params[:username])
 
     if user && user.authenticate(params[:password])
@@ -16,7 +24,15 @@ class UsersController < ApplicationController
     end
   end
 
-  post "/users/signup" do
+  get "/signup" do
+    if logged_in?
+      redirect "/tweets"
+    else
+      erb :"/users/create_user"
+    end
+  end
+
+  post "/signup" do
     username = params[:username].gsub(" ", "")
     email = params[:email].gsub(" ", "")
     password = params[:password].gsub(" ", "")
@@ -24,9 +40,11 @@ class UsersController < ApplicationController
     if username.empty? || email.empty? || password.empty?
       redirect "/signup"
     else
-      User.create(params)
+      user = User.create(params)
 
-      redirect "/login"
+      session[:user_id] = user.id
+
+      redirect "/tweets"
     end
   end
 
@@ -46,15 +64,5 @@ class UsersController < ApplicationController
 
   delete "/users/:id" do
 
-  end
-
-  helpers do
-    def current_user
-      User.find(session[:user_id])
-    end
-
-    def logged_in?
-      !!session[:user_id]
-    end
   end
 end

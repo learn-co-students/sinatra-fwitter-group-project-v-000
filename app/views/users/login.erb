@@ -1,17 +1,20 @@
-<h1>Fwitter Login</h1>
+<h1>Fwitter Log In</h1>
 
-<form class="" action="/users/login" method="post">
+<form class="" action="/login" method="post">
   <p>
     <label for="username">Username: </label>
-    <input type="text" id="username" name="username" value="">
+    <input type="text" name="username">
+  </p>
+
+  <p>
+    <label for="email">E-mail: </label>
+    <input type="text" name="email">
   </p>
 
   <p>
     <label for="password">Password: </label>
-    <input type="password" id="password" name="password" value="">
+    <input type="password" name="password">
   </p>
 
-  <p>
-    <input type="submit" id="submit" name="" value="Log In">  
-  </p>
+  <p><input type="submit" id="submit" value="Log In"></p>
 </form>

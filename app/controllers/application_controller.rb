@@ -13,19 +13,13 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  get "/login" do
-    erb :"/users/login"
-    #redirect "/users/login"
-  end
+  helpers do
+    def current_user
+      User.find_by(id: session[:user_id])
+    end
 
-  get "/signup" do
-    erb :"/users/create_user"
-    #redirect "/users/signup"
-  end
-
-  get "/logout" do
-    session.clear
-
-    redirect "/"
+    def logged_in?
+      !!session[:user_id]
+    end
   end
 end
