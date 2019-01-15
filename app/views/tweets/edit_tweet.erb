@@ -1,0 +1,11 @@
+<h1>Fwitter Edit Tweet</h1>
+
+<form class="" action="/tweets/<%= @tweet.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <p>
+    <label for="content">Tweet: </label>
+    <textarea id="content" name="content" rows="8" cols="80"><%= @tweet.content %></textarea>
+  </p>
+
+  <p><input type="submit" id="submit" value="Edit Tweet"></p>
+</form>
