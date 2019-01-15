@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
   get "/users/:slug" do
+    @user = User.find_by_slug(params[:slug])
 
+    erb :"/users/show"
   end
 
   get "/login" do
@@ -48,21 +50,11 @@ class UsersController < ApplicationController
     end
   end
 
+  get "/logout" do
+    if logged_in?
+      session.clear
+    end
 
-
-  get "/users/:id" do
-    erb :"/users/show_user"
-  end
-
-  get "/users/:id/edit" do
-    erb :"/users/edit_user"
-  end
-
-  patch "/users/:id" do
-
-  end
-
-  delete "/users/:id" do
-
+    redirect "/login"
   end
 end
