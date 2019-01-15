@@ -1,10 +1,31 @@
-require './config/environment'
+require "./config/environment"
 
 class ApplicationController < Sinatra::Base
 
   configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
+    set :public_folder, "public"
+    set :views, "app/views"
+    enable :sessions
+    set :session_secret, "fwitter_secret"
   end
 
+  get "/" do
+    erb :index
+  end
+
+  get "/login" do
+    erb :"/users/login"
+    #redirect "/users/login"
+  end
+
+  get "/signup" do
+    erb :"/users/create_user"
+    #redirect "/users/signup"
+  end
+
+  get "/logout" do
+    session.clear
+
+    redirect "/"
+  end
 end
