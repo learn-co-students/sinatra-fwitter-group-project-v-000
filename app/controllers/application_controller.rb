@@ -1,5 +1,5 @@
 require './config/environment'
-#This ApplicationController will contain routes for homepage, login and signup pages.
+# This ApplicationController will contain routes for homepage, login and signup pages.
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -9,19 +9,21 @@ class ApplicationController < Sinatra::Base
     set :session_secret, 'bacon'
   end
 
+# This controller may be overloaded.
+# Move All this to users_controller.
+# Need helper method to validate whether a user is logged in?
+
   get '/' do
     erb :'/index'
   end
 
+  #loads the signup page
   get '/signup' do
-    
-    #if already signed in, redirect to user's tweets
-    #redirect....
     erb :'/users/create_user'
   end
 
   post '/signup' do
-
+    erb :'/u'
   end
 
 end
