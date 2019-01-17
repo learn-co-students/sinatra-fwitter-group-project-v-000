@@ -2,6 +2,7 @@
 
 
 <a href='/tweets/new'>Create a New Tweet</a>
+<a href='/users/<%=@user.slug %>'>View all of your Tweets</a>
 
 <h2> Tweets </h2>
 <% Tweet.all.each do |tweet| %>
