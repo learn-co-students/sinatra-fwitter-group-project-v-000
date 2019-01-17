@@ -1,8 +1,12 @@
-<p>Welcome, <%= @user.username %> </p>
-<h2> Tweets </h2>
+<p>Welcome, <%= @user.username %>! </p>
 
-<% @tweets.each do |tweet| %>
-  <div>
-    <%= tweet.content %>
-  </div>
+
+<a href='/tweets/new'>Create a New Tweet</a>
+
+<h2> Tweets </h2>
+<% Tweet.all.each do |tweet| %>
+  <p><%= tweet.content %> </p>
+  <br>
 <% end %>
+
+<a href='/logout'>Logout</a>
