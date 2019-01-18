@@ -23,7 +23,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    erb :'/u'
+    erb :'/tweets'
   end
 
 end
