@@ -17,4 +17,20 @@ class ApplicationController < Sinatra::Base
     erb :'signup'
   end
 
+  post '/signup' do
+    # can't get this to work: user = User.new(params[:user])
+    user = User.new(username: params[:username], email: params[:email], password: params[:password])
+
+    if user.save && user.authenticate(params[:password])
+      session[:user_id] = user
+      redirect "/tweets"
+    else
+      redirect "/signup"
+    end
+  end
+
+end
+
+helpers do
+  
 end
