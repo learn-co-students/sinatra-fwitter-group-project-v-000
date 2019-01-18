@@ -13,17 +13,14 @@ class ApplicationController < Sinatra::Base
 # Move All this to users_controller.
 # Need helper method to validate whether a user is logged in?
 
-  get '/' do
-    erb :'/index'
-  end
+ 
+  helpers do
+		def logged_in?
+			!!session[:user_id]
+		end
 
-  #loads the signup page
-  get '/signup' do
-    erb :'/users/create_user'
-  end
-
-  post '/signup' do
-    erb :'/tweets'
-  end
-
+		def current_user
+			User.find(session[:user_id])
+		end
+	end
 end
