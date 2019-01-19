@@ -34,8 +34,6 @@ class ApplicationController < Sinatra::Base
     else
       redirect "/signup"
     end
-
-
   end
 
   get '/login' do
@@ -57,31 +55,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/tweets' do
-    # Is there a way to use helper methods?
-    if !!session[:user_id]
-      @user = User.find(session[:user_id])
-      erb :'/tweets/index'
-    else
-      redirect "/login"
-    end
-  end
-
-
-  get '/tweets/new' do
-    erb :'/tweets/new'
-  end
-
-  post '/tweets' do
-    @tweet = Tweet.create(params[:tweet])
-    # Need to assign user_id to tweet
-    redirect "/tweets/#{@tweet.id}"
-  end
-
-  get '/tweets/:id' do
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :'/tweets/show'
-  end
+  
 
   get '/logout' do
     # Can I find a way to call the helper method #logged_in? instead?
@@ -92,6 +66,7 @@ class ApplicationController < Sinatra::Base
       redirect "/login"
     end
   end
+
 
 
 end
