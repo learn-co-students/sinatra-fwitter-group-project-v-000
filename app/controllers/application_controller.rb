@@ -14,7 +14,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb :'signup'
+    # Can I find a way to call the helper method #logged_in? instead?
+    if !!session[:user_id]
+      redirect "/tweets"
+    else
+      erb :'signup'
+    end
   end
 
   post '/signup' do
@@ -22,10 +27,10 @@ class ApplicationController < Sinatra::Base
     # password is showing
     user = User.new(username: params[:username], email: params[:email], password: params[:password])
 
+
     if user.save
       session[:user_id] = user.id
       redirect "/tweets"
-      binding.pry
     else
       redirect "/signup"
     end
@@ -34,38 +39,59 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    erb :'login'
+    # Can I find a way to call the helper method #logged_in? instead?
+    if !!session[:user_id]
+      redirect "/tweets"
+    else
+      erb :'login'
+    end
   end
 
   post '/login' do
     user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect '/tweets'
+      redirect "/tweets"
     else
-      redirect '/login'
+      redirect "/login"
     end
   end
 
   get '/tweets' do
-    "hello world"
+    # Is there a way to use helper methods?
+    if !!session[:user_id]
+      @user = User.find(session[:user_id])
+      erb :'/tweets/index'
+    else
+      redirect "/login"
+    end
   end
 
 
-    get '/tweets/new' do
-      erb :'/tweets/new'
-    end
+  get '/tweets/new' do
+    erb :'/tweets/new'
+  end
 
-    post '/tweets' do
-      @tweet = Tweet.create(params[:tweet])
-      # Need to assign user_id to tweet
-      redirect "/tweets/#{@tweet.id}"
-    end
+  post '/tweets' do
+    @tweet = Tweet.create(params[:tweet])
+    # Need to assign user_id to tweet
+    redirect "/tweets/#{@tweet.id}"
+  end
 
-    get '/tweets/:id' do
-      @tweet = Tweet.find_by_id(params[:id])
-      erb :'/tweets/show'
+  get '/tweets/:id' do
+    @tweet = Tweet.find_by_id(params[:id])
+    erb :'/tweets/show'
+  end
+
+  get '/logout' do
+    # Can I find a way to call the helper method #logged_in? instead?
+    if !!session[:user_id]
+      session.clear
+      redirect "/login"
+    else
+      redirect "/login"
     end
+  end
 
 
 end
