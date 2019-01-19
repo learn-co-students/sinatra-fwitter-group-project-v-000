@@ -55,7 +55,7 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  
+
 
   get '/logout' do
     # Can I find a way to call the helper method #logged_in? instead?

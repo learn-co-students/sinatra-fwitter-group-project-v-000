@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-  get '/users/:id' do
+  get '/users/:slug' do
     # How do I use the helper method?
-    @user = User.find(session[:user_id])
+    @user = User.find_by_slug(params[:slug])
     @tweets = Tweet.all
     erb :'/users/show'
   end
