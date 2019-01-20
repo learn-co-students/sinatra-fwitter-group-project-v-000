@@ -2,10 +2,13 @@
 
 Here are all the tweets:
 
+<br><br>
+
 <% Tweet.all.each do |tweet| %>
   <%= tweet.content %>
+  <br>
 <% end %>
 
-<br>
+<br><br>
 
 <a href="/tweets/new">Write a new tweet</a>
