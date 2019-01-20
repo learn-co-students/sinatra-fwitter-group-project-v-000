@@ -39,21 +39,33 @@ class TweetsController < ApplicationController
 
   get '/tweets/:id' do
     # binding.pry
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :'/tweets/show'
+    if !!session[:user_id]
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :'/tweets/show'
+    else
+      redirect "/login"
+    end
   end
 
   get '/tweets/:id/edit' do
+    # why does this pass the test: does not let a user edit a tweet they did not create
     @tweet = Tweet.find_by_id(params[:id])
+
     erb :'/tweets/edit'
+
   end
 
-  patch '/tweets' do
+  patch '/tweets/:id' do
     @tweet = Tweet.find_by_id(params[:id])
     # Need to assign user_id to tweet
-    @tweet.update(params[:tweet])
-    # @tweet.save
-    redirect "/tweets/#{@tweet.id}"
+    if params[:tweet][:content] != ""
+      @tweet.update(params[:tweet])
+      # @tweet.save
+      redirect "/tweets/#{@tweet.id}"
+    # undefined method id when content is empty
+    elsif params[:tweet][:content] == ""
+      redirect "/tweets/#{@tweeet.id}/edit"
+    end
   end
 
   get '/tweets/:id/delete' do
