@@ -9,15 +9,15 @@ class UsersController < ApplicationController
     if !params.has_value?("")
       user = User.create(params)
       session[:user_id] = user.id
-      redirect "/tweets"
+      redirect '/tweets'
     else
       redirect "/signup"
     end
   end
 
   get '/login' do
-    if Helpers.is_logged_in?
-      redirect "/tweets"
+    if is_logged_in?(session)
+      redirect '/tweets'
     end
     erb :"users/login"
   end
