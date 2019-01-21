@@ -4,6 +4,7 @@ class TweetsController < ApplicationController
     # Is there a way to use helper methods?
     if !!session[:user_id]
       @user = User.find(session[:user_id])
+      @tweets = Tweet.all
       erb :'/tweets/index'
     else
       redirect "/login"
