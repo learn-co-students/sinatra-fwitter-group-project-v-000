@@ -4,9 +4,12 @@ Here is your new tweet:
 
 <br><br>
 
+<!-- how can i make this look like a button -->
 <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
 
-<br>
+<!-- <form action="/tweets/<%= @tweet.id %>/edit" method="POST">
+  <button type="submit" value="edit">Edit Tweet</button>
+</form> -->
 
 <form action="/tweets/<%= @tweet.id %>/delete" method="POST">
   <input id="hidden" type="hidden" name="_method" value="DELETE">

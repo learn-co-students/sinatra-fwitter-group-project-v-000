@@ -47,11 +47,18 @@ class TweetsController < ApplicationController
     end
   end
 
+  # post '/tweets/:id/edit' do
+  #   redirect "/tweets/:id/edit"
+  # end
+
   get '/tweets/:id/edit' do
     # why does this pass the test: does not let a user edit a tweet they did not create
-    if !!session[:user_id]
-      @tweet = Tweet.find_by_id(params[:id])
+    @tweet = Tweet.find_by_id(params[:id])
+    if !!session[:user_id] && @tweet.user_id == session[:user_id]
+
       erb :'/tweets/edit'
+    elsif !!session[:user_id] && @tweet.user_id != session[:user_id]
+      redirect "/tweets"
     else
       redirect "/login"
     end
