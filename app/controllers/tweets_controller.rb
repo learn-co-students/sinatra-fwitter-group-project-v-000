@@ -1,9 +1,7 @@
 class TweetsController < ApplicationController
   #
   get '/tweets' do
-    # Is there a way to use helper methods?
-    if !!session[:user_id]
-      @user = User.find(session[:user_id])
+    if logged_in?
       @tweets = Tweet.all
       erb :'/tweets/index'
     else
@@ -13,9 +11,7 @@ class TweetsController < ApplicationController
 
 
   get '/tweets/new' do
-    # Is there a way to use helper methods?
-    if !!session[:user_id]
-      @user = User.find(session[:user_id])
+    if logged_in?
       erb :'/tweets/new'
     else
       redirect "/login"
@@ -25,13 +21,13 @@ class TweetsController < ApplicationController
   post '/tweets' do
     # Is there a way to use helper methods?
 
-    if !!session[:user_id] && params[:tweet][:content] != ""
+    if logged_in? && params[:tweet][:content] != ""
       @tweet = Tweet.create(params[:tweet])
       # Need to assign user_id to tweet
-      @tweet.user = User.find(session[:user_id])
+      @tweet.user = current_user
       @tweet.save
       redirect "/tweets/#{@tweet.id}"
-    elsif !!session[:user_id] && params[:tweet][:content] == ""
+    elsif logged_in? && params[:tweet][:content] == ""
       redirect "/tweets/new"
     else
       redirect "/login"
@@ -39,8 +35,7 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id' do
-    # binding.pry
-    if !!session[:user_id]
+    if logged_in?
       @tweet = Tweet.find_by_id(params[:id])
       erb :'/tweets/show'
     else
@@ -55,10 +50,10 @@ class TweetsController < ApplicationController
   get '/tweets/:id/edit' do
     # why does this pass the test: does not let a user edit a tweet they did not create
     @tweet = Tweet.find_by_id(params[:id])
-    if !!session[:user_id] && @tweet.user_id == session[:user_id]
+    if logged_in? && @tweet.user == current_user
 
       erb :'/tweets/edit'
-    elsif !!session[:user_id] && @tweet.user_id != session[:user_id]
+    elsif logged_in? && @tweet.user != current_user
       redirect "/tweets"
     else
       redirect "/login"
@@ -81,7 +76,7 @@ class TweetsController < ApplicationController
 
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find_by_id(params[:id])
-    if !!session[:user_id] && @tweet.user_id == session[:user_id]
+    if logged_in? && @tweet.user == current_user
       @tweet.delete
       redirect "/tweets"
     else
