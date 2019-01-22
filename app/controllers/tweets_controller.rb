@@ -23,6 +23,7 @@ class TweetsController < ApplicationController
       @tweet = Tweet.create(params[:tweet])
       @tweet.user = current_user
       @tweet.save
+      flash[:message] = "Tweet successfully created."
       redirect "/tweets/#{@tweet.id}"
     elsif logged_in? && params[:tweet][:content] == ""
       redirect "/tweets/new"
@@ -55,8 +56,10 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find_by_id(params[:id])
     if params[:tweet][:content] != ""
       @tweet.update(params[:tweet])
+      flash[:message] = "Tweet successfully updated."
       redirect "/tweets/#{@tweet.id}"
     elsif params[:tweet][:content] == ""
+      flash[:message] = "Please enter content to update tweet."
       redirect "/tweets/#{@tweet.id}/edit"
     end
   end
@@ -65,6 +68,7 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find_by_id(params[:id])
     if logged_in? && @tweet.user == current_user
       @tweet.delete
+      flash[:message] = "Tweet successfully deleted."
       redirect "/tweets"
     else
       redirect "/login"

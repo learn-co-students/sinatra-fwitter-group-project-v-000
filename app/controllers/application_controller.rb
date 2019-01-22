@@ -7,6 +7,7 @@ class ApplicationController < Sinatra::Base
     set :views, "app/views"
     enable :sessions
     set :session_secret, "password_security"
+    use Rack::Flash
   end
 
   get '/' do
@@ -27,6 +28,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = user.id
       redirect "/tweets"
     else
+      flash[:message] = "Please enter a valid username, email, and password to sign up."
       redirect "/signup"
     end
   end
@@ -45,6 +47,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = user.id
       redirect "/tweets"
     else
+      flash[:message] = "Incorrect username, email, or password entered."    
       redirect "/login"
     end
   end
