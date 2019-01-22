@@ -1,14 +1,16 @@
-<h1>Welcome, <%= current_user.username %></h1>
+<h1>Welcome, <%= current_user.username %>!</h1>
 
-Here are all the tweets:
+<h3>Current feed:</h3>
 
-<br><br>
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li><%= tweet.content %></li>
+    <br>
+  <% end %>
+</ul>
 
-<% @tweets.each do |tweet| %>
-  <%= tweet.content %>
-  <br>
-<% end %>
+<b><a href="/tweets/new">Write a new tweet</a></b>
 
-<br><br>
+<br><br><br>
 
-<a href="/tweets/new">Write a new tweet</a>
+<a href="/users/<%= current_user.slug %>">My Tweets</a> <b>|</b> <a href="/logout">Log Out</a>

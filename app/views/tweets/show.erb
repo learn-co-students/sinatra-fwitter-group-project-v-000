@@ -7,11 +7,11 @@ Here is your new tweet:
 <!-- how can i make this look like a button -->
 <a href="/tweets/<%= @tweet.id %>/edit">Edit Tweet</a>
 
-<!-- <form action="/tweets/<%= @tweet.id %>/edit" method="POST">
-  <button type="submit" value="edit">Edit Tweet</button>
-</form> -->
-
 <form action="/tweets/<%= @tweet.id %>/delete" method="POST">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <button type="submit" value="delete">Delete Tweet</button>
 </form>
+
+<br><br>
+
+<a href="/tweets/index">Home</a>  <b>|</b>  <a href="/users/<%= current_user.slug %>">My Tweets</a>  <b>|</b>  <a href="/logout">Log Out</a>
