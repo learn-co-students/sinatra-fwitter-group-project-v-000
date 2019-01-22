@@ -16,7 +16,7 @@ class TweetsController < ApplicationController
         end
     end
     
-    post '/tweets/tweets' do
+    post '/tweets' do
         @tweets = Tweet.all
         redirect to '/tweets'
     end
