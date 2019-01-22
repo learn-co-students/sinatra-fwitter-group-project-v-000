@@ -26,6 +26,7 @@ class TweetsController < ApplicationController
       flash[:message] = "Tweet successfully created."
       redirect "/tweets/#{@tweet.id}"
     elsif logged_in? && params[:tweet][:content] == ""
+      flash[:message] = "Please enter content to post a tweet."
       redirect "/tweets/new"
     else
       redirect "/login"

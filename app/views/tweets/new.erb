@@ -1,3 +1,7 @@
+<h3 style="color: #16A085;"><% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %></h3>
+
 <h1>Write a New Tweet</h1>
 <form action='/tweets' method="POST">
   <label for="content">Tweet:</label>
