@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     end
     
     #loads the signup page
+    #see User Authentication in Sinatra lab
     get '/signup' do
       if !logged_in?
         erb :'/users/create_user'
@@ -17,8 +18,17 @@ class UsersController < ApplicationController
       end
     end
     
+    #see User Authentication in Sinatra lab
     post '/signup' do
-      erb :'/tweets'
+      if !params[:username].empty? && !params[:email].emptyd? && !params[:password].empty?
+        @user = User.new(username: params[:username], email: params[:email], password: params[:password])
+        @user.save
+        #binding.pry
+        session[:user_id] = @user.id #user is logged in
+        redirect '/tweets'
+      else
+        redirect to '/signup'
+      end
     end
 
 end
