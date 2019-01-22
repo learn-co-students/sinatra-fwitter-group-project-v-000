@@ -20,12 +20,12 @@ class UsersController < ApplicationController
     
     #see User Authentication in Sinatra lab
     post '/signup' do
-      if !params[:username].empty? && !params[:email].emptyd? && !params[:password].empty?
+      if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
         @user = User.new(username: params[:username], email: params[:email], password: params[:password])
         @user.save
         #binding.pry
         session[:user_id] = @user.id #user is logged in
-        redirect '/tweets'
+        redirect '/login'
       else
         redirect to '/signup'
       end

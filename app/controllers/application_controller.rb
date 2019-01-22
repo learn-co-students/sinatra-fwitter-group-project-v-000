@@ -14,8 +14,8 @@ class ApplicationController < Sinatra::Base
 # Need helper method to validate whether a user is logged in?
 
  
-  helpers do
-		def logged_in?
+ class Helpers
+		def self.logged_in?(session)
 			!!session[:user_id]
 		end
 
