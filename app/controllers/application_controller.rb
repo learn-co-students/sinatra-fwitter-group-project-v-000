@@ -22,7 +22,6 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    # can't get this to work: user = User.new(params[:user])
     user = User.new(username: params[:username], email: params[:email], password: params[:password])
     if user.save
       session[:user_id] = user.id
@@ -56,6 +55,7 @@ class ApplicationController < Sinatra::Base
     end
     redirect "/login"
   end
+
 
   helpers do
 
