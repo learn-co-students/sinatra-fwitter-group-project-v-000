@@ -5,14 +5,6 @@ class TweetsController < ApplicationController
         erb :'/index'
     end
     
-      #loads the signup page
-    get '/signup' do
-        erb :'/users/create_user'
-    end
-    
-    post '/signup' do
-        erb :'/tweets'
-    end
     
     get '/tweets' do
         if logged_in?
@@ -23,15 +15,24 @@ class TweetsController < ApplicationController
             redirect '/login'
         end
     end
-
+    
     post '/tweets/tweets' do
         @tweets = Tweet.all
         redirect to '/tweets'
     end
-
+    
     get 'tweets/new' do
-
+        
         erb :'/tweets/new'
     end
-
+    
 end
+
+#   #loads the signup page
+# get '/signup' do
+#     erb :'/users/create_user'
+# end
+
+# post '/signup' do
+#     erb :'/tweets'
+# end
