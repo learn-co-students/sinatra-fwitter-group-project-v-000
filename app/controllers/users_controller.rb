@@ -2,6 +2,7 @@ class UsersController < ApplicationController
     
     get '/users/:slug' do
       @user = User.find_by_slug(params[:slug])
+      erb :'/users/show'
     end
 
     get '/' do
@@ -11,23 +12,22 @@ class UsersController < ApplicationController
     #loads the signup page
     #see User Authentication in Sinatra lab
     get '/signup' do
-      if !logged_in?
-        erb :'/users/create_user'
+      if logged_in?
+        redirect to '/tweets'
       else
-        redirect '/tweets'
+        erb :'/users/create_user'
       end
     end
     
     #see User Authentication in Sinatra lab
     post '/signup' do
-      if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
+      if params[:username] == "" || params[:email] == "" || params[:password] == ""
+        redirect to '/signup'
+      else
         @user = User.new(username: params[:username], email: params[:email], password: params[:password])
         @user.save
-        #binding.pry
         session[:user_id] = @user.id #user is logged in
-        redirect '/login'
-      else
-        redirect to '/signup'
+        redirect to '/tweets'
       end
     end
 
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       if !logged_in?
         erb :'/users/login'
       else
-        redirect 'tweets'
+        redirect '/tweets'
       end
     end
 
@@ -45,9 +45,19 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id #user logged in
         redirect '/tweets'
       else
-        redirect '/login'
+        redirect '/signup'
       end
     end
 
+    get '/logout' do
+      if logged_in?
+        session.destroy
+        redirect '/login'
+      else
+        redirect '/'
+      end
+    end
+
+    
 
 end
