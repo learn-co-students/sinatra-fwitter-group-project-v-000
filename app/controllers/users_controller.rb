@@ -22,7 +22,7 @@ require 'pry'
     if logged_in?
       redirect "/tweets"
     else
-      erb :"/users/login"
+      erb :"/users/signup"
     end
   end
 
@@ -32,7 +32,7 @@ require 'pry'
       session[:user_id] = @user.id
       redirect to "/tweets"
     else
-      redirect to "/login"
+      redirect to "/signup"
     end
   end
 
