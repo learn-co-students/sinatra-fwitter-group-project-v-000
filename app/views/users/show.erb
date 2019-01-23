@@ -1,0 +1,11 @@
+<h3>Here is a list of all your tweets, User!</h3>
+
+<ol>
+    <li> 
+        <% @user.tweets.each do |tweet| %>
+            <%= tweet.content %>
+        <% end %>
+    </li>
+</ol>
+<!--Testing Feature -->
+<a href="/tweets">Back</a>

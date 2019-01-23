@@ -4,12 +4,19 @@
     <title>Fwitter</title>
   </head>
   <body>
-
+<!--
     <div class="container">
       <h1>Welcome to Fwitter!</h1>
-      <h2>This is located in layout.erb!</h2>
-      <h2>Don't forget to <strong>yield</strong> your views!</h2>
+      <h3>This is located in layout.erb!</h2>
+      <h4>Don't forget to <strong>yield</strong> your views!</h2>
+      <a href="/tweets/new"> Create Tweet </a>
+      <br>
+      <a href="/logout"> Log Out </a>
     </div>
+-->
 
+<!--The yield below pulls in everything from index.erb, but why? -->
+<!--Do I need the layout.erb page? Why not just use index.erb?-->
+<%= yield %>
   </body>
 </html>
