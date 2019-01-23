@@ -1,15 +1,19 @@
 class UsersController < ApplicationController
 require 'pry'
   get '/signup' do
+    raise params.inspect
     if logged_in?
+
       redirect "/tweets"
     else
+      raise "Failure"
       erb :'users/signup'
     end
   end
 
   post '/signup' do
     @user = User.new(username: params[:username], password: params[:password], email: params[:email])
+
     if @user.save
       session[:user_id] = @user.id
       redirect '/tweets'
@@ -22,7 +26,7 @@ require 'pry'
     if logged_in?
       redirect "/tweets"
     else
-      erb :"/users/signup"
+      erb :"/users/login"
     end
   end
 
@@ -32,7 +36,7 @@ require 'pry'
       session[:user_id] = @user.id
       redirect to "/tweets"
     else
-      redirect to "/signup"
+      redirect to "/login"
     end
   end
 
