@@ -6,9 +6,13 @@
   <body>
 
     <div class="container">
-      <h1>Welcome to Fwitter!</h1>
-      <h2>This is located in layout.erb!</h2>
-      <h2>Don't forget to <strong>yield</strong> your views!</h2>
+      <%if logged_in?%>
+        <h3>Welcome, <%=current_user.username%></h3>
+        <p><a href="/tweets">Home</a> || <a href="/users/<%=current_user.slug%>"><%=current_user.username%>'s Tweets</a> || <a href="/logout">Logout</a></p>
+      <%else%>
+        <h1>Welcome to Fwitter!</h1>
+      <%end%>
+      <%=yield%>
     </div>
 
   </body>

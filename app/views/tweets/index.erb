@@ -1,0 +1,4 @@
+<h3><a href='/tweets/new'>New Tweet</a></h3>
+<%Tweet.all.reverse.each do |tweet|%>
+  <%=tweet.content%><a href="/tweets/<%=tweet.id%>">*</a></br></br>
+<%end%>

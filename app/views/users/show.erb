@@ -1,0 +1,9 @@
+<h1><%=@user.username%>'s Tweets</h1>
+
+<%if @user == current_user%>
+  <h3><a href='/tweets/new'>New Tweet</a></h3>
+<%end%>
+
+<%@user.tweets.each do |tweet|%>
+  <%=tweet.content%></br>
+<%end%>
