@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def is_logged_in?(session)
-      !!session[:user_id]
+      !!current_user(session)
     end
   end
 

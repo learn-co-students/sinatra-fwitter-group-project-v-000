@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if is_logged_in?(session)
-      redirect '/tweets'
+      redirect to '/tweets'
     else
       erb :"users/create_user"
     end
@@ -34,6 +34,20 @@ class UsersController < ApplicationController
       redirect '/tweets'
     else
       erb :"users/login"
+    end
+  end
+
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :"users/show"
+  end
+
+  get '/logout' do
+    if is_logged_in?(session)
+      session.clear
+      redirect to '/login'
+    else
+      redirect to '/'
     end
   end
 end
