@@ -10,10 +10,14 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    @user = User.create(username: params[:user][:username], email: params[:user][:email], password: params[:user][:password])
-    @user.save
-    session[:id] = @user.id
-    redirect '/tweets'
+    if !params.has_value?("")
+      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      @user.save
+      session[:user_id] = @user.id
+      redirect '/tweets'
+    else
+      redirect "/signup"
+    end
   end
-  
+
 end
