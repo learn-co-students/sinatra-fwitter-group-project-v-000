@@ -16,6 +16,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect '/tweets'
     else
+      "All fields are required."
       redirect "/signup"
     end
   end
