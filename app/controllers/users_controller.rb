@@ -6,7 +6,11 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
-    erb :'users/new'
+    if session[:user_id] == nil
+       erb :'users/new'
+    else
+      redirect '/tweets'
+    end
   end
 
   post '/signup' do
@@ -20,4 +24,7 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/users/:id' do
+    erb :'users/show'
+  end
 end
