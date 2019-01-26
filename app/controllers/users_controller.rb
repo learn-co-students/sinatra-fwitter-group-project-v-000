@@ -28,7 +28,8 @@ class UsersController < ApplicationController
   end
 
   post '/users/login' do
-    
+    @user = User.find_by(email: params["email"], password: params["password"])
+    session[:id] = @user.id
   end
 
   get '/users/:id' do
