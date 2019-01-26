@@ -1,13 +1,12 @@
 class UsersController < ApplicationController
 
   get '/users' do
-    @users = User.all
-    erb :'users/index'
+    erb :'layout'
   end
 
   get '/signup' do
     if session[:user_id] == nil
-       erb :'users/new'
+       erb :'users/create_user'
     else
       redirect '/tweets'
     end
