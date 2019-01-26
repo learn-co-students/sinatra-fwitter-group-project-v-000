@@ -23,7 +23,17 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/users/login' do
+    erb :'users/login'
+  end
+
+  post '/users/login' do
+    
+  end
+
   get '/users/:id' do
     erb :'users/show'
   end
+
+
 end

@@ -1,1 +1,13 @@
-login.erb
+
+<h3>Login</h3>
+<b>ALL FIELDS ARE REQUIRED.</b>
+
+<p>
+<form action="/users/login" method="POST">
+  <label for="email">Email:</label>
+  <input type="text" name="email" id="email"></input><br>
+  <label for="password">Password:</label>
+  <input type="text" name="password" id="password"></input><br>
+  <input type="submit" value="Log in">
+</form>
+</p>
