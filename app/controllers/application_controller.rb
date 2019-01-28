@@ -8,7 +8,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    "Hello"
+    "Welcome to Fwitter"
   end
 
 end

@@ -29,7 +29,11 @@ class UsersController < ApplicationController
 
   post '/users/login' do
     @user = User.find_by(email: params["email"], password: params["password"])
-    session[:id] = @user.id
+    if @user == nil
+      redirect '/users/login'
+    else
+      session[:id] = @user.id
+    end
   end
 
   get '/users/:id' do
