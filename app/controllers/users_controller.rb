@@ -28,12 +28,27 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    @user = User.find_by(email: params["email"], password: params["password"])
-    if @user == nil
-      redirect '/login'
+
+    if session[:user_id] == nil
+      @user = User.find_by(username: params[:username], password: params[:password])
+      if @user == nil
+        redirect '/login'
+      else
+        session[:user_id] = @user.id
+        redirect '/tweets'
+      end
     else
-      session[:id] = @user.id
       redirect '/tweets'
+    end
+  end
+
+
+  get '/logout' do
+    if session[:user_id] != nil
+      redirect '/tweets'
+    else
+      session.clear
+      redirect '/login'
     end
   end
 
