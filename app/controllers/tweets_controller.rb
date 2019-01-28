@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    @tweets = Tweet.all
+    @user = User.find(session[:id])
     erb :'tweets/tweets'
   end
 

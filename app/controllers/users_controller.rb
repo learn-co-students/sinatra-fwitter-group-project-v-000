@@ -23,16 +23,17 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/users/login' do
+  get '/login' do
     erb :'users/login'
   end
 
-  post '/users/login' do
+  post '/login' do
     @user = User.find_by(email: params["email"], password: params["password"])
     if @user == nil
-      redirect '/users/login'
+      redirect '/login'
     else
       session[:id] = @user.id
+      redirect '/tweets'
     end
   end
 
