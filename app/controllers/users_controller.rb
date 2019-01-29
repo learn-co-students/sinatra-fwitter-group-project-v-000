@@ -24,21 +24,24 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    erb :'users/login'
+    if session[:user_id] == nil
+     erb :'users/login'
+    else
+     redirect '/tweets'
+    end
   end
 
   post '/login' do
-    binding.pry
     #if the user isn't logged in
     if session[:user_id] == nil
       #find user
-      @user = User.find_by(email: params[:email], password: params[:password])
+      @user = User.find_by(username: params[:username], password: params[:password])
         #if user can't be found/authenticated
       if @user == nil
           #redirect to '/login'
         redirect '/login'
       else
-          #otherwise set session[:user_id] to user.id and then redirect '/tweets
+        #otherwise set session[:user_id] to user.id and then redirect '/tweets
         session[:user_id] = @user.id
         redirect '/tweets'
       end
@@ -51,9 +54,9 @@ class UsersController < ApplicationController
 
   get '/logout' do
     if session[:user_id] != nil
-      redirect '/tweets'
-    else
       session.clear
+      redirect '/login'
+    else
       redirect '/login'
     end
   end
