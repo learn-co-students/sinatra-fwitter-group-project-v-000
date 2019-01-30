@@ -2,7 +2,10 @@ class User < ActiveRecord::Base
   has_many :tweets
 
   def slug
-    binding.pry
-    self.username.downcase
+    self.username.downcase.gsub(/\s+/, "-")
+  end
+
+  def find_by_slug(slug)
+    slug.gsub("-", " ")
   end
 end

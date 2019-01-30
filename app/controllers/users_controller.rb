@@ -51,7 +51,6 @@ class UsersController < ApplicationController
     end
   end
 
-
   get '/logout' do
     if session[:user_id] != nil
       session.clear
@@ -62,6 +61,7 @@ class UsersController < ApplicationController
   end
 
   get '/users/:id' do
+    self.find_by_slug(params[:id])
     erb :'users/show'
   end
 
