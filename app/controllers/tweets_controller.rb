@@ -19,8 +19,12 @@ class TweetsController < ApplicationController
   end
 
   post '/tweets/new' do
-    @user = User.find(session[:user_id])
-    Tweet.create(content: params[:content], user_id: session[:user_id]).save
+    if params[:content] == ""
+      redirect '/tweets/new'
+    else
+      @user = User.find(session[:user_id])
+      Tweet.create(content: params[:content], user_id: session[:user_id]).save
+    end
   end
 
 end
