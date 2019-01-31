@@ -27,4 +27,14 @@ class TweetsController < ApplicationController
     end
   end
 
+  get '/tweets/:id' do
+    if session[:user_id] == nil
+      redirect '/login'
+    else
+      @users_tweet = User.find(session[:user_id]).tweets.find(params[:id]).content
+      erb :'tweets/show_tweet'
+    end
+  end
+
+
 end
