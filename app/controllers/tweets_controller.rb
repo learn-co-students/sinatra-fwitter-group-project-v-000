@@ -67,7 +67,7 @@ class TweetsController < ApplicationController
       @id = params[:id]
       @user = User.find_by_id(session[:user_id])
       if @tweet = Tweet.find_by(id: @id)
-        if (@tweet.user == @user) && (@tweet == @user.tweets.find(1))
+        if (@tweet.user == @user) && (@tweet == @user.tweets.find(@id))
           @tweet.destroy
           redirect '/tweets'
         end
