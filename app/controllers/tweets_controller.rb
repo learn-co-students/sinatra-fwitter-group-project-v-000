@@ -78,15 +78,3 @@ class TweetsController < ApplicationController
   end
 
 end
-
-# post '/tweets/:id/edit' do
-#   @id = params[:id]
-#   if params[:content] == ""
-#     redirect "/tweets/#{@id}/edit"
-#   else
-#     @user_tweet = User.find(session[:user_id]).tweets.find(params[:id])
-#     @user_tweet.content = params[:content]
-#     @user_tweet.save
-#     redirect "/tweets/#{@id}"
-#   end
-# end
