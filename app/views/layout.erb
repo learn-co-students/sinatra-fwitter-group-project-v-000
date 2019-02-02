@@ -6,9 +6,17 @@
   <body>
 
     <div class="container">
-      <h1>Welcome to Fwitter!</h1>
-      <h2>This is located in layout.erb!</h2>
-      <h2>Don't forget to <strong>yield</strong> your views!</h2>
+    <b>
+    <% if !session[:user_id] == nil %>
+    Username: <%=  User.find(session[:user_id]).username %>
+    <% end %>
+    </b>
+    <%=yield%>
+    <b><label><a href="/signup">Sign up</a></label></b><br>
+    <b><label><a href="/login">Log in</a></label></b><br>
+    <b><label><a href="/logout">Log out</a></label></b><br>
+    <b><label><a href="/tweets/new">Create Tweet</a></label></b><br>
+    <b><label><a href="/tweets">View Tweets</a></label></b><br>
     </div>
 
   </body>
