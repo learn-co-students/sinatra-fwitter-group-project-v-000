@@ -14,8 +14,10 @@ class UsersController < ApplicationController
       if login(@user.id)
         redirect '/tweets'
       else
-        redirect "/signup"
+        redirect '/signup'
       end
+    else
+      redirect '/signup'
     end
   end
 
@@ -35,7 +37,7 @@ class UsersController < ApplicationController
         if @user == nil
           redirect '/login'
         else
-          if user && user.authenticate(params[:password])
+          if @user && @user.authenticate(params[:password])
             login(@user.id)
             redirect '/tweets'
           else
