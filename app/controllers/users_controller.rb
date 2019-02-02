@@ -50,12 +50,12 @@ class UsersController < ApplicationController
     end
   end
 
-  get "/users/#{User.find(session[:id]).slug}" do
-    if logged_in?
-      binding.pry
-    else
-      redirect '/login'
-    end
-  end
+  # get "/users/#{User.find(session[:id]).slug}" do
+  #   if logged_in?
+  #     binding.pry
+  #   else
+  #     redirect '/login'
+  #   end
+  # end
 
 end
