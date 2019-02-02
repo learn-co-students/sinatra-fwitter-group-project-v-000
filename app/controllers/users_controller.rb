@@ -11,10 +11,11 @@ class UsersController < ApplicationController
   post '/signup' do
     if !params.has_value?("")
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-      login(@user.id)
-      redirect '/tweets'
-    else
-      redirect "/signup"
+      if login(@user.id)
+        redirect '/tweets'
+      else
+        redirect "/signup"
+      end
     end
   end
 
@@ -34,12 +35,16 @@ class UsersController < ApplicationController
         if @user == nil
           redirect '/login'
         else
-          login(@user.id)
-          redirect '/tweets'
-        end
+          if user && user.authenticate(params[:password])
+            login(@user.id)
+            redirect '/tweets'
+          else
+            redirect '/login'
+          end #38
+        end # 35
       redirect '/tweets'
-    end
-  end
+    end #31
+  end #30
 
   get '/logout' do
     if logged_in?
