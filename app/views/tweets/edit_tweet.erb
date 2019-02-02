@@ -1,10 +1,10 @@
 <h3>Edit Tweet</h3>
 <p>Here is your existing tweet:<br>
-<b>"<%=@user_tweet%>"</b>
+<b>"<%=@tweet.content%>"</b>
 </p>
 <br>
 <br>
-<form action="/tweets/<%=@id%>/edit" method="POST">
+<form action="/tweets/<%=@tweet.id%>/edit" method="POST">
 <input id="hidden" type="hidden" name="_method" value="patch">
   <label>Edit Tweet Content:</label>
   <br></br>

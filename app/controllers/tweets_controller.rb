@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
 
-  get '/tweets' do
+get '/tweets' do
     if logged_in?
       @user = current_user
       erb :'tweets/tweets'
@@ -32,8 +32,7 @@ class TweetsController < ApplicationController
   get '/tweets/:id/edit' do
     if logged_in?
       @user = current_user
-      @id = params[:id]
-      @user_tweet = User.find(session[:user_id]).tweets.find(@id).content
+      @tweet = @user.tweets.find(params[:id])
       erb :'tweets/edit_tweet'
     else
       redirect '/login'
@@ -43,8 +42,7 @@ class TweetsController < ApplicationController
 
   get '/tweets/:id' do
     if logged_in?
-      @users_tweet = User.find(session[:user_id]).tweets.find(params[:id]).content
-      @id = params[:id]
+      @tweet = User.find(session[:user_id]).tweets.find(params[:id])
       erb :'tweets/show_tweet'
     else
       redirect '/login'
@@ -52,32 +50,20 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id/edit' do
-    @id = params[:id]
     if params[:content] == ""
-      redirect "/tweets/#{@id}/edit"
+      redirect "/tweets/#{params[:id]}/edit"
     else
-      @user_tweet = User.find(session[:user_id]).tweets.find(params[:id])
-      @user_tweet.content = params[:content]
-      @user_tweet.save
-      redirect "/tweets/#{@id}"
+      @user = current_user
+      @tweet = @user.tweets.find(params[:id])
+      @tweet.content = params[:content]
+      @tweet.save
+      redirect "/tweets/#{params[:id]}"
     end
   end
 
   delete '/tweets/:id/delete' do
-    if logged_in?
-      @id = params[:id]
-      @user = User.find_by_id(session[:user_id])
-      if @tweet = Tweet.find_by(id: @id)
-        if (@tweet.user == @user) && (@tweet == @user.tweets.find(@id))
-          @tweet.destroy
-          redirect '/tweets'
-        end
-      else
-        redirect "/tweets/#{@id}"
-      end
-    else
-      redirect '/login'
-    end
+    @tweet = Tweet.find(params[:id])
+    @tweet.delete if @tweet.user == current_user
+    redirect to '/tweets'
   end
-
 end
