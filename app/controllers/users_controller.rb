@@ -1,12 +1,8 @@
 class UsersController < ApplicationController
 
-  get '/users' do
-    erb :'layout'
-  end
-
   get '/signup' do
-    if session[:user_id] == nil
-       erb :'users/create_user'
+    if !logged_in?
+      erb :'users/create_user'
     else
       redirect '/tweets'
     end
@@ -16,7 +12,6 @@ class UsersController < ApplicationController
     if !params.has_value?("")
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
       @user.save
-      session[:user_id] = @user.id
       redirect '/tweets'
     else
       redirect "/signup"
@@ -24,36 +19,31 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    if session[:user_id] == nil
-     erb :'users/login'
+    if logged_in?
+      redirect '/tweets'
     else
-     redirect '/tweets'
+     erb :'users/login'
     end
   end
 
   post '/login' do
-    #if the user isn't logged in
-    if session[:user_id] == nil
-      #find user
-      @user = User.find_by(username: params[:username], password: params[:password])
-        #if user can't be found/authenticated
-      if @user == nil
-          #redirect to '/login'
-        redirect '/login'
-      else
-        #otherwise set session[:user_id] to user.id and then redirect '/tweets
-        session[:user_id] = @user.id
-        redirect '/tweets'
-      end
-    #if the user is already logged in, redirect to '/tweets'
+    if logged_in?
+      redirect '/tweets'
     else
+      @user = User.find_by(username: params[:username], password: params[:password])
+        if @user == nil
+          redirect '/login'
+        else
+          login(@user.id)
+          redirect '/tweets'
+        end
       redirect '/tweets'
     end
   end
 
   get '/logout' do
-    if session[:user_id] != nil
-      session.clear
+    if logged_in?
+      logout
       redirect '/login'
     else
       redirect '/login'
@@ -61,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   get '/users/:id' do
-    self.find_by_slug(params[:id])
+    User.find_by_slug(params[:id])
     erb :'users/show'
   end
 

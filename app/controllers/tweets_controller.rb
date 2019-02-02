@@ -1,20 +1,20 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    if session[:user_id] == nil
-      redirect '/login'
-    else
-      @user = User.find(session[:user_id])
+    if logged_in?
+      @user = current_user
       erb :'tweets/tweets'
+    else
+      redirect '/login'
     end
   end
 
   get '/tweets/new' do
-    if session[:user_id] == nil
-      redirect '/login'
-    else
-      @user = User.find(session[:user_id])
+    if logged_in?
+      @user = current_user
       erb :'tweets/new'
+    else
+      redirect '/login'
     end
   end
 
@@ -22,29 +22,32 @@ class TweetsController < ApplicationController
     if params[:content] == ""
       redirect '/tweets/new'
     else
-      @user = User.find(session[:user_id])
-      Tweet.create(content: params[:content], user_id: session[:user_id]).save
+      @user = current_user
+      @tweet = Tweet.create(content: params[:content], user_id: session[:user_id])
+      @user.tweets << @tweet
+      redirect '/tweets'
     end
   end
 
   get '/tweets/:id/edit' do
-    if session[:user_id] == nil
-      redirect '/login'
-    else
+    if logged_in?
+      @user = current_user
       @id = params[:id]
       @user_tweet = User.find(session[:user_id]).tweets.find(@id).content
       erb :'tweets/edit_tweet'
+    else
+      redirect '/login'
     end
   end
 
 
   get '/tweets/:id' do
-    if session[:user_id] == nil
-      redirect '/login'
-    else
+    if logged_in?
       @users_tweet = User.find(session[:user_id]).tweets.find(params[:id]).content
       @id = params[:id]
       erb :'tweets/show_tweet'
+    else
+      redirect '/login'
     end
   end
 
@@ -61,9 +64,7 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
-    if session[:user_id] == nil
-      redirect '/login'
-    else
+    if logged_in?
       @id = params[:id]
       @user = User.find_by_id(session[:user_id])
       if @tweet = Tweet.find_by(id: @id)
@@ -74,6 +75,8 @@ class TweetsController < ApplicationController
       else
         redirect "/tweets/#{@id}"
       end
+    else
+      redirect '/login'
     end
   end
 
