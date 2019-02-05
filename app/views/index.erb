@@ -1,7 +1,13 @@
 <div class="container">
-      <h1>Welcome to Fwitter!</h1>
-      <ul>
-       <li><a href="/signup">Sign Up</a></li>
-       <li><a href="/login">Log in</a></li>
-      </ul>
+  <h1>Welcome to Fwitter!</h1>
+
+  <% if current_user %>
+    <a href="/tweets/new">Add a Tweet </a><br>
+    <a href="/tweets">All Tweets </a><br>
+    <a href="/logout">Log Out </a><br>
+    <a href="/users/<%=@current_user.id%>"><%=@current_user.username%></a>
+    <% else %>
+       <a href="/signup">Sign Up</a>
+       <a href="/login">Log in</a>
+    <% end %>
 </div>
