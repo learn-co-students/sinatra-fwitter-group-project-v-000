@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    erb :'users/create_user'
+    if !logged_in?
+      erb :'users/create_user'
+    else
+      redirect "/tweets"
+    end
   end
 
   post '/signup' do
-    # binding.pry
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       # Could also use params.values.include?("")
       # Should do username and email validation here.
@@ -13,26 +16,38 @@ class UsersController < ApplicationController
       redirect "/signup"
     end
     @user = User.create(params)
-    # binding.pry
-    session[:id] = @user.id
+    session[:user_id] = @user.id
     redirect "/tweets"
   end
 
   get '/login' do
-    erb :'users/login'
+    if !logged_in?
+      erb :'users/login'
+    else
+      redirect "/tweets"
+    end
   end
 
   post '/login' do
-    @user = User.find(params[:id])
-    # Log user in
-    # Add user_id to sessions hash
-    redirect "/"
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect "/tweets"
+		else
+			redirect "/login"
+		end
   end
 
   get '/logout' do
-    @user = User.find(params[:id])
-    # Clear session hash
+    if logged_in?
+      session.clear
+    end
     redirect "/login"
+  end
+
+  get '/users/:id' do
+    @user = User.find(params[:id])
+    redirect "/users/#{@user.slug}"
   end
 
 end
