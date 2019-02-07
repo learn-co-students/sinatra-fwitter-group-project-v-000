@@ -1,5 +1,7 @@
-<h2>Welcome, <%= @user.username %></h2>
+<div class="fweets">
+  <h2>Welcome, <%= @user.username %></h2>
 
-<% @user.tweets.each do |tweet| %>
-<h3><%= tweet.content %></h3>
-<% end %>
+  <% @user.tweets.each do |tweet| %>
+    <h3><%= tweet.content %></h3>
+  <% end %>
+</div>

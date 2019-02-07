@@ -1,5 +1,7 @@
-<h2><%= @user.username %>'s Latest Fweet</h2>
+<div class="latest-fweet">
+  <h2><%= @user.username %>'s Latest Fweet</h2>
 
-<% @user.tweets.each do |tweet| %>
-<h3><%= tweet.content %></h3>
-<% end %>
+  <% @user.tweets.each do |tweet| %>
+    <h3><%= tweet.content %></h3>
+  <% end %>
+</div>
