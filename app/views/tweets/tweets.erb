@@ -1,7 +1,9 @@
 <div class="fweets">
   <h2>Welcome, <%= @user.username %></h2>
 
-  <% @user.tweets.each do |tweet| %>
-    <h3><%= tweet.content %></h3>
+  <h3>Recent Fweets:</h3>
+
+  <% @tweets.each do |tweet| %>
+    <p style="font-size: 2rem;"><%= tweet.content %></p><br>
   <% end %>
 </div>
