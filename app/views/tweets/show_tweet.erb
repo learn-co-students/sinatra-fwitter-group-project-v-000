@@ -1,0 +1,14 @@
+<div class="latest-fweet">
+  <h2>Welcome, <%= @user.username %></h2>
+
+  <h3>Here's your latest Fweet:</h3>
+
+  <p style="font-size: 1.5rem;">"<%= @tweet.content %>"</p><br>
+  
+  <a style="border-radius: 3px; display: inline; color: buttontext; cursor: default; font: 400 11px system-ui; text-decoration: none; border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186); border-style: solid; border-width: 1px; padding: 1px 7px 2px;" href="/tweets/<%= @tweet.id %>/edit">Edit Fweet</a>
+
+  <form style="display: inline;" method="POST" action="/tweets/<%= @tweet.id/delete %>">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input style="border-radius: 3px; display: inline; color: buttontext; cursor: default; font: 400 11px system-ui; text-decoration: none; border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186); border-style: solid; border-width: 1px; padding: 1px 7px 2px;" id="submit" type="submit" value="Delete Fweet">
+  </form>
+</div>

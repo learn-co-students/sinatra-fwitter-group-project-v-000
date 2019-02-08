@@ -1,3 +1,10 @@
 <div class="edit-fweet">
+  <h2>Change Your Mind?</h2>
 
+  <form method="POST" action="/tweets/<%= @tweet.id %>">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <label for="content">Edit your Fweet here:</label><br>
+    <textarea id="content" cols="60" rows="20" name="content"><%= @tweet.content %></textarea><br><br>
+    <input id="submit" type="submit" value="Update Fweet">
+  </form>
 </div>
