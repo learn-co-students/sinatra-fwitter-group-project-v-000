@@ -38,8 +38,8 @@ class TweetsController < ApplicationController
       # Allows a logged in user to edit their own Fweet.
     redirect "/login" if !logged_in?
     @tweet = Tweet.find_by(id: params[:id])
-    if @tweet.user_id == current_user.id
-        # Makes sure that the user owns the Fweet they want to edit.
+    if @tweet && @tweet.user_id == current_user.id
+        # Makes sure that the Fweet exists and the user owns the Fweet they want to edit.
       erb :'tweets/edit_tweet'
     else
       redirect "/tweets/"
@@ -47,7 +47,7 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-      # Sends the edits to teh server and updates the Fweet.
+      # Sends the edits to the server and updates the Fweet.
     @tweet = Tweet.find_by(id: params[:id])
     redirect "/tweets/#{@tweet.id}/edit" if params[:content].empty?
       # Will send the user back to the edit form if no Fweet content was submitted.
@@ -58,7 +58,7 @@ class TweetsController < ApplicationController
   delete '/tweets/:id/delete' do
       # Allows a logged in user to delete their own Fweet.
     tweet = Tweet.find_by(id: params[:id])
-    tweet.delete if tweet.user_id == current_user.id
+    tweet.delete if tweet && tweet.user_id == current_user.id
     redirect "/tweets"
   end
 
