@@ -10,14 +10,12 @@ class UsersController < ApplicationController
 
   post "/signup" do
     user = User.new(:username => params[:username], :password => params[:password], :email => params[:email])
-
     if user.save
       session[:user_id] = user.id
       redirect "/tweets"
         else
           redirect "/signup"
       end
-
     end
 
   get "/login" do
@@ -49,6 +47,5 @@ class UsersController < ApplicationController
     @tweets = Tweet.all
     erb :'/users/show'
   end
-
 
 end
