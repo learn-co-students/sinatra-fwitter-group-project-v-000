@@ -1,6 +1,4 @@
-<h1>Welcome, <%= current_user.username %></h1>
-
-<h3>Current feed:</h3>
+<h1>Current feed:</h1>
 
 <ul>
   <% @tweets.each do |tweet| %>
@@ -9,7 +7,6 @@
   <% end %>
 </ul>
 
-<a href="/tweets/new">Write a new tweet</a>
-
-<a href="/users/<%= current_user.slug %>">My Tweets</a> 
+<a href="/tweets/new">Write a new tweet</a> <br>
+<a href="/users/<%= current_user.slug %>">My Tweets</a> <br>
 <a href="/logout">Log Out</a>
