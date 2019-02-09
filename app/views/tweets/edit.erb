@@ -1,0 +1,9 @@
+<h1>Tweet</h1>
+
+<form action="/tweets/<%= @tweet.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <textarea id="content" type="text" name="tweet[content]" maxlength="240" value="<%= @tweet.content %>"></textarea>
+  <br>
+  <input type="submit" name="submit" value="submit">
+
+</form>
