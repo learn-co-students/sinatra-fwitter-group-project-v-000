@@ -1,0 +1,9 @@
+<div class="fweets">
+  <h2>Welcome, <%= current_user.username %></h2>
+
+  <h3>All Recent Fweets:</h3>
+
+  <% @tweets.each do |tweet| %>
+    <p style="font-size: 1.5rem;">"<%= tweet.content %>"</p><br>
+  <% end %>
+</div>

@@ -1,0 +1,7 @@
+<div class="all-user-fweets">
+  <h2><%= current_user.username %>'s Fweets</h2>
+
+  <% current_user.tweets.each do |tweet| %>
+    <h3><%= tweet.content %></h3>
+  <% end %>
+</div>
