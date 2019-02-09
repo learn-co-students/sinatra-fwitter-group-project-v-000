@@ -25,31 +25,31 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    
+    # binding.pry
     if !logged_in?
       erb :'users/login'
     else
-      redirect_to '/tweets'
-
+      redirect "/tweets"
     end
-
   end
 
   post '/login' do
 
     @user = User.find_by(username: params[:username])
     # binding.pry
-    if @user.authenticate(params[:password])
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       current_user
 
-      redirect to '/tweets'
+      redirect "/tweets"
     else
       erb :'users/login'
     end
   end
 
-
-
+  get '/logout' do
+    session.clear
+    redirect "/login"
+  end
 
 end
