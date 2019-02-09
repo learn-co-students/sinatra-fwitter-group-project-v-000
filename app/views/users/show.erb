@@ -1,0 +1,16 @@
+<h1><%= current_user.username %>'s tweets:</h1>
+
+<% if current_user.tweets != [] %>
+  <ul>
+    <% current_user.tweets.each do |tweet| %>
+      <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  You haven't written any tweets.
+  <br>
+<% end %>
+
+<br>
+
+<a href="/tweets/new">Write a new tweet</a>

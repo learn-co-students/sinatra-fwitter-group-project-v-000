@@ -1,6 +1,6 @@
 class CreateUsers < ActiveRecord::Migration
   def change
-    create_table :tweets do |t|
+    create_table :users do |t|
       t.string :username
       t.string :password
       t.string :email
