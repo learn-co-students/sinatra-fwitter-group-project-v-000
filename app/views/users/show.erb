@@ -1,0 +1,4 @@
+<h1><%=@user.username%></h1>
+<%@user.tweets.each_with_index do |tweet, i|%>
+<%="#{i}. #{tweet.content}"%><br>
+<%end%>
