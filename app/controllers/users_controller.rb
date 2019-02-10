@@ -20,7 +20,7 @@ class UsersController < ApplicationController
         @user.password = params[:password]
         @user.save
         session[:user_id] = @user.id
-        redirect to '/tweets'
+        redirect "/tweets"
       end
   end
 
@@ -45,6 +45,12 @@ class UsersController < ApplicationController
     else
       erb :'users/login'
     end
+  end
+
+  get '/users/:slug' do
+    # raise params.inspect
+    @user = User.find_by_slug( params[:slug])
+      erb :'/users/show'
   end
 
   get '/logout' do
