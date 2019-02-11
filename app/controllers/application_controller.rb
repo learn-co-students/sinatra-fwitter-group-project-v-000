@@ -16,6 +16,23 @@ class ApplicationController < Sinatra::Base
       erb :'tweets/tweets'
     else
       erb :index
-    end 
+    end
+  end
+
+  helpers do
+
+    def current_user
+      if session[:user_id]
+        @current_user = User.find_by(id: session[:user_id])
+      end
+    end
+
+    def logged_in?
+      if current_user
+        true
+      else
+        false
+      end 
+    end
   end
 end
