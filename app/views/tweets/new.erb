@@ -1,0 +1,10 @@
+<h1>Create a new Tweet</h1>
+<form action="/tweets" method="post">
+
+<input type="hidden" value="<%= @user.id %>" name="user_id">
+
+<label for="content">Tweet:</label>
+<textarea rows ="5" id="content" name="content"></textarea><br><br>
+
+<button type="submit" value="submit">submit</button>
+</form>
