@@ -1,8 +1,10 @@
 require './config/environment'
 
 if ActiveRecord::Migrator.needs_migration?
-  raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
+  raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.aa'  
 end
 
 use Rack::MethodOverride
+use UsersController
+use TweetsController
 run ApplicationController
