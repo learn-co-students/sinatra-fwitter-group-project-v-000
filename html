@@ -1,0 +1,370 @@
+Run options: include {:focus=>true}
+
+All examples were filtered out; ignoring {:focus=>true}
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF...
+
+Failures:
+
+  1) ApplicationController Homepage loads the homepage
+     Failure/Error: expect(last_response.status).to eq(200)
+
+       expected: 200
+            got: 404
+
+       (compared using ==)
+     # ./spec/controllers/application_controller_spec.rb:9:in `block (3 levels) in <top (required)>'
+
+  2) ApplicationController Signup Page loads the signup page
+     Failure/Error: expect(last_response.status).to eq(200)
+
+       expected: 200
+            got: 404
+
+       (compared using ==)
+     # ./spec/controllers/application_controller_spec.rb:18:in `block (3 levels) in <top (required)>'
+
+  3) ApplicationController Signup Page signup directs user to twitter index
+     Failure/Error: expect(last_response.location).to include("/tweets")
+       expected nil to include "/tweets", but it does not respond to `include?`
+     # ./spec/controllers/application_controller_spec.rb:28:in `block (3 levels) in <top (required)>'
+
+  4) ApplicationController Signup Page does not let a user sign up without a username
+     Failure/Error: expect(last_response.location).to include('/signup')
+       expected nil to include "/signup", but it does not respond to `include?`
+     # ./spec/controllers/application_controller_spec.rb:38:in `block (3 levels) in <top (required)>'
+
+  5) ApplicationController Signup Page does not let a user sign up without an email
+     Failure/Error: expect(last_response.location).to include('/signup')
+       expected nil to include "/signup", but it does not respond to `include?`
+     # ./spec/controllers/application_controller_spec.rb:48:in `block (3 levels) in <top (required)>'
+
+  6) ApplicationController Signup Page does not let a user sign up without a password
+     Failure/Error: expect(last_response.location).to include('/signup')
+       expected nil to include "/signup", but it does not respond to `include?`
+     # ./spec/controllers/application_controller_spec.rb:58:in `block (3 levels) in <top (required)>'
+
+  7) ApplicationController Signup Page creates a new user and logs them in on valid submission and does not let a logged in user view the signup page
+     Failure/Error: expect(last_response.location).to include('/tweets')
+       expected nil to include "/tweets", but it does not respond to `include?`
+     # ./spec/controllers/application_controller_spec.rb:69:in `block (3 levels) in <top (required)>'
+
+  8) ApplicationController login loads the login page
+     Failure/Error: expect(last_response.status).to eq(200)
+
+       expected: 200
+            got: 404
+
+       (compared using ==)
+     # ./spec/controllers/application_controller_spec.rb:76:in `block (3 levels) in <top (required)>'
+
+  9) ApplicationController login loads the tweets index after login
+     Failure/Error: expect(last_response.status).to eq(302)
+
+       expected: 302
+            got: 404
+
+       (compared using ==)
+     # ./spec/controllers/application_controller_spec.rb:86:in `block (3 levels) in <top (required)>'
+
+  10) ApplicationController login does not let user view login page if already logged in
+      Failure/Error: expect(last_response.location).to include("/tweets")
+        expected nil to include "/tweets", but it does not respond to `include?`
+      # ./spec/controllers/application_controller_spec.rb:100:in `block (3 levels) in <top (required)>'
+
+  11) ApplicationController logout lets a user logout if they are already logged in
+      Failure/Error: expect(last_response.location).to include("/login")
+        expected nil to include "/login", but it does not respond to `include?`
+      # ./spec/controllers/application_controller_spec.rb:114:in `block (3 levels) in <top (required)>'
+
+  12) ApplicationController logout does not let a user logout if not logged in
+      Failure/Error: expect(last_response.location).to include("/")
+        expected nil to include "/", but it does not respond to `include?`
+      # ./spec/controllers/application_controller_spec.rb:119:in `block (3 levels) in <top (required)>'
+
+  13) ApplicationController logout does not load /tweets if user not logged in
+      Failure/Error: expect(last_response.location).to include("/login")
+        expected nil to include "/login", but it does not respond to `include?`
+      # ./spec/controllers/application_controller_spec.rb:124:in `block (3 levels) in <top (required)>'
+
+  14) ApplicationController logout does load /tweets if user is logged in
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:133:in `block (3 levels) in <top (required)>'
+
+  15) ApplicationController user show page shows all a single users tweets
+      Failure/Error: expect(last_response.body).to include("tweeting!")
+
+        expected "<!DOCTYPE html>\n<html>\n<head>\n  <style type=\"text/css\">\n  body { text-align:center;font-family...2F;becky567&#x27; do\n    &quot;Hello World&quot;\n  end\nend\n</pre>\n  </div>\n</body>\n</html>\n" to include "tweeting!"
+        Diff:
+        @@ -1,2 +1,25 @@
+        -tweeting!
+        +<!DOCTYPE html>
+        +<html>
+        +<head>
+        +  <style type="text/css">
+        +  body { text-align:center;font-family:helvetica,arial;font-size:22px;
+        +    color:#888;margin:20px}
+        +  #c {margin:0 auto;width:500px;text-align:left}
+        +  </style>
+        +</head>
+        +<body>
+        +  <h2>Sinatra doesn’t know this ditty.</h2>
+        +  <img src='http://example.org/__sinatra__/404.png'>
+        +  <div id="c">
+        +    Try this:
+        +    <pre># in application_controller.rb
+        +class ApplicationController
+        +  get &#x27;&#x2F;users&#x2F;becky567&#x27; do
+        +    &quot;Hello World&quot;
+        +  end
+        +end
+        +</pre>
+        +  </div>
+        +</body>
+        +</html>
+      # ./spec/controllers/application_controller_spec.rb:147:in `block (3 levels) in <top (required)>'
+
+  16) ApplicationController index action logged in lets a user view the tweets index if logged in
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:164:in `block (4 levels) in <top (required)>'
+
+  17) ApplicationController index action logged out does not let a user view the tweets index if not logged in
+      Failure/Error: expect(last_response.location).to include("/login")
+        expected nil to include "/login", but it does not respond to `include?`
+      # ./spec/controllers/application_controller_spec.rb:176:in `block (4 levels) in <top (required)>'
+
+  18) ApplicationController new action logged in lets user view new tweet form if logged in
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:188:in `block (4 levels) in <top (required)>'
+
+  19) ApplicationController new action logged in lets user create a tweet if they are logged in
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:200:in `block (4 levels) in <top (required)>'
+
+  20) ApplicationController new action logged in does not let a user tweet from another user
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:221:in `block (4 levels) in <top (required)>'
+
+  21) ApplicationController new action logged in does not let a user create a blank tweet
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:243:in `block (4 levels) in <top (required)>'
+
+  22) ApplicationController new action logged out does not let user view new tweet form if not logged in
+      Failure/Error: expect(last_response.location).to include("/login")
+        expected nil to include "/login", but it does not respond to `include?`
+      # ./spec/controllers/application_controller_spec.rb:260:in `block (4 levels) in <top (required)>'
+
+  23) ApplicationController show action logged in displays a single tweet
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:274:in `block (4 levels) in <top (required)>'
+
+  24) ApplicationController show action logged out does not let a user view a tweet
+      Failure/Error: expect(last_response.location).to include("/login")
+        expected nil to include "/login", but it does not respond to `include?`
+      # ./spec/controllers/application_controller_spec.rb:291:in `block (4 levels) in <top (required)>'
+
+  25) ApplicationController edit action logged in lets a user view tweet edit form if they are logged in
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:303:in `block (4 levels) in <top (required)>'
+
+  26) ApplicationController edit action logged in does not let a user edit a tweet they did not create
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:320:in `block (4 levels) in <top (required)>'
+
+  27) ApplicationController edit action logged in lets a user edit their own tweet if they are logged in
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:332:in `block (4 levels) in <top (required)>'
+
+  28) ApplicationController edit action logged in does not let a user edit a text with blank content
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:350:in `block (4 levels) in <top (required)>'
+
+  29) ApplicationController edit action logged out does not load -- instead redirects to login
+      Failure/Error: expect(last_response.location).to include("/login")
+        expected nil to include "/login", but it does not respond to `include?`
+      # ./spec/controllers/application_controller_spec.rb:366:in `block (4 levels) in <top (required)>'
+
+  30) ApplicationController delete action logged in lets a user delete their own tweet if they are logged in
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:378:in `block (4 levels) in <top (required)>'
+
+  31) ApplicationController delete action logged in does not let a user delete a tweet they did not create
+      Failure/Error: fill_in(:username, :with => "becky567")
+
+      Capybara::ElementNotFound:
+        Unable to find field :username
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:301:in `block in synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/base.rb:83:in `synchronize'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:292:in `synced_resolve'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/finders.rb:47:in `find'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/node/actions.rb:90:in `fill_in'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/session.rb:732:in `block (2 levels) in <class:Session>'
+      # /Users/heshiebrody/.rvm/gems/ruby-2.3.3/gems/capybara-3.12.0/lib/capybara/dsl.rb:51:in `block (2 levels) in <module:DSL>'
+      # ./spec/controllers/application_controller_spec.rb:396:in `block (4 levels) in <top (required)>'
+
+  32) ApplicationController delete action logged out does not load let user delete a tweet if not logged in
+      Failure/Error: expect(page.current_path).to eq("/login")
+
+        expected: "/login"
+             got: "/tweets/1"
+
+        (compared using ==)
+      # ./spec/controllers/application_controller_spec.rb:411:in `block (4 levels) in <top (required)>'
+
+Finished in 3 seconds (files took 2.82 seconds to load)
+35 examples, 32 failures
+
+Failed examples:
+
+rspec ./spec/controllers/application_controller_spec.rb:7 # ApplicationController Homepage loads the homepage
+rspec ./spec/controllers/application_controller_spec.rb:16 # ApplicationController Signup Page loads the signup page
+rspec ./spec/controllers/application_controller_spec.rb:21 # ApplicationController Signup Page signup directs user to twitter index
+rspec ./spec/controllers/application_controller_spec.rb:31 # ApplicationController Signup Page does not let a user sign up without a username
+rspec ./spec/controllers/application_controller_spec.rb:41 # ApplicationController Signup Page does not let a user sign up without an email
+rspec ./spec/controllers/application_controller_spec.rb:51 # ApplicationController Signup Page does not let a user sign up without a password
+rspec ./spec/controllers/application_controller_spec.rb:61 # ApplicationController Signup Page creates a new user and logs them in on valid submission and does not let a logged in user view the signup page
+rspec ./spec/controllers/application_controller_spec.rb:74 # ApplicationController login loads the login page
+rspec ./spec/controllers/application_controller_spec.rb:79 # ApplicationController login loads the tweets index after login
+rspec ./spec/controllers/application_controller_spec.rb:92 # ApplicationController login does not let user view login page if already logged in
+rspec ./spec/controllers/application_controller_spec.rb:105 # ApplicationController logout lets a user logout if they are already logged in
+rspec ./spec/controllers/application_controller_spec.rb:117 # ApplicationController logout does not let a user logout if not logged in
+rspec ./spec/controllers/application_controller_spec.rb:122 # ApplicationController logout does not load /tweets if user not logged in
+rspec ./spec/controllers/application_controller_spec.rb:127 # ApplicationController logout does load /tweets if user is logged in
+rspec ./spec/controllers/application_controller_spec.rb:141 # ApplicationController user show page shows all a single users tweets
+rspec ./spec/controllers/application_controller_spec.rb:155 # ApplicationController index action logged in lets a user view the tweets index if logged in
+rspec ./spec/controllers/application_controller_spec.rb:174 # ApplicationController index action logged out does not let a user view the tweets index if not logged in
+rspec ./spec/controllers/application_controller_spec.rb:183 # ApplicationController new action logged in lets user view new tweet form if logged in
+rspec ./spec/controllers/application_controller_spec.rb:195 # ApplicationController new action logged in lets user create a tweet if they are logged in
+rspec ./spec/controllers/application_controller_spec.rb:215 # ApplicationController new action logged in does not let a user tweet from another user
+rspec ./spec/controllers/application_controller_spec.rb:238 # ApplicationController new action logged in does not let a user create a blank tweet
+rspec ./spec/controllers/application_controller_spec.rb:258 # ApplicationController new action logged out does not let user view new tweet form if not logged in
+rspec ./spec/controllers/application_controller_spec.rb:267 # ApplicationController show action logged in displays a single tweet
+rspec ./spec/controllers/application_controller_spec.rb:287 # ApplicationController show action logged out does not let a user view a tweet
+rspec ./spec/controllers/application_controller_spec.rb:298 # ApplicationController edit action logged in lets a user view tweet edit form if they are logged in
+rspec ./spec/controllers/application_controller_spec.rb:311 # ApplicationController edit action logged in does not let a user edit a tweet they did not create
+rspec ./spec/controllers/application_controller_spec.rb:327 # ApplicationController edit action logged in lets a user edit their own tweet if they are logged in
+rspec ./spec/controllers/application_controller_spec.rb:345 # ApplicationController edit action logged in does not let a user edit a text with blank content
+rspec ./spec/controllers/application_controller_spec.rb:364 # ApplicationController edit action logged out does not load -- instead redirects to login
+rspec ./spec/controllers/application_controller_spec.rb:373 # ApplicationController delete action logged in lets a user delete their own tweet if they are logged in
+rspec ./spec/controllers/application_controller_spec.rb:387 # ApplicationController delete action logged in does not let a user delete a tweet they did not create
+rspec ./spec/controllers/application_controller_spec.rb:408 # ApplicationController delete action logged out does not load let user delete a tweet if not logged in
+
