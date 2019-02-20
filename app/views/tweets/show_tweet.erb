@@ -1,2 +1,8 @@
     <h3>Hey, <%=@user.username%></h3>
-    <p><label>Tweet: <input type="text" name="content" id="content" value="<%=@tweet.content%>"></label></p>
+    <br>
+    <p><a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a></p>
+
+    <form action="/tweets/<%=@tweet.id%>/delete" method="post">
+      <p>Tweet: <%=@tweet.content%></p>
+      <input type="submit" id="submit" name="submit" value="Delete Tweet">
+    </form>
