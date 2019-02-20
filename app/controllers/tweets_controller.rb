@@ -22,6 +22,7 @@ class TweetsController < ApplicationController
   post '/tweets' do
     if !params[:content].empty?
       @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
+      redirect "/tweets/#{@tweet.id}"
     else
       redirect "/tweets/new"
     end
@@ -30,8 +31,12 @@ class TweetsController < ApplicationController
   get '/tweets/:id' do
     if logged_in?
       @user = current_user
-      @tweet = Tweet.find(params[:id])
-      erb :"/tweets/show_tweet"
+      @tweet = Tweet.find_by_id(params[:id])
+      if @tweet
+        erb :"/tweets/show_tweet"
+      else
+        redirect "/tweets"
+      end
     else
       redirect "/login"
     end
@@ -40,8 +45,12 @@ class TweetsController < ApplicationController
   get '/tweets/:id/edit' do
     if logged_in?
       @user = current_user
-      @tweet = Tweet.find(params[:id])
-      erb :"/tweets/edit_tweet"
+      @tweet = Tweet.find_by_id(params[:id])
+      if @tweet && current_user.tweets.include?(@tweet)
+        erb :"/tweets/edit_tweet"
+      else
+        redirect "/login"
+      end
     else
       redirect "/login"
     end
@@ -49,11 +58,12 @@ class TweetsController < ApplicationController
 
   patch '/tweets/:id' do
     @user = current_user
-    @tweet = Tweet.find(params[:id])
-    if !params[:content].empty?
+    @tweet = Tweet.find_by_id(params[:id])
+    if !params[:content].empty? && @tweet
       if logged_in?
         if current_user.tweets.include?(@tweet)
           @tweet.update(content: params[:content])
+          redirect "/tweets/#{@tweet.id}"
         else
           redirect "/login"
         end
@@ -61,17 +71,18 @@ class TweetsController < ApplicationController
         redirect "/login"
       end
     else
-      redirect "/tweets/#{@user.id}/edit"
+      redirect "/tweets/#{@tweet.id}/edit"
     end
   end
 
   post '/tweets/:id/delete' do
     if logged_in?
       @user = current_user
-      @tweet = Tweet.find(params[:id])
+      @tweet = Tweet.find_by_id(params[:id])
 
-      if current_user.tweets.include?(@tweet)
+      if current_user.tweets.include?(@tweet) && @tweet
         @tweet.destroy
+        redirect "/tweets"
       else
         redirect "/login"
       end
