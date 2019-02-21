@@ -1,0 +1,12 @@
+<h1>Edit your fweet</h1>
+
+<p>To quote: "<%= @tweet.content %>"</p><br>
+
+<form action="/tweets/<%= @tweet.id %>" method="POST">
+
+<input type="hidden" id="hidden" name="_method" value="PATCH">
+<input type="text" name="content"><br><br>
+
+<input type="submit" value="submit">
+
+</form>
