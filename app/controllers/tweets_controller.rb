@@ -4,7 +4,11 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/new' do
-    erb :'/tweets/new'
+    if !logged_in?
+      redirect "/login"
+    else
+      erb :'/tweets/new'
+    end
   end
 
   post '/tweets' do
@@ -16,4 +20,8 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find_by_id(params[:id])
     erb :'/tweets/show_tweet'
   end
+
+  # get 'tweets/:id/edit' do
+  #
+  # end
 end

@@ -4,13 +4,12 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
-      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-      session[:user_id] = @user.id
+    if !logged_in?
+      redirect '/signup' if params[:username].empty? || params[:email].empty? || params[:password].empty?
 
+      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      login(@user.username, @user.email, @user.password)
       redirect "/tweets/tweets"
-    else
-      redirect '/signup'
     end
   end
 
@@ -19,11 +18,11 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    @user = User.find_by(email: params[:email], password: params[:password])
-    if @user
-      sessions[:user_id] = @user.id
-      redirect "/tweets/tweets"
-    end
-    redirect '/login'
+    login(params[:username], params[:email], params[:password])
+    redirect "/tweets/tweets"
+  end
+
+  get '/logout' do
+    logout
   end
 end
