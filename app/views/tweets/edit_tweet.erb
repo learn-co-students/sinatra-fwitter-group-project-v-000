@@ -1,0 +1,6 @@
+<h3>Hey, <%=@user.username%></h3>
+<form action="/tweets/<%=@tweet.id%>" method="post">
+  <p><label>Tweet: <input type="text" name="content" id="content" value="<%=@tweet.content%>"></label></p>
+  <input type="hidden" id="hidden" name="_method" value="patch">
+  <input type="submit" id="submit" name="submit" value="Submit">
+</form>
