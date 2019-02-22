@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Fwitter</title>
+  </head>
+  <body>
+
+    <div class="container">
+      <h1>Welcome to Fwitter!</h1>
+      <br></br>
+    </div>
+    <% if !logged_in? %>
+    <p> Please sign up or log in below: </p>
+    <%end %>
+     <nav>
+      <% if logged_in? %>
+         <a href="/tweets/new"> Create Tweet </a>
+        <a href="/logout"> Log Out </a>
+        <p>Welcome, <%=current_user.username %></p>
+       <% else %>
+        <a href="/signup">Sign Up</a><br>
+        <a href="/login"> Log In </a>
+      <%end %>
+     </nav>
+
+
+  </body>
+</html>
