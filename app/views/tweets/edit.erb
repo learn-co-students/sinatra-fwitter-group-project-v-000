@@ -1,0 +1,12 @@
+<!--edit tweet form-->
+<h1>Your Tweet:</h1>
+<p><%= @tweet.content %></p>
+
+<form action="/tweets/<%= @tweet.id %>/edit" method=POST>
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label>Edit Your Tweet:</label>
+  <input type="text" name="content" id="content">
+  <input type="submit" value="Submit">
+</form>
+<br></br>
+<a class="button" href="/">Home</a>
