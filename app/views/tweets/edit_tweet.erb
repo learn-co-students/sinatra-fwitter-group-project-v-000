@@ -1,0 +1,16 @@
+<a class="button" href="/logout">Log out</a>
+
+<h1>Edit Tweet</h1>
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<form action="/tweets/<%=@tweet.id%>" method="POST">
+		<input type="hidden" name="_method" value="patch">
+				<table align="center">       
+        <tr><td><label>Content: </label></td></tr>
+        <tr><td><input type="text" id="content" name="content" value="<%=@tweet.content%>" width="90%"></td></tr> 
+        <tr><td><input type="submit" value="submit" class="button"></td></tr>        
+		</table>
+</form>
