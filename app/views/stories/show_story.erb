@@ -1,0 +1,20 @@
+
+<div class="main">
+  <div class="content">
+    <h2><%= @story.title %></h2>
+    <h3><%- @story.genre %></h3>
+
+    <p><%= @story.summary %></p>
+
+    <p><em><%= @story.notes %></em></p>
+
+     <form method="post" action="/stories/<%=@story.id%>/delete">
+      <input id="hidden" type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Ball it up and toss it in the trash.">
+
+     </form>
+
+     <a href="/stories/<%=@story.id%>/edit">Edit this story. </a>
+    <a href="/stories">View All Stories</a>
+  </div>
+</div>

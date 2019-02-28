@@ -1,0 +1,19 @@
+
+<div class="main">
+  <div class="content">
+    <div class="nameplate"><%= @user.username %></div>
+
+
+     <a href='/stories/new'>Record a new story.</a><br>
+    <a href='/users/<%=@user.slug %>'>View all of your stories.</a>
+
+     <h2> Stories: </h2>
+    <% Story.all.each do |story| %>
+      <h3><%= story.title %></h3>
+        <p><%= story.genre %></p>
+        <p><em><%= story.summary %></em></p>
+    <% end %>
+
+     <a href='/logout'>Logout</a>
+  </div>
+</div>
