@@ -1,0 +1,7 @@
+<h1>Welcome, here are all the tweets:</h1>
+<ul>
+	<% @tweets.each do |tweet| %>
+		<li><%= tweet.content %></li>
+	<% end %>
+</ul>
+<p><a href="/logout">Log Out</a></p>
