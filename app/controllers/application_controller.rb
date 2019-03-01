@@ -14,12 +14,23 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
-   def logged_in?
-   !!current_user
-   end
+     def logged_in?
+     !!current_user
+     end
 
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+     def current_user
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+     end
   end
-end
+
+  def authorized_to_edit?(tweet)
+    tweet.user == current_user
+  end
+
+  def redirect_if_not_logged_in
+    if !logged_in?
+      redirect '/'
+    end
+  end
+
 end

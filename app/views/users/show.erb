@@ -1,11 +1,7 @@
-<p> Here are your tweets, <%= @current_user.username %></p>
-<% @user.tweets.each do |tweet| %>
-  <div>
-    <%= tweet.content %>
-  </div>
-<% end %>
+<p> Welcome, <%= current_user.username %> </p>
 
-<form  action="users/logout" method="post">
-  <input id="hidden" type="hidden" name="_method" value="logout">
-  <input type="submit" value="Log Out">
-</form>
+
+
+<!--<a href='/logout'>Logout</a>
+<a href='/tweets'>All Tweets</a>
+<a href="/tweets/new">Create a New Tweet</a> -->
