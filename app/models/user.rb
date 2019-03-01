@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
     has_many :tweets
 
     def slug
-        self.name.downcase.gsub(" ","-")
+        self.username.downcase.gsub(" ","-")
         #parameterize?
     end
 
