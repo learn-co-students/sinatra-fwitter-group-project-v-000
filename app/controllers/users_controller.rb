@@ -1,21 +1,23 @@
 class UsersController < ApplicationController
 
-    get '/signup' do
-        if logged_in?
-            redirect to '/tweets'
-        else
+    get '/signup' do #renders the signup form
+        #if logged_in?
+        #    redirect to '/tweets'
+        #else
             erb :'users/create_user'
-        end
+        #end
     end
 
     post '/signup' do
-          if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
-              @user = User.create(params)
-              @user.save
-              session[:user_id] = @user.id
-              redirect to '/tweets'
-          else
-              redirect to '/signup'
+        #binding.pry
+        if params[:username] != "" && params[:email] != "" && params[:password] != ""
+                #valid input
+            @user = User.create(params)
+        #      @user.save
+        #      session[:user_id] = @user.id
+              redirect to "/users/#{@user.id}"
+         else
+        #      redirect to '/signup'
           end
       end
 
@@ -43,14 +45,16 @@ class UsersController < ApplicationController
           #erb :login
       end
 
-      get '/logout' do
-          session.destroy
-          redirect '/login'
-      end
-
       get '/users/:slug' do
           "This will be the user show route"
           #@user = User.find_by_slug(params[:slug])
-          #erb :'/users/show'
+          erb :'/users/show'
       end
+
+
+            get '/logout' do
+                session.destroy
+                redirect '/login'
+            end
+
 end
