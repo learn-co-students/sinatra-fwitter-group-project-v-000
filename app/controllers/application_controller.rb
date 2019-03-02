@@ -15,7 +15,15 @@ class ApplicationController < Sinatra::Base
       erb :index
     end
 
-    def logged_in?
-         session[:user_id]
+    helpers do
+
+        def logged_in? #should return true if user is logged in, otherwise false
+            !!current_user
+        end
+
+        def current_user # will return the user if there is one
+            @current_user ||= User.find_by(id: session[:user_id]) #slug?
+        end
+
     end
 end
