@@ -1,0 +1,8 @@
+tweets/edit_tweet.erb
+
+<form class="" action="/tweets/<%= @tweet.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="name">Content:</label>
+  <textarea name="content" style="width:auto; height:auto;"><%= @tweet.content%></textarea>
+  <input type="submit" name="" value="Create Tweet">
+</form>
