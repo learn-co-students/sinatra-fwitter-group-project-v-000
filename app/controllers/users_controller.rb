@@ -17,7 +17,7 @@ class UsersController < ApplicationController
         erb :signup
       #binding.pry
     else
-      redirect "/tweets"
+      erb :signup
     end
 
   end
