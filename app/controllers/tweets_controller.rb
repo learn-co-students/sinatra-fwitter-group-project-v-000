@@ -1,13 +1,15 @@
 class TweetsController < ApplicationController
 
+get '/tweets' do
+  @tweets = Tweet.all
+
+  erb :'tweets/tweets'
+end
+
 # get tweets/new to render a form to create new tweet
 get '/tweets/new' do
   #display a form for creation
   erb :'/tweets/new'
-end
-
-get '/tweets' do
-  @tweet = Tweet.all
 end
 
 post '/tweets' do

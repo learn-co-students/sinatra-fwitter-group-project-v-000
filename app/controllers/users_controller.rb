@@ -1,36 +1,44 @@
 class UsersController < ApplicationController
 
+  get '/login' do
+    erb :'/users/login'
+  end
 
   post '/login' do
     @user = User.create(params)
     #raise params.inspect
     session[:user_id] = @user.id # actually logging the user in
-    redirect "/"
+    redirect "/tweets"
+  end
+
+  get '/signup' do
+    @user = User.create(username: params[:username], password: params[:password])
+    if !@user
+        erb :signup
+      #binding.pry
+    else
+      redirect "/tweets"
+    end
+
   end
 
   post '/signup' do
-    @user = User.create(params)
-    #raise params.inspect
-    session[:user_id] = @user.id # actually logging the user in
-    redirect '/tweets'
+    #binding.pry
+    if params[:username] != "" && params[:email] != "" && params[:password] != ""
+      # create a new user
+      @user = User.new(username: params[:username], email: params[:email], password: params[:password])
+      @user.save
+      session[:user_id] = @user.id
+      redirect to "/tweets"
 
+    else
+      redirect '/signup'
+    end
+  end
 
-
-
-    # if params[:content] != ""
-    #   # create a new entry
-    #   @journal_entry = JournalEntry.create(content: params[:content],
-    #   user_id: current_user.id, title: params[:title], mood: params[:mood])
-    #   flash[:message] = "Journal entry successfully created." if @journal_entry.id
-    #   redirect "/journal_entries/#{@journal_entry.id}"
-    # else
-    #   flash[:errors] = "Something went wrong - you must provide content for your entry."
-    #   redirect '/journal_entries/new'
-    # end
-
-
-
-
+  get '/logout' do
+    session.clear
+    redirect '/login'
   end
 
 end

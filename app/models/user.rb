@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   has_many :tweets
-  
+
+  has_secure_password
+
+
 # ACTIVERECORD VALIDATIONS - adding more validations into our user model:
 
 # validates is a method invocation
@@ -8,5 +11,18 @@ class User < ActiveRecord::Base
 # presence: true - key value pair
 #  these validations will pervent ActiveRecord from:
 #  - creation saving updating from the database if these requirements are not meet
-  validates :username, presence: true
+
+  # validates :username, presence: true
+
+  # def slug
+  #   #binding.pry
+  #   if self.username.include?(" ")
+  #    my_slug = self.username.gsub(" ", "-").downcase
+  #    User.all_slugs.include?(my_slug) ? "#{my_slug}-#{id}" : my_slug
+  #   end
+  # end
+  #
+  # def self.all_slugs
+  #   all.map {|u| u.slug}
+  # end
 end
