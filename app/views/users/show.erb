@@ -1,3 +1,14 @@
-<h2><%= @user.username %>'s Show page</2>
-
-<%= @user.username%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fwitter</title>
+</head>
+<body>
+    <div>
+        <h2><%= @user.username %>'s Show page</h2>
+        <h2><%= @user.tweets.each do |tweet|  %>
+            <p><%= tweet.content %></p>
+        <% end %>
+    </div>
+</body>
+</html>
