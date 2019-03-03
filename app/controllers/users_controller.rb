@@ -29,9 +29,9 @@ class UsersController < ApplicationController
     post '/login' do
         #find the user
         @user = User.find_by(username: params[:username])
+        binding.pry
         #authenticate the user-verfy the user is who they say they are. the right credentials
         if @user.authenticate(params[:password])
-
             # log the user in - create the user session
             session[:user_id] = @user.id #actually logging the user in.
             #redirect to the users show page

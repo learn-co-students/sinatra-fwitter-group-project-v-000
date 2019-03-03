@@ -3,6 +3,7 @@ class TweetsController < ApplicationController
 #index action. index page to display all tweets
     get '/tweets' do
         if logged_in?
+
             erb :'tweets/tweets'
         else
             redirect to '/login'
@@ -12,7 +13,9 @@ class TweetsController < ApplicationController
 #new action. displays create tweet form
     get '/tweets/new' do
         if logged_in?
-            erb :'tweets/new'
+
+            erb :'/tweets/new'
+
         else
             redirect to '/login'
         end
