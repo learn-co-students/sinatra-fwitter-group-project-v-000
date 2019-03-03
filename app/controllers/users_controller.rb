@@ -12,14 +12,11 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
-    @user = User.create(username: params[:username], password: params[:password])
-    if !@user
-        erb :signup
-      #binding.pry
+    if logged_in?
+      redirect "/tweets"
     else
       erb :signup
     end
-
   end
 
   post '/signup' do
