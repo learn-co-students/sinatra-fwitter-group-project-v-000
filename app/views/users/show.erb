@@ -1,0 +1,6 @@
+<%= @user.username %>
+
+<% @user.tweets do |tweet| %>
+<%= tweet.content %>
+<% end %>
+binding.pry
