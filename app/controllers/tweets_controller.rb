@@ -13,8 +13,11 @@ get '/tweets/new' do
 end
 
 post '/tweets' do
+  redirect_if_not_logged_in
   #raise params.inspect
   @tweet = Tweet.create(content: params[:content])
+  redirect "/tweets"
+
   #binding.pry
 end
 
