@@ -43,12 +43,12 @@ class UsersController < ApplicationController
 
   # user SHOW route
 # this routes job is to show the user
-get '/users/:id' do # this will be the user show route
+get '/users/:slug' do # this will be the user show route
   # what do I need to do first?
   # raise params.inspect
-  @user = User.find_by(id: params[:id])
-binding.pry
-  redirect_if_not_logged_in
+  @user = User.find_by_slug(params[:slug])
+#binding.pry
+#  redirect_if_not_logged_in
   erb :'users/show'
 end
 
