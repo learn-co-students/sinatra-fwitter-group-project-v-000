@@ -14,15 +14,14 @@ class User < ActiveRecord::Base
 
   # validates :username, presence: true
 
-  # def slug
-  #   #binding.pry
-  #   if self.username.include?(" ")
-  #    my_slug = self.username.gsub(" ", "-").downcase
-  #    User.all_slugs.include?(my_slug) ? "#{my_slug}-#{id}" : my_slug
-  #   end
-  # end
-  #
-  # def self.all_slugs
-  #   all.map {|u| u.slug}
-  # end
+  def slug
+    #binding.pry
+     my_slug = self.username.gsub(" ", "-").downcase
+  end
+
+  def self.find_by_slug(slug)
+    all.map {|u| if u.slug == slug
+                return u
+                end}
+  end
 end
