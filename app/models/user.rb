@@ -20,8 +20,15 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug)
-    all.map {|u| if u.slug == slug
-                return u
-                end}
+    # all.map {|u| if u.slug == slug
+    #             return u
+    #             end}
+    all.map do |a_user|
+      if a_user.slug == slug
+        return a_user
+      end
+    end
+    
   end
+
 end
