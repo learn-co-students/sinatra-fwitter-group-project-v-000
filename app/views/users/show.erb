@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Fwitter</title>
-</head>
-<body>
-    <div>
-        <h2><%= @user.username %>'s Show page</h2>
-        <h2><%= @user.tweets.each do |tweet|  %>
-            <p><%= tweet.content %></p>
+<h2><%= @user.username %>'s show page</h2>
+<h2><%= Tweets.all.each do |t| %>
+        <h2><%= tweet.content %>
         <% end %>
-    </div>
-</body>
-</html>

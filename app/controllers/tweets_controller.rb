@@ -3,7 +3,7 @@ class TweetsController < ApplicationController
 #index action. index page to display all tweets
     get '/tweets' do
         if logged_in?
-
+            @user = current_user
             erb :'tweets/tweets'
         else
             redirect to '/login'
@@ -13,28 +13,25 @@ class TweetsController < ApplicationController
 #new action. displays create tweet form
     get '/tweets/new' do
         if logged_in?
-
             erb :'/tweets/new'
-
         else
             redirect to '/login'
         end
     end
-
 #create action. Creates one tweet.
     post '/tweets' do
-        if params[:content].empty?
-            redirect to '/tweets/new'
+        if params[:content] != ""
+            tweet = current_user.tweets.create(params)
         else
-            redirect to '/login'
+            redirect to '/tweets/new'
         end
     end
 
 #Read
     get '/tweets/:id' do
         if logged_in?
-            @tweet = Tweet.find_by_id(params[:id])
-            erb :'tweets/show_tweet'
+            @tweet = Tweet.find(params[:id])
+            erb :'/tweets/show_tweet'
         else
             redirect to '/login'
         end
@@ -43,30 +40,26 @@ class TweetsController < ApplicationController
 #update
 
     get 'tweets/:id/edit' do
-        @tweet = Tweet.find(params[:id])
-        @user = User.find_by(is: session[:user_id])
-        if !logged_in?
-            redirect to '/login'
-        elsif logged_in? && @user.tweets.include?(@tweet)
-            erb :'tweets/edit_tweet'
+        if logged_in?
+            @tweet = Tweet.find(params[:id])
+            redirect to '/tweets/edit_tweet'
         else
-            redirect to '/tweets'
+            redirect to '/login'
         end
     end
 
 
     patch 'tweets/:id' do
-        @tweet = Tweet.find(params[:id])
+        tweet = Tweet.find(params[:id])
         if params[:content].empty?
-            redirect to "/tweets/#{@tweet.id}/edit"
+            tweet.update(content: params[:content])
         else
-            @tweet.update(content: params[:content])
-            redirect to "/tweets/#{@tweet.id}"
+            redirect to "/tweets/#{params[:id]/edit}"
         end
     end
 
 #delete
-    delete 'tweets/:id' do
+    post 'tweets/:id/delete' do
 
     end
 
