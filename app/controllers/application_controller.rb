@@ -30,6 +30,10 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    def authorized_to_edit?(a_tweet)
+      a_tweet.user == current_user
+    end
+
   end
 
 end
