@@ -12,9 +12,13 @@ end
 
 # get tweets/new to render a form to create new tweet
 get '/tweets/new' do
-  redirect_if_not_logged_in
+  if logged_in?
+    erb :'/tweets/new'
+  else
+    redirect "/login"
+  end
   #display a form for creation
-  erb :'/tweets/new'
+
 end
 
 post '/tweets' do
