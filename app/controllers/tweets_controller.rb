@@ -12,15 +12,21 @@ end
 
 # get tweets/new to render a form to create new tweet
 get '/tweets/new' do
+  redirect_if_not_logged_in
   #display a form for creation
   erb :'/tweets/new'
 end
 
 post '/tweets' do
+  #binding.pry
   redirect_if_not_logged_in
   #raise params.inspect
-  @tweet = Tweet.create(content: params[:content])
-  redirect "/tweets"
+  if params[:content] != ""
+    @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
+    redirect "/tweets"
+  else
+    redirect '/tweets/new'
+  end
 
   #binding.pry
 end
