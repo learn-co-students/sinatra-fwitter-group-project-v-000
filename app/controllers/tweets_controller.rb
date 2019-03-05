@@ -4,7 +4,7 @@ get '/tweets' do
   if logged_in?
   @tweets = Tweet.all
 
-  erb :'tweets/show'
+  erb :'tweets/tweets'
   else
     redirect '/login'
   end
@@ -37,19 +37,24 @@ end
 
 # show route for a tweet
 get '/tweets/:id' do
+#  if logged_in?
     @tweet = Tweet.find(params[:id])
 
     erb :'/tweets/show_tweet'
+#  else
+  #  redirect "/tweets"
+#  end
 end
 
 get '/tweets/:id/edit' do
-  @tweet = Tweet.find(params[:id])
 
+    @tweet = Tweet.find(params[:id])
     erb :'/tweets/edit_tweet'
 end
 
   # This action's job is to ...???
   patch '/tweets/:id' do
+    if params[:content] != ""
     # 1. find the tweet
     @tweet = Tweet.find(params[:id])
     # 2. modify (update) the journal entry
@@ -57,10 +62,14 @@ end
     #raise params.inspect
 
     # 3. redirect to show page
-    redirect "/tweets/#{@tweet.id}"
+      redirect "/tweets/#{@tweet.id}"
+    else 
+      redirect "/tweets/#{@tweet.id}/edit"
+    end
   end
 
   delete '/tweets/:id' do
+
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
 
