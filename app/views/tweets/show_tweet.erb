@@ -1,0 +1,15 @@
+/tweets/show_tweet.erb
+
+<h1><%= @tweet.content %> </h1>
+<h1><%#= @tweet.user_id %> </h1>
+<form class="" action="/tweets/<%= @tweet.id %>" method="post">
+  <!--  -->
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" name="" value="Delete Tweet">
+</form>
+
+<form class="" action="/tweets/<%= @tweet.id %>" method="post">
+  <!--  -->
+  <input type="hidden" name="_method" value="patch">
+  <input type="submit" name="" value="Edit Tweet">
+</form>

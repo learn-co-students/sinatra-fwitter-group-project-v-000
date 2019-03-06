@@ -1,0 +1,15 @@
+<h2>Welcome,<%#= @tweets.user.username %></h2>
+
+<ul><% @tweets.each do |tweet| %>
+<li><%= tweet.content %></li>
+<% if authorized_to_edit?(tweet) %>
+  <a href="/tweets/<%=tweet.id %>/edit">Edit Tweet</a>
+  <br><br>
+  <form class="" action="/tweets/<%=tweet.id %>" method="post">
+    <!--  -->
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" name="" value="Delete Tweet">
+  </form>
+<% end %>
+
+<%end %></ul>
