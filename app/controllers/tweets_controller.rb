@@ -21,7 +21,8 @@ class TweetsController < ApplicationController
 #create action. Creates one tweet.
     post '/tweets' do
         if params[:content] != ""
-            tweet = current_user.tweets.create(params)
+            @tweet = current_user.tweets.create(params)
+            redirect to "/tweets/#{@tweet.id}"
         else
             redirect to '/tweets/new'
         end
@@ -40,21 +41,26 @@ class TweetsController < ApplicationController
 #update
 
     get 'tweets/:id/edit' do
-        if logged_in?
-            @tweet = Tweet.find(params[:id])
-            redirect to '/tweets/edit_tweet'
+        binding.pry
+        @tweet = Tweet.find(params[:id])
+        if logged_in? && @tweet.user != current_user
+            redirect to "/tweets/#{@tweet.id}"
         else
             redirect to '/login'
         end
+        redirect to '/tweets/edit_tweet'
     end
 
 
     patch 'tweets/:id' do
-        tweet = Tweet.find(params[:id])
-        if params[:content].empty?
-            tweet.update(content: params[:content])
-        else
-            redirect to "/tweets/#{params[:id]/edit}"
+        if logged_in?
+            @tweet = Tweet.find(params[:id])
+            if params[:content].empty?
+                redirect to "/tweets/#{@tweet.id}/edit"
+                @tweet.update(content: params[:content])
+            else
+            redirect to "/tweets/#{@tweet.id}"
+            end
         end
     end
 
