@@ -1,0 +1,15 @@
+<h3>das is da signup page</h3>
+
+<% if !logged_in? %>
+<form action="/signup" method="post">
+  <label>Username</label>
+    <input type="text" name="username">
+  <label>Email</label>
+    <input type="text" name="email">
+  <label>Password</label>
+    <input type="password" name="password">
+
+  <input type="submit" value="Sign Up">
+</form>
+
+<% end %>
