@@ -1,0 +1,10 @@
+<h2>Tweets Page</h2>
+<h2><%= @user.username %>'s Show Page</h2>
+
+<a href="/tweets/new">Tweet away!</a>
+
+<ul>
+<% Tweet.all.each do |t| %>
+<li><%= t.content %></li>
+<% end %>
+</ul>
