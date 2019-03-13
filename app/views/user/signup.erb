@@ -1,0 +1,16 @@
+<h3>Make a fwitter account!</h3>
+<h5>We won't steal your information like facebook, even though we can <3</h5>
+<form action="/signup" method="post">
+    <label for="user_name">Username:</label>
+    <input type="text" name="username" id="user_name">
+
+    <label for="user_email">Email:</label>
+    <input type="text" name="email" id="user_email">
+
+    <label for="user_password">Password:</label>
+    <input type="password" name="password" id="user_password">
+
+    <input type="submit" value="login">
+</form>
+
+<%= "<br> All fields must be filled with valid information fewl. <3" if @user && @user.errors.any? %>
