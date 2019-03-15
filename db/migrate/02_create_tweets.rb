@@ -6,4 +6,5 @@ class CreateTweets < ActiveRecord::Migration
       t.integer :user_id
     end
   end
+  
 end
