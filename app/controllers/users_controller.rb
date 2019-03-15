@@ -9,14 +9,18 @@ class UsersController < ApplicationController
   end
 
   post '/users' do
-    user = User.new(params)
-      if User.find_by(:email => params[:email])
-        binding.pry
-        redirect to '/signin'
-      else
-        user.save
-        redirect to '/tweets'
-      end
+    if params[:username].empty?
+      binding.pry
+      redirect to '/signup'
+    elsif User.find_by(:email => params[:email])
+      # binding.pry
+      redirect to '/signin'
+    else
+      # binding.pry
+      user = User.new(params)
+      user.save
+      redirect to '/tweets'
+    end
   end
 
 end
