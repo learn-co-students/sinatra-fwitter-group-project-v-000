@@ -1,4 +1,4 @@
-require '../config/environment'
+require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
@@ -12,15 +12,15 @@ class ApplicationController < Sinatra::Base
   get '/' do
     erb :index
   end
-  
-  # helper do
-	# 	def logged_in?
-	# 		!!session[:user_id]
-	# 	end
-  #
-	# 	def current_user
-	# 		User.find(session[:user_id])
-	# 	end
-	# end 
+
+  helper do
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
+    end
+  end 
 
 end
