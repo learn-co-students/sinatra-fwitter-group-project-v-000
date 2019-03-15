@@ -8,17 +8,15 @@ class UsersController < ApplicationController
     erb :"/users/login"
   end
 
-  post '/users' do
-    if params[:username].empty?
-      binding.pry
-      redirect to '/signup'
-    elsif User.find_by(:email => params[:email])
-      # binding.pry
+  post '/signup' do
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      redirect '/signup'
+    end
+    if User.find_by(:email => params[:email])
       redirect to '/signin'
     else
       # binding.pry
-      user = User.new(params)
-      user.save
+      user = User.create(params)
       redirect to '/tweets'
     end
   end
