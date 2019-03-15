@@ -15,7 +15,6 @@ class UsersController < ApplicationController
     if User.find_by(:email => params[:email])
       redirect to '/signin'
     else
-      # binding.pry
       user = User.create(params)
       redirect to '/tweets'
     end
