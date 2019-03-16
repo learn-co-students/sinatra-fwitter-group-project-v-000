@@ -1,17 +1,11 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    if logged_in?
+    if !logged_in?
+      erb :"/users/create_user"
+    else
       redirect to '/tweets'
     end
-    erb :"/users/create_user"
-  end
-
-  get '/login' do
-    if logged_in?
-      redirect '/tweets'
-    end
-    erb :"/users/login"
   end
 
   post '/signup' do
@@ -24,6 +18,14 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/login' do
+    if !logged_in?
+      erb :"/users/login"
+    else
+      redirect '/tweets'
+    end
+  end
+
   post '/login' do
     @user = User.find_by(:username => params[:username], :password => params[:password])
     session[:id] = @user.id
@@ -33,8 +35,10 @@ class UsersController < ApplicationController
 
 
   get '/logout' do
-    session[:id].clear
-    redirect to '/login'
+    if !session[:session_id].empty?
+      session.clear
+      redirect to '/login'
+    end
   end
 
 end
