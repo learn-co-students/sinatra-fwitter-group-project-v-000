@@ -52,9 +52,11 @@ class ApplicationController < Sinatra::Base
 
 
   get '/logout' do
-    if !session[:session_id].empty?
+    if logged_in?
       session.clear
       redirect to '/login'
+    else
+      redirect to '/'
     end
   end
 
