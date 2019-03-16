@@ -16,6 +16,7 @@ class UsersController < ApplicationController
       redirect to '/signin'
     else
       user = User.create(params)
+      session[:user_id] = user.id
       redirect to '/tweets'
     end
   end

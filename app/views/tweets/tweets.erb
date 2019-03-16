@@ -1,3 +1,7 @@
-<% @tweets.each do |tweet| %>
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li>
       <%= tweet.content %><br>
-<%end%>
+    </li>
+  <%end%>
+</ul>
