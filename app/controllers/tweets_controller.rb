@@ -48,7 +48,16 @@ class TweetsController < ApplicationController
     end
   end
 
-
+  patch '/tweets/:id' do
+    if params[:content].empty?
+      redirect to "/tweets/#{params[:id]}/edit"
+    else
+      @tweet = Tweet.find(params[:id])
+      params.delete('_method')
+      @tweet.update(params)
+      redirect to "/tweets/#{@tweet.id}"
+    end
+  end
 
 
 end
