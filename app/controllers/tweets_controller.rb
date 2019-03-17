@@ -18,7 +18,9 @@ class TweetsController < ApplicationController
       @tweet = Tweet.find_or_create_by(:content => params[:content])
       @tweet.user_id = session[:user_id]
       @tweet.save
-      redirect to "/tweets/show_tweet"
+      binding.pry
+      user = User.find(session[:user_id])
+      redirect to "/tweets/#{user.slug}"
     else
       redirect to '/login'
     end
@@ -26,6 +28,7 @@ class TweetsController < ApplicationController
 
   get '/tweets/:slug' do
 
+    # redirect to "/tweets/show_tweet"
   end
 
 end
