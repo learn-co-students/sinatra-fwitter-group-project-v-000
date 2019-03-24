@@ -1,0 +1,17 @@
+<% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+
+<h1><%=@exercise.user.username %> adding </h1>
+    <h2> "<%= @exercise.content %>"</h2>
+      <br></br>
+
+<a href='/exercises/<%= @exercise.id %>/edit'><h4>Edit Exercise</h4></a>
+<p>
+    <form action="/exercises/<%=@exercise.id%>/delete" method="post">
+      <input type="hidden" id="hidden" name="_method" value="delete">
+      <input type='submit' id="delete" name="delete" value='Delete Exercise'>
+    </form>
+
+    <p><a href="/exercises/new">Create a New Exercise</a></p>
+      <p><a href="/exercises">Home</a></p>

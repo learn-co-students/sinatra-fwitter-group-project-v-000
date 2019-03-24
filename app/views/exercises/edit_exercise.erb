@@ -1,0 +1,18 @@
+<% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+
+
+<h1>Edit Your Exercise Class</h1>
+
+<form action='/exercises/<%= @exercise.id %>' method='post'>
+  <input id='hidden' type='hidden' name='_method' value='patch'>
+
+  Content: <input type='text' id='content' name='content' value='<%= @exercise.content %>' required>
+  <br></br>
+
+  <input type='submit' id='submit' value='Edit Exercise'>
+</form>
+
+  <p><a href="/exercises/new">Create a New Exercise</a></p>
+    <p><a href="/exercises">Home</a></p>

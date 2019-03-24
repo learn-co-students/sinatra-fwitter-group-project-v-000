@@ -1,0 +1,16 @@
+  <% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
+
+
+<h1>Welcome, <%= @user.username %>, here are all exercise classes available:</h1>
+
+<h3>
+  <p><% Exercise.all.each do |exercise| %>
+     <p><a href="/users/<%= exercise.user.slug %>"><%= exercise.user.username %> creating! <a href="/exercises/<%= exercise.id %>">"<%= exercise.content %>"</p>
+    <% end %>
+  </p> </h3>
+
+      <br>
+      <p><a href="/exercises/new">Create a New Exercise Class</a></p>
+        <p><a href="/exercises">Home</a></p>
