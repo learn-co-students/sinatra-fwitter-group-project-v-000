@@ -13,7 +13,7 @@ class ApplicationController < Sinatra::Base
 
   get "/" do
     if logged_in?
-      redirect '/tweets'
+      redirect '/exercises'
     else
       erb :index
     end
@@ -21,7 +21,7 @@ class ApplicationController < Sinatra::Base
 
   get "/login" do
     if logged_in?
-      redirect '/tweets'
+      redirect '/exercises'
     else
       erb :"/users/login"
     end
@@ -30,7 +30,7 @@ class ApplicationController < Sinatra::Base
   get "/signup" do
     if logged_in?
       flash[:notice] = "You're already logged in! Redirecting..."
-      redirect '/tweets'
+      redirect '/exercises'
     else
       erb :"/users/create_user"
     end
@@ -44,8 +44,8 @@ class ApplicationController < Sinatra::Base
       @user = User.new(params)
       @user.save
       session[:user_id] = @user.id
-      flash[:notice] = "Welcome to Fwitter!"
-      redirect '/tweets'
+      flash[:notice] = "Welcome to DSN gym!"
+      redirect '/exercises'
     end
   end
 
@@ -55,7 +55,7 @@ class ApplicationController < Sinatra::Base
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:success] = "Welcome, #{@user.username}!"
-      redirect '/tweets'
+      redirect '/exercises'
     else
       flash[:error] = "Login failed!"
       redirect '/login'
@@ -64,14 +64,14 @@ class ApplicationController < Sinatra::Base
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    @tweets = @user.tweets
+    @exercises = @user.tweets
     erb :"/users/show"
   end
 
-  get "/tweets/new" do
+  get "/exercises/new" do
     @user = current_user
     if logged_in?
-      erb :"/tweets/create_tweet"
+      erb :"/exercises/create_exercise"
     else
       redirect '/login'
     end
@@ -80,43 +80,43 @@ class ApplicationController < Sinatra::Base
   post "/new" do
     if logged_in? && params[:content] != ""
       @user = current_user
-      @tweet = Tweet.create(content: params["content"], user_id: params[:user_id])
-      @tweet.save
-      erb :"/tweets/show_tweet"
+      @exercise = Exercise.create(content: params["content"], user_id: params[:user_id])
+      @exercise.save
+      erb :"/exercises/show_exercise"
     elsif logged_in? && params[:content] == ""
       flash[:notice] = "Your tweet is blank!"
-      redirect '/tweets/new'
+      redirect '/exercises/new'
     else
       flash[:notice] = "Please log in to proceed"
       redirect '/login'
     end
   end
 
-  get "/tweets" do
+  get "/exercises" do
     if logged_in?
       @user = current_user
-      erb :"/tweets/tweets"
+      erb :"/exercises/exercises"
     else
       redirect '/login'
     end
   end
 
-  get "/tweets/:id" do
+  get "/exercises/:id" do
     @user = current_user
-    @tweet = Tweet.find_by_id(params[:id])
+    @exercise = Exercise.find_by_id(params[:id])
     if !logged_in?
       redirect '/login'
     else
-      erb :"/tweets/show_tweet"
+      erb :"/exercises/show_exercise"
     end
   end
 
-  get "/tweets/:id/edit" do
+  get "/exercises/:id/edit" do
     if logged_in?
-      @tweet = Tweet.find(params[:id])
-      if @tweet.user_id == session[:user_id]
+      @exercise = Exercise.find(params[:id])
+      if @exercise.user_id == session[:user_id]
         # binding.pry
-      erb :"/tweets/edit_tweet"
+      erb :"/exercises/edit_exercise"
       else
         redirect '/login'
       end
@@ -125,52 +125,31 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  # get '/tweets/:id/edit' do
-  # 	if logged_in?
-  # 		@tweet = Tweet.find(params[:id])
-  # 		if current_user.id == @tweet.user_id
-  # 			erb :'tweets/edit_tweet'
-  # 		else
-  # 			"You are not authorized to edit this tweet."
-  # 		end
-  # 	else
-  # 		redirect '/login'
-  # 	end
-  # end
 
 
 
 
-
-
-
-
-
-
-
-
-
-  patch "/tweets/:id" do
+  patch "/exercises/:id" do
     if params[:content] == ""
       flash[:notice] = "Please enter content to proceed"
-      redirect "/tweets/#{params[:id]}/edit"
+      redirect "/exercises/#{params[:id]}/edit"
     else
-      @tweet = Tweet.find(params[:id])
-      @tweet.update(content: params[:content])
-      redirect "/tweets/#{@tweet.id}"
+      @exercise = Exercise.find(params[:id])
+      @exercise.update(content: params[:content])
+      redirect "/exercises/#{@exercise.id}"
     end
   end
 
-  delete "/tweets/:id/delete" do
+  delete "/exercises/:id/delete" do
     @user = current_user
-    @tweet = Tweet.find_by_id(params[:id])
-    if logged_in? && @tweet.user_id == session[:user_id]
-      @tweet.delete
-      erb :'/tweets/delete'
-    elsif !logged_in? || @tweet.user_id != session[:user_id]
-      erb :'/tweets/error'
+    @exercise = Exercise.find_by_id(params[:id])
+    if logged_in? && @exercise.user_id == session[:user_id]
+      @exercise.delete
+      erb :'/exercises/delete'
+    elsif !logged_in? || @exercise.user_id != session[:user_id]
+      erb :'/exercises/error'
     else
-      erb :'/tweets/error'
+      erb :'/exercises/error'
     end
   end
 
