@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+  <body>
+    <h1>Welcome, <%= @user.username %>! Here are all the Tweets:</h1>
+
+    <% @tweets.each do |tweet| %>
+      <% user = User.find_by(:id => tweet.user_id) %>
+    <ul>
+      <li><a href="tweets/<%= tweet.id %>"><%= tweet.content%></a> by <a href="users/<%= user.slug %>"><%=user.username%></a></li>
+    </ul>
+    <% end %>
+
+
+  </body>
+</html>

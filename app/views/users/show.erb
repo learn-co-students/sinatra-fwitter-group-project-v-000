@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Tweets by <%= @user.username %></h1>
+    <% @user_tweets.each do |tweet| %>
+    <ul>
+      <li><a href="/tweets/<%= tweet.id %>"> <%= tweet.content %></a> </li>
+    </ul>
+    <% end %>
+
+  </body>
+</html>
