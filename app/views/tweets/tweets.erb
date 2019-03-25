@@ -1,0 +1,11 @@
+<h2><%= @user.username %>'s Tweets</h2>
+
+<a href="/tweets/new">What's Happening?</a>
+
+  <% Tweet.all.each do |tweet| %>
+  <%= tweet.user.username %>:
+  <%= tweet.content %>
+<% end %>
+<br>
+<a href="/logout"><input type="submit" value="Logout"></a>
+    
