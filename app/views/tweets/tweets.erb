@@ -1,0 +1,7 @@
+
+<h1>Welcome, </h1>
+  <% Tweet.all.each do |tweet| %>
+    <h2><%= tweet.content %> </h2>
+  <% end %>
+
+<button type="submit" id="submit"><a href="/logout">Logout</a></button>
