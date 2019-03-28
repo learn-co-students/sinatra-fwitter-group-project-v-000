@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
     has_many :tweets
     has_secure_password
+    validates_presence_of  :username, :email, :password_digest
+
 
     def slug
         self.username.downcase.split(' ').join('-')
@@ -15,5 +17,6 @@ class User < ActiveRecord::Base
         end 
         @all_user_info[0]
     end
+
 
 end
