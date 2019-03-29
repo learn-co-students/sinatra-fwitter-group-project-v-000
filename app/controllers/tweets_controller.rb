@@ -3,7 +3,9 @@ class TweetsController < Sinatra::Base
     set :views, Proc.new { File.join(root, "../views/") }
 
     get '/tweets' do
-        erb :'tweets/tweets'
-    end
+      
+          erb :'tweets/tweets'
+    
+      end
 
 end
