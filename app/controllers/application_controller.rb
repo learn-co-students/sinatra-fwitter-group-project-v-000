@@ -15,12 +15,8 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def logged_in?
-<<<<<<< HEAD
       #!!session[:user_id]
       !!current_user
-=======
-      !!session[:user_id]
->>>>>>> c39c98be5d202e2ecf714f25d67039090863585c
     end
 
     def current_user
