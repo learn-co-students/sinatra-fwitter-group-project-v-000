@@ -12,6 +12,7 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
 
     get '/tweets/new' do
       if logged_in?
+        @curent_user
         erb :'tweets/new'
       else
         redirect to "/login"
