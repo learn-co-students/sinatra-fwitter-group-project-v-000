@@ -3,19 +3,38 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
     set :views, Proc.new { File.join(root, "../views/") }
 
     get '/tweets' do
-      if logged_in?
+        if logged_in?
         erb :'tweets/tweets'
+        else
+            redirect to "/login"
+        end
+    end
+
+    get '/tweets/new' do
+        if logged_in?
+        erb :'tweets/new'
+        else
+            redirect to "/login"
+        end
+    end
+
+    get '/tweets/:id' do
+        if logged_in?
+            @tweets = @current_user.tweets
+        erb :'user/show'
+        binding.pry
+        else
+            redirect to "/login"
+        end
+    end
+
+    posts '/tweets' do
+      if logged_in?
+        params[:content]
       else
+        binding.pry
         redirect to "/login"
       end
     end
 
-    get '/tweets/new' do
-      if logged_in?
-        @curent_user
-        erb :'tweets/new'
-      else
-        redirect to "/login"
-      end
-    end
 end
