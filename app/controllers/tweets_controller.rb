@@ -19,22 +19,23 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
     end
 
     get '/tweets/:id' do
-        if logged_in?
-            @tweets = @current_user.tweets
-        erb :'user/show'
-        binding.pry
-        else
-            redirect to "/login"
-        end
-    end
+       if logged_in?
+           @tweet = Tweet.find_by_id(params[:id])
+       erb :'tweets/show_tweet'
+       else
+           redirect to "/login"
+       end
+   end
 
     post '/tweets' do
-      if logged_in?
-        params[:content]
-      else
-        binding.pry
-        redirect to "/login"
+          if logged_in? && params[:content] == ""
+              redirect to '/tweets/new'
+          elsif logged_in?
+          @tweet = params[:content]
+          redirect to '/tweets/tweets'
+          else
+          redirect to "/login"
+          end
       end
-    end
 
 end
