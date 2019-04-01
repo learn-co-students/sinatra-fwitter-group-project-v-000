@@ -28,7 +28,7 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
         end
     end
 
-    posts '/tweets' do
+    post '/tweets' do
       if logged_in?
         params[:content]
       else
