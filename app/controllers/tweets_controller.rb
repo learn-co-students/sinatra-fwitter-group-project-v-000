@@ -17,6 +17,4 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
         redirect to "/login"
       end
     end
-
-
 end
