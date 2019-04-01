@@ -1,9 +1,11 @@
+
 class TweetsController < ApplicationController #ApplicationController inheritance needed for logged_in?
     set :session_secret, "my_application_secret"
     set :views, Proc.new { File.join(root, "../views/") }
 
     get '/tweets' do
         if logged_in?
+        @tweets = Tweet.all
         erb :'tweets/tweets'
         else
             redirect to "/login"
@@ -19,13 +21,13 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
     end
 
     get '/tweets/:id' do
-       if logged_in?
-           @tweet = Tweet.find_by_id(params[:id])
-       erb :'tweets/show_tweet'
-       else
-           redirect to "/login"
-       end
-   end
+        if logged_in?
+            @tweet = Tweet.find_by_id(params[:id])
+        erb :'tweets/show_tweet'
+        else
+            redirect to "/login"
+        end
+    end
 
     post '/tweets' do
           if logged_in? && params[:content] == ""
