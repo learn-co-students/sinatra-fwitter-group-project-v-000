@@ -1,0 +1,23 @@
+<h1>Edit Tweet Here</h1>
+<form class="" action="/tweets/<%=@tweet.id%>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <!-- in application_controller.rb
+  error from shotgun
+class ApplicationController
+  post '/tweets/8' do
+    "Hello World"
+  end
+end #application controller, because your tweets controller is inheriting from you app controller
+ and your hidden field was wrong
+
+<input type="hidden" value="_method" id="patch">-->
+
+    <label>Edit Tweet</label>
+    <input type="text" name="content" value="<%=@tweet.content%>">
+    <input type="submit" name="Edit Tweet" value="submit">
+</form>
+
+<form class="" action="/tweets/<%=@tweet.id%>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" name="Delete Tweet" value="delete" id="Delete Tweet">
+</form>
