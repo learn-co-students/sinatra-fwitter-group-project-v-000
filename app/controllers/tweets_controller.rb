@@ -30,13 +30,12 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
     end
 
     post '/tweets' do
-      binding.pry
       if logged_in? && params[:content] == ""
         redirect to '/tweets/new'
       elsif logged_in?
         @tweet = Tweet.new(content: params[:content]) #@tweet = params[:content] is not enough to create a whole new instance
-        current_user.tweets << @tweet #@tweets not needed, changed tweets.erb form to current_user
-        #shows all a single users tweets
+        @tweets = current_user.tweets
+        @tweets << @tweet
         redirect to '/tweets/tweets'
       else
         redirect to "/login"
