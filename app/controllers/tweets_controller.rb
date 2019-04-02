@@ -54,8 +54,13 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
     end
 
     patch '/tweets/:id' do
-      if !(patch["content"].empty?)
-      @tweet.update(content: patch["content"])
+      binding.pry
+      if !(params["content"].empty?)
+        @tweet.update(content: params["content"])
+        @tweet.save
+        redirect to("/tweets/#{@tweet.id}") #remember to redirect
+      else
+        redirect to ("/tweets/#{@tweet.id}/edit")
       end
     end
 
@@ -63,6 +68,7 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
       @tweet = Tweet.find_by(id: params[:id])
       current_user.tweets.delete(@tweet)
       Tweets.all.delete(@tweet)
+      redirect to("/tweets")
     end
 
 end
