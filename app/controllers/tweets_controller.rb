@@ -53,6 +53,16 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
       end
     end
 
+    patch '/tweets/:id' do
+      if !(patch["content"].empty?)
+      @tweet.update(content: patch["content"])
+      end
+    end
 
+    delete '/tweets/:id' do
+      @tweet = Tweet.find_by(id: params[:id])
+      current_user.tweets.delete(@tweet)
+      Tweets.all.delete(@tweet)
+    end
 
 end

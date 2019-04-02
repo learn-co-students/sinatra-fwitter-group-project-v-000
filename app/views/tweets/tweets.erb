@@ -4,7 +4,9 @@
 <h2> Tweets </h2>
 <br>
 <% @tweets.each do |tweet| %>
-<%= tweet.content %>
+<br> <!-- added breaks to space out contents -->
+<a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a>
+<br>
 <% end %>
 <br>
 <a href="/logout">Logout</a>
