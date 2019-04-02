@@ -22,8 +22,10 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
 
     get '/tweets/:id' do
         if logged_in?
+          binding.pry
           @tweet = Tweet.find_by_id(params[:id])
         erb :'tweets/show_tweet'
+        #elsif params[:id] = "tweets"
         else
           redirect to "/login"
         end
@@ -32,11 +34,12 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
     post '/tweets' do
       if logged_in? && params[:content] == ""
         redirect to '/tweets/new'
-      elsif logged_in?
+      elsif logged_in? && params[:content] != ""
         @tweet = Tweet.new(content: params[:content]) #@tweet = params[:content] is not enough to create a whole new instance
+        current_user.tweets << @tweet
         @tweets = current_user.tweets
-        @tweets << @tweet
-        redirect to '/tweets/tweets'
+        #redirect to '/tweets/tweets' this is a file, not a path
+        redirect to '/tweets'
       else
         redirect to "/login"
       end

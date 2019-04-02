@@ -2,9 +2,9 @@
 
 <p> Welcome, to Fwitter
 <h2> Tweets </h2>
-<a href="/logout">Logout</a>
-
-
+<br>
 <% @tweets.each do |tweet| %>
 <%= tweet.content %>
 <% end %>
+<br>
+<a href="/logout">Logout</a>
