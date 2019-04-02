@@ -5,6 +5,6 @@
 <a href="/logout">Logout</a>
 
 
-<% @tweets.each do |tweet| %>
+<% current_user.tweets.each do |tweet| %>
 <%= tweet.content %>
 <% end %>
