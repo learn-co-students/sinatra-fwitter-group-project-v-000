@@ -54,13 +54,16 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
     end
 
     patch '/tweets/:id' do
-      binding.pry
-      if !(params["content"].empty?)
-        @tweet.update(content: params["content"])
-        @tweet.save
-        redirect to("/tweets/#{@tweet.id}") #remember to redirect
+      @tweet = Tweet.find_by(id: params[:id])
+      if logged_in?
+        if !(params["content"].empty?)
+          @tweet.update(content: params["content"])
+          redirect to("/tweets/#{@tweet.id}") #remember to redirect
+        else
+          redirect to ("/tweets/#{@tweet.id}/edit")
+        end
       else
-        redirect to ("/tweets/#{@tweet.id}/edit")
+        redirect to "/login"
       end
     end
 
