@@ -31,7 +31,7 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
     end
 
     post '/tweets' do
-      if logged_in? && params[:content] == ""
+      if logged_in? && (params[:content] == "")
         redirect to '/tweets/new'
       elsif logged_in?
         @tweet = Tweet.new(content: params[:content]) #@tweet = params[:content] is not enough to create a whole new instance
