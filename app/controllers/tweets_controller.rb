@@ -2,7 +2,7 @@
 class TweetsController < ApplicationController #ApplicationController inheritance needed for logged_in?
     set :session_secret, "my_application_secret"
     set :views, Proc.new { File.join(root, "../views/") }
-
+    #always check params and shotgun and browser when dealing with this
     get '/tweets' do
         if logged_in?
          @tweets = Tweet.all
@@ -68,10 +68,18 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
     end
 
     delete '/tweets/:id' do
-      @tweet = Tweet.find_by(id: params[:id])
-      current_user.tweets.delete(@tweet)
-      Tweets.all.delete(@tweet)
-      redirect to("/tweets")
+      if logged_in?
+        @tweet = Tweet.find_by(id: params[:id])
+        @user = User.find_by(id: @tweet.user_id)
+        if current_user == @user
+          #delete action logged in does not let a user delete a tweet they did not create
+          @user.tweets.delete(@tweet)
+          Tweet.all.delete(@tweet)
+        end
+        redirect to("/tweets")
+      else
+        redirect to "/login"
+      end
     end
 
 end
