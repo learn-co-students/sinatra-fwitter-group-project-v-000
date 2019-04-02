@@ -44,4 +44,15 @@ class TweetsController < ApplicationController #ApplicationController inheritanc
       end
     end
 
+    get '/tweets/:id/edit' do
+      if logged_in?
+        @tweet = Tweet.find_by(id: params[:id])
+        erb :"/tweets/edit_tweet"
+      else
+        redirect to "/login"
+      end
+    end
+
+
+
 end
