@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
 
-  get '/users/new'do
+  get '/users/new' do
   end
 
 
@@ -26,7 +26,6 @@ class UsersController < ApplicationController
   patch 'users/:id' do
   end
 
-  end
 
 
   put '/users/:id' do

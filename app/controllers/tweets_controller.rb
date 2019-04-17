@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
   end
 
 
-  get '/tweets/new'do
+  get '/tweets/new' do
   end
 
 
@@ -22,17 +22,17 @@ class TweetsController < ApplicationController
   end
 
 
+
   patch 'tweets/:id' do
   end
 
-  end
 
 
   put '/tweets/:id' do
   end
 
 
-  delete '/tweets/:id'
+  delete '/tweets/:id' do
   end
 
 
