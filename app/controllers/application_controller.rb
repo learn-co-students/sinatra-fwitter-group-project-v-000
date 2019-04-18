@@ -14,9 +14,13 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  get '/signup' do
+    erb :'users/create_user'
+  end
+
 
   helpers do
-  def logged_in?
+  def is_logged_in?
     # binding.pry
     !!current_user
     # @user = User.all params[:user_id]
@@ -24,8 +28,9 @@ class ApplicationController < Sinatra::Base
   end
 
 
-  def current_user
-    
+  def current_user(session_id)
+    find_by_id session[:user_id]
+    user
   end
 # Check return values in def current_user
 
