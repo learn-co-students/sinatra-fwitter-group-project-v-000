@@ -4,8 +4,10 @@ class UsersController < ApplicationController
     get '/signup' do
       if !logged_in?
       erb :'/users/create_user'
+      flash[:message] = "Welcome to Fwitter! Please sign up."
       else
-       redirect to '/tweets'
+       redirect to("/tweets/#{@tweet.slug}")
+      #  redirect to '/tweets' 
      end
    end
 
