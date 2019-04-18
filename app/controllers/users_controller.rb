@@ -11,7 +11,7 @@ class UsersController < ApplicationController
         erb :'/users/create_user'
         flash[:message] = "Welcome to Fwitter! Please sign up."
       else
-        redirect to '/tweets'
+        redirect to :'/tweets'
       end
     end
 
