@@ -1,3 +1,4 @@
+require 'flas
 class UsersController < ApplicationController
 
   get '/users/slug' do
