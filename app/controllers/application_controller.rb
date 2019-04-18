@@ -17,15 +17,26 @@ class ApplicationController < Sinatra::Base
 
   helpers do
   def logged_in?
+    current_user
     # @user = User.all params[:user_id =>]
     # Write code so that User is acknowledge via session
     # see Session lab
-  end
-
+      end
+  end 
 
   def current_user
+      @session[:user_id]
       User.find_by_id(session[:user_id])
-    end
   end
+
+
+  #   if session[:user_id] == 1
+  #     # "Session ID set. It's currently set to #{session[:user_id]}."
+  #     redirect '/fetch_session_id'
+  #   else
+  #     "Session ID has not been set!"
+  #   end
+  # end
+
 
 end
