@@ -1,7 +1,8 @@
-require 'flas
+require 'rack-flash'
+ #require 'flash'
 class UsersController < ApplicationController
 
-  get '/users/slug' do
+  get '/users/:slug' do
     @user = User.find_by(params[:slug])
     erb :'users/show'
   end
@@ -10,7 +11,7 @@ class UsersController < ApplicationController
     get '/signup' do
       if !logged_in?
         erb :'/users/create_user'
-        flash[:message] = "Welcome to Fwitter! Please sign up."
+        # flash[:message] = "Welcome to Fwitter! Please sign up."
       else
         redirect to '/tweets'
       end
