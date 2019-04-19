@@ -9,23 +9,12 @@ class ApplicationController < Sinatra::Base
   end
 
 
-  get '/' do
-    erb :index
-  end
+    get '/' do
+      erb :index
+    end
 
 
-
-  get '/signup' do
-    erb :users/create_user
-  end
-
-
-  get '/login' do
-    erb :users/login
-  end
-
-
-  helpers do
+    helpers do
     def logged_in?
       !!current_user
     end
