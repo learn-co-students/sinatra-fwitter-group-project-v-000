@@ -14,8 +14,14 @@ class ApplicationController < Sinatra::Base
   end
 
 
+
   get '/signup' do
     erb :users/create_user
+  end
+
+
+  get '/login' do
+    erb :users/login
   end
 
 
@@ -26,7 +32,6 @@ class ApplicationController < Sinatra::Base
 
     def current_user
       @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
-
     end
   end
 end

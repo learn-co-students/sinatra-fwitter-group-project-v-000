@@ -7,41 +7,59 @@ class TweetsController < ApplicationController
     else
       redirect '/login'
       end
-  end 
+  end
 
 
   get '/tweets/new' do
+    if logged_in?
+      erb :'tweets/create_tweet'
+    else
+      redirect '/login'
+    end
   end
-
 
 
   post '/tweets' do
-    redirect
-  end
-
-
-  get '/tweets/:id' do
-  end
-
-
-  get '/tweets/:id/edit' do
-  end
-
-
-
-  patch 'tweets/:id' do
-  end
-
-
-
-  put '/tweets/:id' do
-  end
-
-
-  delete '/tweets/:id' do
+    if logged_in?
+      if params[:content] == ""
+        redirect '/tweets/new'
+      else
+        @tweet = current_user.tweets.build(content: params[:content])
+        if @tweet.save
+          redirect "/tweets/#{@tweet.id}"
+        else
+          redirect '/tweets/new'
+        end
+      end
+    else
+      redirect '/login'
+    end
   end
 
 
 
+  # get '/tweets/:id' do
+  # end
+  #
+  #
+  # get '/tweets/:id/edit' do
+  # end
+  #
+  #
+  #
+  # patch 'tweets/:id' do
+  # end
+  #
+  #
+  #
+  # put '/tweets/:id' do
+  # end
+  #
+  #
+  # delete '/tweets/:id' do
+  # end
+  #
+  #
+  #
 
 end

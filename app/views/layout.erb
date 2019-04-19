@@ -1,11 +1,17 @@
 <!doctype html>
 <html>
   <head>
-    <title>Fwitter</title>
+    <title>Welcome to Fwitter</title>
   </head>
   <body>
-
-    <%= yield %>
+    <% if logged_in%>
+      <a href="/logout"> Log Out</a>
+      <p> Welcome, <%=current_user.username%></p>
+      <%= yield %>
+      <% else %>
+        <a href="/signup"> Sign Up </a>
+        <a href="/login"> Sign In </a>
+        <% end %>
 
   </body>
 </html>
