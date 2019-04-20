@@ -18,6 +18,7 @@ class TweetsController < ApplicationController
     end
   end
 
+
   post '/tweets' do
     if logged_in? && params[:content] == " "
         redirect '/tweets/new'
@@ -25,28 +26,21 @@ class TweetsController < ApplicationController
 
     if @tweet = current_user.tweets.build(content: params[:content])
         redirect "/tweets/#{@tweet.id}"
-
         @tweet.save
-
     else
-
         redirect '/login'
         end
       end
-    # end
+    end
+
+
 
     get '/tweets/:id' do
       if logged_in?
         @tweet = Tweet.find_by_id(:params[:id])
       erb :'tweets/show_tweet'
-
       else
       redirect '/login'
+      end
     end
   end
-
-
-
-
-
-end
