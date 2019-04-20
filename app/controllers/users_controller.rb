@@ -62,10 +62,9 @@ class UsersController < ApplicationController
         session.destroy
         redirect to '/login'
 
-      elsif
-         erb :tweets
-
-      else !logged_in?
+        #  erb :tweets
+       else
+        !logged_in
         session.destroy
         redirect '/'
 
