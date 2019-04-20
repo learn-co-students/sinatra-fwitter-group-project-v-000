@@ -10,24 +10,24 @@ class UsersController < ApplicationController
 
     get '/signup' do
       if !logged_in?
-        erb :signup
+        erb :'users/signup'
         # flash[:message] = "Welcome to Fwitter!"
       else
-        redirect '/tweets/tweets'
+        redirect 'tweets/index'
       end
     end
 
 
     post '/signup' do
         if params[:username] == "" || params[:email] == "" || params[:password] == ""
-        redirect '/signup'
+        redirect 'users/signup'
       else
         # @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
         @user = User.new(name: params["name"], email: params["email"], password: params["password"])
 
         @user.save
         session[:user_id] = @user.id
-        redirect 'tweets'
+        redirect '/index'
       end
     end
 
