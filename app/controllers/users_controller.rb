@@ -49,7 +49,7 @@ class UsersController < ApplicationController
       if user && user.authenticate(params[:password])
 
         session[:user_id] = user.id
-        redirect '/tweets'
+        redirect to '/tweets'
 
       else
         redirect '/signup'
@@ -64,9 +64,9 @@ class UsersController < ApplicationController
 
         #  erb :tweets
        else
-        !logged_in
-        session.destroy
-        redirect '/'
+        # !logged_in
+        # session.destroy
+        redirect to '/'
 
         end
     end

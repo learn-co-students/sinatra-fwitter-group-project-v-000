@@ -7,11 +7,11 @@
     <% if logged_in?%>
       <a href="/logout">Log Out</a>
       <p> Welcome, <%=current_user.username%></p>
-      <%= yield %>
+
       <% else %>
         <<a href="/signup"> Sign Up </a>
         <a href="/login">Log In</a>
         <% end %>
-
+      <%= yield %>
   </body>
 </html>
