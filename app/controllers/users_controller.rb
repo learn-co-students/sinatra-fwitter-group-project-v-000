@@ -53,23 +53,22 @@ class UsersController < ApplicationController
 
       else
         redirect '/signup'
-
-        end
+            end
       end
 
 
     get '/logout' do
       if logged_in?
-        # binding.pry
         session.destroy
-        redirect '/login'
-      else
-        erb :'tweets'
-        end
-      if 
-         !logged_in?
-          redirect '/'
-          # @session._current.id
+        redirect to '/login'
+
+      elsif
+         erb :tweets
+
+      else !logged_in?
+        session.destroy
+        redirect '/'
+
         end
     end
 end
