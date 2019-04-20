@@ -62,9 +62,14 @@ class UsersController < ApplicationController
       if logged_in?
         # binding.pry
         session.destroy
-        erb :'/login'
+        redirect '/login'
       else
-        redirect '/'
-      end
+        erb :'tweets'
+        end
+      if 
+         !logged_in?
+          redirect '/'
+          # @session._current.id
+        end
     end
 end
