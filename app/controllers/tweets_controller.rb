@@ -20,7 +20,8 @@ class TweetsController < ApplicationController
 
 
   post '/tweets' do
-    if logged_in? && params[:content] == " "
+    if logged_in?
+      if params[:content] == " "
         redirect '/tweets/new'
     else
 

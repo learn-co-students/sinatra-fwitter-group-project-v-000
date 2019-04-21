@@ -57,14 +57,7 @@ class UsersController < ApplicationController
       end
     end
 
-      # else
-      #   if logged_in?
-      #   redirect '/tweets/new'
-      #     end
-      #   end
-      # end
-
-
+    
 
 
     get '/logout' do
@@ -72,11 +65,9 @@ class UsersController < ApplicationController
         session.destroy
         redirect to '/login'
 
-         erb :tweets
+
        else
-        !logged_in
-        session.destroy
         redirect to '/'
       end
-
+    end
 end
