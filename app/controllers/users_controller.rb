@@ -51,13 +51,13 @@ class UsersController < ApplicationController
 
         session[:user_id] = user.id
         redirect to '/tweets'
-
+  
       else
         redirect '/signup'
       end
     end
 
-    
+
     get '/logout' do
       if logged_in?
         session.destroy
