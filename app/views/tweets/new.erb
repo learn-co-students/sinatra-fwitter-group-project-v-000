@@ -1,6 +1,10 @@
-<h3>Create Tweet</h3>
+<h2>New Tweet</h2>
+<p><%=@tweet.content%></p>
 
-<form action="/tweets" method="post">
-  <input type="text" name="content" id="content" value="content">
-  <input type="submit" id="submit" value="Submit">
-</form>
+  <form method='post' action='tweets/new'>
+    <input id='hidden' type='hidden' name='_method' value='new'>
+    <input type='text' name='content' id='content' value='@tweet.content'>
+
+    <!-- t.text :content
+    t.integer :user_id -->
+<%end%>
