@@ -50,7 +50,7 @@ class UsersController < ApplicationController
       if @user && @user.authenticate(params[:password])
 
         session[:user_id] = @user.id
-        redirect to '/tweets'
+        redirect '/tweets'
 
       else
         redirect '/signup'
@@ -61,11 +61,13 @@ class UsersController < ApplicationController
     get '/logout' do
       if logged_in?
         session.destroy
-        redirect to '/login'
+        redirect '/login'
 
 
        else
-        redirect to '/'
+        # redirect '/'
+        redirect '/'
+
       end
     end
 end
