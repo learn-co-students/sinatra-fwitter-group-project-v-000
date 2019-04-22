@@ -24,14 +24,13 @@ post '/tweets' do
     if params[:content] == ""
       redirect '/tweets/new'
     else
-      @tweet = current_user.tweets.build(content: params[:content])
-      if @tweet.save
+      @tweet = Tweet.create(content: params[:content])
+      @tweet.user_id == current_user.id
+      @tweet.save
         redirect "/tweets/#{@tweet.id}"
-    else
-        redirect '/tweets/new'
-        end
       end
-    else
+  else
+    
     redirect '/login'
     end
   end
