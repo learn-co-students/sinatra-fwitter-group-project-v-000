@@ -9,12 +9,12 @@ class ApplicationController < Sinatra::Base
   end
 
 
-    get '/' do
+  get '/' do
       erb :index
-    end
+  end
 
 
-    helpers do
+  helpers do
     def logged_in?
       !!current_user
     end

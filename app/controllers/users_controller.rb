@@ -2,10 +2,10 @@ require 'rack-flash'
  # require 'flash'
 class UsersController < ApplicationController
 
-  get '/users/:slug' do
-    @user = User.find_by(params[:slug])
-    erb :'users/show'
-  end
+    get '/users/:slug' do
+      @user = User.find_by(params[:slug])
+      erb :'users/show'
+    end
 
 
     get '/signup' do
@@ -19,23 +19,18 @@ class UsersController < ApplicationController
 
 
     post '/signup' do
-        if params[:username] == "" || params[:email] == "" || params[:password] == ""
-            # binding.pry
-        redirect  '/signup'
-
-        else
-        # @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+      if params[:username] == "" || params[:email] == "" || params[:password] == ""
+          redirect  '/signup'
+      else
         @user = User.new(username: params["username"], email: params["email"], password: params["password"])
-
         @user.save
         session[:user_id] = @user.id
-        redirect '/tweets'
-      end
+          redirect '/tweets'
+        end
     end
 
 
     get '/login' do
-      # binding.pry
       if logged_in?
         redirect '/tweets'
       else
@@ -49,10 +44,9 @@ class UsersController < ApplicationController
       @user = User.find_by(:username => params[:username])
 
       if @user && @user.authenticate(params[:password])
-
         session[:user_id] = @user.id
-        redirect '/tweets'
 
+        redirect '/tweets'
       else
         redirect '/signup'
       end
@@ -62,13 +56,10 @@ class UsersController < ApplicationController
     get '/logout' do
       if logged_in?
         session.destroy
+
         redirect '/login'
-
-
-       else
-        # redirect '/'
+      else
         redirect '/'
-
       end
     end
 end
