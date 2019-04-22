@@ -35,10 +35,11 @@ class UsersController < ApplicationController
 
 
     get '/login' do
-      if !logged_in?
-        erb :'users/login'
+      # binding.pry
+      if logged_in?
+        erb :'tweets'
       else
-        redirect '/tweets'
+        erb :'users/login'
           end
     end
 
