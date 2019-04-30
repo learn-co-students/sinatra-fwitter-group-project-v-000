@@ -1,0 +1,7 @@
+User.create(username: "sarah", email: "sarah@sarah.com", password: "password")
+User.create(username: "jane", email: "jane@jane.com", password: "password")
+User.create(username: "paz", email: "paz@paz.com", password: "password")
+Tweet.create(content: "tweet tweet tweet")
+Tweet.create(content: "tweet tweet tweet tweet")
+Tweet.create(content: "tweet tweet tweet tweet tweet")
+Tweet.create(content: "tweet tweet tweet tweet tweet tweet")
