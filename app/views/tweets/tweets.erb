@@ -1,0 +1,4 @@
+Welcome, <%=@user.username%>.
+<%@user.tweets.each do |t|%>
+<p>look at this tweet: <%=t.content%></p>
+<%end%>

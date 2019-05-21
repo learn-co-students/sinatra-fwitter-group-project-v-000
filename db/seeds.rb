@@ -1,0 +1,6 @@
+tom = User.create(:username => 'tgray017', :email => 'tgray017@gmail.com', :password => 'pwd')
+tom.tweets.create(:content => 'this is my first tweet')
+tom.tweets.create(:content => 'this is my second tweet')
+tom.tweets.create(:content => 'this is my third tweet')
+victoria = User.create(:username => 'vikkyb', :email => 'vikkyb@gmail.com', :password => 'pwd1')
+victoria.tweets.create(:content => "this is victoria's tweet")

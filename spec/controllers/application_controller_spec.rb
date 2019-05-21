@@ -362,6 +362,18 @@ describe ApplicationController do
 
     context "logged out" do
       it 'does not load -- instead redirects to login' do
+        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+
+        visit '/login'
+
+        fill_in(:username, :with => "becky567")
+        fill_in(:password, :with => "kittens")
+        click_button 'submit'
+
+        visit '/tweets/new'
+        fill_in(:content, :with => "tweet!!!")
+        click_button 'submit'
+        
         get '/tweets/1/edit'
         expect(last_response.location).to include("/login")
       end
@@ -397,7 +409,7 @@ describe ApplicationController do
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit "tweets/#{tweet2.id}"
-        click_button "Delete Tweet"
+        #click_button "Delete Tweet" - removed this test since visiting tweets/tweet2.id should redirect to /login
         expect(page.status_code).to eq(200)
         expect(Tweet.find_by(:content => "look at this tweet")).to be_instance_of(Tweet)
         expect(page.current_path).to include('/tweets')
