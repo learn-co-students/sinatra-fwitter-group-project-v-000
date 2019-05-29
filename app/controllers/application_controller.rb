@@ -5,6 +5,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secret, "changeme"
   end
 
   get '/' do
@@ -12,56 +14,60 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    erb :'/users/create_user'
-  end
-
-  post '/signup' do
-    @new_user = User.create(username: params[:username], email: params[:email], password: params[:password])
-    if params[:username] || params[:email] || params[:password].empty?
-      redirect "/signup"
+    # binding.pry
+    if logged_in?
+      redirect "/tweets/index"
     else
-      redirect "/tweets"
+      erb :'/users/create_user'
     end
   end
 
+  post '/signup' do
+    # binding.pry
+
+    if params[:name].empty? || params[:email].empty? || params[:password].empty?
+      redirect "/signup"
+    else
+      @new_user = User.create(username: params[:name], email: params[:email], password: params[:password])
+      redirect "/tweets/index"
+    end
+      # @new_user = User.new(username: params[:username], email: params[:email], password: params[:password])
+      # if @new_user.save
+      #   redirect "/tweets/index"
+      # else
+      #   redirect "/signup"
+      # end
+  end
+
   get '/login' do
+    # binding.pry
     erb :'/users/login'
   end
 
   post '/login' do
+    # binding.pry
     @user = User.find_by(:username => params[:username])
+
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      erb :index
+      # binding.pry
+      redirect "/tweets/index"
     else
       redirect "/login"
     end
   end
 
-  get '/tweets/new' do
-    erb :'/tweets/new'
-  end
-
-  get '/tweets/:id' do
-
-  end
-
-  get '/tweets/:id/edit' do
-
-  end
-
-  post '/tweets/:id' do
-
-  end
-
-  post '/tweets/:id/delete' do
-
-  end
 
 
-  post '/tweets' do
-    @tweet = Tweet.create(content: params[:content])
 
+  helpers do
+    def logged_in?
+      !!session[:user_id]
+    end
+
+    def current_user
+      User.find(session[:user_id])
+    end
   end
 
 end
