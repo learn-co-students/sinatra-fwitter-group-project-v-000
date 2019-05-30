@@ -14,47 +14,47 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    # binding.pry
     if logged_in?
-      redirect "/tweets/index"
+      redirect "/tweets"
     else
       erb :'/users/create_user'
     end
   end
 
   post '/signup' do
-    # binding.pry
-
-    if params[:name].empty? || params[:email].empty? || params[:password].empty?
+    if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect "/signup"
     else
-      @new_user = User.create(username: params[:name], email: params[:email], password: params[:password])
-      redirect "/tweets/index"
+      @new_user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      session[:user_id] = @new_user.id
+      redirect "/tweets"
     end
-      # @new_user = User.new(username: params[:username], email: params[:email], password: params[:password])
-      # if @new_user.save
-      #   redirect "/tweets/index"
-      # else
-      #   redirect "/signup"
-      # end
   end
 
   get '/login' do
-    # binding.pry
-    erb :'/users/login'
+    if logged_in?
+      redirect "/tweets"
+    else
+      erb :'/users/login'
+    end
   end
 
   post '/login' do
-    # binding.pry
     @user = User.find_by(:username => params[:username])
-
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      # binding.pry
-      redirect "/tweets/index"
+      redirect "/tweets"
     else
       redirect "/login"
     end
+  end
+
+  get "/logout" do
+    if logged_in?
+      session.clear
+      redirect "/login"
+    end
+    redirect "/tweets"
   end
 
 
