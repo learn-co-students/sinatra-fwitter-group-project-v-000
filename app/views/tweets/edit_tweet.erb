@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 <form action="/tweets/<%= @tweet.id %>" method="POST">
   <input id="hidden" type="hidden" name="_method" value="patch">
 What are you thinking about?
 <input type="text" name="content" value="<%= @tweet.content %>">
 <input type="submit" name="submit" value="submit">
+=======
+<form action="/tweets/<%=@tweet.id%>" method="POST">
+
+  <input type="hidden" name="_method" value="patch" id="hidden">
+What are you thinking about?
+<input type="text" name="content" value="<%=@tweet.content%>">
+<input type="submit" name="" value="submit">
+>>>>>>> fb1e67ae4cc0c9c4125ba043b384e948ef5f0118
   </form>
