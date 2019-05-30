@@ -5,10 +5,11 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
+    enable :sessions
+    set :session_secrets, "hello"
   end
 
-  enable :sessions
-  # set session_secret "change"
+
 
   get '/' do
     erb :index
@@ -35,10 +36,10 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/login' do
-    if !logged_in?
-      erb :'users/login'
-    else
+    if logged_in?
       redirect "/tweets"
+    else
+      erb :'users/login'
     end
   end
 
