@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 <h1> @user.username </h1>
 
 <ul>
   <% @user.tweets.each do |tweet| %>
   <li><%= tweet.content %></li>
   <% end %>
+=======
+<ul>
+<%@user.tweets.each do |tweet|%>
+<li><%=tweet.content%></li>
+<%end%>
+>>>>>>> fb1e67ae4cc0c9c4125ba043b384e948ef5f0118
 </ul>
