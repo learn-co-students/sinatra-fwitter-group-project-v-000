@@ -24,12 +24,11 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-      # binding.pry
-    @new_user = User.new(username: params[:username], email: params[:email], password: params[:password])
-    if params[:username].empty? || params[:email].empty? || params[:password].empty?
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect "/signup"
     else
-      @new_user.save
+      @new_user = User.create(username: params[:username], email: params[:email], password: params[:password])
+      # @new_user.save
       session[:user_id] = @new_user.id
       redirect "/tweets"
     end
@@ -47,7 +46,6 @@ class ApplicationController < Sinatra::Base
     @user = User.find_by(:username => params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      session[:user_id].save
       redirect "/tweets"
     else
       redirect "/login"
@@ -55,24 +53,20 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    if logged_in?
-      session[:user_id].clear
+    if !logged_in?
       redirect "/login"
-      # erb :'/users/logout'
     else
+      session.clear
       redirect "/login"
-          # else
-    #   redirect "/tweets"
-      # erb :'users/logout'
-      # erb :'/users/logout'
     end
   end
 
-  post '/logout' do
-    session[:user_id].delete
-    # session[:user_id].delete
-    # session[:user_id].delete
-  end
+  # post '/logout' do
+  #   # binding.pry
+  #   session[:user_id].delete
+  #   # session[:user_id].delete
+  #   # session[:user_id].delete
+  # end
 
   helpers do
     def logged_in?

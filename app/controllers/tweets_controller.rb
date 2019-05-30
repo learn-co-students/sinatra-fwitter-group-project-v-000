@@ -1,15 +1,18 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    if !logged_in?
-      # @tweet = Tweet.all
-      redirect "/login"
+    # binding.pry
+    if logged_in?
+      @tweets = Tweet.all
+      erb :'tweets/tweets'
     else
-      erb :'/tweets/tweets'
+      redirect "/login"
     end
   end
 
   get '/tweets/new' do
+    @new_tweet = Tweet.create(content: params[:content])
+    @all_tweets = Tweet.all
     erb :'/tweets/new'
   end
 
