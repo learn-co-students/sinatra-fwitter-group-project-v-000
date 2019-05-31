@@ -1,7 +1,10 @@
 <form action="/tweets/<%=@tweet.id%>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
 
-  <input type="hidden" name="_method" value="patch" id="hidden">
 What are you thinking about?
+
 <input type="text" name="content" value="<%=@tweet.content%>">
-<input type="submit" name="" value="submit">
+
+
+<input type="submit" name="submit" value="submit">
   </form>
