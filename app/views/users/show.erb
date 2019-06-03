@@ -1,0 +1,30 @@
+<h3>Welcome <%= @user.username %></h3>
+<h3> Here are your tweets </h3>
+
+<ul>
+<% @user.tweets.each do |tweet| %>
+  <ul>
+  <li><%= tweet.content %></li>
+</ul><br>
+<% end %>
+</ul>
+
+<br></br>
+
+<h3>Here are tweets by others</h3>
+<ul>
+  <% Tweet.all.each do |t| %>
+    <% if t.user != @user %>
+      <ul>
+        <li><h4><%= t.content %></h4></li>
+        <p>Tweeted by: <%= t.user.username %></p>
+      </ul>
+    <% end %>
+  <% end %>
+</ul>
+
+<br></br>
+
+<form method="GET" action="/logout">
+  <input type="submit" value="Log Out">
+</form>
