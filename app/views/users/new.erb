@@ -1,0 +1,13 @@
+<%unless locals.empty?%>
+  <%=message%>
+  <%end%>
+
+  <h2>Sign Up for Fwitter<h2></br>
+      <form action="/signup" method="post">
+      <h3>
+      <label>Name</label> <input type="text" name="username" value=""></br>
+      <label>Email</label> <input type="text" name="email" value=""></br>
+      <label>Password</label> <input type="password" name="password" value=""></br>
+      <input class="btn btn-primary" type="submit">
+    </h3>
+    </form>
