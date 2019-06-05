@@ -8,4 +8,10 @@ class TweetsController < ApplicationController
     erb :'tweets/new'
   end
 
+  post '/tweets' do
+    @tweet = Tweet.new(params)
+
+    erb :'tweets/show'
+  end
+
 end
