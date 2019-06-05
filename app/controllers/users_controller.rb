@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
- get '/here' do
-   "testing"
+ get '/users/signup' do
+   erb :'/users/new'
  end
 end
