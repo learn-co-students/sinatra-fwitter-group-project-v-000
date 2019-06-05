@@ -5,9 +5,14 @@ class UsersController < ApplicationController
  end
 
  post '/signup' do
-   @user = User.create(params)
-   session[:user_id] = @user.id
-   redirect '/tweets'
+   @user = User.new(params)
+
+   if @user.save
+     session[:user_id] = @user.id
+     redirect '/tweets'
+   else
+     erb :'/'
+   end
  end
 
  get '/login' do
@@ -15,10 +20,14 @@ class UsersController < ApplicationController
  end
 
  post '/login' do
-   @user = User.find_by(username: params[:username], password: params[:password])
+   user = User.find_by(:username => params[:username])
 
-   session[:user_id] = @user.id
-   redirect '/tweets'
+   if user && user.authenticate(params[:password])
+     session[:user_id] = user.id
+     redirect "/tweets"
+   else
+     redirect "/"
+   end
  end
 
  get '/logout' do
