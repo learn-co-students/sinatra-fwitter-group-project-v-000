@@ -18,15 +18,12 @@ class UsersController < ApplicationController
    @user = User.find_by(username: params[:username], password: params[:password])
 
    session[:user_id] = @user.id
+   binding.pry
    redirect '/tweets'
  end
 
  get '/logout' do
    session.clear
    redirect '/'
- end
-
- get '/test' do
-   binding.pry
  end
 end
