@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    "how about this one?"
+    erb :'tweets/index'
   end
 
   get '/tweets/new' do
@@ -15,17 +15,17 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id' do
-    @tweet = Tweet.find_by(params[:id])
+    @tweet = Tweet.find_by_id(params[:id])
     erb :'tweets/show'
   end
 
   get '/tweets/:id/edit' do
-    @tweet = Tweet.find_by(params[:id])
+    @tweet = Tweet.find_by_id(params[:id])
     erb :'tweets/edit'
   end
 
   patch '/tweets/:id' do
-    @tweet = Tweet.find_by(params[:id])
+    @tweet = Tweet.find_by_id(params[:id])
     @tweet.content = params[:content]
     @tweet.save
 
