@@ -24,4 +24,12 @@ class TweetsController < ApplicationController
     erb :'tweets/edit'
   end
 
+  patch '/tweets/:id' do
+    @tweet = Tweet.find_by(params[:id])
+    @tweet.content = params[:content]
+    @tweet.save
+
+    erb :'tweets/show'
+  end
+
 end
