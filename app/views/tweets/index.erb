@@ -1,0 +1,12 @@
+<h1>Current feed:</h1>
+
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li><%= tweet.content %></li>
+    <br>
+  <% end %>
+</ul>
+
+<a href="/tweets/new">Write a new tweet</a> <br>
+<a href="/users/<%= current_user.slug %>">My Tweets</a> <br>
+<a href="/logout">Log Out</a>
