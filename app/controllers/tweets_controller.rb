@@ -3,8 +3,9 @@ class TweetsController < ApplicationController
   get '/tweets' do
     if User.find_by_id(session[:user_id])
       @user = User.find_by_id(session[:user_id])
-      @tweets = []
-      @tweets << Tweet.where(:user_id => @user.id) unless !Tweet.find_by(:user_id => @user.id)
+      @tweets = Tweet.all
+#      @tweets = []
+#      @tweets = Tweet.where(:user_id => @user.id) unless !Tweet.find_by(:user_id => @user.id)
       erb :'tweets/index'
     else
       redirect erb: '/login'
@@ -12,14 +13,22 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/new' do
-    erb :'tweets/new'
+    if User.find_by_id(session[:user_id])
+      erb :'tweets/new'
+    else
+      redirect erb: '/login'
+    end
   end
 
   post '/tweets' do
-    @tweet = Tweet.new(:content => params[:content])
-    @tweet.user_id = session[:user_id]
-    @tweet.save
-    redirect 'tweets/#{@tweet.id}'
+    if !params[:content].empty?
+      @tweet = Tweet.new(:content => params[:content])
+      @tweet.user_id = session[:user_id]
+      @tweet.save
+      redirect 'tweets'
+    else
+      redirect 'tweets/new'
+    end
   end
 
   get '/tweets/:id' do
