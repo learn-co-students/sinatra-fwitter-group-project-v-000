@@ -32,13 +32,21 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id' do
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :'tweets/show'
+    if User.find_by_id(session[:user_id])
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :'tweets/show'
+    else
+      redirect 'login'
+    end
   end
 
   get '/tweets/:id/edit' do
-    @tweet = Tweet.find_by_id(params[:id])
-    erb :'tweets/edit'
+    if User.find_by_id(session[:user_id])
+      @tweet = Tweet.find_by_id(params[:id])
+      erb :'tweets/edit'
+    else
+      redirect 'login'
+    end
   end
 
   patch '/tweets/:id' do
@@ -50,9 +58,13 @@ class TweetsController < ApplicationController
   end
 
   delete '/tweets/:id/delete' do
-    @tweet = Tweet.find_by_id(params[:id])
-    @tweet.delete
-    redirect to '/tweets'
+    if User.find_by_id(session[:user_id])
+      @tweet = Tweet.find_by_id(params[:id])
+      @tweet.delete
+      redirect to '/tweets'
+    else
+      redirect 'login'
+    end
   end
 
 end
