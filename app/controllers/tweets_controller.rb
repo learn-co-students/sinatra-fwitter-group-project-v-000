@@ -50,11 +50,14 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    @tweet = Tweet.find_by_id(params[:id])
-    @tweet.content = params[:content]
-    @tweet.save
-
-    erb :'tweets/show'
+    if !params[:content].empty?
+      @tweet = Tweet.find_by_id(params[:id])
+      @tweet.content = params[:content]
+      @tweet.save
+      erb :'tweets/show'
+    else
+      redirect '/tweets/#{params[:id]}/edit'
+    end
   end
 
   delete '/tweets/:id/delete' do
