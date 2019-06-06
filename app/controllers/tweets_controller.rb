@@ -5,7 +5,7 @@ class TweetsController < ApplicationController
       @user = User.find_by_id(session[:user_id])
       erb :'tweets/index'
     else
-      redirect erb: '/'
+      redirect erb: '/login'
     end
   end
 
