@@ -56,7 +56,7 @@ class TweetsController < ApplicationController
       @tweet.save
       erb :'tweets/show'
     else
-      redirect '/tweets/#{params[:id]}/edit'
+      redirect "/tweets/#{params[:id]}/edit"
     end
   end
 
