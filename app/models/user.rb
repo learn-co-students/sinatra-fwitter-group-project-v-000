@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_many :tweets
 
     def slug
-      self.name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+      self.username.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
     end
 
     def self.find_by_slug(slug)
