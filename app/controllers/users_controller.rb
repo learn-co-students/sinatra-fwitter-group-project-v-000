@@ -37,4 +37,8 @@ class UsersController < ApplicationController
    session.clear
    redirect '/login'
  end
+
+ get '/users/:user_slug' do
+   erb :'/users/show'
+ end
 end

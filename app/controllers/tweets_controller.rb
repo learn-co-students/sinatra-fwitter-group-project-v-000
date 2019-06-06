@@ -3,6 +3,8 @@ class TweetsController < ApplicationController
   get '/tweets' do
     if User.find_by_id(session[:user_id])
       @user = User.find_by_id(session[:user_id])
+      @tweets = []
+      @tweets << Tweet.find_by(:user_id => @user.id) unless !Tweet.find_by(:user_id => @user.id)
       erb :'tweets/index'
     else
       redirect erb: '/login'
@@ -15,8 +17,9 @@ class TweetsController < ApplicationController
 
   post '/tweets' do
     @tweet = Tweet.new(params)
+    @tweet.user_id = session[:user_id]
     @tweet.save
-    redirect 'tweets/#{@tweet.id}'
+    redirect 'tweets/@tweet.id'
   end
 
   get '/tweets/:id' do
