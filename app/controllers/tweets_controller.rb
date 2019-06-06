@@ -1,6 +1,7 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
+    @user = User.find_by_id(session[:id])
     erb :'tweets/index'
   end
 

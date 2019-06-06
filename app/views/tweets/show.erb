@@ -1,4 +1,4 @@
-<h1>Content: <%=@tweet.content%></h1>
+<h2>Content: <%=@tweet.content%></h2>
 
 <a href=<%="/tweets/#{@tweet.id}/edit"%>>Edit Tweet</a>
 <form action="/tweets/<%= @tweet.id %>/delete" method="post">
