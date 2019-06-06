@@ -1,8 +1,13 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    @user = User.find_by_id(session[:id])
-    erb :'tweets/index'
+    binding.pry
+    if User.find_by_id(session[:user_id])
+      @user = User.find_by_id(session[:user_id])
+      erb :'tweets/index'
+    else
+      redirect erb: '/'
+    end
   end
 
   get '/tweets/new' do
