@@ -10,7 +10,7 @@ class UsersController < ApplicationController
      session[:user_id] = @user.id
      redirect '/tweets'
    else
-     erb :'/'
+     erb :'/users/new'
    end
  end
 
