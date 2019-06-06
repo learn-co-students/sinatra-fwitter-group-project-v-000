@@ -19,7 +19,8 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(params)
     @tweet.user_id = session[:user_id]
     @tweet.save
-    redirect 'tweets/@tweet.id'
+    binding.pry
+    redirect 'tweets/#{@tweet.id}'
   end
 
   get '/tweets/:id' do
