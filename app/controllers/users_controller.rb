@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 
+    get '/' do
+        erb :index
+    end
+
     get '/signup' do
         user = User.find_by(id: session[:user_id])
         if !user.nil?
@@ -44,23 +48,24 @@ class UsersController < ApplicationController
     end
 
     get '/logout' do
-        user = User.find_by(id: session[:user_id])
-        if !user.nil?
-          if user.id == session[:user_id]
-            erb :'/users/logout'
-          end
-        else
-          erb :'/'
-        end
+        # user = User.find_by(id: session[:user_id])
+        # if !user.nil?
+        #   if user.id == session[:user_id]
+        #     erb :'/users/logout'
+        #   end
+        # else
+        #   redirect to '/'
+        # end
+        session.clear
+        redirect '/login'
     end
 
     post '/logout' do
         user = User.find_by(id: session[:user_id])
         if !user.nil?
-          if user.id == session[:user_id]
-            session[:user_id] = ""
+            session[:user_id].clear
+            binding.pry
             redirect to '/login'
-          end
         else
           erb :'/users/login'
         end
