@@ -40,4 +40,8 @@ class ApplicationController < Sinatra::Base
     erb :'/tweets/index'
   end
 
+  get '/login' do
+    erb :'/users/login'
+  end
+
 end
