@@ -43,4 +43,27 @@ class UsersController < ApplicationController
         end
     end
 
+    get '/logout' do
+        user = User.find_by(id: session[:user_id])
+        if !user.nil?
+          if user.id == session[:user_id]
+            erb :'/users/logout'
+          end
+        else
+          erb :'/'
+        end
+    end
+
+    post '/logout' do
+        user = User.find_by(id: session[:user_id])
+        if !user.nil?
+          if user.id == session[:user_id]
+            session[:user_id] = ""
+            redirect to '/login'
+          end
+        else
+          erb :'/users/login'
+        end
+    end
+
 end
