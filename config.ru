@@ -6,3 +6,8 @@ end
 
 use Rack::MethodOverride
 run ApplicationController
+
+# defer the '/signup' logic from ApplicationContoller
+# to the logic set in the contollers below
+use UsersController
+use TweetsController
