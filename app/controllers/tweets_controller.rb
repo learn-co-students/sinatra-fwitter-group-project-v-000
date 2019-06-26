@@ -76,6 +76,7 @@ class TweetsController < ApplicationController
       end
     end
   
+    # lets a user delete their own tweet if they are logged in
     delete '/tweets/:id/delete' do
       if logged_in?
         @tweet = Tweet.find_by_id(params[:id])
@@ -84,6 +85,7 @@ class TweetsController < ApplicationController
         end
         redirect to '/tweets'
       else
+        # does not load let user delete a tweet if not logged in
         redirect to '/login'
       end
     end

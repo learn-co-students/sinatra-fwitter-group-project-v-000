@@ -3,7 +3,8 @@ class UsersController < ApplicationController
       @user = User.find_by_slug(params[:slug])
       erb :'users/show'
     end
-  
+
+    #  loads the signup page
     get '/signup' do
       if !logged_in?
         erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
@@ -12,6 +13,8 @@ class UsersController < ApplicationController
       end
     end
   
+    # creates a new user and logs them in on valid submission and does not let 
+    # a logged in user view the signup page
     post '/signup' do 
       if params[:username] == "" || params[:email] == "" || params[:password] == ""
         redirect to '/signup'
