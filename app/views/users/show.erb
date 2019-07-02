@@ -1,0 +1,11 @@
+<h3>Welcome, <%= @user.username %></h3>
+
+<h4> Tweets </h4>
+
+<% @user.tweets.each do |tweet| %>
+  <div>
+    <%= tweet.content %>
+  </div>
+<% end %>
+
+<a class="button" href="/logout">Logout</a>
