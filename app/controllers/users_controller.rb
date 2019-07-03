@@ -39,7 +39,7 @@ class UsersController < ApplicationController
         if @current_user && @current_user.authenticate(params[:password])
             session[:user_id] = @current_user.id
           #  binding.pry
-            redirect to '/tweets'
+            redirect to '/tweets/tweets'
         else
             redirect to '/signup'
         end
