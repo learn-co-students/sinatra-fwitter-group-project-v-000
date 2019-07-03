@@ -1,0 +1,7 @@
+Welcome to Twitter, <%=current_user.username%>!
+<h2>FTweets</h2>
+<ul>
+<% @tweets.each do |tweet| %>
+<li><a href="/tweets/<%=tweet.id%>"><%= tweet.content %></a></li>
+<%end%>
+</ul>
