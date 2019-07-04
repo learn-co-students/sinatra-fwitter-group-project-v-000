@@ -34,10 +34,10 @@ class UsersController < ApplicationController
     end
 
     post '/login' do
-        @current_user = User.find_by(:username => params[:username])
+        current_user = User.find_by(:username => params[:username])
        # binding.pry
-        if @current_user && @current_user.authenticate(params[:password])
-            session[:user_id] = @current_user.id
+        if current_user && current_user.authenticate(params[:password])
+            session[:user_id] = current_user.id
           #  binding.pry
             redirect to '/tweets'
         else
@@ -46,8 +46,12 @@ class UsersController < ApplicationController
     end
 
     get '/logout' do
-        session.clear
-        redirect to '/login'
+        if is_logged_in?
+            session.clear
+            redirect to '/login'
+        else
+            redirect to '/'
+        end
     end
 
     
