@@ -35,11 +35,9 @@ class UsersController < ApplicationController
 
     post '/login' do
         current_user = User.find_by(:username => params[:username])
-       # binding.pry
         if current_user && current_user.authenticate(params[:password])
             session[:user_id] = current_user.id
-          #  binding.pry
-            redirect to '/tweets'
+            redirect to "/tweets"
         else
             redirect to '/signup'
         end
