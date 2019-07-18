@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   post "/signup" do
     if params[:username].blank? || params[:email].blank?
-      redirect "/signup" if session
+      redirect "/signup"
     elsif params[:password].blank?
       redirect "/signup"
     else
