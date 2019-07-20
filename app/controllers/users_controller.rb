@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   post '/signup' do
     user = User.new(params)
+    user.save
     if user.save
       redirect '/tweets'
     else
