@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    @user = User.find_by(params)
+    # @user = User.find_by(params)
     if logged_in?
      erb :"/tweets/tweets"
     else

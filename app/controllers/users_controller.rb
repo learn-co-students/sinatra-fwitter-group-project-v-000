@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   get '/signup' do
-    @user = User.find_by(params)
-    if !@user
+    # @user = User.find_by(params)
+    if !logged_in?
      erb :"/users/create_user"
     else
       redirect to '/tweets'
@@ -18,6 +18,7 @@ class UsersController < ApplicationController
       redirect '/signup'
     end
   end
+
 
   get "/login" do
     if logged_in?
@@ -38,12 +39,22 @@ class UsersController < ApplicationController
   end
 
   get "/logout" do
-   session.clear
-  if logged_in?
-     redirect to "/tweets"
-   else
-     redirect to "/login"
-   end
+    if logged_in?
+      session.destroy
+      redirect to "/login"
+    else
+      redirect to "/"
+    end
   end
+  #
+  #  POST route created for default "logout" view previously created
+  #  post "/logout" do
+  #  session.clear
+  #   if logged_in?
+  #      redirect to "/tweets"
+  #    else
+  #      redirect to "/login"
+  #    end
+  #  end
 
 end
