@@ -23,4 +23,9 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  #Attempted "go back" link; seems to loop back to current page view
+  # get "/back" do
+  #   redirect back
+  # end
+
 end

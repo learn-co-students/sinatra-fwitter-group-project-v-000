@@ -1,0 +1,14 @@
+<h1>Welcome, <%= current_user.username %></h1>
+
+<h2>
+  Tweet by:
+  <%if @user %>
+    <%=@user.username%>
+  <% else %>
+    Unknown
+  <% end %> </h2>
+<p><%=@tweet.content%></p>
+
+<% if current_user.id == @tweet.user_id %>
+<a href="/tweets/<%=@tweet.id%>/edit"></a>
+<%end%>
