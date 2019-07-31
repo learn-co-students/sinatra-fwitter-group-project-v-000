@@ -1,0 +1,13 @@
+<% if logged_in? %>
+
+<form action="/tweets/<%= @tweet.id %>" method="POST">
+	<input id="hidden" type="hidden" name="_method" value="PATCH">
+	<input type="text" name="content" value="<%= @tweet.content %>"><br>
+	<input type="submit" type="submit" name="submit" id="submit">
+</form>
+
+<% else %>
+
+<a href="/login">Click here to log in.</a>
+
+<% end %>
