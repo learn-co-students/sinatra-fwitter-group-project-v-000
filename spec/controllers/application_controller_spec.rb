@@ -19,7 +19,7 @@ describe ApplicationController do
 
     it 'signup directs user to twitter index' do
       params = {
-        :username => "skittles123",
+        :name => "skittles123",
         :email => "skittles@aol.com",
         :password => "rainbows"
       }
@@ -27,9 +27,9 @@ describe ApplicationController do
       expect(last_response.location).to include("/tweets")
     end
 
-    it 'does not let a user sign up without a username' do
+    it 'does not let a user sign up without a name' do
       params = {
-        :username => "",
+        :name => "",
         :email => "skittles@aol.com",
         :password => "rainbows"
       }
@@ -39,7 +39,7 @@ describe ApplicationController do
 
     it 'does not let a user sign up without an email' do
       params = {
-        :username => "skittles123",
+        :name => "skittles123",
         :email => "",
         :password => "rainbows"
       }
@@ -49,7 +49,7 @@ describe ApplicationController do
 
     it 'does not let a user sign up without a password' do
       params = {
-        :username => "skittles123",
+        :name => "skittles123",
         :email => "skittles@aol.com",
         :password => ""
       }
@@ -58,9 +58,9 @@ describe ApplicationController do
     end
 
     it 'does not let a logged in user view the signup page' do
-      user = User.create(:username => "skittles123", :email => "skittles@aol.com", :password => "rainbows")
+      user = User.create(:name => "skittles123", :email => "skittles@aol.com", :password => "rainbows")
       params = {
-        :username => "skittles123",
+        :name => "skittles123",
         :email => "skittles@aol.com",
         :password => "rainbows"
       }
@@ -77,9 +77,9 @@ describe ApplicationController do
     end
 
     it 'loads the tweets index after login' do
-      user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+      user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
       params = {
-        :username => "becky567",
+        :name => "becky567",
         :password => "kittens"
       }
       post '/login', params
@@ -90,10 +90,10 @@ describe ApplicationController do
     end
 
     it 'does not let user view login page if already logged in' do
-      user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+      user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
 
       params = {
-        :username => "becky567",
+        :name => "becky567",
         :password => "kittens"
       }
       post '/login', params
@@ -104,10 +104,10 @@ describe ApplicationController do
 
   describe "logout" do
     it "lets a user logout if they are already logged in and redirects to the login page" do
-      user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+      user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
 
       params = {
-        :username => "becky567",
+        :name => "becky567",
         :password => "kittens"
       }
       post '/login', params
@@ -128,12 +128,12 @@ describe ApplicationController do
     end
 
     it 'loads /tweets if user is logged in' do
-      user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+      user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
 
 
       visit '/login'
 
-      fill_in(:username, :with => "becky567")
+      fill_in(:name, :with => "becky567")
       fill_in(:password, :with => "kittens")
       click_button 'submit'
       expect(page.current_path).to eq('/tweets')
@@ -143,7 +143,7 @@ describe ApplicationController do
 
   describe 'user show page' do
     it 'shows all a single users tweets' do
-      user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+      user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
       tweet1 = Tweet.create(:content => "tweeting!", :user_id => user.id)
       tweet2 = Tweet.create(:content => "tweet tweet tweet", :user_id => user.id)
       get "/users/#{user.slug}"
@@ -157,15 +157,15 @@ describe ApplicationController do
   describe 'index action' do
     context 'logged in' do
       it 'lets a user view the tweets index if logged in' do
-        user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user1 = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet1 = Tweet.create(:content => "tweeting!", :user_id => user1.id)
 
-        user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
+        user2 = User.create(:name => "silverstallion", :email => "silver@aol.com", :password => "horses")
         tweet2 = Tweet.create(:content => "look at this tweet", :user_id => user2.id)
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:name, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit "/tweets"
@@ -185,11 +185,11 @@ describe ApplicationController do
   describe 'new action' do
     context 'logged in' do
       it 'lets user view new tweet form if logged in' do
-        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:name, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit '/tweets/new'
@@ -197,11 +197,11 @@ describe ApplicationController do
       end
 
       it 'lets user create a tweet if they are logged in' do
-        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:name, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
 
@@ -209,7 +209,7 @@ describe ApplicationController do
         fill_in(:content, :with => "tweet!!!")
         click_button 'submit'
 
-        user = User.find_by(:username => "becky567")
+        user = User.find_by(:name => "becky567")
         tweet = Tweet.find_by(:content => "tweet!!!")
         expect(tweet).to be_instance_of(Tweet)
         expect(tweet.user_id).to eq(user.id)
@@ -217,12 +217,12 @@ describe ApplicationController do
       end
 
       it 'does not let a user tweet from another user' do
-        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
-        user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
+        user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user2 = User.create(:name => "silverstallion", :email => "silver@aol.com", :password => "horses")
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:name, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
 
@@ -240,11 +240,11 @@ describe ApplicationController do
       end
 
       it 'does not let a user create a blank tweet' do
-        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:name, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
 
@@ -270,12 +270,12 @@ describe ApplicationController do
     context 'logged in' do
       it 'displays a single tweet' do
 
-        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet = Tweet.create(:content => "i am a boss at tweeting", :user_id => user.id)
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:name, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
 
@@ -289,7 +289,7 @@ describe ApplicationController do
 
     context 'logged out' do
       it 'does not let a user view a tweet' do
-        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet = Tweet.create(:content => "i am a boss at tweeting", :user_id => user.id)
         get "/tweets/#{tweet.id}"
         expect(last_response.location).to include("/login")
@@ -300,11 +300,11 @@ describe ApplicationController do
   describe 'edit action' do
     context "logged in" do
       it 'lets a user view tweet edit form if they are logged in' do
-        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet = Tweet.create(:content => "tweeting!", :user_id => user.id)
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:name, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit '/tweets/1/edit'
@@ -313,15 +313,15 @@ describe ApplicationController do
       end
 
       it 'does not let a user edit a tweet they did not create' do
-        user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user1 = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet1 = Tweet.create(:content => "tweeting!", :user_id => user1.id)
 
-        user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
+        user2 = User.create(:name => "silverstallion", :email => "silver@aol.com", :password => "horses")
         tweet2 = Tweet.create(:content => "look at this tweet", :user_id => user2.id)
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:name, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit "tweets/#{tweet2.id}"
@@ -332,11 +332,11 @@ describe ApplicationController do
       end
 
       it 'lets a user edit their own tweet if they are logged in' do
-        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet = Tweet.create(:content => "tweeting!", :user_id => 1)
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:name, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit '/tweets/1/edit'
@@ -350,11 +350,11 @@ describe ApplicationController do
       end
 
       it 'does not let a user edit a text with blank content' do
-        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet = Tweet.create(:content => "tweeting!", :user_id => 1)
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:name, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit '/tweets/1/edit'
@@ -378,11 +378,11 @@ describe ApplicationController do
   describe 'delete action' do
     context "logged in" do
       it 'lets a user delete their own tweet if they are logged in' do
-        user = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet = Tweet.create(:content => "tweeting!", :user_id => 1)
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:name, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit 'tweets/1'
@@ -392,15 +392,15 @@ describe ApplicationController do
       end
 
       it 'does not let a user delete a tweet they did not create' do
-        user1 = User.create(:username => "becky567", :email => "starz@aol.com", :password => "kittens")
+        user1 = User.create(:name => "becky567", :email => "starz@aol.com", :password => "kittens")
         tweet1 = Tweet.create(:content => "tweeting!", :user_id => user1.id)
 
-        user2 = User.create(:username => "silverstallion", :email => "silver@aol.com", :password => "horses")
+        user2 = User.create(:name => "silverstallion", :email => "silver@aol.com", :password => "horses")
         tweet2 = Tweet.create(:content => "look at this tweet", :user_id => user2.id)
 
         visit '/login'
 
-        fill_in(:username, :with => "becky567")
+        fill_in(:name, :with => "becky567")
         fill_in(:password, :with => "kittens")
         click_button 'submit'
         visit "tweets/#{tweet2.id}"
