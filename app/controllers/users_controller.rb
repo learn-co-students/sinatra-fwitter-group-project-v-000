@@ -64,15 +64,12 @@ end
 
   end
 
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
 
-
-  helpers do
-   def logged_in?
-     !!session[:user_id]
-   end
-
-   def current_user
-     User.find(session[:user_id])
-   end
+    erb :'users/show'
   end
+
+
+
 end
