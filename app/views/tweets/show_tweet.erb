@@ -1,7 +1,17 @@
 <p>This is the show tweet page</p>
 
 <h3><%= @tweet.content %></h3>
-<form  action="/delete" method="post">
-    <input type="submit" name="Edit" value="Edit Tweet">
+
+<!-- <form action="/tweets/:id" method="post"> -->
+  <!-- <input type="submit" name="Edit" value="Edit Tweet"> -->
+  <p><a href="/tweets/:id/edit">Edit Tweet</a></p>
+
+</form>
+
+<form  action="/tweets/<%=@tweet.id%>" method="post">
+
+    <input type="hidden" type="hidden" name="_method" value="delete">
+
     <input type="submit" name="Delete" value="Delete Tweet">
+
 </form>
