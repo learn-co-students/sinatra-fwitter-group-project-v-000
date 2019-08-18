@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     session[:user_id] = @user.id
     if @user.username.present? && @user.password_digest.present? &&
       @user.email.present?
-      redirect to '/tweets'
+      redirect '/tweets'
     else
       redirect to '/signup'
     end
@@ -25,23 +25,26 @@ class UsersController < ApplicationController
       erb :'/users/login'
     else
       redirect to '/tweets'
-    end 
+    end
   end
 
   post '/login' do
     @user = User.find_by(username: params[:username])
-    #binding.pry
-    if @user && @user.authenticate(params[:password_digest])
-      session[:user_id] = user.id
-      erb :'/tweets/tweets'
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect to '/tweets'
     else
       redirect to '/login'
     end
   end
 
   get '/logout' do
-
-    redirect to '/login'
+    if session[:user_id] == nil
+      redirect "/"
+    else
+      session.clear
+      redirect '/login'
+    end
   end
 
 end
