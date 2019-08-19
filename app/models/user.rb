@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   def self.find_by_slug(slug)
     user_name = slug.gsub(/-/, ' ')
     User.all.each do |user|
-      if user.name.downcase == user_name
+      if user.username.downcase == user_name
         @user = user
       end
     end

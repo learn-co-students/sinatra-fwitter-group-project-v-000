@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     end
   end
 
-  get "/users/#{user.slug}"
+  get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     erb :'/tweets/show_tweet'
   end
