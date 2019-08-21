@@ -11,6 +11,7 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem "tux"
+gem 'slugify', '~> 1.0', '>= 1.0.7'
 
 group :test do
   gem 'rspec'
