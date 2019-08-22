@@ -1,5 +1,5 @@
 class TweetsController < ApplicationController
-=begin
+
   get '/tweets' do
     if logged_in?
       erb :'/tweets/tweets'
@@ -67,5 +67,5 @@ class TweetsController < ApplicationController
       redirect "/users/#{current_user.username.slugify}"
     end
   end
-=end
+
 end

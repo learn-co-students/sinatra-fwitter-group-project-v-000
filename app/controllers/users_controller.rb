@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-=begin
+
   get '/signup' do
     if !logged_in?
       erb :'users/create_user'
@@ -51,5 +51,5 @@ class UsersController < ApplicationController
       redirect "/tweets"
     end
   end
-=end
+
 end

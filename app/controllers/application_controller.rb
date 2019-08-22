@@ -12,7 +12,7 @@ class ApplicationController < Sinatra::Base
   get '/' do
     erb :index
   end
-
+=begin
   get '/signup' do
     if !logged_in?
       erb :'users/create_user'
@@ -132,7 +132,7 @@ class ApplicationController < Sinatra::Base
       redirect "/users/#{current_user.username.slugify}"
     end
   end
-
+=end
   helpers do
     def logged_in?
       !!session[:user_id]
