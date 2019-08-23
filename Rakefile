@@ -1,6 +1,7 @@
 ENV["SINATRA_ENV"] ||= "development"
 
 require_relative './config/environment'
+# rake tasks to create new tables
 require 'sinatra/activerecord/rake'
 
 
