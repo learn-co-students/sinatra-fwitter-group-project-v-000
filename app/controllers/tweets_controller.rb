@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class TweetsController < ApplicationController
+  use Rack::Flash
 
   get '/tweets' do
     if logged_in?
@@ -40,8 +43,10 @@ class TweetsController < ApplicationController
       @tweet = Tweet.find(params[:id])
       erb :'/tweets/edit_tweet'
     elsif logged_in?
+      flash[:message] = "You don't have permission"
       redirect "/tweets"
     else
+      flash[:message] = "Please log in"
       redirect "/login"
     end
   end
@@ -53,6 +58,7 @@ class TweetsController < ApplicationController
         @tweet.update(content: params[:content])
         redirect "/users/#{current_user.username.slugify}"
       else
+        flash[:message] = "Invalid params"
         redirect "/tweets/#{params[:id]}/edit"
       end
     else
