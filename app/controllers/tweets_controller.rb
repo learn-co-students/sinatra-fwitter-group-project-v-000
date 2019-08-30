@@ -52,6 +52,7 @@ class TweetsController < ApplicationController
       if params[:content].empty?
         redirect "/tweets/#{params[:id]}/edit"
       else
+        binding.pry
         @tweet.update(content: params[:content])
         redirect "/users/#{current_user.username.slugify}"
       end
