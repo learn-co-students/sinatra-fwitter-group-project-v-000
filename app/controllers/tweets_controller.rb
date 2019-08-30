@@ -49,11 +49,11 @@ class TweetsController < ApplicationController
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
     if logged_in? && current_user.tweets.ids.include?(@tweet.id)
-      if params[:content].empty?
-        redirect "/tweets/#{params[:id]}/edit"
-      else
+      if valid_params? 
         @tweet.update(content: params[:content])
         redirect "/users/#{current_user.username.slugify}"
+      else
+        redirect "/tweets/#{params[:id]}/edit"
       end
     end
   end
@@ -66,6 +66,15 @@ class TweetsController < ApplicationController
       redirect "/users/#{@tweet.user.username.slugify}"
     else
       redirect "/tweets"
+    end
+  end
+
+  helpers do
+    # if none of params values are blank, returns true
+    def valid_params?
+      params.none? do |k,v|
+        v == ""
+      end
     end
   end
 
