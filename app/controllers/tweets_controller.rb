@@ -47,13 +47,12 @@ class TweetsController < ApplicationController
   end
 
   patch '/tweets/:id' do
-    if logged_in? && current_user.tweets.ids.include?(params[:id].to_i)
+    @tweet = Tweet.find(params[:id])
+    if logged_in? && current_user.tweets.ids.include?(@tweet.id)
       if params[:content].empty?
         redirect "/tweets/#{params[:id]}/edit"
       else
-        @tweet = Tweet.find(params[:id])
-        @tweet.content = params[:content]
-        @tweet.save
+        @tweet.update(content: params[:content])
         redirect "/users/#{current_user.username.slugify}"
       end
     end
