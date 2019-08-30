@@ -57,12 +57,12 @@ class TweetsController < ApplicationController
     end
   end
 
-  delete '/tweets/:id' do
+  get '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
 
     if current_user.id == @tweet.user_id
       @tweet.destroy
-      redirect "/tweets"
+      redirect "/users/#{@tweet.user.username.slugify}"
     else
       redirect "/tweets"
     end
