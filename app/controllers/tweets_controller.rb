@@ -68,14 +68,5 @@ class TweetsController < ApplicationController
       redirect "/tweets"
     end
   end
-=begin
-  helpers do
-    # if none of params values are blank, returns true
-    def valid_params?
-      params.none? do |k,v|
-        v == ""
-      end
-    end
-  end
-=end
+
 end
