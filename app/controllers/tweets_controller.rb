@@ -35,17 +35,6 @@ class TweetsController < ApplicationController
     end
   end
 
-  get '/tweets/:id/delete' do
-    tweet = Tweet.find(params[:id])
-
-    if current_user.id == tweet.user_id
-      tweet.destroy
-      redirect "/tweets"
-    else
-      redirect "/tweets"
-    end
-  end
-
   get '/tweets/:id/edit' do
     if logged_in? && current_user.tweets.ids.include?(params[:id].to_i)
       @tweet = Tweet.find(params[:id])
@@ -65,6 +54,17 @@ class TweetsController < ApplicationController
       @tweet.content = params[:content]
       @tweet.save
       redirect "/users/#{current_user.username.slugify}"
+    end
+  end
+
+  delete '/tweets/:id' do
+    @tweet = Tweet.find(params[:id])
+
+    if current_user.id == @tweet.user_id
+      @tweet.destroy
+      redirect "/tweets"
+    else
+      redirect "/tweets"
     end
   end
 
