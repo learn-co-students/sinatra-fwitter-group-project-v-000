@@ -55,6 +55,10 @@ class TweetsController < ApplicationController
       else
         redirect "/tweets/#{params[:id]}/edit"
       end
+    else
+      # if don't have permission to update
+      flash[:message] = "You don't have permission"
+      redirect "/tweets"
     end
   end
 
