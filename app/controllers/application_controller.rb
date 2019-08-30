@@ -27,5 +27,13 @@ class ApplicationController < Sinatra::Base
       # if @current_user is assigned, don't evaluate
       @current_user ||= User.find(session[:user_id])
     end
+
+    # if none of params values are blank, returns true
+    def valid_params?
+      params.none? do |k,v|
+        v == ""
+      end
+    end
   end
+  
 end
