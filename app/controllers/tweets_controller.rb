@@ -7,6 +7,7 @@ class TweetsController < ApplicationController
     if logged_in?
       erb :'/tweets/tweets'
     else
+      flash[:message] = "Must be logged in to view tweets."
       redirect "/login"
     end
   end
@@ -15,16 +16,19 @@ class TweetsController < ApplicationController
     if logged_in?
       erb :'/tweets/new'
     else
+      flash[:message] = "Must be logged in to create a new tweet."
       redirect "/login"
     end
   end
 
   post '/tweets' do
     if params[:content].empty?
+      flash[:message] = "Tweet must have content."
       redirect "/tweets/new"
     else
       @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
       @tweet.save
+      flash[:message] = "New tweet created!"
       redirect "/tweets"
     end
   end
@@ -34,6 +38,7 @@ class TweetsController < ApplicationController
       @tweet = Tweet.find(params[:id])
       erb :'/tweets/show_tweet'
     else
+      flash[:message] = "Must be logged in to view a tweet."
       redirect "/login"
     end
   end
@@ -43,10 +48,10 @@ class TweetsController < ApplicationController
       @tweet = Tweet.find(params[:id])
       erb :'/tweets/edit_tweet'
     elsif logged_in?
-      flash[:message] = "You don't have permission"
+      flash[:message] = "You don't have permission to edit that tweet."
       redirect "/tweets"
     else
-      flash[:message] = "Please log in"
+      flash[:message] = "Please log in."
       redirect "/login"
     end
   end
@@ -62,8 +67,7 @@ class TweetsController < ApplicationController
         redirect "/tweets/#{params[:id]}/edit"
       end
     else
-      # if don't have permission to update
-      flash[:message] = "You don't have permission"
+      flash[:message] = "You don't have permission to update this tweet."
       redirect "/tweets"
     end
   end
@@ -73,8 +77,10 @@ class TweetsController < ApplicationController
 
     if current_user.id == @tweet.user_id
       @tweet.destroy
+      flash[:message] = "Tweet deleted."
       redirect "/users/#{@tweet.user.username.slugify}"
     else
+      flash[:message] = "You don't have permission to delete this tweet."
       redirect "/tweets"
     end
   end
