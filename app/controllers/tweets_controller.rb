@@ -58,7 +58,8 @@ class TweetsController < ApplicationController
 
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    if logged_in? && current_user.tweets.ids.include?(@tweet.id)
+
+    if logged_in? && current_user == @tweet.user
       if valid_params?
         @tweet.update(content: params[:content])
         redirect "/users/#{current_user.username.slugify}"
@@ -75,7 +76,7 @@ class TweetsController < ApplicationController
   delete '/tweets/:id/delete' do
     @tweet = Tweet.find(params[:id])
 
-    if current_user.id == @tweet.user_id
+    if logged_in? && current_user.id == @tweet.user_id
       @tweet.destroy
       flash[:message] = "Tweet deleted."
       redirect "/users/#{@tweet.user.username.slugify}"
