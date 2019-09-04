@@ -28,6 +28,8 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
+    login
+=begin
     user = User.find_by(username: params[:username])
 
 		 if user && user.authenticate(params[:password])
@@ -36,11 +38,13 @@ class UsersController < ApplicationController
 	  else
 	    redirect "/login"
 	  end
+=end
   end
 
   get '/logout' do
-    session.clear
-    redirect "/login"
+    logout!
+    #session.clear
+    #redirect "/login"
   end
 
   get '/users/:slug' do

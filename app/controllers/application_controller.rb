@@ -19,6 +19,17 @@ class ApplicationController < Sinatra::Base
 
   # helper methods
   helpers do
+    def login
+      user = User.find_by(username: params[:username])
+
+      if user && user.authenticate(params[:password])
+ 			    session[:user_id] = user.id
+          redirect "/tweets"
+      else
+        redirect "/login"
+      end
+    end
+
     def logged_in?
       !!session[:user_id]
     end
@@ -28,6 +39,11 @@ class ApplicationController < Sinatra::Base
       @current_user ||= User.find(session[:user_id])
     end
 
+    def logout!
+      session.clear
+      redirect "/login"
+    end
+
     # if none of params values are blank, returns true
     def valid_params?
       params.none? do |k,v|
@@ -35,5 +51,5 @@ class ApplicationController < Sinatra::Base
       end
     end
   end
-  
+
 end
