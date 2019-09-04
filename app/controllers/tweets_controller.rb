@@ -28,6 +28,7 @@ class TweetsController < ApplicationController
     else
       @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
       @tweet.save
+      
       flash[:message] = "New tweet created!"
       redirect "/tweets"
     end
