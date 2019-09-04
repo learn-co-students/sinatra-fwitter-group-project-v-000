@@ -28,7 +28,7 @@ class TweetsController < ApplicationController
     else
       @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
       @tweet.save
-      
+
       flash[:message] = "New tweet created!"
       redirect "/tweets"
     end
@@ -45,15 +45,16 @@ class TweetsController < ApplicationController
   end
 
   get '/tweets/:id/edit' do
-    if logged_in? && current_user.tweets.ids.include?(params[:id].to_i)
-      @tweet = Tweet.find(params[:id])
-      erb :'/tweets/edit_tweet'
-    elsif logged_in?
-      flash[:message] = "You don't have permission to edit that tweet."
-      redirect "/tweets"
-    else
+    @tweet = Tweet.find(params[:id])
+
+    if !logged_in?
       flash[:message] = "Please log in."
       redirect "/login"
+    elsif @tweet.user_id == current_user.id
+      erb :'/tweets/edit_tweet'
+    else
+      flash[:message] = "You don't have permission to edit that tweet."
+      redirect "/tweets"
     end
   end
 

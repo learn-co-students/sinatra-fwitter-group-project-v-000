@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params[:username].empty? || params[:email].empty? || params[:password].empty?
+    if !valid_params? #params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect "/signup"
 	  else
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
@@ -29,22 +29,10 @@ class UsersController < ApplicationController
 
   post '/login' do
     login
-=begin
-    user = User.find_by(username: params[:username])
-
-		 if user && user.authenticate(params[:password])
-			session[:user_id] = user.id
-	    redirect "/tweets"
-	  else
-	    redirect "/login"
-	  end
-=end
   end
 
   get '/logout' do
     logout!
-    #session.clear
-    #redirect "/login"
   end
 
   get '/users/:slug' do
