@@ -16,21 +16,20 @@ class TweetsController < ApplicationController
     if logged_in?
       erb :'/tweets/new'
     else
-      flash[:message] = "Must be logged in to create a new tweet."
+      flash[:error] = "Must be logged in to create a new tweet."
       redirect "/login"
     end
   end
 
   post '/tweets' do
-    if params[:content].empty?
-      flash[:message] = "Tweet must have content."
-      redirect "/tweets/new"
-    else
-      @tweet = Tweet.create(content: params[:content], user_id: current_user.id)
-      @tweet.save
+    @tweet = Tweet.new(content: params[:content], user_id: current_user.id)
 
-      flash[:message] = "New tweet created!"
+    if @tweet.save
+      flash[:message] = "New tweet successfully created!"
       redirect "/tweets"
+    else
+      flash[:error] = "Tweet creation failure: #{@tweet.errors.full_messages.to_sentence}"
+      redirect "/tweets/new"
     end
   end
 
@@ -50,7 +49,7 @@ class TweetsController < ApplicationController
     if !logged_in?
       flash[:message] = "Please log in."
       redirect "/login"
-    elsif @tweet.user_id == current_user.id
+    elsif authorized_to_edit?(@tweet) #@tweet.user_id == current_user.id
       erb :'/tweets/edit_tweet'
     else
       flash[:message] = "You don't have permission to edit that tweet."
@@ -61,6 +60,14 @@ class TweetsController < ApplicationController
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
 
+    if @tweet.update(content: params[:content])
+      flash[:message] = "Tweet successfully updated!"
+      redirect "/users/#{current_user.username.slugify}"
+    else
+      flash[:message] = "Tweet must have content."
+      redirect "/tweets/#{params[:id]}/edit"
+    end
+=begin
     if logged_in? && current_user == @tweet.user
       if valid_params?
         @tweet.update(content: params[:content])
@@ -73,6 +80,7 @@ class TweetsController < ApplicationController
       flash[:message] = "You don't have permission to update this tweet."
       redirect "/tweets"
     end
+=end
   end
 
   delete '/tweets/:id/delete' do

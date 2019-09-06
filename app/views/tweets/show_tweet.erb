@@ -8,7 +8,7 @@ form to delete a tweet should be submitted via a POST request to tweets/:id/dele
 
 <%= @tweet.content %>
 <br><br>
-
+<% #if authorized_to_edit?(@tweet) %>
 <form>
   <button id="EditTweet" type="submit" formaction="/tweets/<%= @tweet.id %>/edit">Edit Tweet</button>
 </form>
@@ -17,3 +17,4 @@ form to delete a tweet should be submitted via a POST request to tweets/:id/dele
   <input id="hidden" type="hidden" name="_method" value="delete">
   <input type="submit" id="submit" value="Delete Tweet">
 </form>
+<% #end %>

@@ -7,7 +7,16 @@
 
     <div class="container">
       <h1>Fwitter!</h1>
+
+      <% if flash.has?(:message) %>
+        <%= flash[:message] %>
+      <% elsif flash.has?(:error) %>
+          <%= flash[:error] %>
+      <% end %>
+
       <%= yield %>
+
+      
     </div>
 
   </body>
