@@ -1,4 +1,6 @@
 # loads dependencies
+require 'sysrandom/securerandom'
+ENV['SESSION_SECRET'] = "shotgun will not let me" #SecureRandom.hex(64)
 
 # constant (environment), if exists don't evaluate
 ENV['SINATRA_ENV'] ||= "development"

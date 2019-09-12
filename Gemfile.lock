@@ -94,6 +94,7 @@ GEM
       sinatra (>= 1.0)
     slugify (1.0.7)
     sqlite3 (1.3.13)
+    sysrandom (1.0.5)
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -129,6 +130,7 @@ DEPENDENCIES
   sinatra-activerecord
   slugify (~> 1.0, >= 1.0.7)
   sqlite3
+  sysrandom
   thin
   tux
 

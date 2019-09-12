@@ -8,6 +8,7 @@ end
 
 # a Rack module for handling browser-unsupported HTTP verbs in web applications
 use Rack::MethodOverride
+#use Rack::Session::Pool
 
 #
 use TweetsController

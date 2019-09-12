@@ -19,6 +19,7 @@ class ApplicationController < Sinatra::Base
 
   # helper methods
   helpers do
+=begin
     def login
       user = User.find_by(username: params[:username])
 
@@ -29,21 +30,21 @@ class ApplicationController < Sinatra::Base
         redirect "/login"
       end
     end
-
-    def logged_in?
-      !!session[:user_id]
-      #current_user
-    end
-
+=end
     def current_user
       # if @current_user is assigned, don't evaluate
       @current_user ||= User.find(session[:user_id])
     end
 
+    def logged_in?
+      !!session[:user_id]
+      #!!current_user
+    end
+
     def authorized_to_edit?(tweet)
       current_user == tweet.user
     end
-    
+
     # find tweet
     # redirect
 
