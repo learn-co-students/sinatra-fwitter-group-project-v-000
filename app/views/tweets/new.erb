@@ -1,7 +1,7 @@
 <h2>What's on your mind <%= current_user.username %>?</h2>
   <form action='/tweets' method="post">
     <label for="content">Content:</label>
-    <input type="text" name="content">
+    <input type="text" name="content" id="content">
     <br><br>
     <input type="submit" id="submit" value="Create Tweet">
   </form>

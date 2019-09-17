@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   get '/users/:slug' do
     if current_user.username.slugify == params[:slug]
       @user = User.find_by_slug(params[:slug])
-      erb :'users/show'
+      erb :"/users/show"
     else
       redirect "/tweets"
     end
