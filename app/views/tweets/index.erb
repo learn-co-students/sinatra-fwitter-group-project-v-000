@@ -1,0 +1,8 @@
+All tweets
+Welcome, <%= @user.username %>!
+
+<% Tweet.all.each do |tweet| %>
+<ul>
+  <li><%= tweet.content %></li>
+</ul>
+<% end %>
