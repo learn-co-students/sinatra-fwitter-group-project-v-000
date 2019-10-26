@@ -1,0 +1,13 @@
+<h1>Edit Your Tweet</h1>
+<form action="/tweets/<%= @tweet.id %>" method="POST">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label for="content">Edit Tweet Content:</label>
+  <br>
+  <input type="text" id="content" name="content" value="<%= @tweet.content %>">
+  <br><br>
+  <input type="submit" id="submit" value="Save">
+  </form>
+
+  <form>
+    <button type="submit" formaction="/users/<%= @tweet.user.username.slugify %>">Cancel</button>
+  </form>

@@ -1,0 +1,25 @@
+<h1>Welcome, <%= current_user.username %></h1>
+<h2>All Tweets</h2>
+<ul>
+  <% Tweet.all.each do |tweet| %>
+    <li><%= tweet.user.username %>
+      <ul>
+        <li><%= tweet.content %></li>
+      </ul>
+    </li>
+    <br>
+    <% end %>
+</ul>
+
+<form>
+  <button type="submit" formaction="/tweets/new">Create New Tweet</button>
+  <button type="submit" formaction="/logout">Log Out</button>
+  <button type="submit" formaction="/users/<%= current_user.username.slugify %>">View My Tweets</button>
+</form>
+
+<!--
+<form action="/logout" method="post">
+  Logout?
+  <input id="submit" type="submit" name="submit" >
+</form>
+-->

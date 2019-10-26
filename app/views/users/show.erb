@@ -1,0 +1,16 @@
+<h1><%= @user.username %>'s Tweets</h1>
+
+<% @user.tweets.each do |tweet| %>
+  <li><%= tweet.content %>
+    <form>
+      <button type="submit" formaction="/tweets/<%= tweet.id %>/edit">Edit Tweet</button>
+      <button type="submit" formaction="/tweets/<%= tweet.id %>/delete">Delete Tweet</button>
+    </form>
+  <br>
+<% end %>
+<br>
+<form>
+  <button type="submit" formaction="/tweets/new">Create New Tweet</button>
+  <button type="submit" formaction="/tweets">View All Tweets</button>
+  <button type="submit" formaction="/logout">Log Out</button>
+</form>

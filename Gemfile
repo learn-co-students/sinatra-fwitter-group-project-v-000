@@ -10,7 +10,10 @@ gem 'thin'
 gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
+gem 'sysrandom'
 gem "tux"
+gem 'rack-flash3'
+gem 'slugify', '~> 1.0', '>= 1.0.7'
 
 group :test do
   gem 'rspec'
