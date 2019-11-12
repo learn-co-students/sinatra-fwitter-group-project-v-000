@@ -7,4 +7,12 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
+  get '/' do
+    erb 'Welcome to Fwitter'
+  end
+
+  get '/signup' do
+    erb :'signup'
+  end
+
 end
