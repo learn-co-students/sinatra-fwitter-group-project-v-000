@@ -59,13 +59,14 @@ class TweetsController < ApplicationController
       redirect to "/tweets"
     end
 
-    if @tweet.user_id = session[:user_id] && !params[:content] != ""
+    if @tweet.user_id = session[:user_id] && !params[:content].empty?
       @tweet.user_id = session[:user_id]
       @tweet.content = params[:content]
       @tweet.save
+      redirect to "/tweets"
+    else
+      redirect to "/tweets/:id/edit"
     end
-
-    redirect to "/tweets"
   end
 
   post "/tweets/:id/delete" do
