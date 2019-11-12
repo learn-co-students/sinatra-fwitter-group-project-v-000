@@ -65,7 +65,7 @@ class TweetsController < ApplicationController
       @tweet.save
       redirect to "/tweets"
     else
-      redirect to "/tweets/:id/edit"
+      redirect to "/tweets/#{@user.id}/edit"
     end
   end
 
