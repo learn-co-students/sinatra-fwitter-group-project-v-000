@@ -24,12 +24,19 @@ class TweetsController < ApplicationController
   end
 
   get "/tweets/:id" do
+    if !logged_in?
+      redirect to "/login"
+    end
+
     @user = current_user
     @tweet = Tweet.find(params[:id])
     erb :"/tweets/show"
   end
 
   get "/tweets/:id/edit" do
+    if !logged_in?
+      redirect to "/login"
+    end
     @user = current_user
     @tweet = Tweet.find(params[:id])
 
@@ -49,11 +56,12 @@ class TweetsController < ApplicationController
     end
 
     if @tweet.user_id = session[:user_id] && !params[:content].empty?
+      @tweet.user_id = session[:user_id]
       @tweet.content = params[:content]
+      @tweet.save
     end
 
-    @tweet.save
-    redirect to "tweets"
+    redirect to "/tweets"
   end
 
   post "/tweets/:id/delete" do

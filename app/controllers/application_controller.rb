@@ -10,6 +10,9 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
+    if logged_in?
+      redirect to :"/tweets"
+    end
     erb :"index"
   end
 
@@ -22,6 +25,5 @@ class ApplicationController < Sinatra::Base
       User.find(session[:user_id])
     end
   end
-
 
 end

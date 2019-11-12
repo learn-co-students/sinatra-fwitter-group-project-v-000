@@ -1,4 +1,4 @@
-<h1>Welcome, <%= @user.username %></h1>
+<h1>Welcome, <%= @user.username.capitalize %></h1>
 <% @tweets.each do |tweet| %>
 <ul>
   <li><a href="/tweets/<%= tweet.id %>"><%= tweet.content %><br> User: <%= tweet.user.username%></a></li>
