@@ -13,10 +13,10 @@ class UsersController < ApplicationController
     end
 
     if params[:username] == "" || params[:password] == "" || params[:email] == ""
-      redirect to "/failure"
+      redirect to "/signup"
     else
       user = User.create(:username => params[:username], :password => params[:password], :email => params[:email])
-      redirect to "/login"
+      redirect to "/tweets"
     end
   end
 
@@ -41,14 +41,18 @@ class UsersController < ApplicationController
     erb :"index"
   end
 
+  #get "/logout" do
+  #  if !logged_in?
+  #    redirect to "/"
+  #  end
+  #  erb :"/users/logout"
+  #end
+
   get "/logout" do
     if !logged_in?
-      redirect to "/"
+        redirect to "/"
     end
-    erb :"/users/logout"
-  end
 
-  post "/logout" do
     if logged_in?
       session.clear
       redirect to "/login"
