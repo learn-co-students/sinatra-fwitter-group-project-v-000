@@ -16,8 +16,10 @@ class UsersController < ApplicationController
       redirect to "/signup"
     else
       user = User.create(:username => params[:username], :password => params[:password], :email => params[:email])
+      session[:user_id] = user.id
       redirect to "/tweets"
     end
+
   end
 
   get "/login" do
