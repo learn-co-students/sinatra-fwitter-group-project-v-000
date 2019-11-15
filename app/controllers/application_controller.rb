@@ -34,13 +34,21 @@ class ApplicationController < Sinatra::Base
    end
 
    get '/login' do
-     binding.pry
      if session[:user_id] == nil
        erb :'/users/login'
      else
       redirect :'/users/tweets'
     end
    end
+
+  #  post '/login' do
+  #     user = User.find_by(username: params["username"], email: params["email"], password: params["password"])
+  #     if session[:user_id] == user.id
+  #       redirect :'/users/tweets'
+  #     else
+  #       redirect :'/users/login'
+  #     end
+  #  end
 
 
 end
