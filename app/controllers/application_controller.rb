@@ -3,16 +3,23 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
-  end
+   set :public_folder, 'public'
+   set :views, 'app/views'
+   enable :sessions
+   set :session_secret, "secret"
+ end
 
   get '/' do
     erb 'Welcome to Fwitter'
   end
 
   get '/signup' do
-    erb :'signup'
+    if session[:user_id] != nil
+      redirect :"/tweets"
+      erb :'signup'
+    else
+      erb :'signup'
+    end
   end
 
   post '/signup' do
