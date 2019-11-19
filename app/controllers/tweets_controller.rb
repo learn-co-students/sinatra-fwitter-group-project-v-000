@@ -18,10 +18,18 @@ class TweetsController < ApplicationController
   end
 
  post '/tweets' do
-   @user = User.find(session[:user_id])
-   @tweet = Tweet.create(content: params[:content], user: @user)
+   if params[:content] == ""
+     redirect :'/tweets/new'
+   else
+     @user = User.find(session[:user_id])
+     @tweet = Tweet.create(content: params[:content], user: @user)
+     redirect :'/tweets'
+   end
+ end
 
-   redirect :'/tweets'
+ get '/tweets/:id' do
+   @tweet = Tweet.find(params[:id])
+   erb :'/tweets/show_tweet'
  end
 
 
