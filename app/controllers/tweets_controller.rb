@@ -8,4 +8,21 @@ class TweetsController < ApplicationController
       erb :'/tweets/tweets'
     end
   end
+
+  get '/tweets/new' do
+    if !Helper.is_logged_in?(session)
+      redirect :'/login'
+    else
+      erb :'/tweets/new'
+    end
+  end
+
+ post '/tweets' do
+   @user = User.find(session[:user_id])
+   @tweet = Tweet.create(content: params[:content], user: @user)
+
+   redirect :'/tweets'
+ end
+
+
 end
