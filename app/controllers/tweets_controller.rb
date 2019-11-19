@@ -49,9 +49,9 @@ class TweetsController < ApplicationController
    if !Helper.is_logged_in?(session)
      redirect :'/login'
    elsif @tweet.content == ""
-     redirect :'/tweets/#{@tweet.id}/edit_tweet'
+     redirect :'/tweets/#{@tweet.id}/edit'
    else
-     redirect  :'/tweets/#{@tweet.id}/edit'
+     redirect  :'/tweets/#{@tweet.id}'
    end
  end
 
