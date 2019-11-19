@@ -35,13 +35,13 @@ class TweetsController < ApplicationController
  delete '/tweets/:id' do
    @tweet = Tweet.find(params[:id])
    @tweet.delete
-   redirect to '/tweets'
+   redirect '/tweets'
  end
 
  patch '/tweets/:id' do
    @tweet = Tweet.find(params[:id])
-   @tweet = params[:content]
+   @tweet.content = params[:content]
    @tweet.save
-   redirect to "/tweets/#{@tweet.id}"
+   redirect "/tweets/#{@tweet.id}"
  end
 end
