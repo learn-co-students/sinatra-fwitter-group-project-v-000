@@ -30,11 +30,6 @@ class TweetsController < ApplicationController
  get '/tweets/:id' do
    @tweet = Tweet.find(params[:id])
    erb :'/tweets/show_tweet'
-
-   @user = User.find(session[:user_id])
-   @tweet = Tweet.create(content: params[:content], user: @user)
-
-   redirect :'/tweets'
  end
 
 
