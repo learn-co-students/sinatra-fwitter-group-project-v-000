@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
 
   get '/signup' do
     if Helper.is_logged_in?(session)
-      redirect :"/tweets"
+      redirect "/tweets"
     else
       erb :'signup'
     end
@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
        @user.save
        session[:user_id] = @user.id
      else
-       redirect :"/signup"
+       redirect "/signup"
      end
      redirect :"/tweets"
    end
@@ -36,7 +36,7 @@ class ApplicationController < Sinatra::Base
      if !Helper.is_logged_in?(session)
        erb :'/users/login'
      else
-      redirect :'/tweets'
+      redirect '/tweets'
     end
    end
 
@@ -45,7 +45,7 @@ class ApplicationController < Sinatra::Base
 
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect :'/tweets'
+      redirect '/tweets'
     else
       erb :'/users/login'
     end
@@ -53,7 +53,7 @@ class ApplicationController < Sinatra::Base
 
    get '/logout' do
      session.clear
-     redirect to :'/login'
+     redirect to '/login'
    end
 
 end
