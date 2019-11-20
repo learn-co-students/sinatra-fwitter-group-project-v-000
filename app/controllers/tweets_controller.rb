@@ -1,4 +1,5 @@
 class TweetsController < ApplicationController
+use Rack::Flash
 
   get '/tweets' do
     if !Helper.is_logged_in?(session)
@@ -19,10 +20,12 @@ class TweetsController < ApplicationController
 
  post '/tweets' do
    if params[:content] == ""
+     flash[:message] = "Content cannot be blank!"
      redirect '/tweets/new'
    else
      @user = Helper.current_user(session)
      @tweet = Tweet.create(content: params[:content], user: @user)
+     flash[:message] = "ulala."
      redirect '/tweets'
    end
  end
@@ -59,6 +62,7 @@ class TweetsController < ApplicationController
  patch '/tweets/:id' do
 
    if params[:content] == ""
+     flash[:message] = "Content cannot be blank!"
      redirect "/tweets/#{params[:id]}/edit"
    end
 

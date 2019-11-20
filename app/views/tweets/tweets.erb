@@ -1,7 +1,10 @@
 <h1>Welcome, <%= @user.username %>! </h1>
 
-  <ul>
+  <ul class="list-group">
     <% Tweet.all.order('id DESC').each do |tweet| %>
-    <li><a href="/tweets/<%= tweet.id %>"><%= tweet.user.username%><br><%= tweet.content %></a></li>
+      <li class="list-group-item">
+        <h5><%= tweet.user.username%></h5>
+        <p><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
+      </li>
     <% end %>
   </ul>
