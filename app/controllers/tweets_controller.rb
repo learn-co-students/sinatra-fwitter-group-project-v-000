@@ -4,7 +4,7 @@ class TweetsController < ApplicationController
     if !Helper.is_logged_in?(session)
       redirect '/login'
     else
-      @user = User.find(session[:user_id])
+      @user = Helper.current_user(session)
       erb :'/tweets/tweets'
     end
   end
@@ -21,7 +21,7 @@ class TweetsController < ApplicationController
    if params[:content] == ""
      redirect '/tweets/new'
    else
-     @user = User.find(session[:user_id])
+     @user = Helper.current_user(session)
      @tweet = Tweet.create(content: params[:content], user: @user)
      redirect '/tweets'
    end
