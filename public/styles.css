@@ -1,3 +1,15 @@
 body {
-  background: red;
+}
+
+.header {
+  text-align: center;
+}
+
+.homepage_links{
+  text-align: center;
+}
+
+.logo {
+  width: 10%;
+  height: 10%;
 }
