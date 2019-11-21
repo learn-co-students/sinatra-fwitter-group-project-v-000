@@ -11,7 +11,7 @@ class ApplicationController < Sinatra::Base
  end
 
   get '/' do
-    erb 'Welcome to Fwitter'
+    erb :'/tweets/main'
   end
 
   get '/signup' do
