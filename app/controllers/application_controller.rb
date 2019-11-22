@@ -28,6 +28,7 @@ class ApplicationController < Sinatra::Base
        @user.save
        session[:user_id] = @user.id
      else
+       flash[:message] = "oops, no information entered. Please try again!"
        redirect "/signup"
      end
      redirect :"/tweets"
@@ -48,6 +49,7 @@ class ApplicationController < Sinatra::Base
       session[:user_id] = @user.id
       redirect '/tweets'
     else
+      flash[:message] = "No username or password found. Please try again <3"
       erb :'/users/login'
     end
    end
