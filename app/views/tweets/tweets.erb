@@ -1,0 +1,21 @@
+</br>
+
+<h1>Welcome, <%= @user.username %>! </h1> 
+<div class="float-right">
+<a class="btn btn-primary" href="/tweets/new" role="button">New Tweet</a>
+</div>
+</br>
+</br>
+  <ul class="list-group">
+    <% Tweet.all.order('id DESC').each do |tweet| %>
+      <li class="list-group-item">
+        <h5><%= tweet.user.username%></h5>
+        <p><a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a>
+      </li>
+    <% end %>
+  </ul>
+  </br>
+<div class="float-right">
+  <a class="btn btn-dark" href="/logout" role="button">Logout</a>
+</div>
+</br>

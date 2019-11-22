@@ -1,0 +1,26 @@
+.header {
+  text-align: center;
+}
+
+.homepage_links{
+  text-align: center;
+}
+
+.logo {
+  width: 150px;
+}
+
+.login_wrapper {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.signup_wrapper {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.edit_tweet_wrapper {
+  width: 100%;
+  margin: 0 auto;
+}

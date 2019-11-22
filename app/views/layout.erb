@@ -2,13 +2,22 @@
 <html>
   <head>
     <title>Fwitter</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="/">
+        <img class="logo" src="/images/flatironlogo.png" alt="logo" />
+      </a>
+    </nav>
     <div class="container">
-      <h1>Welcome to Fwitter!</h1>
-      <h2>This is located in layout.erb!</h2>
-      <h2>Don't forget to <strong>yield</strong> your views!</h2>
+      <% if flash.has?(:message) %>
+      <div class="alert alert-primary" role="alert">
+        <%= flash[:message] %>
+      </div>
+      <% end %>
+      <%= yield %>
     </div>
 
   </body>
