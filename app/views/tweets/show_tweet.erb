@@ -1,12 +1,13 @@
 <h3><%= @tweet.user.username %>!</h3>
-<h3><%= @tweet.content %>!</h3>
+<h3><%= @tweet.content %></h3>
 </br>
 <form action="/tweets/<%= @tweet.id %>" method="post">
+  <a class="btn btn-primary" href="/tweets" role="button">Back</a>
+  <a class="btn btn-primary" href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
   <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete Tweet">
+  <input class="btn btn-danger" type="submit" value="Delete Tweet">
 </form>
 </br>
-<a href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
 </form>
 <div class="float-right">
   <a class="btn btn-dark" href="/logout" role="button">Logout</a>

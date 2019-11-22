@@ -25,7 +25,6 @@ use Rack::Flash
    else
      @user = Helper.current_user(session)
      @tweet = Tweet.create(content: params[:content], user: @user)
-     flash[:message] = "ulala."
      redirect '/tweets'
    end
  end
