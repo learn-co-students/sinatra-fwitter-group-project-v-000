@@ -10,6 +10,10 @@ body {
 }
 
 .logo {
-  width: 10%;
-  height: 10%;
+  width: 150px;
+}
+
+.login_wrapper {
+  width: 50%;
+  margin: 0 auto; 
 }
