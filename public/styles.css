@@ -15,5 +15,14 @@ body {
 
 .login_wrapper {
   width: 50%;
-  margin: 0 auto; 
+  margin: 0 auto;
+}
+
+#main h1 {
+  margin: 0;
+  display: inline-block;
+}
+
+#main .btn btn-primary {
+  float: right;
 }
