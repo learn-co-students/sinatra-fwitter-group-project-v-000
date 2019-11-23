@@ -54,7 +54,12 @@ use Rack::Flash
      redirect '/login'
    else
      @tweet = Tweet.find(params[:id])
-     erb :'/tweets/edit_tweet'
+     
+     if @tweet.user.id == session[:user_id]
+       erb :'/tweets/edit_tweet'
+     else
+       redirect '/tweets'
+     end
    end
  end
 
