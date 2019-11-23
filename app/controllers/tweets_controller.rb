@@ -45,6 +45,7 @@ use Rack::Flash
      @tweet.delete
      redirect '/tweets'
    else
+     flash[:message] = "You are not allowed to this! :p"
      redirect '/login'
    end
  end
@@ -54,10 +55,12 @@ use Rack::Flash
      redirect '/login'
    else
      @tweet = Tweet.find(params[:id])
-     
+
      if @tweet.user.id == session[:user_id]
        erb :'/tweets/edit_tweet'
      else
+       flash[:message] = "You are not allowed to this! :p"
+       
        redirect '/tweets'
      end
    end

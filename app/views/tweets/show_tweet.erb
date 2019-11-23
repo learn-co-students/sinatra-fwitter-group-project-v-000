@@ -3,11 +3,9 @@
 </br>
 <form action="/tweets/<%= @tweet.id %>" method="post">
   <a class="btn btn-primary" href="/tweets" role="button">Back</a>
-  <% if @tweet.user.id == session[:user_id] %>
-    <a class="btn btn-primary" href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
-    <input id="hidden" type="hidden" name="_method" value="delete">
-    <input class="btn btn-danger" type="submit" value="Delete Tweet">
-  <% end %>
+  <a class="btn btn-primary" href="/tweets/<%=@tweet.id%>/edit">Edit Tweet</a>
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input class="btn btn-danger" type="submit" value="Delete Tweet">
 </form>
 </br>
 </form>
