@@ -10,7 +10,11 @@ class TweetsController < ApplicationController
       end
 
     get '/tweets/new' do 
-      erb :'/tweets/new'
+    user = Helpers.current_user(session)
+      if user.nil?
+        redirect to '/login'
+      else
+        erb :'/tweets/new'
     end
 
     post '/tweets' do 
