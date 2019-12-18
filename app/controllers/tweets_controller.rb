@@ -10,7 +10,7 @@ class TweetsController < ApplicationController
       end
 
     get '/tweets/new' do 
-    user = Helpers.current_user(session)
+      user = Helpers.current_user(session)
       if user.nil?
         redirect to '/login'
       else
