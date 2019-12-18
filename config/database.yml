@@ -1,10 +1,7 @@
-default: &default
+development:
   adapter: 'sqlite3'
   database: 'db/development.sqlite'
 
-development:
-  <<: *default
-
 test:
-  <<: *default
+  adapter: 'sqlite3'
   database: 'db/test.sqlite'
