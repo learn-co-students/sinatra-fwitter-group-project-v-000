@@ -9,5 +9,21 @@ class TweetsController < ApplicationController
         end
       end
 
+    get '/tweets/new' do 
+      erb :'/tweets/new'
+    end
+
+    post '/tweets' do 
+    user = Helpers.current_user(session)
+      if user.nil?
+        redirect to '/login'
+      elsif params[:tweet][:content].empty?
+        redirect to '/tweets/new'
+      else
+        user.tweets.build({content: params[:tweet][:content]})
+        user.save
+      end
+        redirect to '/tweets'
+    end
       
 end
