@@ -1,0 +1,6 @@
+User show page
+<h1><%= @user.username %></h1>
+
+  <% @user.tweets.each do |tweet| %>
+    <li><%= tweet.content %></li>
+  <% end %>
