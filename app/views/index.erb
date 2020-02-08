@@ -3,6 +3,25 @@
     margin-left: 20px;
     margin-right: 350px;
   }
+
+  .button5 {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button5:hover {
+  background-color: #555555;
+  color: white;
+}
 </style>
 
 <div class="home_page">
@@ -12,8 +31,17 @@
   <nav>
     <% if logged_in? %>
 
+    <button class="button5">
       <a href="/tweets/new"> Create Tweet </a>
+    </button>
+
+    <button class="button5">
       <a href="/logout"> Log Out </a>
+    </button>
+
+    <button class="button5">
+      <a href="/tweets"> View Posts</a>
+    </button>
       <p>Welcome, <%=current_user.username %></p>
 
     <% else %>
