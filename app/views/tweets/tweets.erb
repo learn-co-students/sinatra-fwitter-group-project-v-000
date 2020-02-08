@@ -1,0 +1,20 @@
+<style media="screen">
+  .show_tweets {
+    margin-left: 20px;
+    margin-right: 350px;
+  }
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<div class="show_tweets">
+  <p> <%= current_user.username %> </p>
+  <h2>Posts:  </h2>
+
+  <% @tweets.each do |tweet| %>
+    <div class="w3-panel w3-card">
+      <p> <%= tweet.content %> </p>
+    </div>
+  <% end %>
+</div>
