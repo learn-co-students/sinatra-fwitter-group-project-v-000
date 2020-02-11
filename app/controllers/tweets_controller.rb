@@ -27,6 +27,7 @@ class TweetsController < ApplicationController
         @user = Helper.current_user(session)
         @tweet.user_id = @user.id
         @tweet.save
+        redirect to '/tweets'
     end
 
     get '/tweets/:id' do
