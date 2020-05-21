@@ -9,14 +9,31 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
-        user = User.new(username:params[:username], email:params[:email], password:params[:password])
-        if user.save && user.username != " " && user.email != " "
-            session[:user_id] = user_id 
+        user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
+        session[:user_id] = user.id
+        if user.username != " " && user.email != " "
+            redirect '/users/signup'
         else
-           redirect to '/signup'
+            redirect '/tweets'
         end
-    #   redirect to '/tweets'  
-    end 
-
-
+    end    
 end
+    # user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
+    # session[:user_id] = user.id
+
+    # redirect to '/tweets'
+
+    #     user = User.new(:username=>params[:username], :email=>params[:email], :password=>params[:password])
+    #     if user.save && user.username != " " && user.email != " "
+    #         session[:user_id] = user_id 
+    #     else
+    #        redirect to '/signup'
+    #     end
+    #   redirect to '/index'  
+    # end 
+
+        # params.each do |input|
+        #     if input.empty?
+        #     redirect to '/signup'
+        #     else
+
