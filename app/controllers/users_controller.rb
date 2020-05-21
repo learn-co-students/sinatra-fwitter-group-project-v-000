@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
     get '/signup' do
         if is_logged_in?
+        # binding.pry
         redirect '/tweets'
         else
         erb :'/users/signup'
@@ -12,7 +13,7 @@ class UsersController < ApplicationController
         user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
         session[:user_id] = user.id
         if user.username != " " && user.email != " "
-            redirect '/users/signup'
+            redirect '/signup'
         else
             redirect '/tweets'
         end
