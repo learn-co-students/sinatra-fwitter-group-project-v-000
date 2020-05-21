@@ -24,4 +24,5 @@ enable :sessions
       !!session[:user_id]
     end
   end  
+  
 end
