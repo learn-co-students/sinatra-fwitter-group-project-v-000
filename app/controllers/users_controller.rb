@@ -9,11 +9,14 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
-        user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
-        session[:user_id] = user.id
-        if user.username != " " && user.email != " "
+        # binding.pry
+        # user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
+        # session[:user_id] = user.id
+        if params[:username] == "" || params[:email] == "" || params[:password] == ""
             redirect '/signup'
         else
+            user = User.create(:username => params["username"], :email => params["email"], :password => params["password"])
+            session[:user_id] = user.id
             redirect '/tweets'
         end
     end    
@@ -26,14 +29,30 @@ class UsersController < ApplicationController
         end
     end
 
+    # post '/login' do
+    #     binding.pry
+    #     user = User.find_by(:username=>params[:username])
+    #     session[:user_id] = user.id
+    #     if user && user.authenticate(params[:password])
+            
+    #         redirect to '/tweets'
+    #     else
+    #         redirect to '/login' 
+    #     end   
+    # end
+
     post '/login' do
-        user = User.find_by(:username=>params[:username])
+        # binding.pry
+        user = User.find_by(:username => params[:username])
+
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
+            # binding.pry
             redirect to '/tweets'
+
         else
-            redirect to '/login' 
-        end   
+            erb :'/users/login'
+        end
     end
         
     get '/users/:slug' do
