@@ -1,24 +1,23 @@
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
-enable :sessions
+# enable :sessions
   
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    # enable :sessions
+    enable :sessions
     set :session_secret, "secret"
   end
 
   get '/' do
-    # @user = current_user if is_logged_in?
     erb :index
   end
 
   helpers do
     def current_user
       # binding.pry
-      @current_user = User.find(session[:user_id])
+      @user = User.find(session[:user_id])
     end
   
     def is_logged_in?

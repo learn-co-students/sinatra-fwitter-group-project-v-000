@@ -2,7 +2,7 @@ class TweetsController < ApplicationController
     
     get '/tweets' do
         if is_logged_in?
-        # @user = current_user
+        @user = current_user
         @tweet = Tweet.all
         erb :'tweets/tweets'
         else
