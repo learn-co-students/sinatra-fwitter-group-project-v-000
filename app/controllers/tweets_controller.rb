@@ -62,15 +62,24 @@ class TweetsController < ApplicationController
     end
 
     patch '/tweets/:id/edit' do
-        @tweet = Tweet.find_by_id(:id=> params[:id])
+        @tweet = Tweet.find_by_id(params[:id])
         @user = current_user
-        if !params[:content].empty?
+        if !params[:content].empty? 
             @tweet.update(:content => params[:content])
             @tweet.save
-            binding.pry
             redirect "tweets/#{@tweet[:id]}"
-        else
+        else 
             redirect "tweets/#{@tweet[:id]}/edit"
+        end
+    end
+
+    post '/tweets/:id/delete' do
+        @tweet = Tweet.find_by_id(params[:id])
+        if current_user == @tweet.user
+            @tweet.delete
+            redirect to '/tweets'
+        else
+            redirect to "/tweets/#{params[:id]}"
         end
     end
 end
