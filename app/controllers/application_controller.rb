@@ -22,7 +22,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/tweets' do
-    "Tweets Index Page"
+    @tweets = Tweet.all
+    erb :'tweets/tweets'
   end
 
 end
