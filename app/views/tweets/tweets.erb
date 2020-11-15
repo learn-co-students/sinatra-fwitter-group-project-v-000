@@ -1,5 +1,6 @@
 <h1>Twitter Index</h1>
 
 <% @tweets.each do |tweet| %>
-  <p><%=tweet.content%></p>
+  <h2><%= tweet.user.username %> </h2>
+  <p><%= tweet.content %></p>
 <% end %>

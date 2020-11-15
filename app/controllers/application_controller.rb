@@ -14,8 +14,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/signup' do
-    "This is the signup page"
-    erb :'users/create_user'
+    if session[:user_id]
+      redirect '/tweets'
+    else
+      "This is the signup page"
+      erb :'users/create_user'
+    end
   end
 
   post '/signup' do
