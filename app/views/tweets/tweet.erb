@@ -1,0 +1,9 @@
+<h1>Tweet Show Page</h1>
+
+<h2>Tweet: <%= @tweet.content %></h2>
+<h2>Tweet posted by: <%= @tweet.user.username %></h2>
+
+<%= "Welcome, User Name: #{@user.username} User ID: #{session[:user_id].to_s}"%> <br><br>
+
+<a href="">Delete Tweet</a> <br><br>
+<a href="">Edit Tweet</a>

@@ -1,0 +1,6 @@
+<h1>User Index</h1>
+
+<% @users.each do |user| %>
+  <h2><%= user.username %></h2>
+<% end %>
+<%= "Welcome, User ID: #{session[:user_id].to_s}"%>

@@ -2,6 +2,6 @@
 <form action="/login" method="POST">
 <input type="text" name="username" placeholder="Username:"><br>
 <input type="text" name="password" placeholder="Password:"><br><br>
-<input type="submit" value="Log In">
+<input type="submit" name="submit" value="Log In">
 </form>
 <%= "User ID: #{session[:user_id].to_s}"%>

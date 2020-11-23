@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    "Welcome to Fwitter"
+    erb :home
   end
 
   get '/signup' do
@@ -33,11 +33,6 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  get '/tweets' do
-    @tweets = Tweet.all
-    erb :'tweets/tweets'
-  end
-
   get '/login' do
     if session[:user_id]
       redirect '/tweets'
@@ -58,8 +53,18 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    session.clear
-    redirect '/login'
+    if session[:user_id]
+      session.clear
+      redirect '/login'
+    else
+      redirect '/'
+    end
+  end
+
+  post '/logout' do
+    if session[:user_id]
+      redirect '/tweets'
+    end
   end
 
 end
