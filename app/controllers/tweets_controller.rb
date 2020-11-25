@@ -53,8 +53,23 @@ class TweetsController < ApplicationController
   #update
   patch '/tweets/:id' do
     @tweet = Tweet.find(params[:id])
-    @tweet.update(:content => params[:content])
-    redirect '/tweets'
+    if params[:content] == ""
+      redirect "/tweets/#{params[:id]}/edit"
+    else
+      @tweet.update(:content => params[:content])
+      redirect '/tweets'
+    end
+  end
+
+  #destroy
+  delete '/tweets/:id/delete' do
+    @tweet = Tweet.find(params[:id])
+    if session[:user_id] == @tweet.user_id
+      Tweet.destroy(params[:id])
+      redirect '/tweets'
+    else
+      redirect '/tweets'
+    end
   end
 
 end
