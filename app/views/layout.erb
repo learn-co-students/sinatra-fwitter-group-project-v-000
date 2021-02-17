@@ -6,8 +6,11 @@
   <body>
 
     <div class="container">
-      <h1>Welcome to Fwitter!</h1>
-
+      <% if session[:user_id]%>
+        <h1>Welcome, <%= User.find(session[:user_id]) %></h1>
+      <% else%>
+        <h1>Welcome to Fwitter!</h1>
+      <% end %>
       <%= yield %>
     </div>
 
