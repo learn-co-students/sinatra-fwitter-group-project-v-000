@@ -16,17 +16,15 @@ class ApplicationController < Sinatra::Base
 
   #helpers
 
-  helpers do
+ helpers do
     #find current user if the user logged in before
     def current_user
       @current_user ||=  User.find_by_id(session[:user_id]) if session[:user_id]
     end
    
-    def logged_in?
+    def is_logged_in?
        !!current_user
     end
      
-
-    
   end
 end
