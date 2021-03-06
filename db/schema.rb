@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_04_005416) do
+ActiveRecord::Schema.define(version: 2021_03_05_223340) do
 
   create_table "tweets", force: :cascade do |t|
     t.text "content"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2021_03_04_005416) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "usernmae"
+    t.string "username"
     t.text "email"
     t.string "password_digest"
   end

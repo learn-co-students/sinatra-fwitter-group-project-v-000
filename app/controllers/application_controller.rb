@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
   helpers do
     #find current user if the user logged in before
     def current_user
-      @user_user || =  User.find_by_id(id: session[:user_id]) if session[:user_id]
+      @current_user ||=  User.find_by_id(session[:user_id]) if session[:user_id]
     end
    
     def logged_in?

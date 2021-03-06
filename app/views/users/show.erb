@@ -1,0 +1,12 @@
+<h1>This user</h1>
+<p>Username: <%=@user.username%></p>
+<p>Email: <%=@user.email%></p>
+
+<p> <%=@user.username%>'s Tweets</p>
+<ul>
+<%@user.tweets.order(:id)each do |t|%>
+   <%=t.content%>
+<%end%>
+</ul>
+<a href='/tweets'>See all Tweets</a>
+
