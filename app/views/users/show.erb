@@ -4,7 +4,7 @@
 
 <p> <%=@user.username%>'s Tweets</p>
 <ul>
-<%@user.tweets.order(:id)each do |t|%>
+<%@user.tweets.each do |t|%>
    <%=t.content%>
 <%end%>
 </ul>
