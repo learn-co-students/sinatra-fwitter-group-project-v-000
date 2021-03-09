@@ -1,0 +1,8 @@
+
+<h1>Welcome, here are your tweets!</h1>
+
+<% Tweet.all.each do |t| %>
+    <a href="/tweets/<%=t.id%>"> <%= t.content %> </a>
+    
+    <% end %>
+
