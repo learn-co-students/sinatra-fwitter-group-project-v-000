@@ -20,7 +20,11 @@ class UsersController < ApplicationController
   end
 
   get '/login' do
-    erb :'users/login'
+    if logged_in?
+      redirect '/tweets'
+    else
+      erb :'users/login'
+    end
   end
 
   post '/login' do
@@ -28,9 +32,23 @@ class UsersController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id]= user.id
-      binding.pry
+
       redirect '/tweets'
     end
+  end
+
+  get '/logout' do
+    if logged_in?
+      session.clear
+      redirect '/login'
+    else
+      redirect '/'
+    end
+  end
+
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'users/show'
   end
 
 end

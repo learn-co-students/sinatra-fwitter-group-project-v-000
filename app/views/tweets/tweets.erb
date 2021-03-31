@@ -1,1 +1,4 @@
-Tweets
+<h1>Welcome, </h1>
+<% Tweet.all.each do |tweet| %>
+  <%= tweet.content %><br>
+<% end %>

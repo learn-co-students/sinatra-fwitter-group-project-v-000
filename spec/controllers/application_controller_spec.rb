@@ -85,12 +85,8 @@ describe ApplicationController do
       post '/login', params
       expect(last_response.status).to eq(302)
       follow_redirect!
-      binding.pry
       expect(last_response.status).to eq(200)
-      binding.pry
       expect(last_response.body).to include("Welcome,")
-      binding.pry
-      true == true
     end
 
     it 'does not let user view login page if already logged in' do
