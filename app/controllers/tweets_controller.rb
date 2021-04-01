@@ -19,13 +19,69 @@ class TweetsController < ApplicationController
     # between the objects, probably always consider using this when a has_many is
     # involved. Don't forget that this needs to be saved! It is a version of new,
     # not of create.
-    tweet = current_user.tweets.build(content: params[:content])
-    tweet.save
-
+    if params[:content] == ""
+      redirect '/tweets/new'
+    else
+      tweet = current_user.tweets.build(content: params[:content])
+      tweet.save
+    end
   end
 
   get '/tweets/new' do
+    if logged_in?
       erb :'tweets/new'
+    else
+      redirect '/login'
+    end
+  end
+
+  get '/tweets/new' do
+
+      erb :'tweets/new'
+  end
+
+  get '/tweets/:id' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'tweets/show_tweet'
+    else
+      redirect '/login'
+    end
+  end
+
+  patch '/tweets/:id' do
+
+    tweet = Tweet.find(params[:id])
+
+    if logged_in? && params[:content] != "" && current_user.tweets.include?(tweet)
+
+      tweet.content = params[:content]
+      tweet.save
+
+      redirect "tweets/#{tweet.id}"
+    else
+      redirect "/tweets/#{params[:id]}/edit"
+    end
+  end
+
+  delete '/tweets/:id/delete' do
+
+    tweet = Tweet.find(params[:id])
+
+    if logged_in? && current_user.tweets.include?(tweet)
+      tweet.delete
+    end
+
+    redirect '/tweets'
+  end
+
+  get '/tweets/:id/edit' do
+    if logged_in?
+      @tweet = Tweet.find(params[:id])
+      erb :'tweets/edit_tweet'
+    else
+      redirect '/login'
+    end
   end
 
 end
