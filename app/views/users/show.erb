@@ -1,0 +1,7 @@
+<h1><%= @user.username %></h1>
+<p><a href="/tweets/new">New Tweet</a> | <a href="/tweets">All Tweets</a> | <a href="/logout">Log Out</a></p>
+<% @tweets.each do |tweet| %>
+  <ul>
+    <li><%= tweet.content %> <a href="/tweets/<%= tweet.id %>">(view</a> | <a href="/tweets/<%= tweet.id %>/edit">edit)</a></li>
+  </ul>
+<% end %>

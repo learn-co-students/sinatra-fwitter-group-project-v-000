@@ -1,0 +1,14 @@
+<h1>Edit Tweet</h1>
+<p><a href="tweets/new">New Tweet</a> | <a href="/users/<%= @user.slug %>">My Tweets</a> | <a href="/logout">Log Out</a></p>
+<% if Helpers.is_logged_in?(session) %>
+<%= @error %>
+  <form action="/tweets/<%= @tweet.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <label for="content">Edit Your Tweet:</label>
+    <input type="text" id="content" value="<%= @tweet.content %>" name="content"></br>
+    </br>
+    <input type="submit" id="submit" value="Edit Tweet">
+  </form>
+  <% else %>
+      <h1> You Must Be Logged in to Make Tweets </h1>
+  <% end %>
