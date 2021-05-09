@@ -344,6 +344,7 @@ describe ApplicationController do
         fill_in(:content, :with => "i love tweeting")
 
         click_button 'submit'
+
         expect(Tweet.find_by(:content => "i love tweeting")).to be_instance_of(Tweet)
         expect(Tweet.find_by(:content => "tweeting!")).to eq(nil)
         expect(page.status_code).to eq(200)
@@ -370,6 +371,7 @@ describe ApplicationController do
     context "logged out" do
       it 'does not load -- requests user to login' do
         get '/tweets/1/edit'
+
         expect(last_response.location).to include("/login")
       end
     end
