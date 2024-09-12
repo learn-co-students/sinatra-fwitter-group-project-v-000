@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 require 'pry'
 describe 'User' do
+=======
+describe 'User' do 
+>>>>>>> 0e5b428cca2f7b3036c2f6d24e21bb9ff289858e
   before do
     @user = User.create(:username => "test 123", :email => "test123@aol.com", :password => "test")
   end
